@@ -1,0 +1,19 @@
+﻿{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "listFiles": false,
+        "noLib": false,
+        "rootDir": "."
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "filesGlob": [
+        "./**/*.ts",
+        "../typings/tsd.d.ts"
+    ]
+}

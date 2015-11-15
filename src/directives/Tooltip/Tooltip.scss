@@ -1,0 +1,14 @@
+@import "../../../bower_components/animatewithsass/properties";
+@import "../../../bower_components/animatewithsass/_fading-entrances/fading-entrances.scss";
+.customFadeIn{
+  cursor: pointer;
+  opacity: 1 !important;
+  @include fadeIn(
+    $count: $countDefault,
+    $duration: .5s,
+    $delay: $delayDefault,
+    $function: $functionDefault,
+    $fill: $fillDefault,
+    $visibility: $visibilityDefault
+  )
+}

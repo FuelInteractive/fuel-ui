@@ -1,0 +1,27 @@
+<div class="text-center py"> 
+	<strong>{{currentMonth | date:'MMMM yyyy'}}</strong>
+	<table class="table">
+		<thead>	
+			<tr>
+				<th>S</th>
+				<th>M</th>
+				<th>T</th>
+				<th>W</th>
+				<th>T</th>
+				<th>F</th>
+				<th>S</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ng-for="#week of weeks">
+				<td *ng-for="#day of week"
+					[class.selectable]="checkSelectable(day)" 
+					[class.disabled]="!checkSelectable(day)"
+					[class.selected]="checkSelectedDate(day)" 
+					(click)="selectDate(day)">
+					{{day}}
+				</td> 
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,38 @@
+@import "../../bower_components/animatewithsass/animate.scss";
+@import "bourbon";
+
+@include keyframes(slideInLeft) {
+	0% {
+  		@include transform(translateX(100%));
+  	}
+	100% {
+  		@include transform(translateX(0));
+  	}
+}
+
+@include keyframes(slideInRight) {
+	0% {
+  		@include transform(translateX(-100%));
+  	}
+	100% {
+  		@include transform(translateX(0));
+  	}
+}
+
+@include keyframes(slideOutLeft) {
+	0% {
+  		@include transform(translateX(0));
+  	}
+	100% {
+  		@include transform(translateX(-100%));
+  	}
+}
+
+@include keyframes(slideOutRight) {
+	0% {
+  		@include transform(translateX(0));
+  	}
+	100% {
+  		@include transform(translateX(100%));
+  	}
+}

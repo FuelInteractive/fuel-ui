@@ -1,0 +1,48 @@
+
+<div class="input-group" (click)="showCalendar()">
+	<input type="text" class="form-control"
+		[(ng-model)]="inputDate" 
+		 #date-field
+		 />
+	<span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
+		<i class="fa fa-calendar"></i>
+	</span>
+</div>
+
+<div class="modal" *ng-if="calendarDisplayed"
+	[class.modal-zoom-in]="calendarDisplayed"
+	[class.modal-zoom-out]="!calendarDisplayed">
+	<div class="modal-dialog">
+<section class="modal-content container m-a">
+	<header class="row">
+		<time *ng-for="#month of monthList" 
+			class="col-xs-{{12/months}} text-center p-y">
+			<h5>{{month | date:'MMMM yyyy'}}</h5>
+		</time>
+		<div class="prev-month">
+			<button class="btn btn-primary" role="prev"
+				[class.disabled]="!canPrevMonth()"			 
+				(click)="prevMonth()">
+				<i class="fa fa-chevron-circle-left"></i>
+			</button>
+		</div>
+		<div class="next-month">
+			<button class="btn btn-primary" role="next"
+				[class.disabled]="!canNextMonth()"
+				(click)="nextMonth()">
+				<i class="fa fa-chevron-circle-right"></i>
+			</button>
+		</div>
+	</header>
+	<section class="row">
+		<date-picker-calendar *ng-for="#month of monthList"
+			class="col-md-{{12/months}}" 
+			[min-date]="minDate" [max-date]="maxDate"
+			[current-month]="month" 
+			[(selected-date)]="selectedDate" />
+	</section>
+	<footer>
+	</footer>
+</section>
+	</div>
+</div>

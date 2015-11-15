@@ -1,0 +1,20 @@
+@import '../../styles/bourbon';
+
+/*.theImage {transition: all 2s ease-in;}
+.theImage.ng-enter { opacity: 0; }
+.theImage.ng-enter-active { opacity: 1; }
+.theImage.ng-leave-active { opacity: 0; }*/
+
+.theImage {
+	@include animation-duration(2s);
+	@include animation-timing-function(ease);
+	//@include animation-name(zoomInDown);
+ }
+ 
+ .theImage.ng-enter-active {
+	 @include animation-name(zoomInDown);
+ }
+ 
+ .theImage.ng-leave-active {
+	 @include animation-name(zoomOutUp);
+ }
