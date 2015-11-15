@@ -13,7 +13,7 @@ export class Alert {
     @Input() displayed: boolean = false;
     @Input() closeButton: boolean = true;
     @Input() type: string = 'success';
-    @Output() alertDisplayedChange:EventEmitter = new EventEmitter();
+    @Output() displayedChange:EventEmitter = new EventEmitter();
 
     constructor(el: ElementRef){
         this._el = el.nativeElement;
@@ -25,7 +25,7 @@ export class Alert {
 
     close():void{
         this.displayed = false;
-        this.alertDisplayedChange.next(null);
+        this.displayedChange.next(null);
     }
 }
 
