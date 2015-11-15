@@ -5,7 +5,7 @@
   "main": "fuel-ui.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "jspm install"
+    "postinstall": "jspm install && bower install"
   },
   "keywords": [
     "angular",
