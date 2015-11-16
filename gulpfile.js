@@ -65,11 +65,12 @@ gulp.task("scripts", ["cleanScripts", "views", "sass"], function () {
         .pipe(gulp.dest(paths.dest));
 });
 
-gulp.task("production", function() {
+gulp.task("production", ["build"], function() {
     var tsProject = typescript.createProject("tscbundle.json");
     
     var sourceFiles = [
         paths.source + "/**/*.ts",
+        "!"+paths.source + "/demo*.*",
         "./typings/tsd.d.ts"
     ];
 
@@ -95,11 +96,11 @@ gulp.task("views", ["cleanViews"], function () {
 
 gulp.task("sass", ["cleanSass"], function () {
     return gulp.src(paths.source + "/**/*.{scss,sass}")
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(sass({
             errLogToConsole: true
         }).on('error', sass.logError))
-        .pipe(sourcemaps.write())
+        //.pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.dest));
 
 });
