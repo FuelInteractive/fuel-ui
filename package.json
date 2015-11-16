@@ -43,7 +43,7 @@
   },
   "jspm": {
     "jspmNodeConversion": false,
-    "format": "es5",
+    "format": "es6",
     "dependencies": {
       "angular2": "npm:angular2@^2.0.0-alpha.45",
       "es6-shim": "github:es-shims/es6-shim@^0.33.6",
