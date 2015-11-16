@@ -70,6 +70,7 @@ gulp.task("production", ["build"], function() {
     
     var sourceFiles = [
         paths.source + "/**/*.ts",
+        "!"+paths.source + "/demo*.*",
         "./typings/tsd.d.ts"
     ];
 

@@ -15,7 +15,7 @@ var Alert = (function () {
         this.displayed = false;
         this.closeButton = true;
         this.type = 'success';
-        this.alertDisplayedChange = new angular2_1.EventEmitter();
+        this.displayedChange = new angular2_1.EventEmitter();
         this._el = el.nativeElement;
     }
     Alert.prototype.getElement = function () {
@@ -23,7 +23,7 @@ var Alert = (function () {
     };
     Alert.prototype.close = function () {
         this.displayed = false;
-        this.alertDisplayedChange.next(null);
+        this.displayedChange.next(null);
     };
     __decorate([
         angular2_1.Input(), 
@@ -40,7 +40,7 @@ var Alert = (function () {
     __decorate([
         angular2_1.Output(), 
         __metadata('design:type', angular2_1.EventEmitter)
-    ], Alert.prototype, "alertDisplayedChange");
+    ], Alert.prototype, "displayedChange");
     Alert = __decorate([
         angular2_1.Component({
             selector: 'alert'

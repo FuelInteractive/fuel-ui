@@ -4,7 +4,7 @@ export declare class Alert {
     displayed: boolean;
     closeButton: boolean;
     type: string;
-    alertDisplayedChange: EventEmitter;
+    displayedChange: EventEmitter;
     constructor(el: ElementRef);
     getElement(): HTMLElement;
     close(): void;
@@ -214,36 +214,6 @@ import { OrderBy } from "./OrderBy/OrderBy";
 export declare var FUELUI_PIPE_PROVIDERS: typeof OrderBy[][];
 export * from "./OrderBy/OrderBy";
 export * from "./Range/Range";
-
-export declare class DemoComponent {
-    modalTitle: string;
-    closeText: string;
-    closeButton: boolean;
-    closeOnUnfocus: boolean;
-    showAlert: boolean;
-    alertType: string;
-    alertBody: string;
-    progress: number;
-    totalPages: number;
-    pagesAtOnce: number;
-    currentPage: number;
-    selectedDate: Date;
-    minDate: Date;
-    maxDate: Date;
-    maxGuests: number;
-    maxChildren: number;
-    maxNumRooms: number;
-    numGuests: number;
-    numChildren: number;
-    numRooms: number;
-    checkInDate: Date;
-    checkOutDate: Date;
-    pageChange(page: number): void;
-    saveFunc(modal: any, error: boolean): void;
-    logStart($event: any): void;
-    logEnd($event: any): void;
-}
-
 
 export declare class DateRange {
     start: Date;
