@@ -24,7 +24,7 @@ var DateRangePicker = (function () {
             selector: 'date-range-picker'
         }),
         angular2_1.View({
-            styles: ["\n\n   /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJjb21wb25lbnRzL0RhdGVQaWNrZXIvRGF0ZVJhbmdlUGlja2VyLnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiIl0sImZpbGUiOiJjb21wb25lbnRzL0RhdGVQaWNrZXIvRGF0ZVJhbmdlUGlja2VyLmNzcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9 */\n\t"],
+            styles: ["\n\n\t"],
             template: "\n\n\t",
             directives: []
         }), 
