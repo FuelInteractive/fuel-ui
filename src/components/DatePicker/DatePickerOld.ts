@@ -81,7 +81,7 @@ export class DatePickerOld {
 	}
 	
 	afterViewInit(): void {
-		(<any>this.calendarQuery.changes).toRx()
+		this.calendarQuery.changes
 			.subscribe(() => {
 				this.calendars = [];
 				this.calendarQuery.map((c) => this.calendars.push(c));

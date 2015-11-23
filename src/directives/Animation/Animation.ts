@@ -14,8 +14,8 @@ import {Directive, Input, Output, EventEmitter, ElementRef} from 'angular2/angul
     }
 })
 export class Animation {
-    @Output() onAnimationStart: EventEmitter = new EventEmitter();
-    @Output() onAnimationEnd: EventEmitter = new EventEmitter();
+    @Output() onAnimationStart = new EventEmitter<any>();
+    @Output() onAnimationEnd = new EventEmitter<any>();
 
 	@Input('animation') animationClasses: string = '';
 	@Input() play: boolean = false; 

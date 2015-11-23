@@ -2,11 +2,25 @@
 <html>
 <head>
     <title>Fuel Ui Demos</title>
-    <script src="/jspm_packages/system.js"></script>
-    <script src="/config.js"></script>
     <link rel="stylesheet" href="dist/styles/fuel-ui.css" />
     <link rel="stylesheet" href="dist/demo.css" />
-    <script>System.import("dist/demoBootstrap");</script>
+    
+    <script src="/node_modules/core-js/client/core.min.js"></script>
+    <script src="/node_modules/es6-shim/es6-shim.js"></script>
+    <script src="/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="/node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="/node_modules/angular2/bundles/http.js"></script>
+    <script src="/node_modules/angular2/bundles/router.js"></script>
+    <!--<script src="/config.js"></script>-->
+    <script>
+        System.config({
+            packages: {
+                'dist': {defaultExtension: 'js'},
+                'bundles': {defaultExtension: 'js'}
+            }
+        });
+        System.import("dist/demoBootstrap").catch(console.log.bind(console));
+    </script>
 </head>
 <body>
     <!-- The app component created in app.ts -->

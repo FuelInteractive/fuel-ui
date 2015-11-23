@@ -19,7 +19,7 @@ export class Pagination implements OnChanges {
     @Input() currentPage: number;
     @Input() pagesAtOnce: number;
     @Input() totalPages: number;
-    @Output() currentPageChange:EventEmitter = new EventEmitter();
+    @Output() currentPageChange = new EventEmitter<any>();
     pagesBlank:Array<number> = [];
     startingIndex:number;
     endingIndex:number;

@@ -4,7 +4,7 @@ export declare class Alert {
     displayed: boolean;
     closeButton: boolean;
     type: string;
-    displayedChange: EventEmitter;
+    displayedChange: EventEmitter<any>;
     constructor(el: ElementRef);
     getElement(): HTMLElement;
     close(): void;
@@ -49,7 +49,7 @@ export declare class DatePickerCalendar implements OnInit {
     weeks: string[][];
     currentMonth: Date;
     selectedDate: Date;
-    selectedDateChange: EventEmitter;
+    selectedDateChange: EventEmitter<{}>;
     minDate: Date;
     maxDate: Date;
     constructor();
@@ -62,8 +62,8 @@ export declare class DatePickerCalendar implements OnInit {
 
 import { EventEmitter, ElementRef } from 'angular2/angular2';
 export declare class Animation {
-    onAnimationStart: EventEmitter;
-    onAnimationEnd: EventEmitter;
+    onAnimationStart: EventEmitter<any>;
+    onAnimationEnd: EventEmitter<any>;
     animationClasses: string;
     play: boolean;
     id: string;
@@ -116,7 +116,7 @@ import { EventEmitter, ElementRef, QueryList } from 'angular2/angular2';
 import { DatePickerBase } from './DatePickerBase';
 import { Animation } from '../../Directives/Animation/Animation';
 export declare class DatePicker extends DatePickerBase {
-    valueChange: EventEmitter;
+    valueChange: EventEmitter<{}>;
     value: string | Date;
     private _selectedDate;
     selectedDate: Date;
@@ -130,8 +130,8 @@ export declare class DatePicker extends DatePickerBase {
 
 import { EventEmitter } from 'angular2/angular2';
 export declare class AnimationListener {
-    animationStart: EventEmitter;
-    animationEnd: EventEmitter;
+    animationStart: EventEmitter<any>;
+    animationEnd: EventEmitter<any>;
     constructor();
     animationStarted($event: Event): void;
     animationEnded($event: Event): void;
@@ -163,7 +163,7 @@ export declare class Pagination implements OnChanges {
     currentPage: number;
     pagesAtOnce: number;
     totalPages: number;
-    currentPageChange: EventEmitter;
+    currentPageChange: EventEmitter<any>;
     pagesBlank: Array<number>;
     startingIndex: number;
     endingIndex: number;
@@ -236,7 +236,7 @@ import { ElementRef, EventEmitter } from 'angular2/angular2';
 import { QueryList } from 'angular2/angular2';
 import { DatePickerCalendar } from './DatePickerCalendar';
 export declare class DatePickerOld {
-    valueChange: EventEmitter;
+    valueChange: EventEmitter<{}>;
     value: Date | string;
     private _selectedDate;
     selectedDate: Date;
@@ -273,5 +273,5 @@ export declare var DATE_PICKER_PROVIDERS: (typeof DatePickerCalendar | typeof Da
 
 import { EventEmitter } from 'angular2/angular2';
 export declare class DateRangePicker {
-    startDateChange: EventEmitter;
+    startDateChange: EventEmitter<{}>;
 }

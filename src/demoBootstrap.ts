@@ -1,8 +1,3 @@
-import "es6-shim";
-import "zone.js";
-import "reflect-metadata/Reflect";
-import "core-js";
-
 import {FORM_PROVIDERS, bootstrap, provide} from "angular2/angular2";
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from "angular2/router";
 

@@ -97,7 +97,7 @@ export class Carousel {
 	}
 
 	afterContentInit(): void {
-		(<any>this.imageQuery.changes).toRx()
+		this.imageQuery.changes
 				.subscribe(() => this.registerImages());
 		this.registerImages();
 	}

@@ -39,7 +39,7 @@ var Alert = (function () {
     ], Alert.prototype, "type");
     __decorate([
         angular2_1.Output(), 
-        __metadata('design:type', angular2_1.EventEmitter)
+        __metadata('design:type', Object)
     ], Alert.prototype, "displayedChange");
     Alert = __decorate([
         angular2_1.Component({
@@ -418,11 +418,11 @@ var Animation = (function () {
     };
     __decorate([
         angular2_1.Output(), 
-        __metadata('design:type', angular2_1.EventEmitter)
+        __metadata('design:type', Object)
     ], Animation.prototype, "onAnimationStart");
     __decorate([
         angular2_1.Output(), 
-        __metadata('design:type', angular2_1.EventEmitter)
+        __metadata('design:type', Object)
     ], Animation.prototype, "onAnimationEnd");
     __decorate([
         angular2_1.Input('animation'), 
@@ -752,11 +752,11 @@ var AnimationListener = (function () {
     };
     __decorate([
         angular2_1.Output(), 
-        __metadata('design:type', angular2_1.EventEmitter)
+        __metadata('design:type', Object)
     ], AnimationListener.prototype, "animationStart");
     __decorate([
         angular2_1.Output(), 
-        __metadata('design:type', angular2_1.EventEmitter)
+        __metadata('design:type', Object)
     ], AnimationListener.prototype, "animationEnd");
     AnimationListener = __decorate([
         angular2_1.Directive({
@@ -974,7 +974,7 @@ var Pagination = (function () {
     ], Pagination.prototype, "totalPages");
     __decorate([
         angular2_1.Output(), 
-        __metadata('design:type', angular2_1.EventEmitter)
+        __metadata('design:type', Object)
     ], Pagination.prototype, "currentPageChange");
     Pagination = __decorate([
         angular2_1.Component({

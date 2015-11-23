@@ -13,10 +13,5 @@
     "exclude": [
         "node_modules",
         "jspm_packages"
-    ],
-     "filesGlob": [
-        "./**/*.ts",
-        "./typings/tsd.d.ts",
-        "!./bundles"
     ]
 }

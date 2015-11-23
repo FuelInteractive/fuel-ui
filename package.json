@@ -5,7 +5,7 @@
   "main": "bundles/fuelui.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "jspm install && bower install",
+    "postinstall": "bower install",
     "prepublish": "gulp production"
   },
   "keywords": [
@@ -29,35 +29,20 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-typescript": "^2.8.0",
     "gulp-webserver": "^0.9.1 ",
-    "jspm": "^0.16.2",
     "merge2": "^0.3.6",
+    "systemjs-builder": "^0.14.11",
     "typescript": "^1.5.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "bourbon": "^4.2.6",
+    "angular2": "^2.0.0-alpha.46",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha",
-    "font-awesome": "4.4.0"
-  },
-  "jspm": {
-    "jspmNodeConversion": false,
-    "format": "es6",
-    "dependencies": {
-      "angular2": "npm:angular2@^2.0.0-alpha.45",
-      "es6-shim": "github:es-shims/es6-shim@^0.33.6",
-      "ng2-translate": "npm:ng2-translate@^0.1.5",
-      "reflect-metadata": "npm:reflect-metadata@^0.1.2",
-      "typescript": "npm:typescript@^1.6.2",
-      "zone.js": "npm:zone.js@^0.5.8"
-    },
-    "devDependencies": {
-      "--help": "npm:babel-core@^5.8.24",
-      "--help-runtime": "npm:babel-runtime@^5.8.24",
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.2.6"
-    }
+    "bourbon": "^4.2.6",
+    "core.js": "^0.4.2",
+    "es6-shim": "^0.33.13",
+    "font-awesome": "4.4.0",
+    "systemjs": "0.19.5"
   }
 }

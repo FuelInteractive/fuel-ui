@@ -60,7 +60,7 @@ export class DatePickerBase {
 				this.hideCalendar();
 		});
 		
-		(<any>this.calendarQuery.changes).toRx()
+		<any>this.calendarQuery.changes
 			.subscribe((calendars: any) => this.updateCalendars(calendars));
 	}
 
