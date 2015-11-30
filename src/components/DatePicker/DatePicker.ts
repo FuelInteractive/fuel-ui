@@ -13,8 +13,8 @@ import {Animation} from '../../Directives/Animation/Animation'
 	]
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePicker.css'],
-	templateUrl: 'dist/components/DatePicker/DatePicker.html',
+	styleUrls: ['components/DatePicker/DatePicker.css'],
+	templateUrl: 'components/DatePicker/DatePicker.html',
 	directives: [DatePickerCalendar, CORE_DIRECTIVES, FORM_DIRECTIVES, Animation]
 })
 export class DatePicker extends DatePickerBase {

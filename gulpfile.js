@@ -15,12 +15,12 @@ var Builder = require('systemjs-builder');
 
 var paths = {
     source: 'src',
-    dest: 'dist',
+    dest: 'bin',
     bundle: 'bundles'
 };
 
 var inlineTemplateConfig = {
-    base: '/',
+    base: paths.dest,
     html: true,
     css: true,
     target: 'es5',
@@ -73,10 +73,11 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
 gulp.task('bundle', ['scripts'], function() {    
     // optional constructor options
     // sets the baseURL and loads the configuration file
-    var builder = new Builder(paths.dest, './config.js');
+    var builder = new Builder('./', './builderConfig.js');
     
-    builder
-        .bundle('fuelui.js', 'outfile.js')
+    return builder
+        //.buildStatic(paths.dest+'/fuel-ui.js', 'fuel-ui.js')
+        .bundle(paths.dest+'/fuel-ui.js', paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('bundle complete');
         })
@@ -84,30 +85,6 @@ gulp.task('bundle', ['scripts'], function() {
             console.log('Build error');
             console.log(err);
         });
-});
-
-gulp.task('production', ['build'], function() {
-    var tsProject = typescript.createProject('tsconfig.json');
-    
-    var sourceFiles = [
-        paths.source + '/**/*.ts',
-        '!'+paths.source + '/demo*.*',
-        './typings/tsd.d.ts'
-    ];
-
-    var tsResult = gulp
-        .src(sourceFiles)
-        .pipe(inlineNg2Template(inlineTemplateConfig))
-        .pipe(typescript(tsProject));
-        
-    return merge([
-        tsResult.dts
-            .pipe(concat('fuelui.d.ts'))
-            .pipe(gulp.dest(paths.bundle)),
-        tsResult.js
-            .pipe(concat('fuelui.js'))
-            .pipe(gulp.dest(paths.bundle))    
-    ]);
 });
 
 gulp.task('views', ['cleanViews'], function () {
@@ -140,6 +117,6 @@ gulp.task('watch', function () {
     gulp.watch(paths.source+'/**/*.{scss,sass}', ['sass', 'scripts']);
 });
 
-gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts']);
+gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'bundle']);
 
 gulp.task('default', ['build', 'serve', 'watch']);

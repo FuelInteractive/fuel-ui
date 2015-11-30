@@ -4,8 +4,8 @@ import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitte
     selector: 'alert'
 })
 @View({
-    styleUrls: ['dist/components/Alert/Alert.css'],
-    templateUrl: 'dist/components/Alert/Alert.html',
+    styleUrls: ['components/Alert/Alert.css'],
+    templateUrl: 'components/Alert/Alert.html',
     directives: [CORE_DIRECTIVES]
 })
 export class Alert {

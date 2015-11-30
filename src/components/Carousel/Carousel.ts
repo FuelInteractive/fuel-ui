@@ -83,8 +83,8 @@ export class CarouselItem {
 	selector: 'carousel'
 })
 @View({
-	styleUrls: ['dist/components/carousel/carousel.css'],
-	templateUrl: 'dist/components/carousel/carousel.html',
+	styleUrls: ['components/carousel/carousel.css'],
+	templateUrl: 'components/carousel/carousel.html',
 	directives: [CORE_DIRECTIVES, CarouselItem],
 	encapsulation: ViewEncapsulation.None
 })

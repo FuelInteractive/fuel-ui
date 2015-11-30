@@ -8,8 +8,8 @@ import {DatePickerCalendar} from './DatePickerCalendar';
 	properties: ['minDate: minDate', 'maxDate: maxDate']
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePickerOld.css'],
-	templateUrl: 'dist/components/DatePicker/DatePickerOld.html',
+	styleUrls: ['components/DatePicker/DatePickerOld.css'],
+	templateUrl: 'components/DatePicker/DatePickerOld.html',
 	directives: [DatePickerCalendar, FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 export class DatePickerOld {

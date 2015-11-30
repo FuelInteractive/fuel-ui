@@ -9,8 +9,8 @@ import {Range} from '../../pipes/Range/Range';
     ]
 })
 @View({
-    styleUrls: ['dist/components/Pagination/Pagination.css'],
-    templateUrl: 'dist/components/Pagination/Pagination.html',
+    styleUrls: ['components/Pagination/Pagination.css'],
+    templateUrl: 'components/Pagination/Pagination.html',
     directives: [CORE_DIRECTIVES],
     pipes: [SlicePipe, Range]
 })

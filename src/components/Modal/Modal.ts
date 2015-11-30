@@ -9,8 +9,8 @@ import {Range} from "../../pipes/Range/Range";
 	}
 })
 @View({
-	styleUrls: ['dist/components/Modal/Modal.css'],
-	templateUrl: 'dist/components/Modal/Modal.html',
+	styleUrls: ['components/Modal/Modal.css'],
+	templateUrl: 'components/Modal/Modal.html',
 	directives: [CORE_DIRECTIVES, AnimationListener],
 	pipes: [Range]
 })

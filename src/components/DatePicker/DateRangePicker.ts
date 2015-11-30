@@ -7,8 +7,8 @@ import {DateRange} from '../../utilities/DateUtils.ts';
 	selector: 'date-range-picker'
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DateRangePicker.css'],
-	templateUrl: 'dist/components/DatePicker/DateRangePicker.html',
+	styleUrls: ['components/DatePicker/DateRangePicker.css'],
+	templateUrl: 'components/DatePicker/DateRangePicker.html',
 	directives: []
 })
 export class DateRangePicker {

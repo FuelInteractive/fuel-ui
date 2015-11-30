@@ -1,7 +1,9 @@
-import {View, Component, CORE_DIRECTIVES, FORM_DIRECTIVES, ViewEncapsulation} from 'angular2/angular2';
-import {FUELUI_COMPONENT_PROVIDERS} from './components/components';
-import {FUELUI_DIRECTIVE_PROVIDERS} from './directives/directives';
-import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
+import {View, Component, ViewEncapsulation, bootstrap, provide} from 'angular2/angular2';
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/angular2';
+import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
+import {FUELUI_COMPONENT_PROVIDERS} from './fuel-ui';
+import {FUELUI_DIRECTIVE_PROVIDERS} from './fuel-ui';
+import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 
 @Component({
 	selector: 'fuel-ui'
@@ -128,7 +130,7 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 	</main>`,
 	directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES],
 	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['dist/directives/Tooltip/Tooltip.css'],
+	styleUrls: ['directives/Tooltip/Tooltip.css'],
 	pipes: [FUELUI_PIPE_PROVIDERS]
 })
 export class DemoComponent {
@@ -183,3 +185,10 @@ export class DemoComponent {
 		console.log('AT THE END!', $event);
 	}
 }
+
+bootstrap(DemoComponent, [
+	ROUTER_PROVIDERS,
+	FORM_PROVIDERS,
+	provide(LocationStrategy, {useClass: HashLocationStrategy}),
+	FUELUI_COMPONENT_PROVIDERS
+]);

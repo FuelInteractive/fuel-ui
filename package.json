@@ -43,6 +43,13 @@
     "core.js": "^0.4.2",
     "es6-shim": "^0.33.13",
     "font-awesome": "4.4.0",
+    "jspm": "^0.16.15",
     "systemjs": "0.19.5"
+  },
+  "jspm": {
+    "dependencies": {
+      "angular2": "npm:angular2@^2.0.0-alpha.46"
+    },
+    "devDependencies": {}
   }
 }

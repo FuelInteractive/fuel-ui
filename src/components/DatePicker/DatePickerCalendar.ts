@@ -7,8 +7,8 @@ import {Input, Output, EventEmitter, OnInit} from 'angular2/angular2';
 	selector: 'date-picker-calendar'
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePickerCalendar.css'],
-	templateUrl: 'dist/components/DatePicker/DatePickerCalendar.html',
+	styleUrls: ['components/DatePicker/DatePickerCalendar.css'],
+	templateUrl: 'components/DatePicker/DatePickerCalendar.html',
 	directives: [CORE_DIRECTIVES,FORM_DIRECTIVES]
 })
 export class DatePickerCalendar implements OnInit {
