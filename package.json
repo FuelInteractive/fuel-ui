@@ -1,6 +1,6 @@
 {
   "name": "fuel-ui",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A set of utilities and Angular2 components implementing Twitter's Bootstrap 4 components",
   "main": "bundles/fuelui.js",
   "scripts": {
