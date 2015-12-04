@@ -18,7 +18,7 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 				play="true"
 				(on-animation-end)="logEnd()"></div>
 		</div>
-		<h2>DatePicker</h3>
+		<h2>DatePicker</h2>
 		<section class="row m-a">
 			<div class="col-md-3">
 				<date-picker 
@@ -70,7 +70,6 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 						<li>Testing 1</li>
 						<li>Testing 2</li>
 						<li>Testing 3</li>
-						<li>&hellip;</li>
 					</ul>
 				</div>
 				<div class="modal-footer">

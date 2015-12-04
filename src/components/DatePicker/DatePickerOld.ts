@@ -1,5 +1,5 @@
 import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, DOCUMENT, ElementRef,
-	Input, Output, EventEmitter, OnInit, DatePipe} from 'angular2/angular2';
+	Input, Output, EventEmitter, OnInit, DatePipe, AfterViewInit} from 'angular2/angular2';
 import {ViewChildren, QueryList, ViewChild} from 'angular2/angular2';
 import {DatePickerCalendar} from './DatePickerCalendar';
 
@@ -12,7 +12,7 @@ import {DatePickerCalendar} from './DatePickerCalendar';
 	templateUrl: 'components/DatePicker/DatePickerOld.html',
 	directives: [DatePickerCalendar, FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
-export class DatePickerOld {
+export class DatePickerOld implements AfterViewInit {
 	@Output() valueChange = new EventEmitter();
 	@Input() set value(value: Date|string) {
 		if(value instanceof Date && !isNaN(value.valueOf())) 
@@ -75,12 +75,12 @@ export class DatePickerOld {
 		this.modal = modal.nativeElement;
 	}
 	
-	onInit(): void {
+	ngOnInit(): void {
 		if(this.currentDate < this._minDate)
 			this.currentDate = this._minDate;
 	}
 	
-	afterViewInit(): void {
+	ngAfterViewInit(): void {
 		this.calendarQuery.changes
 			.subscribe(() => {
 				this.calendars = [];
@@ -93,7 +93,7 @@ export class DatePickerOld {
 		});
 	}
 	
-	onChanges(changes: any): void {
+	ngOnChanges(changes: any): void {
 		this.hideCalendar();
 	}
 	

@@ -1,6 +1,6 @@
 import {Directive, Component, View, CORE_DIRECTIVES, ViewEncapsulation} from 'angular2/angular2';
-import {QueryList, ContentChildren, ElementRef} from 'angular2/angular2';
-import {Input, Output, EventEmitter, OnInit} from 'angular2/angular2';
+import {QueryList, ContentChildren, ElementRef, AfterContentInit} from 'angular2/angular2';
+import {Input, Output, EventEmitter} from 'angular2/angular2';
 
 @Directive({
 	selector: '.carousel-item',
@@ -88,7 +88,7 @@ export class CarouselItem {
 	directives: [CORE_DIRECTIVES, CarouselItem],
 	encapsulation: ViewEncapsulation.None
 })
-export class Carousel {
+export class Carousel implements AfterContentInit {
 	images: CarouselItem[] = [];
 	@ContentChildren(CarouselItem) imageQuery: QueryList<CarouselItem>;
 
@@ -96,7 +96,7 @@ export class Carousel {
 
 	}
 
-	afterContentInit(): void {
+	ngAfterContentInit(): void {
 		this.imageQuery.changes
 				.subscribe(() => this.registerImages());
 		this.registerImages();

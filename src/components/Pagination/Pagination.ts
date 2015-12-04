@@ -28,7 +28,7 @@ export class Pagination implements OnChanges {
         this._el = el.nativeElement;
     }
 
-    onChanges(changes:any):void{
+    ngOnChanges(changes:any):void{
         this.setPage(this.currentPage);
     }
 

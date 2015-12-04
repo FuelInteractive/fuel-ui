@@ -298,10 +298,10 @@ System.registerDynamic("bin/directives/Animation/Animation.js", ["node_modules/a
       this._callbacks = [];
       this.element = element.nativeElement;
     }
-    Animation.prototype.onChange = function() {
+    Animation.prototype.ngOnChanges = function() {
       this.setup();
     };
-    Animation.prototype.onInit = function() {
+    Animation.prototype.ngOnInit = function() {
       this.setup();
     };
     Animation.prototype.addAnimation = function(animationClasses) {
@@ -438,7 +438,7 @@ System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules
       this.pagesBlank = [];
       this._el = el.nativeElement;
     }
-    Pagination.prototype.onChanges = function(changes) {
+    Pagination.prototype.ngOnChanges = function(changes) {
       this.setPage(this.currentPage);
     };
     Pagination.prototype.getElement = function() {
@@ -727,10 +727,10 @@ System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/a
       this._callbacks = [];
       this.element = element.nativeElement;
     }
-    Animation.prototype.onChange = function() {
+    Animation.prototype.ngOnChanges = function() {
       this.setup();
     };
-    Animation.prototype.onInit = function() {
+    Animation.prototype.ngOnInit = function() {
       this.setup();
     };
     Animation.prototype.addAnimation = function(animationClasses) {
@@ -844,7 +844,7 @@ System.registerDynamic("bin/components/DatePicker/DatePickerCalendar.js", ["node
     function DatePickerCalendar() {
       this.selectedDateChange = new angular2_2.EventEmitter();
     }
-    DatePickerCalendar.prototype.onInit = function() {
+    DatePickerCalendar.prototype.ngOnInit = function() {
       this.buildWeeks(this.currentMonth || new Date());
     };
     DatePickerCalendar.prototype.checkSelectable = function(date) {
@@ -996,9 +996,7 @@ System.registerDynamic("bin/components/DatePicker/DatePickerBase.js", ["node_mod
         if (e.srcElement.className.indexOf('modal') != -1)
           _this.hideCalendar();
       });
-      this.calendarQuery.changes.subscribe(function(calendars) {
-        return _this.updateCalendars(calendars);
-      });
+      this.calendarQuery.changes.subscribe(this.updateCalendars);
     };
     DatePickerBase.prototype.handleDateInput = function(value) {
       if (value instanceof Date && !isNaN(value.valueOf()))
@@ -1171,12 +1169,12 @@ System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules
       configurable: true
     });
     ;
-    DatePicker.prototype.onInit = function() {
+    DatePicker.prototype.ngOnInit = function() {
       if (this.selectedDate < this._minDate)
         this.selectedDate = this._minDate;
       _super.prototype.onInit.call(this);
     };
-    DatePicker.prototype.onChanges = function(changes) {
+    DatePicker.prototype.ngOnChanges = function(changes) {
       this.onInit();
     };
     __decorate([angular2_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange");

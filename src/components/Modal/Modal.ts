@@ -1,4 +1,4 @@
-import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter, OnInit} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter} from 'angular2/angular2';
 import {AnimationListener} from "../../directives/Animation/AnimationListener";
 import {Range} from "../../pipes/Range/Range";
 

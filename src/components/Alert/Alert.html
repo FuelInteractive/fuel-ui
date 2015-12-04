@@ -4,7 +4,7 @@
     class="alert alertFadeIn"
     [ng-class]="{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }" >
     <button *ng-if="closeButton" (click)="close()" type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&#215;</span>
         <span class="sr-only">Close</span>
     </button>
     <ng-content></ng-content>

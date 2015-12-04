@@ -34,22 +34,15 @@
     "typescript": "^1.5.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "bourbon": "^4.2.6"
   },
   "dependencies": {
-    "angular2": "^2.0.0-alpha.46",
+    "angular2": "^2.0.0-alpha.47",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha",
-    "bourbon": "^4.2.6",
     "core.js": "^0.4.2",
     "es6-shim": "^0.33.13",
     "font-awesome": "4.4.0",
-    "jspm": "^0.16.15",
     "systemjs": "0.19.5"
-  },
-  "jspm": {
-    "dependencies": {
-      "angular2": "npm:angular2@^2.0.0-alpha.46"
-    },
-    "devDependencies": {}
   }
 }

@@ -23,7 +23,7 @@ export class DatePickerCalendar implements OnInit {
 	constructor() {		
 	}
 	
-	onInit(): void {
+	ngOnInit(): void {
 		this.buildWeeks(this.currentMonth || new Date());		
 	}
 	
