@@ -11,8 +11,8 @@
 				<th>F</th>
 				<th>S</th>
 			</tr>
-			<tr *ng-for="#week of weeks">
-				<td *ng-for="#day of week"
+			<tr *ngFor="#week of weeks">
+				<td *ngFor="#day of week"
 					[class.selectable]="checkSelectable(day)" 
 					[class.disabled]="!checkSelectable(day)"
 					[class.selected]="checkSelectedDate(day)" 

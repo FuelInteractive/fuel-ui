@@ -6,11 +6,11 @@ Use the component's `showModal(displayed: boolean)` method to properly trigger t
 
 ### Modal Settings
 
-  * `[close-button]` _- boolean - (Default: `true`)(Optional)_ -
+  * `[closeButton]` _- boolean - (Default: `true`)(Optional)_ -
     Takes a boolean that causes the close button to be displayed in the top right corner
-  * `[close-on-unfocus]` _- boolean - (Default: `true`)(Optional)_-
+  * `[closeOnUnfocus]` _- boolean - (Default: `true`)(Optional)_-
     Takes a boolean that causes the modal to close when a user clicks outside of the modal
-  * `[modal-title]` _- string - (Default: `null`)(Optional)_ -
+  * `[modalTitle]` _- string - (Default: `null`)(Optional)_ -
     The heading of the modal
 
 ### Modal inner content
@@ -25,9 +25,9 @@ modalTitle: string = 'This is a Modal';
 
 ```html
 <modal #modal
-    [close-button]="closeButton"
-    [close-on-unfocus]="closeOnUnfocus"
-    [modal-title]="modalTitle">
+    [closeButton]="closeButton"
+    [closeOnUnfocus]="closeOnUnfocus"
+    [modalTitle]="modalTitle">
     <div class="modal-body">
         <p>Body of modal...</p>
     </div>
@@ -54,9 +54,9 @@ toggleModal(modal:any){
 
 ```html
 <modal #modal
-    [close-button]="closeButton"
-    [close-on-unfocus]="closeOnUnfocus"
-    [modal-title]="modalTitle">
+    [closeButton]="closeButton"
+    [closeOnUnfocus]="closeOnUnfocus"
+    [modalTitle]="modalTitle">
     <div class="modal-body">
         <p>Body of modal...</p>
     </div>

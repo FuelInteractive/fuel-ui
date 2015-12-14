@@ -1,4 +1,5 @@
-import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter} from 'angular2/angular2';
+import {Component, View, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
     selector: 'alert'

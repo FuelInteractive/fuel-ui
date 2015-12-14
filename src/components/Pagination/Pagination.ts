@@ -1,4 +1,5 @@
-import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter, SlicePipe, OnChanges} from 'angular2/angular2';
+import {Component, View, ElementRef, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
+import {CORE_DIRECTIVES, SlicePipe} from 'angular2/common';
 import {Range} from '../../pipes/Range/Range';
 
 @Component({

@@ -1,5 +1,6 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, AfterViewInit} from 'angular2/angular2';
-import {Input, Output, ElementRef, ViewChildren, QueryList} from 'angular2/angular2';
+import {Component, View, AfterViewInit} from 'angular2/core';
+import {Input, Output, ElementRef, ViewChildren, QueryList} from 'angular2/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {DatePickerCalendar} from './DatePickerCalendar';
 import {Animation} from '../../Directives/Animation/Animation'
 

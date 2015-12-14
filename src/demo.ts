@@ -1,5 +1,6 @@
-import {View, Component, ViewEncapsulation, bootstrap, provide} from 'angular2/angular2';
-import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/angular2';
+import {View, Component, ViewEncapsulation, provide} from 'angular2/core';
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/common';
+import {bootstrap} from 'angular2/platform/browser';
 import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
 import {FUELUI_COMPONENT_PROVIDERS} from './fuel-ui';
 import {FUELUI_DIRECTIVE_PROVIDERS} from './fuel-ui';
@@ -11,6 +12,18 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 @View({
 	template: `
 	<main class="container">
+		<h2>Infinite Scroller</h2>
+		<div class="row m-a">
+			<div class="col-md-6">
+				<infinite-scroller (next)="infinteScrollNext()" distance="2">
+					
+						<div *ngFor="#item of infiniteScrollItems" infinite-scroll-item>
+							{{item}}
+						</div>
+					
+				</infinite-scroller>
+			</div>
+		</div>
 		<h2>Animation Helper</h2>
 		<div class="row m-a">
 			<div class="test-box"
@@ -43,7 +56,7 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 			<alert
 				[(displayed)]="showAlert"
 				[type]="alertType">
-				<span [inner-html]="alertBody"></span>
+				<span [innerHtml]="alertBody"></span>
 			</alert>
 			<button (click)="saveFunc(modal, false)">Toggle Alert Success</button>
 			<button (click)="saveFunc(modal, true)">Toggle Alert Error</button>
@@ -53,11 +66,11 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 			<button (click)="modal.showModal()">Toggle Modal</button>
 			<modal #modal
 				class="animated"
-				[modal-title]="modalTitle"
-				[close-button]="closeButton"
-				[close-on-unfocus]="closeOnUnfocus"
-				(animation-start)="logStart($event)"
-				(animation-end)="logEnd($event)">
+				[modalTitle]="modalTitle"
+				[closeButton]="closeButton"
+				[closeOnUnfocus]="closeOnUnfocus"
+				(animationStart)="logStart($event)"
+				(animationEnd)="logEnd($event)">
 				<div class="modal-body">
 					<carousel>
 						<img class="carousel-item"
@@ -85,7 +98,7 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 		<h2>Tooltip</h2>
 		<section class="row m-a">
 			<div tooltip="Tooltip text goes here.">Some text here.</div>
-			<div tooltip="Example data binding: {{test}}!">Hover me with input value</div> <input [(ng-model)]="test" type="text" class="form-control">
+			<div tooltip="Example data binding: {{test}}!">Hover me with input value</div> <input [(ngModel)]="test" type="text" class="form-control">
 		</section>
 		<section class="row m-a">
 			<h2>Pagination Example</h2>
@@ -93,26 +106,26 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 				<div class="form-group row">
 					<label for="totalPages" class="col-sm-2 form-control-label">Total Pages</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="totalPages" min="1" type="number" name="totalPages">
+						<input class="form-control" [(ngModel)]="totalPages" min="1" type="number" name="totalPages">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="pagesAtOnce" class="col-sm-2 form-control-label">Pages At Once</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="pagesAtOnce" min="1" [max]="totalPages" type="number" name="pagesAtOnce">
+						<input class="form-control" [(ngModel)]="pagesAtOnce" min="1" [max]="totalPages" type="number" name="pagesAtOnce">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="currentPage" class="col-sm-2 form-control-label">Current Page</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="currentPage" min="1" [max]="totalPages" type="number" name="currentPage">
+						<input class="form-control" [(ngModel)]="currentPage" min="1" [max]="totalPages" type="number" name="currentPage">
 					</div>
 				</div>
 			</form>
 			<pagination
-				[(current-page)]="currentPage"
-				[total-pages]="totalPages"
-				[pages-at-once]="pagesAtOnce">
+				[(currentPage)]="currentPage"
+				[totalPages]="totalPages"
+				[pagesAtOnce]="pagesAtOnce">
 			</pagination>
 		</section>
 		<section class="row m-a">
@@ -121,7 +134,7 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 				<div class="form-group row">
 					<label for="progress" class="col-sm-2 form-control-label">Progress %</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="progress" min="0" max="100" type="number" name="progress">
+						<input class="form-control" [(ngModel)]="progress" min="0" max="100" type="number" name="progress">
 					</div>
 				</div>
 			</form>
@@ -156,9 +169,25 @@ export class DemoComponent {
 	numRooms: number = 1;
 	checkInDate: Date = new Date();
 	checkOutDate: Date = new Date();
+	
+	infiniteScrollItems: string[] = [];
+
+	constructor() {
+		for(let i = 0; i < 5; i++)
+			this.infinteScrollNext();
+	}
 
 	pageChange(page:number):void{
 		this.currentPage = page;
+	}
+	
+	infinteScrollNext(): void {
+		var currentItem = this.infiniteScrollItems.length;
+		var newItem = "";
+		for(let i = 0; i < 50; i++)
+			newItem += "Test " + currentItem + " ";
+		
+		this.infiniteScrollItems.push(newItem);
 	}
 
 	saveFunc(modal:any, error:boolean):void{

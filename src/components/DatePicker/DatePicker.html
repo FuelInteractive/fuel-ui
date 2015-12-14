@@ -1,14 +1,14 @@
 <div class="input-group" (click)="showCalendar($event)">
 	<input type="text" class="form-control"
-		[(ng-model)]="inputDate" 
-		 #date-field
+		[(ngModel)]="inputDate" 
+		 #dateField
 		 />
 	<span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
 		<i class="fa fa-calendar"></i>
 	</span>
 </div>
 
-<section class="modal ng-animate" *ng-if="calendarDisplayed">
+<section class="modal ng-animate" *ngIf="calendarDisplayed">
 <div class="modal-dialog" role="document"
 	[style.top.px]="calendarY"
 	[style.left.px]="calendarX">
@@ -31,7 +31,7 @@
 	</header>
 	<section class="calendar-container">
 		<date-picker-calendar animation
-			*ng-for="#month of calendarMonths #i=index"
+			*ngFor="#month of calendarMonths #i=index"
 			class="col-md-{{12/months}} p-a-0"
 			[style.margin-left]="(i!=months||direction!='right'?0:-100/months)+'%'" 
 			[id]="i"

@@ -38,11 +38,12 @@
     "bourbon": "^4.2.6"
   },
   "dependencies": {
-    "angular2": "^2.0.0-alpha.48",
+    "angular2": "^2.0.0-alpha.53",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha",
     "core.js": "^0.4.2",
     "es6-shim": "^0.33.13",
     "font-awesome": "4.4.0",
+    "rxjs": "^5.0.0-alpha.14",
     "systemjs": "0.19.5"
   }
 }

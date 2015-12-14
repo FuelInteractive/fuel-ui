@@ -1,9 +1,9 @@
 /*
  * Example use
- *		Basic Array of single type: *ng-for="#n of someBlankArray | 0 : 9"
+ *		Basic Array of single type: *ngFor="#n of someBlankArray | 0 : 9"
  */
 
-import {Pipe} from "angular2/angular2";
+import {Pipe} from "angular2/core";
 
 @Pipe({
     name: 'range',
