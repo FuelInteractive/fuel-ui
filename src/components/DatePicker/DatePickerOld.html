@@ -1,15 +1,15 @@
 
 <div class="input-group" (click)="showCalendar()">
 	<input type="text" class="form-control"
-		[(ng-model)]="inputDate" 
-		 #date-field
+		[(ngModel)]="inputDate" 
+		 #dateField
 		 />
 	<span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
 		<i class="fa fa-calendar"></i>
 	</span>
 </div>
 
-<div class="modal" *ng-if="calendarDisplayed"
+<div class="modal" *ngIf="calendarDisplayed"
 	[class.modal-zoom-in]="calendarDisplayed"
 	[class.modal-zoom-out]="!calendarDisplayed">
 	<div class="modal-dialog">

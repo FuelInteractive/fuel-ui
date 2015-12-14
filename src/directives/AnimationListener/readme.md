@@ -5,9 +5,9 @@ This directive indicates that the element has animations attached to it. The dir
 
 ### Animation Listener Settings
 
-  * `(animation-start)` _- function_ -
+  * `(animationStart)` _- function_ -
     A function to fire when any animation starts
-  * `(animation-end)` _- function_ -
+  * `(animationEnd)` _- function_ -
     A function to fire when any animation ends
 
 ### Animation Listener Example
@@ -19,7 +19,7 @@ fired($event:any){
 
 ```html
 <div class="animated"
-    (animation-start)="fired($event)"
-    (animation-end)="fired($event)">
+    (animationStart)="fired($event)"
+    (animationEnd)="fired($event)">
 </div>
 ```
