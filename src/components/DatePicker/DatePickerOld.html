@@ -15,7 +15,7 @@
 	<div class="modal-dialog">
 <section class="modal-content container m-a">
 	<header class="row">
-		<time *ng-for="#month of monthList" 
+		<time *ngFor="#month of monthList" 
 			class="col-xs-{{12/months}} text-center p-y">
 			<h5>{{month | date:'MMMM yyyy'}}</h5>
 		</time>
@@ -35,7 +35,7 @@
 		</div>
 	</header>
 	<section class="row">
-		<date-picker-calendar *ng-for="#month of monthList"
+		<date-picker-calendar *ngFor="#month of monthList"
 			class="col-md-{{12/months}}" 
 			[min-date]="minDate" [max-date]="maxDate"
 			[current-month]="month" 

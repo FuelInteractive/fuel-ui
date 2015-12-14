@@ -106,7 +106,7 @@ gulp.task('sass', ['cleanSass'], function () {
 gulp.task('serve', function(){
     gulp.src('./')
         .pipe(webserver({
-            livereload: true,
+            livereload: false,
             open: true
         }));
 });

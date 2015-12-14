@@ -1,5 +1,6 @@
-import {View, Component, ViewEncapsulation, bootstrap, provide} from 'angular2/angular2';
-import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/angular2';
+import {View, Component, ViewEncapsulation, provide} from 'angular2/core';
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/common';
+import {bootstrap} from 'angular2/bootstrap';
 import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
 import {FUELUI_COMPONENT_PROVIDERS} from './fuel-ui';
 import {FUELUI_DIRECTIVE_PROVIDERS} from './fuel-ui';
@@ -11,6 +12,18 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 @View({
 	template: `
 	<main class="container">
+		<h2>Infinite Scroller</h2>
+		<div class="row m-a">
+			<div class="col-md-6">
+				<infinite-scroller (next)="infinteScrollNext()" distance="2">
+					
+						<div *ngFor="#item of infiniteScrollItems" infinite-scroll-item>
+							{{item}}
+						</div>
+					
+				</infinite-scroller>
+			</div>
+		</div>
 		<h2>Animation Helper</h2>
 		<div class="row m-a">
 			<div class="test-box"
@@ -156,9 +169,25 @@ export class DemoComponent {
 	numRooms: number = 1;
 	checkInDate: Date = new Date();
 	checkOutDate: Date = new Date();
+	
+	infiniteScrollItems: string[] = [];
+
+	constructor() {
+		for(let i = 0; i < 5; i++)
+			this.infinteScrollNext();
+	}
 
 	pageChange(page:number):void{
 		this.currentPage = page;
+	}
+	
+	infinteScrollNext(): void {
+		var currentItem = this.infiniteScrollItems.length;
+		var newItem = "";
+		for(let i = 0; i < 50; i++)
+			newItem += "Test " + currentItem + " ";
+		
+		this.infiniteScrollItems.push(newItem);
 	}
 
 	saveFunc(modal:any, error:boolean):void{

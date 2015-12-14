@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges} from 'angular2/angular2';
+import {Directive, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges} from 'angular2/core';
 
 @Directive({
     selector: '[animation]',

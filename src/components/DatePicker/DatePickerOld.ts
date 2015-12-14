@@ -1,6 +1,7 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, DOCUMENT, ElementRef,
-	Input, Output, EventEmitter, OnInit, DatePipe, AfterViewInit} from 'angular2/angular2';
-import {ViewChildren, QueryList, ViewChild} from 'angular2/angular2';
+import {Component, View, ElementRef,
+	Input, Output, EventEmitter, OnInit, AfterViewInit} from 'angular2/core';
+import {ViewChildren, QueryList, ViewChild} from 'angular2/core';
+import {CORE_DIRECTIVES,FORM_DIRECTIVES,DatePipe} from 'angular2/common';
 import {DatePickerCalendar} from './DatePickerCalendar';
 
 @Component({
