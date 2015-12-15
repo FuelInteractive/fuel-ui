@@ -14,13 +14,18 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 	<main class="container">
 		<h2>Infinite Scroller</h2>
 		<div class="row m-a">
-			<div class="col-md-6">
-				<infinite-scroller (next)="infinteScrollNext()" distance="2">
-					
-						<div *ngFor="#item of infiniteScrollItems" infinite-scroll-item>
-							{{item}}
+			<div class="col-md-6" style="border: 1px solid #333; background-color: #EEE">
+				<infinite-scroller 
+					(next)="infinteScrollNext()" 
+					(prev)="infiniteScrollPrev()" 
+					height="300"
+					distance="120">
+					<div *ngFor="#item of infiniteScrollItems" class="card p-a" style="background-color: #FFF">
+						<div class="card-block">
+							<h4 class="card-title">Some Item</h4>
+							<p class="card-text">{{item}}</p>
 						</div>
-					
+					</div>
 				</infinite-scroller>
 			</div>
 		</div>
@@ -43,12 +48,7 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 		<h2>Carousel</h2>
 		<section class="row m-a">
 			<carousel class="col-md-6">
-				<img class="carousel-item" 
-					src="/images/carouselImages/beach.png" alt="Beach" />
-				<img class="carousel-item" 
-					src="/images/carouselImages/river.jpg" alt="River" />
-				<img class="carousel-item" 
-					src="/images/carouselImages/windmill.jpg" alt="Windmill" />
+				<img *ngFor="#image of carouselImages" src="{{image}}" class="carousel-item" />
 			</carousel>
 		</section>
 		<h2>Alert</h2>
@@ -147,6 +147,12 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 	pipes: [FUELUI_PIPE_PROVIDERS]
 })
 export class DemoComponent {
+	carouselImages: string[] = [
+		'/images/carouselImages/beach.png',
+		'/images/carouselImages/river.jpg',
+		'/images/carouselImages/windmill.jpg'	
+	];
+	
 	modalTitle: string = 'TEST EST TESTSETSETTESET';
 	closeText: string = 'Cancel';
 	closeButton: boolean = true;
@@ -171,22 +177,31 @@ export class DemoComponent {
 	checkOutDate: Date = new Date();
 	
 	infiniteScrollItems: string[] = [];
+	infiniteScrollMin: number = 0;
+	infiniteScrollMax: number = 1;
 
 	constructor() {
-		for(let i = 0; i < 5; i++)
-			this.infinteScrollNext();
+		for(let i = 0; i < 10; i++)
+			this.infinteScrollNext(false);
 	}
 
 	pageChange(page:number):void{
 		this.currentPage = page;
 	}
 	
-	infinteScrollNext(): void {
-		var currentItem = this.infiniteScrollItems.length;
+	infiniteScrollPrev(): void {		
 		var newItem = "";
 		for(let i = 0; i < 50; i++)
-			newItem += "Test " + currentItem + " ";
-		
+			newItem += "Test " + this.infiniteScrollMin + " ";
+		this.infiniteScrollMin--;
+		this.infiniteScrollItems.unshift(newItem);
+	}
+	
+	infinteScrollNext(clean: boolean = true): void {
+		var newItem = "";
+		for(let i = 0; i < 50; i++)
+			newItem += "Test " + this.infiniteScrollMax + " ";
+		this.infiniteScrollMax++;
 		this.infiniteScrollItems.push(newItem);
 	}
 

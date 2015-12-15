@@ -9,15 +9,28 @@ import {
 	ContentChildren,
 	ViewChildren,
 	QueryList,
-	AfterContentInit
+	AfterContentInit,
+    AfterViewInit
  } from "angular2/core";
+
+@Directive({
+	selector: '.infinite-scroll-item'
+})
+export class InfiniteScrollItem {
+	public element: Element;
+	constructor(element: ElementRef) {
+		this.element = element.nativeElement;
+	}
+}
 
 @Component({
 	selector: 'infinite-scroller'
 })
 @View({
 	template: `
-		<div class="scroll-container" (scroll)="doscroll($event)">
+		<div class="scroll-container" 
+			(scroll)="doscroll($event)"
+			[style.height.px]="height">
 			<ng-content></ng-content>
 		</div>
 	`,
@@ -35,20 +48,24 @@ import {
 		.scroll-content {
 			overflow: auto;
 		}
-	`]
+	`],
+	directives: []
 })
-export class InfiniteScroller implements AfterContentInit {
+export class InfiniteScroller implements AfterContentInit, AfterViewInit {
 	@Input()
 	distance: number;
 	
+	@Input()
+	height: number;
+	
 	@Output()
-	next = new EventEmitter();
+	next: EventEmitter<any> = new EventEmitter();
 	
 	@Output()
 	prev: EventEmitter<any> = new EventEmitter();
 	
-	@ContentChildren(InfiniteScrollItem)
-	contentQuery: QueryList<InfiniteScrollItem>;
+	lastScroll: number = 0;
+	isScrolling: boolean = false;
 	
 	container: Element
 	
@@ -57,49 +74,35 @@ export class InfiniteScroller implements AfterContentInit {
 	}
 	
 	ngAfterContentInit(): void {
-		this.contentQuery.changes
-			.subscribe(() => this.contentQuery.map(i => console.log(this)));
+		this.container.firstElementChild.scrollTop = 1;
 	}
 	
-	registerItems(): void {
-
+	ngAfterViewInit(): void {
+		
 	}
 	
 	doscroll(event: Event) {
+		this.isScrolling = true;
 		
 		var target = <Element>(typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
+		var targetRect = target.getBoundingClientRect();
+		var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
 		
-		var height = target.getBoundingClientRect().height;
+		var scrollDown = target.scrollTop > this.lastScroll;
+		var saveLastScroll = this.lastScroll;
+		this.lastScroll = target.scrollTop;
 		
-		if(height - target.scrollTop > 100)
-			return;
+		if(scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance*2) {
+			this.next.emit(null);
+			if(target.scrollHeight - target.scrollTop === target.clientHeight) {
+				target.scrollTop -= 10;
+			}
+		} 
+		else if(!scrollDown && target.scrollTop <= this.distance*2) {
+			this.prev.emit(null);
+			target.scrollTop = saveLastScroll > 0 ? saveLastScroll : 1;
+		}
 		
-		console.log(this.contentQuery);
-		//console.log(this.itemQuery);
-		//console.log(this.itemQuery.first.element.getBoundingClientRect().top);
-		this.next.emit(null);
-	}
-	
-	isVisable(item: InfiniteScrollItem): boolean {
-		var containerRect = this.container.getBoundingClientRect();
-		var itemRect = item.element.getBoundingClientRect();
-		
-		return itemRect.top < containerRect.height;
-	}
-}
-
-@Directive({
-	selector: '[infinite-scroll-item]'
-})
-export class InfiniteScrollItem {
-	public element: Element;
-	constructor(element: ElementRef) {
-		this.element = element.nativeElement;
-		//console.log(this);
+		this.isScrolling = false;
 	}
 }
-
-export var InfiniteScrollerProviders = [
-	InfiniteScroller,
-	InfiniteScrollItem
-]
