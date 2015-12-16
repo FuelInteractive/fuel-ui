@@ -9,11 +9,12 @@ This is currently a work in progress, check the source for additional readme doc
 - Modal
 - Pagination
 - Progressbar
+- InfiniteScroller
 
 ##Directives
 - Tooltip
 - Animation (helper)
 
-##Pipes Available
+##Pipes
 - OrderBy
 - Range
