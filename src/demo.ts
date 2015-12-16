@@ -19,7 +19,8 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 					(next)="infinteScrollNext()" 
 					(prev)="infiniteScrollPrev()" 
 					height="300"
-					distance="120">
+					distance="120"
+					hideScrollbar="true">
 					<div *ngFor="#item of infiniteScrollItems" class="card p-a" style="background-color: #FFF">
 						<div class="card-block">
 							<h4 class="card-title">Some Item</h4>
@@ -34,7 +35,7 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 			<div class="test-box"
 				animation="test-animation-a test-animation-b"
 				play="true"
-				(on-animation-end)="logEnd()"></div>
+				(onAnimationEnd)="logEnd()"></div>
 		</div>
 		<h2>DatePicker</h2>
 		<section class="row m-a">

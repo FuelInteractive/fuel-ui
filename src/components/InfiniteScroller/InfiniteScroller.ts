@@ -13,16 +13,6 @@ import {
     AfterViewInit
  } from "angular2/core";
 
-@Directive({
-	selector: '.infinite-scroll-item'
-})
-export class InfiniteScrollItem {
-	public element: Element;
-	constructor(element: ElementRef) {
-		this.element = element.nativeElement;
-	}
-}
-
 @Component({
 	selector: 'infinite-scroller'
 })
@@ -30,7 +20,8 @@ export class InfiniteScrollItem {
 	template: `
 		<div class="scroll-container" 
 			(scroll)="doscroll($event)"
-			[style.height.px]="height">
+			[style.height.px]="height"
+			[class.hide-scrollbar]="hideScrollbar">
 			<ng-content></ng-content>
 		</div>
 	`,
@@ -38,10 +29,9 @@ export class InfiniteScrollItem {
 		.scroll-container {
 			overflow-y: scroll;
 			overflow-x: hidden;
-			height: 300px;
 		}
 		
-		.scroll-container::-webkit-scrollbar {
+		.scroll-container.hide-scrollbar::-webkit-scrollbar {
 			display: none;
 		}
 		
@@ -53,10 +43,11 @@ export class InfiniteScrollItem {
 })
 export class InfiniteScroller implements AfterContentInit, AfterViewInit {
 	@Input()
-	distance: number;
-	
+	distance: number = 100;
 	@Input()
-	height: number;
+	height: string = 'auto';
+	@Input()
+	hideScrollbar: boolean = false;
 	
 	@Output()
 	next: EventEmitter<any> = new EventEmitter();
