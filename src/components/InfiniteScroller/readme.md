@@ -20,15 +20,8 @@ This component also defines styles to allow infinite scrolling within a self con
   * `[hideScrollbar]` _- boolean - (Default: `false`)(Optional)_ -
     Determines wether or not to hide the scrollbar of the container
 
-### inner content
+### Inner content
   * Content to be scrolled, typically containing an iterated model using *ngFor
-
-Basic useful feature list:
-
- * Ctrl+S / Cmd+S to save the file
- * Ctrl+Shift+S / Cmd+Shift+S to choose to save as Markdown or HTML
- * Drag and drop a file into here to load it
- * File contents are saved in the URL so you can share files
 
 ### Example
 ```html
