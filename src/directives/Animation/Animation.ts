@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, ElementRef} from 'angular2/angular2';
+import {Directive, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges} from 'angular2/core';
 
 @Directive({
     selector: '[animation]',
@@ -13,9 +13,9 @@ import {Directive, Input, Output, EventEmitter, ElementRef} from 'angular2/angul
         '(MSAnimationEnd)': 'animationEnded($event)'
     }
 })
-export class Animation {
-    @Output() onAnimationStart: EventEmitter = new EventEmitter();
-    @Output() onAnimationEnd: EventEmitter = new EventEmitter();
+export class Animation implements OnInit, OnChanges {
+    @Output() onAnimationStart = new EventEmitter<any>();
+    @Output() onAnimationEnd = new EventEmitter<any>();
 
 	@Input('animation') animationClasses: string = '';
 	@Input() play: boolean = false; 
@@ -30,11 +30,11 @@ export class Animation {
 		this.element = element.nativeElement;
     }
 	
-	onChange(): void {
+	ngOnChanges(): void {
 		this.setup();
 	}
 	
-	onInit(): void {
+	ngOnInit(): void {
 		this.setup();
 	}
 

@@ -1,4 +1,5 @@
-import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter, OnInit} from 'angular2/angular2';
+import {Component, View, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {AnimationListener} from "../../directives/Animation/AnimationListener";
 import {Range} from "../../pipes/Range/Range";
 
@@ -9,8 +10,8 @@ import {Range} from "../../pipes/Range/Range";
 	}
 })
 @View({
-	styleUrls: ['dist/components/Modal/Modal.css'],
-	templateUrl: 'dist/components/Modal/Modal.html',
+	styleUrls: ['components/Modal/Modal.css'],
+	templateUrl: 'components/Modal/Modal.html',
 	directives: [CORE_DIRECTIVES, AnimationListener],
 	pipes: [Range]
 })

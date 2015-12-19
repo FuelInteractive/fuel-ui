@@ -173,7 +173,7 @@ ipch/
 _UpgradeReport_Files/
 .settings/
 **/wwwroot/lib/
-FuelUi/dist/
+dist/
 .idea/
 .vscode/
 

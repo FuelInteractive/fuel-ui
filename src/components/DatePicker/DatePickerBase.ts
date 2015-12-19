@@ -1,5 +1,6 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {Input, Output, ElementRef, ViewChildren, QueryList} from 'angular2/angular2';
+import {Component, View, AfterViewInit} from 'angular2/core';
+import {Input, Output, ElementRef, ViewChildren, QueryList} from 'angular2/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {DatePickerCalendar} from './DatePickerCalendar';
 import {Animation} from '../../Directives/Animation/Animation'
 
@@ -7,11 +8,11 @@ import {Animation} from '../../Directives/Animation/Animation'
 	selector: 'date-picker'
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePicker.css'],
-	templateUrl: 'dist/components/DatePicker/DatePicker.html',
+	styleUrls: ['components/DatePicker/DatePicker.css'],
+	templateUrl: 'components/DatePicker/DatePicker.html',
 	directives: [DatePickerCalendar, CORE_DIRECTIVES, FORM_DIRECTIVES, Animation]
 })
-export class DatePickerBase {
+export class DatePickerBase implements AfterViewInit {
 
 	_minDate: Date = new Date(1900,0,1);
 	_maxDate: Date = new Date(2200,0,1);
@@ -54,14 +55,14 @@ export class DatePickerBase {
 		this.currentDate = this.currentDate;
 	}
 
-	afterViewInit(): void {			
+	ngAfterViewInit(): void {			
 		this.modal.addEventListener('click', (e) => {
 			if(e.srcElement.className.indexOf('modal') != -1)
 				this.hideCalendar();
 		});
 		
-		(<any>this.calendarQuery.changes).toRx()
-			.subscribe((calendars: any) => this.updateCalendars(calendars));
+		<any>this.calendarQuery.changes
+			.subscribe(this.updateCalendars);
 	}
 
 	handleDateInput(value: string|Date): Date {

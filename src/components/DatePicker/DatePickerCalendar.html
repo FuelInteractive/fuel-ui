@@ -1,7 +1,7 @@
 <div class="text-center py"> 
 	<strong>{{currentMonth | date:'MMMM yyyy'}}</strong>
-	<table class="table">
-		<thead>	
+	<table class="table">	
+		<tbody>
 			<tr>
 				<th>S</th>
 				<th>M</th>
@@ -11,10 +11,8 @@
 				<th>F</th>
 				<th>S</th>
 			</tr>
-		</thead>
-		<tbody>
-			<tr *ng-for="#week of weeks">
-				<td *ng-for="#day of week"
+			<tr *ngFor="#week of weeks">
+				<td *ngFor="#day of week"
 					[class.selectable]="checkSelectable(day)" 
 					[class.disabled]="!checkSelectable(day)"
 					[class.selected]="checkSelectedDate(day)" 

@@ -1,11 +1,11 @@
 /*
  * Example use
- *		Basic Array of single type: *ng-for="#todo of todoService.todos | orderBy : 'desc'"
- *		Multidimensional Array Sort on single column: *ng-for="#todo of todoService.todos | orderBy : 'asc' : 'status'"
- *		Multidimensional Array Sort on multiple columns: *ng-for="#todo of todoService.todos | orderBy : 'asc' : ['status', 'title']"
+ *		Basic Array of single type: *ngFor="#todo of todoService.todos | orderBy : 'desc'"
+ *		Multidimensional Array Sort on single column: *ngFor="#todo of todoService.todos | orderBy : 'asc' : 'status'"
+ *		Multidimensional Array Sort on multiple columns: *ngFor="#todo of todoService.todos | orderBy : 'asc' : ['status', 'title']"
  */
 
-import {Pipe} from "angular2/angular2";
+import {Pipe} from "angular2/core";
 
 @Pipe({
     name: 'orderBy',

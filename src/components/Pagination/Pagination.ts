@@ -1,4 +1,5 @@
-import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter, SlicePipe, OnChanges} from 'angular2/angular2';
+import {Component, View, ElementRef, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
+import {CORE_DIRECTIVES, SlicePipe} from 'angular2/common';
 import {Range} from '../../pipes/Range/Range';
 
 @Component({
@@ -9,8 +10,8 @@ import {Range} from '../../pipes/Range/Range';
     ]
 })
 @View({
-    styleUrls: ['dist/components/Pagination/Pagination.css'],
-    templateUrl: 'dist/components/Pagination/Pagination.html',
+    styleUrls: ['components/Pagination/Pagination.css'],
+    templateUrl: 'components/Pagination/Pagination.html',
     directives: [CORE_DIRECTIVES],
     pipes: [SlicePipe, Range]
 })
@@ -19,7 +20,7 @@ export class Pagination implements OnChanges {
     @Input() currentPage: number;
     @Input() pagesAtOnce: number;
     @Input() totalPages: number;
-    @Output() currentPageChange:EventEmitter = new EventEmitter();
+    @Output() currentPageChange = new EventEmitter<any>();
     pagesBlank:Array<number> = [];
     startingIndex:number;
     endingIndex:number;
@@ -28,7 +29,7 @@ export class Pagination implements OnChanges {
         this._el = el.nativeElement;
     }
 
-    onChanges(changes:any):void{
+    ngOnChanges(changes:any):void{
         this.setPage(this.currentPage);
     }
 

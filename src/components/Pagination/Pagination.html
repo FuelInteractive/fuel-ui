@@ -8,16 +8,16 @@
         </li>
         <li [class.disabled]="currentPage == 1">
             <a [attr.disabled]="currentPage == 1" (click)="setPage(currentPage - 1)" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true">&#171;</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
-        <li *ng-for="#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex" [class.active]="currentPage == page">
+        <li *ngFor="#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex" [class.active]="currentPage == page">
             <a (click)="setPage(page)">{{page}}</a>
         </li>
         <li [class.disabled]="currentPage == totalPages">
             <a [attr.disabled]="currentPage == totalPages" (click)="setPage(currentPage + 1)" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true">&#187;</span>
                 <span class="sr-only">Next</span>
             </a>
         </li>
@@ -33,6 +33,6 @@
 <div class="input-group col-md-3">
     <span class="input-group-addon">Jump to:</span>
     <select class="form-control" (change)="setPage($event.target.value)">
-        <option *ng-for="#page of pagesBlank | range : 1 : totalPages" [value]="page" [selected]="page == currentPage">{{page}}</option>
+        <option *ngFor="#page of pagesBlank | range : 1 : totalPages" [value]="page" [selected]="page == currentPage">{{page}}</option>
     </select>
 </div>

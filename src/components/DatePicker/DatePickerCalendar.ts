@@ -1,5 +1,6 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {Input, Output, EventEmitter, OnInit} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
+import {Input, Output, EventEmitter, OnInit} from 'angular2/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 
 //import {AnimationListener} from '../../directives/AnimationListener/AnimationListener';
 
@@ -7,8 +8,8 @@ import {Input, Output, EventEmitter, OnInit} from 'angular2/angular2';
 	selector: 'date-picker-calendar'
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePickerCalendar.css'],
-	templateUrl: 'dist/components/DatePicker/DatePickerCalendar.html',
+	styleUrls: ['components/DatePicker/DatePickerCalendar.css'],
+	templateUrl: 'components/DatePicker/DatePickerCalendar.html',
 	directives: [CORE_DIRECTIVES,FORM_DIRECTIVES]
 })
 export class DatePickerCalendar implements OnInit {
@@ -23,7 +24,7 @@ export class DatePickerCalendar implements OnInit {
 	constructor() {		
 	}
 	
-	onInit(): void {
+	ngOnInit(): void {
 		this.buildWeeks(this.currentMonth || new Date());		
 	}
 	

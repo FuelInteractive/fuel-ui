@@ -1,11 +1,12 @@
-import {Component, View, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter} from 'angular2/angular2';
+import {Component, View, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
     selector: 'alert'
 })
 @View({
-    styleUrls: ['dist/components/Alert/Alert.css'],
-    templateUrl: 'dist/components/Alert/Alert.html',
+    styleUrls: ['components/Alert/Alert.css'],
+    templateUrl: 'components/Alert/Alert.html',
     directives: [CORE_DIRECTIVES]
 })
 export class Alert {
@@ -13,7 +14,7 @@ export class Alert {
     @Input() displayed: boolean = false;
     @Input() closeButton: boolean = true;
     @Input() type: string = 'success';
-    @Output() displayedChange:EventEmitter = new EventEmitter();
+    @Output() displayedChange = new EventEmitter<any>();
 
     constructor(el: ElementRef){
         this._el = el.nativeElement;

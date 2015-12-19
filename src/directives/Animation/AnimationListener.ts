@@ -1,4 +1,4 @@
-import {Directive, Output, EventEmitter} from 'angular2/angular2';
+import {Directive, Output, EventEmitter} from 'angular2/core';
 
 @Directive({
     selector: '[.animated]',
@@ -14,8 +14,8 @@ import {Directive, Output, EventEmitter} from 'angular2/angular2';
     }
 })
 export class AnimationListener {
-    @Output() animationStart: EventEmitter = new EventEmitter();
-    @Output() animationEnd: EventEmitter = new EventEmitter();
+    @Output() animationStart = new EventEmitter<any>();
+    @Output() animationEnd = new EventEmitter<any>();
 
     constructor() {
     }

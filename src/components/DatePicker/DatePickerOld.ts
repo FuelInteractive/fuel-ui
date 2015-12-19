@@ -1,6 +1,7 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, DOCUMENT, ElementRef,
-	Input, Output, EventEmitter, OnInit, DatePipe} from 'angular2/angular2';
-import {ViewChildren, QueryList, ViewChild} from 'angular2/angular2';
+import {Component, View, ElementRef,
+	Input, Output, EventEmitter, OnInit, AfterViewInit} from 'angular2/core';
+import {ViewChildren, QueryList, ViewChild} from 'angular2/core';
+import {CORE_DIRECTIVES,FORM_DIRECTIVES,DatePipe} from 'angular2/common';
 import {DatePickerCalendar} from './DatePickerCalendar';
 
 @Component({
@@ -8,11 +9,11 @@ import {DatePickerCalendar} from './DatePickerCalendar';
 	properties: ['minDate: minDate', 'maxDate: maxDate']
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePickerOld.css'],
-	templateUrl: 'dist/components/DatePicker/DatePickerOld.html',
+	styleUrls: ['components/DatePicker/DatePickerOld.css'],
+	templateUrl: 'components/DatePicker/DatePickerOld.html',
 	directives: [DatePickerCalendar, FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
-export class DatePickerOld {
+export class DatePickerOld implements AfterViewInit {
 	@Output() valueChange = new EventEmitter();
 	@Input() set value(value: Date|string) {
 		if(value instanceof Date && !isNaN(value.valueOf())) 
@@ -75,13 +76,13 @@ export class DatePickerOld {
 		this.modal = modal.nativeElement;
 	}
 	
-	onInit(): void {
+	ngOnInit(): void {
 		if(this.currentDate < this._minDate)
 			this.currentDate = this._minDate;
 	}
 	
-	afterViewInit(): void {
-		(<any>this.calendarQuery.changes).toRx()
+	ngAfterViewInit(): void {
+		this.calendarQuery.changes
 			.subscribe(() => {
 				this.calendars = [];
 				this.calendarQuery.map((c) => this.calendars.push(c));
@@ -93,7 +94,7 @@ export class DatePickerOld {
 		});
 	}
 	
-	onChanges(changes: any): void {
+	ngOnChanges(changes: any): void {
 		this.hideCalendar();
 	}
 	

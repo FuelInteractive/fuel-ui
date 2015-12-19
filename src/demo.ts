@@ -1,7 +1,10 @@
-import {View, Component, CORE_DIRECTIVES, FORM_DIRECTIVES, ViewEncapsulation} from 'angular2/angular2';
-import {FUELUI_COMPONENT_PROVIDERS} from './components/components';
-import {FUELUI_DIRECTIVE_PROVIDERS} from './directives/directives';
-import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
+import {View, Component, ViewEncapsulation, provide} from 'angular2/core';
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/common';
+import {bootstrap} from 'angular2/platform/browser';
+import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
+import {FUELUI_COMPONENT_PROVIDERS} from './fuel-ui';
+import {FUELUI_DIRECTIVE_PROVIDERS} from './fuel-ui';
+import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 
 @Component({
 	selector: 'fuel-ui'
@@ -9,30 +12,44 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 @View({
 	template: `
 	<main class="container">
+		<h2>Infinite Scroller</h2>
+		<div class="row m-a">
+			<div class="col-md-6" style="border: 1px solid #333; background-color: #EEE">
+				<infinite-scroller 
+					(next)="infinteScrollNext()" 
+					(prev)="infiniteScrollPrev()" 
+					height="300"
+					distance="120"
+					hideScrollbar="true">
+					<div *ngFor="#item of infiniteScrollItems" class="card p-a" style="background-color: #FFF">
+						<div class="card-block">
+							<h4 class="card-title">Some Item</h4>
+							<p class="card-text">{{item}}</p>
+						</div>
+					</div>
+				</infinite-scroller>
+			</div>
+		</div>
 		<h2>Animation Helper</h2>
 		<div class="row m-a">
 			<div class="test-box"
 				animation="test-animation-a test-animation-b"
 				play="true"
-				(on-animation-end)="logEnd()"></div>
+				(onAnimationEnd)="logEnd()"></div>
 		</div>
-		<h2>DatePicker</h3>
+		<h2>DatePicker</h2>
 		<section class="row m-a">
 			<div class="col-md-3">
 				<date-picker 
 					min-date="11/1/2015"
-					max-date="11/1/2016" months="2" />
+					max-date="11/1/2016" months="2">
+				</date-picker>
 			</div>
 		</section>
 		<h2>Carousel</h2>
 		<section class="row m-a">
 			<carousel class="col-md-6">
-				<img class="carousel-item" 
-					src="/images/carouselImages/beach.png" alt="Beach" />
-				<img class="carousel-item" 
-					src="/images/carouselImages/river.jpg" alt="River" />
-				<img class="carousel-item" 
-					src="/images/carouselImages/windmill.jpg" alt="Windmill" />
+				<img *ngFor="#image of carouselImages" src="{{image}}" class="carousel-item" />
 			</carousel>
 		</section>
 		<h2>Alert</h2>
@@ -40,7 +57,7 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 			<alert
 				[(displayed)]="showAlert"
 				[type]="alertType">
-				<span [inner-html]="alertBody"></span>
+				<span [innerHtml]="alertBody"></span>
 			</alert>
 			<button (click)="saveFunc(modal, false)">Toggle Alert Success</button>
 			<button (click)="saveFunc(modal, true)">Toggle Alert Error</button>
@@ -50,11 +67,11 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 			<button (click)="modal.showModal()">Toggle Modal</button>
 			<modal #modal
 				class="animated"
-				[modal-title]="modalTitle"
-				[close-button]="closeButton"
-				[close-on-unfocus]="closeOnUnfocus"
-				(animation-start)="logStart($event)"
-				(animation-end)="logEnd($event)">
+				[modalTitle]="modalTitle"
+				[closeButton]="closeButton"
+				[closeOnUnfocus]="closeOnUnfocus"
+				(animationStart)="logStart($event)"
+				(animationEnd)="logEnd($event)">
 				<div class="modal-body">
 					<carousel>
 						<img class="carousel-item"
@@ -68,7 +85,6 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 						<li>Testing 1</li>
 						<li>Testing 2</li>
 						<li>Testing 3</li>
-						<li>&hellip;</li>
 					</ul>
 				</div>
 				<div class="modal-footer">
@@ -83,7 +99,7 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 		<h2>Tooltip</h2>
 		<section class="row m-a">
 			<div tooltip="Tooltip text goes here.">Some text here.</div>
-			<div tooltip="Example data binding: {{test}}!">Hover me with input value</div> <input [(ng-model)]="test" type="text" class="form-control">
+			<div tooltip="Example data binding: {{test}}!">Hover me with input value</div> <input [(ngModel)]="test" type="text" class="form-control">
 		</section>
 		<section class="row m-a">
 			<h2>Pagination Example</h2>
@@ -91,26 +107,26 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 				<div class="form-group row">
 					<label for="totalPages" class="col-sm-2 form-control-label">Total Pages</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="totalPages" min="1" type="number" name="totalPages">
+						<input class="form-control" [(ngModel)]="totalPages" min="1" type="number" name="totalPages">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="pagesAtOnce" class="col-sm-2 form-control-label">Pages At Once</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="pagesAtOnce" min="1" [max]="totalPages" type="number" name="pagesAtOnce">
+						<input class="form-control" [(ngModel)]="pagesAtOnce" min="1" [max]="totalPages" type="number" name="pagesAtOnce">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="currentPage" class="col-sm-2 form-control-label">Current Page</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="currentPage" min="1" [max]="totalPages" type="number" name="currentPage">
+						<input class="form-control" [(ngModel)]="currentPage" min="1" [max]="totalPages" type="number" name="currentPage">
 					</div>
 				</div>
 			</form>
 			<pagination
-				[(current-page)]="currentPage"
-				[total-pages]="totalPages"
-				[pages-at-once]="pagesAtOnce">
+				[(currentPage)]="currentPage"
+				[totalPages]="totalPages"
+				[pagesAtOnce]="pagesAtOnce">
 			</pagination>
 		</section>
 		<section class="row m-a">
@@ -119,7 +135,7 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 				<div class="form-group row">
 					<label for="progress" class="col-sm-2 form-control-label">Progress %</label>
 					<div class="col-sm-2">
-						<input class="form-control" [(ng-model)]="progress" min="0" max="100" type="number" name="progress">
+						<input class="form-control" [(ngModel)]="progress" min="0" max="100" type="number" name="progress">
 					</div>
 				</div>
 			</form>
@@ -128,10 +144,16 @@ import {FUELUI_PIPE_PROVIDERS} from './pipes/pipes';
 	</main>`,
 	directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES],
 	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['dist/directives/Tooltip/Tooltip.css'],
+	styleUrls: ['directives/Tooltip/Tooltip.css'],
 	pipes: [FUELUI_PIPE_PROVIDERS]
 })
 export class DemoComponent {
+	carouselImages: string[] = [
+		'/images/carouselImages/beach.png',
+		'/images/carouselImages/river.jpg',
+		'/images/carouselImages/windmill.jpg'	
+	];
+	
 	modalTitle: string = 'TEST EST TESTSETSETTESET';
 	closeText: string = 'Cancel';
 	closeButton: boolean = true;
@@ -154,9 +176,34 @@ export class DemoComponent {
 	numRooms: number = 1;
 	checkInDate: Date = new Date();
 	checkOutDate: Date = new Date();
+	
+	infiniteScrollItems: string[] = [];
+	infiniteScrollMin: number = 0;
+	infiniteScrollMax: number = 1;
+
+	constructor() {
+		for(let i = 0; i < 10; i++)
+			this.infinteScrollNext(false);
+	}
 
 	pageChange(page:number):void{
 		this.currentPage = page;
+	}
+	
+	infiniteScrollPrev(): void {		
+		var newItem = "";
+		for(let i = 0; i < 50; i++)
+			newItem += "Test " + this.infiniteScrollMin + " ";
+		this.infiniteScrollMin--;
+		this.infiniteScrollItems.unshift(newItem);
+	}
+	
+	infinteScrollNext(clean: boolean = true): void {
+		var newItem = "";
+		for(let i = 0; i < 50; i++)
+			newItem += "Test " + this.infiniteScrollMax + " ";
+		this.infiniteScrollMax++;
+		this.infiniteScrollItems.push(newItem);
 	}
 
 	saveFunc(modal:any, error:boolean):void{
@@ -183,3 +230,10 @@ export class DemoComponent {
 		console.log('AT THE END!', $event);
 	}
 }
+
+bootstrap(DemoComponent, [
+	ROUTER_PROVIDERS,
+	FORM_PROVIDERS,
+	provide(LocationStrategy, {useClass: HashLocationStrategy}),
+	FUELUI_COMPONENT_PROVIDERS
+]);

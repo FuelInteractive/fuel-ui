@@ -1,4 +1,5 @@
-import {Directive, CORE_DIRECTIVES, ElementRef, Input, Output, EventEmitter, OnInit, ViewContainerRef, ProtoViewRef, View} from 'angular2/angular2';
+import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, ProtoViewRef, View} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Directive({
     selector: '[tooltip]',

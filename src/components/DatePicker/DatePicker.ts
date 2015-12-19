@@ -1,5 +1,6 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {Input, Output, EventEmitter, ElementRef, ViewChildren, QueryList} from 'angular2/angular2';
+import {Component, View, OnInit, OnChanges} from 'angular2/core';
+import {Input, Output, EventEmitter, ElementRef, ViewChildren, QueryList} from 'angular2/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerBase} from './DatePickerBase';
 import {DatePickerCalendar} from './DatePickerCalendar';
 import {Animation} from '../../Directives/Animation/Animation'
@@ -13,11 +14,11 @@ import {Animation} from '../../Directives/Animation/Animation'
 	]
 })
 @View({
-	styleUrls: ['dist/components/DatePicker/DatePicker.css'],
-	templateUrl: 'dist/components/DatePicker/DatePicker.html',
+	styleUrls: ['components/DatePicker/DatePicker.css'],
+	templateUrl: 'components/DatePicker/DatePicker.html',
 	directives: [DatePickerCalendar, CORE_DIRECTIVES, FORM_DIRECTIVES, Animation]
 })
-export class DatePicker extends DatePickerBase {
+export class DatePicker extends DatePickerBase implements OnInit, OnChanges {
 	@Output() valueChange = new EventEmitter();
 	@Input()
 	set value(value: string|Date) {
@@ -49,13 +50,13 @@ export class DatePicker extends DatePickerBase {
 		this.selectedDate = new Date();
 	}
 	
-	onInit(): void {
+	ngOnInit(): void {
 		if(this.selectedDate < this._minDate)
 			this.selectedDate = this._minDate;
 		super.onInit();		
 	}
 	
-	onChanges(changes: any): void {
+	ngOnChanges(changes: any): void {
 		this.onInit();
 	}
 }
