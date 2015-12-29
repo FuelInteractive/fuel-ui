@@ -1,10 +1,11 @@
 import {Directive, Component, View, ViewEncapsulation} from 'angular2/core';
 import {QueryList, ContentChildren, ElementRef, AfterContentInit} from 'angular2/core';
-import {Input, Output, EventEmitter} from 'angular2/core';
+import {Input, Output, EventEmitter, ChangeDetectionStrategy} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Directive({
 	selector: '.carousel-item',
+    
 	host: {
 		'[class.active]': 'isActive',
 		'[class.slide-out-left]': 'left',
@@ -91,7 +92,9 @@ export class CarouselItem {
 })
 export class Carousel implements AfterContentInit {
 	images: CarouselItem[] = [];
-	@ContentChildren(CarouselItem) imageQuery: QueryList<CarouselItem>;
+    
+	@ContentChildren(CarouselItem) 
+    imageQuery: QueryList<CarouselItem>;
 
 	constructor() {
 
@@ -106,8 +109,8 @@ export class Carousel implements AfterContentInit {
 		this.images = [];
 		this.imageQuery.map((i) => this.images.push(i));
 		var activeImage = this.getActiveImage();
-		if(this.images.length > 0 && activeImage == null)
-			this.images[0].isActive = true;
+        if(this.images.length > 0 && activeImage == null)
+            setTimeout(() => this.images[0].isActive = true, 1);
 	}
 
 	setAllInactive(): void {
