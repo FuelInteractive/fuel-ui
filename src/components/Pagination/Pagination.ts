@@ -1,9 +1,10 @@
-import {Component, View, ElementRef, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
+import {Component, View, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from 'angular2/core';
 import {CORE_DIRECTIVES, SlicePipe} from 'angular2/common';
 import {Range} from '../../pipes/Range/Range';
 
 @Component({
     selector: 'pagination',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     properties: [
         "totalPages: total-pages",
         "pagesAtOnce: pages-at-once"
@@ -46,22 +47,16 @@ export class Pagination implements OnChanges {
         if(this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0){
             this.startingIndex = 0;
             this.endingIndex = this.pagesAtOnce;
-
-            console.log('start', this.startingIndex, this.endingIndex);
         }
-        else if(this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)){
+        else if(this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
             this.startingIndex = this.totalPages - this.pagesAtOnce;
             this.endingIndex = this.totalPages;
-
-            console.log('end', this.startingIndex, this.endingIndex);
         }
-        else{
+        else {
             this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
             this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages
                                 ? this.startingIndex + this.pagesAtOnce
                                 : this.totalPages;
-
-            console.log('maths', this.startingIndex, this.endingIndex);
         }
 
         this.currentPageChange.next(this.currentPage);
