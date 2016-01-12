@@ -7,8 +7,7 @@
         "noImplicitAny": true,
         "listFiles": false,
         "noLib": false,
-        "rootDir": ".",
-        "sortOutput": true
+        "rootDir": "."
     },
     "exclude": [
         "node_modules",

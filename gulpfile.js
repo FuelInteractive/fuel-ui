@@ -30,10 +30,11 @@ var inlineTemplateConfig = {
 
 gulp.task('hello', function () {
     console.log('HELLO!');
+    console.log(Object.keys(gulp.tasks));
 });
 
 gulp.task('cleanSass', function () {
-    return gulp.src(paths.dest + '/**/*.{scss,sass}', { read: false })
+    return gulp.src(paths.dest + '/**/*.css', { read: false })
 			.pipe(vinylPaths(del));
 });
 
