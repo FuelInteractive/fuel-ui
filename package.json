@@ -2,7 +2,8 @@
   "name": "fuel-ui",
   "version": "0.0.13",
   "description": "A set of utilities and Angular2 components implementing Twitter's Bootstrap 4 components",
-  "main": "bundles/fuelui.js",
+  "main": "bundles/fuel-ui.js",
+  "typings": "fuel-ui",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "bower install",
