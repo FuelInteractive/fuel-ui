@@ -21,7 +21,8 @@ import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 					height="300"
 					distance="120"
 					hideScrollbar="true">
-					<div *ngFor="#item of infiniteScrollItems" class="card p-a" style="background-color: #FFF">
+					<div *ngFor="#item of infiniteScrollItems" 
+                        class="card p-a scroll-item" style="background-color: #FFF">
 						<div class="card-block">
 							<h4 class="card-title">Some Item</h4>
 							<p class="card-text">{{item}}</p>
