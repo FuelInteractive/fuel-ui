@@ -1,16 +1,16 @@
-import {View, Component, ViewEncapsulation, provide} from 'angular2/core';
-import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/common';
-import {bootstrap} from 'angular2/platform/browser';
-import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
-import {FUELUI_COMPONENT_PROVIDERS} from './fuel-ui';
-import {FUELUI_DIRECTIVE_PROVIDERS} from './fuel-ui';
-import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
+import {View, Component, ViewEncapsulation, provide} from "angular2/core";
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
+import {bootstrap} from "angular2/platform/browser";
+import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from "angular2/router";
+import {FUELUI_COMPONENT_PROVIDERS} from "./fuel-ui";
+import {FUELUI_DIRECTIVE_PROVIDERS} from "./fuel-ui";
+import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 
 @Component({
-	selector: 'fuel-ui'
+    selector: "fuel-ui"
 })
 @View({
-	template: `
+    template: `
 	<main class="container">
 		<h2>Infinite Scroller</h2>
 		<div class="row m-a">
@@ -142,98 +142,103 @@ import {FUELUI_PIPE_PROVIDERS} from './fuel-ui';
 			<progress class="progress progress-striped progress-animated" [value]="progress" max="100">{{progress}}%</progress>
 		</section>
 	</main>`,
-	directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES],
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['directives/Tooltip/Tooltip.css'],
-	pipes: [FUELUI_PIPE_PROVIDERS]
+    directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES],
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ["directives/Tooltip/Tooltip.css"],
+    pipes: [FUELUI_PIPE_PROVIDERS]
 })
 export class DemoComponent {
-	carouselImages: string[] = [
-		'/images/carouselImages/beach.png',
-		'/images/carouselImages/river.jpg',
-		'/images/carouselImages/windmill.jpg'	
-	];
-	
-	modalTitle: string = 'TEST EST TESTSETSETTESET';
-	closeText: string = 'Cancel';
-	closeButton: boolean = true;
-	closeOnUnfocus: boolean = true;
-	showAlert: boolean = false;
-	alertType: string = 'success';
-	alertBody: string = '<strong>Some alert</strong> success message or something';
-	progress: number = 25;
-	totalPages: number = 10;
-	pagesAtOnce: number = 5;
-	currentPage: number = 1;
-	selectedDate: Date = new Date();
-	minDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
-	maxDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-	maxGuests: number = 5;
-	maxChildren: number = 3;
-	maxNumRooms: number = 15;
-	numGuests: number = 2;
-	numChildren: number = 1;
-	numRooms: number = 1;
-	checkInDate: Date = new Date();
-	checkOutDate: Date = new Date();
-	
-	infiniteScrollItems: string[] = [];
-	infiniteScrollMin: number = 0;
-	infiniteScrollMax: number = 1;
+    carouselImages: string[] = [
+        "/images/carouselImages/beach.png",
+        "/images/carouselImages/river.jpg",
+        "/images/carouselImages/windmill.jpg"
+    ];
 
-	constructor() {
-		for(let i = 0; i < 10; i++)
-			this.infinteScrollNext(false);
-	}
+    modalTitle: string = "TEST EST TESTSETSETTESET";
+    closeText: string = "Cancel";
+    closeButton: boolean = true;
+    closeOnUnfocus: boolean = true;
+    showAlert: boolean = false;
+    alertType: string = "success";
+    alertBody: string = "<strong>Some alert</strong> success message or something";
+    progress: number = 25;
+    totalPages: number = 10;
+    pagesAtOnce: number = 5;
+    currentPage: number = 1;
+    selectedDate: Date = new Date();
+    minDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+    maxDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+    maxGuests: number = 5;
+    maxChildren: number = 3;
+    maxNumRooms: number = 15;
+    numGuests: number = 2;
+    numChildren: number = 1;
+    numRooms: number = 1;
+    checkInDate: Date = new Date();
+    checkOutDate: Date = new Date();
 
-	pageChange(page:number):void{
-		this.currentPage = page;
-	}
-	
-	infiniteScrollPrev(): void {		
-		var newItem = "";
-		for(let i = 0; i < 50; i++)
-			newItem += "Test " + this.infiniteScrollMin + " ";
-		this.infiniteScrollMin--;
-		this.infiniteScrollItems.unshift(newItem);
-	}
-	
-	infinteScrollNext(clean: boolean = true): void {
-		var newItem = "";
-		for(let i = 0; i < 50; i++)
-			newItem += "Test " + this.infiniteScrollMax + " ";
-		this.infiniteScrollMax++;
-		this.infiniteScrollItems.push(newItem);
-	}
+    infiniteScrollItems: string[] = [];
+    infiniteScrollMin: number = 0;
+    infiniteScrollMax: number = 1;
 
-	saveFunc(modal:any, error:boolean):void{
-		//do validations
+    constructor() {
+        for (let i = 0; i < 10; i++) {
+            this.infinteScrollNext(false);
+        }
+    }
 
-		if(!error){
-			this.alertType = 'success';
-			this.alertBody = '<strong>Some alert</strong> success message or something';
-			this.showAlert = true;
-		}else{
-			this.alertType = 'danger';
-			this.alertBody = '<strong>Something went wrong</strong> error message or something';
-			this.showAlert = true;
-		}
+    pageChange(page: number): void {
+        this.currentPage = page;
+    }
 
-		modal.showModal(false);
-	}
+    infiniteScrollPrev(): void {
+        var newItem = "";
+        for (let i = 0; i < 50; i++) {
+            newItem += "Test " + this.infiniteScrollMin + " ";
+        }
 
-	logStart($event: any):void{
-		console.log('AT THE START!', $event);
-	}
+        this.infiniteScrollMin--;
+        this.infiniteScrollItems.unshift(newItem);
+    }
 
-	logEnd($event: any):void{
-		console.log('AT THE END!', $event);
-	}
+    infinteScrollNext(clean: boolean = true): void {
+        var newItem = "";
+        for (let i = 0; i < 50; i++) {
+            newItem += "Test " + this.infiniteScrollMax + " ";
+        }
+
+        this.infiniteScrollMax++;
+        this.infiniteScrollItems.push(newItem);
+    }
+
+    saveFunc(modal: any, error: boolean): void {
+        // do validations
+
+        if (!error) {
+            this.alertType = "success";
+            this.alertBody = "<strong>Some alert</strong> success message or something";
+            this.showAlert = true;
+        } else {
+            this.alertType = "danger";
+            this.alertBody = "<strong>Something went wrong</strong> error message or something";
+            this.showAlert = true;
+        }
+
+        modal.showModal(false);
+    }
+
+    logStart($event: any): void {
+        console.log("AT THE START!", $event);
+    }
+
+    logEnd($event: any): void {
+        console.log("AT THE END!", $event);
+    }
 }
 
 bootstrap(DemoComponent, [
-	ROUTER_PROVIDERS,
-	FORM_PROVIDERS,
-	provide(LocationStrategy, {useClass: HashLocationStrategy}),
-	FUELUI_COMPONENT_PROVIDERS
+    ROUTER_PROVIDERS,
+    FORM_PROVIDERS,
+    provide(LocationStrategy, { useClass: HashLocationStrategy }),
+    FUELUI_COMPONENT_PROVIDERS
 ]);

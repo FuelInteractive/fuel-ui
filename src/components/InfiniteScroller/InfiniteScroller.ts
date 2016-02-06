@@ -14,7 +14,7 @@ import {
  } from "angular2/core";
 
 @Component({
-	selector: 'infinite-scroller'
+	selector: "infinite-scroller"
 })
 @View({
 	template: `
