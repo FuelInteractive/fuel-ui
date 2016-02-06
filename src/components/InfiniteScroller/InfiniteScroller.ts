@@ -12,6 +12,23 @@ import {
 	AfterContentInit,
     AfterViewInit
  } from "angular2/core";
+ 
+ import { outerHeight } from "../../utilities/ElementUtils";
+
+@Directive({
+    selector: "[scroll-item],.scroll-item"
+})
+export class ScrollItem {
+    element: Element;
+    
+    get height(): number {
+        return outerHeight(this.element);
+    }
+    
+    constructor(element: ElementRef) {
+        this.element = element.nativeElement;
+    }
+}
 
 @Component({
 	selector: "infinite-scroller"
@@ -41,7 +58,9 @@ import {
 	`],
 	directives: []
 })
-export class InfiniteScroller implements AfterContentInit, AfterViewInit {
+export class InfiniteScroller 
+    implements AfterContentInit, AfterViewInit 
+{        
 	@Input()
 	distance: number = 100;
 	@Input()
@@ -58,19 +77,36 @@ export class InfiniteScroller implements AfterContentInit, AfterViewInit {
 	lastScroll: number = 0;
 	isScrolling: boolean = false;
 	
+    @ContentChildren(ScrollItem) 
+    itemQuery: QueryList<ScrollItem>;
+    firstItem: ScrollItem;
 	container: Element
-	
+	scrollTarget: Element;
+    
 	constructor(element: ElementRef) {
 		this.container = element.nativeElement;
 	}
 	
 	ngAfterContentInit(): void {
-		this.container.firstElementChild.scrollTop = 1;
+        this.firstItem = this.itemQuery.first;
+        this.itemQuery.changes.subscribe(() => {
+            this.handleItemChanges();
+        });
 	}
-	
-	ngAfterViewInit(): void {
-		
-	}
+    
+    ngAfterViewInit(): void {
+        this.container.firstElementChild.scrollTop += 1;
+    }
+    
+	handleItemChanges() {        
+        if(this.firstItem == null)
+            this.firstItem = this.itemQuery.first;
+            
+        if(this.firstItem !== this.itemQuery.first) {
+            this.container.firstElementChild.scrollTop += this.itemQuery.first.height;
+            this.firstItem = this.itemQuery.first;
+        }
+    }
 	
 	doscroll(event: Event) {
 		this.isScrolling = true;
@@ -91,9 +127,12 @@ export class InfiniteScroller implements AfterContentInit, AfterViewInit {
 		} 
 		else if(!scrollDown && target.scrollTop <= this.distance*2) {
 			this.prev.emit(null);
-			target.scrollTop = saveLastScroll > 0 ? saveLastScroll : 1;
 		}
 		
 		this.isScrolling = false;
 	}
 }
+
+export var INFINITESCROLLER_PROVIDERS = [
+    InfiniteScroller, ScrollItem
+]
