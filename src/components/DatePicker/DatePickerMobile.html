@@ -1,0 +1,49 @@
+<div class="input-group" (click)="showCalendar($event)">
+	<input type="text" class="form-control"
+		[(ngModel)]="inputDate" 
+		 #dateField
+		 />
+	<span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
+		<i class="fa fa-calendar"></i>
+	</span>
+</div>
+
+<section class="" *ngIf="calendarDisplayed">
+<div class="" role="document"
+	[style.top.px]="calendarY"
+	[style.left.px]="calendarX">
+<div class="container p-a-0">
+	<header class="row">
+		<div class="prev-month">
+			<button class="btn btn-primary btn-sm" role="prev"
+				[class.disabled]="!canPrevMonth()"			 
+				(click)="prevMonth()">
+				<i class="fa fa-chevron-circle-left"></i>
+			</button>
+		</div>
+		<div class="next-month">
+			<button class="btn btn-primary btn-sm" role="next"
+				[class.disabled]="!canNextMonth()"
+				(click)="nextMonth()">
+				<i class="fa fa-chevron-circle-right"></i>
+			</button>
+		</div>
+	</header>
+	<infinite-scroller class="calendar-container"
+        (next)="addNextMonth()"
+        (prev)="addPrevMonth()"
+        height="250"
+        distance="50"
+        hideScrollbar="true">
+		<date-picker-calendar scroll-item
+			*ngFor="#month of calendarMonths #i=index" 
+			[id]="i"
+			[minDate]="minDate" [maxDate]="maxDate"
+			[currentMonth]="month" 
+			[(selectedDate)]="selectedDate" 
+			(selectedDate)="hideCalendar()">
+		</date-picker-calendar>
+	</infinite-scroller>
+</div>
+</div>
+</section>

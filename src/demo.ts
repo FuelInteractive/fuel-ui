@@ -47,6 +47,14 @@ import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 				</date-picker>
 			</div>
 		</section>
+        <section class="row m-a">
+			<div class="col-md-3">
+				<date-picker-mobile 
+					min-date="11/1/2015"
+					max-date="11/1/2016" months="2">
+				</date-picker-mobile>
+			</div>
+		</section>
 		<h2>Carousel</h2>
 		<section class="row m-a">
 			<carousel class="col-md-6">

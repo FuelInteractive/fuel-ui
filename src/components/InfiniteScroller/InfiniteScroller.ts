@@ -84,7 +84,7 @@ export class InfiniteScroller
 	scrollTarget: Element;
     
 	constructor(element: ElementRef) {
-		this.container = element.nativeElement;
+		this.container = element.nativeElement.firstElementChild;
 	}
 	
 	ngAfterContentInit(): void {
@@ -95,7 +95,7 @@ export class InfiniteScroller
 	}
     
     ngAfterViewInit(): void {
-        this.container.firstElementChild.scrollTop += 1;
+        this.container.scrollTop += 1;
     }
     
 	handleItemChanges() {        
@@ -103,7 +103,7 @@ export class InfiniteScroller
             this.firstItem = this.itemQuery.first;
             
         if(this.firstItem !== this.itemQuery.first) {
-            this.container.firstElementChild.scrollTop += this.itemQuery.first.height;
+            this.container.scrollTop += this.itemQuery.first.height;
             this.firstItem = this.itemQuery.first;
         }
     }
@@ -131,6 +131,21 @@ export class InfiniteScroller
 		
 		this.isScrolling = false;
 	}
+    
+    scrollToIndex(index: number) {
+        var itemArray = this.itemQuery.toArray();
+        
+        var targetIndex = 0;
+        if(index > 0 && index < itemArray.length)
+            targetIndex = index;
+        else if(index >= itemArray.length)
+            targetIndex = itemArray.length - 1;
+        
+        var target = this.itemQuery.toArray()[targetIndex];
+        var targetPosition = target.element.getBoundingClientRect().top;
+        
+        this.container.scrollTop = targetPosition;
+    }
 }
 
 export var INFINITESCROLLER_PROVIDERS = [

@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+@import "../../styles/bourbon";
+
+.modal {
+    display: block;
+}
+
+.modal-dialog {
+	display: inline-block;
+	width: 400px;
+	height: 300px;
+	margin: 0;
+	position: relative;
+}
+
+.input-group-addon {
+	background-color: $input-bg;
+	border-left: none;
+}
+
+header {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.prev-month, .next-month {
+	position: absolute;
+	top: 0;
+	display: inline-block;
+	z-index: 100;
+	margin-top: .2rem;
+	.btn-sm {
+		padding: .1rem .7rem;
+	}
+}
+
+.prev-month {
+	left: 0;
+	margin-left: 4%;
+}
+
+.next-month {
+	right:0;
+	margin-right: 4%;
+}
+
+.calendar-container {
+	border: 1px solid transparent;
+}
