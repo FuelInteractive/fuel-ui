@@ -20,6 +20,8 @@ export class DatePickerCalendar implements OnInit {
 	
 	@Input() minDate: Date;
 	@Input() maxDate: Date;
+    
+    @Input() showMonth: boolean = true;
 	
 	constructor() {		
 	}

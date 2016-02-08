@@ -4,7 +4,7 @@ import {DatePicker} from "./DatePicker/DatePicker";
 import {DatePickerMobile} from "./DatePicker/DatePickerMobile";
 import {MODAL_PROVIDERS, Modal} from "./Modal/Modal";
 import {PAGINATION_PROVIDERS, Pagination} from "./Pagination/Pagination";
-import {INFINITESCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./InfiniteScroller/InfiniteScroller";
+import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./InfiniteScroller/InfiniteScroller";
 
 export var FUELUI_COMPONENT_PROVIDERS = [
 	ALERT_PROVIDERS,
@@ -13,7 +13,7 @@ export var FUELUI_COMPONENT_PROVIDERS = [
     DatePickerMobile,
 	MODAL_PROVIDERS,
 	PAGINATION_PROVIDERS,
-	INFINITESCROLLER_PROVIDERS
+	INFINITE_SCROLLER_PROVIDERS
 ];
 
 export * from "./Alert/Alert";

@@ -32,6 +32,7 @@
 	<infinite-scroller class="calendar-container"
         (next)="addNextMonth()"
         (prev)="addPrevMonth()"
+        [(topIndex)]="monthLabelIndex"
         height="250"
         distance="50"
         hideScrollbar="true">
@@ -41,7 +42,8 @@
 			[minDate]="minDate" [maxDate]="maxDate"
 			[currentMonth]="month" 
 			[(selectedDate)]="selectedDate" 
-			(selectedDate)="hideCalendar()">
+			(selectedDate)="hideCalendar()"
+            [showMonth]="i != monthLabelIndex">
 		</date-picker-calendar>
 	</infinite-scroller>
 </div>

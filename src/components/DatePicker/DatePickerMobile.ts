@@ -2,7 +2,7 @@ import {Component, View, OnInit, OnChanges, AfterViewInit} from "angular2/core";
 import {Input, Output, EventEmitter, ElementRef, ContentChild, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
-import { INFINITESCROLLER_PROVIDERS, InfiniteScroller } from "../InfiniteScroller/InfiniteScroller";
+import { INFINITE_SCROLLER_PROVIDERS, InfiniteScroller } from "../InfiniteScroller/InfiniteScroller";
 
 @Component({
     selector: "date-picker-mobile"
@@ -10,7 +10,7 @@ import { INFINITESCROLLER_PROVIDERS, InfiniteScroller } from "../InfiniteScrolle
 @View({
     styleUrls: ["components/DatePicker/DatePickerMobile.css"],
     templateUrl: "components/DatePicker/DatePickerMobile.html",
-    directives: [DatePickerCalendar, INFINITESCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES]
+    directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class DatePickerMobile implements OnInit, AfterViewInit {
     _minDate: Date = new Date(1900,0,1);
@@ -56,6 +56,8 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		this._inputDate = value;
 		this._selectedDate = new Date(value);
 	}
+    
+    monthLabelIndex: number = 0;
     
 	modal: HTMLElement;    
     calendarDisplayed: boolean = true;

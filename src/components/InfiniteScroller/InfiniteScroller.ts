@@ -74,6 +74,12 @@ export class InfiniteScroller
 	@Output()
 	prev: EventEmitter<any> = new EventEmitter();
 	
+    @Output()
+    topIndex: EventEmitter<number> = new EventEmitter();
+    
+    @Output()
+    bottomIndex: EventEmitter<number> = new EventEmitter();
+    
 	lastScroll: number = 0;
 	isScrolling: boolean = false;
 	
@@ -98,7 +104,7 @@ export class InfiniteScroller
         this.container.scrollTop += 1;
     }
     
-	handleItemChanges() {        
+	handleItemChanges() {
         if(this.firstItem == null)
             this.firstItem = this.itemQuery.first;
             
@@ -106,6 +112,33 @@ export class InfiniteScroller
             this.container.scrollTop += this.itemQuery.first.height;
             this.firstItem = this.itemQuery.first;
         }
+    }
+    
+    getVisableIndicies(): void {
+        var itemArray = this.itemQuery.toArray();
+        var visableIndicies = itemArray
+            .filter(i => this.checkVisableItem(i))
+            .map(i => itemArray.indexOf(i));
+        if(visableIndicies.length > 1) {
+            this.topIndex.emit(visableIndicies[0]);
+            this.bottomIndex.emit(visableIndicies[visableIndicies.length-1]);
+            console.log(visableIndicies);
+        }
+        else if(visableIndicies.length > 0) {
+            this.topIndex.emit(visableIndicies[0]);
+            console.log(visableIndicies);
+        }        
+    }
+    
+    checkVisableItem(item: ScrollItem): boolean {
+        var rect = item.element.getBoundingClientRect();
+        if(rect.top > this.container.scrollTop + this.container.clientHeight)
+           return false;
+           
+        if(rect.bottom - 5 <= this.container.scrollTop)
+            return false;
+            
+        return true;
     }
 	
 	doscroll(event: Event) {
@@ -129,6 +162,8 @@ export class InfiniteScroller
 			this.prev.emit(null);
 		}
 		
+        this.getVisableIndicies();
+        
 		this.isScrolling = false;
 	}
     
@@ -148,6 +183,6 @@ export class InfiniteScroller
     }
 }
 
-export var INFINITESCROLLER_PROVIDERS = [
+export var INFINITE_SCROLLER_PROVIDERS = [
     InfiniteScroller, ScrollItem
 ]

@@ -1,7 +1,7 @@
 <div class="text-center py">
 	<table class="table">	
 		<tbody>
-            <tr>
+            <tr *ngIf="showMonth">
                 <td colspan="7">
                     <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>
                 </td>
