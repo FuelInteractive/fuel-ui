@@ -33,11 +33,12 @@ class Todo{
 ```html
 Basic Array of single type
 <span *ngFor="#n of numberArray | orderBy">{{n}}<span>
-<span *ngFor="#fruit of fruitArray | orderBy : 'desc'">{{fruit}}<span>
+<span *ngFor="#fruit of fruitArray | orderBy : '-'">{{fruit}}<span>
 
 Multidimensional Array Sort on single column
-<span *ngFor="#todo of todos | orderBy : 'asc' : 'status'">{{todo.name}} - {{todo.status}}<span>
+<span *ngFor="#todo of todos | orderBy : 'status'">{{todo.name}} - {{todo.status}}<span>
+<span *ngFor="#todo of todos | orderBy : '-status'">{{todo.name}} - {{todo.status}}<span>
 
 Multidimensional Array Sort on multiple columns
-<span *ngFor="#todo of todos | orderBy : 'asc' : ['status', 'title']">{{todo.name}} - {{todo.status}}<span>
+<span *ngFor="#todo of todos | orderBy : ['status', '-title']">{{todo.name}} - {{todo.status}}<span>
 ```

@@ -1,86 +1,87 @@
 /*
  * Example use
- *		Basic Array of single type: *ngFor="#todo of todoService.todos | orderBy : 'desc'"
- *		Multidimensional Array Sort on single column: *ngFor="#todo of todoService.todos | orderBy : 'asc' : 'status'"
- *		Multidimensional Array Sort on multiple columns: *ngFor="#todo of todoService.todos | orderBy : 'asc' : ['status', 'title']"
+ *		Basic Array of single type: *ngFor="#todo of todoService.todos | orderBy : '-'"
+ *		Multidimensional Array Sort on single column: *ngFor="#todo of todoService.todos | orderBy : ['-status']"
+ *		Multidimensional Array Sort on multiple columns: *ngFor="#todo of todoService.todos | orderBy : ['status', '-title']"
  */
 
-import {Pipe} from "angular2/core";
+import {CONST} from 'angular2/src/facade/lang';
+import {Injectable, PipeTransform, Pipe} from 'angular2/core';
 
-@Pipe({
-    name: 'orderBy',
-    pure: false
-})
-export class OrderBy{
-    transform(value:any, config:any = ['asc', null]){
+@CONST()
+@Pipe({name: 'orderBy', pure: false})
+@Injectable()
+export class OrderBy implements PipeTransform {
 
-        if(!Array.isArray(value)) return value;
-
-        var newValue:any[] = [];
-
-        var sort = config[0];
-        var property = config[1];
-
-        if(property == null || property == ''){
-            //Basic array
-            newValue = sort == 'asc' ? value.sort() : value.sort().reverse();
-        }
-        else if(!Array.isArray(property)){
-            //Single property to sort by, only look for that
-            newValue = value.sort(function(a:any,b:any){
-                if (a[property] === b[property]) {
-                    return 0;
-                }
-                else {
-                    //Lowercase strings and parse numbers
-                    if((isNaN(parseFloat(a[property])) || isFinite(a[property]))
-                        || (isNaN(parseFloat(b[property])) || isFinite(b[property]))){
-                        a[property] = a[property].toLowerCase();
-                        b[property] = b[property].toLowerCase();
-                    }
-                    else{
-                        a[property] = parseFloat(a[property]);
-                        b[property] = parseFloat(b[property]);
-                    }
-
-                    if(sort == 'asc'){
-                        return (a[property] < b[property]) ? -1 : 1;
-                    }
-                    else{
-                        return (a[property] > b[property]) ? -1 : 1;
-                    }
-                }
-            });
+    static _orderByComparator(origA:any, origB:any, property:string, desc:boolean):number{
+ 
+        if((isNaN(parseFloat(origA[property])) || !isFinite(origA[property]))
+            || (isNaN(parseFloat(origB[property])) || !isFinite(origB[property]))){
+            //Isn't a number so lowercase the string to properly compare
+            if(desc){
+                if(origA[property].toLowerCase() > origB[property].toLowerCase()) return -1;
+                if(origA[property].toLowerCase() < origB[property].toLowerCase()) return 1;
+            }
+            else{
+                if(origA[property].toLowerCase() < origB[property].toLowerCase()) return -1;
+                if(origA[property].toLowerCase() > origB[property].toLowerCase()) return 1;
+            }
         }
         else{
-            //Loop over property array in order and sort
-            newValue = value.sort(function(a:any,b:any){
-                for(var i:number = 0; i < property.length; i++){
-                    //Lowercase strings and parse numbers
-                    if((isNaN(parseFloat(a[property[i]])) || isFinite(a[property[i]]))
-                        || (isNaN(parseFloat(b[property[i]])) || isFinite(b[property[i]]))){
-                        a[property[i]] = a[property[i]].toLowerCase();
-                        b[property[i]] = b[property[i]].toLowerCase();
-                    }
-                    else{
-                        a[property[i]] = parseFloat(a[property[i]]);
-                        b[property[i]] = parseFloat(b[property[i]]);
-                    }
+            //Parse strings as numbers to compare properly
+            if(desc){
+                if(parseFloat(origA[property]) > parseFloat(origB[property])) return -1;
+                if(parseFloat(origA[property]) < parseFloat(origB[property])) return 1;
+            }
+            else{
+                if(parseFloat(origA[property]) < parseFloat(origB[property])) return -1;
+                if(parseFloat(origA[property]) > parseFloat(origB[property])) return 1;
+            }
+        }
 
-                    if(sort == 'asc'){
-                        if(a[property[i]] < b[property[i]]) return -1;
-                        if(a[property[i]] > b[property[i]]) return 1;
-                    }
-                    else{
-                        if(a[property[i]] > b[property[i]]) return -1;
-                        if(a[property[i]] < b[property[i]]) return 1;
-                    }
+        return 0; //equal each other
+    }
+
+    transform(value:any, [config = '+']): any{
+        
+        if(!Array.isArray(value)) return value;
+
+        if(!Array.isArray(config) || (Array.isArray(config) && config.length == 1)){
+            var propertyToCheck:string = !Array.isArray(config) ? config : config[0];
+
+            //Basic array
+            if(!propertyToCheck || propertyToCheck == '-' || propertyToCheck == '+'){
+                return propertyToCheck.substr(0,1) == '-' ? value.sort().reverse() : value.sort();
+            }
+            else {
+                var desc = propertyToCheck.substr(0, 1) == '-';
+                var property:string = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-'
+                    ? propertyToCheck.substr(1)
+                    : propertyToCheck;
+
+                return value.sort(function(origA:any,origB:any){
+                    return OrderBy._orderByComparator(origA, origB, property, desc);
+                });
+            }
+        }
+        else {
+            //Loop over property of the array in order and sort
+            return value.sort(function(origA:any,origB:any){
+                for(var i:number = 0; i < config.length; i++){
+                    var desc = config[i].substr(0, 1) == '-';
+                    var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-'
+                        ? config[i].substr(1)
+                        : config[i];
+
+                    var comparison = OrderBy._orderByComparator(origA, origB, property, desc);
+
+                    //Don't return 0 yet in case of needing to sort by next property
+                    if(comparison != 0) return comparison;
                 }
 
                 return 0; //equal each other
             });
         }
-        return newValue;
     }
 }
 
