@@ -13,16 +13,16 @@ import {
     AfterViewInit
  } from "angular2/core";
  
- import { outerHeight } from "../../utilities/ElementUtils";
+ import { ElementUtils } from "../../utilities/ElementUtils";
 
 @Directive({
     selector: "[scroll-item],.scroll-item"
 })
 export class ScrollItem {
-    element: Element;
+    element: HTMLElement;
     
     get height(): number {
-        return outerHeight(this.element);
+        return ElementUtils.outerHeight(this.element);
     }
     
     constructor(element: ElementRef) {
@@ -130,15 +130,26 @@ export class InfiniteScroller
         }        
     }
     
-    checkVisableItem(item: ScrollItem): boolean {
-        var rect = item.element.getBoundingClientRect();
-        if(rect.top > this.container.scrollTop + this.container.clientHeight)
-           return false;
-           
-        if(rect.bottom - 5 <= this.container.scrollTop)
-            return false;
+    checkVisableItem(item: ScrollItem): boolean {        
+        var itemHeight = 0;
+        for(let index in item.element.children)
+            itemHeight += item.element.children[index].clientHeight;
             
-        return true;
+        var itemTop = item.element.offsetTop;  
+        var itemBottom = itemTop + item.element.children[0].clientHeight;
+        var viewTop = this.container.scrollTop;
+        var viewBottom = viewTop + this.container.clientHeight;
+            
+        if(itemTop >= viewTop && itemTop <= viewBottom) 
+            return true;
+        
+        if(itemBottom >= viewTop && itemBottom <= viewBottom)
+            return true;
+            
+        if(itemTop <= viewTop && itemBottom >= viewBottom)
+            return true;
+            
+        return false;
     }
 	
 	doscroll(event: Event) {
