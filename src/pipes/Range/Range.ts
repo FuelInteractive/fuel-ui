@@ -3,13 +3,13 @@
  *		Basic Array of single type: *ngFor="#n of someBlankArray | 0 : 9"
  */
 
-import {Pipe} from "angular2/core";
+import {Pipe, PipeTransform} from "angular2/core";
 
 @Pipe({
     name: 'range',
     pure: false
 })
-export class Range{
+export class Range implements PipeTransform {
     transform(value:any, config:any = [0, 4]){
 
         var newValue:any[] = [];

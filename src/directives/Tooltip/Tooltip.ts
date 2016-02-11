@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, ProtoViewRef, View} from 'angular2/core';
+import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, View} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Directive({

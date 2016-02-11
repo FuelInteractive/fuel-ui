@@ -6,6 +6,10 @@ import {FUELUI_COMPONENT_PROVIDERS} from "./fuel-ui";
 import {FUELUI_DIRECTIVE_PROVIDERS} from "./fuel-ui";
 import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 
+export class Person {
+  constructor(public firstName: string, public lastName: string, public age: number) {}
+} 
+
 @Component({
     selector: "fuel-ui"
 })
@@ -142,6 +146,61 @@ import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 			</form>
 			<progress class="progress progress-striped progress-animated" [value]="progress" max="100">{{progress}}%</progress>
 		</section>
+		<h2>OrderBy Examples</h2>
+		<section class="row m-a">
+			<h3>One-Dimensional Arrays</h3>
+			<div class="col-md-4">
+				<h4>Unordered</h4>
+				<code>*ngFor="#f of fruit"</code><br/>
+				<ul>
+					<li *ngFor="#f of fruit">{{f}}</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h4>Asc</h4>
+				<code>*ngFor="#f of fruit | orderBy"</code><br/>
+				OR<br/>
+				<code>*ngFor="#f of fruit | orderBy : '+'"</code><br/>
+				OR<br/>
+				<code>*ngFor="#f of fruit | orderBy : ['+']"</code><br/>
+				<ul>
+					<li *ngFor="#f of fruitToSort | orderBy">{{f}}</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h4>Desc</h4>
+				<code>*ngFor="#f of fruit | orderBy : '-'"</code><br/>
+				OR<br/>
+				<code>*ngFor="#f of fruit | orderBy : ['-']"</code><br/>
+				<ul>
+					<li *ngFor="#f of fruitToSort | orderBy : '-'">{{f}}</li>
+				</ul>
+			</div>
+		</section>
+		<section class="row m-a">
+			<h3>Multi-Dimensional Arrays</h3>
+			<div class="col-md-4">
+				<h4>Unordered</h4>
+				<code>*ngFor="#person of people"</code><br/>
+				<ul>
+					<li *ngFor="#person of people">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h4>By Last Name Asc</h4>
+				<code>*ngFor="#person of people | orderBy : ['lastName']"</code><br/>
+				<ul>
+					<li *ngFor="#person of peopleToSort | orderBy : ['lastName']">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h4>By Age Desc Then First Name Asc</h4>
+				<code>*ngFor="#person of people | orderBy : ['-age', 'firstName']"</code><br/>
+				<ul>
+					<li *ngFor="#person of peopleToSort | orderBy : ['-age', 'firstName']">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+				</ul>
+			</div>
+		</section>
 	</main>`,
     directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES],
     encapsulation: ViewEncapsulation.None,
@@ -177,10 +236,21 @@ export class DemoComponent {
     numRooms: number = 1;
     checkInDate: Date = new Date();
     checkOutDate: Date = new Date();
-
     infiniteScrollItems: string[] = [];
     infiniteScrollMin: number = 0;
     infiniteScrollMax: number = 1;
+    people: Person[] = [
+			    		new Person('Linus', 'Torvalds', 46),
+						new Person('Larry', 'Ellison', 71),
+    					new Person('Mark', 'Zuckerberg', 31),
+						new Person('Sergey', 'Brin', 42),
+			    		new Person('Vint', 'Cerf', 72),
+			            new Person('Richard', 'Stallman', 62),
+			            new Person('John', 'Papa', 42)
+		            ];
+    peopleToSort: Person[] = [...this.people];
+    fruit: string[] = ["orange", "apple", "pear", "grape", "banana"];
+    fruitToSort: string[] = [...this.fruit];
 
     constructor() {
         for (let i = 0; i < 10; i++) {
