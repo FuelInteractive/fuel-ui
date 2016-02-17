@@ -1,5 +1,5 @@
 import {ORDERBY_PROVIDERS, OrderBy} from "./OrderBy/OrderBy";
-import {RANGE_PROVIDERS} from "./Range/Range";
+import {RANGE_PROVIDERS, Range} from "./Range/Range";
 
 export var FUELUI_PIPE_PROVIDERS = [
     ORDERBY_PROVIDERS,

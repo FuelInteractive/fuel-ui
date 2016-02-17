@@ -1,13 +1,11 @@
-This pipe orders any given array based numerically or alphabetically. Supports multi-dimensional arrays and ascending/descending sorting.
+This pipe orders any given array based numerically or alphabetically. Supports multi-dimensional arrays and ascending/descending sorting per property.
 
 ### Order By Pipe
-`orderBy` - `{{someArray | orderBy : sortingType : max : nameOfColumn}}`
+`orderBy` - `{{someArray | orderBy : orderingConfig}}`
 
 ### Order By Parameters
-  * `sortingType` _- string - (Default: `asc`)(Optional)_ -
-    The direction the array will be sorted. `asc` or `desc`
-  * `nameOfColumn` _- string or Array<string> - (Default: `null`)(Optional)_ -
-    Ending number of array
+  * `orderingConfig` _- string or Array<string> - (Default: `+`)(Optional)_ -
+    A string of `'+'` or `'-'` for the direction of the sort. Or an array of property names with prepended with `'-'` property needs to be sorted descending.
 
 ### Order By Example
 ```javascript
@@ -33,11 +31,12 @@ class Todo{
 ```html
 Basic Array of single type
 <span *ngFor="#n of numberArray | orderBy">{{n}}<span>
-<span *ngFor="#fruit of fruitArray | orderBy : 'desc'">{{fruit}}<span>
+<span *ngFor="#fruit of fruitArray | orderBy : '-'">{{fruit}}<span>
 
 Multidimensional Array Sort on single column
-<span *ngFor="#todo of todos | orderBy : 'asc' : 'status'">{{todo.name}} - {{todo.status}}<span>
+<span *ngFor="#todo of todos | orderBy : 'status'">{{todo.name}} - {{todo.status}}<span>
+<span *ngFor="#todo of todos | orderBy : '-status'">{{todo.name}} - {{todo.status}}<span>
 
 Multidimensional Array Sort on multiple columns
-<span *ngFor="#todo of todos | orderBy : 'asc' : ['status', 'title']">{{todo.name}} - {{todo.status}}<span>
+<span *ngFor="#todo of todos | orderBy : ['status', '-title']">{{todo.name}} - {{todo.status}}<span>
 ```
