@@ -21,6 +21,9 @@
 				<i class="fa fa-chevron-circle-left"></i>
 			</button>
 		</div>
+        <div class="center-block text-center m-t">
+            <strong>{{calendarMonths[monthLabelIndex] | date:'MMMM yyyy'}}</strong>
+        </div> 
 		<div class="next-month">
 			<button class="btn btn-primary btn-sm" role="next"
 				[class.disabled]="!canNextMonth()"
@@ -32,7 +35,7 @@
 	<infinite-scroller class="calendar-container"
         (next)="addNextMonth()"
         (prev)="addPrevMonth()"
-        [(topIndex)]="monthLabelIndex"
+        (topIndex)="monthLabelIndex"
         height="250"
         distance="50"
         hideScrollbar="true">

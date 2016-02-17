@@ -81,7 +81,6 @@ export class InfiniteScroller
     bottomIndex: EventEmitter<number> = new EventEmitter();
     
 	lastScroll: number = 0;
-	isScrolling: boolean = false;
 	
     @ContentChildren(ScrollItem) 
     itemQuery: QueryList<ScrollItem>;
@@ -122,11 +121,9 @@ export class InfiniteScroller
         if(visableIndicies.length > 1) {
             this.topIndex.emit(visableIndicies[0]);
             this.bottomIndex.emit(visableIndicies[visableIndicies.length-1]);
-            console.log(visableIndicies);
         }
         else if(visableIndicies.length > 0) {
             this.topIndex.emit(visableIndicies[0]);
-            console.log(visableIndicies);
         }        
     }
     
@@ -141,9 +138,7 @@ export class InfiniteScroller
         return true;
     }
 	
-	doscroll(event: Event) {
-		this.isScrolling = true;
-		
+	doscroll(event: Event) {		
 		var target = <Element>(typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
 		var targetRect = target.getBoundingClientRect();
 		var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
@@ -164,7 +159,8 @@ export class InfiniteScroller
 		
         this.getVisableIndicies();
         
-		this.isScrolling = false;
+        if(target.scrollTop < 1)
+            target.scrollTop = 1;
 	}
     
     scrollToIndex(index: number) {
