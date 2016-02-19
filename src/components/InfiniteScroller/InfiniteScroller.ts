@@ -19,7 +19,7 @@ import {
     selector: "[scroll-item],.scroll-item"
 })
 export class ScrollItem {
-    element: Element;
+    element: HTMLElement;
     
     get height(): number {
         return outerHeight(this.element);
@@ -75,10 +75,10 @@ export class InfiniteScroller
 	prev: EventEmitter<any> = new EventEmitter();
 	
     @Output()
-    topIndex: EventEmitter<number> = new EventEmitter();
+    topIndexChange: EventEmitter<any> = new EventEmitter();
     
     @Output()
-    bottomIndex: EventEmitter<number> = new EventEmitter();
+    bottomIndexChange: EventEmitter<any> = new EventEmitter();
     
 	lastScroll: number = 0;
 	
@@ -118,21 +118,25 @@ export class InfiniteScroller
         var visableIndicies = itemArray
             .filter(i => this.checkVisableItem(i))
             .map(i => itemArray.indexOf(i));
+        
         if(visableIndicies.length > 1) {
-            this.topIndex.emit(visableIndicies[0]);
-            this.bottomIndex.emit(visableIndicies[visableIndicies.length-1]);
+            console.log(visableIndicies[0]);
+            this.topIndexChange.next(visableIndicies[0]);
+            this.bottomIndexChange.next(visableIndicies[visableIndicies.length-1]);
         }
         else if(visableIndicies.length > 0) {
-            this.topIndex.emit(visableIndicies[0]);
+            console.log(visableIndicies[0]);
+            this.topIndexChange.next(visableIndicies[0]);
         }        
     }
     
     checkVisableItem(item: ScrollItem): boolean {
         var rect = item.element.getBoundingClientRect();
-        if(rect.top > this.container.scrollTop + this.container.clientHeight)
+        
+        if(rect.top > this.container.clientHeight)
            return false;
            
-        if(rect.bottom - 5 <= this.container.scrollTop)
+        if(rect.bottom <= 0)
             return false;
             
         return true;
