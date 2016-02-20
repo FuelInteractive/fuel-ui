@@ -1,20 +1,11 @@
 <div class="text-center py">
-	<table class="table">	
+	<table class="table m-a-0">	
 		<tbody>
             <tr *ngIf="showMonth">
                 <td colspan="7">
                     <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>
                 </td>
             </tr> 
-			<tr>
-				<th>S</th>
-				<th>M</th>
-				<th>T</th>
-				<th>W</th>
-				<th>T</th>
-				<th>F</th>
-				<th>S</th>
-			</tr>
 			<tr *ngFor="#week of weeks">
 				<td *ngFor="#day of week"
 					[class.selectable]="checkSelectable(day)" 

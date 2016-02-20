@@ -86,20 +86,10 @@ export class DatePickerCalendar implements OnInit {
 		
 		if(this.weeks.length > 5)
 			return;
-			
-		var emptyWeek = ['','','','','','',''];
 		
 		var firstWeekCount = this.weeks[0]
 			.filter(i => i.length > 0).length;
 		var lastWeekCount = this.weeks[this.weeks.length-1]
 			.filter(i => i.length > 0).length;
-		
-		if(firstWeekCount > lastWeekCount)
-			this.weeks.unshift(emptyWeek);
-		else
-			this.weeks.push(emptyWeek);
-		
-		if(this.weeks.length < 6)
-			this.weeks.unshift(emptyWeek);
 	}
 }

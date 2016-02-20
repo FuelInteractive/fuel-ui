@@ -57,8 +57,6 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		this._selectedDate = new Date(value);
 	}
     
-    monthLabelIndex: number = 0;
-    
 	modal: HTMLElement;    
     calendarDisplayed: boolean = true;
     calendarX: number = 1;
@@ -84,6 +82,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 				this.hideCalendar();
 		});
     }    
+    
     
     handleDateInput(value: string|Date): Date {
 		if(value instanceof Date && !isNaN(value.valueOf()))

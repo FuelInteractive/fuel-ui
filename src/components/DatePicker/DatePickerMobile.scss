@@ -1,16 +1,12 @@
 @import "../../styles/variables";
 @import "../../styles/bourbon";
 
-.modal {
-    display: block;
+.date-picker-component {
+    border: 1px solid $table-border-color;
 }
 
-.modal-dialog {
-	display: inline-block;
-	width: 400px;
-	height: 300px;
-	margin: 0;
-	position: relative;
+.table {
+	font-size: .75rem;
 }
 
 .input-group-addon {
@@ -22,6 +18,8 @@ header {
 	position: relative;
 	top: 0;
 	left: 0;
+    background-color: $brand-primary;
+    color: $btn-primary-color;
 }
 
 .prev-month, .next-month {
@@ -46,5 +44,5 @@ header {
 }
 
 .calendar-container {
-	border: 1px solid transparent;
+	box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1);
 }

@@ -75,13 +75,12 @@ export class InfiniteScroller
 	prev: EventEmitter<any> = new EventEmitter();
 	
     @Output()
-    topIndex: EventEmitter<number> = new EventEmitter();
+    topIndexChange: EventEmitter<any> = new EventEmitter();
     
     @Output()
-    bottomIndex: EventEmitter<number> = new EventEmitter();
+    bottomIndexChange: EventEmitter<any> = new EventEmitter();
     
 	lastScroll: number = 0;
-	isScrolling: boolean = false;
 	
     @ContentChildren(ScrollItem) 
     itemQuery: QueryList<ScrollItem>;
@@ -119,14 +118,15 @@ export class InfiniteScroller
         var visableIndicies = itemArray
             .filter(i => this.checkVisableItem(i))
             .map(i => itemArray.indexOf(i));
+        
         if(visableIndicies.length > 1) {
-            this.topIndex.emit(visableIndicies[0]);
-            this.bottomIndex.emit(visableIndicies[visableIndicies.length-1]);
-            console.log(visableIndicies);
+            console.log(visableIndicies[0]);
+            this.topIndexChange.next(visableIndicies[0]);
+            this.bottomIndexChange.next(visableIndicies[visableIndicies.length-1]);
         }
         else if(visableIndicies.length > 0) {
-            this.topIndex.emit(visableIndicies[0]);
-            console.log(visableIndicies);
+            console.log(visableIndicies[0]);
+            this.topIndexChange.next(visableIndicies[0]);
         }        
     }
     
@@ -145,6 +145,7 @@ export class InfiniteScroller
         
         if(itemBottom >= viewTop && itemBottom <= viewBottom)
             return true;
+        if(rect.top > this.container.clientHeight)
             
         if(itemTop <= viewTop && itemBottom >= viewBottom)
             return true;
@@ -152,9 +153,7 @@ export class InfiniteScroller
         return false;
     }
 	
-	doscroll(event: Event) {
-		this.isScrolling = true;
-		
+	doscroll(event: Event) {		
 		var target = <Element>(typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
 		var targetRect = target.getBoundingClientRect();
 		var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
@@ -175,7 +174,8 @@ export class InfiniteScroller
 		
         this.getVisableIndicies();
         
-		this.isScrolling = false;
+        if(target.scrollTop < 1)
+            target.scrollTop = 1;
 	}
     
     scrollToIndex(index: number) {

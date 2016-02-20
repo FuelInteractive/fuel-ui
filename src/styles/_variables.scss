@@ -4,3 +4,10 @@
 $fa-font-path: '../../node_modules/font-awesome/fonts';
 
 $defaultAnimationSpeed: .5s;
+
+$enable-flex:               false !default;
+$enable-rounded:            true !default;
+$enable-shadows:            true !default;
+$enable-gradients:          false !default;
+$enable-transitions:        true !default;
+$enable-hover-media-query:  false !default;

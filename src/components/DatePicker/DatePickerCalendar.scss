@@ -1,27 +1,9 @@
 @import "../../styles/variables";
 @import "../../styles/bourbon";
 
-$duration: .5s;
-
-.slide-in-right {
-	@include animation(slideInRight $duration ease);
-}
-
-.slide-in-left {
-	@include animation(slideInLeft $duration ease);
-}
-
-.slide-in-right {
-	@include animation(slideInRight $duration ease);
-}
-
-.slide-in-right {
-	@include animation(slideInRight $duration ease);
-}
-
 .table {
 	font-size: .75rem;
-	border: 1px solid $table-border-color;
+	border-top: 1px solid $table-border-color;
 }
 
 tr {
@@ -30,7 +12,7 @@ tr {
 
 th, td {
 	text-align: center;
-	vertical-align: center;
+	vertical-align: middle;
 	padding: .1rem;
 	height: 1.75rem;
 	border: none;
@@ -38,7 +20,7 @@ th, td {
 
 td.selectable {
 	cursor: pointer !important;
-	border: 1px solid $table-border-color;
+	/*border: 1px solid $table-border-color;*/
 }
 
 td.selectable:hover {
@@ -52,6 +34,6 @@ td.selected {
 }
 
 td.disabled {
-	background-color: lighten($input-bg-disabled, 5%);
+	/*background-color: lighten($input-bg-disabled, 5%);*/
 	color: $btn-link-disabled-color;
 }
