@@ -76,17 +76,19 @@ export class InfiniteScroller
 	
     @Output()
     topIndexChange: EventEmitter<any> = new EventEmitter();
+    topIndex: number = 0;
     
     @Output()
     bottomIndexChange: EventEmitter<any> = new EventEmitter();
+    bottomIndex: number = 0;
     
 	lastScroll: number = 0;
 	
     @ContentChildren(ScrollItem) 
     itemQuery: QueryList<ScrollItem>;
     firstItem: ScrollItem;
-	container: Element
-	scrollTarget: Element;
+	container: HTMLElement
+	scrollTarget: HTMLElement;
     
 	constructor(element: ElementRef) {
 		this.container = element.nativeElement.firstElementChild;
@@ -120,13 +122,14 @@ export class InfiniteScroller
             .map(i => itemArray.indexOf(i));
         
         if(visableIndicies.length > 1) {
-            console.log(visableIndicies[0]);
-            this.topIndexChange.next(visableIndicies[0]);
-            this.bottomIndexChange.next(visableIndicies[visableIndicies.length-1]);
+            this.topIndex = visableIndicies[0]
+            this.bottomIndex = visableIndicies[visableIndicies.length-1];
+            this.topIndexChange.next(this.topIndex);
+            this.bottomIndexChange.next(this.bottomIndex);
         }
         else if(visableIndicies.length > 0) {
-            console.log(visableIndicies[0]);
-            this.topIndexChange.next(visableIndicies[0]);
+            this.topIndex = visableIndicies[0]
+            this.topIndexChange.next(this.topIndex);
         }        
     }
     
@@ -145,7 +148,6 @@ export class InfiniteScroller
         
         if(itemBottom >= viewTop && itemBottom <= viewBottom)
             return true;
-        if(rect.top > this.container.clientHeight)
             
         if(itemTop <= viewTop && itemBottom >= viewBottom)
             return true;
@@ -188,9 +190,13 @@ export class InfiniteScroller
             targetIndex = itemArray.length - 1;
         
         var target = this.itemQuery.toArray()[targetIndex];
-        var targetPosition = target.element.getBoundingClientRect().top;
-        
-        this.container.scrollTop = targetPosition;
+        var targetPos = target.element.offsetTop;
+        console.log("topindex: " + this.topIndex);
+        console.log("bottomindex" + this.bottomIndex);
+        console.log("Scroll to index: " + index);
+        console.log("targetPos: " + targetPos);
+        console.log(target);
+        ElementUtils.scrollTo(this.container, targetPos, 10);
     }
 }
 

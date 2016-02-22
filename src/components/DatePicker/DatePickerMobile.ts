@@ -2,7 +2,8 @@ import {Component, View, OnInit, OnChanges, AfterViewInit} from "angular2/core";
 import {Input, Output, EventEmitter, ElementRef, ContentChild, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
-import { INFINITE_SCROLLER_PROVIDERS, InfiniteScroller } from "../InfiniteScroller/InfiniteScroller";
+import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
+import {ElementUtils} from "../../Utilities/ElementUtils";
 
 @Component({
     selector: "date-picker-mobile"
@@ -126,6 +127,14 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		return nextDate <= compareDate;
 	}
 	
+    scrollPrevMonth(): void {
+        
+    }
+    
+    scrollNextMonth(): void {
+        
+    }
+    
     addNextMonth(): void {
         if(!this.canNextMonth())
             return;

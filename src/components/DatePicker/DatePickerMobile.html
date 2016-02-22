@@ -28,7 +28,22 @@
 				<i class="fa fa-chevron-circle-right"></i>
 			</button>
 		</div>-->
-        <table class="table m-b-0">
+        <div>
+            <button type="button" class="btn btn-secondar pull-left"
+                [class.disabled]="!canPrevMonth()" 
+                (click)="scroller.scrollToIndex(scroller.topIndex-1)">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <time>
+                selected date
+            </time>
+            <button type="button" class="btn btn-secondary pull-right"
+                [class.disabled]="!canNextMonth()"
+                (click)="scroller.scrollToIndex(scroller.topIndex+1)">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+        <table class="table m-b-0 days-of-week">
             <tbody>
             <tr>
 				<th>S</th>
@@ -43,7 +58,7 @@
         </table>
 	</header>
     <section class="calendar-container m-a-0">
-        <infinite-scroller
+        <infinite-scroller #scroller
             (next)="addNextMonth()"
             (prev)="addPrevMonth()"
             height="250"

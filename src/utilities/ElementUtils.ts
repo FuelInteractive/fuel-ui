@@ -14,19 +14,21 @@ export class ElementUtils {
         width += parseInt(style.borderLeftWidth) + parseInt(style.borderRightWidth);
         return width;
     }
+    
+    static scrollTo(element: HTMLElement, to: number, duration: number) {
+        if (duration <= 0) return;
+        var difference = to - element.scrollTop;
+        var perTick = difference / duration * 10;
+
+        setTimeout(function() {
+            element.scrollTop = element.scrollTop + perTick;
+            if (element.scrollTop === to) return;
+            ElementUtils.scrollTo(element, to, duration - 10);
+        }, 10);
+    }
 }
 
-export function scrollTo(element: HTMLElement, to: number, duration: number) {
-    if (duration <= 0) return;
-    var difference = to - element.scrollTop;
-    var perTick = difference / duration * 10;
 
-    setTimeout(function() {
-        element.scrollTop = element.scrollTop + perTick;
-        if (element.scrollTop === to) return;
-        scrollTo(element, to, duration - 10);
-    }, 10);
-}
 
 //http://codepen.io/branneman/pen/tCdHa
 //

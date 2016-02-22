@@ -3,9 +3,15 @@
 
 .date-picker-component {
     border: 1px solid $table-border-color;
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+    background-color: $body-bg;
+    font-size: .75rem;
+    width: 350px;
 }
 
-.table {
+table {
 	font-size: .75rem;
 }
 
@@ -18,8 +24,30 @@ header {
 	position: relative;
 	top: 0;
 	left: 0;
-    background-color: $brand-primary;
-    color: $btn-primary-color;
+    vertical-align: middle;
+    .days-of-week {
+        background-color: $brand-primary;
+        color: $btn-primary-color;
+    }
+    
+    table{
+        border-top: none !important;
+    }
+    
+    th, td {
+        text-align: center;
+    }
+    
+    button {
+        border: none;
+        border-radius: 0;
+        color: $brand-primary; 
+        background-color: $input-bg;
+    }
+    
+    button:active {
+        background-color: $input-bg-disabled;
+    }
 }
 
 .prev-month, .next-month {
