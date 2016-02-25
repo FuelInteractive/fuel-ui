@@ -23,6 +23,8 @@
     @if $enable-rounded {
         border-radius: $border-radius-lg;
     }
+    
+    @include transition(all .1s ease);
 }
 
 table {

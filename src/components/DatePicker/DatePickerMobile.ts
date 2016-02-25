@@ -63,17 +63,42 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 	calendarY: number = 1;
     
     calendarMonths: Date[] = [];
+    
+    _preGenMonths = 2;
  
     constructor(modal: ElementRef) {
         this.modal = modal.nativeElement;
         this.selectedDate = new Date();
+        if(this.selectedDate < this._minDate)
+            this.selectedDate = this._minDate;
     }
     
     ngOnInit(): void {
         this.calendarMonths = [
-            new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth()),
-            new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth()+1),
+            new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth()-1),
+            new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth())
         ]
+        
+        for(let i = 0; i < this._preGenMonths; i++) {
+            let earliestDate = this.calendarMonths[0];
+            let latestDate = this.calendarMonths[this.calendarMonths.length-1];
+            if(this.canPrevMonth)
+                this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth()-1));
+            if(this.canNextMonth)
+                this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth()+1));
+        }
+        
+        setTimeout(() => {
+            let scrollToMonth = this.calendarMonths.findIndex(m => {
+                return m.getFullYear() == this.selectedDate.getFullYear()
+                    && m.getMonth() == this.selectedDate.getMonth()
+            });
+            
+            this.calendarScroller.container.scrollTop = 
+                this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
+            
+            this.calendarScroller.scrollToIndex(scrollToMonth);
+        }, 1);
     }
     
     ngAfterViewInit(): void {
@@ -82,7 +107,6 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 				this.hideCalendar();
 		});
     }    
-    
     
     handleDateInput(value: string|Date): Date {
 		if(value instanceof Date && !isNaN(value.valueOf()))
@@ -95,10 +119,10 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		if(event != null) {
 			var clickedRect = event.srcElement.parentElement.getBoundingClientRect();
 			this.calendarX = clickedRect.left;
-			if(screen.height - clickedRect.bottom <= 400) {
-				this.calendarY = (clickedRect.top - 290 + clickedRect.height);
+			if(screen.height - clickedRect.bottom <= 500) {
+				this.calendarY = (clickedRect.top);
 			} else {
-				this.calendarY = (clickedRect.top + clickedRect.height);
+				this.calendarY = (clickedRect.top);
 			}
 		}			
 		
@@ -110,7 +134,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		this.calendarDisplayed = false;
 	}
     
-    canPrevMonth(): boolean {
+    get canPrevMonth(): boolean {
         var currentDate = this.calendarMonths[0];
 		var prevDate = 
 			new Date(currentDate.getFullYear(), currentDate.getMonth()-1);
@@ -119,7 +143,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		return prevDate >= compareDate;
 	}
     
-    canNextMonth(): boolean {
+    get canNextMonth(): boolean {
         var currentDate = this.calendarMonths[this.calendarMonths.length-1];
 		var nextDate = 
 			new Date(currentDate.getFullYear(), currentDate.getMonth()+1); 
@@ -127,7 +151,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 			new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
 		return nextDate <= compareDate;
 	}
-	
+    
     scrollPrevMonth(): void {
         if(this.calendarScroller.topIndex == 0)
             this.addPrevMonth();
@@ -144,7 +168,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
     }
     
     addNextMonth(): void {
-        if(!this.canNextMonth())
+        if(!this.canNextMonth)
             return;
         
         var lastMonth = this.calendarMonths[this.calendarMonths.length-1];
@@ -153,7 +177,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
     }
     
     addPrevMonth(): void {
-        if(!this.canPrevMonth())
+        if(!this.canPrevMonth)
             return;
         
         var firstMonth = this.calendarMonths[0];

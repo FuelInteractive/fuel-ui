@@ -8,7 +8,7 @@
 	</span>
 </div>
 
-<div class="date-picker-overlay" 
+<div class="date-picker-overlay" aria-hidden="true"
     *ngIf="calendarDisplayed" 
     (click)="hideCalendar()">
 </div>
@@ -20,7 +20,6 @@
 <div class="container p-a-0">
     <header>
         <button type="button" class="btn btn-secondary pull-left"
-            [class.disabled]="!canPrevMonth()" 
             (click)="scrollPrevMonth()">
             <i class="fa fa-chevron-left"></i>
         </button>
@@ -29,7 +28,6 @@
         <input type="text" class="form-control text-xs-center" 
             id="endDate" [(ngModel)]="inputDate" />
         <button type="button" class="btn btn-secondary pull-right"
-            [class.disabled]="!canNextMonth()"
             (click)="scrollNextMonth()">
             <i class="fa fa-chevron-right"></i>
         </button>

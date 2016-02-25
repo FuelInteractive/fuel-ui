@@ -131,8 +131,6 @@ export class InfiniteScroller
             this.topIndex = visableIndicies[0]
             this.topIndexChange.next(this.topIndex);
         }        
-        
-        console.log(visableIndicies.map(i => itemArray[i].element));
     }
     
     checkVisableItem(item: ScrollItem): boolean {                    
@@ -196,12 +194,6 @@ export class InfiniteScroller
         
         var target = this.itemQuery.toArray()[targetIndex];
         var targetPos = target.element.offsetTop - this.container.offsetTop;
-        console.log("topindex: " + this.topIndex);
-        console.log("bottomindex" + this.bottomIndex);
-        console.log("Scroll to index: " + targetIndex);
-        console.log("targetPos: " + targetPos);
-        console.log("Current scrolltop: " + this.container.scrollTop);
-        console.log(target);
         this.scrollTo(targetPos);
     }
 }
