@@ -12,6 +12,8 @@ var inlineNg2Template = require('gulp-inline-ng2-template');
 var merge = require('merge2');
 var webserver = require('gulp-webserver');
 var Builder = require('systemjs-builder');
+var runSequence = require('run-sequence');
+var server = require('gulp-server-livereload');
 
 var paths = {
     source: 'src',
@@ -105,19 +107,36 @@ gulp.task('sass', ['cleanSass'], function () {
 });
 
 gulp.task('serve', function(){
-    gulp.src('./')
-        .pipe(webserver({
-            livereload: false,
-            open: true
-        }));
+	gulp.src('./')
+		.pipe(server({
+			livereload: {
+				enable: true,
+				filter: function(filePath, cb) {
+					cb( 
+						/bin\/[^\/]*\.js$/.test(filePath) &&
+						!(/node_modules/.test(filePath)) &&  
+						!(/.*ts$/.test(filePath)) && 
+						!(/gulpfile.js$/.test(filePath))
+					);
+				}
+			},
+			defaultFile: 'index.html',
+			open: true
+		}));
 });
 
 gulp.task('watch', function () {
-    gulp.watch(paths.source+'/**/*.html', ['views', 'scripts']);
+    gulp.watch(paths.source+'/**/*.html', ['views']);
     gulp.watch(paths.source+'/**/*.ts', ['scripts']);
-    gulp.watch(paths.source+'/**/*.{scss,sass}', ['sass', 'scripts']);
+    gulp.watch(paths.source+'/**/*.{scss,sass}', ['sass']);
 });
 
 gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'bundle']);
 
-gulp.task('default', ['build', 'serve', 'watch']);
+gulp.task('default', function(){
+	runSequence(
+		'build',
+		'serve',
+		'watch'
+	);
+});
