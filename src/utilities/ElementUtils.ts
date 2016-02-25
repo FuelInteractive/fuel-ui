@@ -1,3 +1,5 @@
+import {AnimationUtils} from "./AnimationUtils";
+
 export class ElementUtils {
     static outerHeight(el: Element): number {
         var height = el.clientHeight;
@@ -17,28 +19,19 @@ export class ElementUtils {
     
     static scrollTo(element: HTMLElement, to: number, duration: number) {
         if (duration <= 0) return;
-        var difference = to - element.scrollTop;
-        var perTick = difference / duration * 10;
+        
+        var startTime = new Date().getTime();
+        var from = element.scrollTop;
+        
+        var timer = setInterval(() => {
+           var time = new Date().getTime() - startTime;
+           var scrollTo = AnimationUtils.easeInOutQuart(time, from, to-from, duration);
 
-        setTimeout(function() {
-            element.scrollTop = element.scrollTop + perTick;
-            if (element.scrollTop === to) return;
-            ElementUtils.scrollTo(element, to, duration - 10);
-        }, 10);
+           element.scrollTop = scrollTo;
+           if(time >= duration) {
+               element.scrollTop = to;
+               clearInterval(timer);
+           } 
+        }, 1000 / 60);
     }
-}
-
-
-
-//http://codepen.io/branneman/pen/tCdHa
-//
-// http://easings.net/#easeInOutQuart
-//  t: current time
-//  b: beginning value
-//  c: change in value
-//  d: duration
-//
-function easeInOutQuart(t: number, b: number, c: number, d: number) {
-  if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
-  return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
 }

@@ -35,5 +35,5 @@ td.selected {
 
 td.disabled {
 	/*background-color: lighten($input-bg-disabled, 5%);*/
-	color: $btn-link-disabled-color;
+	color: desaturate(lighten($btn-link-disabled-color, 25%), 25%);
 }

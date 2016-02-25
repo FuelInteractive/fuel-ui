@@ -1,14 +1,28 @@
 @import "../../styles/variables";
 @import "../../styles/bourbon";
 
+.date-picker-overlay {
+    background-color: rgba(0,0,0,0);
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
 .date-picker-component {
     border: 1px solid $table-border-color;
     position: absolute;
-    z-index: 100;
+    z-index: 101;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
     background-color: $body-bg;
     font-size: .75rem;
     width: 350px;
+    @if $enable-rounded {
+        border-radius: $border-radius-lg;
+    }
 }
 
 table {
@@ -47,6 +61,13 @@ header {
     
     button:active {
         background-color: $input-bg-disabled;
+    }
+    
+    input {
+        border: none;
+        width: 37% !important;
+        display: inline-block;
+        margin: 0 auto;
     }
 }
 

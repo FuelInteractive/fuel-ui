@@ -54,8 +54,9 @@ export class Person {
         <section class="row m-a">
 			<div class="col-md-3">
 				<date-picker-mobile 
-					min-date="11/1/2015"
-					max-date="11/1/2016" months="2">
+					minDate="11/1/2015"
+					maxDate="11/11/2016" 
+                    [dateFilter]="dateFilter">
 				</date-picker-mobile>
 			</div>
 		</section>
@@ -288,6 +289,13 @@ export class DemoComponent {
 
         this.infiniteScrollMax++;
         this.infiniteScrollItems.push(newItem);
+    }
+    
+    dateFilter(d: Date): boolean {
+        if([1,2].indexOf(d.getDay()) > -1)
+            return false;
+        
+        return true;
     }
 
     saveFunc(modal: any, error: boolean): void {

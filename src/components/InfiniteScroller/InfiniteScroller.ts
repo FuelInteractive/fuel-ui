@@ -26,7 +26,7 @@ export class ScrollItem {
     }
     
     constructor(element: ElementRef) {
-        this.element = element.nativeElement;
+        this.element = element.nativeElement.firstElementChild;
     }
 }
 
@@ -131,25 +131,23 @@ export class InfiniteScroller
             this.topIndex = visableIndicies[0]
             this.topIndexChange.next(this.topIndex);
         }        
+        
+        console.log(visableIndicies.map(i => itemArray[i].element));
     }
     
-    checkVisableItem(item: ScrollItem): boolean {        
-        var itemHeight = 0;
-        for(let index in item.element.children)
-            itemHeight += item.element.children[index].clientHeight;
-            
+    checkVisableItem(item: ScrollItem): boolean {                    
         var itemTop = item.element.offsetTop;  
-        var itemBottom = itemTop + item.element.children[0].clientHeight;
-        var viewTop = this.container.scrollTop;
+        var itemBottom = itemTop + ElementUtils.outerHeight(item.element);
+        var viewTop = this.container.scrollTop + this.container.offsetTop;
         var viewBottom = viewTop + this.container.clientHeight;
             
-        if(itemTop >= viewTop && itemTop <= viewBottom) 
+        if(itemTop > viewTop && itemTop < viewBottom) 
             return true;
         
-        if(itemBottom >= viewTop && itemBottom <= viewBottom)
+        if(itemBottom > viewTop && itemBottom < viewBottom)
             return true;
             
-        if(itemTop <= viewTop && itemBottom >= viewBottom)
+        if(itemTop < viewTop && itemBottom > viewBottom)
             return true;
             
         return false;
@@ -180,7 +178,11 @@ export class InfiniteScroller
             target.scrollTop = 1;
 	}
     
-    scrollToIndex(index: number) {
+    scrollTo(position: number): void {
+        ElementUtils.scrollTo(this.container, position, 500);
+    }
+    
+    scrollToIndex(index: number): void {
         var itemArray = this.itemQuery.toArray();
         
         var targetIndex = 0;
@@ -189,14 +191,18 @@ export class InfiniteScroller
         else if(index >= itemArray.length)
             targetIndex = itemArray.length - 1;
         
+        if(targetIndex < 0)
+            targetIndex = 0;
+        
         var target = this.itemQuery.toArray()[targetIndex];
-        var targetPos = target.element.offsetTop;
+        var targetPos = target.element.offsetTop - this.container.offsetTop;
         console.log("topindex: " + this.topIndex);
         console.log("bottomindex" + this.bottomIndex);
-        console.log("Scroll to index: " + index);
+        console.log("Scroll to index: " + targetIndex);
         console.log("targetPos: " + targetPos);
+        console.log("Current scrolltop: " + this.container.scrollTop);
         console.log(target);
-        ElementUtils.scrollTo(this.container, targetPos, 10);
+        this.scrollTo(targetPos);
     }
 }
 

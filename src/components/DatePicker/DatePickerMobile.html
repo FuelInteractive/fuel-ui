@@ -8,66 +8,57 @@
 	</span>
 </div>
 
+<div class="date-picker-overlay" 
+    *ngIf="calendarDisplayed" 
+    (click)="hideCalendar()">
+</div>
+
 <section class="date-picker-component" *ngIf="calendarDisplayed">
 <div class="" role="document"
-	[style.top.px]="calendarY"
-	[style.left.px]="calendarX">
+    [style.top.px]="calendarY"
+    [style.left.px]="calendarX">
 <div class="container p-a-0">
-	<header>
-		<!--<div class="prev-month">
-			<button class="btn btn-primary btn-sm" role="prev"
-				[class.disabled]="!canPrevMonth()"			 
-				(click)="prevMonth()">
-				<i class="fa fa-chevron-circle-left"></i>
-			</button>
-		</div>
-		<div class="next-month">
-			<button class="btn btn-primary btn-sm" role="next"
-				[class.disabled]="!canNextMonth()"
-				(click)="nextMonth()">
-				<i class="fa fa-chevron-circle-right"></i>
-			</button>
-		</div>-->
-        <div>
-            <button type="button" class="btn btn-secondar pull-left"
-                [class.disabled]="!canPrevMonth()" 
-                (click)="scroller.scrollToIndex(scroller.topIndex-1)">
-                <i class="fa fa-chevron-left"></i>
-            </button>
-            <time>
-                selected date
-            </time>
-            <button type="button" class="btn btn-secondary pull-right"
-                [class.disabled]="!canNextMonth()"
-                (click)="scroller.scrollToIndex(scroller.topIndex+1)">
-                <i class="fa fa-chevron-right"></i>
-            </button>
-        </div>
+    <header>
+        <button type="button" class="btn btn-secondary pull-left"
+            [class.disabled]="!canPrevMonth()" 
+            (click)="scrollPrevMonth()">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <input type="text" class="form-control text-xs-center" 
+            id="startDate" [(ngModel)]="inputDate" />
+        <input type="text" class="form-control text-xs-center" 
+            id="endDate" [(ngModel)]="inputDate" />
+        <button type="button" class="btn btn-secondary pull-right"
+            [class.disabled]="!canNextMonth()"
+            (click)="scrollNextMonth()">
+            <i class="fa fa-chevron-right"></i>
+        </button>
         <table class="table m-b-0 days-of-week">
             <tbody>
             <tr>
-				<th>S</th>
-				<th>M</th>
-				<th>T</th>
-				<th>W</th>
-				<th>T</th>
-				<th>F</th>
-				<th>S</th>
-			</tr>
+                <th>S</th>
+                <th>M</th>
+                <th>T</th>
+                <th>W</th>
+                <th>T</th>
+                <th>F</th>
+                <th>S</th>
+            </tr>
             </tbody>
         </table>
-	</header>
+    </header>
     <section class="calendar-container m-a-0">
-        <infinite-scroller #scroller
+        <infinite-scroller
             (next)="addNextMonth()"
             (prev)="addPrevMonth()"
-            height="250"
-            distance="50"
+            height="300"
+            distance="100"
             hideScrollbar="true">
             <date-picker-calendar scroll-item
                 *ngFor="#month of calendarMonths #i=index" 
                 [id]="i"
                 [minDate]="minDate" [maxDate]="maxDate"
+                [dateFilter]="dateFilter"
                 [currentMonth]="month" 
                 [(selectedDate)]="selectedDate" 
                 (selectedDate)="hideCalendar()">

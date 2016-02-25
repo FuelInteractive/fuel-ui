@@ -20,6 +20,7 @@ export class DatePickerCalendar implements OnInit {
 	
 	@Input() minDate: Date;
 	@Input() maxDate: Date;
+    @Input() dateFilter: (d: Date) => boolean;
     
     @Input() showMonth: boolean = true;
 	
@@ -37,7 +38,10 @@ export class DatePickerCalendar implements OnInit {
 		
 		var compareDate = 
 			new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-			
+            
+        if(typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
+			return false;
+            
 		return compareDate >= this.minDate && compareDate <= this.maxDate;
 	}
 	

@@ -49,3 +49,10 @@
 	height: 50px;
 	background: blue;
 }
+
+.vertical-bar {
+    display: inline-block;
+    height: 100%;
+    width: 5px;
+    border-right: $border-width solid $hr-border-color; 
+}

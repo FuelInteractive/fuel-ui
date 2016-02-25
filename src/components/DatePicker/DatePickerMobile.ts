@@ -1,5 +1,5 @@
 import {Component, View, OnInit, OnChanges, AfterViewInit} from "angular2/core";
-import {Input, Output, EventEmitter, ElementRef, ContentChild, QueryList} from "angular2/core";
+import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
@@ -29,6 +29,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 	}
 	get maxDate(): Date|string { return this._maxDate; }
     
+    @Input() dateFilter: (d: Date) => boolean;
     
     @Output() valueChange = new EventEmitter();
 	@Input()
@@ -36,16 +37,14 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		this._selectedDate = this.handleDateInput(value);
 	}
  
-    @ContentChild(InfiniteScroller)
+    @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
  
-    currentDate: Date;
 	private _selectedDate: Date;
 	get selectedDate(): Date { return this._selectedDate; };
 	set selectedDate(value: Date) {
 		this._selectedDate = value;
 		this._inputDate = value.toLocaleDateString();
-		this.currentDate = value;
 		this.valueChange.next(this.selectedDate);
 		this.hideCalendar();
 	}
@@ -112,27 +111,36 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 	}
     
     canPrevMonth(): boolean {
+        var currentDate = this.calendarMonths[0];
 		var prevDate = 
-			new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()-1);
+			new Date(currentDate.getFullYear(), currentDate.getMonth()-1);
 		var compareDate = 
 			new Date(this._minDate.getFullYear(), this._minDate.getMonth());
 		return prevDate >= compareDate;
 	}
     
     canNextMonth(): boolean {
+        var currentDate = this.calendarMonths[this.calendarMonths.length-1];
 		var nextDate = 
-			new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1); 
+			new Date(currentDate.getFullYear(), currentDate.getMonth()+1); 
 		var compareDate = 
-			new Date(this._maxDate.getFullYear(), this._maxDate.getMonth()-1);
+			new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
 		return nextDate <= compareDate;
 	}
 	
     scrollPrevMonth(): void {
+        if(this.calendarScroller.topIndex == 0)
+            this.addPrevMonth();
         
+        setTimeout(() => {
+            this.calendarScroller.scrollToIndex(this.calendarScroller.topIndex - 1);
+        }, 10);
     }
     
     scrollNextMonth(): void {
-        
+        setTimeout(() => {
+            this.calendarScroller.scrollToIndex(this.calendarScroller.topIndex + 1);
+        }, 10);
     }
     
     addNextMonth(): void {
