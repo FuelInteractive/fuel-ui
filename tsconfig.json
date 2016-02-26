@@ -12,6 +12,12 @@
     },
     "exclude": [
         "node_modules",
-        "jspm_packages"
+        "jspm_packages",
+        "node_modules/angular2/typings/es6-collections/es6-collections.d.ts",
+        "node_modules/angular2/typings/es6-promise/es6-promise.d.ts"
+    ],
+    "filesGlob": [
+        "./**/*.ts",
+        "../typings/tsd.d.ts"
     ]
 }

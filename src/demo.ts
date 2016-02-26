@@ -1,5 +1,3 @@
-///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
-
 import {View, Component, ViewEncapsulation, provide, ChangeDetectionStrategy} from "angular2/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
 import {bootstrap} from "angular2/platform/browser";

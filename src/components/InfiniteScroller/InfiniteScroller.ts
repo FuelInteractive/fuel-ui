@@ -18,7 +18,7 @@ import {
 @Directive({
     selector: "[scroll-item],.scroll-item"
 })
-export class ScrollItem {
+export class ScrollItem implements AfterViewInit {
     element: HTMLElement;
     
     get height(): number {
@@ -26,7 +26,11 @@ export class ScrollItem {
     }
     
     constructor(element: ElementRef) {
-        this.element = element.nativeElement.firstElementChild;
+        this.element = element.nativeElement;
+    }
+    
+    ngAfterViewInit(): void {
+        this.element = <HTMLElement>this.element.firstElementChild;
     }
 }
 
@@ -90,8 +94,10 @@ export class InfiniteScroller
 	container: HTMLElement
 	scrollTarget: HTMLElement;
     
+    //test
+    
 	constructor(element: ElementRef) {
-		this.container = element.nativeElement.firstElementChild;
+		this.container = element.nativeElement;
 	}
 	
 	ngAfterContentInit(): void {
@@ -102,6 +108,7 @@ export class InfiniteScroller
 	}
     
     ngAfterViewInit(): void {
+        this.container = <HTMLElement>this.container.firstElementChild;        
         this.container.scrollTop += 1;
     }
     
