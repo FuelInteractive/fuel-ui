@@ -1,25 +1,20 @@
 System.registerDynamic("bin/components/Alert/Alert.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -42,17 +37,17 @@ System.registerDynamic("bin/components/Alert/Alert.js", ["node_modules/angular2/
       this.displayed = false;
       this.displayedChange.next(null);
     };
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "displayed");
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "closeButton");
-    __decorate([core_1.Input(), __metadata('design:type', String)], Alert.prototype, "type");
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Alert.prototype, "displayedChange");
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "displayed", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "closeButton", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Alert.prototype, "type", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Alert.prototype, "displayedChange", void 0);
     Alert = __decorate([core_1.Component({selector: 'alert'}), core_1.View({
       styles: ["\n      .alertFadeIn {\n        -webkit-animation-name: fadeIn;\n        -moz-animation-name: fadeIn;\n        animation-name: fadeIn;\n        -webkit-animation-duration: 1s;\n        -moz-animation-duration: 1s;\n        animation-duration: 1s;\n        -webkit-animation-timing-function: ease;\n        -moz-animation-timing-function: ease;\n        animation-timing-function: ease; }\n    "],
       template: "\n      <div\n          *ngIf=\"displayed\"\n          role=\"alert\"\n          class=\"alert alertFadeIn\"\n          [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n          <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&#215;</span>\n              <span class=\"sr-only\">Close</span>\n          </button>\n          <ng-content></ng-content>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Alert);
     return Alert;
-  })();
+  }());
   exports.Alert = Alert;
   exports.ALERT_PROVIDERS = [Alert];
   global.define = __define;
@@ -60,27 +55,22 @@ System.registerDynamic("bin/components/Alert/Alert.js", ["node_modules/angular2/
 });
 
 System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -148,7 +138,7 @@ System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/ang
       }
     }), __metadata('design:paramtypes', [])], CarouselItem);
     return CarouselItem;
-  })();
+  }());
   exports.CarouselItem = CarouselItem;
   var Carousel = (function() {
     function Carousel() {
@@ -222,7 +212,7 @@ System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/ang
         return curr.isActive ? curr : prev;
       }, null);
     };
-    __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "imageQuery");
+    __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "imageQuery", void 0);
     Carousel = __decorate([core_1.Component({selector: 'carousel'}), core_1.View({
       styles: ["\n   .carousel-item {\n     width: 100%; }\n\n   .carousel-item.slide-in-left {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: -100%;\n     -webkit-animation-name: slideInLeft;\n     -moz-animation-name: slideInLeft;\n     animation-name: slideInLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-in-right {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: 100%;\n     -webkit-animation-name: slideInRight;\n     -moz-animation-name: slideInRight;\n     animation-name: slideInRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-left {\n     -webkit-animation-name: slideOutLeft;\n     -moz-animation-name: slideOutLeft;\n     animation-name: slideOutLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-right {\n     -webkit-animation-name: slideOutRight;\n     -moz-animation-name: slideOutRight;\n     animation-name: slideOutRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
       template: "\n   <div class=\"carousel slide\">\n     <ol class=\"carousel-indicators\">\n       <li *ngFor=\"#image of images\"\n         (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\"></li> \n     </ol>\n     <div class=\"carousel-inner\" role=\"listbox\">\n         <ng-content></ng-content>\n     </div>\n     <a class=\"left carousel-control\" role=\"button\" (click)=\"prevImage()\">\n       <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Previous</span>\n     </a>\n     <a class=\"right carousel-control\" role=\"button\" (click)=\"nextImage()\">\n       <span class=\"icon-next\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Next</span>\n     </a>\n   </div>\n    ",
@@ -230,7 +220,7 @@ System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/ang
       encapsulation: core_1.ViewEncapsulation.None
     }), __metadata('design:paramtypes', [])], Carousel);
     return Carousel;
-  })();
+  }());
   exports.Carousel = Carousel;
   exports.CAROUSEL_PROVIDERS = [Carousel, CarouselItem];
   global.define = __define;
@@ -238,27 +228,22 @@ System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/ang
 });
 
 System.registerDynamic("bin/components/DatePicker/DatePickerBase.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/Directives/Animation/Animation.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -399,34 +384,133 @@ System.registerDynamic("bin/components/DatePicker/DatePickerBase.js", ["node_mod
       directives: [DatePickerCalendar_1.DatePickerCalendar, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, Animation_1.Animation]
     }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePickerBase);
     return DatePickerBase;
-  })();
+  }());
   exports.DatePickerBase = DatePickerBase;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/DatePicker/DatePickerCalendar.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var core_2 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var DatePickerCalendar = (function() {
+    function DatePickerCalendar() {
+      this.selectedDateChange = new core_2.EventEmitter();
     }
+    DatePickerCalendar.prototype.ngOnInit = function() {
+      this.buildWeeks(this.currentMonth || new Date());
+    };
+    DatePickerCalendar.prototype.checkSelectable = function(date) {
+      var dateNumber = parseInt(date);
+      if (isNaN(dateNumber))
+        return false;
+      var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+      return compareDate >= this.minDate && compareDate <= this.maxDate;
+    };
+    DatePickerCalendar.prototype.checkSelectedDate = function(date) {
+      if (typeof this.selectedDate == undefined || this.selectedDate == null)
+        return false;
+      return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
+    };
+    DatePickerCalendar.prototype.selectDate = function(date) {
+      if (!this.checkSelectable(date))
+        return;
+      var dateNumber = parseInt(date);
+      this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+      this.selectedDateChange.next(this.selectedDate);
+    };
+    DatePickerCalendar.prototype.buildWeeks = function(date) {
+      this.currentMonth = date;
+      var currentDay = new Date(this.currentMonth.toDateString());
+      currentDay.setDate(1);
+      currentDay.setDate(currentDay.getDate() - currentDay.getDay());
+      var lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0);
+      lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
+      this.weeks = [];
+      var currentWeek = [];
+      while (currentDay <= lastDay) {
+        if (currentDay.getMonth() == this.currentMonth.getMonth())
+          currentWeek.push(currentDay.getDate().toLocaleString());
+        else
+          currentWeek.push("");
+        currentDay.setDate(currentDay.getDate() + 1);
+        if (currentDay.getDay() == 0) {
+          this.weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      }
+      if (this.weeks.length > 5)
+        return;
+      var emptyWeek = ['', '', '', '', '', '', ''];
+      var firstWeekCount = this.weeks[0].filter(function(i) {
+        return i.length > 0;
+      }).length;
+      var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
+        return i.length > 0;
+      }).length;
+      if (firstWeekCount > lastWeekCount)
+        this.weeks.unshift(emptyWeek);
+      else
+        this.weeks.push(emptyWeek);
+      if (this.weeks.length < 6)
+        this.weeks.unshift(emptyWeek);
+    };
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate", void 0);
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerCalendar.prototype, "selectedDateChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "minDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "maxDate", void 0);
+    DatePickerCalendar = __decorate([core_1.Component({selector: 'date-picker-calendar'}), core_1.View({
+      styles: ["\n   .slide-in-right {\n     -webkit-animation: slideInRight 0.5s ease;\n     -moz-animation: slideInRight 0.5s ease;\n     animation: slideInRight 0.5s ease; }\n\n   .slide-in-left {\n     -webkit-animation: slideInLeft 0.5s ease;\n     -moz-animation: slideInLeft 0.5s ease;\n     animation: slideInLeft 0.5s ease; }\n\n   .slide-in-right {\n     -webkit-animation: slideInRight 0.5s ease;\n     -moz-animation: slideInRight 0.5s ease;\n     animation: slideInRight 0.5s ease; }\n\n   .slide-in-right {\n     -webkit-animation: slideInRight 0.5s ease;\n     -moz-animation: slideInRight 0.5s ease;\n     animation: slideInRight 0.5s ease; }\n\n   .table {\n     font-size: .75rem;\n     border: 1px solid #eceeef; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: center;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none; }\n\n   td.selectable {\n     cursor: pointer !important;\n     border: 1px solid #eceeef; }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #71b1e9;\n     color: #fff; }\n\n   td.disabled {\n     background-color: #fafafb;\n     color: #818a91; }\n    "],
+      template: "\n   <div class=\"text-center py\"> \n    <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n    <table class=\"table\">\t\n        <tbody>\n            <tr>\n                <th>S</th>\n                <th>M</th>\n                <th>T</th>\n                <th>W</th>\n                <th>T</th>\n                <th>F</th>\n                <th>S</th>\n            </tr>\n            <tr *ngFor=\"#week of weeks\">\n                <td *ngFor=\"#day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                    (click)=\"selectDate(day)\">\n                    {{day}}\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+    }), __metadata('design:paramtypes', [])], DatePickerCalendar);
+    return DatePickerCalendar;
+  }());
+  exports.DatePickerCalendar = DatePickerCalendar;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -503,12 +587,12 @@ System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/a
         this._callbacks.shift()();
       this.onAnimationEnd.next(null);
     };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart");
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd");
-    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses");
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play");
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id");
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group");
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
+    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
     Animation = __decorate([core_1.Directive({
       selector: '[animation]',
       host: {
@@ -523,13 +607,14 @@ System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/a
       }
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
     return Animation;
-  })();
+  }());
   exports.Animation = Animation;
   global.define = __define;
   return module.exports;
 });
 
 System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerBase.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/Directives/Animation/Animation.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
@@ -544,22 +629,16 @@ System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -621,9 +700,9 @@ System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules
     DatePicker.prototype.ngOnChanges = function(changes) {
       this.onInit();
     };
-    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange");
-    Object.defineProperty(DatePicker.prototype, "value", __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "value", Object.getOwnPropertyDescriptor(DatePicker.prototype, "value")));
-    __decorate([core_2.ViewChildren(Animation_1.Animation), __metadata('design:type', core_2.QueryList)], DatePicker.prototype, "calendarQuery");
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "value", null);
+    __decorate([core_2.ViewChildren(Animation_1.Animation), __metadata('design:type', core_2.QueryList)], DatePicker.prototype, "calendarQuery", void 0);
     DatePicker = __decorate([core_1.Component({
       selector: 'date-picker',
       inputs: ['minDate: min-date', 'maxDate: max-date', 'months: months']
@@ -633,311 +712,29 @@ System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules
       directives: [DatePickerCalendar_1.DatePickerCalendar, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, Animation_1.Animation]
     }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePicker);
     return DatePicker;
-  })(DatePickerBase_1.DatePickerBase);
+  }(DatePickerBase_1.DatePickerBase));
   exports.DatePicker = DatePicker;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/components/DatePicker/DatePickerCalendar.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var core_2 = $__require('node_modules/angular2/core.js');
-  var common_1 = $__require('node_modules/angular2/common.js');
-  var DatePickerCalendar = (function() {
-    function DatePickerCalendar() {
-      this.selectedDateChange = new core_2.EventEmitter();
-      this.showMonth = true;
-    }
-    DatePickerCalendar.prototype.ngOnInit = function() {
-      this.buildWeeks(this.currentMonth || new Date());
-    };
-    DatePickerCalendar.prototype.checkSelectable = function(date) {
-      var dateNumber = parseInt(date);
-      if (isNaN(dateNumber))
-        return false;
-      var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-      return compareDate >= this.minDate && compareDate <= this.maxDate;
-    };
-    DatePickerCalendar.prototype.checkSelectedDate = function(date) {
-      if (typeof this.selectedDate == undefined || this.selectedDate == null)
-        return false;
-      return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
-    };
-    DatePickerCalendar.prototype.selectDate = function(date) {
-      if (!this.checkSelectable(date))
-        return;
-      var dateNumber = parseInt(date);
-      this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-      this.selectedDateChange.next(this.selectedDate);
-    };
-    DatePickerCalendar.prototype.buildWeeks = function(date) {
-      this.currentMonth = date;
-      var currentDay = new Date(this.currentMonth.toDateString());
-      currentDay.setDate(1);
-      currentDay.setDate(currentDay.getDate() - currentDay.getDay());
-      var lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0);
-      lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
-      this.weeks = [];
-      var currentWeek = [];
-      while (currentDay <= lastDay) {
-        if (currentDay.getMonth() == this.currentMonth.getMonth())
-          currentWeek.push(currentDay.getDate().toLocaleString());
-        else
-          currentWeek.push("");
-        currentDay.setDate(currentDay.getDate() + 1);
-        if (currentDay.getDay() == 0) {
-          this.weeks.push(currentWeek);
-          currentWeek = [];
-        }
-      }
-      if (this.weeks.length > 5)
-        return;
-      var firstWeekCount = this.weeks[0].filter(function(i) {
-        return i.length > 0;
-      }).length;
-      var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
-        return i.length > 0;
-      }).length;
-    };
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth");
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate");
-    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerCalendar.prototype, "selectedDateChange");
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "minDate");
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "maxDate");
-    __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "showMonth");
-    DatePickerCalendar = __decorate([core_1.Component({selector: 'date-picker-calendar'}), core_1.View({
-      styles: ["\n   .table {\n     font-size: .75rem;\n     border-top: 1px solid #eceeef; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none; }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #71b1e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #818a91; }\n    "],
-      template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"#week of weeks\">\n                <td *ngFor=\"#day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                    (click)=\"selectDate(day)\">\n                    {{day}}\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-    }), __metadata('design:paramtypes', [])], DatePickerCalendar);
-    return DatePickerCalendar;
-  })();
-  exports.DatePickerCalendar = DatePickerCalendar;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/DatePicker/DatePickerMobile.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/components/InfiniteScroller/InfiniteScroller.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var core_2 = $__require('node_modules/angular2/core.js');
-  var common_1 = $__require('node_modules/angular2/common.js');
-  var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
-  var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  var DatePickerMobile = (function() {
-    function DatePickerMobile(modal) {
-      this._minDate = new Date(1900, 0, 1);
-      this._maxDate = new Date(2200, 0, 1);
-      this.valueChange = new core_2.EventEmitter();
-      this._inputDate = "";
-      this.calendarDisplayed = true;
-      this.calendarX = 1;
-      this.calendarY = 1;
-      this.calendarMonths = [];
-      this.modal = modal.nativeElement;
-      this.selectedDate = new Date();
-    }
-    Object.defineProperty(DatePickerMobile.prototype, "minDate", {
-      get: function() {
-        return this._minDate;
-      },
-      set: function(value) {
-        this._minDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DatePickerMobile.prototype, "maxDate", {
-      get: function() {
-        return this._maxDate;
-      },
-      set: function(value) {
-        this._maxDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DatePickerMobile.prototype, "value", {
-      set: function(value) {
-        this._selectedDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DatePickerMobile.prototype, "selectedDate", {
-      get: function() {
-        return this._selectedDate;
-      },
-      set: function(value) {
-        this._selectedDate = value;
-        this._inputDate = value.toLocaleDateString();
-        this.currentDate = value;
-        this.valueChange.next(this.selectedDate);
-        this.hideCalendar();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DatePickerMobile.prototype, "inputDate", {
-      get: function() {
-        return this._inputDate;
-      },
-      set: function(value) {
-        this._inputDate = value;
-        this._selectedDate = new Date(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    DatePickerMobile.prototype.ngOnInit = function() {
-      this.calendarMonths = [new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth()), new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth() + 1)];
-    };
-    DatePickerMobile.prototype.ngAfterViewInit = function() {
-      var _this = this;
-      this.modal.addEventListener('click', function(e) {
-        if (e.srcElement.className.indexOf('modal') != -1)
-          _this.hideCalendar();
-      });
-    };
-    DatePickerMobile.prototype.handleDateInput = function(value) {
-      if (value instanceof Date && !isNaN(value.valueOf()))
-        return value;
-      else
-        return new Date(value);
-    };
-    DatePickerMobile.prototype.showCalendar = function(event) {
-      if (event != null) {
-        var clickedRect = event.srcElement.parentElement.getBoundingClientRect();
-        this.calendarX = clickedRect.left;
-        if (screen.height - clickedRect.bottom <= 400) {
-          this.calendarY = (clickedRect.top - 290 + clickedRect.height);
-        } else {
-          this.calendarY = (clickedRect.top + clickedRect.height);
-        }
-      }
-      this.ngOnInit();
-      this.calendarDisplayed = true;
-    };
-    DatePickerMobile.prototype.hideCalendar = function() {
-      this.calendarDisplayed = false;
-    };
-    DatePickerMobile.prototype.canPrevMonth = function() {
-      var prevDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1);
-      var compareDate = new Date(this._minDate.getFullYear(), this._minDate.getMonth());
-      return prevDate >= compareDate;
-    };
-    DatePickerMobile.prototype.canNextMonth = function() {
-      var nextDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1);
-      var compareDate = new Date(this._maxDate.getFullYear(), this._maxDate.getMonth() - 1);
-      return nextDate <= compareDate;
-    };
-    DatePickerMobile.prototype.addNextMonth = function() {
-      if (!this.canNextMonth())
-        return;
-      var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
-      var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
-      this.calendarMonths.push(nextMonth);
-    };
-    DatePickerMobile.prototype.addPrevMonth = function() {
-      if (!this.canPrevMonth())
-        return;
-      var firstMonth = this.calendarMonths[0];
-      var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
-      this.calendarMonths.unshift(prevMonth);
-    };
-    Object.defineProperty(DatePickerMobile.prototype, "minDate", __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "minDate", Object.getOwnPropertyDescriptor(DatePickerMobile.prototype, "minDate")));
-    Object.defineProperty(DatePickerMobile.prototype, "maxDate", __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "maxDate", Object.getOwnPropertyDescriptor(DatePickerMobile.prototype, "maxDate")));
-    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerMobile.prototype, "valueChange");
-    Object.defineProperty(DatePickerMobile.prototype, "value", __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "value", Object.getOwnPropertyDescriptor(DatePickerMobile.prototype, "value")));
-    __decorate([core_2.ContentChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DatePickerMobile.prototype, "calendarScroller");
-    DatePickerMobile = __decorate([core_1.Component({selector: "date-picker-mobile"}), core_1.View({
-      styles: ["\n      .date-picker-component {\n        border: 1px solid #eceeef; }\n\n      .table {\n        font-size: .75rem; }\n\n      .input-group-addon {\n        background-color: #fff;\n        border-left: none; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        background-color: #0275d8;\n        color: #fff; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .calendar-container {\n        box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1); }\n    "],
-      template: "\n      <div class=\"input-group\" (click)=\"showCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n            [(ngModel)]=\"inputDate\" \n             #dateField\n             />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <section class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n      <div class=\"\" role=\"document\"\n        [style.top.px]=\"calendarY\"\n        [style.left.px]=\"calendarX\">\n      <div class=\"container p-a-0\">\n        <header>\n            <!--<div class=\"prev-month\">\n                <button class=\"btn btn-primary btn-sm\" role=\"prev\"\n                    [class.disabled]=\"!canPrevMonth()\"\t\t\t \n                    (click)=\"prevMonth()\">\n                    <i class=\"fa fa-chevron-circle-left\"></i>\n                </button>\n            </div>\n            <div class=\"next-month\">\n                <button class=\"btn btn-primary btn-sm\" role=\"next\"\n                    [class.disabled]=\"!canNextMonth()\"\n                    (click)=\"nextMonth()\">\n                    <i class=\"fa fa-chevron-circle-right\"></i>\n                </button>\n            </div>-->\n              <table class=\"table m-b-0\">\n                  <tbody>\n                  <tr>\n                    <th>S</th>\n                    <th>M</th>\n                    <th>T</th>\n                    <th>W</th>\n                    <th>T</th>\n                    <th>F</th>\n                    <th>S</th>\n                </tr>\n                  </tbody>\n              </table>\n        </header>\n          <section class=\"calendar-container m-a-0\">\n              <infinite-scroller\n                  (next)=\"addNextMonth()\"\n                  (prev)=\"addPrevMonth()\"\n                  height=\"250\"\n                  distance=\"50\"\n                  hideScrollbar=\"true\">\n                  <date-picker-calendar scroll-item\n                      *ngFor=\"#month of calendarMonths #i=index\" \n                      [id]=\"i\"\n                      [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                      [currentMonth]=\"month\" \n                      [(selectedDate)]=\"selectedDate\" \n                      (selectedDate)=\"hideCalendar()\">\n                      {{i}}\n                  </date-picker-calendar>\n              </infinite-scroller>\n          </section>\n      </div>\n      </div>\n      </section>\n    ",
-      directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-    }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePickerMobile);
-    return DatePickerMobile;
-  })();
-  exports.DatePickerMobile = DatePickerMobile;
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/directives/Animation/AnimationListener.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -985,9 +782,9 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
       }
       return false;
     };
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus");
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton");
-    __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle");
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle", void 0);
     Modal = __decorate([core_1.Component({
       selector: 'modal',
       host: {'(click)': 'clickElement($event)'}
@@ -998,7 +795,7 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
       pipes: [Range_1.Range]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
     return Modal;
-  })();
+  }());
   exports.Modal = Modal;
   exports.MODAL_PROVIDERS = [Modal];
   global.define = __define;
@@ -1057,6 +854,7 @@ System.registerDynamic("node_modules/angular2/src/common/pipes/async_pipe.js", [
   })();
   var _promiseStrategy = new PromiseStrategy();
   var _observableStrategy = new ObservableStrategy();
+  var __unused;
   var AsyncPipe = (function() {
     function AsyncPipe(_ref) {
       this._latestValue = null;
@@ -1076,6 +874,7 @@ System.registerDynamic("node_modules/angular2/src/common/pipes/async_pipe.js", [
         if (lang_1.isPresent(obj)) {
           this._subscribe(obj);
         }
+        this._latestReturnedValue = this._latestValue;
         return this._latestValue;
       }
       if (obj !== this._obj) {
@@ -2373,7 +2172,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/normal
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/forms/directives/shared.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/common/forms/validators.js", "node_modules/angular2/src/common/forms/directives/default_value_accessor.js", "node_modules/angular2/src/common/forms/directives/number_value_accessor.js", "node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js", "node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/normalize_validator.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/forms/directives/shared.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/common/forms/validators.js", "node_modules/angular2/src/common/forms/directives/default_value_accessor.js", "node_modules/angular2/src/common/forms/directives/number_value_accessor.js", "node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js", "node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/normalize_validator.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2387,6 +2186,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/shared
   var number_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/number_value_accessor.js');
   var checkbox_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js');
   var select_control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js');
+  var radio_control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js');
   var normalize_validator_1 = $__require('node_modules/angular2/src/common/forms/directives/normalize_validator.js');
   function controlPath(name, parent) {
     var p = collection_1.ListWrapper.clone(parent.path);
@@ -2450,9 +2250,9 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/shared
     var builtinAccessor;
     var customAccessor;
     valueAccessors.forEach(function(v) {
-      if (v instanceof default_value_accessor_1.DefaultValueAccessor) {
+      if (lang_1.hasConstructor(v, default_value_accessor_1.DefaultValueAccessor)) {
         defaultAccessor = v;
-      } else if (v instanceof checkbox_value_accessor_1.CheckboxControlValueAccessor || v instanceof number_value_accessor_1.NumberValueAccessor || v instanceof select_control_value_accessor_1.SelectControlValueAccessor) {
+      } else if (lang_1.hasConstructor(v, checkbox_value_accessor_1.CheckboxControlValueAccessor) || lang_1.hasConstructor(v, number_value_accessor_1.NumberValueAccessor) || lang_1.hasConstructor(v, select_control_value_accessor_1.SelectControlValueAccessor) || lang_1.hasConstructor(v, radio_control_value_accessor_1.RadioControlValueAccessor)) {
         if (lang_1.isPresent(builtinAccessor))
           _throwError(dir, "More than one built-in value accessor matches");
         builtinAccessor = v;
@@ -2673,7 +2473,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/defaul
     }
     DefaultValueAccessor.prototype.writeValue = function(value) {
       var normalizedValue = lang_1.isBlank(value) ? '' : value;
-      this._renderer.setElementProperty(this._elementRef, 'value', normalizedValue);
+      this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', normalizedValue);
     };
     DefaultValueAccessor.prototype.registerOnChange = function(fn) {
       this.onChange = fn;
@@ -2735,7 +2535,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/checkb
       this.onTouched = function() {};
     }
     CheckboxControlValueAccessor.prototype.writeValue = function(value) {
-      this._renderer.setElementProperty(this._elementRef, 'checked', value);
+      this._renderer.setElementProperty(this._elementRef.nativeElement, 'checked', value);
     };
     CheckboxControlValueAccessor.prototype.registerOnChange = function(fn) {
       this.onChange = fn;
@@ -2749,7 +2549,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/checkb
         '(change)': 'onChange($event.target.checked)',
         '(blur)': 'onTouched()'
       },
-      bindings: [CHECKBOX_VALUE_ACCESSOR]
+      providers: [CHECKBOX_VALUE_ACCESSOR]
     }), __metadata('design:paramtypes', [core_1.Renderer, core_1.ElementRef])], CheckboxControlValueAccessor);
     return CheckboxControlValueAccessor;
   })();
@@ -2797,7 +2597,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/number
       this.onTouched = function() {};
     }
     NumberValueAccessor.prototype.writeValue = function(value) {
-      this._renderer.setElementProperty(this._elementRef, 'value', value);
+      this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', value);
     };
     NumberValueAccessor.prototype.registerOnChange = function(fn) {
       this.onChange = function(value) {
@@ -2917,19 +2717,6 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/ng_con
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/forms/directives/control_value_accessor.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  exports.NG_VALUE_ACCESSOR = lang_1.CONST_EXPR(new core_1.OpaqueToken("NgValueAccessor"));
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/common/forms/directives/control_value_accessor.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -2983,7 +2770,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/select
     }
     SelectControlValueAccessor.prototype.writeValue = function(value) {
       this.value = value;
-      this._renderer.setElementProperty(this._elementRef, 'value', value);
+      this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', value);
     };
     SelectControlValueAccessor.prototype.registerOnChange = function(fn) {
       this.onChange = fn;
@@ -3000,7 +2787,6 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/select
     SelectControlValueAccessor = __decorate([core_1.Directive({
       selector: 'select[ngControl],select[ngFormControl],select[ngModel]',
       host: {
-        '(change)': 'onChange($event.target.value)',
         '(input)': 'onChange($event.target.value)',
         '(blur)': 'onTouched()'
       },
@@ -3013,132 +2799,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/select
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/forms/directives/abstract_control_directive.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var AbstractControlDirective = (function() {
-    function AbstractControlDirective() {}
-    Object.defineProperty(AbstractControlDirective.prototype, "control", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "value", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.value : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "valid", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.valid : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "errors", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.errors : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "pristine", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.pristine : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "dirty", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.dirty : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "touched", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.touched : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "untouched", {
-      get: function() {
-        return lang_1.isPresent(this.control) ? this.control.untouched : null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "path", {
-      get: function() {
-        return null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return AbstractControlDirective;
-  })();
-  exports.AbstractControlDirective = AbstractControlDirective;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/common/forms/directives/ng_control.js", ["node_modules/angular2/src/common/forms/directives/abstract_control_directive.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var abstract_control_directive_1 = $__require('node_modules/angular2/src/common/forms/directives/abstract_control_directive.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var NgControl = (function(_super) {
-    __extends(NgControl, _super);
-    function NgControl() {
-      _super.apply(this, arguments);
-      this.name = null;
-      this.valueAccessor = null;
-    }
-    Object.defineProperty(NgControl.prototype, "validator", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(NgControl.prototype, "asyncValidator", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return NgControl;
-  })(abstract_control_directive_1.AbstractControlDirective);
-  exports.NgControl = NgControl;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/common/forms/directives.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/common/forms/directives/ng_control_name.js", "node_modules/angular2/src/common/forms/directives/ng_form_control.js", "node_modules/angular2/src/common/forms/directives/ng_model.js", "node_modules/angular2/src/common/forms/directives/ng_control_group.js", "node_modules/angular2/src/common/forms/directives/ng_form_model.js", "node_modules/angular2/src/common/forms/directives/ng_form.js", "node_modules/angular2/src/common/forms/directives/default_value_accessor.js", "node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js", "node_modules/angular2/src/common/forms/directives/number_value_accessor.js", "node_modules/angular2/src/common/forms/directives/ng_control_status.js", "node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/validators.js", "node_modules/angular2/src/common/forms/directives/ng_control.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/forms/directives.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/common/forms/directives/ng_control_name.js", "node_modules/angular2/src/common/forms/directives/ng_form_control.js", "node_modules/angular2/src/common/forms/directives/ng_model.js", "node_modules/angular2/src/common/forms/directives/ng_control_group.js", "node_modules/angular2/src/common/forms/directives/ng_form_model.js", "node_modules/angular2/src/common/forms/directives/ng_form.js", "node_modules/angular2/src/common/forms/directives/default_value_accessor.js", "node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js", "node_modules/angular2/src/common/forms/directives/number_value_accessor.js", "node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/ng_control_status.js", "node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/validators.js", "node_modules/angular2/src/common/forms/directives/ng_control.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3154,6 +2815,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives.js", [
   var default_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/default_value_accessor.js');
   var checkbox_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js');
   var number_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/number_value_accessor.js');
+  var radio_control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js');
   var ng_control_status_1 = $__require('node_modules/angular2/src/common/forms/directives/ng_control_status.js');
   var select_control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js');
   var validators_1 = $__require('node_modules/angular2/src/common/forms/directives/validators.js');
@@ -3173,6 +2835,9 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives.js", [
   exports.DefaultValueAccessor = default_value_accessor_2.DefaultValueAccessor;
   var checkbox_value_accessor_2 = $__require('node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js');
   exports.CheckboxControlValueAccessor = checkbox_value_accessor_2.CheckboxControlValueAccessor;
+  var radio_control_value_accessor_2 = $__require('node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js');
+  exports.RadioControlValueAccessor = radio_control_value_accessor_2.RadioControlValueAccessor;
+  exports.RadioButtonState = radio_control_value_accessor_2.RadioButtonState;
   var number_value_accessor_2 = $__require('node_modules/angular2/src/common/forms/directives/number_value_accessor.js');
   exports.NumberValueAccessor = number_value_accessor_2.NumberValueAccessor;
   var ng_control_status_2 = $__require('node_modules/angular2/src/common/forms/directives/ng_control_status.js');
@@ -3186,7 +2851,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives.js", [
   exports.MaxLengthValidator = validators_2.MaxLengthValidator;
   var ng_control_1 = $__require('node_modules/angular2/src/common/forms/directives/ng_control.js');
   exports.NgControl = ng_control_1.NgControl;
-  exports.FORM_DIRECTIVES = lang_1.CONST_EXPR([ng_control_name_1.NgControlName, ng_control_group_1.NgControlGroup, ng_form_control_1.NgFormControl, ng_model_1.NgModel, ng_form_model_1.NgFormModel, ng_form_1.NgForm, select_control_value_accessor_1.NgSelectOption, default_value_accessor_1.DefaultValueAccessor, number_value_accessor_1.NumberValueAccessor, checkbox_value_accessor_1.CheckboxControlValueAccessor, select_control_value_accessor_1.SelectControlValueAccessor, ng_control_status_1.NgControlStatus, validators_1.RequiredValidator, validators_1.MinLengthValidator, validators_1.MaxLengthValidator]);
+  exports.FORM_DIRECTIVES = lang_1.CONST_EXPR([ng_control_name_1.NgControlName, ng_control_group_1.NgControlGroup, ng_form_control_1.NgFormControl, ng_model_1.NgModel, ng_form_model_1.NgFormModel, ng_form_1.NgForm, select_control_value_accessor_1.NgSelectOption, default_value_accessor_1.DefaultValueAccessor, number_value_accessor_1.NumberValueAccessor, checkbox_value_accessor_1.CheckboxControlValueAccessor, select_control_value_accessor_1.SelectControlValueAccessor, radio_control_value_accessor_1.RadioControlValueAccessor, ng_control_status_1.NgControlStatus, validators_1.RequiredValidator, validators_1.MinLengthValidator, validators_1.MaxLengthValidator]);
   global.define = __define;
   return module.exports;
 });
@@ -3207,7 +2872,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/validators.js", [
   var Validators = (function() {
     function Validators() {}
     Validators.required = function(control) {
-      return lang_1.isBlank(control.value) || control.value == "" ? {"required": true} : null;
+      return lang_1.isBlank(control.value) || (lang_1.isString(control.value) && control.value == "") ? {"required": true} : null;
     };
     Validators.minLength = function(minLength) {
       return function(control) {
@@ -3592,6 +3257,17 @@ System.registerDynamic("node_modules/angular2/src/common/forms/model.js", ["node
       }
       return lang_1.isPresent(this.getError(errorCode, path));
     };
+    Object.defineProperty(AbstractControl.prototype, "root", {
+      get: function() {
+        var x = this;
+        while (lang_1.isPresent(x._parent)) {
+          x = x._parent;
+        }
+        return x;
+      },
+      enumerable: true,
+      configurable: true
+    });
     AbstractControl.prototype._updateControlsErrors = function() {
       this._status = this._calculateStatus();
       if (lang_1.isPresent(this._parent)) {
@@ -3888,13 +3564,269 @@ System.registerDynamic("node_modules/angular2/src/common/forms/form_builder.js",
     return FormBuilder;
   })();
   exports.FormBuilder = FormBuilder;
-  exports.FORM_PROVIDERS = lang_1.CONST_EXPR([FormBuilder]);
-  exports.FORM_BINDINGS = exports.FORM_PROVIDERS;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/forms.js", ["node_modules/angular2/src/common/forms/model.js", "node_modules/angular2/src/common/forms/directives/abstract_control_directive.js", "node_modules/angular2/src/common/forms/directives/control_container.js", "node_modules/angular2/src/common/forms/directives/ng_control_name.js", "node_modules/angular2/src/common/forms/directives/ng_form_control.js", "node_modules/angular2/src/common/forms/directives/ng_model.js", "node_modules/angular2/src/common/forms/directives/ng_control.js", "node_modules/angular2/src/common/forms/directives/ng_control_group.js", "node_modules/angular2/src/common/forms/directives/ng_form_model.js", "node_modules/angular2/src/common/forms/directives/ng_form.js", "node_modules/angular2/src/common/forms/directives/control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/default_value_accessor.js", "node_modules/angular2/src/common/forms/directives/ng_control_status.js", "node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js", "node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives.js", "node_modules/angular2/src/common/forms/validators.js", "node_modules/angular2/src/common/forms/directives/validators.js", "node_modules/angular2/src/common/forms/form_builder.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/forms/directives/control_value_accessor.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  exports.NG_VALUE_ACCESSOR = lang_1.CONST_EXPR(new core_1.OpaqueToken("NgValueAccessor"));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/common/forms/directives/abstract_control_directive.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var AbstractControlDirective = (function() {
+    function AbstractControlDirective() {}
+    Object.defineProperty(AbstractControlDirective.prototype, "control", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "value", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.value : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "valid", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.valid : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "errors", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.errors : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "pristine", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.pristine : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "dirty", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.dirty : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "touched", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.touched : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "untouched", {
+      get: function() {
+        return lang_1.isPresent(this.control) ? this.control.untouched : null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "path", {
+      get: function() {
+        return null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return AbstractControlDirective;
+  })();
+  exports.AbstractControlDirective = AbstractControlDirective;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/common/forms/directives/ng_control.js", ["node_modules/angular2/src/common/forms/directives/abstract_control_directive.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var abstract_control_directive_1 = $__require('node_modules/angular2/src/common/forms/directives/abstract_control_directive.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var NgControl = (function(_super) {
+    __extends(NgControl, _super);
+    function NgControl() {
+      _super.apply(this, arguments);
+      this.name = null;
+      this.valueAccessor = null;
+    }
+    Object.defineProperty(NgControl.prototype, "validator", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(NgControl.prototype, "asyncValidator", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return NgControl;
+  })(abstract_control_directive_1.AbstractControlDirective);
+  exports.NgControl = NgControl;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/common/forms/directives/control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/ng_control.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/control_value_accessor.js');
+  var ng_control_1 = $__require('node_modules/angular2/src/common/forms/directives/ng_control.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var RADIO_VALUE_ACCESSOR = lang_1.CONST_EXPR(new core_1.Provider(control_value_accessor_1.NG_VALUE_ACCESSOR, {
+    useExisting: core_1.forwardRef(function() {
+      return RadioControlValueAccessor;
+    }),
+    multi: true
+  }));
+  var RadioControlRegistry = (function() {
+    function RadioControlRegistry() {
+      this._accessors = [];
+    }
+    RadioControlRegistry.prototype.add = function(control, accessor) {
+      this._accessors.push([control, accessor]);
+    };
+    RadioControlRegistry.prototype.remove = function(accessor) {
+      var indexToRemove = -1;
+      for (var i = 0; i < this._accessors.length; ++i) {
+        if (this._accessors[i][1] === accessor) {
+          indexToRemove = i;
+        }
+      }
+      collection_1.ListWrapper.removeAt(this._accessors, indexToRemove);
+    };
+    RadioControlRegistry.prototype.select = function(accessor) {
+      this._accessors.forEach(function(c) {
+        if (c[0].control.root === accessor._control.control.root && c[1] !== accessor) {
+          c[1].fireUncheck();
+        }
+      });
+    };
+    RadioControlRegistry = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], RadioControlRegistry);
+    return RadioControlRegistry;
+  })();
+  exports.RadioControlRegistry = RadioControlRegistry;
+  var RadioButtonState = (function() {
+    function RadioButtonState(checked, value) {
+      this.checked = checked;
+      this.value = value;
+    }
+    return RadioButtonState;
+  })();
+  exports.RadioButtonState = RadioButtonState;
+  var RadioControlValueAccessor = (function() {
+    function RadioControlValueAccessor(_renderer, _elementRef, _registry, _injector) {
+      this._renderer = _renderer;
+      this._elementRef = _elementRef;
+      this._registry = _registry;
+      this._injector = _injector;
+      this.onChange = function() {};
+      this.onTouched = function() {};
+    }
+    RadioControlValueAccessor.prototype.ngOnInit = function() {
+      this._control = this._injector.get(ng_control_1.NgControl);
+      this._registry.add(this._control, this);
+    };
+    RadioControlValueAccessor.prototype.ngOnDestroy = function() {
+      this._registry.remove(this);
+    };
+    RadioControlValueAccessor.prototype.writeValue = function(value) {
+      this._state = value;
+      if (lang_1.isPresent(value) && value.checked) {
+        this._renderer.setElementProperty(this._elementRef.nativeElement, 'checked', true);
+      }
+    };
+    RadioControlValueAccessor.prototype.registerOnChange = function(fn) {
+      var _this = this;
+      this._fn = fn;
+      this.onChange = function() {
+        fn(new RadioButtonState(true, _this._state.value));
+        _this._registry.select(_this);
+      };
+    };
+    RadioControlValueAccessor.prototype.fireUncheck = function() {
+      this._fn(new RadioButtonState(false, this._state.value));
+    };
+    RadioControlValueAccessor.prototype.registerOnTouched = function(fn) {
+      this.onTouched = fn;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], RadioControlValueAccessor.prototype, "name", void 0);
+    RadioControlValueAccessor = __decorate([core_1.Directive({
+      selector: 'input[type=radio][ngControl],input[type=radio][ngFormControl],input[type=radio][ngModel]',
+      host: {
+        '(change)': 'onChange()',
+        '(blur)': 'onTouched()'
+      },
+      providers: [RADIO_VALUE_ACCESSOR]
+    }), __metadata('design:paramtypes', [core_1.Renderer, core_1.ElementRef, RadioControlRegistry, core_1.Injector])], RadioControlValueAccessor);
+    return RadioControlValueAccessor;
+  })();
+  exports.RadioControlValueAccessor = RadioControlValueAccessor;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/common/forms.js", ["node_modules/angular2/src/common/forms/model.js", "node_modules/angular2/src/common/forms/directives/abstract_control_directive.js", "node_modules/angular2/src/common/forms/directives/control_container.js", "node_modules/angular2/src/common/forms/directives/ng_control_name.js", "node_modules/angular2/src/common/forms/directives/ng_form_control.js", "node_modules/angular2/src/common/forms/directives/ng_model.js", "node_modules/angular2/src/common/forms/directives/ng_control.js", "node_modules/angular2/src/common/forms/directives/ng_control_group.js", "node_modules/angular2/src/common/forms/directives/ng_form_model.js", "node_modules/angular2/src/common/forms/directives/ng_form.js", "node_modules/angular2/src/common/forms/directives/control_value_accessor.js", "node_modules/angular2/src/common/forms/directives/default_value_accessor.js", "node_modules/angular2/src/common/forms/directives/ng_control_status.js", "node_modules/angular2/src/common/forms/directives/checkbox_value_accessor.js", "node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", "node_modules/angular2/src/common/forms/directives.js", "node_modules/angular2/src/common/forms/validators.js", "node_modules/angular2/src/common/forms/directives/validators.js", "node_modules/angular2/src/common/forms/form_builder.js", "node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3936,6 +3868,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms.js", ["node_modul
   exports.SelectControlValueAccessor = select_control_value_accessor_1.SelectControlValueAccessor;
   var directives_1 = $__require('node_modules/angular2/src/common/forms/directives.js');
   exports.FORM_DIRECTIVES = directives_1.FORM_DIRECTIVES;
+  exports.RadioButtonState = directives_1.RadioButtonState;
   var validators_1 = $__require('node_modules/angular2/src/common/forms/validators.js');
   exports.NG_VALIDATORS = validators_1.NG_VALIDATORS;
   exports.NG_ASYNC_VALIDATORS = validators_1.NG_ASYNC_VALIDATORS;
@@ -3946,8 +3879,11 @@ System.registerDynamic("node_modules/angular2/src/common/forms.js", ["node_modul
   exports.MaxLengthValidator = validators_2.MaxLengthValidator;
   var form_builder_1 = $__require('node_modules/angular2/src/common/forms/form_builder.js');
   exports.FormBuilder = form_builder_1.FormBuilder;
-  exports.FORM_PROVIDERS = form_builder_1.FORM_PROVIDERS;
-  exports.FORM_BINDINGS = form_builder_1.FORM_BINDINGS;
+  var form_builder_2 = $__require('node_modules/angular2/src/common/forms/form_builder.js');
+  var radio_control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/radio_control_value_accessor.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  exports.FORM_PROVIDERS = lang_1.CONST_EXPR([form_builder_2.FormBuilder, radio_control_value_accessor_1.RadioControlRegistry]);
+  exports.FORM_BINDINGS = exports.FORM_PROVIDERS;
   global.define = __define;
   return module.exports;
 });
@@ -4099,10 +4035,10 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_class.js"
           var classes = className.split(/\s+/g);
           for (var i = 0,
               len = classes.length; i < len; i++) {
-            this._renderer.setElementClass(this._ngEl, classes[i], enabled);
+            this._renderer.setElementClass(this._ngEl.nativeElement, classes[i], enabled);
           }
         } else {
-          this._renderer.setElementClass(this._ngEl, className, enabled);
+          this._renderer.setElementClass(this._ngEl.nativeElement, className, enabled);
         }
       }
     };
@@ -4152,7 +4088,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
       set: function(value) {
         this._ngForOf = value;
         if (lang_1.isBlank(this._differ) && lang_1.isPresent(value)) {
-          this._differ = this._iterableDiffers.find(value).create(this._cdr);
+          this._differ = this._iterableDiffers.find(value).create(this._cdr, this._ngForTrackBy);
         }
       },
       enumerable: true,
@@ -4167,6 +4103,13 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
       enumerable: true,
       configurable: true
     });
+    Object.defineProperty(NgFor.prototype, "ngForTrackBy", {
+      set: function(value) {
+        this._ngForTrackBy = value;
+      },
+      enumerable: true,
+      configurable: true
+    });
     NgFor.prototype.ngDoCheck = function() {
       if (lang_1.isPresent(this._differ)) {
         var changes = this._differ.diff(this._ngForOf);
@@ -4175,6 +4118,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
       }
     };
     NgFor.prototype._applyChanges = function(changes) {
+      var _this = this;
       var recordViewTuples = [];
       changes.forEachRemovedItem(function(removedRecord) {
         return recordViewTuples.push(new RecordViewTuple(removedRecord, null));
@@ -4192,8 +4136,13 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
       }
       for (var i = 0,
           ilen = this._viewContainer.length; i < ilen; i++) {
-        this._viewContainer.get(i).setLocal('last', i === ilen - 1);
+        var viewRef = this._viewContainer.get(i);
+        viewRef.setLocal('last', i === ilen - 1);
       }
+      changes.forEachIdentityChange(function(record) {
+        var viewRef = _this._viewContainer.get(record.currentIndex);
+        viewRef.setLocal('\$implicit', record.item);
+      });
     };
     NgFor.prototype._perViewChange = function(view, record) {
       view.setLocal('\$implicit', record.item);
@@ -4233,7 +4182,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
     };
     NgFor = __decorate([core_1.Directive({
       selector: '[ngFor][ngForOf]',
-      inputs: ['ngForOf', 'ngForTemplate']
+      inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate']
     }), __metadata('design:paramtypes', [core_1.ViewContainerRef, core_1.TemplateRef, core_1.IterableDiffers, core_1.ChangeDetectorRef])], NgFor);
     return NgFor;
   })();
@@ -4364,7 +4313,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_style.js"
       });
     };
     NgStyle.prototype._setStyle = function(name, val) {
-      this._renderer.setElementStyle(this._ngEl, name, val);
+      this._renderer.setElementStyle(this._ngEl.nativeElement, name, val);
     };
     NgStyle = __decorate([core_1.Directive({
       selector: '[ngStyle]',
@@ -4421,6 +4370,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_switch.js
     };
     return SwitchView;
   })();
+  exports.SwitchView = SwitchView;
   var NgSwitch = (function() {
     function NgSwitch() {
       this._useDefault = false;
@@ -4615,27 +4565,22 @@ System.registerDynamic("node_modules/angular2/common.js", ["node_modules/angular
 });
 
 System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -4672,10 +4617,10 @@ System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules
       }
       this.currentPageChange.next(this.currentPage);
     };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage");
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce");
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages");
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange");
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
     Pagination = __decorate([core_1.Component({
       selector: 'pagination',
       changeDetection: core_1.ChangeDetectionStrategy.OnPush,
@@ -4687,35 +4632,56 @@ System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules
       pipes: [common_1.SlicePipe, Range_1.Range]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Pagination);
     return Pagination;
-  })();
+  }());
   exports.Pagination = Pagination;
   exports.PAGINATION_PROVIDERS = [Pagination];
   global.define = __define;
   return module.exports;
 });
 
+System.registerDynamic("bin/utilities/ElementUtils.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function outerHeight(el) {
+    var height = el.clientHeight;
+    var style = getComputedStyle(el);
+    height += parseInt(style.marginTop) + parseInt(style.marginBottom);
+    height += parseInt(style.borderTopWidth) + parseInt(style.borderBottomWidth);
+    return height;
+  }
+  exports.outerHeight = outerHeight;
+  function outerWidth(el) {
+    var width = el.clientWidth;
+    var style = getComputedStyle(el);
+    width += parseInt(style.marginLeft) + parseInt(style.marginRight);
+    width += parseInt(style.borderLeftWidth) + parseInt(style.borderRightWidth);
+    return width;
+  }
+  exports.outerWidth = outerWidth;
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["node_modules/angular2/core.js", "bin/utilities/ElementUtils.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -4729,14 +4695,14 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
     }
     Object.defineProperty(ScrollItem.prototype, "height", {
       get: function() {
-        return ElementUtils_1.ElementUtils.outerHeight(this.element);
+        return ElementUtils_1.outerHeight(this.element);
       },
       enumerable: true,
       configurable: true
     });
     ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [core_1.ElementRef])], ScrollItem);
     return ScrollItem;
-  })();
+  }());
   exports.ScrollItem = ScrollItem;
   var InfiniteScroller = (function() {
     function InfiniteScroller(element) {
@@ -4745,10 +4711,9 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
       this.hideScrollbar = false;
       this.next = new core_1.EventEmitter();
       this.prev = new core_1.EventEmitter();
-      this.topIndexChange = new core_1.EventEmitter();
-      this.bottomIndexChange = new core_1.EventEmitter();
       this.lastScroll = 0;
-      this.container = element.nativeElement.firstElementChild;
+      this.isScrolling = false;
+      this.container = element.nativeElement;
     }
     InfiniteScroller.prototype.ngAfterContentInit = function() {
       var _this = this;
@@ -4758,51 +4723,18 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
       });
     };
     InfiniteScroller.prototype.ngAfterViewInit = function() {
-      this.container.scrollTop += 1;
+      this.container.firstElementChild.scrollTop += 1;
     };
     InfiniteScroller.prototype.handleItemChanges = function() {
       if (this.firstItem == null)
         this.firstItem = this.itemQuery.first;
       if (this.firstItem !== this.itemQuery.first) {
-        this.container.scrollTop += this.itemQuery.first.height;
+        this.container.firstElementChild.scrollTop += this.itemQuery.first.height;
         this.firstItem = this.itemQuery.first;
       }
     };
-    InfiniteScroller.prototype.getVisableIndicies = function() {
-      var _this = this;
-      var itemArray = this.itemQuery.toArray();
-      var visableIndicies = itemArray.filter(function(i) {
-        return _this.checkVisableItem(i);
-      }).map(function(i) {
-        return itemArray.indexOf(i);
-      });
-      if (visableIndicies.length > 1) {
-        console.log(visableIndicies[0]);
-        this.topIndexChange.next(visableIndicies[0]);
-        this.bottomIndexChange.next(visableIndicies[visableIndicies.length - 1]);
-      } else if (visableIndicies.length > 0) {
-        console.log(visableIndicies[0]);
-        this.topIndexChange.next(visableIndicies[0]);
-      }
-    };
-    InfiniteScroller.prototype.checkVisableItem = function(item) {
-      var itemHeight = 0;
-      for (var index in item.element.children)
-        itemHeight += item.element.children[index].clientHeight;
-      var itemTop = item.element.offsetTop;
-      var itemBottom = itemTop + item.element.children[0].clientHeight;
-      var viewTop = this.container.scrollTop;
-      var viewBottom = viewTop + this.container.clientHeight;
-      if (itemTop >= viewTop && itemTop <= viewBottom)
-        return true;
-      if (itemBottom >= viewTop && itemBottom <= viewBottom)
-        return true;
-      if (rect.top > this.container.clientHeight)
-        if (itemTop <= viewTop && itemBottom >= viewBottom)
-          return true;
-      return false;
-    };
     InfiniteScroller.prototype.doscroll = function(event) {
+      this.isScrolling = true;
       var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
       var targetRect = target.getBoundingClientRect();
       var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
@@ -4817,43 +4749,29 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
       } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
         this.prev.emit(null);
       }
-      this.getVisableIndicies();
-      if (target.scrollTop < 1)
-        target.scrollTop = 1;
+      this.isScrolling = false;
     };
-    InfiniteScroller.prototype.scrollToIndex = function(index) {
-      var itemArray = this.itemQuery.toArray();
-      var targetIndex = 0;
-      if (index > 0 && index < itemArray.length)
-        targetIndex = index;
-      else if (index >= itemArray.length)
-        targetIndex = itemArray.length - 1;
-      var target = this.itemQuery.toArray()[targetIndex];
-      var targetPosition = target.element.getBoundingClientRect().top;
-      this.container.scrollTop = targetPosition;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance");
-    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height");
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar");
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next");
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev");
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "topIndexChange");
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "bottomIndexChange");
-    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery");
+    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev", void 0);
+    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
     InfiniteScroller = __decorate([core_1.Component({selector: "infinite-scroller"}), core_1.View({
       template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height.px]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
       styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
       directives: []
     }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
     return InfiniteScroller;
-  })();
+  }());
   exports.InfiniteScroller = InfiniteScroller;
-  exports.INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
+  exports.INFINITESCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePicker.js", "bin/components/DatePicker/DatePickerMobile.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePicker.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
@@ -4866,11 +4784,10 @@ System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Al
   var Alert_1 = $__require('bin/components/Alert/Alert.js');
   var Carousel_1 = $__require('bin/components/Carousel/Carousel.js');
   var DatePicker_1 = $__require('bin/components/DatePicker/DatePicker.js');
-  var DatePickerMobile_1 = $__require('bin/components/DatePicker/DatePickerMobile.js');
   var Modal_1 = $__require('bin/components/Modal/Modal.js');
   var Pagination_1 = $__require('bin/components/Pagination/Pagination.js');
   var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePicker_1.DatePicker, DatePickerMobile_1.DatePickerMobile, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS];
+  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePicker_1.DatePicker, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITESCROLLER_PROVIDERS];
   __export($__require('bin/components/Alert/Alert.js'));
   __export($__require('bin/components/Carousel/Carousel.js'));
   __export($__require('bin/components/DatePicker/DatePicker.js'));
@@ -4882,27 +4799,22 @@ System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Al
 });
 
 System.registerDynamic("bin/directives/Animation/AnimationListener.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -4920,8 +4832,8 @@ System.registerDynamic("bin/directives/Animation/AnimationListener.js", ["node_m
     AnimationListener.prototype.animationEnded = function($event) {
       this.animationEnd.next($event);
     };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationStart");
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationEnd");
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationEnd", void 0);
     AnimationListener = __decorate([core_1.Directive({
       selector: '[.animated]',
       host: {
@@ -4936,7 +4848,7 @@ System.registerDynamic("bin/directives/Animation/AnimationListener.js", ["node_m
       }
     }), __metadata('design:paramtypes', [])], AnimationListener);
     return AnimationListener;
-  })();
+  }());
   exports.AnimationListener = AnimationListener;
   exports.ANIMATION_LISTENER_PROVIDERS = [AnimationListener];
   global.define = __define;
@@ -4944,27 +4856,22 @@ System.registerDynamic("bin/directives/Animation/AnimationListener.js", ["node_m
 });
 
 System.registerDynamic("bin/directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -5041,12 +4948,12 @@ System.registerDynamic("bin/directives/Animation/Animation.js", ["node_modules/a
         this._callbacks.shift()();
       this.onAnimationEnd.next(null);
     };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart");
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd");
-    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses");
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play");
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id");
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group");
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
+    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
     Animation = __decorate([core_1.Directive({
       selector: '[animation]',
       host: {
@@ -5061,34 +4968,29 @@ System.registerDynamic("bin/directives/Animation/Animation.js", ["node_modules/a
       }
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
     return Animation;
-  })();
+  }());
   exports.Animation = Animation;
   global.define = __define;
   return module.exports;
 });
 
 System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -5135,7 +5037,7 @@ System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angul
       }
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Tooltip);
     return Tooltip;
-  })();
+  }());
   exports.Tooltip = Tooltip;
   exports.TOOLTIP_PROVIDERS = [Tooltip];
   global.define = __define;
@@ -5143,6 +5045,7 @@ System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angul
 });
 
 System.registerDynamic("bin/directives/directives.js", ["bin/directives/Animation/AnimationListener.js", "bin/directives/Animation/Animation.js", "bin/directives/Tooltip/Tooltip.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
@@ -5163,87 +5066,71 @@ System.registerDynamic("bin/directives/directives.js", ["bin/directives/Animatio
   return module.exports;
 });
 
-System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/core.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var core_1 = $__require('node_modules/angular2/core.js');
   var OrderBy = (function() {
-    function OrderBy() {}
-    OrderBy._orderByComparator = function(origA, origB, property, desc) {
-      if ((isNaN(parseFloat(origA[property])) || !isFinite(origA[property])) || (isNaN(parseFloat(origB[property])) || !isFinite(origB[property]))) {
-        if (desc) {
-          if (origA[property].toLowerCase() > origB[property].toLowerCase())
-            return -1;
-          if (origA[property].toLowerCase() < origB[property].toLowerCase())
-            return 1;
-        } else {
-          if (origA[property].toLowerCase() < origB[property].toLowerCase())
-            return -1;
-          if (origA[property].toLowerCase() > origB[property].toLowerCase())
-            return 1;
-        }
+    function OrderBy() {
+      this.value = [];
+    }
+    OrderBy._orderByComparator = function(a, b) {
+      if ((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))) {
+        if (a.toLowerCase() < b.toLowerCase())
+          return -1;
+        if (a.toLowerCase() > b.toLowerCase())
+          return 1;
       } else {
-        if (desc) {
-          if (parseFloat(origA[property]) > parseFloat(origB[property]))
-            return -1;
-          if (parseFloat(origA[property]) < parseFloat(origB[property]))
-            return 1;
-        } else {
-          if (parseFloat(origA[property]) < parseFloat(origB[property]))
-            return -1;
-          if (parseFloat(origA[property]) > parseFloat(origB[property]))
-            return 1;
-        }
+        if (parseFloat(a) < parseFloat(b))
+          return -1;
+        if (parseFloat(a) > parseFloat(b))
+          return 1;
       }
       return 0;
     };
-    OrderBy.prototype.transform = function(value, _a) {
+    OrderBy.prototype.transform = function(input, _a) {
       var _b = _a[0],
           config = _b === void 0 ? '+' : _b;
+      this.value = input.slice();
+      var value = this.value;
       if (!Array.isArray(value))
         return value;
       if (!Array.isArray(config) || (Array.isArray(config) && config.length == 1)) {
         var propertyToCheck = !Array.isArray(config) ? config : config[0];
+        var desc = propertyToCheck.substr(0, 1) == '-';
         if (!propertyToCheck || propertyToCheck == '-' || propertyToCheck == '+') {
-          return propertyToCheck.substr(0, 1) == '-' ? value.sort().reverse() : value.sort();
+          return !desc ? value.sort() : value.sort().reverse();
         } else {
-          var desc = propertyToCheck.substr(0, 1) == '-';
           var property = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-' ? propertyToCheck.substr(1) : propertyToCheck;
-          return value.sort(function(origA, origB) {
-            return OrderBy._orderByComparator(origA, origB, property, desc);
+          return value.sort(function(a, b) {
+            return !desc ? OrderBy._orderByComparator(a[property], b[property]) : -OrderBy._orderByComparator(a[property], b[property]);
           });
         }
       } else {
-        return value.sort(function(origA, origB) {
+        return value.sort(function(a, b) {
           for (var i = 0; i < config.length; i++) {
             var desc = config[i].substr(0, 1) == '-';
             var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-' ? config[i].substr(1) : config[i];
-            var comparison = OrderBy._orderByComparator(origA, origB, property, desc);
+            var comparison = !desc ? OrderBy._orderByComparator(a[property], b[property]) : -OrderBy._orderByComparator(a[property], b[property]);
             if (comparison != 0)
               return comparison;
           }
@@ -5251,12 +5138,12 @@ System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/s
         });
       }
     };
-    OrderBy = __decorate([lang_1.CONST(), core_1.Pipe({
+    OrderBy = __decorate([core_1.Pipe({
       name: 'orderBy',
       pure: false
-    }), core_1.Injectable(), __metadata('design:paramtypes', [])], OrderBy);
+    }), __metadata('design:paramtypes', [])], OrderBy);
     return OrderBy;
-  })();
+  }());
   exports.OrderBy = OrderBy;
   exports.ORDERBY_PROVIDERS = [OrderBy];
   global.define = __define;
@@ -5305,7 +5192,7 @@ System.registerDynamic("node_modules/angular2/src/facade/facade.js", ["node_modu
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["node_modules/angular2/src/core/zone/ng_zone.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/testability/testability.js", "node_modules/angular2/src/core/linker/dynamic_component_loader.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/linker/view_ref.js", "node_modules/angular2/src/core/console.js", "node_modules/angular2/src/core/profile/profile.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["node_modules/angular2/src/core/zone/ng_zone.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/testability/testability.js", "node_modules/angular2/src/core/linker/dynamic_component_loader.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/console.js", "node_modules/angular2/src/core/profile/profile.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5329,7 +5216,6 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
   var testability_1 = $__require('node_modules/angular2/src/core/testability/testability.js');
   var dynamic_component_loader_1 = $__require('node_modules/angular2/src/core/linker/dynamic_component_loader.js');
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
   var console_1 = $__require('node_modules/angular2/src/core/console.js');
   var profile_1 = $__require('node_modules/angular2/src/core/profile/profile.js');
   var lang_2 = $__require('node_modules/angular2/src/facade/lang.js');
@@ -5341,8 +5227,9 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
           appRef._unloadComponent(ref);
         }).then(function(componentRef) {
           ref = componentRef;
-          if (lang_1.isPresent(componentRef.location.nativeElement)) {
-            injector.get(testability_1.TestabilityRegistry).registerApplication(componentRef.location.nativeElement, injector.get(testability_1.Testability));
+          var testability = injector.getOptional(testability_1.Testability);
+          if (lang_1.isPresent(testability)) {
+            injector.get(testability_1.TestabilityRegistry).registerApplication(componentRef.location.nativeElement, testability);
           }
           return componentRef;
         });
@@ -5434,20 +5321,28 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
     });
     PlatformRef_.prototype.application = function(providers) {
       var app = this._initApp(createNgZone(), providers);
+      if (async_1.PromiseWrapper.isPromise(app)) {
+        throw new exceptions_1.BaseException("Cannot use asyncronous app initializers with application. Use asyncApplication instead.");
+      }
       return app;
     };
     PlatformRef_.prototype.asyncApplication = function(bindingFn, additionalProviders) {
       var _this = this;
       var zone = createNgZone();
       var completer = async_1.PromiseWrapper.completer();
-      zone.run(function() {
-        async_1.PromiseWrapper.then(bindingFn(zone), function(providers) {
-          if (lang_1.isPresent(additionalProviders)) {
-            providers = collection_1.ListWrapper.concat(providers, additionalProviders);
-          }
-          completer.resolve(_this._initApp(zone, providers));
+      if (bindingFn === null) {
+        completer.resolve(this._initApp(zone, additionalProviders));
+      } else {
+        zone.run(function() {
+          async_1.PromiseWrapper.then(bindingFn(zone), function(providers) {
+            if (lang_1.isPresent(additionalProviders)) {
+              providers = collection_1.ListWrapper.concat(providers, additionalProviders);
+            }
+            var promise = _this._initApp(zone, providers);
+            completer.resolve(promise);
+          });
         });
-      });
+      }
       return completer.promise;
     };
     PlatformRef_.prototype._initApp = function(zone, providers) {
@@ -5478,8 +5373,14 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
       });
       app = new ApplicationRef_(this, zone, injector);
       this._applications.push(app);
-      _runAppInitializers(injector);
-      return app;
+      var promise = _runAppInitializers(injector);
+      if (promise !== null) {
+        return async_1.PromiseWrapper.then(promise, function(_) {
+          return app;
+        });
+      } else {
+        return app;
+      }
     };
     PlatformRef_.prototype.dispose = function() {
       collection_1.ListWrapper.clone(this._applications).forEach(function(app) {
@@ -5498,10 +5399,20 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
   exports.PlatformRef_ = PlatformRef_;
   function _runAppInitializers(injector) {
     var inits = injector.getOptional(application_tokens_1.APP_INITIALIZER);
-    if (lang_1.isPresent(inits))
+    var promises = [];
+    if (lang_1.isPresent(inits)) {
       inits.forEach(function(init) {
-        return init();
+        var retVal = init();
+        if (async_1.PromiseWrapper.isPromise(retVal)) {
+          promises.push(retVal);
+        }
       });
+    }
+    if (promises.length > 0) {
+      return async_1.PromiseWrapper.all(promises);
+    } else {
+      return null;
+    }
   }
   var ApplicationRef = (function() {
     function ApplicationRef() {}
@@ -5599,13 +5510,14 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
       });
       return completer.promise.then(function(_) {
         var c = _this._injector.get(console_1.Console);
-        var modeDescription = lang_1.assertionsEnabled() ? "in the development mode. Call enableProdMode() to enable the production mode." : "in the production mode. Call enableDevMode() to enable the development mode.";
-        c.log("Angular 2 is running " + modeDescription);
+        if (lang_1.assertionsEnabled()) {
+          c.log("Angular 2 is running in the development mode. Call enableProdMode() to enable the production mode.");
+        }
         return _;
       });
     };
     ApplicationRef_.prototype._loadComponent = function(ref) {
-      var appChangeDetector = view_ref_1.internalView(ref.hostView).changeDetector;
+      var appChangeDetector = ref.location.internalElement.parentView.changeDetector;
       this._changeDetectorRefs.push(appChangeDetector.ref);
       this.tick();
       this._rootComponents.push(ref);
@@ -5617,7 +5529,7 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
       if (!collection_1.ListWrapper.contains(this._rootComponents, ref)) {
         return;
       }
-      this.unregisterChangeDetector(view_ref_1.internalView(ref.hostView).changeDetector.ref);
+      this.unregisterChangeDetector(ref.location.internalElement.parentView.changeDetector.ref);
       collection_1.ListWrapper.remove(this._rootComponents, ref);
     };
     Object.defineProperty(ApplicationRef_.prototype, "injector", {
@@ -5698,19 +5610,9 @@ System.registerDynamic("node_modules/angular2/src/core/render.js", ["node_module
       __define = global.define;
   global.define = undefined;
   var api_1 = $__require('node_modules/angular2/src/core/render/api.js');
+  exports.RootRenderer = api_1.RootRenderer;
   exports.Renderer = api_1.Renderer;
-  exports.RenderViewRef = api_1.RenderViewRef;
-  exports.RenderProtoViewRef = api_1.RenderProtoViewRef;
-  exports.RenderFragmentRef = api_1.RenderFragmentRef;
-  exports.RenderViewWithFragments = api_1.RenderViewWithFragments;
-  exports.RenderTemplateCmd = api_1.RenderTemplateCmd;
-  exports.RenderTextCmd = api_1.RenderTextCmd;
-  exports.RenderNgContentCmd = api_1.RenderNgContentCmd;
-  exports.RenderBeginElementCmd = api_1.RenderBeginElementCmd;
-  exports.RenderBeginComponentCmd = api_1.RenderBeginComponentCmd;
-  exports.RenderEmbeddedTemplateCmd = api_1.RenderEmbeddedTemplateCmd;
-  exports.RenderBeginCmd = api_1.RenderBeginCmd;
-  exports.RenderComponentTemplate = api_1.RenderComponentTemplate;
+  exports.RenderComponentType = api_1.RenderComponentType;
   global.define = __define;
   return module.exports;
 });
@@ -5738,8 +5640,10 @@ System.registerDynamic("node_modules/angular2/src/core/linker.js", ["node_module
   var template_ref_1 = $__require('node_modules/angular2/src/core/linker/template_ref.js');
   exports.TemplateRef = template_ref_1.TemplateRef;
   var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
+  exports.EmbeddedViewRef = view_ref_1.EmbeddedViewRef;
+  exports.HostViewRef = view_ref_1.HostViewRef;
   exports.ViewRef = view_ref_1.ViewRef;
-  exports.ProtoViewRef = view_ref_1.ProtoViewRef;
+  exports.HostViewFactoryRef = view_ref_1.HostViewFactoryRef;
   var view_container_ref_1 = $__require('node_modules/angular2/src/core/linker/view_container_ref.js');
   exports.ViewContainerRef = view_container_ref_1.ViewContainerRef;
   var dynamic_component_loader_2 = $__require('node_modules/angular2/src/core/linker/dynamic_component_loader.js');
@@ -5748,7 +5652,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker.js", ["node_module
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/debug/debug_element.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/linker/view.js", "node_modules/angular2/src/core/linker/view_ref.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/debug/debug_node.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5764,205 +5668,175 @@ System.registerDynamic("node_modules/angular2/src/core/debug/debug_element.js", 
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var view_1 = $__require('node_modules/angular2/src/core/linker/view.js');
-  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
-  var DebugElement = (function() {
-    function DebugElement() {}
-    Object.defineProperty(DebugElement.prototype, "componentInstance", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var EventListener = (function() {
+    function EventListener(name, callback) {
+      this.name = name;
+      this.callback = callback;
+    }
     ;
-    Object.defineProperty(DebugElement.prototype, "nativeElement", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DebugElement.prototype, "elementRef", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DebugElement.prototype, "children", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DebugElement.prototype, "componentViewChildren", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    DebugElement.prototype.query = function(predicate, scope) {
-      if (scope === void 0) {
-        scope = Scope.all;
+    return EventListener;
+  })();
+  exports.EventListener = EventListener;
+  var DebugNode = (function() {
+    function DebugNode(nativeNode, parent) {
+      this.nativeNode = nativeNode;
+      if (lang_1.isPresent(parent) && parent instanceof DebugElement) {
+        parent.addChild(this);
+      } else {
+        this.parent = null;
       }
-      var results = this.queryAll(predicate, scope);
+      this.listeners = [];
+      this.providerTokens = [];
+    }
+    DebugNode.prototype.setDebugInfo = function(info) {
+      this.injector = info.injector;
+      this.providerTokens = info.providerTokens;
+      this.locals = info.locals;
+      this.componentInstance = info.component;
+    };
+    DebugNode.prototype.inject = function(token) {
+      return this.injector.get(token);
+    };
+    DebugNode.prototype.getLocal = function(name) {
+      return this.locals.get(name);
+    };
+    return DebugNode;
+  })();
+  exports.DebugNode = DebugNode;
+  var DebugElement = (function(_super) {
+    __extends(DebugElement, _super);
+    function DebugElement(nativeNode, parent) {
+      _super.call(this, nativeNode, parent);
+      this.properties = new Map();
+      this.attributes = new Map();
+      this.childNodes = [];
+      this.nativeElement = nativeNode;
+    }
+    DebugElement.prototype.addChild = function(child) {
+      if (lang_1.isPresent(child)) {
+        this.childNodes.push(child);
+        child.parent = this;
+      }
+    };
+    DebugElement.prototype.removeChild = function(child) {
+      var childIndex = this.childNodes.indexOf(child);
+      if (childIndex !== -1) {
+        child.parent = null;
+        this.childNodes.splice(childIndex, 1);
+      }
+    };
+    DebugElement.prototype.insertChildrenAfter = function(child, newChildren) {
+      var siblingIndex = this.childNodes.indexOf(child);
+      if (siblingIndex !== -1) {
+        var previousChildren = this.childNodes.slice(0, siblingIndex + 1);
+        var nextChildren = this.childNodes.slice(siblingIndex + 1);
+        this.childNodes = collection_1.ListWrapper.concat(collection_1.ListWrapper.concat(previousChildren, newChildren), nextChildren);
+        for (var i = 0; i < newChildren.length; ++i) {
+          var newChild = newChildren[i];
+          if (lang_1.isPresent(newChild.parent)) {
+            newChild.parent.removeChild(newChild);
+          }
+          newChild.parent = this;
+        }
+      }
+    };
+    DebugElement.prototype.query = function(predicate) {
+      var results = this.queryAll(predicate);
       return results.length > 0 ? results[0] : null;
     };
-    DebugElement.prototype.queryAll = function(predicate, scope) {
-      if (scope === void 0) {
-        scope = Scope.all;
-      }
-      var elementsInScope = scope(this);
-      return elementsInScope.filter(predicate);
+    DebugElement.prototype.queryAll = function(predicate) {
+      var matches = [];
+      _queryElementChildren(this, predicate, matches);
+      return matches;
+    };
+    DebugElement.prototype.queryAllNodes = function(predicate) {
+      var matches = [];
+      _queryNodeChildren(this, predicate, matches);
+      return matches;
+    };
+    Object.defineProperty(DebugElement.prototype, "children", {
+      get: function() {
+        var children = [];
+        this.childNodes.forEach(function(node) {
+          if (node instanceof DebugElement) {
+            children.push(node);
+          }
+        });
+        return children;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    DebugElement.prototype.triggerEventHandler = function(eventName, eventObj) {
+      this.listeners.forEach(function(listener) {
+        if (listener.name == eventName) {
+          listener.callback(eventObj);
+        }
+      });
     };
     return DebugElement;
-  })();
+  })(DebugNode);
   exports.DebugElement = DebugElement;
-  var DebugElement_ = (function(_super) {
-    __extends(DebugElement_, _super);
-    function DebugElement_(_parentView, _boundElementIndex) {
-      _super.call(this);
-      this._parentView = _parentView;
-      this._boundElementIndex = _boundElementIndex;
-      this._elementInjector = this._parentView.elementInjectors[this._boundElementIndex];
-    }
-    Object.defineProperty(DebugElement_.prototype, "componentInstance", {
-      get: function() {
-        if (!lang_1.isPresent(this._elementInjector)) {
-          return null;
-        }
-        return this._elementInjector.getComponent();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DebugElement_.prototype, "nativeElement", {
-      get: function() {
-        return this.elementRef.nativeElement;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DebugElement_.prototype, "elementRef", {
-      get: function() {
-        return this._parentView.elementRefs[this._boundElementIndex];
-      },
-      enumerable: true,
-      configurable: true
-    });
-    DebugElement_.prototype.getDirectiveInstance = function(directiveIndex) {
-      return this._elementInjector.getDirectiveAtIndex(directiveIndex);
-    };
-    Object.defineProperty(DebugElement_.prototype, "children", {
-      get: function() {
-        return this._getChildElements(this._parentView, this._boundElementIndex);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DebugElement_.prototype, "componentViewChildren", {
-      get: function() {
-        var shadowView = this._parentView.getNestedView(this._boundElementIndex);
-        if (!lang_1.isPresent(shadowView) || shadowView.proto.type !== view_1.ViewType.COMPONENT) {
-          return [];
-        }
-        return this._getChildElements(shadowView, null);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    DebugElement_.prototype.triggerEventHandler = function(eventName, eventObj) {
-      this._parentView.triggerEventHandlers(eventName, eventObj, this._boundElementIndex);
-    };
-    DebugElement_.prototype.hasDirective = function(type) {
-      if (!lang_1.isPresent(this._elementInjector)) {
-        return false;
-      }
-      return this._elementInjector.hasDirective(type);
-    };
-    DebugElement_.prototype.inject = function(type) {
-      if (!lang_1.isPresent(this._elementInjector)) {
-        return null;
-      }
-      return this._elementInjector.get(type);
-    };
-    DebugElement_.prototype.getLocal = function(name) {
-      return this._parentView.locals.get(name);
-    };
-    DebugElement_.prototype._getChildElements = function(view, parentBoundElementIndex) {
-      var _this = this;
-      var els = [];
-      var parentElementBinder = null;
-      if (lang_1.isPresent(parentBoundElementIndex)) {
-        parentElementBinder = view.proto.elementBinders[parentBoundElementIndex - view.elementOffset];
-      }
-      for (var i = 0; i < view.proto.elementBinders.length; ++i) {
-        var binder = view.proto.elementBinders[i];
-        if (binder.parent == parentElementBinder) {
-          els.push(new DebugElement_(view, view.elementOffset + i));
-          var views = view.viewContainers[view.elementOffset + i];
-          if (lang_1.isPresent(views)) {
-            views.views.forEach(function(nextView) {
-              els = els.concat(_this._getChildElements(nextView, null));
-            });
-          }
-        }
-      }
-      return els;
-    };
-    return DebugElement_;
-  })(DebugElement);
-  exports.DebugElement_ = DebugElement_;
-  function inspectElement(elementRef) {
-    return new DebugElement_(view_ref_1.internalView(elementRef.parentView), elementRef.boundElementIndex);
-  }
-  exports.inspectElement = inspectElement;
-  function asNativeElements(arr) {
-    return arr.map(function(debugEl) {
-      return debugEl.nativeElement;
+  function asNativeElements(debugEls) {
+    return debugEls.map(function(el) {
+      return el.nativeElement;
     });
   }
   exports.asNativeElements = asNativeElements;
-  var Scope = (function() {
-    function Scope() {}
-    Scope.all = function(debugElement) {
-      var scope = [];
-      scope.push(debugElement);
-      debugElement.children.forEach(function(child) {
-        return scope = scope.concat(Scope.all(child));
+  function _queryElementChildren(element, predicate, matches) {
+    element.childNodes.forEach(function(node) {
+      if (node instanceof DebugElement) {
+        if (predicate(node)) {
+          matches.push(node);
+        }
+        _queryElementChildren(node, predicate, matches);
+      }
+    });
+  }
+  function _queryNodeChildren(parentNode, predicate, matches) {
+    if (parentNode instanceof DebugElement) {
+      parentNode.childNodes.forEach(function(node) {
+        if (predicate(node)) {
+          matches.push(node);
+        }
+        if (node instanceof DebugElement) {
+          _queryNodeChildren(node, predicate, matches);
+        }
       });
-      debugElement.componentViewChildren.forEach(function(child) {
-        return scope = scope.concat(Scope.all(child));
-      });
-      return scope;
-    };
-    Scope.light = function(debugElement) {
-      var scope = [];
-      debugElement.children.forEach(function(child) {
-        scope.push(child);
-        scope = scope.concat(Scope.light(child));
-      });
-      return scope;
-    };
-    Scope.view = function(debugElement) {
-      var scope = [];
-      debugElement.componentViewChildren.forEach(function(child) {
-        scope.push(child);
-        scope = scope.concat(Scope.light(child));
-      });
-      return scope;
-    };
-    return Scope;
-  })();
-  exports.Scope = Scope;
+    }
+  }
+  var _nativeNodeToDebugNode = new Map();
+  function getDebugNode(nativeNode) {
+    return _nativeNodeToDebugNode.get(nativeNode);
+  }
+  exports.getDebugNode = getDebugNode;
+  function getAllDebugNodes() {
+    return collection_1.MapWrapper.values(_nativeNodeToDebugNode);
+  }
+  exports.getAllDebugNodes = getAllDebugNodes;
+  function indexDebugNode(node) {
+    _nativeNodeToDebugNode.set(node.nativeNode, node);
+  }
+  exports.indexDebugNode = indexDebugNode;
+  function removeDebugNodeFromIndex(node) {
+    _nativeNodeToDebugNode.delete(node.nativeNode);
+  }
+  exports.removeDebugNodeFromIndex = removeDebugNodeFromIndex;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/platform_directives_and_pipes.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var di_1 = $__require('node_modules/angular2/src/core/di.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  exports.PLATFORM_DIRECTIVES = lang_1.CONST_EXPR(new di_1.OpaqueToken("Platform Directives"));
+  exports.PLATFORM_PIPES = lang_1.CONST_EXPR(new di_1.OpaqueToken("Platform Pipes"));
   global.define = __define;
   return module.exports;
 });
@@ -6161,7 +6035,7 @@ System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone.js", ["node_
       var ngZone = this;
       var errorHandling;
       if (enableLongStackTrace) {
-        errorHandling = collection_1.StringMapWrapper.merge(Zone.longStackTraceZone, {onError: function(e) {
+        errorHandling = collection_1.StringMapWrapper.merge(lang_1.global.Zone.longStackTraceZone, {onError: function(e) {
             ngZone._notifyOnError(this, e);
           }});
       } else {
@@ -6233,14 +6107,14 @@ System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone.js", ["node_
               fn();
               collection_1.ListWrapper.remove(ngZone._pendingTimeouts, id);
             };
-            id = parentSetTimeout(cb, delay, args);
+            id = parentSetTimeout.call(this, cb, delay, args);
             ngZone._pendingTimeouts.push(id);
             return id;
           };
         },
         '$clearTimeout': function(parentClearTimeout) {
           return function(id) {
-            parentClearTimeout(id);
+            parentClearTimeout.call(this, id);
             collection_1.ListWrapper.remove(ngZone._pendingTimeouts, id);
           };
         },
@@ -6304,6 +6178,7 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
   var Testability = (function() {
     function Testability(_ngZone) {
       this._pendingCount = 0;
+      this._didWork = false;
       this._callbacks = [];
       this._isAngularEventPending = false;
       this._watchAngularEvents(_ngZone);
@@ -6311,6 +6186,7 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
     Testability.prototype._watchAngularEvents = function(_ngZone) {
       var _this = this;
       async_1.ObservableWrapper.subscribe(_ngZone.onTurnStart, function(_) {
+        _this._didWork = true;
         _this._isAngularEventPending = true;
       });
       _ngZone.runOutsideAngular(function() {
@@ -6324,6 +6200,7 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
     };
     Testability.prototype.increasePendingRequestCount = function() {
       this._pendingCount += 1;
+      this._didWork = true;
       return this._pendingCount;
     };
     Testability.prototype.decreasePendingRequestCount = function() {
@@ -6340,12 +6217,14 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
     Testability.prototype._runCallbacksIfReady = function() {
       var _this = this;
       if (!this.isStable()) {
+        this._didWork = true;
         return;
       }
       async_1.PromiseWrapper.resolve(null).then(function(_) {
         while (_this._callbacks.length !== 0) {
-          (_this._callbacks.pop())();
+          (_this._callbacks.pop())(_this._didWork);
         }
+        _this._didWork = false;
       });
     };
     Testability.prototype.whenStable = function(callback) {
@@ -6432,85 +6311,7 @@ System.registerDynamic("node_modules/angular2/src/core/platform_common_providers
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/linker/compiler.js", ["node_modules/angular2/src/core/linker/proto_view_factory.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/linker/template_commands.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var proto_view_factory_1 = $__require('node_modules/angular2/src/core/linker/proto_view_factory.js');
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
-  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
-  var template_commands_1 = $__require('node_modules/angular2/src/core/linker/template_commands.js');
-  var Compiler = (function() {
-    function Compiler() {}
-    return Compiler;
-  })();
-  exports.Compiler = Compiler;
-  function _isCompiledHostTemplate(type) {
-    return type instanceof template_commands_1.CompiledHostTemplate;
-  }
-  var Compiler_ = (function(_super) {
-    __extends(Compiler_, _super);
-    function Compiler_(_protoViewFactory) {
-      _super.call(this);
-      this._protoViewFactory = _protoViewFactory;
-    }
-    Compiler_.prototype.compileInHost = function(componentType) {
-      var metadatas = reflection_1.reflector.annotations(componentType);
-      var compiledHostTemplate = metadatas.find(_isCompiledHostTemplate);
-      if (lang_1.isBlank(compiledHostTemplate)) {
-        throw new exceptions_1.BaseException("No precompiled template for component " + lang_1.stringify(componentType) + " found");
-      }
-      return async_1.PromiseWrapper.resolve(this._createProtoView(compiledHostTemplate));
-    };
-    Compiler_.prototype._createProtoView = function(compiledHostTemplate) {
-      return this._protoViewFactory.createHost(compiledHostTemplate).ref;
-    };
-    Compiler_.prototype.clearCache = function() {
-      this._protoViewFactory.clearCache();
-    };
-    Compiler_ = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [proto_view_factory_1.ProtoViewFactory])], Compiler_);
-    return Compiler_;
-  })(Compiler);
-  exports.Compiler_ = Compiler_;
-  function internalCreateProtoView(compiler, compiledHostTemplate) {
-    return compiler._createProtoView(compiledHostTemplate);
-  }
-  exports.internalCreateProtoView = internalCreateProtoView;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/view_manager_utils.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/linker/element_injector.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/linker/view.js", "node_modules/angular2/src/core/linker/element_ref.js", "node_modules/angular2/src/core/linker/template_ref.js", "node_modules/angular2/src/core/pipes/pipes.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/resolved_metadata_cache.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/linker/element.js", "node_modules/angular2/src/core/linker/directive_resolver.js", "node_modules/angular2/src/core/pipes/pipe_provider.js", "node_modules/angular2/src/core/linker/pipe_resolver.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -6533,3567 +6334,39 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_manager_utils
       return Reflect.metadata(k, v);
   };
   var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var eli = $__require('node_modules/angular2/src/core/linker/element_injector.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var viewModule = $__require('node_modules/angular2/src/core/linker/view.js');
-  var element_ref_1 = $__require('node_modules/angular2/src/core/linker/element_ref.js');
-  var template_ref_1 = $__require('node_modules/angular2/src/core/linker/template_ref.js');
-  var pipes_1 = $__require('node_modules/angular2/src/core/pipes/pipes.js');
-  var AppViewManagerUtils = (function() {
-    function AppViewManagerUtils() {}
-    AppViewManagerUtils.prototype.getComponentInstance = function(parentView, boundElementIndex) {
-      var eli = parentView.elementInjectors[boundElementIndex];
-      return eli.getComponent();
-    };
-    AppViewManagerUtils.prototype.createView = function(mergedParentViewProto, renderViewWithFragments, viewManager, renderer) {
-      var renderFragments = renderViewWithFragments.fragmentRefs;
-      var renderView = renderViewWithFragments.viewRef;
-      var elementCount = mergedParentViewProto.mergeInfo.elementCount;
-      var viewCount = mergedParentViewProto.mergeInfo.viewCount;
-      var elementRefs = collection_1.ListWrapper.createFixedSize(elementCount);
-      var viewContainers = collection_1.ListWrapper.createFixedSize(elementCount);
-      var preBuiltObjects = collection_1.ListWrapper.createFixedSize(elementCount);
-      var elementInjectors = collection_1.ListWrapper.createFixedSize(elementCount);
-      var views = collection_1.ListWrapper.createFixedSize(viewCount);
-      var elementOffset = 0;
-      var textOffset = 0;
-      var fragmentIdx = 0;
-      var containerElementIndicesByViewIndex = collection_1.ListWrapper.createFixedSize(viewCount);
-      for (var viewOffset = 0; viewOffset < viewCount; viewOffset++) {
-        var containerElementIndex = containerElementIndicesByViewIndex[viewOffset];
-        var containerElementInjector = lang_1.isPresent(containerElementIndex) ? elementInjectors[containerElementIndex] : null;
-        var parentView = lang_1.isPresent(containerElementInjector) ? preBuiltObjects[containerElementIndex].view : null;
-        var protoView = lang_1.isPresent(containerElementIndex) ? parentView.proto.elementBinders[containerElementIndex - parentView.elementOffset].nestedProtoView : mergedParentViewProto;
-        var renderFragment = null;
-        if (viewOffset === 0 || protoView.type === viewModule.ViewType.EMBEDDED) {
-          renderFragment = renderFragments[fragmentIdx++];
-        }
-        var currentView = new viewModule.AppView(renderer, protoView, viewOffset, elementOffset, textOffset, protoView.protoLocals, renderView, renderFragment, containerElementInjector);
-        views[viewOffset] = currentView;
-        if (lang_1.isPresent(containerElementIndex)) {
-          preBuiltObjects[containerElementIndex].nestedView = currentView;
-        }
-        var rootElementInjectors = [];
-        var nestedViewOffset = viewOffset + 1;
-        for (var binderIdx = 0; binderIdx < protoView.elementBinders.length; binderIdx++) {
-          var binder = protoView.elementBinders[binderIdx];
-          var boundElementIndex = elementOffset + binderIdx;
-          var elementInjector = null;
-          if (lang_1.isPresent(binder.nestedProtoView) && binder.nestedProtoView.isMergable) {
-            containerElementIndicesByViewIndex[nestedViewOffset] = boundElementIndex;
-            nestedViewOffset += binder.nestedProtoView.mergeInfo.viewCount;
-          }
-          var protoElementInjector = binder.protoElementInjector;
-          if (lang_1.isPresent(protoElementInjector)) {
-            if (lang_1.isPresent(protoElementInjector.parent)) {
-              var parentElementInjector = elementInjectors[elementOffset + protoElementInjector.parent.index];
-              elementInjector = protoElementInjector.instantiate(parentElementInjector);
-            } else {
-              elementInjector = protoElementInjector.instantiate(null);
-              rootElementInjectors.push(elementInjector);
-            }
-          }
-          elementInjectors[boundElementIndex] = elementInjector;
-          var el = new element_ref_1.ElementRef_(currentView.ref, boundElementIndex, renderer);
-          elementRefs[el.boundElementIndex] = el;
-          if (lang_1.isPresent(elementInjector)) {
-            var templateRef = lang_1.isPresent(binder.nestedProtoView) && binder.nestedProtoView.type === viewModule.ViewType.EMBEDDED ? new template_ref_1.TemplateRef_(el) : null;
-            preBuiltObjects[boundElementIndex] = new eli.PreBuiltObjects(viewManager, currentView, el, templateRef);
-          }
-        }
-        currentView.init(protoView.changeDetectorFactory(currentView), elementInjectors, rootElementInjectors, preBuiltObjects, views, elementRefs, viewContainers);
-        if (lang_1.isPresent(parentView) && protoView.type === viewModule.ViewType.COMPONENT) {
-          parentView.changeDetector.addViewChild(currentView.changeDetector);
-        }
-        elementOffset += protoView.elementBinders.length;
-        textOffset += protoView.textBindingCount;
-      }
-      return views[0];
-    };
-    AppViewManagerUtils.prototype.hydrateRootHostView = function(hostView, injector) {
-      this._hydrateView(hostView, injector, null, new Object(), null);
-    };
-    AppViewManagerUtils.prototype.attachViewInContainer = function(parentView, boundElementIndex, contextView, contextBoundElementIndex, index, view) {
-      if (lang_1.isBlank(contextView)) {
-        contextView = parentView;
-        contextBoundElementIndex = boundElementIndex;
-      }
-      parentView.changeDetector.addContentChild(view.changeDetector);
-      var viewContainer = parentView.viewContainers[boundElementIndex];
-      if (lang_1.isBlank(viewContainer)) {
-        viewContainer = new viewModule.AppViewContainer();
-        parentView.viewContainers[boundElementIndex] = viewContainer;
-      }
-      collection_1.ListWrapper.insert(viewContainer.views, index, view);
-      var elementInjector = contextView.elementInjectors[contextBoundElementIndex];
-      for (var i = view.rootElementInjectors.length - 1; i >= 0; i--) {
-        if (lang_1.isPresent(elementInjector.parent)) {
-          view.rootElementInjectors[i].link(elementInjector.parent);
-        }
-      }
-      elementInjector.traverseAndSetQueriesAsDirty();
-    };
-    AppViewManagerUtils.prototype.detachViewInContainer = function(parentView, boundElementIndex, index) {
-      var viewContainer = parentView.viewContainers[boundElementIndex];
-      var view = viewContainer.views[index];
-      parentView.elementInjectors[boundElementIndex].traverseAndSetQueriesAsDirty();
-      view.changeDetector.remove();
-      collection_1.ListWrapper.removeAt(viewContainer.views, index);
-      for (var i = 0; i < view.rootElementInjectors.length; ++i) {
-        var inj = view.rootElementInjectors[i];
-        inj.unlink();
-      }
-    };
-    AppViewManagerUtils.prototype.hydrateViewInContainer = function(parentView, boundElementIndex, contextView, contextBoundElementIndex, index, imperativelyCreatedProviders) {
-      if (lang_1.isBlank(contextView)) {
-        contextView = parentView;
-        contextBoundElementIndex = boundElementIndex;
-      }
-      var viewContainer = parentView.viewContainers[boundElementIndex];
-      var view = viewContainer.views[index];
-      var elementInjector = contextView.elementInjectors[contextBoundElementIndex];
-      var injector = lang_1.isPresent(imperativelyCreatedProviders) ? di_1.Injector.fromResolvedProviders(imperativelyCreatedProviders) : null;
-      this._hydrateView(view, injector, elementInjector.getHost(), contextView.context, contextView.locals);
-    };
-    AppViewManagerUtils.prototype._hydrateView = function(initView, imperativelyCreatedInjector, hostElementInjector, context, parentLocals) {
-      var viewIdx = initView.viewOffset;
-      var endViewOffset = viewIdx + initView.proto.mergeInfo.viewCount - 1;
-      while (viewIdx <= endViewOffset) {
-        var currView = initView.views[viewIdx];
-        var currProtoView = currView.proto;
-        if (currView !== initView && currView.proto.type === viewModule.ViewType.EMBEDDED) {
-          viewIdx += currView.proto.mergeInfo.viewCount;
-        } else {
-          if (currView !== initView) {
-            imperativelyCreatedInjector = null;
-            parentLocals = null;
-            hostElementInjector = currView.containerElementInjector;
-            context = hostElementInjector.getComponent();
-          }
-          currView.context = context;
-          currView.locals.parent = parentLocals;
-          var binders = currProtoView.elementBinders;
-          for (var binderIdx = 0; binderIdx < binders.length; binderIdx++) {
-            var boundElementIndex = binderIdx + currView.elementOffset;
-            var elementInjector = initView.elementInjectors[boundElementIndex];
-            if (lang_1.isPresent(elementInjector)) {
-              elementInjector.hydrate(imperativelyCreatedInjector, hostElementInjector, currView.preBuiltObjects[boundElementIndex]);
-              this._populateViewLocals(currView, elementInjector, boundElementIndex);
-              this._setUpEventEmitters(currView, elementInjector, boundElementIndex);
-            }
-          }
-          var pipes = lang_1.isPresent(hostElementInjector) ? new pipes_1.Pipes(currView.proto.pipes, hostElementInjector.getInjector()) : null;
-          currView.changeDetector.hydrate(currView.context, currView.locals, currView, pipes);
-          viewIdx++;
-        }
-      }
-    };
-    AppViewManagerUtils.prototype._populateViewLocals = function(view, elementInjector, boundElementIdx) {
-      if (lang_1.isPresent(elementInjector.getDirectiveVariableBindings())) {
-        elementInjector.getDirectiveVariableBindings().forEach(function(directiveIndex, name) {
-          if (lang_1.isBlank(directiveIndex)) {
-            view.locals.set(name, view.elementRefs[boundElementIdx].nativeElement);
-          } else {
-            view.locals.set(name, elementInjector.getDirectiveAtIndex(directiveIndex));
-          }
-        });
-      }
-    };
-    AppViewManagerUtils.prototype._setUpEventEmitters = function(view, elementInjector, boundElementIndex) {
-      var emitters = elementInjector.getEventEmitterAccessors();
-      for (var directiveIndex = 0; directiveIndex < emitters.length; ++directiveIndex) {
-        var directiveEmitters = emitters[directiveIndex];
-        var directive = elementInjector.getDirectiveAtIndex(directiveIndex);
-        for (var eventIndex = 0; eventIndex < directiveEmitters.length; ++eventIndex) {
-          var eventEmitterAccessor = directiveEmitters[eventIndex];
-          eventEmitterAccessor.subscribe(view, boundElementIndex, directive);
-        }
-      }
-    };
-    AppViewManagerUtils.prototype.dehydrateView = function(initView) {
-      var endViewOffset = initView.viewOffset + initView.proto.mergeInfo.viewCount - 1;
-      for (var viewIdx = initView.viewOffset; viewIdx <= endViewOffset; viewIdx++) {
-        var currView = initView.views[viewIdx];
-        if (currView.hydrated()) {
-          if (lang_1.isPresent(currView.locals)) {
-            currView.locals.clearValues();
-          }
-          currView.context = null;
-          currView.changeDetector.dehydrate();
-          var binders = currView.proto.elementBinders;
-          for (var binderIdx = 0; binderIdx < binders.length; binderIdx++) {
-            var eli = initView.elementInjectors[currView.elementOffset + binderIdx];
-            if (lang_1.isPresent(eli)) {
-              eli.dehydrate();
-            }
-          }
-        }
-      }
-    };
-    AppViewManagerUtils = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], AppViewManagerUtils);
-    return AppViewManagerUtils;
-  })();
-  exports.AppViewManagerUtils = AppViewManagerUtils;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/view_pool.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var __param = (this && this.__param) || function(paramIndex, decorator) {
-    return function(target, key) {
-      decorator(target, key, paramIndex);
-    };
-  };
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  exports.APP_VIEW_POOL_CAPACITY = lang_1.CONST_EXPR(new di_1.OpaqueToken('AppViewPool.viewPoolCapacity'));
-  var AppViewPool = (function() {
-    function AppViewPool(poolCapacityPerProtoView) {
-      this._pooledViewsPerProtoView = new collection_1.Map();
-      this._poolCapacityPerProtoView = poolCapacityPerProtoView;
-    }
-    AppViewPool.prototype.getView = function(protoView) {
-      var pooledViews = this._pooledViewsPerProtoView.get(protoView);
-      if (lang_1.isPresent(pooledViews) && pooledViews.length > 0) {
-        return pooledViews.pop();
-      }
-      return null;
-    };
-    AppViewPool.prototype.returnView = function(view) {
-      var protoView = view.proto;
-      var pooledViews = this._pooledViewsPerProtoView.get(protoView);
-      if (lang_1.isBlank(pooledViews)) {
-        pooledViews = [];
-        this._pooledViewsPerProtoView.set(protoView, pooledViews);
-      }
-      var haveRemainingCapacity = pooledViews.length < this._poolCapacityPerProtoView;
-      if (haveRemainingCapacity) {
-        pooledViews.push(view);
-      }
-      return haveRemainingCapacity;
-    };
-    AppViewPool = __decorate([di_1.Injectable(), __param(0, di_1.Inject(exports.APP_VIEW_POOL_CAPACITY)), __metadata('design:paramtypes', [Object])], AppViewPool);
-    return AppViewPool;
-  })();
-  exports.AppViewPool = AppViewPool;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/view_listener.js", ["node_modules/angular2/src/core/di.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var AppViewListener = (function() {
-    function AppViewListener() {}
-    AppViewListener.prototype.onViewCreated = function(view) {};
-    AppViewListener.prototype.onViewDestroyed = function(view) {};
-    AppViewListener = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], AppViewListener);
-    return AppViewListener;
-  })();
-  exports.AppViewListener = AppViewListener;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/change_detection/pipes.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var SelectedPipe = (function() {
-    function SelectedPipe(pipe, pure) {
-      this.pipe = pipe;
-      this.pure = pure;
-    }
-    return SelectedPipe;
-  })();
-  exports.SelectedPipe = SelectedPipe;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/pipes/pipes.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/pipes.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var cd = $__require('node_modules/angular2/src/core/change_detection/pipes.js');
-  var ProtoPipes = (function() {
-    function ProtoPipes(config) {
-      this.config = config;
-      this.config = config;
-    }
-    ProtoPipes.fromProviders = function(providers) {
-      var config = {};
-      providers.forEach(function(b) {
-        return config[b.name] = b;
-      });
-      return new ProtoPipes(config);
-    };
-    ProtoPipes.prototype.get = function(name) {
-      var provider = this.config[name];
-      if (lang_1.isBlank(provider))
-        throw new exceptions_1.BaseException("Cannot find pipe '" + name + "'.");
-      return provider;
-    };
-    return ProtoPipes;
-  })();
-  exports.ProtoPipes = ProtoPipes;
-  var Pipes = (function() {
-    function Pipes(proto, injector) {
-      this.proto = proto;
-      this.injector = injector;
-      this._config = {};
-    }
-    Pipes.prototype.get = function(name) {
-      var cached = collection_1.StringMapWrapper.get(this._config, name);
-      if (lang_1.isPresent(cached))
-        return cached;
-      var p = this.proto.get(name);
-      var transform = this.injector.instantiateResolved(p);
-      var res = new cd.SelectedPipe(transform, p.pure);
-      if (p.pure) {
-        collection_1.StringMapWrapper.set(this._config, name, res);
-      }
-      return res;
-    };
-    return Pipes;
-  })();
-  exports.Pipes = Pipes;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/render/util.js", ["node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var CAMEL_CASE_REGEXP = /([A-Z])/g;
-  var DASH_CASE_REGEXP = /-([a-z])/g;
-  function camelCaseToDashCase(input) {
-    return lang_1.StringWrapper.replaceAllMapped(input, CAMEL_CASE_REGEXP, function(m) {
-      return '-' + m[1].toLowerCase();
-    });
-  }
-  exports.camelCaseToDashCase = camelCaseToDashCase;
-  function dashCaseToCamelCase(input) {
-    return lang_1.StringWrapper.replaceAllMapped(input, DASH_CASE_REGEXP, function(m) {
-      return m[1].toUpperCase();
-    });
-  }
-  exports.dashCaseToCamelCase = dashCaseToCamelCase;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/view.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/change_detection.js", "node_modules/angular2/src/core/change_detection/interfaces.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/linker/view_ref.js", "node_modules/angular2/src/core/render/util.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
-  var interfaces_1 = $__require('node_modules/angular2/src/core/change_detection/interfaces.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
-  var util_1 = $__require('node_modules/angular2/src/core/render/util.js');
-  var view_ref_2 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
-  var interfaces_2 = $__require('node_modules/angular2/src/core/change_detection/interfaces.js');
-  exports.DebugContext = interfaces_2.DebugContext;
-  var REFLECT_PREFIX = 'ng-reflect-';
-  (function(ViewType) {
-    ViewType[ViewType["HOST"] = 0] = "HOST";
-    ViewType[ViewType["COMPONENT"] = 1] = "COMPONENT";
-    ViewType[ViewType["EMBEDDED"] = 2] = "EMBEDDED";
-  })(exports.ViewType || (exports.ViewType = {}));
-  var ViewType = exports.ViewType;
-  var AppViewContainer = (function() {
-    function AppViewContainer() {
-      this.views = [];
-    }
-    return AppViewContainer;
-  })();
-  exports.AppViewContainer = AppViewContainer;
-  var AppView = (function() {
-    function AppView(renderer, proto, viewOffset, elementOffset, textOffset, protoLocals, render, renderFragment, containerElementInjector) {
-      this.renderer = renderer;
-      this.proto = proto;
-      this.viewOffset = viewOffset;
-      this.elementOffset = elementOffset;
-      this.textOffset = textOffset;
-      this.render = render;
-      this.renderFragment = renderFragment;
-      this.containerElementInjector = containerElementInjector;
-      this.views = null;
-      this.elementInjectors = null;
-      this.viewContainers = null;
-      this.preBuiltObjects = null;
-      this.changeDetector = null;
-      this.context = null;
-      this.ref = new view_ref_2.ViewRef_(this);
-      this.locals = new change_detection_1.Locals(null, collection_1.MapWrapper.clone(protoLocals));
-    }
-    AppView.prototype.init = function(changeDetector, elementInjectors, rootElementInjectors, preBuiltObjects, views, elementRefs, viewContainers) {
-      this.changeDetector = changeDetector;
-      this.elementInjectors = elementInjectors;
-      this.rootElementInjectors = rootElementInjectors;
-      this.preBuiltObjects = preBuiltObjects;
-      this.views = views;
-      this.elementRefs = elementRefs;
-      this.viewContainers = viewContainers;
-    };
-    AppView.prototype.setLocal = function(contextName, value) {
-      if (!this.hydrated())
-        throw new exceptions_1.BaseException('Cannot set locals on dehydrated view.');
-      if (!this.proto.templateVariableBindings.has(contextName)) {
-        return;
-      }
-      var templateName = this.proto.templateVariableBindings.get(contextName);
-      this.locals.set(templateName, value);
-    };
-    AppView.prototype.hydrated = function() {
-      return lang_1.isPresent(this.context);
-    };
-    AppView.prototype.triggerEventHandlers = function(eventName, eventObj, boundElementIndex) {
-      var locals = new collection_1.Map();
-      locals.set('$event', eventObj);
-      this.dispatchEvent(boundElementIndex, eventName, locals);
-    };
-    AppView.prototype.notifyOnBinding = function(b, currentValue) {
-      if (b.isTextNode()) {
-        this.renderer.setText(this.render, b.elementIndex + this.textOffset, currentValue);
-      } else {
-        var elementRef = this.elementRefs[this.elementOffset + b.elementIndex];
-        if (b.isElementProperty()) {
-          this.renderer.setElementProperty(elementRef, b.name, currentValue);
-        } else if (b.isElementAttribute()) {
-          this.renderer.setElementAttribute(elementRef, b.name, lang_1.isPresent(currentValue) ? "" + currentValue : null);
-        } else if (b.isElementClass()) {
-          this.renderer.setElementClass(elementRef, b.name, currentValue);
-        } else if (b.isElementStyle()) {
-          var unit = lang_1.isPresent(b.unit) ? b.unit : '';
-          this.renderer.setElementStyle(elementRef, b.name, lang_1.isPresent(currentValue) ? "" + currentValue + unit : null);
-        } else {
-          throw new exceptions_1.BaseException('Unsupported directive record');
-        }
-      }
-    };
-    AppView.prototype.logBindingUpdate = function(b, value) {
-      if (b.isDirective() || b.isElementProperty()) {
-        var elementRef = this.elementRefs[this.elementOffset + b.elementIndex];
-        this.renderer.setBindingDebugInfo(elementRef, "" + REFLECT_PREFIX + util_1.camelCaseToDashCase(b.name), "" + value);
-      }
-    };
-    AppView.prototype.notifyAfterContentChecked = function() {
-      var eiCount = this.proto.elementBinders.length;
-      var ei = this.elementInjectors;
-      for (var i = eiCount - 1; i >= 0; i--) {
-        if (lang_1.isPresent(ei[i + this.elementOffset]))
-          ei[i + this.elementOffset].ngAfterContentChecked();
-      }
-    };
-    AppView.prototype.notifyAfterViewChecked = function() {
-      var eiCount = this.proto.elementBinders.length;
-      var ei = this.elementInjectors;
-      for (var i = eiCount - 1; i >= 0; i--) {
-        if (lang_1.isPresent(ei[i + this.elementOffset]))
-          ei[i + this.elementOffset].ngAfterViewChecked();
-      }
-    };
-    AppView.prototype.getDirectiveFor = function(directive) {
-      var elementInjector = this.elementInjectors[this.elementOffset + directive.elementIndex];
-      return elementInjector.getDirectiveAtIndex(directive.directiveIndex);
-    };
-    AppView.prototype.getNestedView = function(boundElementIndex) {
-      var eli = this.elementInjectors[boundElementIndex];
-      return lang_1.isPresent(eli) ? eli.getNestedView() : null;
-    };
-    AppView.prototype.getContainerElement = function() {
-      return lang_1.isPresent(this.containerElementInjector) ? this.containerElementInjector.getElementRef() : null;
-    };
-    AppView.prototype.getDebugContext = function(elementIndex, directiveIndex) {
-      try {
-        var offsettedIndex = this.elementOffset + elementIndex;
-        var hasRefForIndex = offsettedIndex < this.elementRefs.length;
-        var elementRef = hasRefForIndex ? this.elementRefs[this.elementOffset + elementIndex] : null;
-        var container = this.getContainerElement();
-        var ei = hasRefForIndex ? this.elementInjectors[this.elementOffset + elementIndex] : null;
-        var element = lang_1.isPresent(elementRef) ? elementRef.nativeElement : null;
-        var componentElement = lang_1.isPresent(container) ? container.nativeElement : null;
-        var directive = lang_1.isPresent(directiveIndex) ? this.getDirectiveFor(directiveIndex) : null;
-        var injector = lang_1.isPresent(ei) ? ei.getInjector() : null;
-        return new interfaces_1.DebugContext(element, componentElement, directive, this.context, _localsToStringMap(this.locals), injector);
-      } catch (e) {
-        return null;
-      }
-    };
-    AppView.prototype.getDetectorFor = function(directive) {
-      var childView = this.getNestedView(this.elementOffset + directive.elementIndex);
-      return lang_1.isPresent(childView) ? childView.changeDetector : null;
-    };
-    AppView.prototype.invokeElementMethod = function(elementIndex, methodName, args) {
-      this.renderer.invokeElementMethod(this.elementRefs[elementIndex], methodName, args);
-    };
-    AppView.prototype.dispatchRenderEvent = function(boundElementIndex, eventName, locals) {
-      var elementRef = this.elementRefs[boundElementIndex];
-      var view = view_ref_1.internalView(elementRef.parentView);
-      return view.dispatchEvent(elementRef.boundElementIndex, eventName, locals);
-    };
-    AppView.prototype.dispatchEvent = function(boundElementIndex, eventName, locals) {
-      try {
-        if (this.hydrated()) {
-          return !this.changeDetector.handleEvent(eventName, boundElementIndex - this.elementOffset, new change_detection_1.Locals(this.locals, locals));
-        } else {
-          return true;
-        }
-      } catch (e) {
-        var c = this.getDebugContext(boundElementIndex - this.elementOffset, null);
-        var context = lang_1.isPresent(c) ? new _Context(c.element, c.componentElement, c.context, c.locals, c.injector) : null;
-        throw new EventEvaluationError(eventName, e, e.stack, context);
-      }
-    };
-    Object.defineProperty(AppView.prototype, "ownBindersCount", {
-      get: function() {
-        return this.proto.elementBinders.length;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return AppView;
-  })();
-  exports.AppView = AppView;
-  function _localsToStringMap(locals) {
-    var res = {};
-    var c = locals;
-    while (lang_1.isPresent(c)) {
-      res = collection_1.StringMapWrapper.merge(res, collection_1.MapWrapper.toStringMap(c.current));
-      c = c.parent;
-    }
-    return res;
-  }
-  var _Context = (function() {
-    function _Context(element, componentElement, context, locals, injector) {
-      this.element = element;
-      this.componentElement = componentElement;
-      this.context = context;
-      this.locals = locals;
-      this.injector = injector;
-    }
-    return _Context;
-  })();
-  var EventEvaluationError = (function(_super) {
-    __extends(EventEvaluationError, _super);
-    function EventEvaluationError(eventName, originalException, originalStack, context) {
-      _super.call(this, "Error during evaluation of \"" + eventName + "\"", originalException, originalStack, context);
-    }
-    return EventEvaluationError;
-  })(exceptions_1.WrappedException);
-  var AppProtoViewMergeInfo = (function() {
-    function AppProtoViewMergeInfo(embeddedViewCount, elementCount, viewCount) {
-      this.embeddedViewCount = embeddedViewCount;
-      this.elementCount = elementCount;
-      this.viewCount = viewCount;
-    }
-    return AppProtoViewMergeInfo;
-  })();
-  exports.AppProtoViewMergeInfo = AppProtoViewMergeInfo;
-  var AppProtoView = (function() {
-    function AppProtoView(templateId, templateCmds, type, isMergable, changeDetectorFactory, templateVariableBindings, pipes) {
-      this.templateId = templateId;
-      this.templateCmds = templateCmds;
-      this.type = type;
-      this.isMergable = isMergable;
-      this.changeDetectorFactory = changeDetectorFactory;
-      this.templateVariableBindings = templateVariableBindings;
-      this.pipes = pipes;
-      this.elementBinders = null;
-      this.mergeInfo = null;
-      this.variableLocations = null;
-      this.textBindingCount = null;
-      this.render = null;
-      this.ref = new view_ref_2.ProtoViewRef_(this);
-    }
-    AppProtoView.prototype.init = function(render, elementBinders, textBindingCount, mergeInfo, variableLocations) {
-      var _this = this;
-      this.render = render;
-      this.elementBinders = elementBinders;
-      this.textBindingCount = textBindingCount;
-      this.mergeInfo = mergeInfo;
-      this.variableLocations = variableLocations;
-      this.protoLocals = new collection_1.Map();
-      if (lang_1.isPresent(this.templateVariableBindings)) {
-        this.templateVariableBindings.forEach(function(templateName, _) {
-          _this.protoLocals.set(templateName, null);
-        });
-      }
-      if (lang_1.isPresent(variableLocations)) {
-        variableLocations.forEach(function(_, templateName) {
-          _this.protoLocals.set(templateName, null);
-        });
-      }
-    };
-    AppProtoView.prototype.isInitialized = function() {
-      return lang_1.isPresent(this.elementBinders);
-    };
-    return AppProtoView;
-  })();
-  exports.AppProtoView = AppProtoView;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/element_binder.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var ElementBinder = (function() {
-    function ElementBinder(index, parent, distanceToParent, protoElementInjector, componentDirective, nestedProtoView) {
-      this.index = index;
-      this.parent = parent;
-      this.distanceToParent = distanceToParent;
-      this.protoElementInjector = protoElementInjector;
-      this.componentDirective = componentDirective;
-      this.nestedProtoView = nestedProtoView;
-      if (lang_1.isBlank(index)) {
-        throw new exceptions_1.BaseException('null index not allowed.');
-      }
-    }
-    return ElementBinder;
-  })();
-  exports.ElementBinder = ElementBinder;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/view_container_ref.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/linker/view_ref.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
-  var ViewContainerRef = (function() {
-    function ViewContainerRef() {}
-    ViewContainerRef.prototype.clear = function() {
-      for (var i = this.length - 1; i >= 0; i--) {
-        this.remove(i);
-      }
-    };
-    Object.defineProperty(ViewContainerRef.prototype, "length", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    return ViewContainerRef;
-  })();
-  exports.ViewContainerRef = ViewContainerRef;
-  var ViewContainerRef_ = (function(_super) {
-    __extends(ViewContainerRef_, _super);
-    function ViewContainerRef_(viewManager, element) {
-      _super.call(this);
-      this.viewManager = viewManager;
-      this.element = element;
-    }
-    ViewContainerRef_.prototype._getViews = function() {
-      var element = this.element;
-      var vc = view_ref_1.internalView(element.parentView).viewContainers[element.boundElementIndex];
-      return lang_1.isPresent(vc) ? vc.views : [];
-    };
-    ViewContainerRef_.prototype.get = function(index) {
-      return this._getViews()[index].ref;
-    };
-    Object.defineProperty(ViewContainerRef_.prototype, "length", {
-      get: function() {
-        return this._getViews().length;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ViewContainerRef_.prototype.createEmbeddedView = function(templateRef, index) {
-      if (index === void 0) {
-        index = -1;
-      }
-      if (index == -1)
-        index = this.length;
-      return this.viewManager.createEmbeddedViewInContainer(this.element, index, templateRef);
-    };
-    ViewContainerRef_.prototype.createHostView = function(protoViewRef, index, dynamicallyCreatedProviders) {
-      if (protoViewRef === void 0) {
-        protoViewRef = null;
-      }
-      if (index === void 0) {
-        index = -1;
-      }
-      if (dynamicallyCreatedProviders === void 0) {
-        dynamicallyCreatedProviders = null;
-      }
-      if (index == -1)
-        index = this.length;
-      return this.viewManager.createHostViewInContainer(this.element, index, protoViewRef, dynamicallyCreatedProviders);
-    };
-    ViewContainerRef_.prototype.insert = function(viewRef, index) {
-      if (index === void 0) {
-        index = -1;
-      }
-      if (index == -1)
-        index = this.length;
-      return this.viewManager.attachViewInContainer(this.element, index, viewRef);
-    };
-    ViewContainerRef_.prototype.indexOf = function(viewRef) {
-      return collection_1.ListWrapper.indexOf(this._getViews(), view_ref_1.internalView(viewRef));
-    };
-    ViewContainerRef_.prototype.remove = function(index) {
-      if (index === void 0) {
-        index = -1;
-      }
-      if (index == -1)
-        index = this.length - 1;
-      this.viewManager.destroyViewInContainer(this.element, index);
-    };
-    ViewContainerRef_.prototype.detach = function(index) {
-      if (index === void 0) {
-        index = -1;
-      }
-      if (index == -1)
-        index = this.length - 1;
-      return this.viewManager.detachViewInContainer(this.element, index);
-    };
-    return ViewContainerRef_;
-  })(ViewContainerRef);
-  exports.ViewContainerRef_ = ViewContainerRef_;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/element_ref.js", ["node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var ElementRef = (function() {
-    function ElementRef() {}
-    Object.defineProperty(ElementRef.prototype, "nativeElement", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(ElementRef.prototype, "renderView", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return ElementRef;
-  })();
-  exports.ElementRef = ElementRef;
-  var ElementRef_ = (function(_super) {
-    __extends(ElementRef_, _super);
-    function ElementRef_(parentView, boundElementIndex, _renderer) {
-      _super.call(this);
-      this.parentView = parentView;
-      this.boundElementIndex = boundElementIndex;
-      this._renderer = _renderer;
-    }
-    Object.defineProperty(ElementRef_.prototype, "renderView", {
-      get: function() {
-        return this.parentView.render;
-      },
-      set: function(value) {
-        exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(ElementRef_.prototype, "nativeElement", {
-      get: function() {
-        return this._renderer.getNativeElementSync(this);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return ElementRef_;
-  })(ElementRef);
-  exports.ElementRef_ = ElementRef_;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/view_ref.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  function internalView(viewRef) {
-    return viewRef._view;
-  }
-  exports.internalView = internalView;
-  function internalProtoView(protoViewRef) {
-    return lang_1.isPresent(protoViewRef) ? protoViewRef._protoView : null;
-  }
-  exports.internalProtoView = internalProtoView;
-  var ViewRef = (function() {
-    function ViewRef() {}
-    Object.defineProperty(ViewRef.prototype, "changeDetectorRef", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      set: function(value) {
-        exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return ViewRef;
-  })();
-  exports.ViewRef = ViewRef;
-  var ViewRef_ = (function(_super) {
-    __extends(ViewRef_, _super);
-    function ViewRef_(_view) {
-      _super.call(this);
-      this._changeDetectorRef = null;
-      this._view = _view;
-    }
-    Object.defineProperty(ViewRef_.prototype, "render", {
-      get: function() {
-        return this._view.render;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(ViewRef_.prototype, "renderFragment", {
-      get: function() {
-        return this._view.renderFragment;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(ViewRef_.prototype, "changeDetectorRef", {
-      get: function() {
-        if (this._changeDetectorRef === null) {
-          this._changeDetectorRef = this._view.changeDetector.ref;
-        }
-        return this._changeDetectorRef;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ViewRef_.prototype.setLocal = function(variableName, value) {
-      this._view.setLocal(variableName, value);
-    };
-    return ViewRef_;
-  })(ViewRef);
-  exports.ViewRef_ = ViewRef_;
-  var ProtoViewRef = (function() {
-    function ProtoViewRef() {}
-    return ProtoViewRef;
-  })();
-  exports.ProtoViewRef = ProtoViewRef;
-  var ProtoViewRef_ = (function(_super) {
-    __extends(ProtoViewRef_, _super);
-    function ProtoViewRef_(_protoView) {
-      _super.call(this);
-      this._protoView = _protoView;
-    }
-    return ProtoViewRef_;
-  })(ProtoViewRef);
-  exports.ProtoViewRef_ = ProtoViewRef_;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/template_ref.js", ["node_modules/angular2/src/core/linker/view_ref.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
-  var TemplateRef = (function() {
-    function TemplateRef() {}
-    return TemplateRef;
-  })();
-  exports.TemplateRef = TemplateRef;
-  var TemplateRef_ = (function(_super) {
-    __extends(TemplateRef_, _super);
-    function TemplateRef_(elementRef) {
-      _super.call(this);
-      this.elementRef = elementRef;
-    }
-    TemplateRef_.prototype._getProtoView = function() {
-      var elementRef = this.elementRef;
-      var parentView = view_ref_1.internalView(elementRef.parentView);
-      return parentView.proto.elementBinders[elementRef.boundElementIndex - parentView.elementOffset].nestedProtoView;
-    };
-    Object.defineProperty(TemplateRef_.prototype, "protoViewRef", {
-      get: function() {
-        return this._getProtoView().ref;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    TemplateRef_.prototype.hasLocal = function(name) {
-      return this._getProtoView().templateVariableBindings.has(name);
-    };
-    return TemplateRef_;
-  })(TemplateRef);
-  exports.TemplateRef_ = TemplateRef_;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/directive_lifecycle_reflector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/linker/interfaces.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var interfaces_1 = $__require('node_modules/angular2/src/core/linker/interfaces.js');
-  function hasLifecycleHook(lcInterface, token) {
-    if (!(token instanceof lang_1.Type))
-      return false;
-    var proto = token.prototype;
-    switch (lcInterface) {
-      case interfaces_1.LifecycleHooks.AfterContentInit:
-        return !!proto.ngAfterContentInit;
-      case interfaces_1.LifecycleHooks.AfterContentChecked:
-        return !!proto.ngAfterContentChecked;
-      case interfaces_1.LifecycleHooks.AfterViewInit:
-        return !!proto.ngAfterViewInit;
-      case interfaces_1.LifecycleHooks.AfterViewChecked:
-        return !!proto.ngAfterViewChecked;
-      case interfaces_1.LifecycleHooks.OnChanges:
-        return !!proto.ngOnChanges;
-      case interfaces_1.LifecycleHooks.DoCheck:
-        return !!proto.ngDoCheck;
-      case interfaces_1.LifecycleHooks.OnDestroy:
-        return !!proto.ngOnDestroy;
-      case interfaces_1.LifecycleHooks.OnInit:
-        return !!proto.ngOnInit;
-      default:
-        return false;
-    }
-  }
-  exports.hasLifecycleHook = hasLifecycleHook;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/facade/promise.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var PromiseWrapper = (function() {
-    function PromiseWrapper() {}
-    PromiseWrapper.resolve = function(obj) {
-      return Promise.resolve(obj);
-    };
-    PromiseWrapper.reject = function(obj, _) {
-      return Promise.reject(obj);
-    };
-    PromiseWrapper.catchError = function(promise, onError) {
-      return promise.catch(onError);
-    };
-    PromiseWrapper.all = function(promises) {
-      if (promises.length == 0)
-        return Promise.resolve([]);
-      return Promise.all(promises);
-    };
-    PromiseWrapper.then = function(promise, success, rejection) {
-      return promise.then(success, rejection);
-    };
-    PromiseWrapper.wrap = function(computation) {
-      return new Promise(function(res, rej) {
-        try {
-          res(computation());
-        } catch (e) {
-          rej(e);
-        }
-      });
-    };
-    PromiseWrapper.scheduleMicrotask = function(computation) {
-      PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function(_) {});
-    };
-    PromiseWrapper.isPromise = function(obj) {
-      return obj instanceof Promise;
-    };
-    PromiseWrapper.completer = function() {
-      var resolve;
-      var reject;
-      var p = new Promise(function(res, rej) {
-        resolve = res;
-        reject = rej;
-      });
-      return {
-        promise: p,
-        resolve: resolve,
-        reject: reject
-      };
-    };
-    return PromiseWrapper;
-  })();
-  exports.PromiseWrapper = PromiseWrapper;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/subject/SubjectSubscription.js", ["node_modules/rxjs/Subscription.js", "node_modules/rxjs/Subscriber.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
-  var Subscriber_1 = $__require('node_modules/rxjs/Subscriber.js');
-  var SubjectSubscription = (function(_super) {
-    __extends(SubjectSubscription, _super);
-    function SubjectSubscription(subject, observer) {
-      _super.call(this);
-      this.subject = subject;
-      this.observer = observer;
-      this.isUnsubscribed = false;
-    }
-    SubjectSubscription.prototype.unsubscribe = function() {
-      if (this.isUnsubscribed) {
-        return;
-      }
-      this.isUnsubscribed = true;
-      var subject = this.subject;
-      var observers = subject.observers;
-      this.subject = void 0;
-      if (!observers || observers.length === 0 || subject.isUnsubscribed) {
-        return;
-      }
-      if (this.observer instanceof Subscriber_1.Subscriber) {
-        this.observer.unsubscribe();
-      }
-      var subscriberIndex = observers.indexOf(this.observer);
-      if (subscriberIndex !== -1) {
-        observers.splice(subscriberIndex, 1);
-      }
-    };
-    return SubjectSubscription;
-  })(Subscription_1.Subscription);
-  exports.SubjectSubscription = SubjectSubscription;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Observable.js", "node_modules/rxjs/Subscriber.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/subject/SubjectSubscription.js", "node_modules/rxjs/symbol/rxSubscriber.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var Observable_1 = $__require('node_modules/rxjs/Observable.js');
-  var Subscriber_1 = $__require('node_modules/rxjs/Subscriber.js');
-  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
-  var SubjectSubscription_1 = $__require('node_modules/rxjs/subject/SubjectSubscription.js');
-  var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
-  var subscriptionAdd = Subscription_1.Subscription.prototype.add;
-  var subscriptionRemove = Subscription_1.Subscription.prototype.remove;
-  var subscriptionUnsubscribe = Subscription_1.Subscription.prototype.unsubscribe;
-  var subscriberNext = Subscriber_1.Subscriber.prototype.next;
-  var subscriberError = Subscriber_1.Subscriber.prototype.error;
-  var subscriberComplete = Subscriber_1.Subscriber.prototype.complete;
-  var _subscriberNext = Subscriber_1.Subscriber.prototype._next;
-  var _subscriberError = Subscriber_1.Subscriber.prototype._error;
-  var _subscriberComplete = Subscriber_1.Subscriber.prototype._complete;
-  var Subject = (function(_super) {
-    __extends(Subject, _super);
-    function Subject() {
-      _super.apply(this, arguments);
-      this.observers = [];
-      this.isUnsubscribed = false;
-      this.dispatching = false;
-      this.errorSignal = false;
-      this.completeSignal = false;
-    }
-    Subject.prototype[rxSubscriber_1.rxSubscriber] = function() {
-      return this;
-    };
-    Subject.create = function(source, destination) {
-      return new BidirectionalSubject(source, destination);
-    };
-    Subject.prototype.lift = function(operator) {
-      var subject = new BidirectionalSubject(this, this.destination || this);
-      subject.operator = operator;
-      return subject;
-    };
-    Subject.prototype._subscribe = function(subscriber) {
-      if (subscriber.isUnsubscribed) {
-        return;
-      } else if (this.errorSignal) {
-        subscriber.error(this.errorInstance);
-        return;
-      } else if (this.completeSignal) {
-        subscriber.complete();
-        return;
-      } else if (this.isUnsubscribed) {
-        throw new Error('Cannot subscribe to a disposed Subject.');
-      }
-      this.observers.push(subscriber);
-      return new SubjectSubscription_1.SubjectSubscription(this, subscriber);
-    };
-    Subject.prototype.add = function(subscription) {
-      subscriptionAdd.call(this, subscription);
-    };
-    Subject.prototype.remove = function(subscription) {
-      subscriptionRemove.call(this, subscription);
-    };
-    Subject.prototype.unsubscribe = function() {
-      this.observers = void 0;
-      subscriptionUnsubscribe.call(this);
-    };
-    Subject.prototype.next = function(value) {
-      if (this.isUnsubscribed) {
-        return;
-      }
-      this.dispatching = true;
-      this._next(value);
-      this.dispatching = false;
-      if (this.errorSignal) {
-        this.error(this.errorInstance);
-      } else if (this.completeSignal) {
-        this.complete();
-      }
-    };
-    Subject.prototype.error = function(err) {
-      if (this.isUnsubscribed || this.completeSignal) {
-        return;
-      }
-      this.errorSignal = true;
-      this.errorInstance = err;
-      if (this.dispatching) {
-        return;
-      }
-      this._error(err);
-      this.unsubscribe();
-    };
-    Subject.prototype.complete = function() {
-      if (this.isUnsubscribed || this.errorSignal) {
-        return;
-      }
-      this.completeSignal = true;
-      if (this.dispatching) {
-        return;
-      }
-      this._complete();
-      this.unsubscribe();
-    };
-    Subject.prototype._next = function(value) {
-      var index = -1;
-      var observers = this.observers.slice(0);
-      var len = observers.length;
-      while (++index < len) {
-        observers[index].next(value);
-      }
-    };
-    Subject.prototype._error = function(err) {
-      var index = -1;
-      var observers = this.observers;
-      var len = observers.length;
-      this.observers = void 0;
-      this.isUnsubscribed = true;
-      while (++index < len) {
-        observers[index].error(err);
-      }
-      this.isUnsubscribed = false;
-    };
-    Subject.prototype._complete = function() {
-      var index = -1;
-      var observers = this.observers;
-      var len = observers.length;
-      this.observers = void 0;
-      this.isUnsubscribed = true;
-      while (++index < len) {
-        observers[index].complete();
-      }
-      this.isUnsubscribed = false;
-    };
-    return Subject;
-  })(Observable_1.Observable);
-  exports.Subject = Subject;
-  var BidirectionalSubject = (function(_super) {
-    __extends(BidirectionalSubject, _super);
-    function BidirectionalSubject(source, destination) {
-      _super.call(this);
-      this.source = source;
-      this.destination = destination;
-    }
-    BidirectionalSubject.prototype._subscribe = function(subscriber) {
-      var operator = this.operator;
-      return this.source._subscribe.call(this.source, operator ? operator.call(subscriber) : subscriber);
-    };
-    BidirectionalSubject.prototype.next = function(value) {
-      subscriberNext.call(this, value);
-    };
-    BidirectionalSubject.prototype.error = function(err) {
-      subscriberError.call(this, err);
-    };
-    BidirectionalSubject.prototype.complete = function() {
-      subscriberComplete.call(this);
-    };
-    BidirectionalSubject.prototype._next = function(value) {
-      _subscriberNext.call(this, value);
-    };
-    BidirectionalSubject.prototype._error = function(err) {
-      _subscriberError.call(this, err);
-    };
-    BidirectionalSubject.prototype._complete = function() {
-      _subscriberComplete.call(this);
-    };
-    return BidirectionalSubject;
-  })(Subject);
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/scheduler/QueueAction.js", ["node_modules/rxjs/Subscription.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
-  var QueueAction = (function(_super) {
-    __extends(QueueAction, _super);
-    function QueueAction(scheduler, work) {
-      _super.call(this);
-      this.scheduler = scheduler;
-      this.work = work;
-    }
-    QueueAction.prototype.schedule = function(state) {
-      if (this.isUnsubscribed) {
-        return this;
-      }
-      this.state = state;
-      var scheduler = this.scheduler;
-      scheduler.actions.push(this);
-      scheduler.flush();
-      return this;
-    };
-    QueueAction.prototype.execute = function() {
-      if (this.isUnsubscribed) {
-        throw new Error('How did did we execute a canceled Action?');
-      }
-      this.work(this.state);
-    };
-    QueueAction.prototype.unsubscribe = function() {
-      var scheduler = this.scheduler;
-      var actions = scheduler.actions;
-      var index = actions.indexOf(this);
-      this.work = void 0;
-      this.state = void 0;
-      this.scheduler = void 0;
-      if (index !== -1) {
-        actions.splice(index, 1);
-      }
-      _super.prototype.unsubscribe.call(this);
-    };
-    return QueueAction;
-  })(Subscription_1.Subscription);
-  exports.QueueAction = QueueAction;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/scheduler/FutureAction.js", ["node_modules/rxjs/scheduler/QueueAction.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var QueueAction_1 = $__require('node_modules/rxjs/scheduler/QueueAction.js');
-  var FutureAction = (function(_super) {
-    __extends(FutureAction, _super);
-    function FutureAction(scheduler, work) {
-      _super.call(this, scheduler, work);
-      this.scheduler = scheduler;
-      this.work = work;
-    }
-    FutureAction.prototype.schedule = function(state, delay) {
-      var _this = this;
-      if (delay === void 0) {
-        delay = 0;
-      }
-      if (this.isUnsubscribed) {
-        return this;
-      }
-      this.delay = delay;
-      this.state = state;
-      var id = this.id;
-      if (id != null) {
-        this.id = undefined;
-        clearTimeout(id);
-      }
-      var scheduler = this.scheduler;
-      this.id = setTimeout(function() {
-        _this.id = void 0;
-        scheduler.actions.push(_this);
-        scheduler.flush();
-      }, this.delay);
-      return this;
-    };
-    FutureAction.prototype.unsubscribe = function() {
-      var id = this.id;
-      if (id != null) {
-        this.id = void 0;
-        clearTimeout(id);
-      }
-      _super.prototype.unsubscribe.call(this);
-    };
-    return FutureAction;
-  })(QueueAction_1.QueueAction);
-  exports.FutureAction = FutureAction;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/scheduler/QueueScheduler.js", ["node_modules/rxjs/scheduler/QueueAction.js", "node_modules/rxjs/scheduler/FutureAction.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var QueueAction_1 = $__require('node_modules/rxjs/scheduler/QueueAction.js');
-  var FutureAction_1 = $__require('node_modules/rxjs/scheduler/FutureAction.js');
-  var QueueScheduler = (function() {
-    function QueueScheduler() {
-      this.actions = [];
-      this.active = false;
-      this.scheduled = false;
-    }
-    QueueScheduler.prototype.now = function() {
-      return Date.now();
-    };
-    QueueScheduler.prototype.flush = function() {
-      if (this.active || this.scheduled) {
-        return;
-      }
-      this.active = true;
-      var actions = this.actions;
-      for (var action = void 0; action = actions.shift(); ) {
-        action.execute();
-      }
-      this.active = false;
-    };
-    QueueScheduler.prototype.schedule = function(work, delay, state) {
-      if (delay === void 0) {
-        delay = 0;
-      }
-      return (delay <= 0) ? this.scheduleNow(work, state) : this.scheduleLater(work, delay, state);
-    };
-    QueueScheduler.prototype.scheduleNow = function(work, state) {
-      return new QueueAction_1.QueueAction(this, work).schedule(state);
-    };
-    QueueScheduler.prototype.scheduleLater = function(work, delay, state) {
-      return new FutureAction_1.FutureAction(this, work).schedule(state, delay);
-    };
-    return QueueScheduler;
-  })();
-  exports.QueueScheduler = QueueScheduler;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/scheduler/queue.js", ["node_modules/rxjs/scheduler/QueueScheduler.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var QueueScheduler_1 = $__require('node_modules/rxjs/scheduler/QueueScheduler.js');
-  exports.queue = new QueueScheduler_1.QueueScheduler();
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/observable/fromPromise.js", ["node_modules/rxjs/Observable.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/scheduler/queue.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var Observable_1 = $__require('node_modules/rxjs/Observable.js');
-  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
-  var queue_1 = $__require('node_modules/rxjs/scheduler/queue.js');
-  var PromiseObservable = (function(_super) {
-    __extends(PromiseObservable, _super);
-    function PromiseObservable(promise, scheduler) {
-      if (scheduler === void 0) {
-        scheduler = queue_1.queue;
-      }
-      _super.call(this);
-      this.promise = promise;
-      this.scheduler = scheduler;
-      this._isScalar = false;
-    }
-    PromiseObservable.create = function(promise, scheduler) {
-      if (scheduler === void 0) {
-        scheduler = queue_1.queue;
-      }
-      return new PromiseObservable(promise, scheduler);
-    };
-    PromiseObservable.prototype._subscribe = function(subscriber) {
-      var _this = this;
-      var scheduler = this.scheduler;
-      var promise = this.promise;
-      if (scheduler === queue_1.queue) {
-        if (this._isScalar) {
-          subscriber.next(this.value);
-          subscriber.complete();
-        } else {
-          promise.then(function(value) {
-            _this._isScalar = true;
-            _this.value = value;
-            subscriber.next(value);
-            subscriber.complete();
-          }, function(err) {
-            return subscriber.error(err);
-          }).then(null, function(err) {
-            setTimeout(function() {
-              throw err;
-            });
-          });
-        }
-      } else {
-        var subscription = new Subscription_1.Subscription();
-        if (this._isScalar) {
-          var value = this.value;
-          subscription.add(scheduler.schedule(dispatchNext, 0, {
-            value: value,
-            subscriber: subscriber
-          }));
-        } else {
-          promise.then(function(value) {
-            _this._isScalar = true;
-            _this.value = value;
-            subscription.add(scheduler.schedule(dispatchNext, 0, {
-              value: value,
-              subscriber: subscriber
-            }));
-          }, function(err) {
-            return subscription.add(scheduler.schedule(dispatchError, 0, {
-              err: err,
-              subscriber: subscriber
-            }));
-          }).then(null, function(err) {
-            scheduler.schedule(function() {
-              throw err;
-            });
-          });
-        }
-        return subscription;
-      }
-    };
-    return PromiseObservable;
-  })(Observable_1.Observable);
-  exports.PromiseObservable = PromiseObservable;
-  function dispatchNext(_a) {
-    var value = _a.value,
-        subscriber = _a.subscriber;
-    subscriber.next(value);
-    subscriber.complete();
-  }
-  function dispatchError(_a) {
-    var err = _a.err,
-        subscriber = _a.subscriber;
-    subscriber.error(err);
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/operator/toPromise.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var root_1 = $__require('node_modules/rxjs/util/root.js');
-  function toPromise(PromiseCtor) {
-    var _this = this;
-    if (!PromiseCtor) {
-      if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-        PromiseCtor = root_1.root.Rx.config.Promise;
-      } else if (root_1.root.Promise) {
-        PromiseCtor = root_1.root.Promise;
-      }
-    }
-    if (!PromiseCtor) {
-      throw new Error('no Promise impl found');
-    }
-    return new PromiseCtor(function(resolve, reject) {
-      var value;
-      _this.subscribe(function(x) {
-        return value = x;
-      }, function(err) {
-        return reject(err);
-      }, function() {
-        return resolve(value);
-      });
-    });
-  }
-  exports.toPromise = toPromise;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/util/throwError.js", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function throwError(e) {
-    throw e;
-  }
-  exports.throwError = throwError;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/util/tryOrOnError.js", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function tryOrOnError(target) {
-    function tryCatcher() {
-      try {
-        tryCatcher.target.apply(this, arguments);
-      } catch (e) {
-        this.error(e);
-      }
-    }
-    tryCatcher.target = target;
-    return tryCatcher;
-  }
-  exports.tryOrOnError = tryOrOnError;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/util/noop.js", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function noop() {}
-  exports.noop = noop;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/Subscription.js", ["node_modules/rxjs/util/noop.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var noop_1 = $__require('node_modules/rxjs/util/noop.js');
-  var Subscription = (function() {
-    function Subscription(_unsubscribe) {
-      this.isUnsubscribed = false;
-      if (_unsubscribe) {
-        this._unsubscribe = _unsubscribe;
-      }
-    }
-    Subscription.prototype._unsubscribe = function() {
-      noop_1.noop();
-    };
-    Subscription.prototype.unsubscribe = function() {
-      if (this.isUnsubscribed) {
-        return;
-      }
-      this.isUnsubscribed = true;
-      var unsubscribe = this._unsubscribe;
-      var subscriptions = this._subscriptions;
-      this._subscriptions = void 0;
-      if (unsubscribe) {
-        unsubscribe.call(this);
-      }
-      if (subscriptions != null) {
-        var index = -1;
-        var len = subscriptions.length;
-        while (++index < len) {
-          subscriptions[index].unsubscribe();
-        }
-      }
-    };
-    Subscription.prototype.add = function(subscription) {
-      if (!subscription || (subscription === this) || (subscription === Subscription.EMPTY)) {
-        return;
-      }
-      var sub = subscription;
-      switch (typeof subscription) {
-        case 'function':
-          sub = new Subscription(subscription);
-        case 'object':
-          if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
-            break;
-          } else if (this.isUnsubscribed) {
-            sub.unsubscribe();
-          } else {
-            var subscriptions = this._subscriptions || (this._subscriptions = []);
-            subscriptions.push(sub);
-          }
-          break;
-        default:
-          throw new Error('Unrecognized subscription ' + subscription + ' added to Subscription.');
-      }
-    };
-    Subscription.prototype.remove = function(subscription) {
-      if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
-        return;
-      }
-      var subscriptions = this._subscriptions;
-      if (subscriptions) {
-        var subscriptionIndex = subscriptions.indexOf(subscription);
-        if (subscriptionIndex !== -1) {
-          subscriptions.splice(subscriptionIndex, 1);
-        }
-      }
-    };
-    Subscription.EMPTY = (function(empty) {
-      empty.isUnsubscribed = true;
-      return empty;
-    }(new Subscription()));
-    return Subscription;
-  })();
-  exports.Subscription = Subscription;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/Subscriber.js", ["node_modules/rxjs/util/noop.js", "node_modules/rxjs/util/throwError.js", "node_modules/rxjs/util/tryOrOnError.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/symbol/rxSubscriber.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var noop_1 = $__require('node_modules/rxjs/util/noop.js');
-  var throwError_1 = $__require('node_modules/rxjs/util/throwError.js');
-  var tryOrOnError_1 = $__require('node_modules/rxjs/util/tryOrOnError.js');
-  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
-  var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
-  var Subscriber = (function(_super) {
-    __extends(Subscriber, _super);
-    function Subscriber(destination) {
-      _super.call(this);
-      this.destination = destination;
-      this._isUnsubscribed = false;
-      if (!this.destination) {
-        return;
-      }
-      var subscription = destination._subscription;
-      if (subscription) {
-        this._subscription = subscription;
-      } else if (destination instanceof Subscriber) {
-        this._subscription = destination;
-      }
-    }
-    Subscriber.prototype[rxSubscriber_1.rxSubscriber] = function() {
-      return this;
-    };
-    Object.defineProperty(Subscriber.prototype, "isUnsubscribed", {
-      get: function() {
-        var subscription = this._subscription;
-        if (subscription) {
-          return this._isUnsubscribed || subscription.isUnsubscribed;
-        } else {
-          return this._isUnsubscribed;
-        }
-      },
-      set: function(value) {
-        var subscription = this._subscription;
-        if (subscription) {
-          subscription.isUnsubscribed = Boolean(value);
-        } else {
-          this._isUnsubscribed = Boolean(value);
-        }
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Subscriber.create = function(next, error, complete) {
-      var subscriber = new Subscriber();
-      subscriber._next = (typeof next === 'function') && tryOrOnError_1.tryOrOnError(next) || noop_1.noop;
-      subscriber._error = (typeof error === 'function') && error || throwError_1.throwError;
-      subscriber._complete = (typeof complete === 'function') && complete || noop_1.noop;
-      return subscriber;
-    };
-    Subscriber.prototype.add = function(sub) {
-      var _subscription = this._subscription;
-      if (_subscription) {
-        _subscription.add(sub);
-      } else {
-        _super.prototype.add.call(this, sub);
-      }
-    };
-    Subscriber.prototype.remove = function(sub) {
-      if (this._subscription) {
-        this._subscription.remove(sub);
-      } else {
-        _super.prototype.remove.call(this, sub);
-      }
-    };
-    Subscriber.prototype.unsubscribe = function() {
-      if (this._isUnsubscribed) {
-        return;
-      } else if (this._subscription) {
-        this._isUnsubscribed = true;
-      } else {
-        _super.prototype.unsubscribe.call(this);
-      }
-    };
-    Subscriber.prototype._next = function(value) {
-      var destination = this.destination;
-      if (destination.next) {
-        destination.next(value);
-      }
-    };
-    Subscriber.prototype._error = function(err) {
-      var destination = this.destination;
-      if (destination.error) {
-        destination.error(err);
-      }
-    };
-    Subscriber.prototype._complete = function() {
-      var destination = this.destination;
-      if (destination.complete) {
-        destination.complete();
-      }
-    };
-    Subscriber.prototype.next = function(value) {
-      if (!this.isUnsubscribed) {
-        this._next(value);
-      }
-    };
-    Subscriber.prototype.error = function(err) {
-      if (!this.isUnsubscribed) {
-        this._error(err);
-        this.unsubscribe();
-      }
-    };
-    Subscriber.prototype.complete = function() {
-      if (!this.isUnsubscribed) {
-        this._complete();
-        this.unsubscribe();
-      }
-    };
-    return Subscriber;
-  })(Subscription_1.Subscription);
-  exports.Subscriber = Subscriber;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/util/root.js", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var objectTypes = {
-    'boolean': false,
-    'function': true,
-    'object': true,
-    'number': false,
-    'string': false,
-    'undefined': false
-  };
-  exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
-  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-  var freeGlobal = objectTypes[typeof global] && global;
-  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
-    exports.root = freeGlobal;
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/util/SymbolShim.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var root_1 = $__require('node_modules/rxjs/util/root.js');
-  function polyfillSymbol(root) {
-    var Symbol = ensureSymbol(root);
-    ensureIterator(Symbol, root);
-    ensureObservable(Symbol);
-    ensureFor(Symbol);
-    return Symbol;
-  }
-  exports.polyfillSymbol = polyfillSymbol;
-  function ensureFor(Symbol) {
-    if (!Symbol.for) {
-      Symbol.for = symbolForPolyfill;
-    }
-  }
-  exports.ensureFor = ensureFor;
-  var id = 0;
-  function ensureSymbol(root) {
-    if (!root.Symbol) {
-      root.Symbol = function symbolFuncPolyfill(description) {
-        return "@@Symbol(" + description + "):" + id++;
-      };
-    }
-    return root.Symbol;
-  }
-  exports.ensureSymbol = ensureSymbol;
-  function symbolForPolyfill(key) {
-    return '@@' + key;
-  }
-  exports.symbolForPolyfill = symbolForPolyfill;
-  function ensureIterator(Symbol, root) {
-    if (!Symbol.iterator) {
-      if (typeof Symbol.for === 'function') {
-        Symbol.iterator = Symbol.for('iterator');
-      } else if (root.Set && typeof new root.Set()['@@iterator'] === 'function') {
-        Symbol.iterator = '@@iterator';
-      } else if (root.Map) {
-        var keys = Object.getOwnPropertyNames(root.Map.prototype);
-        for (var i = 0; i < keys.length; ++i) {
-          var key = keys[i];
-          if (key !== 'entries' && key !== 'size' && root.Map.prototype[key] === root.Map.prototype['entries']) {
-            Symbol.iterator = key;
-            break;
-          }
-        }
-      } else {
-        Symbol.iterator = '@@iterator';
-      }
-    }
-  }
-  exports.ensureIterator = ensureIterator;
-  function ensureObservable(Symbol) {
-    if (!Symbol.observable) {
-      if (typeof Symbol.for === 'function') {
-        Symbol.observable = Symbol.for('observable');
-      } else {
-        Symbol.observable = '@@observable';
-      }
-    }
-  }
-  exports.ensureObservable = ensureObservable;
-  exports.SymbolShim = polyfillSymbol(root_1.root);
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/symbol/rxSubscriber.js", ["node_modules/rxjs/util/SymbolShim.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var SymbolShim_1 = $__require('node_modules/rxjs/util/SymbolShim.js');
-  exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/Subscriber.js", "node_modules/rxjs/util/root.js", "node_modules/rxjs/util/SymbolShim.js", "node_modules/rxjs/symbol/rxSubscriber.js"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var Subscriber_1 = $__require('node_modules/rxjs/Subscriber.js');
-  var root_1 = $__require('node_modules/rxjs/util/root.js');
-  var SymbolShim_1 = $__require('node_modules/rxjs/util/SymbolShim.js');
-  var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
-  var Observable = (function() {
-    function Observable(subscribe) {
-      this._isScalar = false;
-      if (subscribe) {
-        this._subscribe = subscribe;
-      }
-    }
-    Observable.prototype.lift = function(operator) {
-      var observable = new Observable();
-      observable.source = this;
-      observable.operator = operator;
-      return observable;
-    };
-    Observable.prototype[SymbolShim_1.SymbolShim.observable] = function() {
-      return this;
-    };
-    Observable.prototype.subscribe = function(observerOrNext, error, complete) {
-      var subscriber;
-      if (observerOrNext && typeof observerOrNext === 'object') {
-        if (observerOrNext instanceof Subscriber_1.Subscriber) {
-          subscriber = observerOrNext;
-        } else if (observerOrNext[rxSubscriber_1.rxSubscriber]) {
-          subscriber = observerOrNext[rxSubscriber_1.rxSubscriber]();
-        } else {
-          subscriber = new Subscriber_1.Subscriber(observerOrNext);
-        }
-      } else {
-        var next = observerOrNext;
-        subscriber = Subscriber_1.Subscriber.create(next, error, complete);
-      }
-      subscriber.add(this._subscribe(subscriber));
-      return subscriber;
-    };
-    Observable.prototype.forEach = function(next, thisArg, PromiseCtor) {
-      if (!PromiseCtor) {
-        if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-          PromiseCtor = root_1.root.Rx.config.Promise;
-        } else if (root_1.root.Promise) {
-          PromiseCtor = root_1.root.Promise;
-        }
-      }
-      if (!PromiseCtor) {
-        throw new Error('no Promise impl found');
-      }
-      var nextHandler;
-      if (thisArg) {
-        nextHandler = function nextHandlerFn(value) {
-          var _a = nextHandlerFn,
-              thisArg = _a.thisArg,
-              next = _a.next;
-          return next.call(thisArg, value);
-        };
-        nextHandler.thisArg = thisArg;
-        nextHandler.next = next;
-      } else {
-        nextHandler = next;
-      }
-      var promiseCallback = function promiseCallbackFn(resolve, reject) {
-        var _a = promiseCallbackFn,
-            source = _a.source,
-            nextHandler = _a.nextHandler;
-        source.subscribe(nextHandler, reject, resolve);
-      };
-      promiseCallback.source = this;
-      promiseCallback.nextHandler = nextHandler;
-      return new PromiseCtor(promiseCallback);
-    };
-    Observable.prototype._subscribe = function(subscriber) {
-      return this.source._subscribe(this.operator.call(subscriber));
-    };
-    Observable.create = function(subscribe) {
-      return new Observable(subscribe);
-    };
-    return Observable;
-  })();
-  exports.Observable = Observable;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/facade/async.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/promise.js", "node_modules/rxjs/Subject.js", "node_modules/rxjs/observable/fromPromise.js", "node_modules/rxjs/operator/toPromise.js", "node_modules/rxjs/Observable.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var promise_1 = $__require('node_modules/angular2/src/facade/promise.js');
-  exports.PromiseWrapper = promise_1.PromiseWrapper;
-  exports.Promise = promise_1.Promise;
-  var Subject_1 = $__require('node_modules/rxjs/Subject.js');
-  var fromPromise_1 = $__require('node_modules/rxjs/observable/fromPromise.js');
-  var toPromise_1 = $__require('node_modules/rxjs/operator/toPromise.js');
-  var Observable_1 = $__require('node_modules/rxjs/Observable.js');
-  exports.Observable = Observable_1.Observable;
-  var Subject_2 = $__require('node_modules/rxjs/Subject.js');
-  exports.Subject = Subject_2.Subject;
-  var TimerWrapper = (function() {
-    function TimerWrapper() {}
-    TimerWrapper.setTimeout = function(fn, millis) {
-      return lang_1.global.setTimeout(fn, millis);
-    };
-    TimerWrapper.clearTimeout = function(id) {
-      lang_1.global.clearTimeout(id);
-    };
-    TimerWrapper.setInterval = function(fn, millis) {
-      return lang_1.global.setInterval(fn, millis);
-    };
-    TimerWrapper.clearInterval = function(id) {
-      lang_1.global.clearInterval(id);
-    };
-    return TimerWrapper;
-  })();
-  exports.TimerWrapper = TimerWrapper;
-  var ObservableWrapper = (function() {
-    function ObservableWrapper() {}
-    ObservableWrapper.subscribe = function(emitter, onNext, onError, onComplete) {
-      if (onComplete === void 0) {
-        onComplete = function() {};
-      }
-      onError = (typeof onError === "function") && onError || lang_1.noop;
-      onComplete = (typeof onComplete === "function") && onComplete || lang_1.noop;
-      return emitter.subscribe({
-        next: onNext,
-        error: onError,
-        complete: onComplete
-      });
-    };
-    ObservableWrapper.isObservable = function(obs) {
-      return !!obs.subscribe;
-    };
-    ObservableWrapper.hasSubscribers = function(obs) {
-      return obs.observers.length > 0;
-    };
-    ObservableWrapper.dispose = function(subscription) {
-      subscription.unsubscribe();
-    };
-    ObservableWrapper.callNext = function(emitter, value) {
-      emitter.next(value);
-    };
-    ObservableWrapper.callEmit = function(emitter, value) {
-      emitter.emit(value);
-    };
-    ObservableWrapper.callError = function(emitter, error) {
-      emitter.error(error);
-    };
-    ObservableWrapper.callComplete = function(emitter) {
-      emitter.complete();
-    };
-    ObservableWrapper.fromPromise = function(promise) {
-      return fromPromise_1.PromiseObservable.create(promise);
-    };
-    ObservableWrapper.toPromise = function(obj) {
-      return toPromise_1.toPromise.call(obj);
-    };
-    return ObservableWrapper;
-  })();
-  exports.ObservableWrapper = ObservableWrapper;
-  var EventEmitter = (function(_super) {
-    __extends(EventEmitter, _super);
-    function EventEmitter(isAsync) {
-      if (isAsync === void 0) {
-        isAsync = true;
-      }
-      _super.call(this);
-      this._isAsync = isAsync;
-    }
-    EventEmitter.prototype.emit = function(value) {
-      _super.prototype.next.call(this, value);
-    };
-    EventEmitter.prototype.next = function(value) {
-      _super.prototype.next.call(this, value);
-    };
-    EventEmitter.prototype.subscribe = function(generatorOrNext, error, complete) {
-      var schedulerFn;
-      var errorFn = function(err) {
-        return null;
-      };
-      var completeFn = function() {
-        return null;
-      };
-      if (generatorOrNext && typeof generatorOrNext === 'object') {
-        schedulerFn = this._isAsync ? function(value) {
-          setTimeout(function() {
-            return generatorOrNext.next(value);
-          });
-        } : function(value) {
-          generatorOrNext.next(value);
-        };
-        if (generatorOrNext.error) {
-          errorFn = this._isAsync ? function(err) {
-            setTimeout(function() {
-              return generatorOrNext.error(err);
-            });
-          } : function(err) {
-            generatorOrNext.error(err);
-          };
-        }
-        if (generatorOrNext.complete) {
-          completeFn = this._isAsync ? function() {
-            setTimeout(function() {
-              return generatorOrNext.complete();
-            });
-          } : function() {
-            generatorOrNext.complete();
-          };
-        }
-      } else {
-        schedulerFn = this._isAsync ? function(value) {
-          setTimeout(function() {
-            return generatorOrNext(value);
-          });
-        } : function(value) {
-          generatorOrNext(value);
-        };
-        if (error) {
-          errorFn = this._isAsync ? function(err) {
-            setTimeout(function() {
-              return error(err);
-            });
-          } : function(err) {
-            error(err);
-          };
-        }
-        if (complete) {
-          completeFn = this._isAsync ? function() {
-            setTimeout(function() {
-              return complete();
-            });
-          } : function() {
-            complete();
-          };
-        }
-      }
-      return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
-    };
-    return EventEmitter;
-  })(Subject_1.Subject);
-  exports.EventEmitter = EventEmitter;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/query_list.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/async.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
-  var QueryList = (function() {
-    function QueryList() {
-      this._results = [];
-      this._emitter = new async_1.EventEmitter();
-    }
-    Object.defineProperty(QueryList.prototype, "changes", {
-      get: function() {
-        return this._emitter;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(QueryList.prototype, "length", {
-      get: function() {
-        return this._results.length;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(QueryList.prototype, "first", {
-      get: function() {
-        return collection_1.ListWrapper.first(this._results);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(QueryList.prototype, "last", {
-      get: function() {
-        return collection_1.ListWrapper.last(this._results);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    QueryList.prototype.map = function(fn) {
-      return this._results.map(fn);
-    };
-    QueryList.prototype.filter = function(fn) {
-      return this._results.filter(fn);
-    };
-    QueryList.prototype.reduce = function(fn, init) {
-      return this._results.reduce(fn, init);
-    };
-    QueryList.prototype.toArray = function() {
-      return collection_1.ListWrapper.clone(this._results);
-    };
-    QueryList.prototype[lang_1.getSymbolIterator()] = function() {
-      return this._results[lang_1.getSymbolIterator()]();
-    };
-    QueryList.prototype.toString = function() {
-      return this._results.toString();
-    };
-    QueryList.prototype.reset = function(res) {
-      this._results = res;
-    };
-    QueryList.prototype.notifyOnChanges = function() {
-      this._emitter.emit(this);
-    };
-    return QueryList;
-  })();
-  exports.QueryList = QueryList;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/event_config.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.EVENT_TARGET_SEPARATOR = ':';
-  var EventConfig = (function() {
-    function EventConfig(fieldName, eventName, isLongForm) {
-      this.fieldName = fieldName;
-      this.eventName = eventName;
-      this.isLongForm = isLongForm;
-    }
-    EventConfig.parse = function(eventConfig) {
-      var fieldName = eventConfig,
-          eventName = eventConfig,
-          isLongForm = false;
-      var separatorIdx = eventConfig.indexOf(exports.EVENT_TARGET_SEPARATOR);
-      if (separatorIdx > -1) {
-        fieldName = eventConfig.substring(0, separatorIdx).trim();
-        eventName = eventConfig.substring(separatorIdx + 1).trim();
-        isLongForm = true;
-      }
-      return new EventConfig(fieldName, eventName, isLongForm);
-    };
-    EventConfig.prototype.getFullName = function() {
-      return this.isLongForm ? "" + this.fieldName + exports.EVENT_TARGET_SEPARATOR + this.eventName : this.eventName;
-    };
-    return EventConfig;
-  })();
-  exports.EventConfig = EventConfig;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/pipes/pipe_provider.js", ["node_modules/angular2/src/core/di/provider.js", "node_modules/angular2/src/core/di.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var provider_1 = $__require('node_modules/angular2/src/core/di/provider.js');
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var PipeProvider = (function(_super) {
-    __extends(PipeProvider, _super);
-    function PipeProvider(name, pure, key, resolvedFactories, multiBinding) {
-      _super.call(this, key, resolvedFactories, multiBinding);
-      this.name = name;
-      this.pure = pure;
-    }
-    PipeProvider.createFromType = function(type, metadata) {
-      var provider = new di_1.Provider(type, {useClass: type});
-      var rb = provider_1.resolveProvider(provider);
-      return new PipeProvider(metadata.name, metadata.pure, rb.key, rb.resolvedFactories, rb.multiProvider);
-    };
-    return PipeProvider;
-  })(provider_1.ResolvedProvider_);
-  exports.PipeProvider = PipeProvider;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/interfaces.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(LifecycleHooks) {
-    LifecycleHooks[LifecycleHooks["OnInit"] = 0] = "OnInit";
-    LifecycleHooks[LifecycleHooks["OnDestroy"] = 1] = "OnDestroy";
-    LifecycleHooks[LifecycleHooks["DoCheck"] = 2] = "DoCheck";
-    LifecycleHooks[LifecycleHooks["OnChanges"] = 3] = "OnChanges";
-    LifecycleHooks[LifecycleHooks["AfterContentInit"] = 4] = "AfterContentInit";
-    LifecycleHooks[LifecycleHooks["AfterContentChecked"] = 5] = "AfterContentChecked";
-    LifecycleHooks[LifecycleHooks["AfterViewInit"] = 6] = "AfterViewInit";
-    LifecycleHooks[LifecycleHooks["AfterViewChecked"] = 7] = "AfterViewChecked";
-  })(exports.LifecycleHooks || (exports.LifecycleHooks = {}));
-  var LifecycleHooks = exports.LifecycleHooks;
-  exports.LIFECYCLE_HOOKS_VALUES = [LifecycleHooks.OnInit, LifecycleHooks.OnDestroy, LifecycleHooks.DoCheck, LifecycleHooks.OnChanges, LifecycleHooks.AfterContentInit, LifecycleHooks.AfterContentChecked, LifecycleHooks.AfterViewInit, LifecycleHooks.AfterViewChecked];
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/element_injector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/di/injector.js", "node_modules/angular2/src/core/di/provider.js", "node_modules/angular2/src/core/metadata/di.js", "node_modules/angular2/src/core/linker/view_manager.js", "node_modules/angular2/src/core/linker/view_container_ref.js", "node_modules/angular2/src/core/linker/element_ref.js", "node_modules/angular2/src/core/linker/template_ref.js", "node_modules/angular2/src/core/metadata/directives.js", "node_modules/angular2/src/core/linker/directive_lifecycle_reflector.js", "node_modules/angular2/src/core/change_detection/change_detection.js", "node_modules/angular2/src/core/linker/query_list.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/linker/event_config.js", "node_modules/angular2/src/core/pipes/pipe_provider.js", "node_modules/angular2/src/core/linker/interfaces.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var injector_1 = $__require('node_modules/angular2/src/core/di/injector.js');
-  var provider_1 = $__require('node_modules/angular2/src/core/di/provider.js');
-  var di_2 = $__require('node_modules/angular2/src/core/metadata/di.js');
-  var avmModule = $__require('node_modules/angular2/src/core/linker/view_manager.js');
-  var view_container_ref_1 = $__require('node_modules/angular2/src/core/linker/view_container_ref.js');
-  var element_ref_1 = $__require('node_modules/angular2/src/core/linker/element_ref.js');
-  var template_ref_1 = $__require('node_modules/angular2/src/core/linker/template_ref.js');
-  var directives_1 = $__require('node_modules/angular2/src/core/metadata/directives.js');
-  var directive_lifecycle_reflector_1 = $__require('node_modules/angular2/src/core/linker/directive_lifecycle_reflector.js');
-  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
-  var query_list_1 = $__require('node_modules/angular2/src/core/linker/query_list.js');
-  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
-  var event_config_1 = $__require('node_modules/angular2/src/core/linker/event_config.js');
+  var element_1 = $__require('node_modules/angular2/src/core/linker/element.js');
+  var directive_resolver_1 = $__require('node_modules/angular2/src/core/linker/directive_resolver.js');
   var pipe_provider_1 = $__require('node_modules/angular2/src/core/pipes/pipe_provider.js');
-  var interfaces_1 = $__require('node_modules/angular2/src/core/linker/interfaces.js');
-  var view_container_ref_2 = $__require('node_modules/angular2/src/core/linker/view_container_ref.js');
-  var _staticKeys;
-  var StaticKeys = (function() {
-    function StaticKeys() {
-      this.viewManagerId = di_1.Key.get(avmModule.AppViewManager).id;
-      this.templateRefId = di_1.Key.get(template_ref_1.TemplateRef).id;
-      this.viewContainerId = di_1.Key.get(view_container_ref_1.ViewContainerRef).id;
-      this.changeDetectorRefId = di_1.Key.get(change_detection_1.ChangeDetectorRef).id;
-      this.elementRefId = di_1.Key.get(element_ref_1.ElementRef).id;
+  var pipe_resolver_1 = $__require('node_modules/angular2/src/core/linker/pipe_resolver.js');
+  var ResolvedMetadataCache = (function() {
+    function ResolvedMetadataCache(_directiveResolver, _pipeResolver) {
+      this._directiveResolver = _directiveResolver;
+      this._pipeResolver = _pipeResolver;
+      this._directiveCache = new Map();
+      this._pipeCache = new Map();
     }
-    StaticKeys.instance = function() {
-      if (lang_1.isBlank(_staticKeys))
-        _staticKeys = new StaticKeys();
-      return _staticKeys;
+    ResolvedMetadataCache.prototype.getResolvedDirectiveMetadata = function(type) {
+      var result = this._directiveCache.get(type);
+      if (lang_1.isBlank(result)) {
+        result = element_1.DirectiveProvider.createFromType(type, this._directiveResolver.resolve(type));
+        this._directiveCache.set(type, result);
+      }
+      return result;
     };
-    return StaticKeys;
+    ResolvedMetadataCache.prototype.getResolvedPipeMetadata = function(type) {
+      var result = this._pipeCache.get(type);
+      if (lang_1.isBlank(result)) {
+        result = pipe_provider_1.PipeProvider.createFromType(type, this._pipeResolver.resolve(type));
+        this._pipeCache.set(type, result);
+      }
+      return result;
+    };
+    ResolvedMetadataCache = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [directive_resolver_1.DirectiveResolver, pipe_resolver_1.PipeResolver])], ResolvedMetadataCache);
+    return ResolvedMetadataCache;
   })();
-  exports.StaticKeys = StaticKeys;
-  var TreeNode = (function() {
-    function TreeNode(parent) {
-      if (lang_1.isPresent(parent)) {
-        parent.addChild(this);
-      } else {
-        this._parent = null;
-      }
-    }
-    TreeNode.prototype.addChild = function(child) {
-      child._parent = this;
-    };
-    TreeNode.prototype.remove = function() {
-      this._parent = null;
-    };
-    Object.defineProperty(TreeNode.prototype, "parent", {
-      get: function() {
-        return this._parent;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return TreeNode;
-  })();
-  exports.TreeNode = TreeNode;
-  var DirectiveDependency = (function(_super) {
-    __extends(DirectiveDependency, _super);
-    function DirectiveDependency(key, optional, lowerBoundVisibility, upperBoundVisibility, properties, attributeName, queryDecorator) {
-      _super.call(this, key, optional, lowerBoundVisibility, upperBoundVisibility, properties);
-      this.attributeName = attributeName;
-      this.queryDecorator = queryDecorator;
-      this._verify();
-    }
-    DirectiveDependency.prototype._verify = function() {
-      var count = 0;
-      if (lang_1.isPresent(this.queryDecorator))
-        count++;
-      if (lang_1.isPresent(this.attributeName))
-        count++;
-      if (count > 1)
-        throw new exceptions_1.BaseException('A directive injectable can contain only one of the following @Attribute or @Query.');
-    };
-    DirectiveDependency.createFrom = function(d) {
-      return new DirectiveDependency(d.key, d.optional, d.lowerBoundVisibility, d.upperBoundVisibility, d.properties, DirectiveDependency._attributeName(d.properties), DirectiveDependency._query(d.properties));
-    };
-    DirectiveDependency._attributeName = function(properties) {
-      var p = properties.find(function(p) {
-        return p instanceof di_2.AttributeMetadata;
-      });
-      return lang_1.isPresent(p) ? p.attributeName : null;
-    };
-    DirectiveDependency._query = function(properties) {
-      return properties.find(function(p) {
-        return p instanceof di_2.QueryMetadata;
-      });
-    };
-    return DirectiveDependency;
-  })(di_1.Dependency);
-  exports.DirectiveDependency = DirectiveDependency;
-  var DirectiveProvider = (function(_super) {
-    __extends(DirectiveProvider, _super);
-    function DirectiveProvider(key, factory, deps, metadata, providers, viewProviders) {
-      _super.call(this, key, [new provider_1.ResolvedFactory(factory, deps)], false);
-      this.metadata = metadata;
-      this.providers = providers;
-      this.viewProviders = viewProviders;
-      this.callOnDestroy = directive_lifecycle_reflector_1.hasLifecycleHook(interfaces_1.LifecycleHooks.OnDestroy, key.token);
-    }
-    Object.defineProperty(DirectiveProvider.prototype, "displayName", {
-      get: function() {
-        return this.key.displayName;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveProvider.prototype, "queries", {
-      get: function() {
-        if (lang_1.isBlank(this.metadata.queries))
-          return [];
-        var res = [];
-        collection_1.StringMapWrapper.forEach(this.metadata.queries, function(meta, fieldName) {
-          var setter = reflection_1.reflector.setter(fieldName);
-          res.push(new QueryMetadataWithSetter(setter, meta));
-        });
-        return res;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveProvider.prototype, "eventEmitters", {
-      get: function() {
-        return lang_1.isPresent(this.metadata) && lang_1.isPresent(this.metadata.outputs) ? this.metadata.outputs : [];
-      },
-      enumerable: true,
-      configurable: true
-    });
-    DirectiveProvider.createFromProvider = function(provider, meta) {
-      if (lang_1.isBlank(meta)) {
-        meta = new directives_1.DirectiveMetadata();
-      }
-      var rb = provider_1.resolveProvider(provider);
-      var rf = rb.resolvedFactories[0];
-      var deps = rf.dependencies.map(DirectiveDependency.createFrom);
-      var providers = lang_1.isPresent(meta.providers) ? meta.providers : [];
-      var viewBindigs = meta instanceof directives_1.ComponentMetadata && lang_1.isPresent(meta.viewProviders) ? meta.viewProviders : [];
-      return new DirectiveProvider(rb.key, rf.factory, deps, meta, providers, viewBindigs);
-    };
-    DirectiveProvider.createFromType = function(type, annotation) {
-      var provider = new di_1.Provider(type, {useClass: type});
-      return DirectiveProvider.createFromProvider(provider, annotation);
-    };
-    return DirectiveProvider;
-  })(provider_1.ResolvedProvider_);
-  exports.DirectiveProvider = DirectiveProvider;
-  var PreBuiltObjects = (function() {
-    function PreBuiltObjects(viewManager, view, elementRef, templateRef) {
-      this.viewManager = viewManager;
-      this.view = view;
-      this.elementRef = elementRef;
-      this.templateRef = templateRef;
-      this.nestedView = null;
-    }
-    return PreBuiltObjects;
-  })();
-  exports.PreBuiltObjects = PreBuiltObjects;
-  var QueryMetadataWithSetter = (function() {
-    function QueryMetadataWithSetter(setter, metadata) {
-      this.setter = setter;
-      this.metadata = metadata;
-    }
-    return QueryMetadataWithSetter;
-  })();
-  exports.QueryMetadataWithSetter = QueryMetadataWithSetter;
-  var EventEmitterAccessor = (function() {
-    function EventEmitterAccessor(eventName, getter) {
-      this.eventName = eventName;
-      this.getter = getter;
-    }
-    EventEmitterAccessor.prototype.subscribe = function(view, boundElementIndex, directive) {
-      var _this = this;
-      var eventEmitter = this.getter(directive);
-      return async_1.ObservableWrapper.subscribe(eventEmitter, function(eventObj) {
-        return view.triggerEventHandlers(_this.eventName, eventObj, boundElementIndex);
-      });
-    };
-    return EventEmitterAccessor;
-  })();
-  exports.EventEmitterAccessor = EventEmitterAccessor;
-  function _createEventEmitterAccessors(bwv) {
-    var provider = bwv.provider;
-    if (!(provider instanceof DirectiveProvider))
-      return [];
-    var db = provider;
-    return db.eventEmitters.map(function(eventConfig) {
-      var parsedEvent = event_config_1.EventConfig.parse(eventConfig);
-      return new EventEmitterAccessor(parsedEvent.eventName, reflection_1.reflector.getter(parsedEvent.fieldName));
-    });
-  }
-  function _createProtoQueryRefs(providers) {
-    var res = [];
-    collection_1.ListWrapper.forEachWithIndex(providers, function(b, i) {
-      if (b.provider instanceof DirectiveProvider) {
-        var directiveProvider = b.provider;
-        var queries = directiveProvider.queries;
-        queries.forEach(function(q) {
-          return res.push(new ProtoQueryRef(i, q.setter, q.metadata));
-        });
-        var deps = directiveProvider.resolvedFactory.dependencies;
-        deps.forEach(function(d) {
-          if (lang_1.isPresent(d.queryDecorator))
-            res.push(new ProtoQueryRef(i, null, d.queryDecorator));
-        });
-      }
-    });
-    return res;
-  }
-  var ProtoElementInjector = (function() {
-    function ProtoElementInjector(parent, index, bwv, distanceToParent, _firstProviderIsComponent, directiveVariableBindings) {
-      this.parent = parent;
-      this.index = index;
-      this.distanceToParent = distanceToParent;
-      this.directiveVariableBindings = directiveVariableBindings;
-      this._firstProviderIsComponent = _firstProviderIsComponent;
-      var length = bwv.length;
-      this.protoInjector = new injector_1.ProtoInjector(bwv);
-      this.eventEmitterAccessors = collection_1.ListWrapper.createFixedSize(length);
-      for (var i = 0; i < length; ++i) {
-        this.eventEmitterAccessors[i] = _createEventEmitterAccessors(bwv[i]);
-      }
-      this.protoQueryRefs = _createProtoQueryRefs(bwv);
-    }
-    ProtoElementInjector.create = function(parent, index, providers, firstProviderIsComponent, distanceToParent, directiveVariableBindings) {
-      var bd = [];
-      ProtoElementInjector._createDirectiveProviderWithVisibility(providers, bd, firstProviderIsComponent);
-      if (firstProviderIsComponent) {
-        ProtoElementInjector._createViewProvidersWithVisibility(providers, bd);
-      }
-      ProtoElementInjector._createProvidersWithVisibility(providers, bd);
-      return new ProtoElementInjector(parent, index, bd, distanceToParent, firstProviderIsComponent, directiveVariableBindings);
-    };
-    ProtoElementInjector._createDirectiveProviderWithVisibility = function(dirProviders, bd, firstProviderIsComponent) {
-      dirProviders.forEach(function(dirProvider) {
-        bd.push(ProtoElementInjector._createProviderWithVisibility(firstProviderIsComponent, dirProvider, dirProviders, dirProvider));
-      });
-    };
-    ProtoElementInjector._createProvidersWithVisibility = function(dirProviders, bd) {
-      var providersFromAllDirectives = [];
-      dirProviders.forEach(function(dirProvider) {
-        providersFromAllDirectives = collection_1.ListWrapper.concat(providersFromAllDirectives, dirProvider.providers);
-      });
-      var resolved = di_1.Injector.resolve(providersFromAllDirectives);
-      resolved.forEach(function(b) {
-        return bd.push(new injector_1.ProviderWithVisibility(b, injector_1.Visibility.Public));
-      });
-    };
-    ProtoElementInjector._createProviderWithVisibility = function(firstProviderIsComponent, dirProvider, dirProviders, provider) {
-      var isComponent = firstProviderIsComponent && dirProviders[0] === dirProvider;
-      return new injector_1.ProviderWithVisibility(provider, isComponent ? injector_1.Visibility.PublicAndPrivate : injector_1.Visibility.Public);
-    };
-    ProtoElementInjector._createViewProvidersWithVisibility = function(dirProviders, bd) {
-      var resolvedViewProviders = di_1.Injector.resolve(dirProviders[0].viewProviders);
-      resolvedViewProviders.forEach(function(b) {
-        return bd.push(new injector_1.ProviderWithVisibility(b, injector_1.Visibility.Private));
-      });
-    };
-    ProtoElementInjector.prototype.instantiate = function(parent) {
-      return new ElementInjector(this, parent);
-    };
-    ProtoElementInjector.prototype.directParent = function() {
-      return this.distanceToParent < 2 ? this.parent : null;
-    };
-    Object.defineProperty(ProtoElementInjector.prototype, "hasBindings", {
-      get: function() {
-        return this.eventEmitterAccessors.length > 0;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ProtoElementInjector.prototype.getProviderAtIndex = function(index) {
-      return this.protoInjector.getProviderAtIndex(index);
-    };
-    return ProtoElementInjector;
-  })();
-  exports.ProtoElementInjector = ProtoElementInjector;
-  var _Context = (function() {
-    function _Context(element, componentElement, injector) {
-      this.element = element;
-      this.componentElement = componentElement;
-      this.injector = injector;
-    }
-    return _Context;
-  })();
-  var ElementInjector = (function(_super) {
-    __extends(ElementInjector, _super);
-    function ElementInjector(_proto, parent) {
-      var _this = this;
-      _super.call(this, parent);
-      this._preBuiltObjects = null;
-      this._proto = _proto;
-      this._injector = new di_1.Injector(this._proto.protoInjector, null, this, function() {
-        return _this._debugContext();
-      });
-      var injectorStrategy = this._injector.internalStrategy;
-      this._strategy = injectorStrategy instanceof injector_1.InjectorInlineStrategy ? new ElementInjectorInlineStrategy(injectorStrategy, this) : new ElementInjectorDynamicStrategy(injectorStrategy, this);
-      this.hydrated = false;
-      this._queryStrategy = this._buildQueryStrategy();
-    }
-    ElementInjector.prototype.dehydrate = function() {
-      this.hydrated = false;
-      this._host = null;
-      this._preBuiltObjects = null;
-      this._strategy.callOnDestroy();
-      this._strategy.dehydrate();
-      this._queryStrategy.dehydrate();
-    };
-    ElementInjector.prototype.hydrate = function(imperativelyCreatedInjector, host, preBuiltObjects) {
-      this._host = host;
-      this._preBuiltObjects = preBuiltObjects;
-      this._reattachInjectors(imperativelyCreatedInjector);
-      this._queryStrategy.hydrate();
-      this._strategy.hydrate();
-      this.hydrated = true;
-    };
-    ElementInjector.prototype._debugContext = function() {
-      var p = this._preBuiltObjects;
-      var index = p.elementRef.boundElementIndex - p.view.elementOffset;
-      var c = this._preBuiltObjects.view.getDebugContext(index, null);
-      return lang_1.isPresent(c) ? new _Context(c.element, c.componentElement, c.injector) : null;
-    };
-    ElementInjector.prototype._reattachInjectors = function(imperativelyCreatedInjector) {
-      if (lang_1.isPresent(this._parent)) {
-        if (lang_1.isPresent(imperativelyCreatedInjector)) {
-          this._reattachInjector(this._injector, imperativelyCreatedInjector, false);
-          this._reattachInjector(imperativelyCreatedInjector, this._parent._injector, false);
-        } else {
-          this._reattachInjector(this._injector, this._parent._injector, false);
-        }
-      } else if (lang_1.isPresent(this._host)) {
-        if (lang_1.isPresent(imperativelyCreatedInjector)) {
-          this._reattachInjector(this._injector, imperativelyCreatedInjector, false);
-          this._reattachInjector(imperativelyCreatedInjector, this._host._injector, true);
-        } else {
-          this._reattachInjector(this._injector, this._host._injector, true);
-        }
-      } else {
-        if (lang_1.isPresent(imperativelyCreatedInjector)) {
-          this._reattachInjector(this._injector, imperativelyCreatedInjector, true);
-        }
-      }
-    };
-    ElementInjector.prototype._reattachInjector = function(injector, parentInjector, isBoundary) {
-      injector.internalStrategy.attach(parentInjector, isBoundary);
-    };
-    ElementInjector.prototype.hasVariableBinding = function(name) {
-      var vb = this._proto.directiveVariableBindings;
-      return lang_1.isPresent(vb) && vb.has(name);
-    };
-    ElementInjector.prototype.getVariableBinding = function(name) {
-      var index = this._proto.directiveVariableBindings.get(name);
-      return lang_1.isPresent(index) ? this.getDirectiveAtIndex(index) : this.getElementRef();
-    };
-    ElementInjector.prototype.get = function(token) {
-      return this._injector.get(token);
-    };
-    ElementInjector.prototype.hasDirective = function(type) {
-      return lang_1.isPresent(this._injector.getOptional(type));
-    };
-    ElementInjector.prototype.getEventEmitterAccessors = function() {
-      return this._proto.eventEmitterAccessors;
-    };
-    ElementInjector.prototype.getDirectiveVariableBindings = function() {
-      return this._proto.directiveVariableBindings;
-    };
-    ElementInjector.prototype.getComponent = function() {
-      return this._strategy.getComponent();
-    };
-    ElementInjector.prototype.getInjector = function() {
-      return this._injector;
-    };
-    ElementInjector.prototype.getElementRef = function() {
-      return this._preBuiltObjects.elementRef;
-    };
-    ElementInjector.prototype.getViewContainerRef = function() {
-      return new view_container_ref_2.ViewContainerRef_(this._preBuiltObjects.viewManager, this.getElementRef());
-    };
-    ElementInjector.prototype.getNestedView = function() {
-      return this._preBuiltObjects.nestedView;
-    };
-    ElementInjector.prototype.getView = function() {
-      return this._preBuiltObjects.view;
-    };
-    ElementInjector.prototype.directParent = function() {
-      return this._proto.distanceToParent < 2 ? this.parent : null;
-    };
-    ElementInjector.prototype.isComponentKey = function(key) {
-      return this._strategy.isComponentKey(key);
-    };
-    ElementInjector.prototype.getDependency = function(injector, provider, dep) {
-      var key = dep.key;
-      if (provider instanceof DirectiveProvider) {
-        var dirDep = dep;
-        var dirProvider = provider;
-        var staticKeys = StaticKeys.instance();
-        if (key.id === staticKeys.viewManagerId)
-          return this._preBuiltObjects.viewManager;
-        if (lang_1.isPresent(dirDep.attributeName))
-          return this._buildAttribute(dirDep);
-        if (lang_1.isPresent(dirDep.queryDecorator))
-          return this._queryStrategy.findQuery(dirDep.queryDecorator).list;
-        if (dirDep.key.id === StaticKeys.instance().changeDetectorRefId) {
-          if (dirProvider.metadata instanceof directives_1.ComponentMetadata) {
-            var componentView = this._preBuiltObjects.view.getNestedView(this._preBuiltObjects.elementRef.boundElementIndex);
-            return componentView.changeDetector.ref;
-          } else {
-            return this._preBuiltObjects.view.changeDetector.ref;
-          }
-        }
-        if (dirDep.key.id === StaticKeys.instance().elementRefId) {
-          return this.getElementRef();
-        }
-        if (dirDep.key.id === StaticKeys.instance().viewContainerId) {
-          return this.getViewContainerRef();
-        }
-        if (dirDep.key.id === StaticKeys.instance().templateRefId) {
-          if (lang_1.isBlank(this._preBuiltObjects.templateRef)) {
-            if (dirDep.optional) {
-              return null;
-            }
-            throw new di_1.NoProviderError(null, dirDep.key);
-          }
-          return this._preBuiltObjects.templateRef;
-        }
-      } else if (provider instanceof pipe_provider_1.PipeProvider) {
-        if (dep.key.id === StaticKeys.instance().changeDetectorRefId) {
-          var componentView = this._preBuiltObjects.view.getNestedView(this._preBuiltObjects.elementRef.boundElementIndex);
-          return componentView.changeDetector.ref;
-        }
-      }
-      return injector_1.UNDEFINED;
-    };
-    ElementInjector.prototype._buildAttribute = function(dep) {
-      var attributes = this._proto.attributes;
-      if (lang_1.isPresent(attributes) && attributes.has(dep.attributeName)) {
-        return attributes.get(dep.attributeName);
-      } else {
-        return null;
-      }
-    };
-    ElementInjector.prototype.addDirectivesMatchingQuery = function(query, list) {
-      var templateRef = lang_1.isBlank(this._preBuiltObjects) ? null : this._preBuiltObjects.templateRef;
-      if (query.selector === template_ref_1.TemplateRef && lang_1.isPresent(templateRef)) {
-        list.push(templateRef);
-      }
-      this._strategy.addDirectivesMatchingQuery(query, list);
-    };
-    ElementInjector.prototype._buildQueryStrategy = function() {
-      if (this._proto.protoQueryRefs.length === 0) {
-        return _emptyQueryStrategy;
-      } else if (this._proto.protoQueryRefs.length <= InlineQueryStrategy.NUMBER_OF_SUPPORTED_QUERIES) {
-        return new InlineQueryStrategy(this);
-      } else {
-        return new DynamicQueryStrategy(this);
-      }
-    };
-    ElementInjector.prototype.link = function(parent) {
-      parent.addChild(this);
-    };
-    ElementInjector.prototype.unlink = function() {
-      this.remove();
-    };
-    ElementInjector.prototype.getDirectiveAtIndex = function(index) {
-      return this._injector.getAt(index);
-    };
-    ElementInjector.prototype.hasInstances = function() {
-      return this._proto.hasBindings && this.hydrated;
-    };
-    ElementInjector.prototype.getHost = function() {
-      return this._host;
-    };
-    ElementInjector.prototype.getBoundElementIndex = function() {
-      return this._proto.index;
-    };
-    ElementInjector.prototype.getRootViewInjectors = function() {
-      if (!this.hydrated)
-        return [];
-      var view = this._preBuiltObjects.view;
-      var nestedView = view.getNestedView(view.elementOffset + this.getBoundElementIndex());
-      return lang_1.isPresent(nestedView) ? nestedView.rootElementInjectors : [];
-    };
-    ElementInjector.prototype.ngAfterViewChecked = function() {
-      this._queryStrategy.updateViewQueries();
-    };
-    ElementInjector.prototype.ngAfterContentChecked = function() {
-      this._queryStrategy.updateContentQueries();
-    };
-    ElementInjector.prototype.traverseAndSetQueriesAsDirty = function() {
-      var inj = this;
-      while (lang_1.isPresent(inj)) {
-        inj._setQueriesAsDirty();
-        inj = inj.parent;
-      }
-    };
-    ElementInjector.prototype._setQueriesAsDirty = function() {
-      this._queryStrategy.setContentQueriesAsDirty();
-      if (lang_1.isPresent(this._host))
-        this._host._queryStrategy.setViewQueriesAsDirty();
-    };
-    return ElementInjector;
-  })(TreeNode);
-  exports.ElementInjector = ElementInjector;
-  var _EmptyQueryStrategy = (function() {
-    function _EmptyQueryStrategy() {}
-    _EmptyQueryStrategy.prototype.setContentQueriesAsDirty = function() {};
-    _EmptyQueryStrategy.prototype.setViewQueriesAsDirty = function() {};
-    _EmptyQueryStrategy.prototype.hydrate = function() {};
-    _EmptyQueryStrategy.prototype.dehydrate = function() {};
-    _EmptyQueryStrategy.prototype.updateContentQueries = function() {};
-    _EmptyQueryStrategy.prototype.updateViewQueries = function() {};
-    _EmptyQueryStrategy.prototype.findQuery = function(query) {
-      throw new exceptions_1.BaseException("Cannot find query for directive " + query + ".");
-    };
-    return _EmptyQueryStrategy;
-  })();
-  var _emptyQueryStrategy = new _EmptyQueryStrategy();
-  var InlineQueryStrategy = (function() {
-    function InlineQueryStrategy(ei) {
-      var protoRefs = ei._proto.protoQueryRefs;
-      if (protoRefs.length > 0)
-        this.query0 = new QueryRef(protoRefs[0], ei);
-      if (protoRefs.length > 1)
-        this.query1 = new QueryRef(protoRefs[1], ei);
-      if (protoRefs.length > 2)
-        this.query2 = new QueryRef(protoRefs[2], ei);
-    }
-    InlineQueryStrategy.prototype.setContentQueriesAsDirty = function() {
-      if (lang_1.isPresent(this.query0) && !this.query0.isViewQuery)
-        this.query0.dirty = true;
-      if (lang_1.isPresent(this.query1) && !this.query1.isViewQuery)
-        this.query1.dirty = true;
-      if (lang_1.isPresent(this.query2) && !this.query2.isViewQuery)
-        this.query2.dirty = true;
-    };
-    InlineQueryStrategy.prototype.setViewQueriesAsDirty = function() {
-      if (lang_1.isPresent(this.query0) && this.query0.isViewQuery)
-        this.query0.dirty = true;
-      if (lang_1.isPresent(this.query1) && this.query1.isViewQuery)
-        this.query1.dirty = true;
-      if (lang_1.isPresent(this.query2) && this.query2.isViewQuery)
-        this.query2.dirty = true;
-    };
-    InlineQueryStrategy.prototype.hydrate = function() {
-      if (lang_1.isPresent(this.query0))
-        this.query0.hydrate();
-      if (lang_1.isPresent(this.query1))
-        this.query1.hydrate();
-      if (lang_1.isPresent(this.query2))
-        this.query2.hydrate();
-    };
-    InlineQueryStrategy.prototype.dehydrate = function() {
-      if (lang_1.isPresent(this.query0))
-        this.query0.dehydrate();
-      if (lang_1.isPresent(this.query1))
-        this.query1.dehydrate();
-      if (lang_1.isPresent(this.query2))
-        this.query2.dehydrate();
-    };
-    InlineQueryStrategy.prototype.updateContentQueries = function() {
-      if (lang_1.isPresent(this.query0) && !this.query0.isViewQuery) {
-        this.query0.update();
-      }
-      if (lang_1.isPresent(this.query1) && !this.query1.isViewQuery) {
-        this.query1.update();
-      }
-      if (lang_1.isPresent(this.query2) && !this.query2.isViewQuery) {
-        this.query2.update();
-      }
-    };
-    InlineQueryStrategy.prototype.updateViewQueries = function() {
-      if (lang_1.isPresent(this.query0) && this.query0.isViewQuery) {
-        this.query0.update();
-      }
-      if (lang_1.isPresent(this.query1) && this.query1.isViewQuery) {
-        this.query1.update();
-      }
-      if (lang_1.isPresent(this.query2) && this.query2.isViewQuery) {
-        this.query2.update();
-      }
-    };
-    InlineQueryStrategy.prototype.findQuery = function(query) {
-      if (lang_1.isPresent(this.query0) && this.query0.protoQueryRef.query === query) {
-        return this.query0;
-      }
-      if (lang_1.isPresent(this.query1) && this.query1.protoQueryRef.query === query) {
-        return this.query1;
-      }
-      if (lang_1.isPresent(this.query2) && this.query2.protoQueryRef.query === query) {
-        return this.query2;
-      }
-      throw new exceptions_1.BaseException("Cannot find query for directive " + query + ".");
-    };
-    InlineQueryStrategy.NUMBER_OF_SUPPORTED_QUERIES = 3;
-    return InlineQueryStrategy;
-  })();
-  var DynamicQueryStrategy = (function() {
-    function DynamicQueryStrategy(ei) {
-      this.queries = ei._proto.protoQueryRefs.map(function(p) {
-        return new QueryRef(p, ei);
-      });
-    }
-    DynamicQueryStrategy.prototype.setContentQueriesAsDirty = function() {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        if (!q.isViewQuery)
-          q.dirty = true;
-      }
-    };
-    DynamicQueryStrategy.prototype.setViewQueriesAsDirty = function() {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        if (q.isViewQuery)
-          q.dirty = true;
-      }
-    };
-    DynamicQueryStrategy.prototype.hydrate = function() {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        q.hydrate();
-      }
-    };
-    DynamicQueryStrategy.prototype.dehydrate = function() {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        q.dehydrate();
-      }
-    };
-    DynamicQueryStrategy.prototype.updateContentQueries = function() {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        if (!q.isViewQuery) {
-          q.update();
-        }
-      }
-    };
-    DynamicQueryStrategy.prototype.updateViewQueries = function() {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        if (q.isViewQuery) {
-          q.update();
-        }
-      }
-    };
-    DynamicQueryStrategy.prototype.findQuery = function(query) {
-      for (var i = 0; i < this.queries.length; ++i) {
-        var q = this.queries[i];
-        if (q.protoQueryRef.query === query) {
-          return q;
-        }
-      }
-      throw new exceptions_1.BaseException("Cannot find query for directive " + query + ".");
-    };
-    return DynamicQueryStrategy;
-  })();
-  var ElementInjectorInlineStrategy = (function() {
-    function ElementInjectorInlineStrategy(injectorStrategy, _ei) {
-      this.injectorStrategy = injectorStrategy;
-      this._ei = _ei;
-    }
-    ElementInjectorInlineStrategy.prototype.hydrate = function() {
-      var i = this.injectorStrategy;
-      var p = i.protoStrategy;
-      i.resetConstructionCounter();
-      if (p.provider0 instanceof DirectiveProvider && lang_1.isPresent(p.keyId0) && i.obj0 === injector_1.UNDEFINED)
-        i.obj0 = i.instantiateProvider(p.provider0, p.visibility0);
-      if (p.provider1 instanceof DirectiveProvider && lang_1.isPresent(p.keyId1) && i.obj1 === injector_1.UNDEFINED)
-        i.obj1 = i.instantiateProvider(p.provider1, p.visibility1);
-      if (p.provider2 instanceof DirectiveProvider && lang_1.isPresent(p.keyId2) && i.obj2 === injector_1.UNDEFINED)
-        i.obj2 = i.instantiateProvider(p.provider2, p.visibility2);
-      if (p.provider3 instanceof DirectiveProvider && lang_1.isPresent(p.keyId3) && i.obj3 === injector_1.UNDEFINED)
-        i.obj3 = i.instantiateProvider(p.provider3, p.visibility3);
-      if (p.provider4 instanceof DirectiveProvider && lang_1.isPresent(p.keyId4) && i.obj4 === injector_1.UNDEFINED)
-        i.obj4 = i.instantiateProvider(p.provider4, p.visibility4);
-      if (p.provider5 instanceof DirectiveProvider && lang_1.isPresent(p.keyId5) && i.obj5 === injector_1.UNDEFINED)
-        i.obj5 = i.instantiateProvider(p.provider5, p.visibility5);
-      if (p.provider6 instanceof DirectiveProvider && lang_1.isPresent(p.keyId6) && i.obj6 === injector_1.UNDEFINED)
-        i.obj6 = i.instantiateProvider(p.provider6, p.visibility6);
-      if (p.provider7 instanceof DirectiveProvider && lang_1.isPresent(p.keyId7) && i.obj7 === injector_1.UNDEFINED)
-        i.obj7 = i.instantiateProvider(p.provider7, p.visibility7);
-      if (p.provider8 instanceof DirectiveProvider && lang_1.isPresent(p.keyId8) && i.obj8 === injector_1.UNDEFINED)
-        i.obj8 = i.instantiateProvider(p.provider8, p.visibility8);
-      if (p.provider9 instanceof DirectiveProvider && lang_1.isPresent(p.keyId9) && i.obj9 === injector_1.UNDEFINED)
-        i.obj9 = i.instantiateProvider(p.provider9, p.visibility9);
-    };
-    ElementInjectorInlineStrategy.prototype.dehydrate = function() {
-      var i = this.injectorStrategy;
-      i.obj0 = injector_1.UNDEFINED;
-      i.obj1 = injector_1.UNDEFINED;
-      i.obj2 = injector_1.UNDEFINED;
-      i.obj3 = injector_1.UNDEFINED;
-      i.obj4 = injector_1.UNDEFINED;
-      i.obj5 = injector_1.UNDEFINED;
-      i.obj6 = injector_1.UNDEFINED;
-      i.obj7 = injector_1.UNDEFINED;
-      i.obj8 = injector_1.UNDEFINED;
-      i.obj9 = injector_1.UNDEFINED;
-    };
-    ElementInjectorInlineStrategy.prototype.callOnDestroy = function() {
-      var i = this.injectorStrategy;
-      var p = i.protoStrategy;
-      if (p.provider0 instanceof DirectiveProvider && p.provider0.callOnDestroy) {
-        i.obj0.ngOnDestroy();
-      }
-      if (p.provider1 instanceof DirectiveProvider && p.provider1.callOnDestroy) {
-        i.obj1.ngOnDestroy();
-      }
-      if (p.provider2 instanceof DirectiveProvider && p.provider2.callOnDestroy) {
-        i.obj2.ngOnDestroy();
-      }
-      if (p.provider3 instanceof DirectiveProvider && p.provider3.callOnDestroy) {
-        i.obj3.ngOnDestroy();
-      }
-      if (p.provider4 instanceof DirectiveProvider && p.provider4.callOnDestroy) {
-        i.obj4.ngOnDestroy();
-      }
-      if (p.provider5 instanceof DirectiveProvider && p.provider5.callOnDestroy) {
-        i.obj5.ngOnDestroy();
-      }
-      if (p.provider6 instanceof DirectiveProvider && p.provider6.callOnDestroy) {
-        i.obj6.ngOnDestroy();
-      }
-      if (p.provider7 instanceof DirectiveProvider && p.provider7.callOnDestroy) {
-        i.obj7.ngOnDestroy();
-      }
-      if (p.provider8 instanceof DirectiveProvider && p.provider8.callOnDestroy) {
-        i.obj8.ngOnDestroy();
-      }
-      if (p.provider9 instanceof DirectiveProvider && p.provider9.callOnDestroy) {
-        i.obj9.ngOnDestroy();
-      }
-    };
-    ElementInjectorInlineStrategy.prototype.getComponent = function() {
-      return this.injectorStrategy.obj0;
-    };
-    ElementInjectorInlineStrategy.prototype.isComponentKey = function(key) {
-      return this._ei._proto._firstProviderIsComponent && lang_1.isPresent(key) && key.id === this.injectorStrategy.protoStrategy.keyId0;
-    };
-    ElementInjectorInlineStrategy.prototype.addDirectivesMatchingQuery = function(query, list) {
-      var i = this.injectorStrategy;
-      var p = i.protoStrategy;
-      if (lang_1.isPresent(p.provider0) && p.provider0.key.token === query.selector) {
-        if (i.obj0 === injector_1.UNDEFINED)
-          i.obj0 = i.instantiateProvider(p.provider0, p.visibility0);
-        list.push(i.obj0);
-      }
-      if (lang_1.isPresent(p.provider1) && p.provider1.key.token === query.selector) {
-        if (i.obj1 === injector_1.UNDEFINED)
-          i.obj1 = i.instantiateProvider(p.provider1, p.visibility1);
-        list.push(i.obj1);
-      }
-      if (lang_1.isPresent(p.provider2) && p.provider2.key.token === query.selector) {
-        if (i.obj2 === injector_1.UNDEFINED)
-          i.obj2 = i.instantiateProvider(p.provider2, p.visibility2);
-        list.push(i.obj2);
-      }
-      if (lang_1.isPresent(p.provider3) && p.provider3.key.token === query.selector) {
-        if (i.obj3 === injector_1.UNDEFINED)
-          i.obj3 = i.instantiateProvider(p.provider3, p.visibility3);
-        list.push(i.obj3);
-      }
-      if (lang_1.isPresent(p.provider4) && p.provider4.key.token === query.selector) {
-        if (i.obj4 === injector_1.UNDEFINED)
-          i.obj4 = i.instantiateProvider(p.provider4, p.visibility4);
-        list.push(i.obj4);
-      }
-      if (lang_1.isPresent(p.provider5) && p.provider5.key.token === query.selector) {
-        if (i.obj5 === injector_1.UNDEFINED)
-          i.obj5 = i.instantiateProvider(p.provider5, p.visibility5);
-        list.push(i.obj5);
-      }
-      if (lang_1.isPresent(p.provider6) && p.provider6.key.token === query.selector) {
-        if (i.obj6 === injector_1.UNDEFINED)
-          i.obj6 = i.instantiateProvider(p.provider6, p.visibility6);
-        list.push(i.obj6);
-      }
-      if (lang_1.isPresent(p.provider7) && p.provider7.key.token === query.selector) {
-        if (i.obj7 === injector_1.UNDEFINED)
-          i.obj7 = i.instantiateProvider(p.provider7, p.visibility7);
-        list.push(i.obj7);
-      }
-      if (lang_1.isPresent(p.provider8) && p.provider8.key.token === query.selector) {
-        if (i.obj8 === injector_1.UNDEFINED)
-          i.obj8 = i.instantiateProvider(p.provider8, p.visibility8);
-        list.push(i.obj8);
-      }
-      if (lang_1.isPresent(p.provider9) && p.provider9.key.token === query.selector) {
-        if (i.obj9 === injector_1.UNDEFINED)
-          i.obj9 = i.instantiateProvider(p.provider9, p.visibility9);
-        list.push(i.obj9);
-      }
-    };
-    return ElementInjectorInlineStrategy;
-  })();
-  var ElementInjectorDynamicStrategy = (function() {
-    function ElementInjectorDynamicStrategy(injectorStrategy, _ei) {
-      this.injectorStrategy = injectorStrategy;
-      this._ei = _ei;
-    }
-    ElementInjectorDynamicStrategy.prototype.hydrate = function() {
-      var inj = this.injectorStrategy;
-      var p = inj.protoStrategy;
-      inj.resetConstructionCounter();
-      for (var i = 0; i < p.keyIds.length; i++) {
-        if (p.providers[i] instanceof DirectiveProvider && lang_1.isPresent(p.keyIds[i]) && inj.objs[i] === injector_1.UNDEFINED) {
-          inj.objs[i] = inj.instantiateProvider(p.providers[i], p.visibilities[i]);
-        }
-      }
-    };
-    ElementInjectorDynamicStrategy.prototype.dehydrate = function() {
-      var inj = this.injectorStrategy;
-      collection_1.ListWrapper.fill(inj.objs, injector_1.UNDEFINED);
-    };
-    ElementInjectorDynamicStrategy.prototype.callOnDestroy = function() {
-      var ist = this.injectorStrategy;
-      var p = ist.protoStrategy;
-      for (var i = 0; i < p.providers.length; i++) {
-        if (p.providers[i] instanceof DirectiveProvider && p.providers[i].callOnDestroy) {
-          ist.objs[i].ngOnDestroy();
-        }
-      }
-    };
-    ElementInjectorDynamicStrategy.prototype.getComponent = function() {
-      return this.injectorStrategy.objs[0];
-    };
-    ElementInjectorDynamicStrategy.prototype.isComponentKey = function(key) {
-      var p = this.injectorStrategy.protoStrategy;
-      return this._ei._proto._firstProviderIsComponent && lang_1.isPresent(key) && key.id === p.keyIds[0];
-    };
-    ElementInjectorDynamicStrategy.prototype.addDirectivesMatchingQuery = function(query, list) {
-      var ist = this.injectorStrategy;
-      var p = ist.protoStrategy;
-      for (var i = 0; i < p.providers.length; i++) {
-        if (p.providers[i].key.token === query.selector) {
-          if (ist.objs[i] === injector_1.UNDEFINED) {
-            ist.objs[i] = ist.instantiateProvider(p.providers[i], p.visibilities[i]);
-          }
-          list.push(ist.objs[i]);
-        }
-      }
-    };
-    return ElementInjectorDynamicStrategy;
-  })();
-  var ProtoQueryRef = (function() {
-    function ProtoQueryRef(dirIndex, setter, query) {
-      this.dirIndex = dirIndex;
-      this.setter = setter;
-      this.query = query;
-    }
-    Object.defineProperty(ProtoQueryRef.prototype, "usesPropertySyntax", {
-      get: function() {
-        return lang_1.isPresent(this.setter);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return ProtoQueryRef;
-  })();
-  exports.ProtoQueryRef = ProtoQueryRef;
-  var QueryRef = (function() {
-    function QueryRef(protoQueryRef, originator) {
-      this.protoQueryRef = protoQueryRef;
-      this.originator = originator;
-    }
-    Object.defineProperty(QueryRef.prototype, "isViewQuery", {
-      get: function() {
-        return this.protoQueryRef.query.isViewQuery;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    QueryRef.prototype.update = function() {
-      if (!this.dirty)
-        return;
-      this._update();
-      this.dirty = false;
-      if (this.protoQueryRef.usesPropertySyntax) {
-        var dir = this.originator.getDirectiveAtIndex(this.protoQueryRef.dirIndex);
-        if (this.protoQueryRef.query.first) {
-          this.protoQueryRef.setter(dir, this.list.length > 0 ? this.list.first : null);
-        } else {
-          this.protoQueryRef.setter(dir, this.list);
-        }
-      }
-      this.list.notifyOnChanges();
-    };
-    QueryRef.prototype._update = function() {
-      var aggregator = [];
-      if (this.protoQueryRef.query.isViewQuery) {
-        var view = this.originator.getView();
-        var nestedView = view.getNestedView(view.elementOffset + this.originator.getBoundElementIndex());
-        if (lang_1.isPresent(nestedView))
-          this._visitView(nestedView, aggregator);
-      } else {
-        this._visit(this.originator, aggregator);
-      }
-      this.list.reset(aggregator);
-    };
-    ;
-    QueryRef.prototype._visit = function(inj, aggregator) {
-      var view = inj.getView();
-      var startIdx = view.elementOffset + inj._proto.index;
-      for (var i = startIdx; i < view.elementOffset + view.ownBindersCount; i++) {
-        var curInj = view.elementInjectors[i];
-        if (lang_1.isBlank(curInj))
-          continue;
-        if (i > startIdx && (lang_1.isBlank(curInj) || lang_1.isBlank(curInj.parent) || view.elementOffset + curInj.parent._proto.index < startIdx)) {
-          break;
-        }
-        if (!this.protoQueryRef.query.descendants && !(curInj.parent == this.originator || curInj == this.originator))
-          continue;
-        this._visitInjector(curInj, aggregator);
-        var vc = view.viewContainers[i];
-        if (lang_1.isPresent(vc))
-          this._visitViewContainer(vc, aggregator);
-      }
-    };
-    QueryRef.prototype._visitInjector = function(inj, aggregator) {
-      if (this.protoQueryRef.query.isVarBindingQuery) {
-        this._aggregateVariableBinding(inj, aggregator);
-      } else {
-        this._aggregateDirective(inj, aggregator);
-      }
-    };
-    QueryRef.prototype._visitViewContainer = function(vc, aggregator) {
-      for (var j = 0; j < vc.views.length; j++) {
-        this._visitView(vc.views[j], aggregator);
-      }
-    };
-    QueryRef.prototype._visitView = function(view, aggregator) {
-      for (var i = view.elementOffset; i < view.elementOffset + view.ownBindersCount; i++) {
-        var inj = view.elementInjectors[i];
-        if (lang_1.isBlank(inj))
-          continue;
-        this._visitInjector(inj, aggregator);
-        var vc = view.viewContainers[i];
-        if (lang_1.isPresent(vc))
-          this._visitViewContainer(vc, aggregator);
-      }
-    };
-    QueryRef.prototype._aggregateVariableBinding = function(inj, aggregator) {
-      var vb = this.protoQueryRef.query.varBindings;
-      for (var i = 0; i < vb.length; ++i) {
-        if (inj.hasVariableBinding(vb[i])) {
-          aggregator.push(inj.getVariableBinding(vb[i]));
-        }
-      }
-    };
-    QueryRef.prototype._aggregateDirective = function(inj, aggregator) {
-      inj.addDirectivesMatchingQuery(this.protoQueryRef.query, aggregator);
-    };
-    QueryRef.prototype.dehydrate = function() {
-      this.list = null;
-    };
-    QueryRef.prototype.hydrate = function() {
-      this.list = new query_list_1.QueryList();
-      this.dirty = true;
-    };
-    return QueryRef;
-  })();
-  exports.QueryRef = QueryRef;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/directive_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var metadata_1 = $__require('node_modules/angular2/src/core/metadata.js');
-  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
-  function _isDirectiveMetadata(type) {
-    return type instanceof metadata_1.DirectiveMetadata;
-  }
-  var DirectiveResolver = (function() {
-    function DirectiveResolver() {}
-    DirectiveResolver.prototype.resolve = function(type) {
-      var typeMetadata = reflection_1.reflector.annotations(di_1.resolveForwardRef(type));
-      if (lang_1.isPresent(typeMetadata)) {
-        var metadata = typeMetadata.find(_isDirectiveMetadata);
-        if (lang_1.isPresent(metadata)) {
-          var propertyMetadata = reflection_1.reflector.propMetadata(type);
-          return this._mergeWithPropertyMetadata(metadata, propertyMetadata);
-        }
-      }
-      throw new exceptions_1.BaseException("No Directive annotation found on " + lang_1.stringify(type));
-    };
-    DirectiveResolver.prototype._mergeWithPropertyMetadata = function(dm, propertyMetadata) {
-      var inputs = [];
-      var outputs = [];
-      var host = {};
-      var queries = {};
-      collection_1.StringMapWrapper.forEach(propertyMetadata, function(metadata, propName) {
-        metadata.forEach(function(a) {
-          if (a instanceof metadata_1.InputMetadata) {
-            if (lang_1.isPresent(a.bindingPropertyName)) {
-              inputs.push(propName + ": " + a.bindingPropertyName);
-            } else {
-              inputs.push(propName);
-            }
-          }
-          if (a instanceof metadata_1.OutputMetadata) {
-            if (lang_1.isPresent(a.bindingPropertyName)) {
-              outputs.push(propName + ": " + a.bindingPropertyName);
-            } else {
-              outputs.push(propName);
-            }
-          }
-          if (a instanceof metadata_1.HostBindingMetadata) {
-            if (lang_1.isPresent(a.hostPropertyName)) {
-              host[("[" + a.hostPropertyName + "]")] = propName;
-            } else {
-              host[("[" + propName + "]")] = propName;
-            }
-          }
-          if (a instanceof metadata_1.HostListenerMetadata) {
-            var args = lang_1.isPresent(a.args) ? a.args.join(', ') : '';
-            host[("(" + a.eventName + ")")] = propName + "(" + args + ")";
-          }
-          if (a instanceof metadata_1.ContentChildrenMetadata) {
-            queries[propName] = a;
-          }
-          if (a instanceof metadata_1.ViewChildrenMetadata) {
-            queries[propName] = a;
-          }
-          if (a instanceof metadata_1.ContentChildMetadata) {
-            queries[propName] = a;
-          }
-          if (a instanceof metadata_1.ViewChildMetadata) {
-            queries[propName] = a;
-          }
-        });
-      });
-      return this._merge(dm, inputs, outputs, host, queries);
-    };
-    DirectiveResolver.prototype._merge = function(dm, inputs, outputs, host, queries) {
-      var mergedInputs = lang_1.isPresent(dm.inputs) ? collection_1.ListWrapper.concat(dm.inputs, inputs) : inputs;
-      var mergedOutputs = lang_1.isPresent(dm.outputs) ? collection_1.ListWrapper.concat(dm.outputs, outputs) : outputs;
-      var mergedHost = lang_1.isPresent(dm.host) ? collection_1.StringMapWrapper.merge(dm.host, host) : host;
-      var mergedQueries = lang_1.isPresent(dm.queries) ? collection_1.StringMapWrapper.merge(dm.queries, queries) : queries;
-      if (dm instanceof metadata_1.ComponentMetadata) {
-        return new metadata_1.ComponentMetadata({
-          selector: dm.selector,
-          inputs: mergedInputs,
-          outputs: mergedOutputs,
-          host: mergedHost,
-          exportAs: dm.exportAs,
-          moduleId: dm.moduleId,
-          queries: mergedQueries,
-          changeDetection: dm.changeDetection,
-          providers: dm.providers,
-          viewProviders: dm.viewProviders
-        });
-      } else {
-        return new metadata_1.DirectiveMetadata({
-          selector: dm.selector,
-          inputs: mergedInputs,
-          outputs: mergedOutputs,
-          host: mergedHost,
-          exportAs: dm.exportAs,
-          queries: mergedQueries,
-          providers: dm.providers
-        });
-      }
-    };
-    DirectiveResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], DirectiveResolver);
-    return DirectiveResolver;
-  })();
-  exports.DirectiveResolver = DirectiveResolver;
+  exports.ResolvedMetadataCache = ResolvedMetadataCache;
+  exports.CODEGEN_RESOLVED_METADATA_CACHE = new ResolvedMetadataCache(directive_resolver_1.CODEGEN_DIRECTIVE_RESOLVER, pipe_resolver_1.CODEGEN_PIPE_RESOLVER);
   global.define = __define;
   return module.exports;
 });
@@ -10200,6 +6473,255 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
   return module.exports;
 });
 
+System.registerDynamic("node_modules/angular2/src/core/linker/directive_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var di_1 = $__require('node_modules/angular2/src/core/di.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var metadata_1 = $__require('node_modules/angular2/src/core/metadata.js');
+  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
+  function _isDirectiveMetadata(type) {
+    return type instanceof metadata_1.DirectiveMetadata;
+  }
+  var DirectiveResolver = (function() {
+    function DirectiveResolver() {}
+    DirectiveResolver.prototype.resolve = function(type) {
+      var typeMetadata = reflection_1.reflector.annotations(di_1.resolveForwardRef(type));
+      if (lang_1.isPresent(typeMetadata)) {
+        var metadata = typeMetadata.find(_isDirectiveMetadata);
+        if (lang_1.isPresent(metadata)) {
+          var propertyMetadata = reflection_1.reflector.propMetadata(type);
+          return this._mergeWithPropertyMetadata(metadata, propertyMetadata, type);
+        }
+      }
+      throw new exceptions_1.BaseException("No Directive annotation found on " + lang_1.stringify(type));
+    };
+    DirectiveResolver.prototype._mergeWithPropertyMetadata = function(dm, propertyMetadata, directiveType) {
+      var inputs = [];
+      var outputs = [];
+      var host = {};
+      var queries = {};
+      collection_1.StringMapWrapper.forEach(propertyMetadata, function(metadata, propName) {
+        metadata.forEach(function(a) {
+          if (a instanceof metadata_1.InputMetadata) {
+            if (lang_1.isPresent(a.bindingPropertyName)) {
+              inputs.push(propName + ": " + a.bindingPropertyName);
+            } else {
+              inputs.push(propName);
+            }
+          }
+          if (a instanceof metadata_1.OutputMetadata) {
+            if (lang_1.isPresent(a.bindingPropertyName)) {
+              outputs.push(propName + ": " + a.bindingPropertyName);
+            } else {
+              outputs.push(propName);
+            }
+          }
+          if (a instanceof metadata_1.HostBindingMetadata) {
+            if (lang_1.isPresent(a.hostPropertyName)) {
+              host[("[" + a.hostPropertyName + "]")] = propName;
+            } else {
+              host[("[" + propName + "]")] = propName;
+            }
+          }
+          if (a instanceof metadata_1.HostListenerMetadata) {
+            var args = lang_1.isPresent(a.args) ? a.args.join(', ') : '';
+            host[("(" + a.eventName + ")")] = propName + "(" + args + ")";
+          }
+          if (a instanceof metadata_1.ContentChildrenMetadata) {
+            queries[propName] = a;
+          }
+          if (a instanceof metadata_1.ViewChildrenMetadata) {
+            queries[propName] = a;
+          }
+          if (a instanceof metadata_1.ContentChildMetadata) {
+            queries[propName] = a;
+          }
+          if (a instanceof metadata_1.ViewChildMetadata) {
+            queries[propName] = a;
+          }
+        });
+      });
+      return this._merge(dm, inputs, outputs, host, queries, directiveType);
+    };
+    DirectiveResolver.prototype._merge = function(dm, inputs, outputs, host, queries, directiveType) {
+      var mergedInputs = lang_1.isPresent(dm.inputs) ? collection_1.ListWrapper.concat(dm.inputs, inputs) : inputs;
+      var mergedOutputs;
+      if (lang_1.isPresent(dm.outputs)) {
+        dm.outputs.forEach(function(propName) {
+          if (collection_1.ListWrapper.contains(outputs, propName)) {
+            throw new exceptions_1.BaseException("Output event '" + propName + "' defined multiple times in '" + lang_1.stringify(directiveType) + "'");
+          }
+        });
+        mergedOutputs = collection_1.ListWrapper.concat(dm.outputs, outputs);
+      } else {
+        mergedOutputs = outputs;
+      }
+      var mergedHost = lang_1.isPresent(dm.host) ? collection_1.StringMapWrapper.merge(dm.host, host) : host;
+      var mergedQueries = lang_1.isPresent(dm.queries) ? collection_1.StringMapWrapper.merge(dm.queries, queries) : queries;
+      if (dm instanceof metadata_1.ComponentMetadata) {
+        return new metadata_1.ComponentMetadata({
+          selector: dm.selector,
+          inputs: mergedInputs,
+          outputs: mergedOutputs,
+          host: mergedHost,
+          exportAs: dm.exportAs,
+          moduleId: dm.moduleId,
+          queries: mergedQueries,
+          changeDetection: dm.changeDetection,
+          providers: dm.providers,
+          viewProviders: dm.viewProviders
+        });
+      } else {
+        return new metadata_1.DirectiveMetadata({
+          selector: dm.selector,
+          inputs: mergedInputs,
+          outputs: mergedOutputs,
+          host: mergedHost,
+          exportAs: dm.exportAs,
+          queries: mergedQueries,
+          providers: dm.providers
+        });
+      }
+    };
+    DirectiveResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], DirectiveResolver);
+    return DirectiveResolver;
+  })();
+  exports.DirectiveResolver = DirectiveResolver;
+  exports.CODEGEN_DIRECTIVE_RESOLVER = new DirectiveResolver();
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/metadata/view.js", ["node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  (function(ViewEncapsulation) {
+    ViewEncapsulation[ViewEncapsulation["Emulated"] = 0] = "Emulated";
+    ViewEncapsulation[ViewEncapsulation["Native"] = 1] = "Native";
+    ViewEncapsulation[ViewEncapsulation["None"] = 2] = "None";
+  })(exports.ViewEncapsulation || (exports.ViewEncapsulation = {}));
+  var ViewEncapsulation = exports.ViewEncapsulation;
+  exports.VIEW_ENCAPSULATION_VALUES = [ViewEncapsulation.Emulated, ViewEncapsulation.Native, ViewEncapsulation.None];
+  var ViewMetadata = (function() {
+    function ViewMetadata(_a) {
+      var _b = _a === void 0 ? {} : _a,
+          templateUrl = _b.templateUrl,
+          template = _b.template,
+          directives = _b.directives,
+          pipes = _b.pipes,
+          encapsulation = _b.encapsulation,
+          styles = _b.styles,
+          styleUrls = _b.styleUrls;
+      this.templateUrl = templateUrl;
+      this.template = template;
+      this.styleUrls = styleUrls;
+      this.styles = styles;
+      this.directives = directives;
+      this.pipes = pipes;
+      this.encapsulation = encapsulation;
+    }
+    ViewMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], ViewMetadata);
+    return ViewMetadata;
+  })();
+  exports.ViewMetadata = ViewMetadata;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/metadata.js", ["node_modules/angular2/src/core/metadata/di.js", "node_modules/angular2/src/core/metadata/directives.js", "node_modules/angular2/src/core/metadata/view.js", "node_modules/angular2/src/core/util/decorators.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var di_1 = $__require('node_modules/angular2/src/core/metadata/di.js');
+  exports.QueryMetadata = di_1.QueryMetadata;
+  exports.ContentChildrenMetadata = di_1.ContentChildrenMetadata;
+  exports.ContentChildMetadata = di_1.ContentChildMetadata;
+  exports.ViewChildrenMetadata = di_1.ViewChildrenMetadata;
+  exports.ViewQueryMetadata = di_1.ViewQueryMetadata;
+  exports.ViewChildMetadata = di_1.ViewChildMetadata;
+  exports.AttributeMetadata = di_1.AttributeMetadata;
+  var directives_1 = $__require('node_modules/angular2/src/core/metadata/directives.js');
+  exports.ComponentMetadata = directives_1.ComponentMetadata;
+  exports.DirectiveMetadata = directives_1.DirectiveMetadata;
+  exports.PipeMetadata = directives_1.PipeMetadata;
+  exports.InputMetadata = directives_1.InputMetadata;
+  exports.OutputMetadata = directives_1.OutputMetadata;
+  exports.HostBindingMetadata = directives_1.HostBindingMetadata;
+  exports.HostListenerMetadata = directives_1.HostListenerMetadata;
+  var view_1 = $__require('node_modules/angular2/src/core/metadata/view.js');
+  exports.ViewMetadata = view_1.ViewMetadata;
+  exports.ViewEncapsulation = view_1.ViewEncapsulation;
+  var di_2 = $__require('node_modules/angular2/src/core/metadata/di.js');
+  var directives_2 = $__require('node_modules/angular2/src/core/metadata/directives.js');
+  var view_2 = $__require('node_modules/angular2/src/core/metadata/view.js');
+  var decorators_1 = $__require('node_modules/angular2/src/core/util/decorators.js');
+  exports.Component = decorators_1.makeDecorator(directives_2.ComponentMetadata, function(fn) {
+    return fn.View = exports.View;
+  });
+  exports.Directive = decorators_1.makeDecorator(directives_2.DirectiveMetadata);
+  exports.View = decorators_1.makeDecorator(view_2.ViewMetadata, function(fn) {
+    return fn.View = exports.View;
+  });
+  exports.Attribute = decorators_1.makeParamDecorator(di_2.AttributeMetadata);
+  exports.Query = decorators_1.makeParamDecorator(di_2.QueryMetadata);
+  exports.ContentChildren = decorators_1.makePropDecorator(di_2.ContentChildrenMetadata);
+  exports.ContentChild = decorators_1.makePropDecorator(di_2.ContentChildMetadata);
+  exports.ViewChildren = decorators_1.makePropDecorator(di_2.ViewChildrenMetadata);
+  exports.ViewChild = decorators_1.makePropDecorator(di_2.ViewChildMetadata);
+  exports.ViewQuery = decorators_1.makeParamDecorator(di_2.ViewQueryMetadata);
+  exports.Pipe = decorators_1.makeDecorator(directives_2.PipeMetadata);
+  exports.Input = decorators_1.makePropDecorator(directives_2.InputMetadata);
+  exports.Output = decorators_1.makePropDecorator(directives_2.OutputMetadata);
+  exports.HostBinding = decorators_1.makePropDecorator(directives_2.HostBindingMetadata);
+  exports.HostListener = decorators_1.makePropDecorator(directives_2.HostListenerMetadata);
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("node_modules/angular2/src/core/linker/pipe_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -10246,25 +6768,80 @@ System.registerDynamic("node_modules/angular2/src/core/linker/pipe_resolver.js",
     return PipeResolver;
   })();
   exports.PipeResolver = PipeResolver;
+  exports.CODEGEN_PIPE_RESOLVER = new PipeResolver();
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/platform_directives_and_pipes.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/compiler.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/linker/view.js", "node_modules/angular2/src/core/linker/view_ref.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
   var di_1 = $__require('node_modules/angular2/src/core/di.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  exports.PLATFORM_DIRECTIVES = lang_1.CONST_EXPR(new di_1.OpaqueToken("Platform Directives"));
-  exports.PLATFORM_PIPES = lang_1.CONST_EXPR(new di_1.OpaqueToken("Platform Pipes"));
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
+  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
+  var view_1 = $__require('node_modules/angular2/src/core/linker/view.js');
+  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
+  var Compiler = (function() {
+    function Compiler() {}
+    return Compiler;
+  })();
+  exports.Compiler = Compiler;
+  function isHostViewFactory(type) {
+    return type instanceof view_1.HostViewFactory;
+  }
+  var Compiler_ = (function(_super) {
+    __extends(Compiler_, _super);
+    function Compiler_() {
+      _super.apply(this, arguments);
+    }
+    Compiler_.prototype.compileInHost = function(componentType) {
+      var metadatas = reflection_1.reflector.annotations(componentType);
+      var hostViewFactory = metadatas.find(isHostViewFactory);
+      if (lang_1.isBlank(hostViewFactory)) {
+        throw new exceptions_1.BaseException("No precompiled component " + lang_1.stringify(componentType) + " found");
+      }
+      return async_1.PromiseWrapper.resolve(new view_ref_1.HostViewFactoryRef_(hostViewFactory));
+    };
+    Compiler_.prototype.clearCache = function() {};
+    Compiler_ = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], Compiler_);
+    return Compiler_;
+  })(Compiler);
+  exports.Compiler_ = Compiler_;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/render/api.js", ["node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/view_ref.js", ["node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -10280,32 +6857,32 @@ System.registerDynamic("node_modules/angular2/src/core/render/api.js", ["node_mo
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var RenderProtoViewRef = (function() {
-    function RenderProtoViewRef() {}
-    return RenderProtoViewRef;
+  var ViewRef = (function() {
+    function ViewRef() {}
+    Object.defineProperty(ViewRef.prototype, "changeDetectorRef", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(ViewRef.prototype, "destroyed", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return ViewRef;
   })();
-  exports.RenderProtoViewRef = RenderProtoViewRef;
-  var RenderFragmentRef = (function() {
-    function RenderFragmentRef() {}
-    return RenderFragmentRef;
-  })();
-  exports.RenderFragmentRef = RenderFragmentRef;
-  var RenderViewRef = (function() {
-    function RenderViewRef() {}
-    return RenderViewRef;
-  })();
-  exports.RenderViewRef = RenderViewRef;
-  var RenderTemplateCmd = (function() {
-    function RenderTemplateCmd() {}
-    return RenderTemplateCmd;
-  })();
-  exports.RenderTemplateCmd = RenderTemplateCmd;
-  var RenderBeginCmd = (function(_super) {
-    __extends(RenderBeginCmd, _super);
-    function RenderBeginCmd() {
+  exports.ViewRef = ViewRef;
+  var HostViewRef = (function(_super) {
+    __extends(HostViewRef, _super);
+    function HostViewRef() {
       _super.apply(this, arguments);
     }
-    Object.defineProperty(RenderBeginCmd.prototype, "ngContentIndex", {
+    Object.defineProperty(HostViewRef.prototype, "rootNodes", {
       get: function() {
         return exceptions_1.unimplemented();
       },
@@ -10313,23 +6890,15 @@ System.registerDynamic("node_modules/angular2/src/core/render/api.js", ["node_mo
       configurable: true
     });
     ;
-    Object.defineProperty(RenderBeginCmd.prototype, "isBound", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    return RenderBeginCmd;
-  })(RenderTemplateCmd);
-  exports.RenderBeginCmd = RenderBeginCmd;
-  var RenderTextCmd = (function(_super) {
-    __extends(RenderTextCmd, _super);
-    function RenderTextCmd() {
+    return HostViewRef;
+  })(ViewRef);
+  exports.HostViewRef = HostViewRef;
+  var EmbeddedViewRef = (function(_super) {
+    __extends(EmbeddedViewRef, _super);
+    function EmbeddedViewRef() {
       _super.apply(this, arguments);
     }
-    Object.defineProperty(RenderTextCmd.prototype, "value", {
+    Object.defineProperty(EmbeddedViewRef.prototype, "rootNodes", {
       get: function() {
         return exceptions_1.unimplemented();
       },
@@ -10337,129 +6906,452 @@ System.registerDynamic("node_modules/angular2/src/core/render/api.js", ["node_mo
       configurable: true
     });
     ;
-    return RenderTextCmd;
-  })(RenderBeginCmd);
-  exports.RenderTextCmd = RenderTextCmd;
-  var RenderNgContentCmd = (function(_super) {
-    __extends(RenderNgContentCmd, _super);
-    function RenderNgContentCmd() {
-      _super.apply(this, arguments);
+    return EmbeddedViewRef;
+  })(ViewRef);
+  exports.EmbeddedViewRef = EmbeddedViewRef;
+  var ViewRef_ = (function() {
+    function ViewRef_(_view) {
+      this._view = _view;
+      this._view = _view;
     }
-    Object.defineProperty(RenderNgContentCmd.prototype, "index", {
+    Object.defineProperty(ViewRef_.prototype, "internalView", {
       get: function() {
-        return exceptions_1.unimplemented();
+        return this._view;
       },
       enumerable: true,
       configurable: true
     });
-    ;
-    Object.defineProperty(RenderNgContentCmd.prototype, "ngContentIndex", {
+    Object.defineProperty(ViewRef_.prototype, "changeDetectorRef", {
       get: function() {
-        return exceptions_1.unimplemented();
+        return this._view.changeDetector.ref;
       },
       enumerable: true,
       configurable: true
     });
-    ;
-    return RenderNgContentCmd;
-  })(RenderTemplateCmd);
-  exports.RenderNgContentCmd = RenderNgContentCmd;
-  var RenderBeginElementCmd = (function(_super) {
-    __extends(RenderBeginElementCmd, _super);
-    function RenderBeginElementCmd() {
-      _super.apply(this, arguments);
-    }
-    Object.defineProperty(RenderBeginElementCmd.prototype, "name", {
+    Object.defineProperty(ViewRef_.prototype, "rootNodes", {
       get: function() {
-        return exceptions_1.unimplemented();
+        return this._view.flatRootNodes;
       },
       enumerable: true,
       configurable: true
     });
-    ;
-    Object.defineProperty(RenderBeginElementCmd.prototype, "attrNameAndValues", {
+    ViewRef_.prototype.setLocal = function(variableName, value) {
+      this._view.setLocal(variableName, value);
+    };
+    ViewRef_.prototype.hasLocal = function(variableName) {
+      return this._view.hasLocal(variableName);
+    };
+    Object.defineProperty(ViewRef_.prototype, "destroyed", {
       get: function() {
-        return exceptions_1.unimplemented();
+        return this._view.destroyed;
       },
       enumerable: true,
       configurable: true
     });
-    ;
-    Object.defineProperty(RenderBeginElementCmd.prototype, "eventTargetAndNames", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    return RenderBeginElementCmd;
-  })(RenderBeginCmd);
-  exports.RenderBeginElementCmd = RenderBeginElementCmd;
-  var RenderBeginComponentCmd = (function(_super) {
-    __extends(RenderBeginComponentCmd, _super);
-    function RenderBeginComponentCmd() {
-      _super.apply(this, arguments);
-    }
-    Object.defineProperty(RenderBeginComponentCmd.prototype, "templateId", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    return RenderBeginComponentCmd;
-  })(RenderBeginElementCmd);
-  exports.RenderBeginComponentCmd = RenderBeginComponentCmd;
-  var RenderEmbeddedTemplateCmd = (function(_super) {
-    __extends(RenderEmbeddedTemplateCmd, _super);
-    function RenderEmbeddedTemplateCmd() {
-      _super.apply(this, arguments);
-    }
-    Object.defineProperty(RenderEmbeddedTemplateCmd.prototype, "isMerged", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(RenderEmbeddedTemplateCmd.prototype, "children", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    return RenderEmbeddedTemplateCmd;
-  })(RenderBeginElementCmd);
-  exports.RenderEmbeddedTemplateCmd = RenderEmbeddedTemplateCmd;
-  var RenderViewWithFragments = (function() {
-    function RenderViewWithFragments(viewRef, fragmentRefs) {
-      this.viewRef = viewRef;
-      this.fragmentRefs = fragmentRefs;
-    }
-    return RenderViewWithFragments;
+    return ViewRef_;
   })();
-  exports.RenderViewWithFragments = RenderViewWithFragments;
-  var RenderComponentTemplate = (function() {
-    function RenderComponentTemplate(id, shortId, encapsulation, commands, styles) {
-      this.id = id;
-      this.shortId = shortId;
-      this.encapsulation = encapsulation;
-      this.commands = commands;
-      this.styles = styles;
+  exports.ViewRef_ = ViewRef_;
+  var HostViewFactoryRef = (function() {
+    function HostViewFactoryRef() {}
+    return HostViewFactoryRef;
+  })();
+  exports.HostViewFactoryRef = HostViewFactoryRef;
+  var HostViewFactoryRef_ = (function() {
+    function HostViewFactoryRef_(_hostViewFactory) {
+      this._hostViewFactory = _hostViewFactory;
     }
-    return RenderComponentTemplate;
+    Object.defineProperty(HostViewFactoryRef_.prototype, "internalHostViewFactory", {
+      get: function() {
+        return this._hostViewFactory;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return HostViewFactoryRef_;
   })();
-  exports.RenderComponentTemplate = RenderComponentTemplate;
-  var Renderer = (function() {
-    function Renderer() {}
-    return Renderer;
+  exports.HostViewFactoryRef_ = HostViewFactoryRef_;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/change_detection/pipes.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var SelectedPipe = (function() {
+    function SelectedPipe(pipe, pure) {
+      this.pipe = pipe;
+      this.pure = pure;
+    }
+    return SelectedPipe;
   })();
-  exports.Renderer = Renderer;
+  exports.SelectedPipe = SelectedPipe;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/pipes/pipes.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/pipes.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var cd = $__require('node_modules/angular2/src/core/change_detection/pipes.js');
+  var ProtoPipes = (function() {
+    function ProtoPipes(config) {
+      this.config = config;
+      this.config = config;
+    }
+    ProtoPipes.fromProviders = function(providers) {
+      var config = {};
+      providers.forEach(function(b) {
+        return config[b.name] = b;
+      });
+      return new ProtoPipes(config);
+    };
+    ProtoPipes.prototype.get = function(name) {
+      var provider = this.config[name];
+      if (lang_1.isBlank(provider))
+        throw new exceptions_1.BaseException("Cannot find pipe '" + name + "'.");
+      return provider;
+    };
+    return ProtoPipes;
+  })();
+  exports.ProtoPipes = ProtoPipes;
+  var Pipes = (function() {
+    function Pipes(proto, injector) {
+      this.proto = proto;
+      this.injector = injector;
+      this._config = {};
+    }
+    Pipes.prototype.get = function(name) {
+      var cached = collection_1.StringMapWrapper.get(this._config, name);
+      if (lang_1.isPresent(cached))
+        return cached;
+      var p = this.proto.get(name);
+      var transform = this.injector.instantiateResolved(p);
+      var res = new cd.SelectedPipe(transform, p.pure);
+      if (p.pure) {
+        collection_1.StringMapWrapper.set(this._config, name, res);
+      }
+      return res;
+    };
+    return Pipes;
+  })();
+  exports.Pipes = Pipes;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/render/util.js", ["node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var CAMEL_CASE_REGEXP = /([A-Z])/g;
+  var DASH_CASE_REGEXP = /-([a-z])/g;
+  function camelCaseToDashCase(input) {
+    return lang_1.StringWrapper.replaceAllMapped(input, CAMEL_CASE_REGEXP, function(m) {
+      return '-' + m[1].toLowerCase();
+    });
+  }
+  exports.camelCaseToDashCase = camelCaseToDashCase;
+  function dashCaseToCamelCase(input) {
+    return lang_1.StringWrapper.replaceAllMapped(input, DASH_CASE_REGEXP, function(m) {
+      return m[1].toUpperCase();
+    });
+  }
+  exports.dashCaseToCamelCase = dashCaseToCamelCase;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/linker/view.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/change_detection.js", "node_modules/angular2/src/core/change_detection/interfaces.js", "node_modules/angular2/src/core/linker/element.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/render/api.js", "node_modules/angular2/src/core/linker/view_ref.js", "node_modules/angular2/src/core/pipes/pipes.js", "node_modules/angular2/src/core/render/util.js", "node_modules/angular2/src/core/linker/view_type.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
+  var interfaces_1 = $__require('node_modules/angular2/src/core/change_detection/interfaces.js');
+  var element_1 = $__require('node_modules/angular2/src/core/linker/element.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var api_1 = $__require('node_modules/angular2/src/core/render/api.js');
+  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
+  var pipes_1 = $__require('node_modules/angular2/src/core/pipes/pipes.js');
+  var util_1 = $__require('node_modules/angular2/src/core/render/util.js');
+  var interfaces_2 = $__require('node_modules/angular2/src/core/change_detection/interfaces.js');
+  exports.DebugContext = interfaces_2.DebugContext;
+  var pipes_2 = $__require('node_modules/angular2/src/core/pipes/pipes.js');
+  var view_type_1 = $__require('node_modules/angular2/src/core/linker/view_type.js');
+  var REFLECT_PREFIX = 'ng-reflect-';
+  var EMPTY_CONTEXT = lang_1.CONST_EXPR(new Object());
+  var AppView = (function() {
+    function AppView(proto, renderer, viewManager, projectableNodes, containerAppElement, imperativelyCreatedProviders, rootInjector, changeDetector) {
+      this.proto = proto;
+      this.renderer = renderer;
+      this.viewManager = viewManager;
+      this.projectableNodes = projectableNodes;
+      this.containerAppElement = containerAppElement;
+      this.changeDetector = changeDetector;
+      this.context = null;
+      this.destroyed = false;
+      this.ref = new view_ref_1.ViewRef_(this);
+      var injectorWithHostBoundary = element_1.AppElement.getViewParentInjector(this.proto.type, containerAppElement, imperativelyCreatedProviders, rootInjector);
+      this.parentInjector = injectorWithHostBoundary.injector;
+      this.hostInjectorBoundary = injectorWithHostBoundary.hostInjectorBoundary;
+      var pipes;
+      var context;
+      switch (proto.type) {
+        case view_type_1.ViewType.COMPONENT:
+          pipes = new pipes_2.Pipes(proto.protoPipes, containerAppElement.getInjector());
+          context = containerAppElement.getComponent();
+          break;
+        case view_type_1.ViewType.EMBEDDED:
+          pipes = containerAppElement.parentView.pipes;
+          context = containerAppElement.parentView.context;
+          break;
+        case view_type_1.ViewType.HOST:
+          pipes = null;
+          context = EMPTY_CONTEXT;
+          break;
+      }
+      this.pipes = pipes;
+      this.context = context;
+    }
+    AppView.prototype.init = function(rootNodesOrAppElements, allNodes, disposables, appElements) {
+      this.rootNodesOrAppElements = rootNodesOrAppElements;
+      this.allNodes = allNodes;
+      this.disposables = disposables;
+      this.appElements = appElements;
+      var localsMap = new collection_1.Map();
+      collection_1.StringMapWrapper.forEach(this.proto.templateVariableBindings, function(templateName, _) {
+        localsMap.set(templateName, null);
+      });
+      for (var i = 0; i < appElements.length; i++) {
+        var appEl = appElements[i];
+        var providerTokens = [];
+        if (lang_1.isPresent(appEl.proto.protoInjector)) {
+          for (var j = 0; j < appEl.proto.protoInjector.numberOfProviders; j++) {
+            providerTokens.push(appEl.proto.protoInjector.getProviderAtIndex(j).key.token);
+          }
+        }
+        collection_1.StringMapWrapper.forEach(appEl.proto.directiveVariableBindings, function(directiveIndex, name) {
+          if (lang_1.isBlank(directiveIndex)) {
+            localsMap.set(name, appEl.nativeElement);
+          } else {
+            localsMap.set(name, appEl.getDirectiveAtIndex(directiveIndex));
+          }
+        });
+        this.renderer.setElementDebugInfo(appEl.nativeElement, new api_1.RenderDebugInfo(appEl.getInjector(), appEl.getComponent(), providerTokens, localsMap));
+      }
+      var parentLocals = null;
+      if (this.proto.type !== view_type_1.ViewType.COMPONENT) {
+        parentLocals = lang_1.isPresent(this.containerAppElement) ? this.containerAppElement.parentView.locals : null;
+      }
+      if (this.proto.type === view_type_1.ViewType.COMPONENT) {
+        this.containerAppElement.attachComponentView(this);
+        this.containerAppElement.parentView.changeDetector.addViewChild(this.changeDetector);
+      }
+      this.locals = new change_detection_1.Locals(parentLocals, localsMap);
+      this.changeDetector.hydrate(this.context, this.locals, this, this.pipes);
+      this.viewManager.onViewCreated(this);
+    };
+    AppView.prototype.destroy = function() {
+      if (this.destroyed) {
+        throw new exceptions_1.BaseException('This view has already been destroyed!');
+      }
+      this.changeDetector.destroyRecursive();
+    };
+    AppView.prototype.notifyOnDestroy = function() {
+      this.destroyed = true;
+      var hostElement = this.proto.type === view_type_1.ViewType.COMPONENT ? this.containerAppElement.nativeElement : null;
+      this.renderer.destroyView(hostElement, this.allNodes);
+      for (var i = 0; i < this.disposables.length; i++) {
+        this.disposables[i]();
+      }
+      this.viewManager.onViewDestroyed(this);
+    };
+    Object.defineProperty(AppView.prototype, "changeDetectorRef", {
+      get: function() {
+        return this.changeDetector.ref;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(AppView.prototype, "flatRootNodes", {
+      get: function() {
+        return flattenNestedViewRenderNodes(this.rootNodesOrAppElements);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    AppView.prototype.hasLocal = function(contextName) {
+      return collection_1.StringMapWrapper.contains(this.proto.templateVariableBindings, contextName);
+    };
+    AppView.prototype.setLocal = function(contextName, value) {
+      if (!this.hasLocal(contextName)) {
+        return;
+      }
+      var templateName = this.proto.templateVariableBindings[contextName];
+      this.locals.set(templateName, value);
+    };
+    AppView.prototype.notifyOnBinding = function(b, currentValue) {
+      if (b.isTextNode()) {
+        this.renderer.setText(this.allNodes[b.elementIndex], currentValue);
+      } else {
+        var nativeElement = this.appElements[b.elementIndex].nativeElement;
+        if (b.isElementProperty()) {
+          this.renderer.setElementProperty(nativeElement, b.name, currentValue);
+        } else if (b.isElementAttribute()) {
+          this.renderer.setElementAttribute(nativeElement, b.name, lang_1.isPresent(currentValue) ? "" + currentValue : null);
+        } else if (b.isElementClass()) {
+          this.renderer.setElementClass(nativeElement, b.name, currentValue);
+        } else if (b.isElementStyle()) {
+          var unit = lang_1.isPresent(b.unit) ? b.unit : '';
+          this.renderer.setElementStyle(nativeElement, b.name, lang_1.isPresent(currentValue) ? "" + currentValue + unit : null);
+        } else {
+          throw new exceptions_1.BaseException('Unsupported directive record');
+        }
+      }
+    };
+    AppView.prototype.logBindingUpdate = function(b, value) {
+      if (b.isDirective() || b.isElementProperty()) {
+        var nativeElement = this.appElements[b.elementIndex].nativeElement;
+        this.renderer.setBindingDebugInfo(nativeElement, "" + REFLECT_PREFIX + util_1.camelCaseToDashCase(b.name), "" + value);
+      }
+    };
+    AppView.prototype.notifyAfterContentChecked = function() {
+      var count = this.appElements.length;
+      for (var i = count - 1; i >= 0; i--) {
+        this.appElements[i].ngAfterContentChecked();
+      }
+    };
+    AppView.prototype.notifyAfterViewChecked = function() {
+      var count = this.appElements.length;
+      for (var i = count - 1; i >= 0; i--) {
+        this.appElements[i].ngAfterViewChecked();
+      }
+    };
+    AppView.prototype.getDebugContext = function(appElement, elementIndex, directiveIndex) {
+      try {
+        if (lang_1.isBlank(appElement) && elementIndex < this.appElements.length) {
+          appElement = this.appElements[elementIndex];
+        }
+        var container = this.containerAppElement;
+        var element = lang_1.isPresent(appElement) ? appElement.nativeElement : null;
+        var componentElement = lang_1.isPresent(container) ? container.nativeElement : null;
+        var directive = lang_1.isPresent(directiveIndex) ? appElement.getDirectiveAtIndex(directiveIndex) : null;
+        var injector = lang_1.isPresent(appElement) ? appElement.getInjector() : null;
+        return new interfaces_1.DebugContext(element, componentElement, directive, this.context, _localsToStringMap(this.locals), injector);
+      } catch (e) {
+        return null;
+      }
+    };
+    AppView.prototype.getDirectiveFor = function(directive) {
+      return this.appElements[directive.elementIndex].getDirectiveAtIndex(directive.directiveIndex);
+    };
+    AppView.prototype.getDetectorFor = function(directive) {
+      var componentView = this.appElements[directive.elementIndex].componentView;
+      return lang_1.isPresent(componentView) ? componentView.changeDetector : null;
+    };
+    AppView.prototype.triggerEventHandlers = function(eventName, eventObj, boundElementIndex) {
+      return this.changeDetector.handleEvent(eventName, boundElementIndex, eventObj);
+    };
+    return AppView;
+  })();
+  exports.AppView = AppView;
+  function _localsToStringMap(locals) {
+    var res = {};
+    var c = locals;
+    while (lang_1.isPresent(c)) {
+      res = collection_1.StringMapWrapper.merge(res, collection_1.MapWrapper.toStringMap(c.current));
+      c = c.parent;
+    }
+    return res;
+  }
+  var AppProtoView = (function() {
+    function AppProtoView(type, protoPipes, templateVariableBindings) {
+      this.type = type;
+      this.protoPipes = protoPipes;
+      this.templateVariableBindings = templateVariableBindings;
+    }
+    AppProtoView.create = function(metadataCache, type, pipes, templateVariableBindings) {
+      var protoPipes = null;
+      if (lang_1.isPresent(pipes) && pipes.length > 0) {
+        var boundPipes = collection_1.ListWrapper.createFixedSize(pipes.length);
+        for (var i = 0; i < pipes.length; i++) {
+          boundPipes[i] = metadataCache.getResolvedPipeMetadata(pipes[i]);
+        }
+        protoPipes = pipes_1.ProtoPipes.fromProviders(boundPipes);
+      }
+      return new AppProtoView(type, protoPipes, templateVariableBindings);
+    };
+    return AppProtoView;
+  })();
+  exports.AppProtoView = AppProtoView;
+  var HostViewFactory = (function() {
+    function HostViewFactory(selector, viewFactory) {
+      this.selector = selector;
+      this.viewFactory = viewFactory;
+    }
+    HostViewFactory = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Function])], HostViewFactory);
+    return HostViewFactory;
+  })();
+  exports.HostViewFactory = HostViewFactory;
+  function flattenNestedViewRenderNodes(nodes) {
+    return _flattenNestedViewRenderNodes(nodes, []);
+  }
+  exports.flattenNestedViewRenderNodes = flattenNestedViewRenderNodes;
+  function _flattenNestedViewRenderNodes(nodes, renderNodes) {
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+      if (node instanceof element_1.AppElement) {
+        var appEl = node;
+        renderNodes.push(appEl.nativeElement);
+        if (lang_1.isPresent(appEl.nestedViews)) {
+          for (var k = 0; k < appEl.nestedViews.length; k++) {
+            _flattenNestedViewRenderNodes(appEl.nestedViews[k].rootNodesOrAppElements, renderNodes);
+          }
+        }
+      } else {
+        renderNodes.push(node);
+      }
+    }
+    return renderNodes;
+  }
+  function checkSlotCount(componentName, expectedSlotCount, projectableNodes) {
+    var givenSlotCount = lang_1.isPresent(projectableNodes) ? projectableNodes.length : 0;
+    if (givenSlotCount < expectedSlotCount) {
+      throw new exceptions_1.BaseException(("The component " + componentName + " has " + expectedSlotCount + " <ng-content> elements,") + (" but only " + givenSlotCount + " slots were provided."));
+    }
+  }
+  exports.checkSlotCount = checkSlotCount;
   global.define = __define;
   return module.exports;
 });
@@ -10641,6 +7533,475 @@ System.registerDynamic("node_modules/angular2/src/core/metadata/di.js", ["node_m
   return module.exports;
 });
 
+System.registerDynamic("node_modules/angular2/src/core/linker/element_ref.js", ["node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var ElementRef = (function() {
+    function ElementRef() {}
+    Object.defineProperty(ElementRef.prototype, "nativeElement", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return ElementRef;
+  })();
+  exports.ElementRef = ElementRef;
+  var ElementRef_ = (function() {
+    function ElementRef_(_appElement) {
+      this._appElement = _appElement;
+    }
+    Object.defineProperty(ElementRef_.prototype, "internalElement", {
+      get: function() {
+        return this._appElement;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(ElementRef_.prototype, "nativeElement", {
+      get: function() {
+        return this._appElement.nativeElement;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return ElementRef_;
+  })();
+  exports.ElementRef_ = ElementRef_;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/linker/view_container_ref.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var ViewContainerRef = (function() {
+    function ViewContainerRef() {}
+    Object.defineProperty(ViewContainerRef.prototype, "element", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ViewContainerRef.prototype.clear = function() {
+      for (var i = this.length - 1; i >= 0; i--) {
+        this.remove(i);
+      }
+    };
+    Object.defineProperty(ViewContainerRef.prototype, "length", {
+      get: function() {
+        return exceptions_1.unimplemented();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    return ViewContainerRef;
+  })();
+  exports.ViewContainerRef = ViewContainerRef;
+  var ViewContainerRef_ = (function(_super) {
+    __extends(ViewContainerRef_, _super);
+    function ViewContainerRef_(_element) {
+      _super.call(this);
+      this._element = _element;
+    }
+    ViewContainerRef_.prototype.get = function(index) {
+      return this._element.nestedViews[index].ref;
+    };
+    Object.defineProperty(ViewContainerRef_.prototype, "length", {
+      get: function() {
+        var views = this._element.nestedViews;
+        return lang_1.isPresent(views) ? views.length : 0;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(ViewContainerRef_.prototype, "element", {
+      get: function() {
+        return this._element.ref;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ViewContainerRef_.prototype.createEmbeddedView = function(templateRef, index) {
+      if (index === void 0) {
+        index = -1;
+      }
+      if (index == -1)
+        index = this.length;
+      var vm = this._element.parentView.viewManager;
+      return vm.createEmbeddedViewInContainer(this._element.ref, index, templateRef);
+    };
+    ViewContainerRef_.prototype.createHostView = function(hostViewFactoryRef, index, dynamicallyCreatedProviders, projectableNodes) {
+      if (index === void 0) {
+        index = -1;
+      }
+      if (dynamicallyCreatedProviders === void 0) {
+        dynamicallyCreatedProviders = null;
+      }
+      if (projectableNodes === void 0) {
+        projectableNodes = null;
+      }
+      if (index == -1)
+        index = this.length;
+      var vm = this._element.parentView.viewManager;
+      return vm.createHostViewInContainer(this._element.ref, index, hostViewFactoryRef, dynamicallyCreatedProviders, projectableNodes);
+    };
+    ViewContainerRef_.prototype.insert = function(viewRef, index) {
+      if (index === void 0) {
+        index = -1;
+      }
+      if (index == -1)
+        index = this.length;
+      var vm = this._element.parentView.viewManager;
+      return vm.attachViewInContainer(this._element.ref, index, viewRef);
+    };
+    ViewContainerRef_.prototype.indexOf = function(viewRef) {
+      return collection_1.ListWrapper.indexOf(this._element.nestedViews, viewRef.internalView);
+    };
+    ViewContainerRef_.prototype.remove = function(index) {
+      if (index === void 0) {
+        index = -1;
+      }
+      if (index == -1)
+        index = this.length - 1;
+      var vm = this._element.parentView.viewManager;
+      return vm.destroyViewInContainer(this._element.ref, index);
+    };
+    ViewContainerRef_.prototype.detach = function(index) {
+      if (index === void 0) {
+        index = -1;
+      }
+      if (index == -1)
+        index = this.length - 1;
+      var vm = this._element.parentView.viewManager;
+      return vm.detachViewInContainer(this._element.ref, index);
+    };
+    return ViewContainerRef_;
+  })(ViewContainerRef);
+  exports.ViewContainerRef_ = ViewContainerRef_;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/linker/template_ref.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var TemplateRef = (function() {
+    function TemplateRef() {}
+    Object.defineProperty(TemplateRef.prototype, "elementRef", {
+      get: function() {
+        return null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return TemplateRef;
+  })();
+  exports.TemplateRef = TemplateRef;
+  var TemplateRef_ = (function(_super) {
+    __extends(TemplateRef_, _super);
+    function TemplateRef_(_elementRef) {
+      _super.call(this);
+      this._elementRef = _elementRef;
+    }
+    Object.defineProperty(TemplateRef_.prototype, "elementRef", {
+      get: function() {
+        return this._elementRef;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return TemplateRef_;
+  })(TemplateRef);
+  exports.TemplateRef_ = TemplateRef_;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/change_detection.js", ["node_modules/angular2/src/core/change_detection/change_detection.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
+  exports.ChangeDetectionStrategy = change_detection_1.ChangeDetectionStrategy;
+  exports.ExpressionChangedAfterItHasBeenCheckedException = change_detection_1.ExpressionChangedAfterItHasBeenCheckedException;
+  exports.ChangeDetectionError = change_detection_1.ChangeDetectionError;
+  exports.ChangeDetectorRef = change_detection_1.ChangeDetectorRef;
+  exports.WrappedValue = change_detection_1.WrappedValue;
+  exports.SimpleChange = change_detection_1.SimpleChange;
+  exports.IterableDiffers = change_detection_1.IterableDiffers;
+  exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/metadata/directives.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di/metadata.js", "node_modules/angular2/src/core/change_detection.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var metadata_1 = $__require('node_modules/angular2/src/core/di/metadata.js');
+  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection.js');
+  var DirectiveMetadata = (function(_super) {
+    __extends(DirectiveMetadata, _super);
+    function DirectiveMetadata(_a) {
+      var _b = _a === void 0 ? {} : _a,
+          selector = _b.selector,
+          inputs = _b.inputs,
+          outputs = _b.outputs,
+          properties = _b.properties,
+          events = _b.events,
+          host = _b.host,
+          bindings = _b.bindings,
+          providers = _b.providers,
+          exportAs = _b.exportAs,
+          queries = _b.queries;
+      _super.call(this);
+      this.selector = selector;
+      this._inputs = inputs;
+      this._properties = properties;
+      this._outputs = outputs;
+      this._events = events;
+      this.host = host;
+      this.exportAs = exportAs;
+      this.queries = queries;
+      this._providers = providers;
+      this._bindings = bindings;
+    }
+    Object.defineProperty(DirectiveMetadata.prototype, "inputs", {
+      get: function() {
+        return lang_1.isPresent(this._properties) && this._properties.length > 0 ? this._properties : this._inputs;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DirectiveMetadata.prototype, "properties", {
+      get: function() {
+        return this.inputs;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DirectiveMetadata.prototype, "outputs", {
+      get: function() {
+        return lang_1.isPresent(this._events) && this._events.length > 0 ? this._events : this._outputs;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DirectiveMetadata.prototype, "events", {
+      get: function() {
+        return this.outputs;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DirectiveMetadata.prototype, "providers", {
+      get: function() {
+        return lang_1.isPresent(this._bindings) && this._bindings.length > 0 ? this._bindings : this._providers;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DirectiveMetadata.prototype, "bindings", {
+      get: function() {
+        return this.providers;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    DirectiveMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], DirectiveMetadata);
+    return DirectiveMetadata;
+  })(metadata_1.InjectableMetadata);
+  exports.DirectiveMetadata = DirectiveMetadata;
+  var ComponentMetadata = (function(_super) {
+    __extends(ComponentMetadata, _super);
+    function ComponentMetadata(_a) {
+      var _b = _a === void 0 ? {} : _a,
+          selector = _b.selector,
+          inputs = _b.inputs,
+          outputs = _b.outputs,
+          properties = _b.properties,
+          events = _b.events,
+          host = _b.host,
+          exportAs = _b.exportAs,
+          moduleId = _b.moduleId,
+          bindings = _b.bindings,
+          providers = _b.providers,
+          viewBindings = _b.viewBindings,
+          viewProviders = _b.viewProviders,
+          _c = _b.changeDetection,
+          changeDetection = _c === void 0 ? change_detection_1.ChangeDetectionStrategy.Default : _c,
+          queries = _b.queries,
+          templateUrl = _b.templateUrl,
+          template = _b.template,
+          styleUrls = _b.styleUrls,
+          styles = _b.styles,
+          directives = _b.directives,
+          pipes = _b.pipes,
+          encapsulation = _b.encapsulation;
+      _super.call(this, {
+        selector: selector,
+        inputs: inputs,
+        outputs: outputs,
+        properties: properties,
+        events: events,
+        host: host,
+        exportAs: exportAs,
+        bindings: bindings,
+        providers: providers,
+        queries: queries
+      });
+      this.changeDetection = changeDetection;
+      this._viewProviders = viewProviders;
+      this._viewBindings = viewBindings;
+      this.templateUrl = templateUrl;
+      this.template = template;
+      this.styleUrls = styleUrls;
+      this.styles = styles;
+      this.directives = directives;
+      this.pipes = pipes;
+      this.encapsulation = encapsulation;
+      this.moduleId = moduleId;
+    }
+    Object.defineProperty(ComponentMetadata.prototype, "viewProviders", {
+      get: function() {
+        return lang_1.isPresent(this._viewBindings) && this._viewBindings.length > 0 ? this._viewBindings : this._viewProviders;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(ComponentMetadata.prototype, "viewBindings", {
+      get: function() {
+        return this.viewProviders;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ComponentMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], ComponentMetadata);
+    return ComponentMetadata;
+  })(DirectiveMetadata);
+  exports.ComponentMetadata = ComponentMetadata;
+  var PipeMetadata = (function(_super) {
+    __extends(PipeMetadata, _super);
+    function PipeMetadata(_a) {
+      var name = _a.name,
+          pure = _a.pure;
+      _super.call(this);
+      this.name = name;
+      this._pure = pure;
+    }
+    Object.defineProperty(PipeMetadata.prototype, "pure", {
+      get: function() {
+        return lang_1.isPresent(this._pure) ? this._pure : true;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    PipeMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], PipeMetadata);
+    return PipeMetadata;
+  })(metadata_1.InjectableMetadata);
+  exports.PipeMetadata = PipeMetadata;
+  var InputMetadata = (function() {
+    function InputMetadata(bindingPropertyName) {
+      this.bindingPropertyName = bindingPropertyName;
+    }
+    InputMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String])], InputMetadata);
+    return InputMetadata;
+  })();
+  exports.InputMetadata = InputMetadata;
+  var OutputMetadata = (function() {
+    function OutputMetadata(bindingPropertyName) {
+      this.bindingPropertyName = bindingPropertyName;
+    }
+    OutputMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String])], OutputMetadata);
+    return OutputMetadata;
+  })();
+  exports.OutputMetadata = OutputMetadata;
+  var HostBindingMetadata = (function() {
+    function HostBindingMetadata(hostPropertyName) {
+      this.hostPropertyName = hostPropertyName;
+    }
+    HostBindingMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String])], HostBindingMetadata);
+    return HostBindingMetadata;
+  })();
+  exports.HostBindingMetadata = HostBindingMetadata;
+  var HostListenerMetadata = (function() {
+    function HostListenerMetadata(eventName, args) {
+      this.eventName = eventName;
+      this.args = args;
+    }
+    HostListenerMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Array])], HostListenerMetadata);
+    return HostListenerMetadata;
+  })();
+  exports.HostListenerMetadata = HostListenerMetadata;
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/iterable_differs.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/di.js"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -10740,17 +8101,21 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
     DefaultIterableDifferFactory.prototype.supports = function(obj) {
       return collection_1.isListLikeIterable(obj);
     };
-    DefaultIterableDifferFactory.prototype.create = function(cdRef) {
-      return new DefaultIterableDiffer();
+    DefaultIterableDifferFactory.prototype.create = function(cdRef, trackByFn) {
+      return new DefaultIterableDiffer(trackByFn);
     };
     DefaultIterableDifferFactory = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [])], DefaultIterableDifferFactory);
     return DefaultIterableDifferFactory;
   })();
   exports.DefaultIterableDifferFactory = DefaultIterableDifferFactory;
+  var trackByIdentity = function(index, item) {
+    return item;
+  };
   var DefaultIterableDiffer = (function() {
-    function DefaultIterableDiffer() {
-      this._collection = null;
+    function DefaultIterableDiffer(_trackByFn) {
+      this._trackByFn = _trackByFn;
       this._length = null;
+      this._collection = null;
       this._linkedRecords = null;
       this._unlinkedRecords = null;
       this._previousItHead = null;
@@ -10762,6 +8127,9 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       this._movesTail = null;
       this._removalsHead = null;
       this._removalsTail = null;
+      this._identityChangesHead = null;
+      this._identityChangesTail = null;
+      this._trackByFn = lang_2.isPresent(this._trackByFn) ? this._trackByFn : trackByIdentity;
     }
     Object.defineProperty(DefaultIterableDiffer.prototype, "collection", {
       get: function() {
@@ -10807,6 +8175,12 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
         fn(record);
       }
     };
+    DefaultIterableDiffer.prototype.forEachIdentityChange = function(fn) {
+      var record;
+      for (record = this._identityChangesHead; record !== null; record = record._nextIdentityChange) {
+        fn(record);
+      }
+    };
     DefaultIterableDiffer.prototype.diff = function(collection) {
       if (lang_2.isBlank(collection))
         collection = [];
@@ -10827,27 +8201,38 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       var mayBeDirty = false;
       var index;
       var item;
+      var itemTrackBy;
       if (lang_2.isArray(collection)) {
         var list = collection;
         this._length = collection.length;
         for (index = 0; index < this._length; index++) {
           item = list[index];
-          if (record === null || !lang_2.looseIdentical(record.item, item)) {
-            record = this._mismatch(record, item, index);
+          itemTrackBy = this._trackByFn(index, item);
+          if (record === null || !lang_2.looseIdentical(record.trackById, itemTrackBy)) {
+            record = this._mismatch(record, item, itemTrackBy, index);
             mayBeDirty = true;
-          } else if (mayBeDirty) {
-            record = this._verifyReinsertion(record, item, index);
+          } else {
+            if (mayBeDirty) {
+              record = this._verifyReinsertion(record, item, itemTrackBy, index);
+            }
+            if (!lang_2.looseIdentical(record.item, item))
+              this._addIdentityChange(record, item);
           }
           record = record._next;
         }
       } else {
         index = 0;
         collection_1.iterateListLike(collection, function(item) {
-          if (record === null || !lang_2.looseIdentical(record.item, item)) {
-            record = _this._mismatch(record, item, index);
+          itemTrackBy = _this._trackByFn(index, item);
+          if (record === null || !lang_2.looseIdentical(record.trackById, itemTrackBy)) {
+            record = _this._mismatch(record, item, itemTrackBy, index);
             mayBeDirty = true;
-          } else if (mayBeDirty) {
-            record = _this._verifyReinsertion(record, item, index);
+          } else {
+            if (mayBeDirty) {
+              record = _this._verifyReinsertion(record, item, itemTrackBy, index);
+            }
+            if (!lang_2.looseIdentical(record.item, item))
+              _this._addIdentityChange(record, item);
           }
           record = record._next;
           index++;
@@ -10860,7 +8245,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
     };
     Object.defineProperty(DefaultIterableDiffer.prototype, "isDirty", {
       get: function() {
-        return this._additionsHead !== null || this._movesHead !== null || this._removalsHead !== null;
+        return this._additionsHead !== null || this._movesHead !== null || this._removalsHead !== null || this._identityChangesHead !== null;
       },
       enumerable: true,
       configurable: true
@@ -10882,9 +8267,10 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
         }
         this._movesHead = this._movesTail = null;
         this._removalsHead = this._removalsTail = null;
+        this._identityChangesHead = this._identityChangesTail = null;
       }
     };
-    DefaultIterableDiffer.prototype._mismatch = function(record, item, index) {
+    DefaultIterableDiffer.prototype._mismatch = function(record, item, itemTrackBy, index) {
       var previousRecord;
       if (record === null) {
         previousRecord = this._itTail;
@@ -10892,21 +8278,25 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
         previousRecord = record._prev;
         this._remove(record);
       }
-      record = this._linkedRecords === null ? null : this._linkedRecords.get(item, index);
+      record = this._linkedRecords === null ? null : this._linkedRecords.get(itemTrackBy, index);
       if (record !== null) {
+        if (!lang_2.looseIdentical(record.item, item))
+          this._addIdentityChange(record, item);
         this._moveAfter(record, previousRecord, index);
       } else {
-        record = this._unlinkedRecords === null ? null : this._unlinkedRecords.get(item);
+        record = this._unlinkedRecords === null ? null : this._unlinkedRecords.get(itemTrackBy);
         if (record !== null) {
+          if (!lang_2.looseIdentical(record.item, item))
+            this._addIdentityChange(record, item);
           this._reinsertAfter(record, previousRecord, index);
         } else {
-          record = this._addAfter(new CollectionChangeRecord(item), previousRecord, index);
+          record = this._addAfter(new CollectionChangeRecord(item, itemTrackBy), previousRecord, index);
         }
       }
       return record;
     };
-    DefaultIterableDiffer.prototype._verifyReinsertion = function(record, item, index) {
-      var reinsertRecord = this._unlinkedRecords === null ? null : this._unlinkedRecords.get(item);
+    DefaultIterableDiffer.prototype._verifyReinsertion = function(record, item, itemTrackBy, index) {
+      var reinsertRecord = this._unlinkedRecords === null ? null : this._unlinkedRecords.get(itemTrackBy);
       if (reinsertRecord !== null) {
         record = this._reinsertAfter(reinsertRecord, record._prev, index);
       } else if (record.currentIndex != index) {
@@ -11041,36 +8431,49 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       }
       return record;
     };
+    DefaultIterableDiffer.prototype._addIdentityChange = function(record, item) {
+      record.item = item;
+      if (this._identityChangesTail === null) {
+        this._identityChangesTail = this._identityChangesHead = record;
+      } else {
+        this._identityChangesTail = this._identityChangesTail._nextIdentityChange = record;
+      }
+      return record;
+    };
     DefaultIterableDiffer.prototype.toString = function() {
-      var record;
       var list = [];
-      for (record = this._itHead; record !== null; record = record._next) {
-        list.push(record);
-      }
+      this.forEachItem(function(record) {
+        return list.push(record);
+      });
       var previous = [];
-      for (record = this._previousItHead; record !== null; record = record._nextPrevious) {
-        previous.push(record);
-      }
+      this.forEachPreviousItem(function(record) {
+        return previous.push(record);
+      });
       var additions = [];
-      for (record = this._additionsHead; record !== null; record = record._nextAdded) {
-        additions.push(record);
-      }
+      this.forEachAddedItem(function(record) {
+        return additions.push(record);
+      });
       var moves = [];
-      for (record = this._movesHead; record !== null; record = record._nextMoved) {
-        moves.push(record);
-      }
+      this.forEachMovedItem(function(record) {
+        return moves.push(record);
+      });
       var removals = [];
-      for (record = this._removalsHead; record !== null; record = record._nextRemoved) {
-        removals.push(record);
-      }
-      return "collection: " + list.join(', ') + "\n" + "previous: " + previous.join(', ') + "\n" + "additions: " + additions.join(', ') + "\n" + "moves: " + moves.join(', ') + "\n" + "removals: " + removals.join(', ') + "\n";
+      this.forEachRemovedItem(function(record) {
+        return removals.push(record);
+      });
+      var identityChanges = [];
+      this.forEachIdentityChange(function(record) {
+        return identityChanges.push(record);
+      });
+      return "collection: " + list.join(', ') + "\n" + "previous: " + previous.join(', ') + "\n" + "additions: " + additions.join(', ') + "\n" + "moves: " + moves.join(', ') + "\n" + "removals: " + removals.join(', ') + "\n" + "identityChanges: " + identityChanges.join(', ') + "\n";
     };
     return DefaultIterableDiffer;
   })();
   exports.DefaultIterableDiffer = DefaultIterableDiffer;
   var CollectionChangeRecord = (function() {
-    function CollectionChangeRecord(item) {
+    function CollectionChangeRecord(item, trackById) {
       this.item = item;
+      this.trackById = trackById;
       this.currentIndex = null;
       this.previousIndex = null;
       this._nextPrevious = null;
@@ -11082,6 +8485,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       this._nextRemoved = null;
       this._nextAdded = null;
       this._nextMoved = null;
+      this._nextIdentityChange = null;
     }
     CollectionChangeRecord.prototype.toString = function() {
       return this.previousIndex === this.currentIndex ? lang_2.stringify(this.item) : lang_2.stringify(this.item) + '[' + lang_2.stringify(this.previousIndex) + '->' + lang_2.stringify(this.currentIndex) + ']';
@@ -11106,10 +8510,10 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
         this._tail = record;
       }
     };
-    _DuplicateItemRecordList.prototype.get = function(item, afterIndex) {
+    _DuplicateItemRecordList.prototype.get = function(trackById, afterIndex) {
       var record;
       for (record = this._head; record !== null; record = record._nextDup) {
-        if ((afterIndex === null || afterIndex < record.currentIndex) && lang_2.looseIdentical(record.item, item)) {
+        if ((afterIndex === null || afterIndex < record.currentIndex) && lang_2.looseIdentical(record.trackById, trackById)) {
           return record;
         }
       }
@@ -11137,7 +8541,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       this.map = new Map();
     }
     _DuplicateMap.prototype.put = function(record) {
-      var key = lang_2.getMapKey(record.item);
+      var key = lang_2.getMapKey(record.trackById);
       var duplicates = this.map.get(key);
       if (!lang_2.isPresent(duplicates)) {
         duplicates = new _DuplicateItemRecordList();
@@ -11145,16 +8549,16 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       }
       duplicates.add(record);
     };
-    _DuplicateMap.prototype.get = function(value, afterIndex) {
+    _DuplicateMap.prototype.get = function(trackById, afterIndex) {
       if (afterIndex === void 0) {
         afterIndex = null;
       }
-      var key = lang_2.getMapKey(value);
+      var key = lang_2.getMapKey(trackById);
       var recordList = this.map.get(key);
-      return lang_2.isBlank(recordList) ? null : recordList.get(value, afterIndex);
+      return lang_2.isBlank(recordList) ? null : recordList.get(trackById, afterIndex);
     };
     _DuplicateMap.prototype.remove = function(record) {
-      var key = lang_2.getMapKey(record.item);
+      var key = lang_2.getMapKey(record.trackById);
       var recordList = this.map.get(key);
       if (recordList.remove(record)) {
         this.map.delete(key);
@@ -11821,18 +9225,14 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/l
       return null;
     };
     _Scanner.prototype.scanCharacter = function(start, code) {
-      assert(this.peek == code);
       this.advance();
       return newCharacterToken(start, code);
     };
     _Scanner.prototype.scanOperator = function(start, str) {
-      assert(this.peek == lang_1.StringWrapper.charCodeAt(str, 0));
-      assert(collection_1.SetWrapper.has(OPERATORS, str));
       this.advance();
       return newOperatorToken(start, str);
     };
     _Scanner.prototype.scanComplexOperator = function(start, one, twoCode, two, threeCode, three) {
-      assert(this.peek == lang_1.StringWrapper.charCodeAt(one, 0));
       this.advance();
       var str = one;
       if (this.peek == twoCode) {
@@ -11843,11 +9243,9 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/l
         this.advance();
         str += three;
       }
-      assert(collection_1.SetWrapper.has(OPERATORS, str));
       return newOperatorToken(start, str);
     };
     _Scanner.prototype.scanIdentifier = function() {
-      assert(isIdentifierStart(this.peek));
       var start = this.index;
       this.advance();
       while (isIdentifierPart(this.peek))
@@ -11860,7 +9258,6 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/l
       }
     };
     _Scanner.prototype.scanNumber = function(start) {
-      assert(isDigit(this.peek));
       var simple = (this.index === start);
       this.advance();
       while (true) {
@@ -11883,7 +9280,6 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/l
       return newNumberToken(start, value);
     };
     _Scanner.prototype.scanString = function() {
-      assert(this.peek == exports.$SQ || this.peek == exports.$DQ);
       var start = this.index;
       var quote = this.peek;
       this.advance();
@@ -12028,7 +9424,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/p
   var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
   var ast_1 = $__require('node_modules/angular2/src/core/change_detection/parser/ast.js');
   var _implicitReceiver = new ast_1.ImplicitReceiver();
-  var INTERPOLATION_REGEXP = /\{\{(.*?)\}\}/g;
+  var INTERPOLATION_REGEXP = /\{\{([\s\S]*?)\}\}/g;
   var ParseException = (function(_super) {
     __extends(ParseException, _super);
     function ParseException(message, input, errLocation, ctxLocation) {
@@ -12625,55 +10021,6 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/p
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/locals.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var Locals = (function() {
-    function Locals(parent, current) {
-      this.parent = parent;
-      this.current = current;
-    }
-    Locals.prototype.contains = function(name) {
-      if (this.current.has(name)) {
-        return true;
-      }
-      if (lang_1.isPresent(this.parent)) {
-        return this.parent.contains(name);
-      }
-      return false;
-    };
-    Locals.prototype.get = function(name) {
-      if (this.current.has(name)) {
-        return this.current.get(name);
-      }
-      if (lang_1.isPresent(this.parent)) {
-        return this.parent.get(name);
-      }
-      throw new exceptions_1.BaseException("Cannot find '" + name + "'");
-    };
-    Locals.prototype.set = function(name, value) {
-      if (this.current.has(name)) {
-        this.current.set(name, value);
-      } else {
-        throw new exceptions_1.BaseException("Setting of new keys post-construction is not supported. Key: " + name + ".");
-      }
-    };
-    Locals.prototype.clearValues = function() {
-      collection_1.MapWrapper.clearValues(this.current);
-    };
-    return Locals;
-  })();
-  exports.Locals = Locals;
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("node_modules/angular2/src/core/change_detection/interfaces.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -12983,7 +10330,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/codegen_
           rhs = context + "[" + getLocalName(protoRec.args[0]) + "] = " + getLocalName(protoRec.args[1]);
           break;
         case proto_record_1.RecordType.Chain:
-          rhs = 'null';
+          rhs = "" + getLocalName(protoRec.args[protoRec.args.length - 1]);
           break;
         default:
           throw new exceptions_1.BaseException("Unknown operation " + protoRec.mode);
@@ -13024,18 +10371,59 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/codegen_
       return codegen_facade_1.combineGeneratedStrings(iVals);
     };
     CodegenLogicUtil.prototype.genHydrateDirectives = function(directiveRecords) {
+      var _this = this;
       var res = [];
+      var outputCount = 0;
       for (var i = 0; i < directiveRecords.length; ++i) {
         var r = directiveRecords[i];
-        res.push(this._names.getDirectiveName(r.directiveIndex) + " = " + this._genReadDirective(i) + ";");
+        var dirVarName = this._names.getDirectiveName(r.directiveIndex);
+        res.push(dirVarName + " = " + this._genReadDirective(i) + ";");
+        if (lang_1.isPresent(r.outputs)) {
+          r.outputs.forEach(function(output) {
+            var eventHandlerExpr = _this._genEventHandler(r.directiveIndex.elementIndex, output[1]);
+            var statementStart = "this.outputSubscriptions[" + outputCount++ + "] = " + dirVarName + "." + output[0];
+            if (lang_1.IS_DART) {
+              res.push(statementStart + ".listen(" + eventHandlerExpr + ");");
+            } else {
+              res.push(statementStart + ".subscribe({next: " + eventHandlerExpr + "});");
+            }
+          });
+        }
+      }
+      if (outputCount > 0) {
+        var statementStart = 'this.outputSubscriptions';
+        if (lang_1.IS_DART) {
+          res.unshift(statementStart + " = new List(" + outputCount + ");");
+        } else {
+          res.unshift(statementStart + " = new Array(" + outputCount + ");");
+        }
       }
       return res.join("\n");
     };
-    CodegenLogicUtil.prototype._genReadDirective = function(index) {
-      if (this._changeDetection === constants_1.ChangeDetectionStrategy.OnPushObserve) {
-        return "this.observeDirective(this.getDirectiveFor(directives, " + index + "), " + index + ")";
+    CodegenLogicUtil.prototype.genDirectivesOnDestroy = function(directiveRecords) {
+      var res = [];
+      for (var i = 0; i < directiveRecords.length; ++i) {
+        var r = directiveRecords[i];
+        if (r.callOnDestroy) {
+          var dirVarName = this._names.getDirectiveName(r.directiveIndex);
+          res.push(dirVarName + ".ngOnDestroy();");
+        }
+      }
+      return res.join("\n");
+    };
+    CodegenLogicUtil.prototype._genEventHandler = function(boundElementIndex, eventName) {
+      if (lang_1.IS_DART) {
+        return "(event) => this.handleEvent('" + eventName + "', " + boundElementIndex + ", event)";
       } else {
-        return "this.getDirectiveFor(directives, " + index + ")";
+        return "(function(event) { return this.handleEvent('" + eventName + "', " + boundElementIndex + ", event); }).bind(this)";
+      }
+    };
+    CodegenLogicUtil.prototype._genReadDirective = function(index) {
+      var directiveExpr = "this.getDirectiveFor(directives, " + index + ")";
+      if (this._changeDetection === constants_1.ChangeDetectionStrategy.OnPushObserve) {
+        return "this.observeDirective(" + directiveExpr + ", " + index + ")";
+      } else {
+        return directiveExpr;
       }
     };
     CodegenLogicUtil.prototype.genHydrateDetectors = function(directiveRecords) {
@@ -13750,8 +11138,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/proto_ch
         return d.directiveIndex;
       });
     }
-    DynamicProtoChangeDetector.prototype.instantiate = function(dispatcher) {
-      return new dynamic_change_detector_1.DynamicChangeDetector(this._definition.id, dispatcher, this._propertyBindingRecords.length, this._propertyBindingTargets, this._directiveIndices, this._definition.strategy, this._propertyBindingRecords, this._eventBindingRecords, this._definition.directiveRecords, this._definition.genConfig);
+    DynamicProtoChangeDetector.prototype.instantiate = function() {
+      return new dynamic_change_detector_1.DynamicChangeDetector(this._definition.id, this._propertyBindingRecords.length, this._propertyBindingTargets, this._directiveIndices, this._definition.strategy, this._propertyBindingRecords, this._eventBindingRecords, this._definition.directiveRecords, this._definition.genConfig);
     };
     return DynamicProtoChangeDetector;
   })();
@@ -14170,11 +11558,11 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
       this.typeName = codegen_name_util_1.sanitizeName("ChangeDetector_" + this.id);
     }
     ChangeDetectorJITGenerator.prototype.generate = function() {
-      var factorySource = "\n      " + this.generateSource() + "\n      return function(dispatcher) {\n        return new " + this.typeName + "(dispatcher);\n      }\n    ";
+      var factorySource = "\n      " + this.generateSource() + "\n      return function() {\n        return new " + this.typeName + "();\n      }\n    ";
       return new Function(this.abstractChangeDetectorVarName, this.changeDetectionUtilVarName, this.changeDetectorStateVarName, factorySource)(abstract_change_detector_1.AbstractChangeDetector, change_detection_util_1.ChangeDetectionUtil, constants_1.ChangeDetectorState);
     };
     ChangeDetectorJITGenerator.prototype.generateSource = function() {
-      return "\n      var " + this.typeName + " = function " + this.typeName + "(dispatcher) {\n        " + this.abstractChangeDetectorVarName + ".call(\n            this, " + JSON.stringify(this.id) + ", dispatcher, " + this.records.length + ",\n            " + this.typeName + ".gen_propertyBindingTargets, " + this.typeName + ".gen_directiveIndices,\n            " + codegen_facade_1.codify(this.changeDetectionStrategy) + ");\n        this.dehydrateDirectives(false);\n      }\n\n      " + this.typeName + ".prototype = Object.create(" + this.abstractChangeDetectorVarName + ".prototype);\n\n      " + this.typeName + ".prototype.detectChangesInRecordsInternal = function(throwOnChange) {\n        " + this._names.genInitLocals() + "\n        var " + IS_CHANGED_LOCAL + " = false;\n        var " + CHANGES_LOCAL + " = null;\n\n        " + this._genAllRecords(this.records) + "\n      }\n\n      " + this._maybeGenHandleEventInternal() + "\n\n      " + this._maybeGenAfterContentLifecycleCallbacks() + "\n\n      " + this._maybeGenAfterViewLifecycleCallbacks() + "\n\n      " + this._maybeGenHydrateDirectives() + "\n\n      " + this._maybeGenDehydrateDirectives() + "\n\n      " + this._genPropertyBindingTargets() + "\n\n      " + this._genDirectiveIndices() + "\n    ";
+      return "\n      var " + this.typeName + " = function " + this.typeName + "() {\n        " + this.abstractChangeDetectorVarName + ".call(\n            this, " + JSON.stringify(this.id) + ", " + this.records.length + ",\n            " + this.typeName + ".gen_propertyBindingTargets, " + this.typeName + ".gen_directiveIndices,\n            " + codegen_facade_1.codify(this.changeDetectionStrategy) + ");\n        this.dehydrateDirectives(false);\n      }\n\n      " + this.typeName + ".prototype = Object.create(" + this.abstractChangeDetectorVarName + ".prototype);\n\n      " + this.typeName + ".prototype.detectChangesInRecordsInternal = function(throwOnChange) {\n        " + this._names.genInitLocals() + "\n        var " + IS_CHANGED_LOCAL + " = false;\n        var " + CHANGES_LOCAL + " = null;\n\n        " + this._genAllRecords(this.records) + "\n      }\n\n      " + this._maybeGenHandleEventInternal() + "\n\n      " + this._maybeGenAfterContentLifecycleCallbacks() + "\n\n      " + this._maybeGenAfterViewLifecycleCallbacks() + "\n\n      " + this._maybeGenHydrateDirectives() + "\n\n      " + this._maybeGenDehydrateDirectives() + "\n\n      " + this._genPropertyBindingTargets() + "\n\n      " + this._genDirectiveIndices() + "\n    ";
     };
     ChangeDetectorJITGenerator.prototype._genPropertyBindingTargets = function() {
       var targets = this._logic.genPropertyBindingTargets(this.propertyBindingTargets, this.genConfig.genDebugInfo);
@@ -14237,13 +11625,11 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
     };
     ChangeDetectorJITGenerator.prototype._maybeGenDehydrateDirectives = function() {
       var destroyPipesCode = this._names.genPipeOnDestroy();
-      if (destroyPipesCode) {
-        destroyPipesCode = "if (destroyPipes) { " + destroyPipesCode + " }";
-      }
+      var destroyDirectivesCode = this._logic.genDirectivesOnDestroy(this.directiveRecords);
       var dehydrateFieldsCode = this._names.genDehydrateFields();
-      if (!destroyPipesCode && !dehydrateFieldsCode)
+      if (!destroyPipesCode && !destroyDirectivesCode && !dehydrateFieldsCode)
         return '';
-      return this.typeName + ".prototype.dehydrateDirectives = function(destroyPipes) {\n        " + destroyPipesCode + "\n        " + dehydrateFieldsCode + "\n    }";
+      return this.typeName + ".prototype.dehydrateDirectives = function(destroyPipes) {\n        if (destroyPipes) {\n          " + destroyPipesCode + "\n          " + destroyDirectivesCode + "\n        }\n        " + dehydrateFieldsCode + "\n    }";
     };
     ChangeDetectorJITGenerator.prototype._maybeGenHydrateDirectives = function() {
       var hydrateDirectivesCode = this._logic.genHydrateDirectives(this.directiveRecords);
@@ -14340,7 +11726,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
       });
       contexOrArgCheck.push(this._names.getChangeName(r.contextIndex));
       var condition = "!" + pipe + ".pure || (" + contexOrArgCheck.join(" || ") + ")";
-      var check = "\n      if (" + this.changeDetectionUtilVarName + ".looseNotIdentical(" + oldValue + ", " + newValue + ")) {\n        " + newValue + " = " + this.changeDetectionUtilVarName + ".unwrapValue(" + newValue + ")\n        " + this._genChangeMarker(r) + "\n        " + this._genUpdateDirectiveOrElement(r) + "\n        " + this._genAddToChanges(r) + "\n        " + oldValue + " = " + newValue + ";\n      }\n    ";
+      var check = "\n      " + this._genThrowOnChangeCheck(oldValue, newValue) + "\n      if (" + this.changeDetectionUtilVarName + ".looseNotIdentical(" + oldValue + ", " + newValue + ")) {\n        " + newValue + " = " + this.changeDetectionUtilVarName + ".unwrapValue(" + newValue + ")\n        " + this._genChangeMarker(r) + "\n        " + this._genUpdateDirectiveOrElement(r) + "\n        " + this._genAddToChanges(r) + "\n        " + oldValue + " = " + newValue + ";\n      }\n    ";
       var genCode = r.shouldBeChecked() ? "" + read + check : read;
       if (r.isUsedByOtherRecord()) {
         return init + " if (" + condition + ") { " + genCode + " } else { " + newValue + " = " + oldValue + "; }";
@@ -14353,7 +11739,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
       var oldValue = this._names.getFieldName(r.selfIndex);
       var newValue = this._names.getLocalName(r.selfIndex);
       var read = "\n      " + this._logic.genPropertyBindingEvalValue(r) + "\n    ";
-      var check = "\n      if (" + this.changeDetectionUtilVarName + ".looseNotIdentical(" + oldValue + ", " + newValue + ")) {\n        " + this._genChangeMarker(r) + "\n        " + this._genUpdateDirectiveOrElement(r) + "\n        " + this._genAddToChanges(r) + "\n        " + oldValue + " = " + newValue + ";\n      }\n    ";
+      var check = "\n      " + this._genThrowOnChangeCheck(oldValue, newValue) + "\n      if (" + this.changeDetectionUtilVarName + ".looseNotIdentical(" + oldValue + ", " + newValue + ")) {\n        " + this._genChangeMarker(r) + "\n        " + this._genUpdateDirectiveOrElement(r) + "\n        " + this._genAddToChanges(r) + "\n        " + oldValue + " = " + newValue + ";\n      }\n    ";
       var genCode = r.shouldBeChecked() ? "" + read + check : read;
       if (r.isPureFunction()) {
         var condition = r.args.map(function(a) {
@@ -14375,19 +11761,18 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
       if (!r.lastInBinding)
         return "";
       var newValue = this._names.getLocalName(r.selfIndex);
-      var oldValue = this._names.getFieldName(r.selfIndex);
       var notifyDebug = this.genConfig.logBindingUpdate ? "this.logBindingUpdate(" + newValue + ");" : "";
       var br = r.bindingRecord;
       if (br.target.isDirective()) {
         var directiveProperty = this._names.getDirectiveName(br.directiveRecord.directiveIndex) + "." + br.target.name;
-        return "\n        " + this._genThrowOnChangeCheck(oldValue, newValue) + "\n        " + directiveProperty + " = " + newValue + ";\n        " + notifyDebug + "\n        " + IS_CHANGED_LOCAL + " = true;\n      ";
+        return "\n        " + directiveProperty + " = " + newValue + ";\n        " + notifyDebug + "\n        " + IS_CHANGED_LOCAL + " = true;\n      ";
       } else {
-        return "\n        " + this._genThrowOnChangeCheck(oldValue, newValue) + "\n        this.notifyDispatcher(" + newValue + ");\n        " + notifyDebug + "\n      ";
+        return "\n        this.notifyDispatcher(" + newValue + ");\n        " + notifyDebug + "\n      ";
       }
     };
     ChangeDetectorJITGenerator.prototype._genThrowOnChangeCheck = function(oldValue, newValue) {
       if (lang_1.assertionsEnabled()) {
-        return "\n        if(throwOnChange) {\n          this.throwOnChangeError(" + oldValue + ", " + newValue + ");\n        }\n        ";
+        return "\n        if (throwOnChange && !" + this.changeDetectionUtilVarName + ".devModeEqual(" + oldValue + ", " + newValue + ")) {\n          this.throwOnChangeError(" + oldValue + ", " + newValue + ");\n        }\n        ";
       } else {
         return '';
       }
@@ -14450,8 +11835,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/jit_prot
     JitProtoChangeDetector.isSupported = function() {
       return true;
     };
-    JitProtoChangeDetector.prototype.instantiate = function(dispatcher) {
-      return this._factory(dispatcher);
+    JitProtoChangeDetector.prototype.instantiate = function() {
+      return this._factory();
     };
     JitProtoChangeDetector.prototype._createFactory = function(definition) {
       return new change_detection_jit_generator_1.ChangeDetectorJITGenerator(definition, 'util', 'AbstractChangeDetector', 'ChangeDetectorStatus').generate();
@@ -14498,84 +11883,80 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/exceptio
   exports.ChangeDetectionError = ChangeDetectionError;
   var DehydratedException = (function(_super) {
     __extends(DehydratedException, _super);
-    function DehydratedException() {
-      _super.call(this, 'Attempt to detect changes on a dehydrated detector.');
+    function DehydratedException(details) {
+      _super.call(this, "Attempt to use a dehydrated detector: " + details);
     }
     return DehydratedException;
   })(exceptions_1.BaseException);
   exports.DehydratedException = DehydratedException;
+  var EventEvaluationError = (function(_super) {
+    __extends(EventEvaluationError, _super);
+    function EventEvaluationError(eventName, originalException, originalStack, context) {
+      _super.call(this, "Error during evaluation of \"" + eventName + "\"", originalException, originalStack, context);
+    }
+    return EventEvaluationError;
+  })(exceptions_1.WrappedException);
+  exports.EventEvaluationError = EventEvaluationError;
+  var EventEvaluationErrorContext = (function() {
+    function EventEvaluationErrorContext(element, componentElement, context, locals, injector) {
+      this.element = element;
+      this.componentElement = componentElement;
+      this.context = context;
+      this.locals = locals;
+      this.injector = injector;
+    }
+    return EventEvaluationErrorContext;
+  })();
+  exports.EventEvaluationErrorContext = EventEvaluationErrorContext;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/profile/wtf_impl.js", ["node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/locals.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var trace;
-  var events;
-  function detectWTF() {
-    var wtf = lang_1.global['wtf'];
-    if (wtf) {
-      trace = wtf['trace'];
-      if (trace) {
-        events = trace['events'];
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var Locals = (function() {
+    function Locals(parent, current) {
+      this.parent = parent;
+      this.current = current;
+    }
+    Locals.prototype.contains = function(name) {
+      if (this.current.has(name)) {
         return true;
       }
-    }
-    return false;
-  }
-  exports.detectWTF = detectWTF;
-  function createScope(signature, flags) {
-    if (flags === void 0) {
-      flags = null;
-    }
-    return events.createScope(signature, flags);
-  }
-  exports.createScope = createScope;
-  function leave(scope, returnValue) {
-    trace.leaveScope(scope, returnValue);
-    return returnValue;
-  }
-  exports.leave = leave;
-  function startTimeRange(rangeType, action) {
-    return trace.beginTimeRange(rangeType, action);
-  }
-  exports.startTimeRange = startTimeRange;
-  function endTimeRange(range) {
-    trace.endTimeRange(range);
-  }
-  exports.endTimeRange = endTimeRange;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/profile/profile.js", ["node_modules/angular2/src/core/profile/wtf_impl.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var impl = $__require('node_modules/angular2/src/core/profile/wtf_impl.js');
-  exports.wtfEnabled = impl.detectWTF();
-  function noopScope(arg0, arg1) {
-    return null;
-  }
-  exports.wtfCreateScope = exports.wtfEnabled ? impl.createScope : function(signature, flags) {
-    return noopScope;
-  };
-  exports.wtfLeave = exports.wtfEnabled ? impl.leave : function(s, r) {
-    return r;
-  };
-  exports.wtfStartTimeRange = exports.wtfEnabled ? impl.startTimeRange : function(rangeType, action) {
-    return null;
-  };
-  exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function(r) {
-    return null;
-  };
+      if (lang_1.isPresent(this.parent)) {
+        return this.parent.contains(name);
+      }
+      return false;
+    };
+    Locals.prototype.get = function(name) {
+      if (this.current.has(name)) {
+        return this.current.get(name);
+      }
+      if (lang_1.isPresent(this.parent)) {
+        return this.parent.get(name);
+      }
+      throw new exceptions_1.BaseException("Cannot find '" + name + "'");
+    };
+    Locals.prototype.set = function(name, value) {
+      if (this.current.has(name)) {
+        this.current.set(name, value);
+      } else {
+        throw new exceptions_1.BaseException("Setting of new keys post-construction is not supported. Key: " + name + ".");
+      }
+    };
+    Locals.prototype.clearLocalValues = function() {
+      collection_1.MapWrapper.clearValues(this.current);
+    };
+    return Locals;
+  })();
+  exports.Locals = Locals;
   global.define = __define;
   return module.exports;
 });
@@ -14594,7 +11975,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/observab
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract_change_detector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/change_detection_util.js", "node_modules/angular2/src/core/change_detection/change_detector_ref.js", "node_modules/angular2/src/core/change_detection/exceptions.js", "node_modules/angular2/src/core/change_detection/constants.js", "node_modules/angular2/src/core/profile/profile.js", "node_modules/angular2/src/core/change_detection/observable_facade.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract_change_detector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/change_detection_util.js", "node_modules/angular2/src/core/change_detection/change_detector_ref.js", "node_modules/angular2/src/core/change_detection/exceptions.js", "node_modules/angular2/src/core/change_detection/parser/locals.js", "node_modules/angular2/src/core/change_detection/constants.js", "node_modules/angular2/src/core/profile/profile.js", "node_modules/angular2/src/core/change_detection/observable_facade.js", "node_modules/angular2/src/facade/async.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14605,9 +11986,11 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
   var change_detection_util_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection_util.js');
   var change_detector_ref_1 = $__require('node_modules/angular2/src/core/change_detection/change_detector_ref.js');
   var exceptions_1 = $__require('node_modules/angular2/src/core/change_detection/exceptions.js');
+  var locals_1 = $__require('node_modules/angular2/src/core/change_detection/parser/locals.js');
   var constants_1 = $__require('node_modules/angular2/src/core/change_detection/constants.js');
   var profile_1 = $__require('node_modules/angular2/src/core/profile/profile.js');
   var observable_facade_1 = $__require('node_modules/angular2/src/core/change_detection/observable_facade.js');
+  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
   var _scope_check = profile_1.wtfCreateScope("ChangeDetector#check(ascii id, bool throwOnChange)");
   var _Context = (function() {
     function _Context(element, componentElement, context, locals, injector, expression) {
@@ -14621,9 +12004,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
     return _Context;
   })();
   var AbstractChangeDetector = (function() {
-    function AbstractChangeDetector(id, dispatcher, numberOfPropertyProtoRecords, bindingTargets, directiveIndices, strategy) {
+    function AbstractChangeDetector(id, numberOfPropertyProtoRecords, bindingTargets, directiveIndices, strategy) {
       this.id = id;
-      this.dispatcher = dispatcher;
       this.numberOfPropertyProtoRecords = numberOfPropertyProtoRecords;
       this.bindingTargets = bindingTargets;
       this.directiveIndices = directiveIndices;
@@ -14653,10 +12035,21 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
     AbstractChangeDetector.prototype.remove = function() {
       this.parent.removeContentChild(this);
     };
-    AbstractChangeDetector.prototype.handleEvent = function(eventName, elIndex, locals) {
-      var res = this.handleEventInternal(eventName, elIndex, locals);
-      this.markPathToRootAsCheckOnce();
-      return res;
+    AbstractChangeDetector.prototype.handleEvent = function(eventName, elIndex, event) {
+      if (!this.hydrated()) {
+        this.throwDehydratedError(this.id + " -> " + eventName);
+      }
+      try {
+        var locals = new Map();
+        locals.set('$event', event);
+        var res = !this.handleEventInternal(eventName, elIndex, new locals_1.Locals(this.locals, locals));
+        this.markPathToRootAsCheckOnce();
+        return res;
+      } catch (e) {
+        var c = this.dispatcher.getDebugContext(null, elIndex, null);
+        var context = lang_1.isPresent(c) ? new exceptions_1.EventEvaluationErrorContext(c.element, c.componentElement, c.context, c.locals, c.injector) : null;
+        throw new exceptions_1.EventEvaluationError(eventName, e, e.stack, context);
+      }
     };
     AbstractChangeDetector.prototype.handleEventInternal = function(eventName, elIndex, locals) {
       return false;
@@ -14687,7 +12080,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
     };
     AbstractChangeDetector.prototype.detectChangesInRecords = function(throwOnChange) {
       if (!this.hydrated()) {
-        this.throwDehydratedError();
+        this.throwDehydratedError(this.id);
       }
       try {
         this.detectChangesInRecordsInternal(throwOnChange);
@@ -14699,7 +12092,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
       }
     };
     AbstractChangeDetector.prototype.detectChangesInRecordsInternal = function(throwOnChange) {};
-    AbstractChangeDetector.prototype.hydrate = function(context, locals, directives, pipes) {
+    AbstractChangeDetector.prototype.hydrate = function(context, locals, dispatcher, pipes) {
+      this.dispatcher = dispatcher;
       this.mode = change_detection_util_1.ChangeDetectionUtil.changeDetectionMode(this.strategy);
       this.context = context;
       if (this.strategy === constants_1.ChangeDetectionStrategy.OnPushObserve) {
@@ -14707,15 +12101,17 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
       }
       this.locals = locals;
       this.pipes = pipes;
-      this.hydrateDirectives(directives);
+      this.hydrateDirectives(dispatcher);
       this.state = constants_1.ChangeDetectorState.NeverChecked;
     };
-    AbstractChangeDetector.prototype.hydrateDirectives = function(directives) {};
+    AbstractChangeDetector.prototype.hydrateDirectives = function(dispatcher) {};
     AbstractChangeDetector.prototype.dehydrate = function() {
       this.dehydrateDirectives(true);
       if (this.strategy === constants_1.ChangeDetectionStrategy.OnPushObserve) {
         this._unsubsribeFromObservables();
       }
+      this._unsubscribeFromOutputs();
+      this.dispatcher = null;
       this.context = null;
       this.locals = null;
       this.pipes = null;
@@ -14723,6 +12119,18 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
     AbstractChangeDetector.prototype.dehydrateDirectives = function(destroyPipes) {};
     AbstractChangeDetector.prototype.hydrated = function() {
       return lang_1.isPresent(this.context);
+    };
+    AbstractChangeDetector.prototype.destroyRecursive = function() {
+      this.dispatcher.notifyOnDestroy();
+      this.dehydrate();
+      var children = this.contentChildren;
+      for (var i = 0; i < children.length; i++) {
+        children[i].destroyRecursive();
+      }
+      children = this.viewChildren;
+      for (var i = 0; i < children.length; i++) {
+        children[i].destroyRecursive();
+      }
     };
     AbstractChangeDetector.prototype.afterContentLifecycleCallbacks = function() {
       this.dispatcher.notifyAfterContentChecked();
@@ -14765,6 +12173,14 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
             s.cancel();
             this.subscriptions[i] = null;
           }
+        }
+      }
+    };
+    AbstractChangeDetector.prototype._unsubscribeFromOutputs = function() {
+      if (lang_1.isPresent(this.outputSubscriptions)) {
+        for (var i = 0; i < this.outputSubscriptions.length; ++i) {
+          async_1.ObservableWrapper.dispose(this.outputSubscriptions[i]);
+          this.outputSubscriptions[i] = null;
         }
       }
     };
@@ -14839,7 +12255,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
     AbstractChangeDetector.prototype._throwError = function(exception, stack) {
       var error;
       try {
-        var c = this.dispatcher.getDebugContext(this._currentBinding().elementIndex, null);
+        var c = this.dispatcher.getDebugContext(null, this._currentBinding().elementIndex, null);
         var context = lang_1.isPresent(c) ? new _Context(c.element, c.componentElement, c.context, c.locals, c.injector, this._currentBinding().debug) : null;
         error = new exceptions_1.ChangeDetectionError(this._currentBinding().debug, exception, stack, context);
       } catch (e) {
@@ -14850,8 +12266,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/abstract
     AbstractChangeDetector.prototype.throwOnChangeError = function(oldValue, newValue) {
       throw new exceptions_1.ExpressionChangedAfterItHasBeenCheckedException(this._currentBinding().debug, oldValue, newValue, null);
     };
-    AbstractChangeDetector.prototype.throwDehydratedError = function() {
-      throw new exceptions_1.DehydratedException();
+    AbstractChangeDetector.prototype.throwDehydratedError = function(detail) {
+      throw new exceptions_1.DehydratedException(detail);
     };
     AbstractChangeDetector.prototype._currentBinding = function() {
       return this.bindingTargets[this.propertyBindingIndex];
@@ -14940,7 +12356,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/proto_re
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_change_detector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/abstract_change_detector.js", "node_modules/angular2/src/core/change_detection/change_detection_util.js", "node_modules/angular2/src/core/change_detection/constants.js", "node_modules/angular2/src/core/change_detection/proto_record.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_change_detector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/change_detection/abstract_change_detector.js", "node_modules/angular2/src/core/change_detection/change_detection_util.js", "node_modules/angular2/src/core/change_detection/constants.js", "node_modules/angular2/src/core/change_detection/proto_record.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/facade/async.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14962,15 +12378,16 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_
   var change_detection_util_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection_util.js');
   var constants_1 = $__require('node_modules/angular2/src/core/change_detection/constants.js');
   var proto_record_1 = $__require('node_modules/angular2/src/core/change_detection/proto_record.js');
+  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
+  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
   var DynamicChangeDetector = (function(_super) {
     __extends(DynamicChangeDetector, _super);
-    function DynamicChangeDetector(id, dispatcher, numberOfPropertyProtoRecords, propertyBindingTargets, directiveIndices, strategy, _records, _eventBindings, _directiveRecords, _genConfig) {
-      _super.call(this, id, dispatcher, numberOfPropertyProtoRecords, propertyBindingTargets, directiveIndices, strategy);
+    function DynamicChangeDetector(id, numberOfPropertyProtoRecords, propertyBindingTargets, directiveIndices, strategy, _records, _eventBindings, _directiveRecords, _genConfig) {
+      _super.call(this, id, numberOfPropertyProtoRecords, propertyBindingTargets, directiveIndices, strategy);
       this._records = _records;
       this._eventBindings = _eventBindings;
       this._directiveRecords = _directiveRecords;
       this._genConfig = _genConfig;
-      this.directives = null;
       var len = _records.length + 1;
       this.values = collection_1.ListWrapper.createFixedSize(len);
       this.localPipes = collection_1.ListWrapper.createFixedSize(len);
@@ -15033,22 +12450,41 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_
         return eb.eventName == eventName && eb.elIndex === elIndex;
       });
     };
-    DynamicChangeDetector.prototype.hydrateDirectives = function(directives) {
+    DynamicChangeDetector.prototype.hydrateDirectives = function(dispatcher) {
+      var _this = this;
       this.values[0] = this.context;
-      this.directives = directives;
+      this.dispatcher = dispatcher;
       if (this.strategy === constants_1.ChangeDetectionStrategy.OnPushObserve) {
         for (var i = 0; i < this.directiveIndices.length; ++i) {
           var index = this.directiveIndices[i];
-          _super.prototype.observeDirective.call(this, directives.getDirectiveFor(index), i);
+          _super.prototype.observeDirective.call(this, this._getDirectiveFor(index), i);
         }
       }
+      this.outputSubscriptions = [];
+      for (var i = 0; i < this._directiveRecords.length; ++i) {
+        var r = this._directiveRecords[i];
+        if (lang_1.isPresent(r.outputs)) {
+          r.outputs.forEach(function(output) {
+            var eventHandler = _this._createEventHandler(r.directiveIndex.elementIndex, output[1]);
+            var directive = _this._getDirectiveFor(r.directiveIndex);
+            var getter = reflection_1.reflector.getter(output[0]);
+            _this.outputSubscriptions.push(async_1.ObservableWrapper.subscribe(getter(directive), eventHandler));
+          });
+        }
+      }
+    };
+    DynamicChangeDetector.prototype._createEventHandler = function(boundElementIndex, eventName) {
+      var _this = this;
+      return function(event) {
+        return _this.handleEvent(eventName, boundElementIndex, event);
+      };
     };
     DynamicChangeDetector.prototype.dehydrateDirectives = function(destroyPipes) {
       if (destroyPipes) {
         this._destroyPipes();
+        this._destroyDirectives();
       }
       this.values[0] = null;
-      this.directives = null;
       collection_1.ListWrapper.fill(this.values, change_detection_util_1.ChangeDetectionUtil.uninitialized, 1);
       collection_1.ListWrapper.fill(this.changes, false);
       collection_1.ListWrapper.fill(this.localPipes, null);
@@ -15058,6 +12494,14 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_
       for (var i = 0; i < this.localPipes.length; ++i) {
         if (lang_1.isPresent(this.localPipes[i])) {
           change_detection_util_1.ChangeDetectionUtil.callPipeOnDestroy(this.localPipes[i]);
+        }
+      }
+    };
+    DynamicChangeDetector.prototype._destroyDirectives = function() {
+      for (var i = 0; i < this._directiveRecords.length; ++i) {
+        var record = this._directiveRecords[i];
+        if (record.callOnDestroy) {
+          this._getDirectiveFor(record.directiveIndex).ngOnDestroy();
         }
       }
     };
@@ -15149,10 +12593,10 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_
       }
     };
     DynamicChangeDetector.prototype._getDirectiveFor = function(directiveIndex) {
-      return this.directives.getDirectiveFor(directiveIndex);
+      return this.dispatcher.getDirectiveFor(directiveIndex);
     };
     DynamicChangeDetector.prototype._getDetectorFor = function(directiveIndex) {
-      return this.directives.getDetectorFor(directiveIndex);
+      return this.dispatcher.getDetectorFor(directiveIndex);
     };
     DynamicChangeDetector.prototype._check = function(proto, throwOnChange, values, locals) {
       if (proto.isPipeRecord()) {
@@ -15172,7 +12616,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_
       }
       if (proto.shouldBeChecked()) {
         var prevValue = this._readSelf(proto, values);
-        if (change_detection_util_1.ChangeDetectionUtil.looseNotIdentical(prevValue, currValue)) {
+        var detectedChange = throwOnChange ? !change_detection_util_1.ChangeDetectionUtil.devModeEqual(prevValue, currValue) : change_detection_util_1.ChangeDetectionUtil.looseNotIdentical(prevValue, currValue);
+        if (detectedChange) {
           if (proto.lastInBinding) {
             var change = change_detection_util_1.ChangeDetectionUtil.simpleChange(prevValue, currValue);
             if (throwOnChange)
@@ -15255,7 +12700,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/dynamic_
         var currValue = selectedPipe.pipe.transform(context, args);
         if (proto.shouldBeChecked()) {
           var prevValue = this._readSelf(proto, values);
-          if (change_detection_util_1.ChangeDetectionUtil.looseNotIdentical(prevValue, currValue)) {
+          var detectedChange = throwOnChange ? !change_detection_util_1.ChangeDetectionUtil.devModeEqual(prevValue, currValue) : change_detection_util_1.ChangeDetectionUtil.looseNotIdentical(prevValue, currValue);
+          if (detectedChange) {
             currValue = change_detection_util_1.ChangeDetectionUtil.unwrapValue(currValue);
             if (proto.lastInBinding) {
               var change = change_detection_util_1.ChangeDetectionUtil.simpleChange(prevValue, currValue);
@@ -15602,7 +13048,9 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/directiv
           callOnChanges = _b.callOnChanges,
           callDoCheck = _b.callDoCheck,
           callOnInit = _b.callOnInit,
-          changeDetection = _b.changeDetection;
+          callOnDestroy = _b.callOnDestroy,
+          changeDetection = _b.changeDetection,
+          outputs = _b.outputs;
       this.directiveIndex = directiveIndex;
       this.callAfterContentInit = lang_1.normalizeBool(callAfterContentInit);
       this.callAfterContentChecked = lang_1.normalizeBool(callAfterContentChecked);
@@ -15611,7 +13059,9 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/directiv
       this.callAfterViewChecked = lang_1.normalizeBool(callAfterViewChecked);
       this.callDoCheck = lang_1.normalizeBool(callDoCheck);
       this.callOnInit = lang_1.normalizeBool(callOnInit);
+      this.callOnDestroy = lang_1.normalizeBool(callOnDestroy);
       this.changeDetection = changeDetection;
+      this.outputs = outputs;
     }
     DirectiveRecord.prototype.isDefaultChangeDetection = function() {
       return constants_1.isDefaultChangeDetectionStrategy(this.changeDetection);
@@ -15839,6 +13289,15 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
     ChangeDetectionUtil.looseNotIdentical = function(a, b) {
       return !lang_1.looseIdentical(a, b);
     };
+    ChangeDetectionUtil.devModeEqual = function(a, b) {
+      if (collection_1.isListLikeIterable(a) && collection_1.isListLikeIterable(b)) {
+        return collection_1.areIterablesEqual(a, b, ChangeDetectionUtil.devModeEqual);
+      } else if (!collection_1.isListLikeIterable(a) && !lang_1.isPrimitive(a) && !collection_1.isListLikeIterable(b) && !lang_1.isPrimitive(b)) {
+        return true;
+      } else {
+        return lang_1.looseIdentical(a, b);
+      }
+    };
     ChangeDetectionUtil.uninitialized = lang_1.CONST_EXPR(new Object());
     return ChangeDetectionUtil;
   })();
@@ -15911,365 +13370,67 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/change_detection.js", ["node_modules/angular2/src/core/change_detection/change_detection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/facade/promise.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
-  exports.ChangeDetectionStrategy = change_detection_1.ChangeDetectionStrategy;
-  exports.ExpressionChangedAfterItHasBeenCheckedException = change_detection_1.ExpressionChangedAfterItHasBeenCheckedException;
-  exports.ChangeDetectionError = change_detection_1.ChangeDetectionError;
-  exports.ChangeDetectorRef = change_detection_1.ChangeDetectorRef;
-  exports.WrappedValue = change_detection_1.WrappedValue;
-  exports.SimpleChange = change_detection_1.SimpleChange;
-  exports.IterableDiffers = change_detection_1.IterableDiffers;
-  exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/metadata/directives.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di/metadata.js", "node_modules/angular2/src/core/change_detection.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var metadata_1 = $__require('node_modules/angular2/src/core/di/metadata.js');
-  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection.js');
-  var DirectiveMetadata = (function(_super) {
-    __extends(DirectiveMetadata, _super);
-    function DirectiveMetadata(_a) {
-      var _b = _a === void 0 ? {} : _a,
-          selector = _b.selector,
-          inputs = _b.inputs,
-          outputs = _b.outputs,
-          properties = _b.properties,
-          events = _b.events,
-          host = _b.host,
-          bindings = _b.bindings,
-          providers = _b.providers,
-          exportAs = _b.exportAs,
-          queries = _b.queries;
-      _super.call(this);
-      this.selector = selector;
-      this._inputs = inputs;
-      this._properties = properties;
-      this._outputs = outputs;
-      this._events = events;
-      this.host = host;
-      this.exportAs = exportAs;
-      this.queries = queries;
-      this._providers = providers;
-      this._bindings = bindings;
-    }
-    Object.defineProperty(DirectiveMetadata.prototype, "inputs", {
-      get: function() {
-        return lang_1.isPresent(this._properties) && this._properties.length > 0 ? this._properties : this._inputs;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveMetadata.prototype, "properties", {
-      get: function() {
-        return this.inputs;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveMetadata.prototype, "outputs", {
-      get: function() {
-        return lang_1.isPresent(this._events) && this._events.length > 0 ? this._events : this._outputs;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveMetadata.prototype, "events", {
-      get: function() {
-        return this.outputs;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveMetadata.prototype, "providers", {
-      get: function() {
-        return lang_1.isPresent(this._bindings) && this._bindings.length > 0 ? this._bindings : this._providers;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DirectiveMetadata.prototype, "bindings", {
-      get: function() {
-        return this.providers;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    DirectiveMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], DirectiveMetadata);
-    return DirectiveMetadata;
-  })(metadata_1.InjectableMetadata);
-  exports.DirectiveMetadata = DirectiveMetadata;
-  var ComponentMetadata = (function(_super) {
-    __extends(ComponentMetadata, _super);
-    function ComponentMetadata(_a) {
-      var _b = _a === void 0 ? {} : _a,
-          selector = _b.selector,
-          inputs = _b.inputs,
-          outputs = _b.outputs,
-          properties = _b.properties,
-          events = _b.events,
-          host = _b.host,
-          exportAs = _b.exportAs,
-          moduleId = _b.moduleId,
-          bindings = _b.bindings,
-          providers = _b.providers,
-          viewBindings = _b.viewBindings,
-          viewProviders = _b.viewProviders,
-          _c = _b.changeDetection,
-          changeDetection = _c === void 0 ? change_detection_1.ChangeDetectionStrategy.Default : _c,
-          queries = _b.queries,
-          templateUrl = _b.templateUrl,
-          template = _b.template,
-          styleUrls = _b.styleUrls,
-          styles = _b.styles,
-          directives = _b.directives,
-          pipes = _b.pipes,
-          encapsulation = _b.encapsulation;
-      _super.call(this, {
-        selector: selector,
-        inputs: inputs,
-        outputs: outputs,
-        properties: properties,
-        events: events,
-        host: host,
-        exportAs: exportAs,
-        bindings: bindings,
-        providers: providers,
-        queries: queries
+  var PromiseWrapper = (function() {
+    function PromiseWrapper() {}
+    PromiseWrapper.resolve = function(obj) {
+      return Promise.resolve(obj);
+    };
+    PromiseWrapper.reject = function(obj, _) {
+      return Promise.reject(obj);
+    };
+    PromiseWrapper.catchError = function(promise, onError) {
+      return promise.catch(onError);
+    };
+    PromiseWrapper.all = function(promises) {
+      if (promises.length == 0)
+        return Promise.resolve([]);
+      return Promise.all(promises);
+    };
+    PromiseWrapper.then = function(promise, success, rejection) {
+      return promise.then(success, rejection);
+    };
+    PromiseWrapper.wrap = function(computation) {
+      return new Promise(function(res, rej) {
+        try {
+          res(computation());
+        } catch (e) {
+          rej(e);
+        }
       });
-      this.changeDetection = changeDetection;
-      this._viewProviders = viewProviders;
-      this._viewBindings = viewBindings;
-      this.templateUrl = templateUrl;
-      this.template = template;
-      this.styleUrls = styleUrls;
-      this.styles = styles;
-      this.directives = directives;
-      this.pipes = pipes;
-      this.encapsulation = encapsulation;
-      this.moduleId = moduleId;
-    }
-    Object.defineProperty(ComponentMetadata.prototype, "viewProviders", {
-      get: function() {
-        return lang_1.isPresent(this._viewBindings) && this._viewBindings.length > 0 ? this._viewBindings : this._viewProviders;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(ComponentMetadata.prototype, "viewBindings", {
-      get: function() {
-        return this.viewProviders;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ComponentMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], ComponentMetadata);
-    return ComponentMetadata;
-  })(DirectiveMetadata);
-  exports.ComponentMetadata = ComponentMetadata;
-  var PipeMetadata = (function(_super) {
-    __extends(PipeMetadata, _super);
-    function PipeMetadata(_a) {
-      var name = _a.name,
-          pure = _a.pure;
-      _super.call(this);
-      this.name = name;
-      this._pure = pure;
-    }
-    Object.defineProperty(PipeMetadata.prototype, "pure", {
-      get: function() {
-        return lang_1.isPresent(this._pure) ? this._pure : true;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    PipeMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], PipeMetadata);
-    return PipeMetadata;
-  })(metadata_1.InjectableMetadata);
-  exports.PipeMetadata = PipeMetadata;
-  var InputMetadata = (function() {
-    function InputMetadata(bindingPropertyName) {
-      this.bindingPropertyName = bindingPropertyName;
-    }
-    InputMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String])], InputMetadata);
-    return InputMetadata;
+    };
+    PromiseWrapper.scheduleMicrotask = function(computation) {
+      PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function(_) {});
+    };
+    PromiseWrapper.isPromise = function(obj) {
+      return obj instanceof Promise;
+    };
+    PromiseWrapper.completer = function() {
+      var resolve;
+      var reject;
+      var p = new Promise(function(res, rej) {
+        resolve = res;
+        reject = rej;
+      });
+      return {
+        promise: p,
+        resolve: resolve,
+        reject: reject
+      };
+    };
+    return PromiseWrapper;
   })();
-  exports.InputMetadata = InputMetadata;
-  var OutputMetadata = (function() {
-    function OutputMetadata(bindingPropertyName) {
-      this.bindingPropertyName = bindingPropertyName;
-    }
-    OutputMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String])], OutputMetadata);
-    return OutputMetadata;
-  })();
-  exports.OutputMetadata = OutputMetadata;
-  var HostBindingMetadata = (function() {
-    function HostBindingMetadata(hostPropertyName) {
-      this.hostPropertyName = hostPropertyName;
-    }
-    HostBindingMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String])], HostBindingMetadata);
-    return HostBindingMetadata;
-  })();
-  exports.HostBindingMetadata = HostBindingMetadata;
-  var HostListenerMetadata = (function() {
-    function HostListenerMetadata(eventName, args) {
-      this.eventName = eventName;
-      this.args = args;
-    }
-    HostListenerMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Array])], HostListenerMetadata);
-    return HostListenerMetadata;
-  })();
-  exports.HostListenerMetadata = HostListenerMetadata;
+  exports.PromiseWrapper = PromiseWrapper;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/metadata/view.js", ["node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  (function(ViewEncapsulation) {
-    ViewEncapsulation[ViewEncapsulation["Emulated"] = 0] = "Emulated";
-    ViewEncapsulation[ViewEncapsulation["Native"] = 1] = "Native";
-    ViewEncapsulation[ViewEncapsulation["None"] = 2] = "None";
-  })(exports.ViewEncapsulation || (exports.ViewEncapsulation = {}));
-  var ViewEncapsulation = exports.ViewEncapsulation;
-  exports.VIEW_ENCAPSULATION_VALUES = [ViewEncapsulation.Emulated, ViewEncapsulation.Native, ViewEncapsulation.None];
-  var ViewMetadata = (function() {
-    function ViewMetadata(_a) {
-      var _b = _a === void 0 ? {} : _a,
-          templateUrl = _b.templateUrl,
-          template = _b.template,
-          directives = _b.directives,
-          pipes = _b.pipes,
-          encapsulation = _b.encapsulation,
-          styles = _b.styles,
-          styleUrls = _b.styleUrls;
-      this.templateUrl = templateUrl;
-      this.template = template;
-      this.styleUrls = styleUrls;
-      this.styles = styles;
-      this.directives = directives;
-      this.pipes = pipes;
-      this.encapsulation = encapsulation;
-    }
-    ViewMetadata = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Object])], ViewMetadata);
-    return ViewMetadata;
-  })();
-  exports.ViewMetadata = ViewMetadata;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/metadata.js", ["node_modules/angular2/src/core/metadata/di.js", "node_modules/angular2/src/core/metadata/directives.js", "node_modules/angular2/src/core/metadata/view.js", "node_modules/angular2/src/core/util/decorators.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var di_1 = $__require('node_modules/angular2/src/core/metadata/di.js');
-  exports.QueryMetadata = di_1.QueryMetadata;
-  exports.ContentChildrenMetadata = di_1.ContentChildrenMetadata;
-  exports.ContentChildMetadata = di_1.ContentChildMetadata;
-  exports.ViewChildrenMetadata = di_1.ViewChildrenMetadata;
-  exports.ViewQueryMetadata = di_1.ViewQueryMetadata;
-  exports.ViewChildMetadata = di_1.ViewChildMetadata;
-  exports.AttributeMetadata = di_1.AttributeMetadata;
-  var directives_1 = $__require('node_modules/angular2/src/core/metadata/directives.js');
-  exports.ComponentMetadata = directives_1.ComponentMetadata;
-  exports.DirectiveMetadata = directives_1.DirectiveMetadata;
-  exports.PipeMetadata = directives_1.PipeMetadata;
-  exports.InputMetadata = directives_1.InputMetadata;
-  exports.OutputMetadata = directives_1.OutputMetadata;
-  exports.HostBindingMetadata = directives_1.HostBindingMetadata;
-  exports.HostListenerMetadata = directives_1.HostListenerMetadata;
-  var view_1 = $__require('node_modules/angular2/src/core/metadata/view.js');
-  exports.ViewMetadata = view_1.ViewMetadata;
-  exports.ViewEncapsulation = view_1.ViewEncapsulation;
-  var di_2 = $__require('node_modules/angular2/src/core/metadata/di.js');
-  var directives_2 = $__require('node_modules/angular2/src/core/metadata/directives.js');
-  var view_2 = $__require('node_modules/angular2/src/core/metadata/view.js');
-  var decorators_1 = $__require('node_modules/angular2/src/core/util/decorators.js');
-  exports.Component = decorators_1.makeDecorator(directives_2.ComponentMetadata, function(fn) {
-    return fn.View = exports.View;
-  });
-  exports.Directive = decorators_1.makeDecorator(directives_2.DirectiveMetadata);
-  exports.View = decorators_1.makeDecorator(view_2.ViewMetadata, function(fn) {
-    return fn.View = exports.View;
-  });
-  exports.Attribute = decorators_1.makeParamDecorator(di_2.AttributeMetadata);
-  exports.Query = decorators_1.makeParamDecorator(di_2.QueryMetadata);
-  exports.ContentChildren = decorators_1.makePropDecorator(di_2.ContentChildrenMetadata);
-  exports.ContentChild = decorators_1.makePropDecorator(di_2.ContentChildMetadata);
-  exports.ViewChildren = decorators_1.makePropDecorator(di_2.ViewChildrenMetadata);
-  exports.ViewChild = decorators_1.makePropDecorator(di_2.ViewChildMetadata);
-  exports.ViewQuery = decorators_1.makeParamDecorator(di_2.ViewQueryMetadata);
-  exports.Pipe = decorators_1.makeDecorator(directives_2.PipeMetadata);
-  exports.Input = decorators_1.makePropDecorator(directives_2.InputMetadata);
-  exports.Output = decorators_1.makePropDecorator(directives_2.OutputMetadata);
-  exports.HostBinding = decorators_1.makePropDecorator(directives_2.HostBindingMetadata);
-  exports.HostListener = decorators_1.makePropDecorator(directives_2.HostListenerMetadata);
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/linker/template_commands.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/render/api.js", "node_modules/angular2/src/core/metadata.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/rxjs/subject/SubjectSubscription.js", ["node_modules/rxjs/Subscription.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -16284,193 +13445,2238 @@ System.registerDynamic("node_modules/angular2/src/core/linker/template_commands.
     }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
+  var SubjectSubscription = (function(_super) {
+    __extends(SubjectSubscription, _super);
+    function SubjectSubscription(subject, observer) {
+      _super.call(this);
+      this.subject = subject;
+      this.observer = observer;
+      this.isUnsubscribed = false;
+    }
+    SubjectSubscription.prototype.unsubscribe = function() {
+      if (this.isUnsubscribed) {
+        return;
+      }
+      this.isUnsubscribed = true;
+      var subject = this.subject;
+      var observers = subject.observers;
+      this.subject = null;
+      if (!observers || observers.length === 0 || subject.isUnsubscribed) {
+        return;
+      }
+      var subscriberIndex = observers.indexOf(this.observer);
+      if (subscriberIndex !== -1) {
+        observers.splice(subscriberIndex, 1);
+      }
+    };
+    return SubjectSubscription;
+  }(Subscription_1.Subscription));
+  exports.SubjectSubscription = SubjectSubscription;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/throwError.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function throwError(e) {
+    throw e;
+  }
+  exports.throwError = throwError;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/ObjectUnsubscribedError.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
+  var ObjectUnsubscribedError = (function(_super) {
+    __extends(ObjectUnsubscribedError, _super);
+    function ObjectUnsubscribedError() {
+      _super.call(this, 'object unsubscribed');
+      this.name = 'ObjectUnsubscribedError';
+    }
+    return ObjectUnsubscribedError;
+  }(Error));
+  exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Observable.js", "node_modules/rxjs/Subscriber.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/subject/SubjectSubscription.js", "node_modules/rxjs/symbol/rxSubscriber.js", "node_modules/rxjs/util/throwError.js", "node_modules/rxjs/util/ObjectUnsubscribedError.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('node_modules/rxjs/Observable.js');
+  var Subscriber_1 = $__require('node_modules/rxjs/Subscriber.js');
+  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
+  var SubjectSubscription_1 = $__require('node_modules/rxjs/subject/SubjectSubscription.js');
+  var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
+  var throwError_1 = $__require('node_modules/rxjs/util/throwError.js');
+  var ObjectUnsubscribedError_1 = $__require('node_modules/rxjs/util/ObjectUnsubscribedError.js');
+  var Subject = (function(_super) {
+    __extends(Subject, _super);
+    function Subject(destination, source) {
+      _super.call(this);
+      this.destination = destination;
+      this.source = source;
+      this.observers = [];
+      this.isUnsubscribed = false;
+      this.isStopped = false;
+      this.hasErrored = false;
+      this.dispatching = false;
+      this.hasCompleted = false;
+    }
+    Subject.prototype.lift = function(operator) {
+      var subject = new Subject(this.destination || this, this);
+      subject.operator = operator;
+      return subject;
+    };
+    Subject.prototype.add = function(subscription) {
+      Subscription_1.Subscription.prototype.add.call(this, subscription);
+    };
+    Subject.prototype.remove = function(subscription) {
+      Subscription_1.Subscription.prototype.remove.call(this, subscription);
+    };
+    Subject.prototype.unsubscribe = function() {
+      Subscription_1.Subscription.prototype.unsubscribe.call(this);
+    };
+    Subject.prototype._subscribe = function(subscriber) {
+      if (this.source) {
+        return this.source.subscribe(subscriber);
+      } else {
+        if (subscriber.isUnsubscribed) {
+          return;
+        } else if (this.hasErrored) {
+          return subscriber.error(this.errorValue);
+        } else if (this.hasCompleted) {
+          return subscriber.complete();
+        }
+        this.throwIfUnsubscribed();
+        var subscription = new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        this.observers.push(subscriber);
+        return subscription;
+      }
+    };
+    Subject.prototype._unsubscribe = function() {
+      this.source = null;
+      this.isStopped = true;
+      this.observers = null;
+      this.destination = null;
+    };
+    Subject.prototype.next = function(value) {
+      this.throwIfUnsubscribed();
+      if (this.isStopped) {
+        return;
+      }
+      this.dispatching = true;
+      this._next(value);
+      this.dispatching = false;
+      if (this.hasErrored) {
+        this._error(this.errorValue);
+      } else if (this.hasCompleted) {
+        this._complete();
+      }
+    };
+    Subject.prototype.error = function(err) {
+      this.throwIfUnsubscribed();
+      if (this.isStopped) {
+        return;
+      }
+      this.isStopped = true;
+      this.hasErrored = true;
+      this.errorValue = err;
+      if (this.dispatching) {
+        return;
+      }
+      this._error(err);
+    };
+    Subject.prototype.complete = function() {
+      this.throwIfUnsubscribed();
+      if (this.isStopped) {
+        return;
+      }
+      this.isStopped = true;
+      this.hasCompleted = true;
+      if (this.dispatching) {
+        return;
+      }
+      this._complete();
+    };
+    Subject.prototype.asObservable = function() {
+      var observable = new SubjectObservable(this);
+      return observable;
+    };
+    Subject.prototype._next = function(value) {
+      if (this.destination) {
+        this.destination.next(value);
+      } else {
+        this._finalNext(value);
+      }
+    };
+    Subject.prototype._finalNext = function(value) {
+      var index = -1;
+      var observers = this.observers.slice(0);
+      var len = observers.length;
+      while (++index < len) {
+        observers[index].next(value);
+      }
+    };
+    Subject.prototype._error = function(err) {
+      if (this.destination) {
+        this.destination.error(err);
+      } else {
+        this._finalError(err);
+      }
+    };
+    Subject.prototype._finalError = function(err) {
+      var index = -1;
+      var observers = this.observers;
+      this.observers = null;
+      this.isUnsubscribed = true;
+      if (observers) {
+        var len = observers.length;
+        while (++index < len) {
+          observers[index].error(err);
+        }
+      }
+      this.isUnsubscribed = false;
+      this.unsubscribe();
+    };
+    Subject.prototype._complete = function() {
+      if (this.destination) {
+        this.destination.complete();
+      } else {
+        this._finalComplete();
+      }
+    };
+    Subject.prototype._finalComplete = function() {
+      var index = -1;
+      var observers = this.observers;
+      this.observers = null;
+      this.isUnsubscribed = true;
+      if (observers) {
+        var len = observers.length;
+        while (++index < len) {
+          observers[index].complete();
+        }
+      }
+      this.isUnsubscribed = false;
+      this.unsubscribe();
+    };
+    Subject.prototype.throwIfUnsubscribed = function() {
+      if (this.isUnsubscribed) {
+        throwError_1.throwError(new ObjectUnsubscribedError_1.ObjectUnsubscribedError());
+      }
+    };
+    Subject.prototype[rxSubscriber_1.rxSubscriber] = function() {
+      return new Subscriber_1.Subscriber(this);
+    };
+    Subject.create = function(destination, source) {
+      return new Subject(destination, source);
+    };
+    return Subject;
+  }(Observable_1.Observable));
+  exports.Subject = Subject;
+  var SubjectObservable = (function(_super) {
+    __extends(SubjectObservable, _super);
+    function SubjectObservable(source) {
+      _super.call(this);
+      this.source = source;
+    }
+    return SubjectObservable;
+  }(Observable_1.Observable));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/observable/PromiseObservable.js", ["node_modules/rxjs/util/root.js", "node_modules/rxjs/Observable.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var root_1 = $__require('node_modules/rxjs/util/root.js');
+  var Observable_1 = $__require('node_modules/rxjs/Observable.js');
+  var PromiseObservable = (function(_super) {
+    __extends(PromiseObservable, _super);
+    function PromiseObservable(promise, scheduler) {
+      if (scheduler === void 0) {
+        scheduler = null;
+      }
+      _super.call(this);
+      this.promise = promise;
+      this.scheduler = scheduler;
+    }
+    PromiseObservable.create = function(promise, scheduler) {
+      if (scheduler === void 0) {
+        scheduler = null;
+      }
+      return new PromiseObservable(promise, scheduler);
+    };
+    PromiseObservable.prototype._subscribe = function(subscriber) {
+      var _this = this;
+      var promise = this.promise;
+      var scheduler = this.scheduler;
+      if (scheduler == null) {
+        if (this._isScalar) {
+          if (!subscriber.isUnsubscribed) {
+            subscriber.next(this.value);
+            subscriber.complete();
+          }
+        } else {
+          promise.then(function(value) {
+            _this.value = value;
+            _this._isScalar = true;
+            if (!subscriber.isUnsubscribed) {
+              subscriber.next(value);
+              subscriber.complete();
+            }
+          }, function(err) {
+            if (!subscriber.isUnsubscribed) {
+              subscriber.error(err);
+            }
+          }).then(null, function(err) {
+            root_1.root.setTimeout(function() {
+              throw err;
+            });
+          });
+        }
+      } else {
+        if (this._isScalar) {
+          if (!subscriber.isUnsubscribed) {
+            return scheduler.schedule(dispatchNext, 0, {
+              value: this.value,
+              subscriber: subscriber
+            });
+          }
+        } else {
+          promise.then(function(value) {
+            _this.value = value;
+            _this._isScalar = true;
+            if (!subscriber.isUnsubscribed) {
+              subscriber.add(scheduler.schedule(dispatchNext, 0, {
+                value: value,
+                subscriber: subscriber
+              }));
+            }
+          }, function(err) {
+            if (!subscriber.isUnsubscribed) {
+              subscriber.add(scheduler.schedule(dispatchError, 0, {
+                err: err,
+                subscriber: subscriber
+              }));
+            }
+          }).then(null, function(err) {
+            root_1.root.setTimeout(function() {
+              throw err;
+            });
+          });
+        }
+      }
+    };
+    return PromiseObservable;
+  }(Observable_1.Observable));
+  exports.PromiseObservable = PromiseObservable;
+  function dispatchNext(_a) {
+    var value = _a.value,
+        subscriber = _a.subscriber;
+    if (!subscriber.isUnsubscribed) {
+      subscriber.next(value);
+      subscriber.complete();
+    }
+  }
+  function dispatchError(_a) {
+    var err = _a.err,
+        subscriber = _a.subscriber;
+    if (!subscriber.isUnsubscribed) {
+      subscriber.error(err);
+    }
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/operator/toPromise.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var root_1 = $__require('node_modules/rxjs/util/root.js');
+  function toPromise(PromiseCtor) {
+    var _this = this;
+    if (!PromiseCtor) {
+      if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+        PromiseCtor = root_1.root.Rx.config.Promise;
+      } else if (root_1.root.Promise) {
+        PromiseCtor = root_1.root.Promise;
+      }
+    }
+    if (!PromiseCtor) {
+      throw new Error('no Promise impl found');
+    }
+    return new PromiseCtor(function(resolve, reject) {
+      var value;
+      _this.subscribe(function(x) {
+        return value = x;
+      }, function(err) {
+        return reject(err);
+      }, function() {
+        return resolve(value);
+      });
+    });
+  }
+  exports.toPromise = toPromise;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/isArray.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.isArray = Array.isArray || (function(x) {
+    return x && typeof x.length === 'number';
+  });
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/isObject.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function isObject(x) {
+    return x != null && typeof x === 'object';
+  }
+  exports.isObject = isObject;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/isFunction.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function isFunction(x) {
+    return typeof x === 'function';
+  }
+  exports.isFunction = isFunction;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/Subscription.js", ["node_modules/rxjs/util/isArray.js", "node_modules/rxjs/util/isObject.js", "node_modules/rxjs/util/isFunction.js", "node_modules/rxjs/util/tryCatch.js", "node_modules/rxjs/util/errorObject.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isArray_1 = $__require('node_modules/rxjs/util/isArray.js');
+  var isObject_1 = $__require('node_modules/rxjs/util/isObject.js');
+  var isFunction_1 = $__require('node_modules/rxjs/util/isFunction.js');
+  var tryCatch_1 = $__require('node_modules/rxjs/util/tryCatch.js');
+  var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
+  var Subscription = (function() {
+    function Subscription(_unsubscribe) {
+      this.isUnsubscribed = false;
+      if (_unsubscribe) {
+        this._unsubscribe = _unsubscribe;
+      }
+    }
+    Subscription.prototype.unsubscribe = function() {
+      var hasErrors = false;
+      var errors;
+      if (this.isUnsubscribed) {
+        return;
+      }
+      this.isUnsubscribed = true;
+      var _a = this,
+          _unsubscribe = _a._unsubscribe,
+          _subscriptions = _a._subscriptions;
+      this._subscriptions = null;
+      if (isFunction_1.isFunction(_unsubscribe)) {
+        var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+        if (trial === errorObject_1.errorObject) {
+          hasErrors = true;
+          (errors = errors || []).push(errorObject_1.errorObject.e);
+        }
+      }
+      if (isArray_1.isArray(_subscriptions)) {
+        var index = -1;
+        var len = _subscriptions.length;
+        while (++index < len) {
+          var sub = _subscriptions[index];
+          if (isObject_1.isObject(sub)) {
+            var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+            if (trial === errorObject_1.errorObject) {
+              hasErrors = true;
+              errors = errors || [];
+              var err = errorObject_1.errorObject.e;
+              if (err instanceof UnsubscriptionError) {
+                errors = errors.concat(err.errors);
+              } else {
+                errors.push(err);
+              }
+            }
+          }
+        }
+      }
+      if (hasErrors) {
+        throw new UnsubscriptionError(errors);
+      }
+    };
+    Subscription.prototype.add = function(subscription) {
+      if (!subscription || (subscription === this) || (subscription === Subscription.EMPTY)) {
+        return;
+      }
+      var sub = subscription;
+      switch (typeof subscription) {
+        case 'function':
+          sub = new Subscription(subscription);
+        case 'object':
+          if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
+            break;
+          } else if (this.isUnsubscribed) {
+            sub.unsubscribe();
+          } else {
+            (this._subscriptions || (this._subscriptions = [])).push(sub);
+          }
+          break;
+        default:
+          throw new Error('Unrecognized subscription ' + subscription + ' added to Subscription.');
+      }
+    };
+    Subscription.prototype.remove = function(subscription) {
+      if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
+        return;
+      }
+      var subscriptions = this._subscriptions;
+      if (subscriptions) {
+        var subscriptionIndex = subscriptions.indexOf(subscription);
+        if (subscriptionIndex !== -1) {
+          subscriptions.splice(subscriptionIndex, 1);
+        }
+      }
+    };
+    Subscription.EMPTY = (function(empty) {
+      empty.isUnsubscribed = true;
+      return empty;
+    }(new Subscription()));
+    return Subscription;
+  }());
+  exports.Subscription = Subscription;
+  var UnsubscriptionError = (function(_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+      _super.call(this, 'unsubscriptoin error(s)');
+      this.errors = errors;
+      this.name = 'UnsubscriptionError';
+    }
+    return UnsubscriptionError;
+  }(Error));
+  exports.UnsubscriptionError = UnsubscriptionError;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/Observer.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.empty = {
+    isUnsubscribed: true,
+    next: function(value) {},
+    error: function(err) {
+      throw err;
+    },
+    complete: function() {}
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/Subscriber.js", ["node_modules/rxjs/util/isFunction.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/symbol/rxSubscriber.js", "node_modules/rxjs/Observer.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isFunction_1 = $__require('node_modules/rxjs/util/isFunction.js');
+  var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
+  var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
+  var Observer_1 = $__require('node_modules/rxjs/Observer.js');
+  var Subscriber = (function(_super) {
+    __extends(Subscriber, _super);
+    function Subscriber(destinationOrNext, error, complete) {
+      _super.call(this);
+      this.syncErrorValue = null;
+      this.syncErrorThrown = false;
+      this.syncErrorThrowable = false;
+      this.isStopped = false;
+      switch (arguments.length) {
+        case 0:
+          this.destination = Observer_1.empty;
+          break;
+        case 1:
+          if (!destinationOrNext) {
+            this.destination = Observer_1.empty;
+            break;
+          }
+          if (typeof destinationOrNext === 'object') {
+            if (destinationOrNext instanceof Subscriber) {
+              this.destination = destinationOrNext;
+            } else {
+              this.syncErrorThrowable = true;
+              this.destination = new SafeSubscriber(this, destinationOrNext);
+            }
+            break;
+          }
+        default:
+          this.syncErrorThrowable = true;
+          this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+          break;
+      }
+    }
+    Subscriber.create = function(next, error, complete) {
+      var subscriber = new Subscriber(next, error, complete);
+      subscriber.syncErrorThrowable = false;
+      return subscriber;
+    };
+    Subscriber.prototype.next = function(value) {
+      if (!this.isStopped) {
+        this._next(value);
+      }
+    };
+    Subscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        this.isStopped = true;
+        this._error(err);
+      }
+    };
+    Subscriber.prototype.complete = function() {
+      if (!this.isStopped) {
+        this.isStopped = true;
+        this._complete();
+      }
+    };
+    Subscriber.prototype.unsubscribe = function() {
+      if (this.isUnsubscribed) {
+        return;
+      }
+      this.isStopped = true;
+      _super.prototype.unsubscribe.call(this);
+    };
+    Subscriber.prototype._next = function(value) {
+      this.destination.next(value);
+    };
+    Subscriber.prototype._error = function(err) {
+      this.destination.error(err);
+      this.unsubscribe();
+    };
+    Subscriber.prototype._complete = function() {
+      this.destination.complete();
+      this.unsubscribe();
+    };
+    Subscriber.prototype[rxSubscriber_1.rxSubscriber] = function() {
+      return this;
+    };
+    return Subscriber;
+  }(Subscription_1.Subscription));
+  exports.Subscriber = Subscriber;
+  var SafeSubscriber = (function(_super) {
+    __extends(SafeSubscriber, _super);
+    function SafeSubscriber(_parent, observerOrNext, error, complete) {
+      _super.call(this);
+      this._parent = _parent;
+      var next;
+      var context = this;
+      if (isFunction_1.isFunction(observerOrNext)) {
+        next = observerOrNext;
+      } else if (observerOrNext) {
+        context = observerOrNext;
+        next = observerOrNext.next;
+        error = observerOrNext.error;
+        complete = observerOrNext.complete;
+      }
+      this._context = context;
+      this._next = next;
+      this._error = error;
+      this._complete = complete;
+    }
+    SafeSubscriber.prototype.next = function(value) {
+      if (!this.isStopped && this._next) {
+        var _parent = this._parent;
+        if (!_parent.syncErrorThrowable) {
+          this.__tryOrUnsub(this._next, value);
+        } else if (this.__tryOrSetError(_parent, this._next, value)) {
+          this.unsubscribe();
+        }
+      }
+    };
+    SafeSubscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        var _parent = this._parent;
+        if (this._error) {
+          if (!_parent.syncErrorThrowable) {
+            this.__tryOrUnsub(this._error, err);
+            this.unsubscribe();
+          } else {
+            this.__tryOrSetError(_parent, this._error, err);
+            this.unsubscribe();
+          }
+        } else if (!_parent.syncErrorThrowable) {
+          this.unsubscribe();
+          throw err;
+        } else {
+          _parent.syncErrorValue = err;
+          _parent.syncErrorThrown = true;
+          this.unsubscribe();
+        }
+      }
+    };
+    SafeSubscriber.prototype.complete = function() {
+      if (!this.isStopped) {
+        var _parent = this._parent;
+        if (this._complete) {
+          if (!_parent.syncErrorThrowable) {
+            this.__tryOrUnsub(this._complete);
+            this.unsubscribe();
+          } else {
+            this.__tryOrSetError(_parent, this._complete);
+            this.unsubscribe();
+          }
+        } else {
+          this.unsubscribe();
+        }
+      }
+    };
+    SafeSubscriber.prototype.__tryOrUnsub = function(fn, value) {
+      try {
+        fn.call(this._context, value);
+      } catch (err) {
+        this.unsubscribe();
+        throw err;
+      }
+    };
+    SafeSubscriber.prototype.__tryOrSetError = function(parent, fn, value) {
+      try {
+        fn.call(this._context, value);
+      } catch (err) {
+        parent.syncErrorValue = err;
+        parent.syncErrorThrown = true;
+        return true;
+      }
+      return false;
+    };
+    SafeSubscriber.prototype._unsubscribe = function() {
+      var _parent = this._parent;
+      this._context = null;
+      this._parent = null;
+      _parent.unsubscribe();
+    };
+    return SafeSubscriber;
+  }(Subscriber));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/root.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var objectTypes = {
+    'boolean': false,
+    'function': true,
+    'object': true,
+    'number': false,
+    'string': false,
+    'undefined': false
+  };
+  exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
+  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
+  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+  var freeGlobal = objectTypes[typeof global] && global;
+  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
+    exports.root = freeGlobal;
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/SymbolShim.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var root_1 = $__require('node_modules/rxjs/util/root.js');
+  function polyfillSymbol(root) {
+    var Symbol = ensureSymbol(root);
+    ensureIterator(Symbol, root);
+    ensureObservable(Symbol);
+    ensureFor(Symbol);
+    return Symbol;
+  }
+  exports.polyfillSymbol = polyfillSymbol;
+  function ensureFor(Symbol) {
+    if (!Symbol.for) {
+      Symbol.for = symbolForPolyfill;
+    }
+  }
+  exports.ensureFor = ensureFor;
+  var id = 0;
+  function ensureSymbol(root) {
+    if (!root.Symbol) {
+      root.Symbol = function symbolFuncPolyfill(description) {
+        return "@@Symbol(" + description + "):" + id++;
+      };
+    }
+    return root.Symbol;
+  }
+  exports.ensureSymbol = ensureSymbol;
+  function symbolForPolyfill(key) {
+    return '@@' + key;
+  }
+  exports.symbolForPolyfill = symbolForPolyfill;
+  function ensureIterator(Symbol, root) {
+    if (!Symbol.iterator) {
+      if (typeof Symbol.for === 'function') {
+        Symbol.iterator = Symbol.for('iterator');
+      } else if (root.Set && typeof new root.Set()['@@iterator'] === 'function') {
+        Symbol.iterator = '@@iterator';
+      } else if (root.Map) {
+        var keys = Object.getOwnPropertyNames(root.Map.prototype);
+        for (var i = 0; i < keys.length; ++i) {
+          var key = keys[i];
+          if (key !== 'entries' && key !== 'size' && root.Map.prototype[key] === root.Map.prototype['entries']) {
+            Symbol.iterator = key;
+            break;
+          }
+        }
+      } else {
+        Symbol.iterator = '@@iterator';
+      }
+    }
+  }
+  exports.ensureIterator = ensureIterator;
+  function ensureObservable(Symbol) {
+    if (!Symbol.observable) {
+      if (typeof Symbol.for === 'function') {
+        Symbol.observable = Symbol.for('observable');
+      } else {
+        Symbol.observable = '@@observable';
+      }
+    }
+  }
+  exports.ensureObservable = ensureObservable;
+  exports.SymbolShim = polyfillSymbol(root_1.root);
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/symbol/rxSubscriber.js", ["node_modules/rxjs/util/SymbolShim.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var SymbolShim_1 = $__require('node_modules/rxjs/util/SymbolShim.js');
+  exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/toSubscriber.js", ["node_modules/rxjs/Subscriber.js", "node_modules/rxjs/symbol/rxSubscriber.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var Subscriber_1 = $__require('node_modules/rxjs/Subscriber.js');
+  var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
+  function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver && typeof nextOrObserver === 'object') {
+      if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+        return nextOrObserver;
+      } else if (typeof nextOrObserver[rxSubscriber_1.rxSubscriber] === 'function') {
+        return nextOrObserver[rxSubscriber_1.rxSubscriber]();
+      }
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+  }
+  exports.toSubscriber = toSubscriber;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/tryCatch.js", ["node_modules/rxjs/util/errorObject.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
+  var tryCatchTarget;
+  function tryCatcher() {
+    try {
+      return tryCatchTarget.apply(this, arguments);
+    } catch (e) {
+      errorObject_1.errorObject.e = e;
+      return errorObject_1.errorObject;
+    }
+  }
+  function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+  }
+  exports.tryCatch = tryCatch;
+  ;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/errorObject.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.errorObject = {e: {}};
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/util/root.js", "node_modules/rxjs/util/SymbolShim.js", "node_modules/rxjs/util/toSubscriber.js", "node_modules/rxjs/util/tryCatch.js", "node_modules/rxjs/util/errorObject.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var root_1 = $__require('node_modules/rxjs/util/root.js');
+  var SymbolShim_1 = $__require('node_modules/rxjs/util/SymbolShim.js');
+  var toSubscriber_1 = $__require('node_modules/rxjs/util/toSubscriber.js');
+  var tryCatch_1 = $__require('node_modules/rxjs/util/tryCatch.js');
+  var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
+  var Observable = (function() {
+    function Observable(subscribe) {
+      this._isScalar = false;
+      if (subscribe) {
+        this._subscribe = subscribe;
+      }
+    }
+    Observable.prototype.lift = function(operator) {
+      var observable = new Observable();
+      observable.source = this;
+      observable.operator = operator;
+      return observable;
+    };
+    Observable.prototype.subscribe = function(observerOrNext, error, complete) {
+      var operator = this.operator;
+      var subscriber = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+      if (operator) {
+        subscriber.add(this._subscribe(operator.call(subscriber)));
+      } else {
+        subscriber.add(this._subscribe(subscriber));
+      }
+      if (subscriber.syncErrorThrowable) {
+        subscriber.syncErrorThrowable = false;
+        if (subscriber.syncErrorThrown) {
+          throw subscriber.syncErrorValue;
+        }
+      }
+      return subscriber;
+    };
+    Observable.prototype.forEach = function(next, thisArg, PromiseCtor) {
+      if (!PromiseCtor) {
+        if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+          PromiseCtor = root_1.root.Rx.config.Promise;
+        } else if (root_1.root.Promise) {
+          PromiseCtor = root_1.root.Promise;
+        }
+      }
+      if (!PromiseCtor) {
+        throw new Error('no Promise impl found');
+      }
+      var source = this;
+      return new PromiseCtor(function(resolve, reject) {
+        source.subscribe(function(value) {
+          var result = tryCatch_1.tryCatch(next).call(thisArg, value);
+          if (result === errorObject_1.errorObject) {
+            reject(errorObject_1.errorObject.e);
+          }
+        }, reject, resolve);
+      });
+    };
+    Observable.prototype._subscribe = function(subscriber) {
+      return this.source.subscribe(subscriber);
+    };
+    Observable.prototype[SymbolShim_1.SymbolShim.observable] = function() {
+      return this;
+    };
+    Observable.create = function(subscribe) {
+      return new Observable(subscribe);
+    };
+    return Observable;
+  }());
+  exports.Observable = Observable;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/facade/async.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/promise.js", "node_modules/rxjs/Subject.js", "node_modules/rxjs/observable/PromiseObservable.js", "node_modules/rxjs/operator/toPromise.js", "node_modules/rxjs/Observable.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var promise_1 = $__require('node_modules/angular2/src/facade/promise.js');
+  exports.PromiseWrapper = promise_1.PromiseWrapper;
+  var Subject_1 = $__require('node_modules/rxjs/Subject.js');
+  var PromiseObservable_1 = $__require('node_modules/rxjs/observable/PromiseObservable.js');
+  var toPromise_1 = $__require('node_modules/rxjs/operator/toPromise.js');
+  var Observable_1 = $__require('node_modules/rxjs/Observable.js');
+  exports.Observable = Observable_1.Observable;
+  var Subject_2 = $__require('node_modules/rxjs/Subject.js');
+  exports.Subject = Subject_2.Subject;
+  var TimerWrapper = (function() {
+    function TimerWrapper() {}
+    TimerWrapper.setTimeout = function(fn, millis) {
+      return lang_1.global.setTimeout(fn, millis);
+    };
+    TimerWrapper.clearTimeout = function(id) {
+      lang_1.global.clearTimeout(id);
+    };
+    TimerWrapper.setInterval = function(fn, millis) {
+      return lang_1.global.setInterval(fn, millis);
+    };
+    TimerWrapper.clearInterval = function(id) {
+      lang_1.global.clearInterval(id);
+    };
+    return TimerWrapper;
+  })();
+  exports.TimerWrapper = TimerWrapper;
+  var ObservableWrapper = (function() {
+    function ObservableWrapper() {}
+    ObservableWrapper.subscribe = function(emitter, onNext, onError, onComplete) {
+      if (onComplete === void 0) {
+        onComplete = function() {};
+      }
+      onError = (typeof onError === "function") && onError || lang_1.noop;
+      onComplete = (typeof onComplete === "function") && onComplete || lang_1.noop;
+      return emitter.subscribe({
+        next: onNext,
+        error: onError,
+        complete: onComplete
+      });
+    };
+    ObservableWrapper.isObservable = function(obs) {
+      return !!obs.subscribe;
+    };
+    ObservableWrapper.hasSubscribers = function(obs) {
+      return obs.observers.length > 0;
+    };
+    ObservableWrapper.dispose = function(subscription) {
+      subscription.unsubscribe();
+    };
+    ObservableWrapper.callNext = function(emitter, value) {
+      emitter.next(value);
+    };
+    ObservableWrapper.callEmit = function(emitter, value) {
+      emitter.emit(value);
+    };
+    ObservableWrapper.callError = function(emitter, error) {
+      emitter.error(error);
+    };
+    ObservableWrapper.callComplete = function(emitter) {
+      emitter.complete();
+    };
+    ObservableWrapper.fromPromise = function(promise) {
+      return PromiseObservable_1.PromiseObservable.create(promise);
+    };
+    ObservableWrapper.toPromise = function(obj) {
+      return toPromise_1.toPromise.call(obj);
+    };
+    return ObservableWrapper;
+  })();
+  exports.ObservableWrapper = ObservableWrapper;
+  var EventEmitter = (function(_super) {
+    __extends(EventEmitter, _super);
+    function EventEmitter(isAsync) {
+      if (isAsync === void 0) {
+        isAsync = true;
+      }
+      _super.call(this);
+      this._isAsync = isAsync;
+    }
+    EventEmitter.prototype.emit = function(value) {
+      _super.prototype.next.call(this, value);
+    };
+    EventEmitter.prototype.next = function(value) {
+      _super.prototype.next.call(this, value);
+    };
+    EventEmitter.prototype.subscribe = function(generatorOrNext, error, complete) {
+      var schedulerFn;
+      var errorFn = function(err) {
+        return null;
+      };
+      var completeFn = function() {
+        return null;
+      };
+      if (generatorOrNext && typeof generatorOrNext === 'object') {
+        schedulerFn = this._isAsync ? function(value) {
+          setTimeout(function() {
+            return generatorOrNext.next(value);
+          });
+        } : function(value) {
+          generatorOrNext.next(value);
+        };
+        if (generatorOrNext.error) {
+          errorFn = this._isAsync ? function(err) {
+            setTimeout(function() {
+              return generatorOrNext.error(err);
+            });
+          } : function(err) {
+            generatorOrNext.error(err);
+          };
+        }
+        if (generatorOrNext.complete) {
+          completeFn = this._isAsync ? function() {
+            setTimeout(function() {
+              return generatorOrNext.complete();
+            });
+          } : function() {
+            generatorOrNext.complete();
+          };
+        }
+      } else {
+        schedulerFn = this._isAsync ? function(value) {
+          setTimeout(function() {
+            return generatorOrNext(value);
+          });
+        } : function(value) {
+          generatorOrNext(value);
+        };
+        if (error) {
+          errorFn = this._isAsync ? function(err) {
+            setTimeout(function() {
+              return error(err);
+            });
+          } : function(err) {
+            error(err);
+          };
+        }
+        if (complete) {
+          completeFn = this._isAsync ? function() {
+            setTimeout(function() {
+              return complete();
+            });
+          } : function() {
+            complete();
+          };
+        }
+      }
+      return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
+    };
+    return EventEmitter;
+  })(Subject_1.Subject);
+  exports.EventEmitter = EventEmitter;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/linker/query_list.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/async.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
+  var QueryList = (function() {
+    function QueryList() {
+      this._results = [];
+      this._emitter = new async_1.EventEmitter();
+    }
+    Object.defineProperty(QueryList.prototype, "changes", {
+      get: function() {
+        return this._emitter;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(QueryList.prototype, "length", {
+      get: function() {
+        return this._results.length;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(QueryList.prototype, "first", {
+      get: function() {
+        return collection_1.ListWrapper.first(this._results);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(QueryList.prototype, "last", {
+      get: function() {
+        return collection_1.ListWrapper.last(this._results);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    QueryList.prototype.map = function(fn) {
+      return this._results.map(fn);
+    };
+    QueryList.prototype.filter = function(fn) {
+      return this._results.filter(fn);
+    };
+    QueryList.prototype.reduce = function(fn, init) {
+      return this._results.reduce(fn, init);
+    };
+    QueryList.prototype.toArray = function() {
+      return collection_1.ListWrapper.clone(this._results);
+    };
+    QueryList.prototype[lang_1.getSymbolIterator()] = function() {
+      return this._results[lang_1.getSymbolIterator()]();
+    };
+    QueryList.prototype.toString = function() {
+      return this._results.toString();
+    };
+    QueryList.prototype.reset = function(res) {
+      this._results = res;
+    };
+    QueryList.prototype.notifyOnChanges = function() {
+      this._emitter.emit(this);
+    };
+    return QueryList;
+  })();
+  exports.QueryList = QueryList;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/pipes/pipe_provider.js", ["node_modules/angular2/src/core/di/provider.js", "node_modules/angular2/src/core/di.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var provider_1 = $__require('node_modules/angular2/src/core/di/provider.js');
+  var di_1 = $__require('node_modules/angular2/src/core/di.js');
+  var PipeProvider = (function(_super) {
+    __extends(PipeProvider, _super);
+    function PipeProvider(name, pure, key, resolvedFactories, multiBinding) {
+      _super.call(this, key, resolvedFactories, multiBinding);
+      this.name = name;
+      this.pure = pure;
+    }
+    PipeProvider.createFromType = function(type, metadata) {
+      var provider = new di_1.Provider(type, {useClass: type});
+      var rb = provider_1.resolveProvider(provider);
+      return new PipeProvider(metadata.name, metadata.pure, rb.key, rb.resolvedFactories, rb.multiProvider);
+    };
+    return PipeProvider;
+  })(provider_1.ResolvedProvider_);
+  exports.PipeProvider = PipeProvider;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/linker/element.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/di/provider.js", "node_modules/angular2/src/core/di/injector.js", "node_modules/angular2/src/core/metadata/di.js", "node_modules/angular2/src/core/linker/view_type.js", "node_modules/angular2/src/core/linker/element_ref.js", "node_modules/angular2/src/core/linker/view_container_ref.js", "node_modules/angular2/src/core/render/api.js", "node_modules/angular2/src/core/linker/template_ref.js", "node_modules/angular2/src/core/metadata/directives.js", "node_modules/angular2/src/core/change_detection/change_detection.js", "node_modules/angular2/src/core/linker/query_list.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/pipes/pipe_provider.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var di_1 = $__require('node_modules/angular2/src/core/di.js');
+  var provider_1 = $__require('node_modules/angular2/src/core/di/provider.js');
+  var injector_1 = $__require('node_modules/angular2/src/core/di/injector.js');
+  var provider_2 = $__require('node_modules/angular2/src/core/di/provider.js');
+  var di_2 = $__require('node_modules/angular2/src/core/metadata/di.js');
+  var view_type_1 = $__require('node_modules/angular2/src/core/linker/view_type.js');
+  var element_ref_1 = $__require('node_modules/angular2/src/core/linker/element_ref.js');
+  var view_container_ref_1 = $__require('node_modules/angular2/src/core/linker/view_container_ref.js');
+  var element_ref_2 = $__require('node_modules/angular2/src/core/linker/element_ref.js');
   var api_1 = $__require('node_modules/angular2/src/core/render/api.js');
-  var metadata_1 = $__require('node_modules/angular2/src/core/metadata.js');
-  var metadata_2 = $__require('node_modules/angular2/src/core/metadata.js');
-  exports.ViewEncapsulation = metadata_2.ViewEncapsulation;
-  var CompiledHostTemplate = (function() {
-    function CompiledHostTemplate(template) {
-      this.template = template;
+  var template_ref_1 = $__require('node_modules/angular2/src/core/linker/template_ref.js');
+  var directives_1 = $__require('node_modules/angular2/src/core/metadata/directives.js');
+  var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
+  var query_list_1 = $__require('node_modules/angular2/src/core/linker/query_list.js');
+  var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
+  var pipe_provider_1 = $__require('node_modules/angular2/src/core/pipes/pipe_provider.js');
+  var view_container_ref_2 = $__require('node_modules/angular2/src/core/linker/view_container_ref.js');
+  var _staticKeys;
+  var StaticKeys = (function() {
+    function StaticKeys() {
+      this.templateRefId = di_1.Key.get(template_ref_1.TemplateRef).id;
+      this.viewContainerId = di_1.Key.get(view_container_ref_1.ViewContainerRef).id;
+      this.changeDetectorRefId = di_1.Key.get(change_detection_1.ChangeDetectorRef).id;
+      this.elementRefId = di_1.Key.get(element_ref_2.ElementRef).id;
+      this.rendererId = di_1.Key.get(api_1.Renderer).id;
     }
-    CompiledHostTemplate = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [CompiledComponentTemplate])], CompiledHostTemplate);
-    return CompiledHostTemplate;
-  })();
-  exports.CompiledHostTemplate = CompiledHostTemplate;
-  var CompiledComponentTemplate = (function() {
-    function CompiledComponentTemplate(id, changeDetectorFactory, commands, styles) {
-      this.id = id;
-      this.changeDetectorFactory = changeDetectorFactory;
-      this.commands = commands;
-      this.styles = styles;
-    }
-    CompiledComponentTemplate = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Function, Array, Array])], CompiledComponentTemplate);
-    return CompiledComponentTemplate;
-  })();
-  exports.CompiledComponentTemplate = CompiledComponentTemplate;
-  var EMPTY_ARR = lang_1.CONST_EXPR([]);
-  var TextCmd = (function() {
-    function TextCmd(value, isBound, ngContentIndex) {
-      this.value = value;
-      this.isBound = isBound;
-      this.ngContentIndex = ngContentIndex;
-    }
-    TextCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitText(this, context);
+    StaticKeys.instance = function() {
+      if (lang_1.isBlank(_staticKeys))
+        _staticKeys = new StaticKeys();
+      return _staticKeys;
     };
-    TextCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Boolean, Number])], TextCmd);
-    return TextCmd;
+    return StaticKeys;
   })();
-  exports.TextCmd = TextCmd;
-  var NgContentCmd = (function() {
-    function NgContentCmd(index, ngContentIndex) {
-      this.index = index;
-      this.ngContentIndex = ngContentIndex;
-      this.isBound = false;
+  exports.StaticKeys = StaticKeys;
+  var DirectiveDependency = (function(_super) {
+    __extends(DirectiveDependency, _super);
+    function DirectiveDependency(key, optional, lowerBoundVisibility, upperBoundVisibility, properties, attributeName, queryDecorator) {
+      _super.call(this, key, optional, lowerBoundVisibility, upperBoundVisibility, properties);
+      this.attributeName = attributeName;
+      this.queryDecorator = queryDecorator;
+      this._verify();
     }
-    NgContentCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitNgContent(this, context);
+    DirectiveDependency.prototype._verify = function() {
+      var count = 0;
+      if (lang_1.isPresent(this.queryDecorator))
+        count++;
+      if (lang_1.isPresent(this.attributeName))
+        count++;
+      if (count > 1)
+        throw new exceptions_1.BaseException('A directive injectable can contain only one of the following @Attribute or @Query.');
     };
-    NgContentCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Number, Number])], NgContentCmd);
-    return NgContentCmd;
-  })();
-  exports.NgContentCmd = NgContentCmd;
-  var IBeginElementCmd = (function(_super) {
-    __extends(IBeginElementCmd, _super);
-    function IBeginElementCmd() {
-      _super.apply(this, arguments);
+    DirectiveDependency.createFrom = function(d) {
+      return new DirectiveDependency(d.key, d.optional, d.lowerBoundVisibility, d.upperBoundVisibility, d.properties, DirectiveDependency._attributeName(d.properties), DirectiveDependency._query(d.properties));
+    };
+    DirectiveDependency._attributeName = function(properties) {
+      var p = properties.find(function(p) {
+        return p instanceof di_2.AttributeMetadata;
+      });
+      return lang_1.isPresent(p) ? p.attributeName : null;
+    };
+    DirectiveDependency._query = function(properties) {
+      return properties.find(function(p) {
+        return p instanceof di_2.QueryMetadata;
+      });
+    };
+    return DirectiveDependency;
+  })(di_1.Dependency);
+  exports.DirectiveDependency = DirectiveDependency;
+  var DirectiveProvider = (function(_super) {
+    __extends(DirectiveProvider, _super);
+    function DirectiveProvider(key, factory, deps, isComponent, providers, viewProviders, queries) {
+      _super.call(this, key, [new provider_2.ResolvedFactory(factory, deps)], false);
+      this.isComponent = isComponent;
+      this.providers = providers;
+      this.viewProviders = viewProviders;
+      this.queries = queries;
     }
-    Object.defineProperty(IBeginElementCmd.prototype, "variableNameAndValues", {
+    Object.defineProperty(DirectiveProvider.prototype, "displayName", {
       get: function() {
-        return exceptions_1.unimplemented();
+        return this.key.displayName;
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(IBeginElementCmd.prototype, "eventTargetAndNames", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(IBeginElementCmd.prototype, "directives", {
-      get: function() {
-        return exceptions_1.unimplemented();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return IBeginElementCmd;
-  })(api_1.RenderBeginElementCmd);
-  exports.IBeginElementCmd = IBeginElementCmd;
-  var BeginElementCmd = (function() {
-    function BeginElementCmd(name, attrNameAndValues, eventTargetAndNames, variableNameAndValues, directives, isBound, ngContentIndex) {
-      this.name = name;
-      this.attrNameAndValues = attrNameAndValues;
-      this.eventTargetAndNames = eventTargetAndNames;
-      this.variableNameAndValues = variableNameAndValues;
-      this.directives = directives;
-      this.isBound = isBound;
-      this.ngContentIndex = ngContentIndex;
+    DirectiveProvider.createFromType = function(type, meta) {
+      var provider = new di_1.Provider(type, {useClass: type});
+      if (lang_1.isBlank(meta)) {
+        meta = new directives_1.DirectiveMetadata();
+      }
+      var rb = provider_2.resolveProvider(provider);
+      var rf = rb.resolvedFactories[0];
+      var deps = rf.dependencies.map(DirectiveDependency.createFrom);
+      var isComponent = meta instanceof directives_1.ComponentMetadata;
+      var resolvedProviders = lang_1.isPresent(meta.providers) ? di_1.Injector.resolve(meta.providers) : null;
+      var resolvedViewProviders = meta instanceof directives_1.ComponentMetadata && lang_1.isPresent(meta.viewProviders) ? di_1.Injector.resolve(meta.viewProviders) : null;
+      var queries = [];
+      if (lang_1.isPresent(meta.queries)) {
+        collection_1.StringMapWrapper.forEach(meta.queries, function(meta, fieldName) {
+          var setter = reflection_1.reflector.setter(fieldName);
+          queries.push(new QueryMetadataWithSetter(setter, meta));
+        });
+      }
+      deps.forEach(function(d) {
+        if (lang_1.isPresent(d.queryDecorator)) {
+          queries.push(new QueryMetadataWithSetter(null, d.queryDecorator));
+        }
+      });
+      return new DirectiveProvider(rb.key, rf.factory, deps, isComponent, resolvedProviders, resolvedViewProviders, queries);
+    };
+    return DirectiveProvider;
+  })(provider_2.ResolvedProvider_);
+  exports.DirectiveProvider = DirectiveProvider;
+  var QueryMetadataWithSetter = (function() {
+    function QueryMetadataWithSetter(setter, metadata) {
+      this.setter = setter;
+      this.metadata = metadata;
     }
-    BeginElementCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitBeginElement(this, context);
-    };
-    BeginElementCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Array, Array, Array, Array, Boolean, Number])], BeginElementCmd);
-    return BeginElementCmd;
+    return QueryMetadataWithSetter;
   })();
-  exports.BeginElementCmd = BeginElementCmd;
-  var EndElementCmd = (function() {
-    function EndElementCmd() {}
-    EndElementCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitEndElement(context);
-    };
-    EndElementCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [])], EndElementCmd);
-    return EndElementCmd;
-  })();
-  exports.EndElementCmd = EndElementCmd;
-  var BeginComponentCmd = (function() {
-    function BeginComponentCmd(name, attrNameAndValues, eventTargetAndNames, variableNameAndValues, directives, encapsulation, ngContentIndex, templateGetter) {
-      this.name = name;
-      this.attrNameAndValues = attrNameAndValues;
-      this.eventTargetAndNames = eventTargetAndNames;
-      this.variableNameAndValues = variableNameAndValues;
-      this.directives = directives;
-      this.encapsulation = encapsulation;
-      this.ngContentIndex = ngContentIndex;
-      this.templateGetter = templateGetter;
-      this.isBound = true;
-    }
-    Object.defineProperty(BeginComponentCmd.prototype, "templateId", {
-      get: function() {
-        return this.templateGetter().id;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    BeginComponentCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitBeginComponent(this, context);
-    };
-    BeginComponentCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [String, Array, Array, Array, Array, Number, Number, Function])], BeginComponentCmd);
-    return BeginComponentCmd;
-  })();
-  exports.BeginComponentCmd = BeginComponentCmd;
-  var EndComponentCmd = (function() {
-    function EndComponentCmd() {}
-    EndComponentCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitEndComponent(context);
-    };
-    EndComponentCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [])], EndComponentCmd);
-    return EndComponentCmd;
-  })();
-  exports.EndComponentCmd = EndComponentCmd;
-  var EmbeddedTemplateCmd = (function() {
-    function EmbeddedTemplateCmd(attrNameAndValues, variableNameAndValues, directives, isMerged, ngContentIndex, changeDetectorFactory, children) {
-      this.attrNameAndValues = attrNameAndValues;
-      this.variableNameAndValues = variableNameAndValues;
-      this.directives = directives;
-      this.isMerged = isMerged;
-      this.ngContentIndex = ngContentIndex;
-      this.changeDetectorFactory = changeDetectorFactory;
-      this.children = children;
-      this.isBound = true;
-      this.name = null;
-      this.eventTargetAndNames = EMPTY_ARR;
-    }
-    EmbeddedTemplateCmd.prototype.visit = function(visitor, context) {
-      return visitor.visitEmbeddedTemplate(this, context);
-    };
-    EmbeddedTemplateCmd = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Array, Array, Array, Boolean, Number, Function, Array])], EmbeddedTemplateCmd);
-    return EmbeddedTemplateCmd;
-  })();
-  exports.EmbeddedTemplateCmd = EmbeddedTemplateCmd;
-  function visitAllCommands(visitor, cmds, context) {
-    if (context === void 0) {
-      context = null;
-    }
-    for (var i = 0; i < cmds.length; i++) {
-      cmds[i].visit(visitor, context);
+  exports.QueryMetadataWithSetter = QueryMetadataWithSetter;
+  function setProvidersVisibility(providers, visibility, result) {
+    for (var i = 0; i < providers.length; i++) {
+      result.set(providers[i].key.id, visibility);
     }
   }
-  exports.visitAllCommands = visitAllCommands;
+  var AppProtoElement = (function() {
+    function AppProtoElement(firstProviderIsComponent, index, attributes, pwvs, protoQueryRefs, directiveVariableBindings) {
+      this.firstProviderIsComponent = firstProviderIsComponent;
+      this.index = index;
+      this.attributes = attributes;
+      this.protoQueryRefs = protoQueryRefs;
+      this.directiveVariableBindings = directiveVariableBindings;
+      var length = pwvs.length;
+      if (length > 0) {
+        this.protoInjector = new injector_1.ProtoInjector(pwvs);
+      } else {
+        this.protoInjector = null;
+        this.protoQueryRefs = [];
+      }
+    }
+    AppProtoElement.create = function(metadataCache, index, attributes, directiveTypes, directiveVariableBindings) {
+      var componentDirProvider = null;
+      var mergedProvidersMap = new Map();
+      var providerVisibilityMap = new Map();
+      var providers = collection_1.ListWrapper.createGrowableSize(directiveTypes.length);
+      var protoQueryRefs = [];
+      for (var i = 0; i < directiveTypes.length; i++) {
+        var dirProvider = metadataCache.getResolvedDirectiveMetadata(directiveTypes[i]);
+        providers[i] = new injector_1.ProviderWithVisibility(dirProvider, dirProvider.isComponent ? injector_1.Visibility.PublicAndPrivate : injector_1.Visibility.Public);
+        if (dirProvider.isComponent) {
+          componentDirProvider = dirProvider;
+        } else {
+          if (lang_1.isPresent(dirProvider.providers)) {
+            provider_1.mergeResolvedProviders(dirProvider.providers, mergedProvidersMap);
+            setProvidersVisibility(dirProvider.providers, injector_1.Visibility.Public, providerVisibilityMap);
+          }
+        }
+        if (lang_1.isPresent(dirProvider.viewProviders)) {
+          provider_1.mergeResolvedProviders(dirProvider.viewProviders, mergedProvidersMap);
+          setProvidersVisibility(dirProvider.viewProviders, injector_1.Visibility.Private, providerVisibilityMap);
+        }
+        for (var queryIdx = 0; queryIdx < dirProvider.queries.length; queryIdx++) {
+          var q = dirProvider.queries[queryIdx];
+          protoQueryRefs.push(new ProtoQueryRef(i, q.setter, q.metadata));
+        }
+      }
+      if (lang_1.isPresent(componentDirProvider) && lang_1.isPresent(componentDirProvider.providers)) {
+        provider_1.mergeResolvedProviders(componentDirProvider.providers, mergedProvidersMap);
+        setProvidersVisibility(componentDirProvider.providers, injector_1.Visibility.Public, providerVisibilityMap);
+      }
+      mergedProvidersMap.forEach(function(provider, _) {
+        providers.push(new injector_1.ProviderWithVisibility(provider, providerVisibilityMap.get(provider.key.id)));
+      });
+      return new AppProtoElement(lang_1.isPresent(componentDirProvider), index, attributes, providers, protoQueryRefs, directiveVariableBindings);
+    };
+    AppProtoElement.prototype.getProviderAtIndex = function(index) {
+      return this.protoInjector.getProviderAtIndex(index);
+    };
+    return AppProtoElement;
+  })();
+  exports.AppProtoElement = AppProtoElement;
+  var _Context = (function() {
+    function _Context(element, componentElement, injector) {
+      this.element = element;
+      this.componentElement = componentElement;
+      this.injector = injector;
+    }
+    return _Context;
+  })();
+  var InjectorWithHostBoundary = (function() {
+    function InjectorWithHostBoundary(injector, hostInjectorBoundary) {
+      this.injector = injector;
+      this.hostInjectorBoundary = hostInjectorBoundary;
+    }
+    return InjectorWithHostBoundary;
+  })();
+  exports.InjectorWithHostBoundary = InjectorWithHostBoundary;
+  var AppElement = (function() {
+    function AppElement(proto, parentView, parent, nativeElement, embeddedViewFactory) {
+      var _this = this;
+      this.proto = proto;
+      this.parentView = parentView;
+      this.parent = parent;
+      this.nativeElement = nativeElement;
+      this.embeddedViewFactory = embeddedViewFactory;
+      this.nestedViews = null;
+      this.componentView = null;
+      this.ref = new element_ref_1.ElementRef_(this);
+      var parentInjector = lang_1.isPresent(parent) ? parent._injector : parentView.parentInjector;
+      if (lang_1.isPresent(this.proto.protoInjector)) {
+        var isBoundary;
+        if (lang_1.isPresent(parent) && lang_1.isPresent(parent.proto.protoInjector)) {
+          isBoundary = false;
+        } else {
+          isBoundary = parentView.hostInjectorBoundary;
+        }
+        this._queryStrategy = this._buildQueryStrategy();
+        this._injector = new di_1.Injector(this.proto.protoInjector, parentInjector, isBoundary, this, function() {
+          return _this._debugContext();
+        });
+        var injectorStrategy = this._injector.internalStrategy;
+        this._strategy = injectorStrategy instanceof injector_1.InjectorInlineStrategy ? new ElementDirectiveInlineStrategy(injectorStrategy, this) : new ElementDirectiveDynamicStrategy(injectorStrategy, this);
+        this._strategy.init();
+      } else {
+        this._queryStrategy = null;
+        this._injector = parentInjector;
+        this._strategy = null;
+      }
+    }
+    AppElement.getViewParentInjector = function(parentViewType, containerAppElement, imperativelyCreatedProviders, rootInjector) {
+      var parentInjector;
+      var hostInjectorBoundary;
+      switch (parentViewType) {
+        case view_type_1.ViewType.COMPONENT:
+          parentInjector = containerAppElement._injector;
+          hostInjectorBoundary = true;
+          break;
+        case view_type_1.ViewType.EMBEDDED:
+          parentInjector = lang_1.isPresent(containerAppElement.proto.protoInjector) ? containerAppElement._injector.parent : containerAppElement._injector;
+          hostInjectorBoundary = containerAppElement._injector.hostBoundary;
+          break;
+        case view_type_1.ViewType.HOST:
+          if (lang_1.isPresent(containerAppElement)) {
+            parentInjector = lang_1.isPresent(containerAppElement.proto.protoInjector) ? containerAppElement._injector.parent : containerAppElement._injector;
+            if (lang_1.isPresent(imperativelyCreatedProviders)) {
+              var imperativeProvidersWithVisibility = imperativelyCreatedProviders.map(function(p) {
+                return new injector_1.ProviderWithVisibility(p, injector_1.Visibility.Public);
+              });
+              parentInjector = new di_1.Injector(new injector_1.ProtoInjector(imperativeProvidersWithVisibility), parentInjector, true, null, null);
+              hostInjectorBoundary = false;
+            } else {
+              hostInjectorBoundary = containerAppElement._injector.hostBoundary;
+            }
+          } else {
+            parentInjector = rootInjector;
+            hostInjectorBoundary = true;
+          }
+          break;
+      }
+      return new InjectorWithHostBoundary(parentInjector, hostInjectorBoundary);
+    };
+    AppElement.prototype.attachComponentView = function(componentView) {
+      this.componentView = componentView;
+    };
+    AppElement.prototype._debugContext = function() {
+      var c = this.parentView.getDebugContext(this, null, null);
+      return lang_1.isPresent(c) ? new _Context(c.element, c.componentElement, c.injector) : null;
+    };
+    AppElement.prototype.hasVariableBinding = function(name) {
+      var vb = this.proto.directiveVariableBindings;
+      return lang_1.isPresent(vb) && collection_1.StringMapWrapper.contains(vb, name);
+    };
+    AppElement.prototype.getVariableBinding = function(name) {
+      var index = this.proto.directiveVariableBindings[name];
+      return lang_1.isPresent(index) ? this.getDirectiveAtIndex(index) : this.getElementRef();
+    };
+    AppElement.prototype.get = function(token) {
+      return this._injector.get(token);
+    };
+    AppElement.prototype.hasDirective = function(type) {
+      return lang_1.isPresent(this._injector.getOptional(type));
+    };
+    AppElement.prototype.getComponent = function() {
+      return lang_1.isPresent(this._strategy) ? this._strategy.getComponent() : null;
+    };
+    AppElement.prototype.getInjector = function() {
+      return this._injector;
+    };
+    AppElement.prototype.getElementRef = function() {
+      return this.ref;
+    };
+    AppElement.prototype.getViewContainerRef = function() {
+      return new view_container_ref_2.ViewContainerRef_(this);
+    };
+    AppElement.prototype.getTemplateRef = function() {
+      if (lang_1.isPresent(this.embeddedViewFactory)) {
+        return new template_ref_1.TemplateRef_(this.ref);
+      }
+      return null;
+    };
+    AppElement.prototype.getDependency = function(injector, provider, dep) {
+      if (provider instanceof DirectiveProvider) {
+        var dirDep = dep;
+        if (lang_1.isPresent(dirDep.attributeName))
+          return this._buildAttribute(dirDep);
+        if (lang_1.isPresent(dirDep.queryDecorator))
+          return this._queryStrategy.findQuery(dirDep.queryDecorator).list;
+        if (dirDep.key.id === StaticKeys.instance().changeDetectorRefId) {
+          if (this.proto.firstProviderIsComponent) {
+            return new _ComponentViewChangeDetectorRef(this);
+          } else {
+            return this.parentView.changeDetector.ref;
+          }
+        }
+        if (dirDep.key.id === StaticKeys.instance().elementRefId) {
+          return this.getElementRef();
+        }
+        if (dirDep.key.id === StaticKeys.instance().viewContainerId) {
+          return this.getViewContainerRef();
+        }
+        if (dirDep.key.id === StaticKeys.instance().templateRefId) {
+          var tr = this.getTemplateRef();
+          if (lang_1.isBlank(tr) && !dirDep.optional) {
+            throw new di_1.NoProviderError(null, dirDep.key);
+          }
+          return tr;
+        }
+        if (dirDep.key.id === StaticKeys.instance().rendererId) {
+          return this.parentView.renderer;
+        }
+      } else if (provider instanceof pipe_provider_1.PipeProvider) {
+        if (dep.key.id === StaticKeys.instance().changeDetectorRefId) {
+          if (this.proto.firstProviderIsComponent) {
+            return new _ComponentViewChangeDetectorRef(this);
+          } else {
+            return this.parentView.changeDetector;
+          }
+        }
+      }
+      return injector_1.UNDEFINED;
+    };
+    AppElement.prototype._buildAttribute = function(dep) {
+      var attributes = this.proto.attributes;
+      if (lang_1.isPresent(attributes) && collection_1.StringMapWrapper.contains(attributes, dep.attributeName)) {
+        return attributes[dep.attributeName];
+      } else {
+        return null;
+      }
+    };
+    AppElement.prototype.addDirectivesMatchingQuery = function(query, list) {
+      var templateRef = this.getTemplateRef();
+      if (query.selector === template_ref_1.TemplateRef && lang_1.isPresent(templateRef)) {
+        list.push(templateRef);
+      }
+      if (this._strategy != null) {
+        this._strategy.addDirectivesMatchingQuery(query, list);
+      }
+    };
+    AppElement.prototype._buildQueryStrategy = function() {
+      if (this.proto.protoQueryRefs.length === 0) {
+        return _emptyQueryStrategy;
+      } else if (this.proto.protoQueryRefs.length <= InlineQueryStrategy.NUMBER_OF_SUPPORTED_QUERIES) {
+        return new InlineQueryStrategy(this);
+      } else {
+        return new DynamicQueryStrategy(this);
+      }
+    };
+    AppElement.prototype.getDirectiveAtIndex = function(index) {
+      return this._injector.getAt(index);
+    };
+    AppElement.prototype.ngAfterViewChecked = function() {
+      if (lang_1.isPresent(this._queryStrategy))
+        this._queryStrategy.updateViewQueries();
+    };
+    AppElement.prototype.ngAfterContentChecked = function() {
+      if (lang_1.isPresent(this._queryStrategy))
+        this._queryStrategy.updateContentQueries();
+    };
+    AppElement.prototype.traverseAndSetQueriesAsDirty = function() {
+      var inj = this;
+      while (lang_1.isPresent(inj)) {
+        inj._setQueriesAsDirty();
+        if (lang_1.isBlank(inj.parent) && inj.parentView.proto.type === view_type_1.ViewType.EMBEDDED) {
+          inj = inj.parentView.containerAppElement;
+        } else {
+          inj = inj.parent;
+        }
+      }
+    };
+    AppElement.prototype._setQueriesAsDirty = function() {
+      if (lang_1.isPresent(this._queryStrategy)) {
+        this._queryStrategy.setContentQueriesAsDirty();
+      }
+      if (this.parentView.proto.type === view_type_1.ViewType.COMPONENT) {
+        this.parentView.containerAppElement._queryStrategy.setViewQueriesAsDirty();
+      }
+    };
+    return AppElement;
+  })();
+  exports.AppElement = AppElement;
+  var _EmptyQueryStrategy = (function() {
+    function _EmptyQueryStrategy() {}
+    _EmptyQueryStrategy.prototype.setContentQueriesAsDirty = function() {};
+    _EmptyQueryStrategy.prototype.setViewQueriesAsDirty = function() {};
+    _EmptyQueryStrategy.prototype.updateContentQueries = function() {};
+    _EmptyQueryStrategy.prototype.updateViewQueries = function() {};
+    _EmptyQueryStrategy.prototype.findQuery = function(query) {
+      throw new exceptions_1.BaseException("Cannot find query for directive " + query + ".");
+    };
+    return _EmptyQueryStrategy;
+  })();
+  var _emptyQueryStrategy = new _EmptyQueryStrategy();
+  var InlineQueryStrategy = (function() {
+    function InlineQueryStrategy(ei) {
+      var protoRefs = ei.proto.protoQueryRefs;
+      if (protoRefs.length > 0)
+        this.query0 = new QueryRef(protoRefs[0], ei);
+      if (protoRefs.length > 1)
+        this.query1 = new QueryRef(protoRefs[1], ei);
+      if (protoRefs.length > 2)
+        this.query2 = new QueryRef(protoRefs[2], ei);
+    }
+    InlineQueryStrategy.prototype.setContentQueriesAsDirty = function() {
+      if (lang_1.isPresent(this.query0) && !this.query0.isViewQuery)
+        this.query0.dirty = true;
+      if (lang_1.isPresent(this.query1) && !this.query1.isViewQuery)
+        this.query1.dirty = true;
+      if (lang_1.isPresent(this.query2) && !this.query2.isViewQuery)
+        this.query2.dirty = true;
+    };
+    InlineQueryStrategy.prototype.setViewQueriesAsDirty = function() {
+      if (lang_1.isPresent(this.query0) && this.query0.isViewQuery)
+        this.query0.dirty = true;
+      if (lang_1.isPresent(this.query1) && this.query1.isViewQuery)
+        this.query1.dirty = true;
+      if (lang_1.isPresent(this.query2) && this.query2.isViewQuery)
+        this.query2.dirty = true;
+    };
+    InlineQueryStrategy.prototype.updateContentQueries = function() {
+      if (lang_1.isPresent(this.query0) && !this.query0.isViewQuery) {
+        this.query0.update();
+      }
+      if (lang_1.isPresent(this.query1) && !this.query1.isViewQuery) {
+        this.query1.update();
+      }
+      if (lang_1.isPresent(this.query2) && !this.query2.isViewQuery) {
+        this.query2.update();
+      }
+    };
+    InlineQueryStrategy.prototype.updateViewQueries = function() {
+      if (lang_1.isPresent(this.query0) && this.query0.isViewQuery) {
+        this.query0.update();
+      }
+      if (lang_1.isPresent(this.query1) && this.query1.isViewQuery) {
+        this.query1.update();
+      }
+      if (lang_1.isPresent(this.query2) && this.query2.isViewQuery) {
+        this.query2.update();
+      }
+    };
+    InlineQueryStrategy.prototype.findQuery = function(query) {
+      if (lang_1.isPresent(this.query0) && this.query0.protoQueryRef.query === query) {
+        return this.query0;
+      }
+      if (lang_1.isPresent(this.query1) && this.query1.protoQueryRef.query === query) {
+        return this.query1;
+      }
+      if (lang_1.isPresent(this.query2) && this.query2.protoQueryRef.query === query) {
+        return this.query2;
+      }
+      throw new exceptions_1.BaseException("Cannot find query for directive " + query + ".");
+    };
+    InlineQueryStrategy.NUMBER_OF_SUPPORTED_QUERIES = 3;
+    return InlineQueryStrategy;
+  })();
+  var DynamicQueryStrategy = (function() {
+    function DynamicQueryStrategy(ei) {
+      this.queries = ei.proto.protoQueryRefs.map(function(p) {
+        return new QueryRef(p, ei);
+      });
+    }
+    DynamicQueryStrategy.prototype.setContentQueriesAsDirty = function() {
+      for (var i = 0; i < this.queries.length; ++i) {
+        var q = this.queries[i];
+        if (!q.isViewQuery)
+          q.dirty = true;
+      }
+    };
+    DynamicQueryStrategy.prototype.setViewQueriesAsDirty = function() {
+      for (var i = 0; i < this.queries.length; ++i) {
+        var q = this.queries[i];
+        if (q.isViewQuery)
+          q.dirty = true;
+      }
+    };
+    DynamicQueryStrategy.prototype.updateContentQueries = function() {
+      for (var i = 0; i < this.queries.length; ++i) {
+        var q = this.queries[i];
+        if (!q.isViewQuery) {
+          q.update();
+        }
+      }
+    };
+    DynamicQueryStrategy.prototype.updateViewQueries = function() {
+      for (var i = 0; i < this.queries.length; ++i) {
+        var q = this.queries[i];
+        if (q.isViewQuery) {
+          q.update();
+        }
+      }
+    };
+    DynamicQueryStrategy.prototype.findQuery = function(query) {
+      for (var i = 0; i < this.queries.length; ++i) {
+        var q = this.queries[i];
+        if (q.protoQueryRef.query === query) {
+          return q;
+        }
+      }
+      throw new exceptions_1.BaseException("Cannot find query for directive " + query + ".");
+    };
+    return DynamicQueryStrategy;
+  })();
+  var ElementDirectiveInlineStrategy = (function() {
+    function ElementDirectiveInlineStrategy(injectorStrategy, _ei) {
+      this.injectorStrategy = injectorStrategy;
+      this._ei = _ei;
+    }
+    ElementDirectiveInlineStrategy.prototype.init = function() {
+      var i = this.injectorStrategy;
+      var p = i.protoStrategy;
+      i.resetConstructionCounter();
+      if (p.provider0 instanceof DirectiveProvider && lang_1.isPresent(p.keyId0) && i.obj0 === injector_1.UNDEFINED)
+        i.obj0 = i.instantiateProvider(p.provider0, p.visibility0);
+      if (p.provider1 instanceof DirectiveProvider && lang_1.isPresent(p.keyId1) && i.obj1 === injector_1.UNDEFINED)
+        i.obj1 = i.instantiateProvider(p.provider1, p.visibility1);
+      if (p.provider2 instanceof DirectiveProvider && lang_1.isPresent(p.keyId2) && i.obj2 === injector_1.UNDEFINED)
+        i.obj2 = i.instantiateProvider(p.provider2, p.visibility2);
+      if (p.provider3 instanceof DirectiveProvider && lang_1.isPresent(p.keyId3) && i.obj3 === injector_1.UNDEFINED)
+        i.obj3 = i.instantiateProvider(p.provider3, p.visibility3);
+      if (p.provider4 instanceof DirectiveProvider && lang_1.isPresent(p.keyId4) && i.obj4 === injector_1.UNDEFINED)
+        i.obj4 = i.instantiateProvider(p.provider4, p.visibility4);
+      if (p.provider5 instanceof DirectiveProvider && lang_1.isPresent(p.keyId5) && i.obj5 === injector_1.UNDEFINED)
+        i.obj5 = i.instantiateProvider(p.provider5, p.visibility5);
+      if (p.provider6 instanceof DirectiveProvider && lang_1.isPresent(p.keyId6) && i.obj6 === injector_1.UNDEFINED)
+        i.obj6 = i.instantiateProvider(p.provider6, p.visibility6);
+      if (p.provider7 instanceof DirectiveProvider && lang_1.isPresent(p.keyId7) && i.obj7 === injector_1.UNDEFINED)
+        i.obj7 = i.instantiateProvider(p.provider7, p.visibility7);
+      if (p.provider8 instanceof DirectiveProvider && lang_1.isPresent(p.keyId8) && i.obj8 === injector_1.UNDEFINED)
+        i.obj8 = i.instantiateProvider(p.provider8, p.visibility8);
+      if (p.provider9 instanceof DirectiveProvider && lang_1.isPresent(p.keyId9) && i.obj9 === injector_1.UNDEFINED)
+        i.obj9 = i.instantiateProvider(p.provider9, p.visibility9);
+    };
+    ElementDirectiveInlineStrategy.prototype.getComponent = function() {
+      return this.injectorStrategy.obj0;
+    };
+    ElementDirectiveInlineStrategy.prototype.isComponentKey = function(key) {
+      return this._ei.proto.firstProviderIsComponent && lang_1.isPresent(key) && key.id === this.injectorStrategy.protoStrategy.keyId0;
+    };
+    ElementDirectiveInlineStrategy.prototype.addDirectivesMatchingQuery = function(query, list) {
+      var i = this.injectorStrategy;
+      var p = i.protoStrategy;
+      if (lang_1.isPresent(p.provider0) && p.provider0.key.token === query.selector) {
+        if (i.obj0 === injector_1.UNDEFINED)
+          i.obj0 = i.instantiateProvider(p.provider0, p.visibility0);
+        list.push(i.obj0);
+      }
+      if (lang_1.isPresent(p.provider1) && p.provider1.key.token === query.selector) {
+        if (i.obj1 === injector_1.UNDEFINED)
+          i.obj1 = i.instantiateProvider(p.provider1, p.visibility1);
+        list.push(i.obj1);
+      }
+      if (lang_1.isPresent(p.provider2) && p.provider2.key.token === query.selector) {
+        if (i.obj2 === injector_1.UNDEFINED)
+          i.obj2 = i.instantiateProvider(p.provider2, p.visibility2);
+        list.push(i.obj2);
+      }
+      if (lang_1.isPresent(p.provider3) && p.provider3.key.token === query.selector) {
+        if (i.obj3 === injector_1.UNDEFINED)
+          i.obj3 = i.instantiateProvider(p.provider3, p.visibility3);
+        list.push(i.obj3);
+      }
+      if (lang_1.isPresent(p.provider4) && p.provider4.key.token === query.selector) {
+        if (i.obj4 === injector_1.UNDEFINED)
+          i.obj4 = i.instantiateProvider(p.provider4, p.visibility4);
+        list.push(i.obj4);
+      }
+      if (lang_1.isPresent(p.provider5) && p.provider5.key.token === query.selector) {
+        if (i.obj5 === injector_1.UNDEFINED)
+          i.obj5 = i.instantiateProvider(p.provider5, p.visibility5);
+        list.push(i.obj5);
+      }
+      if (lang_1.isPresent(p.provider6) && p.provider6.key.token === query.selector) {
+        if (i.obj6 === injector_1.UNDEFINED)
+          i.obj6 = i.instantiateProvider(p.provider6, p.visibility6);
+        list.push(i.obj6);
+      }
+      if (lang_1.isPresent(p.provider7) && p.provider7.key.token === query.selector) {
+        if (i.obj7 === injector_1.UNDEFINED)
+          i.obj7 = i.instantiateProvider(p.provider7, p.visibility7);
+        list.push(i.obj7);
+      }
+      if (lang_1.isPresent(p.provider8) && p.provider8.key.token === query.selector) {
+        if (i.obj8 === injector_1.UNDEFINED)
+          i.obj8 = i.instantiateProvider(p.provider8, p.visibility8);
+        list.push(i.obj8);
+      }
+      if (lang_1.isPresent(p.provider9) && p.provider9.key.token === query.selector) {
+        if (i.obj9 === injector_1.UNDEFINED)
+          i.obj9 = i.instantiateProvider(p.provider9, p.visibility9);
+        list.push(i.obj9);
+      }
+    };
+    return ElementDirectiveInlineStrategy;
+  })();
+  var ElementDirectiveDynamicStrategy = (function() {
+    function ElementDirectiveDynamicStrategy(injectorStrategy, _ei) {
+      this.injectorStrategy = injectorStrategy;
+      this._ei = _ei;
+    }
+    ElementDirectiveDynamicStrategy.prototype.init = function() {
+      var inj = this.injectorStrategy;
+      var p = inj.protoStrategy;
+      inj.resetConstructionCounter();
+      for (var i = 0; i < p.keyIds.length; i++) {
+        if (p.providers[i] instanceof DirectiveProvider && lang_1.isPresent(p.keyIds[i]) && inj.objs[i] === injector_1.UNDEFINED) {
+          inj.objs[i] = inj.instantiateProvider(p.providers[i], p.visibilities[i]);
+        }
+      }
+    };
+    ElementDirectiveDynamicStrategy.prototype.getComponent = function() {
+      return this.injectorStrategy.objs[0];
+    };
+    ElementDirectiveDynamicStrategy.prototype.isComponentKey = function(key) {
+      var p = this.injectorStrategy.protoStrategy;
+      return this._ei.proto.firstProviderIsComponent && lang_1.isPresent(key) && key.id === p.keyIds[0];
+    };
+    ElementDirectiveDynamicStrategy.prototype.addDirectivesMatchingQuery = function(query, list) {
+      var ist = this.injectorStrategy;
+      var p = ist.protoStrategy;
+      for (var i = 0; i < p.providers.length; i++) {
+        if (p.providers[i].key.token === query.selector) {
+          if (ist.objs[i] === injector_1.UNDEFINED) {
+            ist.objs[i] = ist.instantiateProvider(p.providers[i], p.visibilities[i]);
+          }
+          list.push(ist.objs[i]);
+        }
+      }
+    };
+    return ElementDirectiveDynamicStrategy;
+  })();
+  var ProtoQueryRef = (function() {
+    function ProtoQueryRef(dirIndex, setter, query) {
+      this.dirIndex = dirIndex;
+      this.setter = setter;
+      this.query = query;
+    }
+    Object.defineProperty(ProtoQueryRef.prototype, "usesPropertySyntax", {
+      get: function() {
+        return lang_1.isPresent(this.setter);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return ProtoQueryRef;
+  })();
+  exports.ProtoQueryRef = ProtoQueryRef;
+  var QueryRef = (function() {
+    function QueryRef(protoQueryRef, originator) {
+      this.protoQueryRef = protoQueryRef;
+      this.originator = originator;
+      this.list = new query_list_1.QueryList();
+      this.dirty = true;
+    }
+    Object.defineProperty(QueryRef.prototype, "isViewQuery", {
+      get: function() {
+        return this.protoQueryRef.query.isViewQuery;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    QueryRef.prototype.update = function() {
+      if (!this.dirty)
+        return;
+      this._update();
+      this.dirty = false;
+      if (this.protoQueryRef.usesPropertySyntax) {
+        var dir = this.originator.getDirectiveAtIndex(this.protoQueryRef.dirIndex);
+        if (this.protoQueryRef.query.first) {
+          this.protoQueryRef.setter(dir, this.list.length > 0 ? this.list.first : null);
+        } else {
+          this.protoQueryRef.setter(dir, this.list);
+        }
+      }
+      this.list.notifyOnChanges();
+    };
+    QueryRef.prototype._update = function() {
+      var aggregator = [];
+      if (this.protoQueryRef.query.isViewQuery) {
+        var nestedView = this.originator.componentView;
+        if (lang_1.isPresent(nestedView))
+          this._visitView(nestedView, aggregator);
+      } else {
+        this._visit(this.originator, aggregator);
+      }
+      this.list.reset(aggregator);
+    };
+    ;
+    QueryRef.prototype._visit = function(inj, aggregator) {
+      var view = inj.parentView;
+      var startIdx = inj.proto.index;
+      for (var i = startIdx; i < view.appElements.length; i++) {
+        var curInj = view.appElements[i];
+        if (i > startIdx && (lang_1.isBlank(curInj.parent) || curInj.parent.proto.index < startIdx)) {
+          break;
+        }
+        if (!this.protoQueryRef.query.descendants && !(curInj.parent == this.originator || curInj == this.originator))
+          continue;
+        this._visitInjector(curInj, aggregator);
+        this._visitViewContainerViews(curInj.nestedViews, aggregator);
+      }
+    };
+    QueryRef.prototype._visitInjector = function(inj, aggregator) {
+      if (this.protoQueryRef.query.isVarBindingQuery) {
+        this._aggregateVariableBinding(inj, aggregator);
+      } else {
+        this._aggregateDirective(inj, aggregator);
+      }
+    };
+    QueryRef.prototype._visitViewContainerViews = function(views, aggregator) {
+      if (lang_1.isPresent(views)) {
+        for (var j = 0; j < views.length; j++) {
+          this._visitView(views[j], aggregator);
+        }
+      }
+    };
+    QueryRef.prototype._visitView = function(view, aggregator) {
+      for (var i = 0; i < view.appElements.length; i++) {
+        var inj = view.appElements[i];
+        this._visitInjector(inj, aggregator);
+        this._visitViewContainerViews(inj.nestedViews, aggregator);
+      }
+    };
+    QueryRef.prototype._aggregateVariableBinding = function(inj, aggregator) {
+      var vb = this.protoQueryRef.query.varBindings;
+      for (var i = 0; i < vb.length; ++i) {
+        if (inj.hasVariableBinding(vb[i])) {
+          aggregator.push(inj.getVariableBinding(vb[i]));
+        }
+      }
+    };
+    QueryRef.prototype._aggregateDirective = function(inj, aggregator) {
+      inj.addDirectivesMatchingQuery(this.protoQueryRef.query, aggregator);
+    };
+    return QueryRef;
+  })();
+  exports.QueryRef = QueryRef;
+  var _ComponentViewChangeDetectorRef = (function(_super) {
+    __extends(_ComponentViewChangeDetectorRef, _super);
+    function _ComponentViewChangeDetectorRef(_appElement) {
+      _super.call(this);
+      this._appElement = _appElement;
+    }
+    _ComponentViewChangeDetectorRef.prototype.markForCheck = function() {
+      this._appElement.componentView.changeDetector.ref.markForCheck();
+    };
+    _ComponentViewChangeDetectorRef.prototype.detach = function() {
+      this._appElement.componentView.changeDetector.ref.detach();
+    };
+    _ComponentViewChangeDetectorRef.prototype.detectChanges = function() {
+      this._appElement.componentView.changeDetector.ref.detectChanges();
+    };
+    _ComponentViewChangeDetectorRef.prototype.checkNoChanges = function() {
+      this._appElement.componentView.changeDetector.ref.checkNoChanges();
+    };
+    _ComponentViewChangeDetectorRef.prototype.reattach = function() {
+      this._appElement.componentView.changeDetector.ref.reattach();
+    };
+    return _ComponentViewChangeDetectorRef;
+  })(change_detection_1.ChangeDetectorRef);
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/render/api.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var RenderComponentType = (function() {
+    function RenderComponentType(id, encapsulation, styles) {
+      this.id = id;
+      this.encapsulation = encapsulation;
+      this.styles = styles;
+    }
+    return RenderComponentType;
+  })();
+  exports.RenderComponentType = RenderComponentType;
+  var RenderDebugInfo = (function() {
+    function RenderDebugInfo(injector, component, providerTokens, locals) {
+      this.injector = injector;
+      this.component = component;
+      this.providerTokens = providerTokens;
+      this.locals = locals;
+    }
+    return RenderDebugInfo;
+  })();
+  exports.RenderDebugInfo = RenderDebugInfo;
+  var Renderer = (function() {
+    function Renderer() {}
+    return Renderer;
+  })();
+  exports.Renderer = Renderer;
+  var RootRenderer = (function() {
+    function RootRenderer() {}
+    return RootRenderer;
+  })();
+  exports.RootRenderer = RootRenderer;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/profile/wtf_impl.js", ["node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var trace;
+  var events;
+  function detectWTF() {
+    var wtf = lang_1.global['wtf'];
+    if (wtf) {
+      trace = wtf['trace'];
+      if (trace) {
+        events = trace['events'];
+        return true;
+      }
+    }
+    return false;
+  }
+  exports.detectWTF = detectWTF;
+  function createScope(signature, flags) {
+    if (flags === void 0) {
+      flags = null;
+    }
+    return events.createScope(signature, flags);
+  }
+  exports.createScope = createScope;
+  function leave(scope, returnValue) {
+    trace.leaveScope(scope, returnValue);
+    return returnValue;
+  }
+  exports.leave = leave;
+  function startTimeRange(rangeType, action) {
+    return trace.beginTimeRange(rangeType, action);
+  }
+  exports.startTimeRange = startTimeRange;
+  function endTimeRange(range) {
+    trace.endTimeRange(range);
+  }
+  exports.endTimeRange = endTimeRange;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/profile/profile.js", ["node_modules/angular2/src/core/profile/wtf_impl.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var impl = $__require('node_modules/angular2/src/core/profile/wtf_impl.js');
+  exports.wtfEnabled = impl.detectWTF();
+  function noopScope(arg0, arg1) {
+    return null;
+  }
+  exports.wtfCreateScope = exports.wtfEnabled ? impl.createScope : function(signature, flags) {
+    return noopScope;
+  };
+  exports.wtfLeave = exports.wtfEnabled ? impl.leave : function(s, r) {
+    return r;
+  };
+  exports.wtfStartTimeRange = exports.wtfEnabled ? impl.startTimeRange : function(rangeType, action) {
+    return null;
+  };
+  exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function(r) {
+    return null;
+  };
   global.define = __define;
   return module.exports;
 });
@@ -16482,6 +15688,7 @@ System.registerDynamic("node_modules/angular2/src/core/util/decorators.js", ["no
       __define = global.define;
   global.define = undefined;
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var _nextClassId = 0;
   function extractAnnotation(annotation) {
     if (lang_1.isFunction(annotation) && annotation.hasOwnProperty('annotation')) {
       annotation = annotation.annotation;
@@ -16543,6 +15750,9 @@ System.registerDynamic("node_modules/angular2/src/core/util/decorators.js", ["no
     }
     if (this && this.annotations instanceof Array) {
       Reflect.defineMetadata('annotations', this.annotations, constructor);
+    }
+    if (!constructor['name']) {
+      constructor['overriddenName'] = "class" + _nextClassId++;
     }
     return constructor;
   }
@@ -16657,7 +15867,7 @@ System.registerDynamic("node_modules/angular2/src/core/di/decorators.js", ["node
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/di/provider.js", "node_modules/angular2/src/core/di/exceptions.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di/key.js", "node_modules/angular2/src/core/di/metadata.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/di/provider.js", "node_modules/angular2/src/core/di/exceptions.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/di/key.js", "node_modules/angular2/src/core/di/metadata.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -16667,6 +15877,7 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
   var provider_1 = $__require('node_modules/angular2/src/core/di/provider.js');
   var exceptions_1 = $__require('node_modules/angular2/src/core/di/exceptions.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var exceptions_2 = $__require('node_modules/angular2/src/facade/exceptions.js');
   var key_1 = $__require('node_modules/angular2/src/core/di/key.js');
   var metadata_1 = $__require('node_modules/angular2/src/core/di/metadata.js');
   var _MAX_CONSTRUCTION_COUNTER = 10;
@@ -16822,6 +16033,12 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
       this.numberOfProviders = bwv.length;
       this._strategy = bwv.length > _MAX_CONSTRUCTION_COUNTER ? new ProtoInjectorDynamicStrategy(this, bwv) : new ProtoInjectorInlineStrategy(this, bwv);
     }
+    ProtoInjector.fromResolvedProviders = function(providers) {
+      var bd = providers.map(function(b) {
+        return new ProviderWithVisibility(b, Visibility.Public);
+      });
+      return new ProtoInjector(bd);
+    };
     ProtoInjector.prototype.getProviderAtIndex = function(index) {
       return this._strategy.getProviderAtIndex(index);
     };
@@ -16848,11 +16065,6 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
     };
     InjectorInlineStrategy.prototype.instantiateProvider = function(provider, visibility) {
       return this.injector._new(provider, visibility);
-    };
-    InjectorInlineStrategy.prototype.attach = function(parent, isHost) {
-      var inj = this.injector;
-      inj._parent = parent;
-      inj._isHost = isHost;
     };
     InjectorInlineStrategy.prototype.getObjByKeyId = function(keyId, visibility) {
       var p = this.protoStrategy;
@@ -16961,11 +16173,6 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
     InjectorDynamicStrategy.prototype.instantiateProvider = function(provider, visibility) {
       return this.injector._new(provider, visibility);
     };
-    InjectorDynamicStrategy.prototype.attach = function(parent, isHost) {
-      var inj = this.injector;
-      inj._parent = parent;
-      inj._isHost = isHost;
-    };
     InjectorDynamicStrategy.prototype.getObjByKeyId = function(keyId, visibility) {
       var p = this.protoStrategy;
       for (var i = 0; i < p.keyIds.length; i++) {
@@ -17003,9 +16210,12 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
   })();
   exports.ProviderWithVisibility = ProviderWithVisibility;
   var Injector = (function() {
-    function Injector(_proto, _parent, _depProvider, _debugContext) {
+    function Injector(_proto, _parent, _isHostBoundary, _depProvider, _debugContext) {
       if (_parent === void 0) {
         _parent = null;
+      }
+      if (_isHostBoundary === void 0) {
+        _isHostBoundary = false;
       }
       if (_depProvider === void 0) {
         _depProvider = null;
@@ -17013,9 +16223,9 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
       if (_debugContext === void 0) {
         _debugContext = null;
       }
+      this._isHostBoundary = _isHostBoundary;
       this._depProvider = _depProvider;
       this._debugContext = _debugContext;
-      this._isHost = false;
       this._constructionCounter = 0;
       this._proto = _proto;
       this._parent = _parent;
@@ -17029,15 +16239,18 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
       return Injector.fromResolvedProviders(resolvedProviders);
     };
     Injector.fromResolvedProviders = function(providers) {
-      var bd = providers.map(function(b) {
-        return new ProviderWithVisibility(b, Visibility.Public);
-      });
-      var proto = new ProtoInjector(bd);
-      return new Injector(proto, null, null);
+      return new Injector(ProtoInjector.fromResolvedProviders(providers));
     };
     Injector.fromResolvedBindings = function(providers) {
       return Injector.fromResolvedProviders(providers);
     };
+    Object.defineProperty(Injector.prototype, "hostBoundary", {
+      get: function() {
+        return this._isHostBoundary;
+      },
+      enumerable: true,
+      configurable: true
+    });
     Injector.prototype.debugContext = function() {
       return this._debugContext();
     };
@@ -17073,7 +16286,7 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
         return new ProviderWithVisibility(b, Visibility.Public);
       });
       var proto = new ProtoInjector(bd);
-      var inj = new Injector(proto, null, null);
+      var inj = new Injector(proto);
       inj._parent = this;
       return inj;
     };
@@ -17217,6 +16430,8 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
           case 20:
             obj = factory(d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19);
             break;
+          default:
+            throw new exceptions_2.BaseException("Cannot instantiate '" + provider.key.displayName + "' because it has more than 20 dependencies");
         }
       } catch (e) {
         throw new exceptions_1.InstantiationError(this, e, e.stack, provider.key);
@@ -17257,7 +16472,7 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
     Injector.prototype._getByKeyHost = function(key, optional, providerVisibility, lowerBoundVisibility) {
       var inj = this;
       if (lowerBoundVisibility instanceof metadata_1.SkipSelfMetadata) {
-        if (inj._isHost) {
+        if (inj._isHostBoundary) {
           return this._getPrivateDependency(key, optional, inj);
         } else {
           inj = inj._parent;
@@ -17267,7 +16482,7 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
         var obj = inj._strategy.getObjByKeyId(key.id, providerVisibility);
         if (obj !== exports.UNDEFINED)
           return obj;
-        if (lang_1.isPresent(inj._parent) && inj._isHost) {
+        if (lang_1.isPresent(inj._parent) && inj._isHostBoundary) {
           return this._getPrivateDependency(key, optional, inj);
         } else {
           inj = inj._parent;
@@ -17282,14 +16497,14 @@ System.registerDynamic("node_modules/angular2/src/core/di/injector.js", ["node_m
     Injector.prototype._getByKeyDefault = function(key, optional, providerVisibility, lowerBoundVisibility) {
       var inj = this;
       if (lowerBoundVisibility instanceof metadata_1.SkipSelfMetadata) {
-        providerVisibility = inj._isHost ? Visibility.PublicAndPrivate : Visibility.Public;
+        providerVisibility = inj._isHostBoundary ? Visibility.PublicAndPrivate : Visibility.Public;
         inj = inj._parent;
       }
       while (inj != null) {
         var obj = inj._strategy.getObjByKeyId(key.id, providerVisibility);
         if (obj !== exports.UNDEFINED)
           return obj;
-        providerVisibility = inj._isHost ? Visibility.PublicAndPrivate : Visibility.Public;
+        providerVisibility = inj._isHostBoundary ? Visibility.PublicAndPrivate : Visibility.Public;
         inj = inj._parent;
       }
       return this._throwOrNull(key, optional);
@@ -17646,39 +16861,49 @@ System.registerDynamic("node_modules/angular2/src/core/di/provider.js", ["node_m
   }
   exports.resolveFactory = resolveFactory;
   function resolveProvider(provider) {
-    return new ResolvedProvider_(key_1.Key.get(provider.token), [resolveFactory(provider)], false);
+    return new ResolvedProvider_(key_1.Key.get(provider.token), [resolveFactory(provider)], provider.multi);
   }
   exports.resolveProvider = resolveProvider;
   function resolveProviders(providers) {
-    var normalized = _createListOfProviders(_normalizeProviders(providers, new Map()));
-    return normalized.map(function(b) {
-      if (b instanceof _NormalizedProvider) {
-        return new ResolvedProvider_(b.key, [b.resolvedFactory], false);
-      } else {
-        var arr = b;
-        return new ResolvedProvider_(arr[0].key, arr.map(function(_) {
-          return _.resolvedFactory;
-        }), true);
-      }
-    });
+    var normalized = _normalizeProviders(providers, []);
+    var resolved = normalized.map(resolveProvider);
+    return collection_1.MapWrapper.values(mergeResolvedProviders(resolved, new Map()));
   }
   exports.resolveProviders = resolveProviders;
-  var _NormalizedProvider = (function() {
-    function _NormalizedProvider(key, resolvedFactory) {
-      this.key = key;
-      this.resolvedFactory = resolvedFactory;
+  function mergeResolvedProviders(providers, normalizedProvidersMap) {
+    for (var i = 0; i < providers.length; i++) {
+      var provider = providers[i];
+      var existing = normalizedProvidersMap.get(provider.key.id);
+      if (lang_1.isPresent(existing)) {
+        if (provider.multiProvider !== existing.multiProvider) {
+          throw new exceptions_2.MixingMultiProvidersWithRegularProvidersError(existing, provider);
+        }
+        if (provider.multiProvider) {
+          for (var j = 0; j < provider.resolvedFactories.length; j++) {
+            existing.resolvedFactories.push(provider.resolvedFactories[j]);
+          }
+        } else {
+          normalizedProvidersMap.set(provider.key.id, provider);
+        }
+      } else {
+        var resolvedProvider;
+        if (provider.multiProvider) {
+          resolvedProvider = new ResolvedProvider_(provider.key, collection_1.ListWrapper.clone(provider.resolvedFactories), provider.multiProvider);
+        } else {
+          resolvedProvider = provider;
+        }
+        normalizedProvidersMap.set(provider.key.id, resolvedProvider);
+      }
     }
-    return _NormalizedProvider;
-  })();
-  function _createListOfProviders(flattenedProviders) {
-    return collection_1.MapWrapper.values(flattenedProviders);
+    return normalizedProvidersMap;
   }
+  exports.mergeResolvedProviders = mergeResolvedProviders;
   function _normalizeProviders(providers, res) {
     providers.forEach(function(b) {
       if (b instanceof lang_1.Type) {
-        _normalizeProvider(provide(b, {useClass: b}), res);
+        res.push(provide(b, {useClass: b}));
       } else if (b instanceof Provider) {
-        _normalizeProvider(b, res);
+        res.push(b);
       } else if (b instanceof Array) {
         _normalizeProviders(b, res);
       } else if (b instanceof ProviderBuilder) {
@@ -17688,27 +16913,6 @@ System.registerDynamic("node_modules/angular2/src/core/di/provider.js", ["node_m
       }
     });
     return res;
-  }
-  function _normalizeProvider(b, res) {
-    var key = key_1.Key.get(b.token);
-    var factory = resolveFactory(b);
-    var normalized = new _NormalizedProvider(key, factory);
-    if (b.multi) {
-      var existingProvider = res.get(key.id);
-      if (existingProvider instanceof Array) {
-        existingProvider.push(normalized);
-      } else if (lang_1.isBlank(existingProvider)) {
-        res.set(key.id, [normalized]);
-      } else {
-        throw new exceptions_2.MixingMultiProvidersWithRegularProvidersError(existingProvider, b);
-      }
-    } else {
-      var existingProvider = res.get(key.id);
-      if (existingProvider instanceof Array) {
-        throw new exceptions_2.MixingMultiProvidersWithRegularProvidersError(existingProvider, b);
-      }
-      res.set(key.id, normalized);
-    }
   }
   function _constructDependencies(factoryFunction, dependencies) {
     if (lang_1.isBlank(dependencies)) {
@@ -18050,7 +17254,7 @@ System.registerDynamic("node_modules/angular2/src/core/di/exceptions.js", ["node
           signature.push(parameter.map(lang_1.stringify).join(' '));
         }
       }
-      return "Cannot resolve all parameters for " + lang_1.stringify(typeOrFunc) + "(" + signature.join(', ') + "). " + 'Make sure they all have valid type or annotations.';
+      return "Cannot resolve all parameters for '" + lang_1.stringify(typeOrFunc) + "'(" + signature.join(', ') + "). " + "Make sure that all the parameters are decorated with Inject or have valid type annotations and that '" + lang_1.stringify(typeOrFunc) + "' is decorated with Injectable.";
     };
     return NoAnnotationError;
   })(exceptions_1.BaseException);
@@ -18191,314 +17395,23 @@ System.registerDynamic("node_modules/angular2/src/core/application_tokens.js", [
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/linker/proto_view_factory.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/render/api.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/pipes/pipe_provider.js", "node_modules/angular2/src/core/pipes/pipes.js", "node_modules/angular2/src/core/linker/view.js", "node_modules/angular2/src/core/linker/element_binder.js", "node_modules/angular2/src/core/linker/element_injector.js", "node_modules/angular2/src/core/linker/directive_resolver.js", "node_modules/angular2/src/core/linker/view_resolver.js", "node_modules/angular2/src/core/linker/pipe_resolver.js", "node_modules/angular2/src/core/metadata/view.js", "node_modules/angular2/src/core/platform_directives_and_pipes.js", "node_modules/angular2/src/core/linker/template_commands.js", "node_modules/angular2/src/core/application_tokens.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/view_type.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var __param = (this && this.__param) || function(paramIndex, decorator) {
-    return function(target, key) {
-      decorator(target, key, paramIndex);
-    };
-  };
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var api_1 = $__require('node_modules/angular2/src/core/render/api.js');
-  var di_1 = $__require('node_modules/angular2/src/core/di.js');
-  var pipe_provider_1 = $__require('node_modules/angular2/src/core/pipes/pipe_provider.js');
-  var pipes_1 = $__require('node_modules/angular2/src/core/pipes/pipes.js');
-  var view_1 = $__require('node_modules/angular2/src/core/linker/view.js');
-  var element_binder_1 = $__require('node_modules/angular2/src/core/linker/element_binder.js');
-  var element_injector_1 = $__require('node_modules/angular2/src/core/linker/element_injector.js');
-  var directive_resolver_1 = $__require('node_modules/angular2/src/core/linker/directive_resolver.js');
-  var view_resolver_1 = $__require('node_modules/angular2/src/core/linker/view_resolver.js');
-  var pipe_resolver_1 = $__require('node_modules/angular2/src/core/linker/pipe_resolver.js');
-  var view_2 = $__require('node_modules/angular2/src/core/metadata/view.js');
-  var platform_directives_and_pipes_1 = $__require('node_modules/angular2/src/core/platform_directives_and_pipes.js');
-  var template_commands_1 = $__require('node_modules/angular2/src/core/linker/template_commands.js');
-  var api_2 = $__require('node_modules/angular2/src/core/render/api.js');
-  var application_tokens_1 = $__require('node_modules/angular2/src/core/application_tokens.js');
-  var ProtoViewFactory = (function() {
-    function ProtoViewFactory(_renderer, _platformPipes, _directiveResolver, _viewResolver, _pipeResolver, _appId) {
-      this._renderer = _renderer;
-      this._platformPipes = _platformPipes;
-      this._directiveResolver = _directiveResolver;
-      this._viewResolver = _viewResolver;
-      this._pipeResolver = _pipeResolver;
-      this._appId = _appId;
-      this._cache = new Map();
-      this._nextTemplateId = 0;
-    }
-    ProtoViewFactory.prototype.clearCache = function() {
-      this._cache.clear();
-    };
-    ProtoViewFactory.prototype.createHost = function(compiledHostTemplate) {
-      var compiledTemplate = compiledHostTemplate.template;
-      var result = this._cache.get(compiledTemplate.id);
-      if (lang_1.isBlank(result)) {
-        var emptyMap = {};
-        var shortId = this._appId + "-" + this._nextTemplateId++;
-        this._renderer.registerComponentTemplate(new api_1.RenderComponentTemplate(compiledTemplate.id, shortId, view_2.ViewEncapsulation.None, compiledTemplate.commands, []));
-        result = new view_1.AppProtoView(compiledTemplate.id, compiledTemplate.commands, view_1.ViewType.HOST, true, compiledTemplate.changeDetectorFactory, null, new pipes_1.ProtoPipes(emptyMap));
-        this._cache.set(compiledTemplate.id, result);
-      }
-      return result;
-    };
-    ProtoViewFactory.prototype._createComponent = function(cmd) {
-      var _this = this;
-      var nestedProtoView = this._cache.get(cmd.templateId);
-      if (lang_1.isBlank(nestedProtoView)) {
-        var component = cmd.directives[0];
-        var view = this._viewResolver.resolve(component);
-        var compiledTemplate = cmd.templateGetter();
-        var styles = _flattenStyleArr(compiledTemplate.styles, []);
-        var shortId = this._appId + "-" + this._nextTemplateId++;
-        this._renderer.registerComponentTemplate(new api_1.RenderComponentTemplate(compiledTemplate.id, shortId, cmd.encapsulation, compiledTemplate.commands, styles));
-        var boundPipes = this._flattenPipes(view).map(function(pipe) {
-          return _this._bindPipe(pipe);
-        });
-        nestedProtoView = new view_1.AppProtoView(compiledTemplate.id, compiledTemplate.commands, view_1.ViewType.COMPONENT, true, compiledTemplate.changeDetectorFactory, null, pipes_1.ProtoPipes.fromProviders(boundPipes));
-        this._cache.set(compiledTemplate.id, nestedProtoView);
-        this._initializeProtoView(nestedProtoView, null);
-      }
-      return nestedProtoView;
-    };
-    ProtoViewFactory.prototype._createEmbeddedTemplate = function(cmd, parent) {
-      var nestedProtoView = new view_1.AppProtoView(parent.templateId, cmd.children, view_1.ViewType.EMBEDDED, cmd.isMerged, cmd.changeDetectorFactory, arrayToMap(cmd.variableNameAndValues, true), new pipes_1.ProtoPipes(parent.pipes.config));
-      if (cmd.isMerged) {
-        this.initializeProtoViewIfNeeded(nestedProtoView);
-      }
-      return nestedProtoView;
-    };
-    ProtoViewFactory.prototype.initializeProtoViewIfNeeded = function(protoView) {
-      if (!protoView.isInitialized()) {
-        var render = this._renderer.createProtoView(protoView.templateId, protoView.templateCmds);
-        this._initializeProtoView(protoView, render);
-      }
-    };
-    ProtoViewFactory.prototype._initializeProtoView = function(protoView, render) {
-      var initializer = new _ProtoViewInitializer(protoView, this._directiveResolver, this);
-      template_commands_1.visitAllCommands(initializer, protoView.templateCmds);
-      var mergeInfo = new view_1.AppProtoViewMergeInfo(initializer.mergeEmbeddedViewCount, initializer.mergeElementCount, initializer.mergeViewCount);
-      protoView.init(render, initializer.elementBinders, initializer.boundTextCount, mergeInfo, initializer.variableLocations);
-    };
-    ProtoViewFactory.prototype._bindPipe = function(typeOrProvider) {
-      var meta = this._pipeResolver.resolve(typeOrProvider);
-      return pipe_provider_1.PipeProvider.createFromType(typeOrProvider, meta);
-    };
-    ProtoViewFactory.prototype._flattenPipes = function(view) {
-      var pipes = [];
-      if (lang_1.isPresent(this._platformPipes)) {
-        _flattenArray(this._platformPipes, pipes);
-      }
-      if (lang_1.isPresent(view.pipes)) {
-        _flattenArray(view.pipes, pipes);
-      }
-      return pipes;
-    };
-    ProtoViewFactory = __decorate([di_1.Injectable(), __param(1, di_1.Optional()), __param(1, di_1.Inject(platform_directives_and_pipes_1.PLATFORM_PIPES)), __param(5, di_1.Inject(application_tokens_1.APP_ID)), __metadata('design:paramtypes', [api_2.Renderer, Array, directive_resolver_1.DirectiveResolver, view_resolver_1.ViewResolver, pipe_resolver_1.PipeResolver, String])], ProtoViewFactory);
-    return ProtoViewFactory;
-  })();
-  exports.ProtoViewFactory = ProtoViewFactory;
-  function createComponent(protoViewFactory, cmd) {
-    return protoViewFactory._createComponent(cmd);
-  }
-  function createEmbeddedTemplate(protoViewFactory, cmd, parent) {
-    return protoViewFactory._createEmbeddedTemplate(cmd, parent);
-  }
-  var _ProtoViewInitializer = (function() {
-    function _ProtoViewInitializer(_protoView, _directiveResolver, _protoViewFactory) {
-      this._protoView = _protoView;
-      this._directiveResolver = _directiveResolver;
-      this._protoViewFactory = _protoViewFactory;
-      this.variableLocations = new Map();
-      this.boundTextCount = 0;
-      this.boundElementIndex = 0;
-      this.elementBinderStack = [];
-      this.distanceToParentElementBinder = 0;
-      this.distanceToParentProtoElementInjector = 0;
-      this.elementBinders = [];
-      this.mergeEmbeddedViewCount = 0;
-      this.mergeElementCount = 0;
-      this.mergeViewCount = 1;
-    }
-    _ProtoViewInitializer.prototype.visitText = function(cmd, context) {
-      if (cmd.isBound) {
-        this.boundTextCount++;
-      }
-      return null;
-    };
-    _ProtoViewInitializer.prototype.visitNgContent = function(cmd, context) {
-      return null;
-    };
-    _ProtoViewInitializer.prototype.visitBeginElement = function(cmd, context) {
-      if (cmd.isBound) {
-        this._visitBeginBoundElement(cmd, null);
-      } else {
-        this._visitBeginElement(cmd, null, null);
-      }
-      return null;
-    };
-    _ProtoViewInitializer.prototype.visitEndElement = function(context) {
-      return this._visitEndElement();
-    };
-    _ProtoViewInitializer.prototype.visitBeginComponent = function(cmd, context) {
-      var nestedProtoView = createComponent(this._protoViewFactory, cmd);
-      return this._visitBeginBoundElement(cmd, nestedProtoView);
-    };
-    _ProtoViewInitializer.prototype.visitEndComponent = function(context) {
-      return this._visitEndElement();
-    };
-    _ProtoViewInitializer.prototype.visitEmbeddedTemplate = function(cmd, context) {
-      var nestedProtoView = createEmbeddedTemplate(this._protoViewFactory, cmd, this._protoView);
-      if (cmd.isMerged) {
-        this.mergeEmbeddedViewCount++;
-      }
-      this._visitBeginBoundElement(cmd, nestedProtoView);
-      return this._visitEndElement();
-    };
-    _ProtoViewInitializer.prototype._visitBeginBoundElement = function(cmd, nestedProtoView) {
-      if (lang_1.isPresent(nestedProtoView) && nestedProtoView.isMergable) {
-        this.mergeElementCount += nestedProtoView.mergeInfo.elementCount;
-        this.mergeViewCount += nestedProtoView.mergeInfo.viewCount;
-        this.mergeEmbeddedViewCount += nestedProtoView.mergeInfo.embeddedViewCount;
-      }
-      var elementBinder = _createElementBinder(this._directiveResolver, nestedProtoView, this.elementBinderStack, this.boundElementIndex, this.distanceToParentElementBinder, this.distanceToParentProtoElementInjector, cmd);
-      this.elementBinders.push(elementBinder);
-      var protoElementInjector = elementBinder.protoElementInjector;
-      for (var i = 0; i < cmd.variableNameAndValues.length; i += 2) {
-        this.variableLocations.set(cmd.variableNameAndValues[i], this.boundElementIndex);
-      }
-      this.boundElementIndex++;
-      this.mergeElementCount++;
-      return this._visitBeginElement(cmd, elementBinder, protoElementInjector);
-    };
-    _ProtoViewInitializer.prototype._visitBeginElement = function(cmd, elementBinder, protoElementInjector) {
-      this.distanceToParentElementBinder = lang_1.isPresent(elementBinder) ? 1 : this.distanceToParentElementBinder + 1;
-      this.distanceToParentProtoElementInjector = lang_1.isPresent(protoElementInjector) ? 1 : this.distanceToParentProtoElementInjector + 1;
-      this.elementBinderStack.push(elementBinder);
-      return null;
-    };
-    _ProtoViewInitializer.prototype._visitEndElement = function() {
-      var parentElementBinder = this.elementBinderStack.pop();
-      var parentProtoElementInjector = lang_1.isPresent(parentElementBinder) ? parentElementBinder.protoElementInjector : null;
-      this.distanceToParentElementBinder = lang_1.isPresent(parentElementBinder) ? parentElementBinder.distanceToParent : this.distanceToParentElementBinder - 1;
-      this.distanceToParentProtoElementInjector = lang_1.isPresent(parentProtoElementInjector) ? parentProtoElementInjector.distanceToParent : this.distanceToParentProtoElementInjector - 1;
-      return null;
-    };
-    return _ProtoViewInitializer;
-  })();
-  function _createElementBinder(directiveResolver, nestedProtoView, elementBinderStack, boundElementIndex, distanceToParentBinder, distanceToParentPei, beginElementCmd) {
-    var parentElementBinder = null;
-    var parentProtoElementInjector = null;
-    if (distanceToParentBinder > 0) {
-      parentElementBinder = elementBinderStack[elementBinderStack.length - distanceToParentBinder];
-    }
-    if (lang_1.isBlank(parentElementBinder)) {
-      distanceToParentBinder = -1;
-    }
-    if (distanceToParentPei > 0) {
-      var peiBinder = elementBinderStack[elementBinderStack.length - distanceToParentPei];
-      if (lang_1.isPresent(peiBinder)) {
-        parentProtoElementInjector = peiBinder.protoElementInjector;
-      }
-    }
-    if (lang_1.isBlank(parentProtoElementInjector)) {
-      distanceToParentPei = -1;
-    }
-    var componentDirectiveProvider = null;
-    var isEmbeddedTemplate = false;
-    var directiveProviders = beginElementCmd.directives.map(function(type) {
-      return provideDirective(directiveResolver, type);
-    });
-    if (beginElementCmd instanceof template_commands_1.BeginComponentCmd) {
-      componentDirectiveProvider = directiveProviders[0];
-    } else if (beginElementCmd instanceof template_commands_1.EmbeddedTemplateCmd) {
-      isEmbeddedTemplate = true;
-    }
-    var protoElementInjector = null;
-    var hasVariables = beginElementCmd.variableNameAndValues.length > 0;
-    if (directiveProviders.length > 0 || hasVariables || isEmbeddedTemplate) {
-      var directiveVariableBindings = new Map();
-      if (!isEmbeddedTemplate) {
-        directiveVariableBindings = createDirectiveVariableBindings(beginElementCmd.variableNameAndValues, directiveProviders);
-      }
-      protoElementInjector = element_injector_1.ProtoElementInjector.create(parentProtoElementInjector, boundElementIndex, directiveProviders, lang_1.isPresent(componentDirectiveProvider), distanceToParentPei, directiveVariableBindings);
-      protoElementInjector.attributes = arrayToMap(beginElementCmd.attrNameAndValues, false);
-    }
-    return new element_binder_1.ElementBinder(boundElementIndex, parentElementBinder, distanceToParentBinder, protoElementInjector, componentDirectiveProvider, nestedProtoView);
-  }
-  function provideDirective(directiveResolver, type) {
-    var annotation = directiveResolver.resolve(type);
-    return element_injector_1.DirectiveProvider.createFromType(type, annotation);
-  }
-  function createDirectiveVariableBindings(variableNameAndValues, directiveProviders) {
-    var directiveVariableBindings = new Map();
-    for (var i = 0; i < variableNameAndValues.length; i += 2) {
-      var templateName = variableNameAndValues[i];
-      var dirIndex = variableNameAndValues[i + 1];
-      if (lang_1.isNumber(dirIndex)) {
-        directiveVariableBindings.set(templateName, dirIndex);
-      } else {
-        directiveVariableBindings.set(templateName, null);
-      }
-    }
-    return directiveVariableBindings;
-  }
-  exports.createDirectiveVariableBindings = createDirectiveVariableBindings;
-  function arrayToMap(arr, inverse) {
-    var result = new Map();
-    for (var i = 0; i < arr.length; i += 2) {
-      if (inverse) {
-        result.set(arr[i + 1], arr[i]);
-      } else {
-        result.set(arr[i], arr[i + 1]);
-      }
-    }
-    return result;
-  }
-  function _flattenArray(tree, out) {
-    for (var i = 0; i < tree.length; i++) {
-      var item = di_1.resolveForwardRef(tree[i]);
-      if (lang_1.isArray(item)) {
-        _flattenArray(item, out);
-      } else {
-        out.push(item);
-      }
-    }
-  }
-  function _flattenStyleArr(arr, out) {
-    for (var i = 0; i < arr.length; i++) {
-      var entry = arr[i];
-      if (lang_1.isArray(entry)) {
-        _flattenStyleArr(entry, out);
-      } else {
-        out.push(entry);
-      }
-    }
-    return out;
-  }
+  (function(ViewType) {
+    ViewType[ViewType["HOST"] = 0] = "HOST";
+    ViewType[ViewType["COMPONENT"] = 1] = "COMPONENT";
+    ViewType[ViewType["EMBEDDED"] = 2] = "EMBEDDED";
+  })(exports.ViewType || (exports.ViewType = {}));
+  var ViewType = exports.ViewType;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/linker/view_manager.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/linker/view.js", "node_modules/angular2/src/core/linker/view_ref.js", "node_modules/angular2/src/core/render/api.js", "node_modules/angular2/src/core/linker/view_manager_utils.js", "node_modules/angular2/src/core/linker/view_pool.js", "node_modules/angular2/src/core/linker/view_listener.js", "node_modules/angular2/src/core/profile/profile.js", "node_modules/angular2/src/core/linker/proto_view_factory.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/view_manager.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/linker/view.js", "node_modules/angular2/src/core/linker/element.js", "node_modules/angular2/src/core/render/api.js", "node_modules/angular2/src/core/profile/profile.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/core/linker/view_type.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -18536,35 +17449,26 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_manager.js", 
   };
   var di_1 = $__require('node_modules/angular2/src/core/di.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var viewModule = $__require('node_modules/angular2/src/core/linker/view.js');
-  var view_ref_1 = $__require('node_modules/angular2/src/core/linker/view_ref.js');
+  var view_1 = $__require('node_modules/angular2/src/core/linker/view.js');
+  var element_1 = $__require('node_modules/angular2/src/core/linker/element.js');
   var api_1 = $__require('node_modules/angular2/src/core/render/api.js');
-  var view_manager_utils_1 = $__require('node_modules/angular2/src/core/linker/view_manager_utils.js');
-  var view_pool_1 = $__require('node_modules/angular2/src/core/linker/view_pool.js');
-  var view_listener_1 = $__require('node_modules/angular2/src/core/linker/view_listener.js');
   var profile_1 = $__require('node_modules/angular2/src/core/profile/profile.js');
-  var proto_view_factory_1 = $__require('node_modules/angular2/src/core/linker/proto_view_factory.js');
+  var application_tokens_1 = $__require('node_modules/angular2/src/core/application_tokens.js');
+  var view_type_1 = $__require('node_modules/angular2/src/core/linker/view_type.js');
   var AppViewManager = (function() {
     function AppViewManager() {}
-    AppViewManager.prototype.getHostElement = function(hostViewRef) {
-      var hostView = view_ref_1.internalView(hostViewRef);
-      if (hostView.proto.type !== viewModule.ViewType.HOST) {
-        throw new exceptions_1.BaseException('This operation is only allowed on host views');
-      }
-      return hostView.elementRefs[hostView.elementOffset];
-    };
     return AppViewManager;
   })();
   exports.AppViewManager = AppViewManager;
   var AppViewManager_ = (function(_super) {
     __extends(AppViewManager_, _super);
-    function AppViewManager_(_viewPool, _viewListener, _utils, _renderer, _protoViewFactory) {
+    function AppViewManager_(_renderer, _appId) {
       _super.call(this);
-      this._viewPool = _viewPool;
-      this._viewListener = _viewListener;
-      this._utils = _utils;
       this._renderer = _renderer;
+      this._appId = _appId;
+      this._nextCompTypeId = 0;
       this._createRootHostViewScope = profile_1.wtfCreateScope('AppViewManager#createRootHostView()');
       this._destroyRootHostViewScope = profile_1.wtfCreateScope('AppViewManager#destroyRootHostView()');
       this._createEmbeddedViewInContainerScope = profile_1.wtfCreateScope('AppViewManager#createEmbeddedViewInContainer()');
@@ -18572,187 +17476,129 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_manager.js", 
       this._destroyViewInContainerScope = profile_1.wtfCreateScope('AppViewMananger#destroyViewInContainer()');
       this._attachViewInContainerScope = profile_1.wtfCreateScope('AppViewMananger#attachViewInContainer()');
       this._detachViewInContainerScope = profile_1.wtfCreateScope('AppViewMananger#detachViewInContainer()');
-      this._protoViewFactory = _protoViewFactory;
     }
     AppViewManager_.prototype.getViewContainer = function(location) {
-      var hostView = view_ref_1.internalView(location.parentView);
-      return hostView.elementInjectors[location.boundElementIndex].getViewContainerRef();
+      return location.internalElement.getViewContainerRef();
+    };
+    AppViewManager_.prototype.getHostElement = function(hostViewRef) {
+      var hostView = hostViewRef.internalView;
+      if (hostView.proto.type !== view_type_1.ViewType.HOST) {
+        throw new exceptions_1.BaseException('This operation is only allowed on host views');
+      }
+      return hostView.appElements[0].ref;
     };
     AppViewManager_.prototype.getNamedElementInComponentView = function(hostLocation, variableName) {
-      var hostView = view_ref_1.internalView(hostLocation.parentView);
-      var boundElementIndex = hostLocation.boundElementIndex;
-      var componentView = hostView.getNestedView(boundElementIndex);
+      var appEl = hostLocation.internalElement;
+      var componentView = appEl.componentView;
       if (lang_1.isBlank(componentView)) {
-        throw new exceptions_1.BaseException("There is no component directive at element " + boundElementIndex);
+        throw new exceptions_1.BaseException("There is no component directive at element " + hostLocation);
       }
-      var binderIdx = componentView.proto.variableLocations.get(variableName);
-      if (lang_1.isBlank(binderIdx)) {
-        throw new exceptions_1.BaseException("Could not find variable " + variableName);
+      for (var i = 0; i < componentView.appElements.length; i++) {
+        var compAppEl = componentView.appElements[i];
+        if (collection_1.StringMapWrapper.contains(compAppEl.proto.directiveVariableBindings, variableName)) {
+          return compAppEl.ref;
+        }
       }
-      return componentView.elementRefs[componentView.elementOffset + binderIdx];
+      throw new exceptions_1.BaseException("Could not find variable " + variableName);
     };
     AppViewManager_.prototype.getComponent = function(hostLocation) {
-      var hostView = view_ref_1.internalView(hostLocation.parentView);
-      var boundElementIndex = hostLocation.boundElementIndex;
-      return this._utils.getComponentInstance(hostView, boundElementIndex);
+      return hostLocation.internalElement.getComponent();
     };
-    AppViewManager_.prototype.createRootHostView = function(hostProtoViewRef, overrideSelector, injector) {
-      var s = this._createRootHostViewScope();
-      var hostProtoView = view_ref_1.internalProtoView(hostProtoViewRef);
-      this._protoViewFactory.initializeProtoViewIfNeeded(hostProtoView);
-      var hostElementSelector = overrideSelector;
-      if (lang_1.isBlank(hostElementSelector)) {
-        hostElementSelector = hostProtoView.elementBinders[0].componentDirective.metadata.selector;
+    AppViewManager_.prototype.createRootHostView = function(hostViewFactoryRef, overrideSelector, injector, projectableNodes) {
+      if (projectableNodes === void 0) {
+        projectableNodes = null;
       }
-      var renderViewWithFragments = this._renderer.createRootHostView(hostProtoView.render, hostProtoView.mergeInfo.embeddedViewCount + 1, hostElementSelector);
-      var hostView = this._createMainView(hostProtoView, renderViewWithFragments);
-      this._renderer.hydrateView(hostView.render);
-      this._utils.hydrateRootHostView(hostView, injector);
-      return profile_1.wtfLeave(s, hostView.ref);
+      var s = this._createRootHostViewScope();
+      var hostViewFactory = hostViewFactoryRef.internalHostViewFactory;
+      var selector = lang_1.isPresent(overrideSelector) ? overrideSelector : hostViewFactory.selector;
+      var view = hostViewFactory.viewFactory(this._renderer, this, null, projectableNodes, selector, null, injector);
+      return profile_1.wtfLeave(s, view.ref);
     };
     AppViewManager_.prototype.destroyRootHostView = function(hostViewRef) {
       var s = this._destroyRootHostViewScope();
-      var hostView = view_ref_1.internalView(hostViewRef);
-      this._renderer.detachFragment(hostView.renderFragment);
-      this._renderer.dehydrateView(hostView.render);
-      this._viewDehydrateRecurse(hostView);
-      this._viewListener.onViewDestroyed(hostView);
-      this._renderer.destroyView(hostView.render);
+      var hostView = hostViewRef.internalView;
+      hostView.renderer.detachView(view_1.flattenNestedViewRenderNodes(hostView.rootNodesOrAppElements));
+      hostView.destroy();
       profile_1.wtfLeave(s);
     };
     AppViewManager_.prototype.createEmbeddedViewInContainer = function(viewContainerLocation, index, templateRef) {
       var s = this._createEmbeddedViewInContainerScope();
-      var protoView = view_ref_1.internalProtoView(templateRef.protoViewRef);
-      if (protoView.type !== viewModule.ViewType.EMBEDDED) {
-        throw new exceptions_1.BaseException('This method can only be called with embedded ProtoViews!');
-      }
-      this._protoViewFactory.initializeProtoViewIfNeeded(protoView);
-      return profile_1.wtfLeave(s, this._createViewInContainer(viewContainerLocation, index, protoView, templateRef.elementRef, null));
+      var contextEl = templateRef.elementRef.internalElement;
+      var view = contextEl.embeddedViewFactory(contextEl.parentView.renderer, this, contextEl, contextEl.parentView.projectableNodes, null, null, null);
+      this._attachViewToContainer(view, viewContainerLocation.internalElement, index);
+      return profile_1.wtfLeave(s, view.ref);
     };
-    AppViewManager_.prototype.createHostViewInContainer = function(viewContainerLocation, index, protoViewRef, imperativelyCreatedInjector) {
+    AppViewManager_.prototype.createHostViewInContainer = function(viewContainerLocation, index, hostViewFactoryRef, dynamicallyCreatedProviders, projectableNodes) {
       var s = this._createHostViewInContainerScope();
-      var protoView = view_ref_1.internalProtoView(protoViewRef);
-      if (protoView.type !== viewModule.ViewType.HOST) {
-        throw new exceptions_1.BaseException('This method can only be called with host ProtoViews!');
-      }
-      this._protoViewFactory.initializeProtoViewIfNeeded(protoView);
-      return profile_1.wtfLeave(s, this._createViewInContainer(viewContainerLocation, index, protoView, viewContainerLocation, imperativelyCreatedInjector));
-    };
-    AppViewManager_.prototype._createViewInContainer = function(viewContainerLocation, index, protoView, context, imperativelyCreatedInjector) {
-      var parentView = view_ref_1.internalView(viewContainerLocation.parentView);
-      var boundElementIndex = viewContainerLocation.boundElementIndex;
-      var contextView = view_ref_1.internalView(context.parentView);
-      var contextBoundElementIndex = context.boundElementIndex;
-      var embeddedFragmentView = contextView.getNestedView(contextBoundElementIndex);
-      var view;
-      if (protoView.type === viewModule.ViewType.EMBEDDED && lang_1.isPresent(embeddedFragmentView) && !embeddedFragmentView.hydrated()) {
-        view = embeddedFragmentView;
-        this._attachRenderView(parentView, boundElementIndex, index, view);
-      } else {
-        view = this._createPooledView(protoView);
-        this._attachRenderView(parentView, boundElementIndex, index, view);
-        this._renderer.hydrateView(view.render);
-      }
-      this._utils.attachViewInContainer(parentView, boundElementIndex, contextView, contextBoundElementIndex, index, view);
-      try {
-        this._utils.hydrateViewInContainer(parentView, boundElementIndex, contextView, contextBoundElementIndex, index, imperativelyCreatedInjector);
-      } catch (e) {
-        this._utils.detachViewInContainer(parentView, boundElementIndex, index);
-        throw e;
-      }
-      return view.ref;
-    };
-    AppViewManager_.prototype._attachRenderView = function(parentView, boundElementIndex, index, view) {
-      var elementRef = parentView.elementRefs[boundElementIndex];
-      if (index === 0) {
-        this._renderer.attachFragmentAfterElement(elementRef, view.renderFragment);
-      } else {
-        var prevView = parentView.viewContainers[boundElementIndex].views[index - 1];
-        this._renderer.attachFragmentAfterFragment(prevView.renderFragment, view.renderFragment);
-      }
+      var viewContainerLocation_ = viewContainerLocation;
+      var contextEl = viewContainerLocation_.internalElement;
+      var hostViewFactory = hostViewFactoryRef.internalHostViewFactory;
+      var view = hostViewFactory.viewFactory(contextEl.parentView.renderer, contextEl.parentView.viewManager, contextEl, projectableNodes, null, dynamicallyCreatedProviders, null);
+      this._attachViewToContainer(view, viewContainerLocation_.internalElement, index);
+      return profile_1.wtfLeave(s, view.ref);
     };
     AppViewManager_.prototype.destroyViewInContainer = function(viewContainerLocation, index) {
       var s = this._destroyViewInContainerScope();
-      var parentView = view_ref_1.internalView(viewContainerLocation.parentView);
-      var boundElementIndex = viewContainerLocation.boundElementIndex;
-      this._destroyViewInContainer(parentView, boundElementIndex, index);
+      var view = this._detachViewInContainer(viewContainerLocation.internalElement, index);
+      view.destroy();
       profile_1.wtfLeave(s);
     };
     AppViewManager_.prototype.attachViewInContainer = function(viewContainerLocation, index, viewRef) {
+      var viewRef_ = viewRef;
       var s = this._attachViewInContainerScope();
-      var view = view_ref_1.internalView(viewRef);
-      var parentView = view_ref_1.internalView(viewContainerLocation.parentView);
-      var boundElementIndex = viewContainerLocation.boundElementIndex;
-      this._utils.attachViewInContainer(parentView, boundElementIndex, null, null, index, view);
-      this._attachRenderView(parentView, boundElementIndex, index, view);
-      return profile_1.wtfLeave(s, viewRef);
+      this._attachViewToContainer(viewRef_.internalView, viewContainerLocation.internalElement, index);
+      return profile_1.wtfLeave(s, viewRef_);
     };
     AppViewManager_.prototype.detachViewInContainer = function(viewContainerLocation, index) {
       var s = this._detachViewInContainerScope();
-      var parentView = view_ref_1.internalView(viewContainerLocation.parentView);
-      var boundElementIndex = viewContainerLocation.boundElementIndex;
-      var viewContainer = parentView.viewContainers[boundElementIndex];
-      var view = viewContainer.views[index];
-      this._utils.detachViewInContainer(parentView, boundElementIndex, index);
-      this._renderer.detachFragment(view.renderFragment);
+      var view = this._detachViewInContainer(viewContainerLocation.internalElement, index);
       return profile_1.wtfLeave(s, view.ref);
     };
-    AppViewManager_.prototype._createMainView = function(protoView, renderViewWithFragments) {
-      var mergedParentView = this._utils.createView(protoView, renderViewWithFragments, this, this._renderer);
-      this._renderer.setEventDispatcher(mergedParentView.render, mergedParentView);
-      this._viewListener.onViewCreated(mergedParentView);
-      return mergedParentView;
+    AppViewManager_.prototype.onViewCreated = function(view) {};
+    AppViewManager_.prototype.onViewDestroyed = function(view) {};
+    AppViewManager_.prototype.createRenderComponentType = function(encapsulation, styles) {
+      return new api_1.RenderComponentType(this._appId + "-" + this._nextCompTypeId++, encapsulation, styles);
     };
-    AppViewManager_.prototype._createPooledView = function(protoView) {
-      var view = this._viewPool.getView(protoView);
-      if (lang_1.isBlank(view)) {
-        view = this._createMainView(protoView, this._renderer.createView(protoView.render, protoView.mergeInfo.embeddedViewCount + 1));
+    AppViewManager_.prototype._attachViewToContainer = function(view, vcAppElement, viewIndex) {
+      if (view.proto.type === view_type_1.ViewType.COMPONENT) {
+        throw new exceptions_1.BaseException("Component views can't be moved!");
       }
+      var nestedViews = vcAppElement.nestedViews;
+      if (nestedViews == null) {
+        nestedViews = [];
+        vcAppElement.nestedViews = nestedViews;
+      }
+      collection_1.ListWrapper.insert(nestedViews, viewIndex, view);
+      var refNode;
+      if (viewIndex > 0) {
+        var prevView = nestedViews[viewIndex - 1];
+        refNode = prevView.rootNodesOrAppElements.length > 0 ? prevView.rootNodesOrAppElements[prevView.rootNodesOrAppElements.length - 1] : null;
+      } else {
+        refNode = vcAppElement.nativeElement;
+      }
+      if (lang_1.isPresent(refNode)) {
+        var refRenderNode;
+        if (refNode instanceof element_1.AppElement) {
+          refRenderNode = refNode.nativeElement;
+        } else {
+          refRenderNode = refNode;
+        }
+        view.renderer.attachViewAfter(refRenderNode, view_1.flattenNestedViewRenderNodes(view.rootNodesOrAppElements));
+      }
+      vcAppElement.parentView.changeDetector.addContentChild(view.changeDetector);
+      vcAppElement.traverseAndSetQueriesAsDirty();
+    };
+    AppViewManager_.prototype._detachViewInContainer = function(vcAppElement, viewIndex) {
+      var view = collection_1.ListWrapper.removeAt(vcAppElement.nestedViews, viewIndex);
+      if (view.proto.type === view_type_1.ViewType.COMPONENT) {
+        throw new exceptions_1.BaseException("Component views can't be moved!");
+      }
+      vcAppElement.traverseAndSetQueriesAsDirty();
+      view.renderer.detachView(view_1.flattenNestedViewRenderNodes(view.rootNodesOrAppElements));
+      view.changeDetector.remove();
       return view;
     };
-    AppViewManager_.prototype._destroyPooledView = function(view) {
-      var wasReturned = this._viewPool.returnView(view);
-      if (!wasReturned) {
-        this._viewListener.onViewDestroyed(view);
-        this._renderer.destroyView(view.render);
-      }
-    };
-    AppViewManager_.prototype._destroyViewInContainer = function(parentView, boundElementIndex, index) {
-      var viewContainer = parentView.viewContainers[boundElementIndex];
-      var view = viewContainer.views[index];
-      this._viewDehydrateRecurse(view);
-      this._utils.detachViewInContainer(parentView, boundElementIndex, index);
-      if (view.viewOffset > 0) {
-        this._renderer.detachFragment(view.renderFragment);
-      } else {
-        this._renderer.dehydrateView(view.render);
-        this._renderer.detachFragment(view.renderFragment);
-        this._destroyPooledView(view);
-      }
-    };
-    AppViewManager_.prototype._viewDehydrateRecurse = function(view) {
-      if (view.hydrated()) {
-        this._utils.dehydrateView(view);
-      }
-      var viewContainers = view.viewContainers;
-      var startViewOffset = view.viewOffset;
-      var endViewOffset = view.viewOffset + view.proto.mergeInfo.viewCount - 1;
-      var elementOffset = view.elementOffset;
-      for (var viewIdx = startViewOffset; viewIdx <= endViewOffset; viewIdx++) {
-        var currView = view.views[viewIdx];
-        for (var binderIdx = 0; binderIdx < currView.proto.elementBinders.length; binderIdx++, elementOffset++) {
-          var vc = viewContainers[elementOffset];
-          if (lang_1.isPresent(vc)) {
-            for (var j = vc.views.length - 1; j >= 0; j--) {
-              this._destroyViewInContainer(currView, elementOffset, j);
-            }
-          }
-        }
-      }
-    };
-    AppViewManager_ = __decorate([di_1.Injectable(), __param(4, di_1.Inject(di_1.forwardRef(function() {
-      return proto_view_factory_1.ProtoViewFactory;
-    }))), __metadata('design:paramtypes', [view_pool_1.AppViewPool, view_listener_1.AppViewListener, view_manager_utils_1.AppViewManagerUtils, api_1.Renderer, Object])], AppViewManager_);
+    AppViewManager_ = __decorate([di_1.Injectable(), __param(1, di_1.Inject(application_tokens_1.APP_ID)), __metadata('design:paramtypes', [api_1.RootRenderer, String])], AppViewManager_);
     return AppViewManager_;
   })(AppViewManager);
   exports.AppViewManager_ = AppViewManager_;
@@ -18799,7 +17645,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/dynamic_component_
     function ComponentRef() {}
     Object.defineProperty(ComponentRef.prototype, "hostView", {
       get: function() {
-        return this.location.parentView;
+        return this.location.internalElement.parentView.ref;
       },
       enumerable: true,
       configurable: true
@@ -18849,10 +17695,10 @@ System.registerDynamic("node_modules/angular2/src/core/linker/dynamic_component_
       this._compiler = _compiler;
       this._viewManager = _viewManager;
     }
-    DynamicComponentLoader_.prototype.loadAsRoot = function(type, overrideSelector, injector, onDispose) {
+    DynamicComponentLoader_.prototype.loadAsRoot = function(type, overrideSelector, injector, onDispose, projectableNodes) {
       var _this = this;
       return this._compiler.compileInHost(type).then(function(hostProtoViewRef) {
-        var hostViewRef = _this._viewManager.createRootHostView(hostProtoViewRef, overrideSelector, injector);
+        var hostViewRef = _this._viewManager.createRootHostView(hostProtoViewRef, overrideSelector, injector, projectableNodes);
         var newLocation = _this._viewManager.getHostElement(hostViewRef);
         var component = _this._viewManager.getComponent(newLocation);
         var dispose = function() {
@@ -18864,25 +17710,31 @@ System.registerDynamic("node_modules/angular2/src/core/linker/dynamic_component_
         return new ComponentRef_(newLocation, component, type, injector, dispose);
       });
     };
-    DynamicComponentLoader_.prototype.loadIntoLocation = function(type, hostLocation, anchorName, providers) {
+    DynamicComponentLoader_.prototype.loadIntoLocation = function(type, hostLocation, anchorName, providers, projectableNodes) {
       if (providers === void 0) {
         providers = null;
       }
-      return this.loadNextToLocation(type, this._viewManager.getNamedElementInComponentView(hostLocation, anchorName), providers);
+      if (projectableNodes === void 0) {
+        projectableNodes = null;
+      }
+      return this.loadNextToLocation(type, this._viewManager.getNamedElementInComponentView(hostLocation, anchorName), providers, projectableNodes);
     };
-    DynamicComponentLoader_.prototype.loadNextToLocation = function(type, location, providers) {
+    DynamicComponentLoader_.prototype.loadNextToLocation = function(type, location, providers, projectableNodes) {
       var _this = this;
       if (providers === void 0) {
         providers = null;
       }
+      if (projectableNodes === void 0) {
+        projectableNodes = null;
+      }
       return this._compiler.compileInHost(type).then(function(hostProtoViewRef) {
         var viewContainer = _this._viewManager.getViewContainer(location);
-        var hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, providers);
+        var hostViewRef = viewContainer.createHostView(hostProtoViewRef, viewContainer.length, providers, projectableNodes);
         var newLocation = _this._viewManager.getHostElement(hostViewRef);
         var component = _this._viewManager.getComponent(newLocation);
         var dispose = function() {
           var index = viewContainer.indexOf(hostViewRef);
-          if (index !== -1) {
+          if (!hostViewRef.destroyed && index !== -1) {
             viewContainer.remove(index);
           }
         };
@@ -18897,7 +17749,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/dynamic_component_
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/application_common_providers.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/core/change_detection/change_detection.js", "node_modules/angular2/src/core/linker/view_pool.js", "node_modules/angular2/src/core/linker/view_manager.js", "node_modules/angular2/src/core/linker/view_manager_utils.js", "node_modules/angular2/src/core/linker/view_resolver.js", "node_modules/angular2/src/core/linker/view_listener.js", "node_modules/angular2/src/core/linker/proto_view_factory.js", "node_modules/angular2/src/core/linker/directive_resolver.js", "node_modules/angular2/src/core/linker/pipe_resolver.js", "node_modules/angular2/src/core/linker/compiler.js", "node_modules/angular2/src/core/linker/dynamic_component_loader.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/application_common_providers.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/core/change_detection/change_detection.js", "node_modules/angular2/src/core/linker/resolved_metadata_cache.js", "node_modules/angular2/src/core/linker/view_manager.js", "node_modules/angular2/src/core/linker/view_resolver.js", "node_modules/angular2/src/core/linker/directive_resolver.js", "node_modules/angular2/src/core/linker/pipe_resolver.js", "node_modules/angular2/src/core/linker/compiler.js", "node_modules/angular2/src/core/linker/dynamic_component_loader.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -18907,20 +17759,17 @@ System.registerDynamic("node_modules/angular2/src/core/application_common_provid
   var di_1 = $__require('node_modules/angular2/src/core/di.js');
   var application_tokens_1 = $__require('node_modules/angular2/src/core/application_tokens.js');
   var change_detection_1 = $__require('node_modules/angular2/src/core/change_detection/change_detection.js');
-  var view_pool_1 = $__require('node_modules/angular2/src/core/linker/view_pool.js');
+  var resolved_metadata_cache_1 = $__require('node_modules/angular2/src/core/linker/resolved_metadata_cache.js');
   var view_manager_1 = $__require('node_modules/angular2/src/core/linker/view_manager.js');
   var view_manager_2 = $__require('node_modules/angular2/src/core/linker/view_manager.js');
-  var view_manager_utils_1 = $__require('node_modules/angular2/src/core/linker/view_manager_utils.js');
   var view_resolver_1 = $__require('node_modules/angular2/src/core/linker/view_resolver.js');
-  var view_listener_1 = $__require('node_modules/angular2/src/core/linker/view_listener.js');
-  var proto_view_factory_1 = $__require('node_modules/angular2/src/core/linker/proto_view_factory.js');
   var directive_resolver_1 = $__require('node_modules/angular2/src/core/linker/directive_resolver.js');
   var pipe_resolver_1 = $__require('node_modules/angular2/src/core/linker/pipe_resolver.js');
   var compiler_1 = $__require('node_modules/angular2/src/core/linker/compiler.js');
   var compiler_2 = $__require('node_modules/angular2/src/core/linker/compiler.js');
   var dynamic_component_loader_1 = $__require('node_modules/angular2/src/core/linker/dynamic_component_loader.js');
   var dynamic_component_loader_2 = $__require('node_modules/angular2/src/core/linker/dynamic_component_loader.js');
-  exports.APPLICATION_COMMON_PROVIDERS = lang_1.CONST_EXPR([new di_1.Provider(compiler_1.Compiler, {useClass: compiler_2.Compiler_}), application_tokens_1.APP_ID_RANDOM_PROVIDER, view_pool_1.AppViewPool, new di_1.Provider(view_pool_1.APP_VIEW_POOL_CAPACITY, {useValue: 10000}), new di_1.Provider(view_manager_1.AppViewManager, {useClass: view_manager_2.AppViewManager_}), view_manager_utils_1.AppViewManagerUtils, view_listener_1.AppViewListener, proto_view_factory_1.ProtoViewFactory, view_resolver_1.ViewResolver, new di_1.Provider(change_detection_1.IterableDiffers, {useValue: change_detection_1.defaultIterableDiffers}), new di_1.Provider(change_detection_1.KeyValueDiffers, {useValue: change_detection_1.defaultKeyValueDiffers}), directive_resolver_1.DirectiveResolver, pipe_resolver_1.PipeResolver, new di_1.Provider(dynamic_component_loader_1.DynamicComponentLoader, {useClass: dynamic_component_loader_2.DynamicComponentLoader_})]);
+  exports.APPLICATION_COMMON_PROVIDERS = lang_1.CONST_EXPR([new di_1.Provider(compiler_1.Compiler, {useClass: compiler_2.Compiler_}), application_tokens_1.APP_ID_RANDOM_PROVIDER, resolved_metadata_cache_1.ResolvedMetadataCache, new di_1.Provider(view_manager_1.AppViewManager, {useClass: view_manager_2.AppViewManager_}), view_resolver_1.ViewResolver, new di_1.Provider(change_detection_1.IterableDiffers, {useValue: change_detection_1.defaultIterableDiffers}), new di_1.Provider(change_detection_1.KeyValueDiffers, {useValue: change_detection_1.defaultKeyValueDiffers}), directive_resolver_1.DirectiveResolver, pipe_resolver_1.PipeResolver, new di_1.Provider(dynamic_component_loader_1.DynamicComponentLoader, {useClass: dynamic_component_loader_2.DynamicComponentLoader_})]);
   global.define = __define;
   return module.exports;
 });
@@ -19095,7 +17944,6 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
   } else {
     globalScope = window;
   }
-  ;
   exports.IS_DART = false;
   var _global = globalScope;
   exports.global = _global;
@@ -19185,6 +18033,9 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
     }
     if (token.name) {
       return token.name;
+    }
+    if (token.overriddenName) {
+      return token.overriddenName;
     }
     var res = token.toString();
     var newLineIndex = res.indexOf("\n");
@@ -19511,6 +18362,25 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
     return _symbolIterator;
   }
   exports.getSymbolIterator = getSymbolIterator;
+  function evalExpression(sourceUrl, expr, declarations, vars) {
+    var fnBody = declarations + "\nreturn " + expr + "\n//# sourceURL=" + sourceUrl;
+    var fnArgNames = [];
+    var fnArgValues = [];
+    for (var argName in vars) {
+      fnArgNames.push(argName);
+      fnArgValues.push(vars[argName]);
+    }
+    return new (Function.bind.apply(Function, [void 0].concat(fnArgNames.concat(fnBody))))().apply(void 0, fnArgValues);
+  }
+  exports.evalExpression = evalExpression;
+  function isPrimitive(obj) {
+    return !isJsObject(obj);
+  }
+  exports.isPrimitive = isPrimitive;
+  function hasConstructor(value, type) {
+    return value.constructor === type;
+  }
+  exports.hasConstructor = hasConstructor;
   global.define = __define;
   return module.exports;
 });
@@ -19835,6 +18705,21 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
     return lang_1.isArray(obj) || (!(obj instanceof exports.Map) && lang_1.getSymbolIterator() in obj);
   }
   exports.isListLikeIterable = isListLikeIterable;
+  function areIterablesEqual(a, b, comparator) {
+    var iterator1 = a[lang_1.getSymbolIterator()]();
+    var iterator2 = b[lang_1.getSymbolIterator()]();
+    while (true) {
+      var item1 = iterator1.next();
+      var item2 = iterator2.next();
+      if (item1.done && item2.done)
+        return true;
+      if (item1.done || item2.done)
+        return false;
+      if (!comparator(item1.value, item2.value))
+        return false;
+    }
+  }
+  exports.areIterablesEqual = areIterablesEqual;
   function iterateListLike(obj, fn) {
     if (lang_1.isArray(obj)) {
       for (var i = 0; i < obj.length; i++) {
@@ -20217,7 +19102,7 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflection_cap
       ;
       throw new Error("Cannot create a factory for '" + lang_1.stringify(t) + "' because its constructor has more than 20 arguments");
     };
-    ReflectionCapabilities.prototype._zipTypesAndAnnotaions = function(paramTypes, paramAnnotations) {
+    ReflectionCapabilities.prototype._zipTypesAndAnnotations = function(paramTypes, paramAnnotations) {
       var result;
       if (typeof paramTypes === 'undefined') {
         result = new Array(paramAnnotations.length);
@@ -20246,7 +19131,7 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflection_cap
         var paramAnnotations = this._reflect.getMetadata('parameters', typeOrFunc);
         var paramTypes = this._reflect.getMetadata('design:paramtypes', typeOrFunc);
         if (lang_1.isPresent(paramTypes) || lang_1.isPresent(paramAnnotations)) {
-          return this._zipTypesAndAnnotaions(paramTypes, paramAnnotations);
+          return this._zipTypesAndAnnotations(paramTypes, paramAnnotations);
         }
       }
       var parameters = new Array(typeOrFunc.length);
@@ -20322,7 +19207,7 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflection.js"
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/core.js", ["node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/util.js", "node_modules/angular2/src/core/prod_mode.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/facade.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/application_ref.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/core/zone.js", "node_modules/angular2/src/core/render.js", "node_modules/angular2/src/core/linker.js", "node_modules/angular2/src/core/debug/debug_element.js", "node_modules/angular2/src/core/testability/testability.js", "node_modules/angular2/src/core/change_detection.js", "node_modules/angular2/src/core/platform_directives_and_pipes.js", "node_modules/angular2/src/core/platform_common_providers.js", "node_modules/angular2/src/core/application_common_providers.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/core.js", ["node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/util.js", "node_modules/angular2/src/core/prod_mode.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/facade.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/application_ref.js", "node_modules/angular2/src/core/application_tokens.js", "node_modules/angular2/src/core/zone.js", "node_modules/angular2/src/core/render.js", "node_modules/angular2/src/core/linker.js", "node_modules/angular2/src/core/debug/debug_node.js", "node_modules/angular2/src/core/testability/testability.js", "node_modules/angular2/src/core/change_detection.js", "node_modules/angular2/src/core/platform_directives_and_pipes.js", "node_modules/angular2/src/core/platform_common_providers.js", "node_modules/angular2/src/core/application_common_providers.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -20354,11 +19239,10 @@ System.registerDynamic("node_modules/angular2/core.js", ["node_modules/angular2/
   __export($__require('node_modules/angular2/src/core/zone.js'));
   __export($__require('node_modules/angular2/src/core/render.js'));
   __export($__require('node_modules/angular2/src/core/linker.js'));
-  var debug_element_1 = $__require('node_modules/angular2/src/core/debug/debug_element.js');
-  exports.DebugElement = debug_element_1.DebugElement;
-  exports.Scope = debug_element_1.Scope;
-  exports.inspectElement = debug_element_1.inspectElement;
-  exports.asNativeElements = debug_element_1.asNativeElements;
+  var debug_node_1 = $__require('node_modules/angular2/src/core/debug/debug_node.js');
+  exports.DebugElement = debug_node_1.DebugElement;
+  exports.DebugNode = debug_node_1.DebugNode;
+  exports.asNativeElements = debug_node_1.asNativeElements;
   __export($__require('node_modules/angular2/src/core/testability/testability.js'));
   __export($__require('node_modules/angular2/src/core/change_detection.js'));
   __export($__require('node_modules/angular2/src/core/platform_directives_and_pipes.js'));
@@ -20370,27 +19254,22 @@ System.registerDynamic("node_modules/angular2/core.js", ["node_modules/angular2/
 });
 
 System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-      case 2:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(o)) || o;
-        }, target);
-      case 3:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key)), void 0;
-        }, void 0);
-      case 4:
-        return decorators.reduceRight(function(o, d) {
-          return (d && d(target, key, o)) || o;
-        }, desc);
-    }
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var __metadata = (this && this.__metadata) || function(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
@@ -20415,7 +19294,7 @@ System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.
       pure: false
     }), __metadata('design:paramtypes', [])], Range);
     return Range;
-  })();
+  }());
   exports.Range = Range;
   exports.RANGE_PROVIDERS = [Range];
   global.define = __define;
@@ -20423,6 +19302,7 @@ System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.
 });
 
 System.registerDynamic("bin/pipes/pipes.js", ["bin/pipes/OrderBy/OrderBy.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
@@ -20442,6 +19322,7 @@ System.registerDynamic("bin/pipes/pipes.js", ["bin/pipes/OrderBy/OrderBy.js", "b
 });
 
 System.registerDynamic("bin/utilities/DateUtils.js", [], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
@@ -20487,59 +19368,14 @@ System.registerDynamic("bin/utilities/DateUtils.js", [], true, function($__requi
       return weekArr;
     };
     return DateRange;
-  })();
+  }());
   exports.DateRange = DateRange;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/utilities/ElementUtils.js", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ElementUtils = (function() {
-    function ElementUtils() {}
-    ElementUtils.outerHeight = function(el) {
-      var height = el.clientHeight;
-      var style = getComputedStyle(el);
-      height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-      height += parseInt(style.borderTopWidth) + parseInt(style.borderBottomWidth);
-      return height;
-    };
-    ElementUtils.outerWidth = function(el) {
-      var width = el.clientWidth;
-      var style = getComputedStyle(el);
-      width += parseInt(style.marginLeft) + parseInt(style.marginRight);
-      width += parseInt(style.borderLeftWidth) + parseInt(style.borderRightWidth);
-      return width;
-    };
-    return ElementUtils;
-  })();
-  exports.ElementUtils = ElementUtils;
-  function scrollTo(element, to, duration) {
-    if (duration <= 0)
-      return;
-    var difference = to - element.scrollTop;
-    var perTick = difference / duration * 10;
-    setTimeout(function() {
-      element.scrollTop = element.scrollTop + perTick;
-      if (element.scrollTop === to)
-        return;
-      scrollTo(element, to, duration - 10);
-    }, 10);
-  }
-  exports.scrollTo = scrollTo;
-  function easeInOutQuart(t, b, c, d) {
-    if ((t /= d / 2) < 1)
-      return c / 2 * t * t * t * t + b;
-    return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/utilities/utilities.js", ["bin/utilities/DateUtils.js", "bin/utilities/ElementUtils.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/utilities/utilities.js", ["bin/utilities/DateUtils.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
@@ -20550,12 +19386,12 @@ System.registerDynamic("bin/utilities/utilities.js", ["bin/utilities/DateUtils.j
         exports[p] = m[p];
   }
   __export($__require('bin/utilities/DateUtils.js'));
-  __export($__require('bin/utilities/ElementUtils.js'));
   global.define = __define;
   return module.exports;
 });
 
 System.registerDynamic("bin/fuel-ui.js", ["bin/components/components.js", "bin/directives/directives.js", "bin/pipes/pipes.js", "bin/utilities/utilities.js"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
