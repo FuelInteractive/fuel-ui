@@ -56,7 +56,7 @@ export class Person {
 			<div class="col-md-3">
 				<date-picker-mobile 
 					minDate="11/1/2015"
-					maxDate="11/11/2016" 
+					maxDate="11/12/2016" 
                     [dateFilter]="dateFilter">
 				</date-picker-mobile>
 			</div>
@@ -409,7 +409,7 @@ export class DemoComponent {
     }
     
     dateFilter(d: Date): boolean {
-        if([1,2].indexOf(d.getDay()) > -1)
+        if([2].indexOf(d.getDay()) > -1)
             return false;
         
         return true;
