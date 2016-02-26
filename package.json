@@ -20,6 +20,7 @@
   "author": "Fuel Travel",
   "license": "ISC",
   "devDependencies": {
+    "bourbon": "^4.2.6",
     "del": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-cache-bust": "^1.0.1",
@@ -27,26 +28,26 @@
     "gulp-inline-ng2-template": "0.0.7",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
+    "gulp-server-livereload": "^1.7.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-typescript": "^2.8.0",
-    "gulp-webserver": "^0.9.1 ",
     "merge2": "^0.3.6",
+    "run-sequence": "^1.1.5",
     "systemjs-builder": "^0.14.11",
     "typescript": "^1.5.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "bourbon": "^4.2.6"
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.0",
+    "angular2": "^2.0.0-beta.7",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha",
     "core.js": "^0.4.2",
-    "es6-shim": "^0.33.13",
+    "es6-shim": "^0.33.4",
     "font-awesome": "4.4.0",
     "reflect-metadata": "^0.1.2",
-    "rxjs": "^5.0.0-alpha.14",
-    "systemjs": "0.19.5",
-    "zone.js": "^0.5.10"
+    "rxjs": "^5.0.0-beta.2",
+    "systemjs": "0.19.22",
+    "zone.js": "^0.5.15"
   }
 }
