@@ -4,6 +4,7 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {ElementUtils} from "../../Utilities/ElementUtils";
+import {DateRange} from "../../utilities/DateUtils";
 
 @Component({
     selector: "date-picker-mobile"
@@ -29,20 +30,18 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 	}
 	get maxDate(): Date|string { return this._maxDate; }
     
-    @Input() range: boolean;
-    
     @Input() dateFilter: (d: Date) => boolean;
     
     @Output() valueChange = new EventEmitter();
 	@Input()
-	set value(value: string|Date) {
+	set value(value: any) {
 		this._selectedDate = this.handleDateInput(value);
 	}
  
     @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
  
-	private _selectedDate: Date;
+	protected _selectedDate: Date;
 	get selectedDate(): Date { return this._selectedDate; };
 	set selectedDate(value: Date) {
 		this._selectedDate = value;
@@ -91,6 +90,9 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
         }
         
         setTimeout(() => {
+            if(this.calendarScroller == null)
+                return;
+                
             let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
                 return m.getFullYear() == this.selectedDate.getFullYear()
                     && m.getMonth() == this.selectedDate.getMonth()
@@ -110,7 +112,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		});
     }    
     
-    handleDateInput(value: string|Date): Date {
+    handleDateInput(value: any): Date {
 		if(value instanceof Date && !isNaN(value.valueOf()))
 			return value;
 		else

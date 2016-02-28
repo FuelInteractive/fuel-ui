@@ -130,9 +130,7 @@ gulp.task('serve', function(){
 });
 
 gulp.task('watch', function () {
-    gulp.watch(paths.source+'/**/*.html', ['views', 'scripts']);
-    gulp.watch(paths.source+'/**/*.ts', ['scripts']);
-    gulp.watch(paths.source+'/**/*.{scss,sass}', ['sass', 'scripts']);
+    gulp.watch(paths.source+'/**/*.*', ['scripts']);
 });
 
 gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'bundle']);

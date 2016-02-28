@@ -44,21 +44,23 @@ export class Person {
 				(onAnimationEnd)="logEnd()"></div>
 		</div>
 		<h2>DatePicker</h2>
-		<section class="row m-a">
-			<div class="col-md-3">
-				<date-picker 
-					min-date="11/1/2015"
-					max-date="11/1/2016" months="2">
-				</date-picker>
-			</div>
-		</section>
         <section class="row m-a">
 			<div class="col-md-3">
-				<date-picker-mobile range="true"
+				<date-picker-mobile
 					minDate="11/1/2015"
 					maxDate="11/12/2016" 
                     [dateFilter]="dateFilter">
 				</date-picker-mobile>
+			</div>
+		</section>
+        <h2>DateRangePicker</h2>
+        <section class="row m-a">
+			<div class="col-md-3">
+				<date-range-picker
+					minDate="11/1/2015"
+					maxDate="11/12/2016" 
+                    [dateFilter]="dateFilter">
+				</date-range-picker>
 			</div>
 		</section>
 		<h2>Carousel</h2>
