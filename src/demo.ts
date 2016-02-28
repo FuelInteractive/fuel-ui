@@ -54,7 +54,7 @@ export class Person {
 		</section>
         <section class="row m-a">
 			<div class="col-md-3">
-				<date-picker-mobile 
+				<date-picker-mobile range="true"
 					minDate="11/1/2015"
 					maxDate="11/12/2016" 
                     [dateFilter]="dateFilter">

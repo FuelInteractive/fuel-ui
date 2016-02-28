@@ -55,6 +55,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     
     var sourceFiles = [
         paths.source + '/**/*.ts',
+        '!./bin/**/*.*',
         './typings/tsd.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'

@@ -8,6 +8,16 @@
 	</span>
 </div>
 
+<div *ngIf="range" class="input-group" (click)="showCalendar($event)">
+	<input type="text" class="form-control"
+		[(ngModel)]="inputDate" 
+		 #dateField2
+		 />
+	<span class="input-group-addon" [class.input-group-addon-focus]="dateField2.focus">
+		<i class="fa fa-calendar"></i>
+	</span>
+</div>
+
 <div class="date-picker-overlay" aria-hidden="true"
     *ngIf="calendarDisplayed" 
     (click)="hideCalendar()">
