@@ -41,7 +41,7 @@ export class ScrollItem implements AfterViewInit {
 	template: `
 		<div class="scroll-container" 
 			(scroll)="doscroll($event)"
-			[style.height.px]="height"
+			[style.height]="height"
 			[class.hide-scrollbar]="hideScrollbar">
 			<ng-content></ng-content>
 		</div>
@@ -50,6 +50,7 @@ export class ScrollItem implements AfterViewInit {
 		.scroll-container {
 			overflow-y: scroll;
 			overflow-x: hidden;
+            max-height: 100%;
 		}
 		
 		.scroll-container.hide-scrollbar::-webkit-scrollbar {
@@ -202,6 +203,14 @@ export class InfiniteScroller
         var target = this.itemQuery.toArray()[targetIndex];
         var targetPos = target.element.offsetTop - this.container.offsetTop;
         this.scrollTo(targetPos);
+    }
+    
+    isTop(): boolean {
+       return this.lastScroll <= 1;
+    }
+    
+    isBottom(): boolean {
+        return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
     }
 }
 

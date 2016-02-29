@@ -6,6 +6,7 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {ElementUtils} from "../../Utilities/ElementUtils";
+import {MobileDetection} from "../../Utilities/DetectionUtils";
 
 @Component({
     selector: "date-picker-mobile"
@@ -63,6 +64,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
     calendarDisplayed: boolean = true;
     calendarX: number = 1;
 	calendarY: number = 1;
+    calendarHeight: string = MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
     
     calendarMonths: Date[] = [];
     
@@ -112,7 +114,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 			if(screen.height - clickedRect.bottom <= 500) {
 				this.calendarY = (clickedRect.top);
 			} else {
-				this.calendarY = (clickedRect.top);
+				this.calendarY = 0;
 			}
 		}			
 		
@@ -153,6 +155,14 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 			new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
 		return nextDate <= compareDate;
 	}
+    
+    disablePrev(): boolean {
+        return this.calendarScroller ? this.calendarScroller.isTop() : false;
+    }
+    
+    disableNext(): boolean {
+        return this.calendarScroller ? this.calendarScroller.isBottom() : false;
+    }
     
     scrollPrevMonth(): void {
         if(this.calendarScroller.topIndex == 0)

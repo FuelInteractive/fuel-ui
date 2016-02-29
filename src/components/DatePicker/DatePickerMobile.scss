@@ -1,5 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/bourbon";
+@import "../../styles/media_queries";
 
 .date-picker-overlay {
     background-color: rgba(0,0,0,0);
@@ -10,30 +11,49 @@
     bottom: 0;
     left: 0;
     z-index: 100;
+    
+    @include mobile-only {
+        background-color: $gray;
+        opacity: .75;
+    }
 }
 
 .date-picker-component {
     border: 1px solid $table-border-color;
-    position: absolute;
     z-index: 101;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
-    background-color: $body-bg;
-    font-size: .75rem;
+    background-color: $body-bg;font-size: .75rem;
+    position: absolute;
     width: 350px;
+    height: auto;
+    top: 0;
+    left: 0;
     @if $enable-rounded {
         border-radius: $border-radius-lg;
     }
     
     @include transition(all .1s ease);
+    
+    @include mobile-only {
+        width: 80%;
+        height: 90%;
+        position: fixed;
+        top: 5%;
+        left: 10%;
+        font-size: 1.5rem;
+    }
 }
 
 table {
-	font-size: .75rem;
+    font-size: .75rem;
+    
+    @include mobile-only {
+        font-size: 1.5rem;
+    }
 }
 
 .input-group-addon {
 	background-color: $input-bg;
-	border-left: none;
 }
 
 header {
@@ -41,6 +61,12 @@ header {
 	top: 0;
 	left: 0;
     vertical-align: middle;
+    background-color: $input-bg;
+    
+    @include mobile-only {
+        height: 11%;
+    }
+    
     .days-of-week {
         background-color: $brand-primary;
         color: $btn-primary-color;
@@ -59,17 +85,49 @@ header {
         border-radius: 0;
         color: $brand-primary; 
         background-color: $input-bg;
+        width: 12%;
+        
+        @include mobile-only {
+            margin-top: .5rem;
+        }
     }
     
     button:active {
         background-color: $input-bg-disabled;
     }
     
+    .button-disable {
+        color: $input-bg-disabled;
+        cursor: default;
+    }
+    
+    .date-range {
+        width: 75%;
+    }
+    
+    .date-range span {
+        background-color: $gray-lighter;
+        border-left: none;
+        border-right: none;
+        
+        @include mobile-only {
+            font-size: 1.75rem;
+        }
+    }
+    
     input {
         border: none;
-        width: 37% !important;
         display: inline-block;
         margin: 0 auto;
+        border: 1px solid #ccc;
+        
+        @include mobile-only {
+            font-size: 1.75rem;
+        }
+    }
+    
+    input:read-only {
+        background-color: $body-bg;
     }
 }
 
@@ -94,6 +152,14 @@ header {
 	margin-right: 4%;
 }
 
+.container {
+    height: 100%;
+}
+
 .calendar-container {
 	box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1);
+    
+    @include mobile-only {
+        height: 89%;
+    }
 }

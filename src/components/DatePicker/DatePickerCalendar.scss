@@ -1,9 +1,11 @@
 @import "../../styles/variables";
 @import "../../styles/bourbon";
+@import "../../styles/media_queries";
 
 .table {
 	font-size: .75rem;
 	border-top: 1px solid $table-border-color;
+    background-color: $body-bg;
 }
 
 tr {
@@ -13,9 +15,15 @@ tr {
 th, td {
 	text-align: center;
 	vertical-align: middle;
-	padding: .1rem;
+    font-size: 1rem;
+    padding: .1rem;
 	height: 1.75rem;
 	border: none;
+    
+    @include mobile-only {
+        padding: .5rem;
+        font-size: 1.5rem;
+    }
 }
 
 td.selectable {

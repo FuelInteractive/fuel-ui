@@ -23,7 +23,7 @@ export class Person {
 				<infinite-scroller 
 					(next)="infinteScrollNext()" 
 					(prev)="infiniteScrollPrev()" 
-					height="300"
+					height="300px"
 					distance="120"
 					hideScrollbar="true">
 					<div *ngFor="#item of infiniteScrollItems" 
@@ -47,8 +47,8 @@ export class Person {
 		<section class="row m-a">
 			<div class="col-md-3">
 				<date-picker 
-					min-date="11/1/2015"
-					max-date="11/1/2016" months="2">
+					minDate="11/1/2015"
+					maxDate="11/1/2016" months="2">
 				</date-picker>
 			</div>
 		</section>
