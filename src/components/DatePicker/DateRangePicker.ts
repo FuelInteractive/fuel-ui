@@ -2,6 +2,7 @@ import {Component, View, Input, Output} from "angular2/core";
 import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DateRange} from "../../utilities/DateUtils";
+import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DatePickerMobile} from "./DatePickerMobile";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
@@ -39,6 +40,7 @@ export class DateRangePicker extends DatePickerMobile {
     calendarScroller: InfiniteScroller;
     
     private _dateTarget: boolean = false;
+    calendarHeight: string = MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
 	
     get selectedDate(): Date {return this._selectedDate};
     set selectedDate(value: Date) { 
