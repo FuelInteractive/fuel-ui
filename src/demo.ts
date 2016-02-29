@@ -59,7 +59,9 @@ export class Person {
 				<date-range-picker
 					minDate="11/1/2015"
 					maxDate="11/12/2016" 
-                    [dateFilter]="dateFilter">
+                    [dateFilter]="dateFilter"
+                    startLabel="Arrival"
+                    endLabel="Departure">
 				</date-range-picker>
 			</div>
 		</section>

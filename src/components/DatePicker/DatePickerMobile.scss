@@ -15,7 +15,7 @@
 .date-picker-component {
     border: 1px solid $table-border-color;
     position: absolute;
-    z-index: 101;
+    z-index: 120;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
     background-color: $body-bg;
     font-size: .75rem;
@@ -29,6 +29,10 @@
 
 table {
 	font-size: .75rem;
+}
+
+.input-group {
+    z-index: 110;
 }
 
 .input-group-addon {
