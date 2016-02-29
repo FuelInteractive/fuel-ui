@@ -1,5 +1,5 @@
 import {Component, View, Input, Output} from "angular2/core";
-import {EventEmitter, ElementRef, ViewChildren, QueryList} from "angular2/core";
+import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DateRange} from "../../utilities/DateUtils";
 import {DatePickerMobile} from "./DatePickerMobile";
@@ -20,16 +20,48 @@ export class DateRangePicker extends DatePickerMobile {
     set value(value: any) {
 		this._selectedDate = this.handleRangeInput(value).start;
 	}
+    
+     @Input()
+    set minDate(value: Date|string) {
+		this._minDate = this.handleDateInput(value);
+	}
+	get minDate(): Date|string { return this._minDate; };
 	
+    @Input()
+    set maxDate(value: Date|string) {
+		this._maxDate = this.handleDateInput(value);
+	}
+	get maxDate(): Date|string { return this._maxDate; }
+    
+    @Input() dateFilter: (d: Date) => boolean;
+ 
+    @ViewChild(InfiniteScroller)
+    calendarScroller: InfiniteScroller;
+    
+    private _dateTarget: boolean = false;
+	
+    get selectedDate(): Date {return this._selectedDate};
+    set selectedDate(value: Date) { 
+        this._selectedDate = value;
+        
+        if(!this._dateTarget)
+            this.inputStartDate = value.toLocaleDateString();
+        else
+            this.inputEndDate = value.toLocaleDateString();
+            
+        this._dateTarget = !this._dateTarget;
+        this.hideCalendar();
+    }
+    
     private _inputStartDate: string = "";
-	get inputStartDate(): string {return this._inputStartDate};
-	set inputDate(value: string) {
+	get inputStartDate(): string { return this._inputStartDate };
+	set inputStartDate(value: string) {
 		this._inputStartDate = value;
 		this._selectedDate = new Date(value);
 	}
     
     private _inputEndDate: string = "";
-	get inputEndDate(): string {return this._inputEndDate};
+	get inputEndDate(): string { return this._inputEndDate };
 	set inputEndDate(value: string) {
 		this._inputEndDate = value;
 		this._selectedDate = new Date(value);
@@ -37,10 +69,11 @@ export class DateRangePicker extends DatePickerMobile {
     
     constructor(modal: ElementRef) {
         super(modal);
-        /*this.modal = modal.nativeElement;
+        this.modal = modal.nativeElement;
+        console.log(modal.nativeElement);
         this.selectedDate = new Date();
         if(this.selectedDate < this._minDate)
-            this.selectedDate = this._minDate;*/
+            this.selectedDate = this._minDate;
     }
     
     handleRangeInput(value: any): DateRange {
@@ -49,4 +82,12 @@ export class DateRangePicker extends DatePickerMobile {
 		else
 			throw "DateRangePicker error: input is not of type DateRange";
 	}
+    
+    focusStartDate(): void {
+        this._dateTarget = false;
+    }
+    
+    focusEndDate(): void {
+        this._dateTarget = true;
+    }
 }
