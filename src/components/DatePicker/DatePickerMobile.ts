@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/lib.d.ts" />
-
 import {Component, View, OnInit, OnChanges, AfterViewInit} from "angular2/core";
 import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
@@ -7,6 +5,7 @@ import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {ElementUtils} from "../../Utilities/ElementUtils";
 import {MobileDetection} from "../../Utilities/DetectionUtils";
+import {DateRange} from "../../utilities/DateUtils";
 
 @Component({
     selector: "date-picker-mobile"
@@ -36,14 +35,14 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
     
     @Output() valueChange = new EventEmitter();
 	@Input()
-	set value(value: string|Date) {
+	set value(value: any) {
 		this._selectedDate = this.handleDateInput(value);
 	}
  
     @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
  
-	private _selectedDate: Date;
+	protected _selectedDate: Date;
 	get selectedDate(): Date { return this._selectedDate; };
 	set selectedDate(value: Date) {
 		this._selectedDate = value;
@@ -91,6 +90,21 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
             if(this.canNextMonth)
                 this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth()+1));
         }
+        
+        setTimeout(() => {
+            if(this.calendarScroller == null)
+                return;
+                
+            let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
+                return m.getFullYear() == this.selectedDate.getFullYear()
+                    && m.getMonth() == this.selectedDate.getMonth()
+            });
+            
+            this.calendarScroller.container.scrollTop = 
+                this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
+            
+            this.calendarScroller.scrollToIndex(scrollToMonth);
+        }, 1);
     }
     
     ngAfterViewInit(): void {
@@ -100,7 +114,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		});
     }    
     
-    handleDateInput(value: string|Date): Date {
+    handleDateInput(value: any): Date {
 		if(value instanceof Date && !isNaN(value.valueOf()))
 			return value;
 		else
@@ -120,18 +134,6 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 		
 		this.ngOnInit();
 		this.calendarDisplayed = true;
-        
-        setTimeout(() => {
-            let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
-                return m.getFullYear() == this.selectedDate.getFullYear()
-                    && m.getMonth() == this.selectedDate.getMonth()
-            });
-            
-            this.calendarScroller.container.scrollTop = 
-                this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-            
-            this.calendarScroller.scrollToIndex(scrollToMonth);
-        }, 1);
 	}
     
     hideCalendar(): void {

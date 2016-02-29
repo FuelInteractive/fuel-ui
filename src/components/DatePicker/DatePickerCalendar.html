@@ -11,6 +11,8 @@
 					[class.selectable]="checkSelectable(day)" 
 					[class.disabled]="!checkSelectable(day)"
 					[class.selected]="checkSelectedDate(day)" 
+                    [class.startDate]="checkStartDate(day)"
+                    [class.endDate]="checkEndDate(day)"
 					(click)="selectDate(day)">
 					{{day}}
 				</td> 

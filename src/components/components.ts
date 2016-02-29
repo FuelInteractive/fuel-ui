@@ -1,7 +1,7 @@
 import {ALERT_PROVIDERS, Alert} from "./Alert/Alert";
 import {CAROUSEL_PROVIDERS, Carousel, CarouselItem} from "./Carousel/Carousel";
-import {DatePicker} from "./DatePicker/DatePicker";
 import {DatePickerMobile} from "./DatePicker/DatePickerMobile";
+import {DateRangePicker} from "./DatePicker/DateRangePicker";
 import {MODAL_PROVIDERS, Modal} from "./Modal/Modal";
 import {PAGINATION_PROVIDERS, Pagination} from "./Pagination/Pagination";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./InfiniteScroller/InfiniteScroller";
@@ -9,7 +9,7 @@ import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./Infin
 export var FUELUI_COMPONENT_PROVIDERS = [
 	ALERT_PROVIDERS,
 	CAROUSEL_PROVIDERS,
-	DatePicker,
+	DateRangePicker,
     DatePickerMobile,
 	MODAL_PROVIDERS,
 	PAGINATION_PROVIDERS,

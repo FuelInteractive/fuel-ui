@@ -227,6 +227,776 @@ System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/ang
   return module.exports;
 });
 
+System.registerDynamic("bin/Utilities/DetectionUtils.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var MobileDetection = (function() {
+    function MobileDetection() {}
+    MobileDetection.isAndroid = function() {
+      return navigator.userAgent.match(/Android/i) != null;
+    };
+    MobileDetection.isBlackBerry = function() {
+      return navigator.userAgent.match(/BlackBerry/i) != null;
+    };
+    MobileDetection.isIOS = function() {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i) != null;
+    };
+    MobileDetection.isOpera = function() {
+      return navigator.userAgent.match(/Opera Mini/i) != null;
+    };
+    MobileDetection.isWindows = function() {
+      return navigator.userAgent.match(/IEMobile|WPDesktop/i) != null;
+    };
+    MobileDetection.isAny = function() {
+      return (this.isAndroid() || this.isBlackBerry() || this.isIOS() || this.isOpera() || this.isWindows());
+    };
+    return MobileDetection;
+  }());
+  exports.MobileDetection = MobileDetection;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/DatePicker/DatePickerMobile.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/Utilities/DetectionUtils.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var core_2 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
+  var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
+  var DetectionUtils_1 = $__require('bin/Utilities/DetectionUtils.js');
+  var DatePickerMobile = (function() {
+    function DatePickerMobile(modal) {
+      this._minDate = new Date(1900, 0, 1);
+      this._maxDate = new Date(2200, 0, 1);
+      this.valueChange = new core_2.EventEmitter();
+      this._inputDate = "";
+      this.calendarDisplayed = true;
+      this.calendarX = 1;
+      this.calendarY = 1;
+      this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
+      this.calendarMonths = [];
+      this._preGenMonths = 2;
+      this.modal = modal.nativeElement;
+      this.selectedDate = new Date();
+      if (this.selectedDate < this._minDate)
+        this.selectedDate = this._minDate;
+    }
+    Object.defineProperty(DatePickerMobile.prototype, "minDate", {
+      get: function() {
+        return this._minDate;
+      },
+      set: function(value) {
+        this._minDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DatePickerMobile.prototype, "maxDate", {
+      get: function() {
+        return this._maxDate;
+      },
+      set: function(value) {
+        this._maxDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DatePickerMobile.prototype, "value", {
+      set: function(value) {
+        this._selectedDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DatePickerMobile.prototype, "selectedDate", {
+      get: function() {
+        return this._selectedDate;
+      },
+      set: function(value) {
+        this._selectedDate = value;
+        this._inputDate = value.toLocaleDateString();
+        this.valueChange.next(this.selectedDate);
+        this.hideCalendar();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DatePickerMobile.prototype, "inputDate", {
+      get: function() {
+        return this._inputDate;
+      },
+      set: function(value) {
+        this._inputDate = value;
+        this._selectedDate = new Date(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    DatePickerMobile.prototype.ngOnInit = function() {
+      var _this = this;
+      this.calendarMonths = [new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth() - 1), new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth())];
+      for (var i = 0; i < this._preGenMonths; i++) {
+        var earliestDate = this.calendarMonths[0];
+        var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
+        if (this.canPrevMonth)
+          this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
+        if (this.canNextMonth)
+          this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
+      }
+      setTimeout(function() {
+        if (_this.calendarScroller == null)
+          return;
+        var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
+          return m.getFullYear() == _this.selectedDate.getFullYear() && m.getMonth() == _this.selectedDate.getMonth();
+        });
+        _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
+        _this.calendarScroller.scrollToIndex(scrollToMonth);
+      }, 1);
+    };
+    DatePickerMobile.prototype.ngAfterViewInit = function() {
+      var _this = this;
+      this.modal.addEventListener('click', function(e) {
+        if (e.srcElement.className.indexOf('modal') != -1)
+          _this.hideCalendar();
+      });
+    };
+    DatePickerMobile.prototype.handleDateInput = function(value) {
+      if (value instanceof Date && !isNaN(value.valueOf()))
+        return value;
+      else
+        return new Date(value);
+    };
+    DatePickerMobile.prototype.showCalendar = function(event) {
+      if (event != null) {
+        var clickedRect = event.srcElement.parentElement.getBoundingClientRect();
+        this.calendarX = clickedRect.left;
+        if (screen.height - clickedRect.bottom <= 500) {
+          this.calendarY = (clickedRect.top);
+        } else {
+          this.calendarY = 0;
+        }
+      }
+      this.ngOnInit();
+      this.calendarDisplayed = true;
+    };
+    DatePickerMobile.prototype.hideCalendar = function() {
+      this.calendarDisplayed = false;
+    };
+    Object.defineProperty(DatePickerMobile.prototype, "canPrevMonth", {
+      get: function() {
+        var currentDate = this.calendarMonths[0];
+        var prevDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
+        var compareDate = new Date(this._minDate.getFullYear(), this._minDate.getMonth());
+        return prevDate >= compareDate;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DatePickerMobile.prototype, "canNextMonth", {
+      get: function() {
+        var currentDate = this.calendarMonths[this.calendarMonths.length - 1];
+        var nextDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
+        var compareDate = new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
+        return nextDate <= compareDate;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    DatePickerMobile.prototype.disablePrev = function() {
+      return this.calendarScroller ? this.calendarScroller.isTop() : false;
+    };
+    DatePickerMobile.prototype.disableNext = function() {
+      return this.calendarScroller ? this.calendarScroller.isBottom() : false;
+    };
+    DatePickerMobile.prototype.scrollPrevMonth = function() {
+      var _this = this;
+      if (this.calendarScroller.topIndex == 0)
+        this.addPrevMonth();
+      setTimeout(function() {
+        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex - 1);
+      }, 10);
+    };
+    DatePickerMobile.prototype.scrollNextMonth = function() {
+      var _this = this;
+      setTimeout(function() {
+        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex + 1);
+      }, 10);
+    };
+    DatePickerMobile.prototype.addNextMonth = function() {
+      if (!this.canNextMonth)
+        return;
+      var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
+      var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
+      this.calendarMonths.push(nextMonth);
+    };
+    DatePickerMobile.prototype.addPrevMonth = function() {
+      if (!this.canPrevMonth)
+        return;
+      var firstMonth = this.calendarMonths[0];
+      var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
+      this.calendarMonths.unshift(prevMonth);
+    };
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "minDate", null);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "maxDate", null);
+    __decorate([core_2.Input(), __metadata('design:type', Function)], DatePickerMobile.prototype, "dateFilter", void 0);
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerMobile.prototype, "valueChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "value", null);
+    __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DatePickerMobile.prototype, "calendarScroller", void 0);
+    DatePickerMobile = __decorate([core_1.Component({selector: "date-picker-mobile"}), core_1.View({
+      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 80%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 10%;\n            font-size: 1.5rem; } }\n\n      table {\n        font-size: .75rem; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          table {\n            font-size: 1.5rem; } }\n\n      .input-group {\n        z-index: 110; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          header {\n            height: 11%; } }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 12%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header button {\n              margin-top: .5rem; } }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 75%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header .date-range span {\n              font-size: 1.75rem; } }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 0 auto;\n          border: 1px solid #ccc; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header input {\n              font-size: 1.75rem; } }\n        header input:read-only {\n          background-color: #fff; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      .calendar-container {\n        box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1); }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .calendar-container {\n            height: 89%; } }\n    "],
+      template: "\n      <div class=\"input-group\" (click)=\"showCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n            [(ngModel)]=\"inputDate\" \n             #dateField\n             />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"#month of calendarMonths #i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+      directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+    }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePickerMobile);
+    return DatePickerMobile;
+  }());
+  exports.DatePickerMobile = DatePickerMobile;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/DatePicker/DateRangePicker.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/utilities/DateUtils.js", "bin/components/DatePicker/DatePickerMobile.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/components/InfiniteScroller/InfiniteScroller.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var core_2 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var DateUtils_1 = $__require('bin/utilities/DateUtils.js');
+  var DatePickerMobile_1 = $__require('bin/components/DatePicker/DatePickerMobile.js');
+  var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
+  var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
+  var DateRangePicker = (function(_super) {
+    __extends(DateRangePicker, _super);
+    function DateRangePicker(modal) {
+      _super.call(this, modal);
+      this.valueChange = new core_2.EventEmitter();
+      this._dateTarget = false;
+      this.startDateChange = new core_2.EventEmitter();
+      this.endDateChange = new core_2.EventEmitter();
+      this._inputStartDate = "";
+      this._inputEndDate = "";
+      this.modal = modal.nativeElement;
+    }
+    Object.defineProperty(DateRangePicker.prototype, "value", {
+      set: function(value) {
+        this._selectedDate = this.handleRangeInput(value).start;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "minDate", {
+      get: function() {
+        return this._minDate;
+      },
+      set: function(value) {
+        this._minDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DateRangePicker.prototype, "maxDate", {
+      get: function() {
+        return this._maxDate;
+      },
+      set: function(value) {
+        this._maxDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "selectedDate", {
+      get: function() {
+        return this._selectedDate;
+      },
+      set: function(value) {
+        this._selectedDate = value;
+        if ((this._dateTarget && this.startDate != null && value <= this.startDate) || !this._dateTarget && this.endDate != null && value >= this.endDate)
+          this._dateTarget = !this._dateTarget;
+        if (!this._dateTarget) {
+          this.inputStartDate = value.toLocaleDateString();
+          this.startDate = value;
+          if (this.startDateChange != null)
+            this.startDateChange.next(this._startDate);
+        } else {
+          this.inputEndDate = value.toLocaleDateString();
+          this.endDate = value;
+          this.hideCalendar();
+          if (this.endDateChange != null)
+            this.endDateChange.next(this._endDate);
+        }
+        this._dateTarget = !this._dateTarget;
+        if (this.startDate != null && this.endDate != null) {
+          var startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
+          var endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
+          this.valueChange.next(new DateUtils_1.DateRange(startDate, endDate));
+        }
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DateRangePicker.prototype, "startDate", {
+      get: function() {
+        return this._startDate;
+      },
+      set: function(value) {
+        this._startDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "endDate", {
+      get: function() {
+        return this._endDate;
+      },
+      set: function(value) {
+        this._endDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "inputStartDate", {
+      get: function() {
+        return this._inputStartDate;
+      },
+      set: function(value) {
+        this._inputStartDate = value;
+        this._selectedDate = new Date(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DateRangePicker.prototype, "inputEndDate", {
+      get: function() {
+        return this._inputEndDate;
+      },
+      set: function(value) {
+        this._inputEndDate = value;
+        this._selectedDate = new Date(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    DateRangePicker.prototype.handleRangeInput = function(value) {
+      if (value instanceof DateUtils_1.DateRange)
+        return value;
+      else
+        throw "DateRangePicker error: input is not of type DateRange";
+    };
+    DateRangePicker.prototype.focusStartDate = function() {
+      this._dateTarget = false;
+    };
+    DateRangePicker.prototype.focusEndDate = function() {
+      this._dateTarget = true;
+    };
+    __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "valueChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "value", null);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "minDate", null);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "maxDate", null);
+    __decorate([core_1.Input(), __metadata('design:type', Function)], DateRangePicker.prototype, "dateFilter", void 0);
+    __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DateRangePicker.prototype, "calendarScroller", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], DateRangePicker.prototype, "startLabel", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], DateRangePicker.prototype, "endLabel", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "startDateChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "startDate", null);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "endDateChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "endDate", null);
+    DateRangePicker = __decorate([core_1.Component({selector: "date-range-picker"}), core_1.View({
+      styles: ["\n   .date-picker-overlay {\n     background-color: transparent;\n     display: block;\n     position: fixed;\n     top: 0;\n     right: 0;\n     bottom: 0;\n     left: 0;\n     z-index: 100; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       .date-picker-overlay {\n         background-color: #55595c;\n         opacity: .75; } }\n\n   .date-picker-component {\n     border: 1px solid #eceeef;\n     z-index: 120;\n     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n     background-color: #fff;\n     font-size: .75rem;\n     position: absolute;\n     width: 350px;\n     height: auto;\n     top: 0;\n     left: 0;\n     border-radius: 0.3rem;\n     -webkit-transition: all 0.1s ease;\n     -moz-transition: all 0.1s ease;\n     transition: all 0.1s ease; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       .date-picker-component {\n         width: 80%;\n         height: 90%;\n         position: fixed;\n         top: 5%;\n         left: 10%;\n         font-size: 1.5rem; } }\n\n   table {\n     font-size: .75rem; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       table {\n         font-size: 1.5rem; } }\n\n   .input-group {\n     z-index: 110; }\n\n   .input-group-addon {\n     background-color: #fff; }\n\n   header {\n     position: relative;\n     top: 0;\n     left: 0;\n     vertical-align: middle;\n     background-color: #fff; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       header {\n         height: 11%; } }\n     header .days-of-week {\n       background-color: #0275d8;\n       color: #fff; }\n     header table {\n       border-top: none !important; }\n     header th, header td {\n       text-align: center; }\n     header button {\n       border: none;\n       border-radius: 0;\n       color: #0275d8;\n       background-color: #fff;\n       width: 12%; }\n       @media (max-width: 480px), screen and (max-device-width: 480px) {\n         header button {\n           margin-top: .5rem; } }\n     header button:active {\n       background-color: #eceeef; }\n     header .button-disable {\n       color: #eceeef;\n       cursor: default; }\n     header .date-range {\n       width: 75%; }\n     header .date-range span {\n       background-color: #eceeef;\n       border-left: none;\n       border-right: none; }\n       @media (max-width: 480px), screen and (max-device-width: 480px) {\n         header .date-range span {\n           font-size: 1.75rem; } }\n     header input {\n       border: none;\n       display: inline-block;\n       margin: 0 auto;\n       border: 1px solid #ccc; }\n       @media (max-width: 480px), screen and (max-device-width: 480px) {\n         header input {\n           font-size: 1.75rem; } }\n     header input:read-only {\n       background-color: #fff; }\n\n   .prev-month, .next-month {\n     position: absolute;\n     top: 0;\n     display: inline-block;\n     z-index: 100;\n     margin-top: .2rem; }\n     .prev-month .btn-sm, .next-month .btn-sm {\n       padding: .1rem .7rem; }\n\n   .prev-month {\n     left: 0;\n     margin-left: 4%; }\n\n   .next-month {\n     right: 0;\n     margin-right: 4%; }\n\n   .container {\n     height: 100%; }\n\n   .calendar-container {\n     box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1); }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       .calendar-container {\n         height: 89%; } }\n    "],
+      template: "\n   <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n       *ngIf=\"calendarDisplayed\" \n       (click)=\"hideCalendar()\">\n   </div>\n\n   <div class=\"form-group\">\n       <label for=\"startDate\">{{startLabel}}</label>\n       <div class=\"input-group\" \n           (click)=\"showCalendar($event)\"\n           (click)=\"focusStartDate()\">\n           <input type=\"text\" class=\"form-control\" name=\"startDate\"\n               [(ngModel)]=\"inputStartDate\" #dateField1 />\n           <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField1.focus\">\n               <i class=\"fa fa-calendar\"></i>\n           </span>\n       </div>\n   </div>\n\n   <div class=\"form-group\">\n       <label for=\"endDate\">{{endLabel}}</label>\n       <div class=\"input-group\" \n           (click)=\"showCalendar($event)\"\n           (click)=\"focusEndDate()\">\n           <input type=\"text\" class=\"form-control\" name=\"endDate\"\n               [(ngModel)]=\"inputEndDate\" #dateField2 />\n           <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField2.focus\">\n               <i class=\"fa fa-calendar\"></i>\n           </span>\n       </div>\n   </div>\n\n   <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n       <div class=\"container p-a-0\">\n           <header>\n               <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                   (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                   <i class=\"fa fa-chevron-left\"></i>\n               </button>\n               <div class=\"date-range pull-left input-group\">\n                   <input type=\"text\" class=\"form-control text-xs-center\" \n                       id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                   <span class=\"input-group-addon\"> - </span>\n                   <input type=\"text\" class=\"form-control text-xs-center\" \n                       id=\"endDate\" [(ngModel)]=\"inputDate\" readonly />\n               </div>\n               <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                   (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                   <i class=\"fa fa-chevron-right\"></i>\n               </button>\n               <table class=\"table m-b-0 days-of-week\">\n                   <tbody>\n                   <tr>\n                       <th>S</th>\n                       <th>M</th>\n                       <th>T</th>\n                       <th>W</th>\n                       <th>T</th>\n                       <th>F</th>\n                       <th>S</th>\n                   </tr>\n                   </tbody>\n               </table>\n           </header>\n           <div class=\"calendar-container m-a-0\">\n               <infinite-scroller\n                   (next)=\"addNextMonth()\"\n                   (prev)=\"addPrevMonth()\"\n                   distance=\"100\"\n                   height=\"{{calendarHeight}}\"\n                   hideScrollbar=\"true\">\n                   <date-picker-calendar scroll-item\n                       *ngFor=\"#month of calendarMonths #i=index\" \n                       [id]=\"i\"\n                       [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                       [dateFilter]=\"dateFilter\"\n                       [currentMonth]=\"month\" \n                       [(selectedDate)]=\"selectedDate\" \n                       (selectedDate)=\"hideCalendar()\">\n                       {{i}}\n                   </date-picker-calendar>\n               </infinite-scroller>\n           </div>\n       </div>\n   </div>\n    ",
+      directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+    }), __metadata('design:paramtypes', [core_2.ElementRef])], DateRangePicker);
+    return DateRangePicker;
+  }(DatePickerMobile_1.DatePickerMobile));
+  exports.DateRangePicker = DateRangePicker;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/directives/Animation/AnimationListener.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var AnimationListener_1 = $__require('bin/directives/Animation/AnimationListener.js');
+  var Range_1 = $__require('bin/pipes/Range/Range.js');
+  var Modal = (function() {
+    function Modal(el) {
+      this.displayed = false;
+      this.closeOnUnfocus = true;
+      this.closeButton = true;
+      this.modalTitle = '';
+      this._el = el.nativeElement;
+    }
+    Modal.prototype.clickElement = function(e) {
+      if (this.closeOnUnfocus) {
+        if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+          this.showModal(false);
+      }
+    };
+    Modal.prototype.getElement = function() {
+      return this._el;
+    };
+    Modal.prototype.showModal = function(isDisplayed) {
+      var _this = this;
+      var body = document.body;
+      if (isDisplayed === undefined) {
+        this.displayed = !this.displayed;
+      } else {
+        this.displayed = isDisplayed;
+      }
+      if (this.displayed) {
+        body.classList.add('modal-open');
+      } else {
+        body.classList.remove('modal-open');
+        if (this.closeOnUnfocus) {
+          this._el.childNodes[0].removeEventListener('click', function(e) {
+            if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+              _this.showModal(false);
+          });
+        }
+      }
+      return false;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle", void 0);
+    Modal = __decorate([core_1.Component({
+      selector: 'modal',
+      host: {'(click)': 'clickElement($event)'}
+    }), core_1.View({
+      styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
+      template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, AnimationListener_1.AnimationListener],
+      pipes: [Range_1.Range]
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
+    return Modal;
+  }());
+  exports.Modal = Modal;
+  exports.MODAL_PROVIDERS = [Modal];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var Range_1 = $__require('bin/pipes/Range/Range.js');
+  var Pagination = (function() {
+    function Pagination(el) {
+      this.currentPageChange = new core_1.EventEmitter();
+      this.pagesBlank = [];
+      this._el = el.nativeElement;
+    }
+    Pagination.prototype.ngOnChanges = function(changes) {
+      this.setPage(this.currentPage);
+    };
+    Pagination.prototype.getElement = function() {
+      return this._el;
+    };
+    Pagination.prototype.setPage = function(newPage) {
+      if (newPage < 1 || newPage > this.totalPages)
+        return;
+      this.currentPage = newPage;
+      if (this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0) {
+        this.startingIndex = 0;
+        this.endingIndex = this.pagesAtOnce;
+      } else if (this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
+        this.startingIndex = this.totalPages - this.pagesAtOnce;
+        this.endingIndex = this.totalPages;
+      } else {
+        this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
+        this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages ? this.startingIndex + this.pagesAtOnce : this.totalPages;
+      }
+      this.currentPageChange.next(this.currentPage);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
+    Pagination = __decorate([core_1.Component({
+      selector: 'pagination',
+      changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+      properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"]
+    }), core_1.View({
+      styles: ["\n      a {\n        cursor: pointer; }\n    "],
+      template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li [class.disabled]=\"currentPage == 1\">\n                  <a [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li [class.disabled]=\"currentPage == 1\">\n                  <a [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" [class.active]=\"currentPage == page\">\n                  <a (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li [class.disabled]=\"currentPage == totalPages\">\n                  <a [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li [class.disabled]=\"currentPage == totalPages\">\n                  <a [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"#page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES],
+      pipes: [common_1.SlicePipe, Range_1.Range]
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Pagination);
+    return Pagination;
+  }());
+  exports.Pagination = Pagination;
+  exports.PAGINATION_PROVIDERS = [Pagination];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["node_modules/angular2/core.js", "bin/utilities/ElementUtils.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var ElementUtils_1 = $__require('bin/utilities/ElementUtils.js');
+  var ScrollItem = (function() {
+    function ScrollItem(element) {
+      this.element = element.nativeElement;
+    }
+    Object.defineProperty(ScrollItem.prototype, "height", {
+      get: function() {
+        return ElementUtils_1.ElementUtils.outerHeight(this.element);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ScrollItem.prototype.ngAfterViewInit = function() {
+      this.element = this.element.firstElementChild;
+    };
+    ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [core_1.ElementRef])], ScrollItem);
+    return ScrollItem;
+  }());
+  exports.ScrollItem = ScrollItem;
+  var InfiniteScroller = (function() {
+    function InfiniteScroller(element) {
+      this.distance = 100;
+      this.height = 'auto';
+      this.hideScrollbar = false;
+      this.next = new core_1.EventEmitter();
+      this.prev = new core_1.EventEmitter();
+      this.topIndexChange = new core_1.EventEmitter();
+      this.topIndex = 0;
+      this.bottomIndexChange = new core_1.EventEmitter();
+      this.bottomIndex = 0;
+      this.lastScroll = 0;
+      this.container = element.nativeElement;
+    }
+    InfiniteScroller.prototype.ngAfterContentInit = function() {
+      var _this = this;
+      this.firstItem = this.itemQuery.first;
+      this.itemQuery.changes.subscribe(function() {
+        _this.handleItemChanges();
+      });
+    };
+    InfiniteScroller.prototype.ngAfterViewInit = function() {
+      this.container = this.container.firstElementChild;
+      this.container.scrollTop += 1;
+    };
+    InfiniteScroller.prototype.handleItemChanges = function() {
+      if (this.firstItem == null)
+        this.firstItem = this.itemQuery.first;
+      if (this.firstItem !== this.itemQuery.first) {
+        this.container.scrollTop += this.itemQuery.first.height;
+        this.firstItem = this.itemQuery.first;
+      }
+    };
+    InfiniteScroller.prototype.getVisableIndicies = function() {
+      var _this = this;
+      var itemArray = this.itemQuery.toArray();
+      var visableIndicies = itemArray.filter(function(i) {
+        return _this.checkVisableItem(i);
+      }).map(function(i) {
+        return itemArray.indexOf(i);
+      });
+      if (visableIndicies.length > 1) {
+        this.topIndex = visableIndicies[0];
+        this.bottomIndex = visableIndicies[visableIndicies.length - 1];
+        this.topIndexChange.next(this.topIndex);
+        this.bottomIndexChange.next(this.bottomIndex);
+      } else if (visableIndicies.length > 0) {
+        this.topIndex = visableIndicies[0];
+        this.topIndexChange.next(this.topIndex);
+      }
+    };
+    InfiniteScroller.prototype.checkVisableItem = function(item) {
+      var itemTop = item.element.offsetTop;
+      var itemBottom = itemTop + ElementUtils_1.ElementUtils.outerHeight(item.element);
+      var viewTop = this.container.scrollTop + this.container.offsetTop;
+      var viewBottom = viewTop + this.container.clientHeight;
+      if (itemTop > viewTop && itemTop < viewBottom)
+        return true;
+      if (itemBottom > viewTop && itemBottom < viewBottom)
+        return true;
+      if (itemTop < viewTop && itemBottom > viewBottom)
+        return true;
+      return false;
+    };
+    InfiniteScroller.prototype.doscroll = function(event) {
+      var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
+      var targetRect = target.getBoundingClientRect();
+      var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
+      var scrollDown = target.scrollTop > this.lastScroll;
+      var saveLastScroll = this.lastScroll;
+      this.lastScroll = target.scrollTop;
+      if (scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance * 2) {
+        this.next.emit(null);
+        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+          target.scrollTop -= 10;
+        }
+      } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
+        this.prev.emit(null);
+      }
+      this.getVisableIndicies();
+      if (target.scrollTop < 1)
+        target.scrollTop = 1;
+    };
+    InfiniteScroller.prototype.scrollTo = function(position) {
+      ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
+    };
+    InfiniteScroller.prototype.scrollToIndex = function(index) {
+      var itemArray = this.itemQuery.toArray();
+      var targetIndex = 0;
+      if (index > 0 && index < itemArray.length)
+        targetIndex = index;
+      else if (index >= itemArray.length)
+        targetIndex = itemArray.length - 1;
+      if (targetIndex < 0)
+        targetIndex = 0;
+      var target = this.itemQuery.toArray()[targetIndex];
+      var targetPos = target.element.offsetTop - this.container.offsetTop;
+      this.scrollTo(targetPos);
+    };
+    InfiniteScroller.prototype.isTop = function() {
+      return this.lastScroll <= 1;
+    };
+    InfiniteScroller.prototype.isBottom = function() {
+      return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "topIndexChange", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "bottomIndexChange", void 0);
+    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
+    InfiniteScroller = __decorate([core_1.Component({selector: "infinite-scroller"}), core_1.View({
+      template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
+      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
+      directives: []
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
+    return InfiniteScroller;
+  }());
+  exports.InfiniteScroller = InfiniteScroller;
+  exports.INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("bin/components/DatePicker/DatePickerBase.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/Directives/Animation/Animation.js"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -386,668 +1156,6 @@ System.registerDynamic("bin/components/DatePicker/DatePickerBase.js", ["node_mod
     return DatePickerBase;
   }());
   exports.DatePickerBase = DatePickerBase;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var Animation = (function() {
-    function Animation(element) {
-      this.onAnimationStart = new core_1.EventEmitter();
-      this.onAnimationEnd = new core_1.EventEmitter();
-      this.animationClasses = '';
-      this.play = false;
-      this.id = '';
-      this.group = '';
-      this._animationQueue = [];
-      this._callbacks = [];
-      this.element = element.nativeElement;
-    }
-    Animation.prototype.ngOnChanges = function() {
-      this.setup();
-    };
-    Animation.prototype.ngOnInit = function() {
-      this.setup();
-    };
-    Animation.prototype.addAnimation = function(animationClasses) {
-      var _this = this;
-      animationClasses.split(' ').map(function(c) {
-        return _this._animationQueue.push(c);
-      });
-      this.animationClasses += " " + animationClasses;
-      return this;
-    };
-    Animation.prototype.setup = function() {
-      this._animationQueue = this.animationClasses.split(" ").filter(function(c) {
-        return c.length > 0;
-      });
-      if (this.play && this._animationQueue.length > 0)
-        this.startAnimation();
-      return this;
-    };
-    Animation.prototype.startAnimation = function(callback) {
-      var _this = this;
-      if (callback === void 0) {
-        callback = null;
-      }
-      if (callback != null)
-        this._callbacks.push(callback);
-      this._animationQueue.shift().split('.').filter(function(c) {
-        return c.length > 0;
-      }).map(function(c) {
-        return _this.element.classList.add(c);
-      });
-      return this;
-    };
-    Animation.prototype.cleanAnimation = function() {
-      var _this = this;
-      this.animationClasses.replace('.', ' ').split(' ').filter(function(c) {
-        return c.length > 0;
-      }).map(function(c) {
-        _this.element.classList.remove(c);
-      });
-      return this;
-    };
-    Animation.prototype.animationStarted = function(event) {
-      this.onAnimationStart.next(null);
-    };
-    Animation.prototype.animationEnded = function(event) {
-      this.cleanAnimation();
-      if (this._animationQueue.length > 0) {
-        this.startAnimation();
-        return;
-      }
-      while (this._callbacks.length > 0)
-        this._callbacks.shift()();
-      this.onAnimationEnd.next(null);
-    };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
-    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
-    Animation = __decorate([core_1.Directive({
-      selector: '[animation]',
-      host: {
-        '(animationstart)': 'animationStarted($event)',
-        '(webkitAnimationStart)': 'animationStarted($event)',
-        '(oanimationstart)': 'animationStarted($event)',
-        '(MSAnimationStart)': 'animationStarted($event)',
-        '(animationend)': 'animationEnded($event)',
-        '(webkitAnimationEnd)': 'animationEnded($event)',
-        '(oanimationend)': 'animationEnded($event)',
-        '(MSAnimationEnd)': 'animationEnded($event)'
-      }
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
-    return Animation;
-  }());
-  exports.Animation = Animation;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerBase.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/Directives/Animation/Animation.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var core_2 = $__require('node_modules/angular2/core.js');
-  var common_1 = $__require('node_modules/angular2/common.js');
-  var DatePickerBase_1 = $__require('bin/components/DatePicker/DatePickerBase.js');
-  var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
-  var Animation_1 = $__require('bin/Directives/Animation/Animation.js');
-  var DatePicker = (function(_super) {
-    __extends(DatePicker, _super);
-    function DatePicker(modal) {
-      _super.call(this, modal);
-      this.valueChange = new core_2.EventEmitter();
-      this._inputDate = "";
-      this.selectedDate = new Date();
-    }
-    Object.defineProperty(DatePicker.prototype, "value", {
-      set: function(value) {
-        this._selectedDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DatePicker.prototype, "selectedDate", {
-      get: function() {
-        return this._selectedDate;
-      },
-      set: function(value) {
-        this._selectedDate = value;
-        this._inputDate = value.toLocaleDateString();
-        this.currentDate = value;
-        this.valueChange.next(this.selectedDate);
-        this.hideCalendar();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DatePicker.prototype, "inputDate", {
-      get: function() {
-        return this._inputDate;
-      },
-      set: function(value) {
-        this._inputDate = value;
-        this._selectedDate = new Date(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    DatePicker.prototype.ngOnInit = function() {
-      if (this.selectedDate < this._minDate)
-        this.selectedDate = this._minDate;
-      _super.prototype.onInit.call(this);
-    };
-    DatePicker.prototype.ngOnChanges = function(changes) {
-      this.onInit();
-    };
-    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "value", null);
-    __decorate([core_2.ViewChildren(Animation_1.Animation), __metadata('design:type', core_2.QueryList)], DatePicker.prototype, "calendarQuery", void 0);
-    DatePicker = __decorate([core_1.Component({
-      selector: 'date-picker',
-      inputs: ['minDate: min-date', 'maxDate: max-date', 'months: months']
-    }), core_1.View({
-      styles: ["\n   .input-group-addon {\n     background-color: #fff;\n     border-left: none; }\n\n   .modal {\n     display: block;\n     -webkit-transition: all 0.1s ease;\n     -moz-transition: all 0.1s ease;\n     transition: all 0.1s ease; }\n\n   .modal.ng-enter {\n     opacity: 0;\n     -webkit-transform: rotateX(-90deg);\n     -moz-transform: rotateX(-90deg);\n     -ms-transform: rotateX(-90deg);\n     -o-transform: rotateX(-90deg);\n     transform: rotateX(-90deg); }\n\n   .modal.ng-enter-active {\n     opacity: 1;\n     -webkit-transform: rotateX(0deg);\n     -moz-transform: rotateX(0deg);\n     -ms-transform: rotateX(0deg);\n     -o-transform: rotateX(0deg);\n     transform: rotateX(0deg); }\n\n   .modal.ng-leave {\n     opacity: 1;\n     -webkit-transform: rotateX(0deg);\n     -moz-transform: rotateX(0deg);\n     -ms-transform: rotateX(0deg);\n     -o-transform: rotateX(0deg);\n     transform: rotateX(0deg); }\n\n   .modal.ng-leave-active {\n     opacity: 0;\n     -webkit-transform: rotateX(90deg);\n     -moz-transform: rotateX(90deg);\n     -ms-transform: rotateX(90deg);\n     -o-transform: rotateX(90deg);\n     transform: rotateX(90deg); }\n\n   .modal-dialog {\n     display: inline-block;\n     width: 400px;\n     height: 300px;\n     margin: 0;\n     position: relative; }\n\n   .calendar-container {\n     overflow: hidden;\n     border: 1px solid transparent;\n     white-space: nowrap; }\n\n   date-picker-calendar {\n     padding-top: .5rem !important; }\n\n   date-picker-calendar.left.enter {\n     -webkit-animation: slideInLeft 0.2s ease;\n     -moz-animation: slideInLeft 0.2s ease;\n     animation: slideInLeft 0.2s ease; }\n\n   date-picker-calendar.left.leave {\n     margin-right: -100%;\n     -webkit-animation: slideOutLeft 0.2s ease;\n     -moz-animation: slideOutLeft 0.2s ease;\n     animation: slideOutLeft 0.2s ease; }\n\n   date-picker-calendar.right.enter {\n     -webkit-animation: slideInRight 0.2s ease;\n     -moz-animation: slideInRight 0.2s ease;\n     animation: slideInRight 0.2s ease; }\n\n   date-picker-calendar.right.leave {\n     margin-left: -50%;\n     -webkit-animation: slideOutRight 0.2s ease;\n     -moz-animation: slideOutRight 0.2s ease;\n     animation: slideOutRight 0.2s ease; }\n\n   .input-group-addon {\n     background-color: #fff;\n     border-left: none; }\n\n   header {\n     position: relative;\n     top: 0;\n     left: 0; }\n\n   .prev-month, .next-month {\n     position: absolute;\n     top: 0;\n     display: inline-block;\n     z-index: 100;\n     margin-top: .2rem; }\n     .prev-month .btn-sm, .next-month .btn-sm {\n       padding: .1rem .7rem; }\n\n   .prev-month {\n     left: 0;\n     margin-left: 4%; }\n\n   .next-month {\n     right: 0;\n     margin-right: 4%; }\n    "],
-      template: "\n   <div class=\"input-group\" (click)=\"showCalendar($event)\">\n    <input type=\"text\" class=\"form-control\"\n        [(ngModel)]=\"inputDate\" \n         #dateField\n         />\n    <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n        <i class=\"fa fa-calendar\"></i>\n    </span>\n   </div>\n\n   <section class=\"modal ng-animate\" *ngIf=\"calendarDisplayed\">\n   <div class=\"modal-dialog\" role=\"document\"\n    [style.top.px]=\"calendarY\"\n    [style.left.px]=\"calendarX\">\n   <div class=\"modal-content container p-a-0\">\n    <header class=\"row\">\n        <div class=\"prev-month\">\n            <button class=\"btn btn-primary btn-sm\" role=\"prev\"\n                [class.disabled]=\"!canPrevMonth()\"\t\t\t \n                (click)=\"prevMonth()\">\n                <i class=\"fa fa-chevron-circle-left\"></i>\n            </button>\n        </div>\n        <div class=\"next-month\">\n            <button class=\"btn btn-primary btn-sm\" role=\"next\"\n                [class.disabled]=\"!canNextMonth()\"\n                (click)=\"nextMonth()\">\n                <i class=\"fa fa-chevron-circle-right\"></i>\n            </button>\n        </div>\n    </header>\n    <section class=\"calendar-container\">\n        <date-picker-calendar animation\n            *ngFor=\"#month of calendarMonths #i=index\"\n            class=\"col-md-{{12/months}} p-a-0\"\n            [style.margin-left]=\"(i!=months||direction!='right'?0:-100/months)+'%'\" \n            [id]=\"i\"\n            [min-date]=\"minDate\" [max-date]=\"maxDate\"\n            [current-month]=\"month\" \n            [(selected-date)]=\"selectedDate\" \n            (selected-date)=\"hideCalendar()\">\n        </date-picker-calendar>\n    </section>\n   </div>\n   </div>\n   </section>\n    ",
-      directives: [DatePickerCalendar_1.DatePickerCalendar, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, Animation_1.Animation]
-    }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePicker);
-    return DatePicker;
-  }(DatePickerBase_1.DatePickerBase));
-  exports.DatePicker = DatePicker;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/DatePicker/DatePickerCalendar.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var core_2 = $__require('node_modules/angular2/core.js');
-  var common_1 = $__require('node_modules/angular2/common.js');
-  var DatePickerCalendar = (function() {
-    function DatePickerCalendar() {
-      this.selectedDateChange = new core_2.EventEmitter();
-      this.showMonth = true;
-    }
-    DatePickerCalendar.prototype.ngOnInit = function() {
-      this.buildWeeks(this.currentMonth || new Date());
-    };
-    DatePickerCalendar.prototype.checkSelectable = function(date) {
-      var dateNumber = parseInt(date);
-      if (isNaN(dateNumber))
-        return false;
-      var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-      if (typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
-        return false;
-      return compareDate >= this.minDate && compareDate <= this.maxDate;
-    };
-    DatePickerCalendar.prototype.checkSelectedDate = function(date) {
-      if (typeof this.selectedDate == undefined || this.selectedDate == null)
-        return false;
-      return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
-    };
-    DatePickerCalendar.prototype.selectDate = function(date) {
-      if (!this.checkSelectable(date))
-        return;
-      var dateNumber = parseInt(date);
-      this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-      this.selectedDateChange.next(this.selectedDate);
-    };
-    DatePickerCalendar.prototype.buildWeeks = function(date) {
-      this.currentMonth = date;
-      var currentDay = new Date(this.currentMonth.toDateString());
-      currentDay.setDate(1);
-      currentDay.setDate(currentDay.getDate() - currentDay.getDay());
-      var lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0);
-      lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
-      this.weeks = [];
-      var currentWeek = [];
-      while (currentDay <= lastDay) {
-        if (currentDay.getMonth() == this.currentMonth.getMonth())
-          currentWeek.push(currentDay.getDate().toLocaleString());
-        else
-          currentWeek.push("");
-        currentDay.setDate(currentDay.getDate() + 1);
-        if (currentDay.getDay() == 0) {
-          this.weeks.push(currentWeek);
-          currentWeek = [];
-        }
-      }
-      if (this.weeks.length > 5)
-        return;
-      var firstWeekCount = this.weeks[0].filter(function(i) {
-        return i.length > 0;
-      }).length;
-      var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
-        return i.length > 0;
-      }).length;
-    };
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate", void 0);
-    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerCalendar.prototype, "selectedDateChange", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "minDate", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "maxDate", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Function)], DatePickerCalendar.prototype, "dateFilter", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "showMonth", void 0);
-    DatePickerCalendar = __decorate([core_1.Component({selector: 'date-picker-calendar'}), core_1.View({
-      styles: ["\n   .table {\n     font-size: .75rem;\n     border-top: 1px solid #eceeef;\n     background-color: #fff; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     font-size: 1rem;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       th, td {\n         padding: .5rem;\n         font-size: 1.5rem; } }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #71b1e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #c9c9c9; }\n    "],
-      template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"#week of weeks\">\n                <td *ngFor=\"#day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                    (click)=\"selectDate(day)\">\n                    {{day}}\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-    }), __metadata('design:paramtypes', [])], DatePickerCalendar);
-    return DatePickerCalendar;
-  }());
-  exports.DatePickerCalendar = DatePickerCalendar;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/Utilities/DetectionUtils.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var MobileDetection = (function() {
-    function MobileDetection() {}
-    MobileDetection.isAndroid = function() {
-      return navigator.userAgent.match(/Android/i) != null;
-    };
-    MobileDetection.isBlackBerry = function() {
-      return navigator.userAgent.match(/BlackBerry/i) != null;
-    };
-    MobileDetection.isIOS = function() {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i) != null;
-    };
-    MobileDetection.isOpera = function() {
-      return navigator.userAgent.match(/Opera Mini/i) != null;
-    };
-    MobileDetection.isWindows = function() {
-      return navigator.userAgent.match(/IEMobile|WPDesktop/i) != null;
-    };
-    MobileDetection.isAny = function() {
-      return (this.isAndroid() || this.isBlackBerry() || this.isIOS() || this.isOpera() || this.isWindows());
-    };
-    return MobileDetection;
-  }());
-  exports.MobileDetection = MobileDetection;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/DatePicker/DatePickerMobile.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/Utilities/DetectionUtils.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var core_2 = $__require('node_modules/angular2/core.js');
-  var common_1 = $__require('node_modules/angular2/common.js');
-  var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
-  var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  var DetectionUtils_1 = $__require('bin/Utilities/DetectionUtils.js');
-  var DatePickerMobile = (function() {
-    function DatePickerMobile(modal) {
-      this._minDate = new Date(1900, 0, 1);
-      this._maxDate = new Date(2200, 0, 1);
-      this.valueChange = new core_2.EventEmitter();
-      this._inputDate = "";
-      this.calendarDisplayed = true;
-      this.calendarX = 1;
-      this.calendarY = 1;
-      this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
-      this.calendarMonths = [];
-      this._preGenMonths = 2;
-      this.modal = modal.nativeElement;
-      this.selectedDate = new Date();
-      if (this.selectedDate < this._minDate)
-        this.selectedDate = this._minDate;
-    }
-    Object.defineProperty(DatePickerMobile.prototype, "minDate", {
-      get: function() {
-        return this._minDate;
-      },
-      set: function(value) {
-        this._minDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DatePickerMobile.prototype, "maxDate", {
-      get: function() {
-        return this._maxDate;
-      },
-      set: function(value) {
-        this._maxDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DatePickerMobile.prototype, "value", {
-      set: function(value) {
-        this._selectedDate = this.handleDateInput(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DatePickerMobile.prototype, "selectedDate", {
-      get: function() {
-        return this._selectedDate;
-      },
-      set: function(value) {
-        this._selectedDate = value;
-        this._inputDate = value.toLocaleDateString();
-        this.valueChange.next(this.selectedDate);
-        this.hideCalendar();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DatePickerMobile.prototype, "inputDate", {
-      get: function() {
-        return this._inputDate;
-      },
-      set: function(value) {
-        this._inputDate = value;
-        this._selectedDate = new Date(value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    DatePickerMobile.prototype.ngOnInit = function() {
-      this.calendarMonths = [new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth() - 1), new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth())];
-      for (var i = 0; i < this._preGenMonths; i++) {
-        var earliestDate = this.calendarMonths[0];
-        var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-        if (this.canPrevMonth)
-          this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-        if (this.canNextMonth)
-          this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-      }
-    };
-    DatePickerMobile.prototype.ngAfterViewInit = function() {
-      var _this = this;
-      this.modal.addEventListener('click', function(e) {
-        if (e.srcElement.className.indexOf('modal') != -1)
-          _this.hideCalendar();
-      });
-    };
-    DatePickerMobile.prototype.handleDateInput = function(value) {
-      if (value instanceof Date && !isNaN(value.valueOf()))
-        return value;
-      else
-        return new Date(value);
-    };
-    DatePickerMobile.prototype.showCalendar = function(event) {
-      var _this = this;
-      if (event != null) {
-        var clickedRect = event.srcElement.parentElement.getBoundingClientRect();
-        this.calendarX = clickedRect.left;
-        if (screen.height - clickedRect.bottom <= 500) {
-          this.calendarY = (clickedRect.top);
-        } else {
-          this.calendarY = 0;
-        }
-      }
-      this.ngOnInit();
-      this.calendarDisplayed = true;
-      setTimeout(function() {
-        var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
-          return m.getFullYear() == _this.selectedDate.getFullYear() && m.getMonth() == _this.selectedDate.getMonth();
-        });
-        _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-        _this.calendarScroller.scrollToIndex(scrollToMonth);
-      }, 1);
-    };
-    DatePickerMobile.prototype.hideCalendar = function() {
-      this.calendarDisplayed = false;
-    };
-    Object.defineProperty(DatePickerMobile.prototype, "canPrevMonth", {
-      get: function() {
-        var currentDate = this.calendarMonths[0];
-        var prevDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
-        var compareDate = new Date(this._minDate.getFullYear(), this._minDate.getMonth());
-        return prevDate >= compareDate;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DatePickerMobile.prototype, "canNextMonth", {
-      get: function() {
-        var currentDate = this.calendarMonths[this.calendarMonths.length - 1];
-        var nextDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
-        var compareDate = new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
-        return nextDate <= compareDate;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    DatePickerMobile.prototype.disablePrev = function() {
-      return this.calendarScroller ? this.calendarScroller.isTop() : false;
-    };
-    DatePickerMobile.prototype.disableNext = function() {
-      return this.calendarScroller ? this.calendarScroller.isBottom() : false;
-    };
-    DatePickerMobile.prototype.scrollPrevMonth = function() {
-      var _this = this;
-      if (this.calendarScroller.topIndex == 0)
-        this.addPrevMonth();
-      setTimeout(function() {
-        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex - 1);
-      }, 10);
-    };
-    DatePickerMobile.prototype.scrollNextMonth = function() {
-      var _this = this;
-      setTimeout(function() {
-        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex + 1);
-      }, 10);
-    };
-    DatePickerMobile.prototype.addNextMonth = function() {
-      if (!this.canNextMonth)
-        return;
-      var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
-      var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
-      this.calendarMonths.push(nextMonth);
-    };
-    DatePickerMobile.prototype.addPrevMonth = function() {
-      if (!this.canPrevMonth)
-        return;
-      var firstMonth = this.calendarMonths[0];
-      var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
-      this.calendarMonths.unshift(prevMonth);
-    };
-    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "minDate", null);
-    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "maxDate", null);
-    __decorate([core_2.Input(), __metadata('design:type', Function)], DatePickerMobile.prototype, "dateFilter", void 0);
-    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerMobile.prototype, "valueChange", void 0);
-    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePickerMobile.prototype, "value", null);
-    __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DatePickerMobile.prototype, "calendarScroller", void 0);
-    DatePickerMobile = __decorate([core_1.Component({selector: "date-picker-mobile"}), core_1.View({
-      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 101;\n        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 80%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 10%;\n            font-size: 1.5rem; } }\n\n      table {\n        font-size: .75rem; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          table {\n            font-size: 1.5rem; } }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          header {\n            height: 11%; } }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 12%;\n          margin-top: .2rem; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header button {\n              margin-top: .5rem; } }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 75%; }\n        header .date-range span {\n          background-color: #818a91; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header .date-range span {\n              font-size: 1.75rem; } }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 0 auto; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header input {\n              font-size: 1.75rem; } }\n        header input:read-only {\n          background-color: #fff; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      .calendar-container {\n        box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1); }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .calendar-container {\n            height: 89%; } }\n    "],
-      template: "\n      <div class=\"input-group\" (click)=\"showCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n            [(ngModel)]=\"inputDate\" \n             #dateField\n             />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                      <span class=\"input-group-addon\"> - </span>\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"endDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"#month of calendarMonths #i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
-      directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-    }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePickerMobile);
-    return DatePickerMobile;
-  }());
-  exports.DatePickerMobile = DatePickerMobile;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/directives/Animation/AnimationListener.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var common_1 = $__require('node_modules/angular2/common.js');
-  var AnimationListener_1 = $__require('bin/directives/Animation/AnimationListener.js');
-  var Range_1 = $__require('bin/pipes/Range/Range.js');
-  var Modal = (function() {
-    function Modal(el) {
-      this.displayed = false;
-      this.closeOnUnfocus = true;
-      this.closeButton = true;
-      this.modalTitle = '';
-      this._el = el.nativeElement;
-    }
-    Modal.prototype.clickElement = function(e) {
-      if (this.closeOnUnfocus) {
-        if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
-          this.showModal(false);
-      }
-    };
-    Modal.prototype.getElement = function() {
-      return this._el;
-    };
-    Modal.prototype.showModal = function(isDisplayed) {
-      var _this = this;
-      var body = document.body;
-      if (isDisplayed === undefined) {
-        this.displayed = !this.displayed;
-      } else {
-        this.displayed = isDisplayed;
-      }
-      if (this.displayed) {
-        body.classList.add('modal-open');
-      } else {
-        body.classList.remove('modal-open');
-        if (this.closeOnUnfocus) {
-          this._el.childNodes[0].removeEventListener('click', function(e) {
-            if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
-              _this.showModal(false);
-          });
-        }
-      }
-      return false;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle", void 0);
-    Modal = __decorate([core_1.Component({
-      selector: 'modal',
-      host: {'(click)': 'clickElement($event)'}
-    }), core_1.View({
-      styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
-      template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, AnimationListener_1.AnimationListener],
-      pipes: [Range_1.Range]
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
-    return Modal;
-  }());
-  exports.Modal = Modal;
-  exports.MODAL_PROVIDERS = [Modal];
   global.define = __define;
   return module.exports;
 });
@@ -4814,7 +4922,7 @@ System.registerDynamic("node_modules/angular2/common.js", ["node_modules/angular
   return module.exports;
 });
 
-System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/DatePicker/DatePickerCalendar.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4837,59 +4945,108 @@ System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('node_modules/angular2/core.js');
+  var core_2 = $__require('node_modules/angular2/core.js');
   var common_1 = $__require('node_modules/angular2/common.js');
-  var Range_1 = $__require('bin/pipes/Range/Range.js');
-  var Pagination = (function() {
-    function Pagination(el) {
-      this.currentPageChange = new core_1.EventEmitter();
-      this.pagesBlank = [];
-      this._el = el.nativeElement;
+  var DatePickerCalendar = (function() {
+    function DatePickerCalendar() {
+      this.selectedDateChange = new core_2.EventEmitter();
+      this.dateTarget = null;
+      this.showMonth = true;
     }
-    Pagination.prototype.ngOnChanges = function(changes) {
-      this.setPage(this.currentPage);
+    DatePickerCalendar.prototype.ngOnInit = function() {
+      this.buildWeeks(this.currentMonth || new Date());
     };
-    Pagination.prototype.getElement = function() {
-      return this._el;
+    DatePickerCalendar.prototype.checkSelectable = function(date) {
+      var dateNumber = parseInt(date);
+      if (isNaN(dateNumber))
+        return false;
+      var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+      if (typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
+        return false;
+      return compareDate >= this.minDate && compareDate <= this.maxDate;
     };
-    Pagination.prototype.setPage = function(newPage) {
-      if (newPage < 1 || newPage > this.totalPages)
-        return;
-      this.currentPage = newPage;
-      if (this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0) {
-        this.startingIndex = 0;
-        this.endingIndex = this.pagesAtOnce;
-      } else if (this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
-        this.startingIndex = this.totalPages - this.pagesAtOnce;
-        this.endingIndex = this.totalPages;
-      } else {
-        this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
-        this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages ? this.startingIndex + this.pagesAtOnce : this.totalPages;
+    DatePickerCalendar.prototype.checkSelectedDate = function(date) {
+      if (typeof this.selectedDate == undefined || this.selectedDate == null)
+        return false;
+      if (typeof this.startDate != undefined && this.startDate != null && typeof this.endDate != undefined && this.endDate != null) {
+        var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
+        return compareDate >= this.startDate && compareDate <= this.endDate;
       }
-      this.currentPageChange.next(this.currentPage);
+      return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
     };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
-    Pagination = __decorate([core_1.Component({
-      selector: 'pagination',
-      changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-      properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"]
-    }), core_1.View({
-      styles: ["\n      a {\n        cursor: pointer; }\n    "],
-      template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li [class.disabled]=\"currentPage == 1\">\n                  <a [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li [class.disabled]=\"currentPage == 1\">\n                  <a [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" [class.active]=\"currentPage == page\">\n                  <a (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li [class.disabled]=\"currentPage == totalPages\">\n                  <a [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li [class.disabled]=\"currentPage == totalPages\">\n                  <a [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"#page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES],
-      pipes: [common_1.SlicePipe, Range_1.Range]
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], Pagination);
-    return Pagination;
+    DatePickerCalendar.prototype.checkStartDate = function(date) {
+      if (typeof this.startDate == undefined || this.startDate == null)
+        return false;
+      if (this.startDate == this.endDate)
+        return false;
+      return this.startDate.getFullYear() == this.currentMonth.getFullYear() && this.startDate.getMonth() == this.currentMonth.getMonth() && this.startDate.getDate().toString() == date;
+    };
+    DatePickerCalendar.prototype.checkEndDate = function(date) {
+      if (typeof this.endDate == undefined || this.endDate == null)
+        return false;
+      if (this.startDate == this.endDate)
+        return false;
+      return this.endDate.getFullYear() == this.currentMonth.getFullYear() && this.endDate.getMonth() == this.currentMonth.getMonth() && this.endDate.getDate().toString() == date;
+    };
+    DatePickerCalendar.prototype.selectDate = function(date) {
+      if (!this.checkSelectable(date))
+        return;
+      var dateNumber = parseInt(date);
+      this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+      this.selectedDateChange.next(this.selectedDate);
+    };
+    DatePickerCalendar.prototype.buildWeeks = function(date) {
+      this.currentMonth = date;
+      var currentDay = new Date(this.currentMonth.toDateString());
+      currentDay.setDate(1);
+      currentDay.setDate(currentDay.getDate() - currentDay.getDay());
+      var lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0);
+      lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
+      this.weeks = [];
+      var currentWeek = [];
+      while (currentDay <= lastDay) {
+        if (currentDay.getMonth() == this.currentMonth.getMonth())
+          currentWeek.push(currentDay.getDate().toLocaleString());
+        else
+          currentWeek.push("");
+        currentDay.setDate(currentDay.getDate() + 1);
+        if (currentDay.getDay() == 0) {
+          this.weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      }
+      if (this.weeks.length > 5)
+        return;
+      var firstWeekCount = this.weeks[0].filter(function(i) {
+        return i.length > 0;
+      }).length;
+      var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
+        return i.length > 0;
+      }).length;
+    };
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate", void 0);
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerCalendar.prototype, "selectedDateChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "dateTarget", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "startDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "endDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "minDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "maxDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Function)], DatePickerCalendar.prototype, "dateFilter", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "showMonth", void 0);
+    DatePickerCalendar = __decorate([core_1.Component({selector: 'date-picker-calendar'}), core_1.View({
+      styles: ["\n   .table {\n     font-size: .75rem;\n     border-top: 1px solid #eceeef;\n     background-color: #fff;\n     border-collapse: collapse; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     font-size: 1rem;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none;\n     position: relative; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       th, td {\n         padding: .5rem;\n         font-size: 1.5rem; } }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #71b1e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #c9c9c9; }\n\n   td.startDate, td.endDate {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.startDate:after {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     right: 0;\n     background-color: inherit;\n     border-left: 1em solid #0275d8;\n     border-top: 1.1em solid #71b1e9;\n     border-bottom: 1.1em solid #71b1e9; }\n\n   td.endDate:before {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     left: 0;\n     background-color: inherit;\n     border-right: 1em solid #0275d8;\n     border-top: 1.1em solid #71b1e9;\n     border-bottom: 1.1em solid #71b1e9; }\n    "],
+      template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"#week of weeks\">\n                <td *ngFor=\"#day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                       [class.startDate]=\"checkStartDate(day)\"\n                       [class.endDate]=\"checkEndDate(day)\"\n                    (click)=\"selectDate(day)\">\n                    {{day}}\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+    }), __metadata('design:paramtypes', [])], DatePickerCalendar);
+    return DatePickerCalendar;
   }());
-  exports.Pagination = Pagination;
-  exports.PAGINATION_PROVIDERS = [Pagination];
+  exports.DatePickerCalendar = DatePickerCalendar;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["node_modules/angular2/core.js", "bin/utilities/ElementUtils.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/Directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4912,152 +5069,208 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('node_modules/angular2/core.js');
-  var ElementUtils_1 = $__require('bin/utilities/ElementUtils.js');
-  var ScrollItem = (function() {
-    function ScrollItem(element) {
+  var Animation = (function() {
+    function Animation(element) {
+      this.onAnimationStart = new core_1.EventEmitter();
+      this.onAnimationEnd = new core_1.EventEmitter();
+      this.animationClasses = '';
+      this.play = false;
+      this.id = '';
+      this.group = '';
+      this._animationQueue = [];
+      this._callbacks = [];
       this.element = element.nativeElement;
     }
-    Object.defineProperty(ScrollItem.prototype, "height", {
-      get: function() {
-        return ElementUtils_1.ElementUtils.outerHeight(this.element);
+    Animation.prototype.ngOnChanges = function() {
+      this.setup();
+    };
+    Animation.prototype.ngOnInit = function() {
+      this.setup();
+    };
+    Animation.prototype.addAnimation = function(animationClasses) {
+      var _this = this;
+      animationClasses.split(' ').map(function(c) {
+        return _this._animationQueue.push(c);
+      });
+      this.animationClasses += " " + animationClasses;
+      return this;
+    };
+    Animation.prototype.setup = function() {
+      this._animationQueue = this.animationClasses.split(" ").filter(function(c) {
+        return c.length > 0;
+      });
+      if (this.play && this._animationQueue.length > 0)
+        this.startAnimation();
+      return this;
+    };
+    Animation.prototype.startAnimation = function(callback) {
+      var _this = this;
+      if (callback === void 0) {
+        callback = null;
+      }
+      if (callback != null)
+        this._callbacks.push(callback);
+      this._animationQueue.shift().split('.').filter(function(c) {
+        return c.length > 0;
+      }).map(function(c) {
+        return _this.element.classList.add(c);
+      });
+      return this;
+    };
+    Animation.prototype.cleanAnimation = function() {
+      var _this = this;
+      this.animationClasses.replace('.', ' ').split(' ').filter(function(c) {
+        return c.length > 0;
+      }).map(function(c) {
+        _this.element.classList.remove(c);
+      });
+      return this;
+    };
+    Animation.prototype.animationStarted = function(event) {
+      this.onAnimationStart.next(null);
+    };
+    Animation.prototype.animationEnded = function(event) {
+      this.cleanAnimation();
+      if (this._animationQueue.length > 0) {
+        this.startAnimation();
+        return;
+      }
+      while (this._callbacks.length > 0)
+        this._callbacks.shift()();
+      this.onAnimationEnd.next(null);
+    };
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
+    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
+    Animation = __decorate([core_1.Directive({
+      selector: '[animation]',
+      host: {
+        '(animationstart)': 'animationStarted($event)',
+        '(webkitAnimationStart)': 'animationStarted($event)',
+        '(oanimationstart)': 'animationStarted($event)',
+        '(MSAnimationStart)': 'animationStarted($event)',
+        '(animationend)': 'animationEnded($event)',
+        '(webkitAnimationEnd)': 'animationEnded($event)',
+        '(oanimationend)': 'animationEnded($event)',
+        '(MSAnimationEnd)': 'animationEnded($event)'
+      }
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
+    return Animation;
+  }());
+  exports.Animation = Animation;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerBase.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/Directives/Animation/Animation.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var core_2 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var DatePickerBase_1 = $__require('bin/components/DatePicker/DatePickerBase.js');
+  var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
+  var Animation_1 = $__require('bin/Directives/Animation/Animation.js');
+  var DatePicker = (function(_super) {
+    __extends(DatePicker, _super);
+    function DatePicker(modal) {
+      _super.call(this, modal);
+      this.valueChange = new core_2.EventEmitter();
+      this._inputDate = "";
+      this.selectedDate = new Date();
+    }
+    Object.defineProperty(DatePicker.prototype, "value", {
+      set: function(value) {
+        this._selectedDate = this.handleDateInput(value);
       },
       enumerable: true,
       configurable: true
     });
-    ScrollItem.prototype.ngAfterViewInit = function() {
-      this.element = this.element.firstElementChild;
+    Object.defineProperty(DatePicker.prototype, "selectedDate", {
+      get: function() {
+        return this._selectedDate;
+      },
+      set: function(value) {
+        this._selectedDate = value;
+        this._inputDate = value.toLocaleDateString();
+        this.currentDate = value;
+        this.valueChange.next(this.selectedDate);
+        this.hideCalendar();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DatePicker.prototype, "inputDate", {
+      get: function() {
+        return this._inputDate;
+      },
+      set: function(value) {
+        this._inputDate = value;
+        this._selectedDate = new Date(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    DatePicker.prototype.ngOnInit = function() {
+      if (this.selectedDate < this._minDate)
+        this.selectedDate = this._minDate;
+      _super.prototype.onInit.call(this);
     };
-    ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [core_1.ElementRef])], ScrollItem);
-    return ScrollItem;
-  }());
-  exports.ScrollItem = ScrollItem;
-  var InfiniteScroller = (function() {
-    function InfiniteScroller(element) {
-      this.distance = 100;
-      this.height = 'auto';
-      this.hideScrollbar = false;
-      this.next = new core_1.EventEmitter();
-      this.prev = new core_1.EventEmitter();
-      this.topIndexChange = new core_1.EventEmitter();
-      this.topIndex = 0;
-      this.bottomIndexChange = new core_1.EventEmitter();
-      this.bottomIndex = 0;
-      this.lastScroll = 0;
-      this.container = element.nativeElement;
-    }
-    InfiniteScroller.prototype.ngAfterContentInit = function() {
-      var _this = this;
-      this.firstItem = this.itemQuery.first;
-      this.itemQuery.changes.subscribe(function() {
-        _this.handleItemChanges();
-      });
+    DatePicker.prototype.ngOnChanges = function(changes) {
+      this.onInit();
     };
-    InfiniteScroller.prototype.ngAfterViewInit = function() {
-      this.container = this.container.firstElementChild;
-      this.container.scrollTop += 1;
-    };
-    InfiniteScroller.prototype.handleItemChanges = function() {
-      if (this.firstItem == null)
-        this.firstItem = this.itemQuery.first;
-      if (this.firstItem !== this.itemQuery.first) {
-        this.container.scrollTop += this.itemQuery.first.height;
-        this.firstItem = this.itemQuery.first;
-      }
-    };
-    InfiniteScroller.prototype.getVisableIndicies = function() {
-      var _this = this;
-      var itemArray = this.itemQuery.toArray();
-      var visableIndicies = itemArray.filter(function(i) {
-        return _this.checkVisableItem(i);
-      }).map(function(i) {
-        return itemArray.indexOf(i);
-      });
-      if (visableIndicies.length > 1) {
-        this.topIndex = visableIndicies[0];
-        this.bottomIndex = visableIndicies[visableIndicies.length - 1];
-        this.topIndexChange.next(this.topIndex);
-        this.bottomIndexChange.next(this.bottomIndex);
-      } else if (visableIndicies.length > 0) {
-        this.topIndex = visableIndicies[0];
-        this.topIndexChange.next(this.topIndex);
-      }
-    };
-    InfiniteScroller.prototype.checkVisableItem = function(item) {
-      var itemTop = item.element.offsetTop;
-      var itemBottom = itemTop + ElementUtils_1.ElementUtils.outerHeight(item.element);
-      var viewTop = this.container.scrollTop + this.container.offsetTop;
-      var viewBottom = viewTop + this.container.clientHeight;
-      if (itemTop > viewTop && itemTop < viewBottom)
-        return true;
-      if (itemBottom > viewTop && itemBottom < viewBottom)
-        return true;
-      if (itemTop < viewTop && itemBottom > viewBottom)
-        return true;
-      return false;
-    };
-    InfiniteScroller.prototype.doscroll = function(event) {
-      var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
-      var targetRect = target.getBoundingClientRect();
-      var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
-      var scrollDown = target.scrollTop > this.lastScroll;
-      var saveLastScroll = this.lastScroll;
-      this.lastScroll = target.scrollTop;
-      if (scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance * 2) {
-        this.next.emit(null);
-        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-          target.scrollTop -= 10;
-        }
-      } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
-        this.prev.emit(null);
-      }
-      this.getVisableIndicies();
-      if (target.scrollTop < 1)
-        target.scrollTop = 1;
-    };
-    InfiniteScroller.prototype.scrollTo = function(position) {
-      ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
-    };
-    InfiniteScroller.prototype.scrollToIndex = function(index) {
-      var itemArray = this.itemQuery.toArray();
-      var targetIndex = 0;
-      if (index > 0 && index < itemArray.length)
-        targetIndex = index;
-      else if (index >= itemArray.length)
-        targetIndex = itemArray.length - 1;
-      if (targetIndex < 0)
-        targetIndex = 0;
-      var target = this.itemQuery.toArray()[targetIndex];
-      var targetPos = target.element.offsetTop - this.container.offsetTop;
-      this.scrollTo(targetPos);
-    };
-    InfiniteScroller.prototype.isTop = function() {
-      return this.lastScroll <= 1;
-    };
-    InfiniteScroller.prototype.isBottom = function() {
-      return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "topIndexChange", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "bottomIndexChange", void 0);
-    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
-    InfiniteScroller = __decorate([core_1.Component({selector: "infinite-scroller"}), core_1.View({
-      template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
-      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
-      directives: []
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
-    return InfiniteScroller;
-  }());
-  exports.InfiniteScroller = InfiniteScroller;
-  exports.INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "value", null);
+    __decorate([core_2.ViewChildren(Animation_1.Animation), __metadata('design:type', core_2.QueryList)], DatePicker.prototype, "calendarQuery", void 0);
+    DatePicker = __decorate([core_1.Component({
+      selector: 'date-picker',
+      inputs: ['minDate: min-date', 'maxDate: max-date', 'months: months']
+    }), core_1.View({
+      styles: ["\n   .input-group-addon {\n     background-color: #fff;\n     border-left: none; }\n\n   .modal {\n     display: block;\n     -webkit-transition: all 0.1s ease;\n     -moz-transition: all 0.1s ease;\n     transition: all 0.1s ease; }\n\n   .modal.ng-enter {\n     opacity: 0;\n     -webkit-transform: rotateX(-90deg);\n     -moz-transform: rotateX(-90deg);\n     -ms-transform: rotateX(-90deg);\n     -o-transform: rotateX(-90deg);\n     transform: rotateX(-90deg); }\n\n   .modal.ng-enter-active {\n     opacity: 1;\n     -webkit-transform: rotateX(0deg);\n     -moz-transform: rotateX(0deg);\n     -ms-transform: rotateX(0deg);\n     -o-transform: rotateX(0deg);\n     transform: rotateX(0deg); }\n\n   .modal.ng-leave {\n     opacity: 1;\n     -webkit-transform: rotateX(0deg);\n     -moz-transform: rotateX(0deg);\n     -ms-transform: rotateX(0deg);\n     -o-transform: rotateX(0deg);\n     transform: rotateX(0deg); }\n\n   .modal.ng-leave-active {\n     opacity: 0;\n     -webkit-transform: rotateX(90deg);\n     -moz-transform: rotateX(90deg);\n     -ms-transform: rotateX(90deg);\n     -o-transform: rotateX(90deg);\n     transform: rotateX(90deg); }\n\n   .modal-dialog {\n     display: inline-block;\n     width: 400px;\n     height: 300px;\n     margin: 0;\n     position: relative; }\n\n   .calendar-container {\n     overflow: hidden;\n     border: 1px solid transparent;\n     white-space: nowrap; }\n\n   date-picker-calendar {\n     padding-top: .5rem !important; }\n\n   date-picker-calendar.left.enter {\n     -webkit-animation: slideInLeft 0.2s ease;\n     -moz-animation: slideInLeft 0.2s ease;\n     animation: slideInLeft 0.2s ease; }\n\n   date-picker-calendar.left.leave {\n     margin-right: -100%;\n     -webkit-animation: slideOutLeft 0.2s ease;\n     -moz-animation: slideOutLeft 0.2s ease;\n     animation: slideOutLeft 0.2s ease; }\n\n   date-picker-calendar.right.enter {\n     -webkit-animation: slideInRight 0.2s ease;\n     -moz-animation: slideInRight 0.2s ease;\n     animation: slideInRight 0.2s ease; }\n\n   date-picker-calendar.right.leave {\n     margin-left: -50%;\n     -webkit-animation: slideOutRight 0.2s ease;\n     -moz-animation: slideOutRight 0.2s ease;\n     animation: slideOutRight 0.2s ease; }\n\n   .input-group-addon {\n     background-color: #fff;\n     border-left: none; }\n\n   header {\n     position: relative;\n     top: 0;\n     left: 0; }\n\n   .prev-month, .next-month {\n     position: absolute;\n     top: 0;\n     display: inline-block;\n     z-index: 100;\n     margin-top: .2rem; }\n     .prev-month .btn-sm, .next-month .btn-sm {\n       padding: .1rem .7rem; }\n\n   .prev-month {\n     left: 0;\n     margin-left: 4%; }\n\n   .next-month {\n     right: 0;\n     margin-right: 4%; }\n    "],
+      template: "\n   <div class=\"input-group\" (click)=\"showCalendar($event)\">\n    <input type=\"text\" class=\"form-control\"\n        [(ngModel)]=\"inputDate\" \n         #dateField\n         />\n    <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n        <i class=\"fa fa-calendar\"></i>\n    </span>\n   </div>\n\n   <section class=\"modal ng-animate\" *ngIf=\"calendarDisplayed\">\n   <div class=\"modal-dialog\" role=\"document\"\n    [style.top.px]=\"calendarY\"\n    [style.left.px]=\"calendarX\">\n   <div class=\"modal-content container p-a-0\">\n    <header class=\"row\">\n        <div class=\"prev-month\">\n            <button class=\"btn btn-primary btn-sm\" role=\"prev\"\n                [class.disabled]=\"!canPrevMonth()\"\t\t\t \n                (click)=\"prevMonth()\">\n                <i class=\"fa fa-chevron-circle-left\"></i>\n            </button>\n        </div>\n        <div class=\"next-month\">\n            <button class=\"btn btn-primary btn-sm\" role=\"next\"\n                [class.disabled]=\"!canNextMonth()\"\n                (click)=\"nextMonth()\">\n                <i class=\"fa fa-chevron-circle-right\"></i>\n            </button>\n        </div>\n    </header>\n    <section class=\"calendar-container\">\n        <date-picker-calendar animation\n            *ngFor=\"#month of calendarMonths #i=index\"\n            class=\"col-md-{{12/months}} p-a-0\"\n            [style.margin-left]=\"(i!=months||direction!='right'?0:-100/months)+'%'\" \n            [id]=\"i\"\n            [min-date]=\"minDate\" [max-date]=\"maxDate\"\n            [current-month]=\"month\" \n            [(selected-date)]=\"selectedDate\" \n            (selected-date)=\"hideCalendar()\">\n        </date-picker-calendar>\n    </section>\n   </div>\n   </div>\n   </section>\n    ",
+      directives: [DatePickerCalendar_1.DatePickerCalendar, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, Animation_1.Animation]
+    }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePicker);
+    return DatePicker;
+  }(DatePickerBase_1.DatePickerBase));
+  exports.DatePicker = DatePicker;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePicker.js", "bin/components/DatePicker/DatePickerMobile.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePickerMobile.js", "bin/components/DatePicker/DateRangePicker.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/components/DatePicker/DatePicker.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5070,12 +5283,12 @@ System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Al
   }
   var Alert_1 = $__require('bin/components/Alert/Alert.js');
   var Carousel_1 = $__require('bin/components/Carousel/Carousel.js');
-  var DatePicker_1 = $__require('bin/components/DatePicker/DatePicker.js');
   var DatePickerMobile_1 = $__require('bin/components/DatePicker/DatePickerMobile.js');
+  var DateRangePicker_1 = $__require('bin/components/DatePicker/DateRangePicker.js');
   var Modal_1 = $__require('bin/components/Modal/Modal.js');
   var Pagination_1 = $__require('bin/components/Pagination/Pagination.js');
   var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePicker_1.DatePicker, DatePickerMobile_1.DatePickerMobile, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS];
+  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DateRangePicker_1.DateRangePicker, DatePickerMobile_1.DatePickerMobile, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS];
   __export($__require('bin/components/Alert/Alert.js'));
   __export($__require('bin/components/Carousel/Carousel.js'));
   __export($__require('bin/components/DatePicker/DatePicker.js'));

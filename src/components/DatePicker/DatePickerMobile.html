@@ -23,9 +23,6 @@
             <div class="date-range pull-left input-group">
                 <input type="text" class="form-control text-xs-center" 
                     id="startDate" [(ngModel)]="inputDate" readonly />
-                <span class="input-group-addon"> - </span>
-                <input type="text" class="form-control text-xs-center" 
-                    id="endDate" [(ngModel)]="inputDate" readonly />
             </div>
             <button type="button" class="btn btn-secondary pull-right"
                 (click)="scrollNextMonth()" [class.button-disable]="disableNext()">

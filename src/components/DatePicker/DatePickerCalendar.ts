@@ -16,8 +16,12 @@ export class DatePickerCalendar implements OnInit {
 	weeks: string[][];
 	@Input() currentMonth: Date;
 	@Input() selectedDate: Date;
-	@Output() selectedDateChange = new EventEmitter();
+	@Output() selectedDateChange = new EventEmitter<Date>();
 	
+    @Input() dateTarget: boolean = null;
+    @Input() startDate: Date;
+    @Input() endDate: Date;
+    
 	@Input() minDate: Date;
 	@Input() maxDate: Date;
     @Input() dateFilter: (d: Date) => boolean;
@@ -38,7 +42,19 @@ export class DatePickerCalendar implements OnInit {
 		
 		var compareDate = 
 			new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-            
+        
+        /*if(this.dateTarget != null && this.dateTarget
+            && typeof this.startDate != undefined && this.startDate != null
+            && compareDate < this.startDate) {
+            return false;
+        }      
+        
+        if(this.dateTarget != null && !this.dateTarget
+            && typeof this.endDate != undefined && this.endDate != null
+            && compareDate > this.endDate) {
+            return false;
+        }*/
+        
         if(typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
 			return false;
             
@@ -48,10 +64,40 @@ export class DatePickerCalendar implements OnInit {
 	checkSelectedDate(date: string): boolean {
 		if(typeof this.selectedDate == undefined || this.selectedDate == null)
 			return false;
+            
+        if(typeof this.startDate != undefined && this.startDate != null
+            && typeof this.endDate != undefined && this.endDate != null) {
+            let compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
+            return compareDate >= this.startDate && compareDate <= this.endDate;
+        }
 			
 		return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() 
 			&& this.selectedDate.getMonth() == this.currentMonth.getMonth() 
 			&& this.selectedDate.getDate().toString() == date;
+	}
+    
+    checkStartDate(date: string): boolean {
+		if(typeof this.startDate == undefined || this.startDate == null)
+			return false;
+		
+        if(this.startDate == this.endDate)
+            return false;
+        	
+		return this.startDate.getFullYear() == this.currentMonth.getFullYear() 
+			&& this.startDate.getMonth() == this.currentMonth.getMonth() 
+			&& this.startDate.getDate().toString() == date;
+	}
+    
+    checkEndDate(date: string): boolean {
+		if(typeof this.endDate == undefined || this.endDate == null)
+			return false;
+		
+        if(this.startDate == this.endDate)
+            return false;
+        	
+		return this.endDate.getFullYear() == this.currentMonth.getFullYear() 
+			&& this.endDate.getMonth() == this.currentMonth.getMonth() 
+			&& this.endDate.getDate().toString() == date;
 	}
 	
 	selectDate(date: string): void {

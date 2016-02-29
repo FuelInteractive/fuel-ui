@@ -55,6 +55,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     
     var sourceFiles = [
         paths.source + '/**/*.ts',
+        '!./bin/**/*.*',
         './typings/tsd.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
@@ -129,9 +130,7 @@ gulp.task('serve', function(){
 });
 
 gulp.task('watch', function () {
-    gulp.watch(paths.source+'/**/*.html', ['views', 'scripts']);
-    gulp.watch(paths.source+'/**/*.ts', ['scripts']);
-    gulp.watch(paths.source+'/**/*.{scss,sass}', ['sass', 'scripts']);
+    gulp.watch(paths.source+'/**/*.*', ['scripts']);
 });
 
 gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'bundle']);
