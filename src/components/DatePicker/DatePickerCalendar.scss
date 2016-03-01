@@ -29,8 +29,8 @@ th, td {
     position: relative;
     
     @include mobile-only {
-        padding: .5rem;
-        font-size: 1.25rem;
+        padding: 1rem;
+        font-size: 2.5rem;
     }
 }
 

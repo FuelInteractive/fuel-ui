@@ -50,6 +50,8 @@ gulp.task('cleanScripts', function () {
 			.pipe(vinylPaths(del));
 });
 
+gulp.task('clean', ['cleanSass','cleanViews', 'cleanScripts']);
+
 gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     var tsProject = typescript.createProject('tsconfig.json');
     
