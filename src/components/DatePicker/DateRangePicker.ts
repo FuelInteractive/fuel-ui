@@ -3,7 +3,7 @@ import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from "angu
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DateRange} from "../../utilities/DateUtils";
 import {MobileDetection} from "../../utilities/DetectionUtils";
-import {DatePickerMobile} from "./DatePickerMobile";
+import {DatePicker} from "./DatePicker";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
 
@@ -11,11 +11,11 @@ import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller
 	selector: "date-range-picker"
 })
 @View({
-	styleUrls: ['components/DatePicker/DatePickerMobile.css'],
+	styleUrls: ['components/DatePicker/DatePicker.css'],
 	templateUrl: 'components/DatePicker/DateRangePicker.html',
 	directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
-export class DateRangePicker extends DatePickerMobile {
+export class DateRangePicker extends DatePicker {
 	@Output() valueChange = new EventEmitter();
     @Input()
     set value(value: any) {

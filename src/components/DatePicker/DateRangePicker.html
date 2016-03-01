@@ -9,7 +9,8 @@
         (click)="showCalendar($event)"
         (click)="focusStartDate()">
         <input type="text" class="form-control" name="startDate"
-            [(ngModel)]="inputStartDate" #dateField1 />
+            [(ngModel)]="inputStartDate" #dateField1 
+            placeholder="{{startLabel}}" />
         <span class="input-group-addon" [class.input-group-addon-focus]="dateField1.focus">
             <i class="fa fa-calendar"></i>
         </span>
@@ -22,7 +23,8 @@
         (click)="showCalendar($event)"
         (click)="focusEndDate()">
         <input type="text" class="form-control" name="endDate"
-            [(ngModel)]="inputEndDate" #dateField2 />
+            [(ngModel)]="inputEndDate" #dateField2 
+            placeholder="{{endLabel}}" />
         <span class="input-group-addon" [class.input-group-addon-focus]="dateField2.focus">
             <i class="fa fa-calendar"></i>
         </span>
@@ -38,10 +40,12 @@
             </button>
             <div class="date-range pull-left input-group">
                 <input type="text" class="form-control text-xs-center" 
-                    id="startDate" [(ngModel)]="inputDate" readonly />
+                    id="startDate" [(ngModel)]="inputStartDate" readonly 
+                    placeholder="{{startLabel}}" />
                 <span class="input-group-addon"> - </span>
                 <input type="text" class="form-control text-xs-center" 
-                    id="endDate" [(ngModel)]="inputDate" readonly />
+                    id="endDate" [(ngModel)]="inputEndDate" readonly 
+                    placeholder="{{endLabel}}" />
             </div>
             <button type="button" class="btn btn-secondary pull-right"
                 (click)="scrollNextMonth()" [class.button-disable]="disableNext()">
@@ -74,7 +78,10 @@
                     [minDate]="minDate" [maxDate]="maxDate"
                     [dateFilter]="dateFilter"
                     [currentMonth]="month" 
-                    [(selectedDate)]="selectedDate" 
+                    [(selectedDate)]="selectedDate"
+                    [(startDate)]="startDate"
+                    [(endDate)]="endDate"
+                    [dateTarget]="_dateTarget" 
                     (selectedDate)="hideCalendar()">
                     {{i}}
                 </date-picker-calendar>

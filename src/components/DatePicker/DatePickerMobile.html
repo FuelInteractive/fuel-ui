@@ -1,8 +1,7 @@
 <div class="input-group" (click)="showCalendar($event)">
 	<input type="text" class="form-control"
-		[(ngModel)]="inputDate" 
-		 #dateField
-		 />
+		[(ngModel)]="inputDate" #dateField
+        placeholder="{{label}}" />
 	<span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
 		<i class="fa fa-calendar"></i>
 	</span>

@@ -8,14 +8,16 @@ import {MobileDetection} from "../../Utilities/DetectionUtils";
 import {DateRange} from "../../utilities/DateUtils";
 
 @Component({
-    selector: "date-picker-mobile"
+    selector: "date-picker"
 })
 @View({
-    styleUrls: ["components/DatePicker/DatePickerMobile.css"],
-    templateUrl: "components/DatePicker/DatePickerMobile.html",
+    styleUrls: ["components/DatePicker/DatePicker.css"],
+    templateUrl: "components/DatePicker/DatePicker.html",
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
-export class DatePickerMobile implements OnInit, AfterViewInit {
+export class DatePicker implements OnInit, AfterViewInit {
+    @Input() label: string;
+    
     _minDate: Date = new Date(1900,0,1);
 	_maxDate: Date = new Date(2200,0,1);
 
@@ -60,7 +62,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
 	}
     
 	modal: HTMLElement;    
-    calendarDisplayed: boolean = true;
+    calendarDisplayed: boolean = false;
     calendarX: number = 1;
 	calendarY: number = 1;
     calendarHeight: string = MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
@@ -71,15 +73,14 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
  
     constructor(modal: ElementRef) {
         this.modal = modal.nativeElement;
-        this.selectedDate = new Date();
-        if(this.selectedDate < this._minDate)
-            this.selectedDate = this._minDate;
     }
     
     ngOnInit(): void {
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+        
         this.calendarMonths = [
-            new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth()-1),
-            new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth())
+            new Date(currentDate.getFullYear(), currentDate.getMonth()-1),
+            new Date(currentDate.getFullYear(), currentDate.getMonth())
         ]
         
         for(let i = 0; i < this._preGenMonths; i++) {
@@ -96,8 +97,8 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
                 return;
                 
             let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
-                return m.getFullYear() == this.selectedDate.getFullYear()
-                    && m.getMonth() == this.selectedDate.getMonth()
+                return m.getFullYear() == currentDate.getFullYear()
+                    && m.getMonth() == currentDate.getMonth()
             });
             
             this.calendarScroller.container.scrollTop = 

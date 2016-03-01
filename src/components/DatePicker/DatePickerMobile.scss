@@ -92,6 +92,7 @@ header {
         width: 12%;
         
         @include mobile-only {
+            font-size: 2.5rem;
             margin-top: .5rem;
         }
     }
@@ -115,7 +116,16 @@ header {
         border-right: none;
         
         @include mobile-only {
-            font-size: 1.75rem;
+            font-size: 2.5rem;
+        }
+    }
+    
+    .input-group-addon {
+        border: none;
+        background-color: $input-bg !important;
+        
+        @include mobile-only {
+            font-size: 2.5rem;
         }
     }
     
@@ -123,10 +133,10 @@ header {
         border: none;
         display: inline-block;
         margin: 0 auto;
-        border: 1px solid #ccc;
+        /*border: 1px solid #ccc;*/
         
         @include mobile-only {
-            font-size: 1.75rem;
+            font-size: 2.5rem;
         }
     }
     

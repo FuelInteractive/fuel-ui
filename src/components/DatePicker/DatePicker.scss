@@ -1,85 +1,148 @@
-@import '../../styles/variables';
-@import '../../styles/bourbon';
+@import "../../styles/variables";
+@import "../../styles/bourbon";
+@import "../../styles/media_queries";
 
-.input-group-addon {
-	background-color: $input-bg;
-	border-left: none;
+.date-picker-overlay {
+    background-color: rgba(0,0,0,0);
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    
+    @include mobile-only {
+        background-color: $gray;
+        opacity: .75;
+    }
 }
 
-.modal {
-	display: block;
-	@include transition(all .1s ease);
+.date-picker-component {
+    border: 1px solid $table-border-color;
+    z-index: 120;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+    background-color: $body-bg;font-size: .75rem;
+    position: absolute;
+    width: 350px;
+    height: auto;
+    top: 0;
+    left: 0;
+    @if $enable-rounded {
+        border-radius: $border-radius-lg;
+    }
+    
+    @include transition(all .1s ease);
+    
+    @include mobile-only {
+        width: 80%;
+        height: 90%;
+        position: fixed;
+        top: 5%;
+        left: 10%;
+        font-size: 1.5rem;
+    }
 }
 
-.modal.ng-enter {
-	opacity: 0;
-	@include transform(rotateX(-90deg));
-} 
-
-.modal.ng-enter-active {
-	opacity: 1;
-	@include transform(rotateX(0deg));
+table {
+    font-size: .75rem;
+    
+    @include mobile-only {
+        font-size: 1.5rem;
+    }
 }
 
-.modal.ng-leave {
-	opacity: 1;
-	@include transform(rotateX(0deg));
-}
-
-.modal.ng-leave-active {
-	opacity: 0;
-	@include transform(rotateX(90deg));
-}
-
-.modal-dialog {
-	display: inline-block;
-	width: 400px;
-	height: 300px;
-	margin: 0;
-	position: relative;
-}
-
-.calendar-container {
-	overflow: hidden;
-	border: 1px solid transparent;
-	white-space: nowrap;
-}
-
-date-picker-calendar {
-	padding-top: .5rem !important;
-}
-
-$calDuration: .2s;
-
-date-picker-calendar.left {
-	&.enter {
-		@include animation(slideInLeft $calDuration ease);
-	}
-	&.leave {
-		margin-right: -100%;
-		@include animation(slideOutLeft $calDuration ease);
-	}
-}
-
-date-picker-calendar.right {
-	&.enter {
-		@include animation(slideInRight $calDuration ease);
-	}
-	&.leave {
-		margin-left: -50%;
-		@include animation(slideOutRight $calDuration ease);
-	}
+.input-group {
+    z-index: 110;
 }
 
 .input-group-addon {
 	background-color: $input-bg;
-	border-left: none;
 }
 
 header {
 	position: relative;
 	top: 0;
 	left: 0;
+    vertical-align: middle;
+    background-color: $input-bg;
+    
+    @include mobile-only {
+        height: 11%;
+    }
+    
+    .days-of-week {
+        background-color: $brand-primary;
+        color: $btn-primary-color;
+    }
+    
+    table{
+        border-top: none !important;
+    }
+    
+    th, td {
+        text-align: center;
+    }
+    
+    button {
+        border: none;
+        border-radius: 0;
+        color: $brand-primary; 
+        background-color: $input-bg;
+        width: 12%;
+        
+        @include mobile-only {
+            font-size: 2.5rem;
+            margin-top: .5rem;
+        }
+    }
+    
+    button:active {
+        background-color: $input-bg-disabled;
+    }
+    
+    .button-disable {
+        color: $input-bg-disabled;
+        cursor: default;
+    }
+    
+    .date-range {
+        width: 75%;
+    }
+    
+    .date-range span {
+        background-color: $gray-lighter;
+        border-left: none;
+        border-right: none;
+        
+        @include mobile-only {
+            font-size: 2.5rem;
+        }
+    }
+    
+    .input-group-addon {
+        border: none;
+        background-color: $input-bg !important;
+        
+        @include mobile-only {
+            font-size: 2.5rem;
+        }
+    }
+    
+    input {
+        border: none;
+        display: inline-block;
+        margin: 0 auto;
+        /*border: 1px solid #ccc;*/
+        
+        @include mobile-only {
+            font-size: 2.5rem;
+        }
+    }
+    
+    input:read-only {
+        background-color: $body-bg;
+    }
 }
 
 .prev-month, .next-month {
@@ -101,4 +164,16 @@ header {
 .next-month {
 	right:0;
 	margin-right: 4%;
+}
+
+.container {
+    height: 100%;
+}
+
+.calendar-container {
+	box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1);
+    
+    @include mobile-only {
+        height: 89%;
+    }
 }
