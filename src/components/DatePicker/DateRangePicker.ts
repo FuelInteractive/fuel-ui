@@ -40,8 +40,8 @@ export class DateRangePicker extends DatePicker {
     calendarScroller: InfiniteScroller;
     
     private _dateTarget: boolean = false;
-    calendarHeight: string = MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
-	
+    calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
+    
     get selectedDate(): Date {return this._selectedDate};
     set selectedDate(value: Date) { 
         this._selectedDate = value;
