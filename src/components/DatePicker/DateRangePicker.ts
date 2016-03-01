@@ -134,12 +134,10 @@ export class DateRangePicker extends DatePicker {
     }
     
     checkStartDateTarget(): boolean {
-        console.log(this._dateTarget);
         return !this._dateTarget;
     }
     
     checkEndDateTarget(): boolean {
-        console.log(this._dateTarget);
         return this._dateTarget;
     }
 }

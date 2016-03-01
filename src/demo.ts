@@ -5,6 +5,7 @@ import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from "angular2
 import {FUELUI_COMPONENT_PROVIDERS} from "./fuel-ui";
 import {FUELUI_DIRECTIVE_PROVIDERS} from "./fuel-ui";
 import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
+import {DateRange} from './fuel-ui';
 
 export class Person {
   constructor(public firstName: string, public lastName: string, public age: number) {}
@@ -50,9 +51,13 @@ export class Person {
                     label="Pick a date"
 					minDate="11/1/2015"
 					maxDate="11/12/2016" 
-                    [dateFilter]="dateFilter">
+                    [dateFilter]="dateFilter"
+                    (valueChange)="datePickerValue">
 				</date-picker>
 			</div>
+            <div class="col-md-3" *ngIf="datePickerValue != null">
+                value: {{datePickerValue}}
+            </div>
 		</section>
         <h2>DateRangePicker</h2>
         <section class="row m-a">
@@ -62,9 +67,14 @@ export class Person {
 					maxDate="11/12/2016" 
                     [dateFilter]="dateFilter"
                     startLabel="Arrival"
-                    endLabel="Departure">
+                    endLabel="Departure"
+                    (valueChange)="dateRangePickerValue">
 				</date-range-picker>
 			</div>
+            <div class="col-md-6" *ngIf="dateRangePickerValue != null">
+                value.start: {{dateRangePickerValue.start}}
+                value.end: {{dateRangePickerValue.end}}
+            </div>
 		</section>
 		<h2>Carousel</h2>
 		<section class="row m-a">
@@ -287,6 +297,8 @@ export class DemoComponent {
         "/images/carouselImages/windmill.jpg"
     ];
 
+    datePickerValue: Date;
+    dateRangePickerValue: DateRange;
     modalTitle: string = "TEST EST TESTSETSETTESET";
     closeText: string = "Cancel";
     closeButton: boolean = true;
