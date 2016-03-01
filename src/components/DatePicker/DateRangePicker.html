@@ -10,7 +10,7 @@
         (click)="focusStartDate()">
         <input type="text" class="form-control" name="startDate"
             [(ngModel)]="inputStartDate" #dateField1 
-            placeholder="{{startLabel}}" />
+            placeholder="{{startLabel}}" readonly />
         <span class="input-group-addon" [class.input-group-addon-focus]="dateField1.focus">
             <i class="fa fa-calendar"></i>
         </span>
@@ -24,7 +24,7 @@
         (click)="focusEndDate()">
         <input type="text" class="form-control" name="endDate"
             [(ngModel)]="inputEndDate" #dateField2 
-            placeholder="{{endLabel}}" />
+            placeholder="{{endLabel}}" readonly />
         <span class="input-group-addon" [class.input-group-addon-focus]="dateField2.focus">
             <i class="fa fa-calendar"></i>
         </span>

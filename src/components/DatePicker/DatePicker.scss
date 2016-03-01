@@ -28,6 +28,7 @@
     height: auto;
     top: 0;
     left: 0;
+    overflow: hidden;
     @if $enable-rounded {
         border-radius: $border-radius-lg;
     }
@@ -35,12 +36,12 @@
     @include transition(all .1s ease);
     
     @include mobile-only {
-        width: 80%;
+        width: 90%;
         height: 90%;
         position: fixed;
         top: 5%;
-        left: 10%;
-        font-size: 1.5rem;
+        left: 5%;
+        font-size: 1.25rem;
     }
 }
 
@@ -48,7 +49,7 @@ table {
     font-size: .75rem;
     
     @include mobile-only {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
     }
 }
 
@@ -66,10 +67,6 @@ header {
 	left: 0;
     vertical-align: middle;
     background-color: $input-bg;
-    
-    @include mobile-only {
-        height: 11%;
-    }
     
     .days-of-week {
         background-color: $brand-primary;
@@ -89,7 +86,7 @@ header {
         border-radius: 0;
         color: $brand-primary; 
         background-color: $input-bg;
-        width: 12%;
+        width: 15%;
         
         @include mobile-only {
             font-size: 2.5rem;
@@ -107,7 +104,7 @@ header {
     }
     
     .date-range {
-        width: 75%;
+        width: 70%;
     }
     
     .date-range span {
@@ -116,7 +113,7 @@ header {
         border-right: none;
         
         @include mobile-only {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
         }
     }
     
@@ -125,7 +122,7 @@ header {
         background-color: $input-bg !important;
         
         @include mobile-only {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
         }
     }
     
@@ -136,7 +133,7 @@ header {
         /*border: 1px solid #ccc;*/
         
         @include mobile-only {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
         }
     }
     
@@ -174,6 +171,6 @@ header {
 	box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1);
     
     @include mobile-only {
-        height: 89%;
+        height: 91%;
     }
 }
