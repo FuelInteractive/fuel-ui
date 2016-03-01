@@ -21,7 +21,6 @@
 .date-picker-component {
     border: 1px solid $table-border-color;
     z-index: 120;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
     background-color: $body-bg;font-size: .75rem;
     position: absolute;
     width: 350px;
@@ -113,7 +112,6 @@ header {
     
     .date-range {
         width: 70%;
-        padding-top: .5rem;
     }
     
     .date-range span {
@@ -138,7 +136,7 @@ header {
     input {
         border: none;
         display: inline-block;
-        margin: 0 auto 5px auto;
+        margin: 0 auto;
         /*border: 1px solid #ccc;*/
         
         @include mobile-only {
@@ -151,10 +149,9 @@ header {
     }
     
     input.target {
-        background-color: desaturate(lighten($brand-primary, 33%), 33%) !important;
-        color: $body-bg;
+        color: $brand-primary;
         @include placeholder {
-            color: $body-bg;
+            color: $brand-primary;
         }
     }
 }
@@ -184,9 +181,7 @@ header {
     height: 100%;
 }
 
-.calendar-container {
-	box-shadow: inset 0px 5px 1px rgba(0, 0, 0, 0.1);
-    
+.calendar-container {    
     @include mobile-only {
         height: 91%;
     }
