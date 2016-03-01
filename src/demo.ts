@@ -1,5 +1,3 @@
-///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
-
 import {View, Component, ViewEncapsulation, provide, ChangeDetectionStrategy} from "angular2/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
 import {bootstrap} from "angular2/platform/browser";
@@ -7,6 +5,7 @@ import {LocationStrategy, HashLocationStrategy, ROUTER_PROVIDERS} from "angular2
 import {FUELUI_COMPONENT_PROVIDERS} from "./fuel-ui";
 import {FUELUI_DIRECTIVE_PROVIDERS} from "./fuel-ui";
 import {FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
+import {DateRange} from './fuel-ui';
 
 export class Person {
   constructor(public firstName: string, public lastName: string, public age: number) {}
@@ -25,7 +24,7 @@ export class Person {
 				<infinite-scroller 
 					(next)="infinteScrollNext()" 
 					(prev)="infiniteScrollPrev()" 
-					height="300"
+					height="300px"
 					distance="120"
 					hideScrollbar="true">
 					<div *ngFor="#item of infiniteScrollItems" 
@@ -46,13 +45,36 @@ export class Person {
 				(onAnimationEnd)="logEnd()"></div>
 		</div>
 		<h2>DatePicker</h2>
-		<section class="row m-a">
+        <section class="row m-a">
 			<div class="col-md-3">
-				<date-picker 
-					min-date="11/1/2015"
-					max-date="11/1/2016" months="2">
+				<date-picker
+                    label="Pick a date"
+					minDate="11/1/2015"
+					maxDate="11/12/2016" 
+                    [dateFilter]="dateFilter"
+                    (valueChange)="datePickerValue">
 				</date-picker>
 			</div>
+            <div class="col-md-3" *ngIf="datePickerValue != null">
+                value: {{datePickerValue}}
+            </div>
+		</section>
+        <h2>DateRangePicker</h2>
+        <section class="row m-a">
+			<div class="col-md-3">
+				<date-range-picker
+					minDate="11/1/2015"
+					maxDate="11/12/2016" 
+                    [dateFilter]="dateFilter"
+                    startLabel="Arrival"
+                    endLabel="Departure"
+                    (valueChange)="dateRangePickerValue">
+				</date-range-picker>
+			</div>
+            <div class="col-md-6" *ngIf="dateRangePickerValue != null">
+                value.start: {{dateRangePickerValue.start}}
+                value.end: {{dateRangePickerValue.end}}
+            </div>
 		</section>
 		<h2>Carousel</h2>
 		<section class="row m-a">
@@ -275,6 +297,8 @@ export class DemoComponent {
         "/images/carouselImages/windmill.jpg"
     ];
 
+    datePickerValue: Date;
+    dateRangePickerValue: DateRange;
     modalTitle: string = "TEST EST TESTSETSETTESET";
     closeText: string = "Cancel";
     closeButton: boolean = true;
@@ -399,6 +423,13 @@ export class DemoComponent {
 
         this.infiniteScrollMax++;
         this.infiniteScrollItems.push(newItem);
+    }
+    
+    dateFilter(d: Date): boolean {
+        if([2].indexOf(d.getDay()) > -1)
+            return false;
+        
+        return true;
     }
 
     saveFunc(modal: any, error: boolean): void {
