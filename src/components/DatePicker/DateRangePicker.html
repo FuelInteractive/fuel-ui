@@ -40,10 +40,12 @@
             </button>
             <div class="date-range pull-left input-group">
                 <input type="text" class="form-control text-xs-center" 
+                    [class.target]="checkStartDateTarget()"
                     id="startDate" [(ngModel)]="inputStartDate" readonly 
                     placeholder="{{startLabel}}" />
                 <span class="input-group-addon"> - </span>
                 <input type="text" class="form-control text-xs-center" 
+                    [class.target]="checkEndDateTarget()"
                     id="endDate" [(ngModel)]="inputEndDate" readonly 
                     placeholder="{{endLabel}}" />
             </div>

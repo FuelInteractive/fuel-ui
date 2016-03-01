@@ -57,8 +57,12 @@ table {
     z-index: 110;
 }
 
-input, .input-group-addon {
-    background-color: $input-bg !important;
+input:read-only {
+    background-color: $input-bg;
+} 
+
+.input-group-addon {
+    background-color: $input-bg;
 }
 
 header {
@@ -134,7 +138,7 @@ header {
     input {
         border: none;
         display: inline-block;
-        margin: 0 auto;
+        margin: 0 auto 5px auto;
         /*border: 1px solid #ccc;*/
         
         @include mobile-only {
@@ -144,6 +148,14 @@ header {
     
     input:read-only {
         background-color: $body-bg;
+    }
+    
+    input.target {
+        background-color: desaturate(lighten($brand-primary, 33%), 33%) !important;
+        color: $body-bg;
+        @include placeholder {
+            color: $body-bg;
+        }
     }
 }
 

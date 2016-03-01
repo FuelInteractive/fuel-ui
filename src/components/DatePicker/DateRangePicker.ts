@@ -132,4 +132,14 @@ export class DateRangePicker extends DatePicker {
     focusEndDate(): void {
         this._dateTarget = true;
     }
+    
+    checkStartDateTarget(): boolean {
+        console.log(this._dateTarget);
+        return !this._dateTarget;
+    }
+    
+    checkEndDateTarget(): boolean {
+        console.log(this._dateTarget);
+        return this._dateTarget;
+    }
 }
