@@ -63,7 +63,7 @@ export class DatePickerMobile implements OnInit, AfterViewInit {
     calendarDisplayed: boolean = true;
     calendarX: number = 1;
 	calendarY: number = 1;
-    calendarHeight: string = MobileDetection.isAny() || window.outerWidth <= 480 ? "auto" : "300px";
+    calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
     
     calendarMonths: Date[] = [];
     
