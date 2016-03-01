@@ -46,8 +46,8 @@ export class DateRangePicker extends DatePicker {
     set selectedDate(value: Date) { 
         this._selectedDate = value;
         
-        if((this._dateTarget && this.startDate != null && value <= this.startDate)
-            || !this._dateTarget && this.endDate != null && value >= this.endDate)
+        if((this._dateTarget && this.startDate != null && value < this.startDate)
+            || !this._dateTarget && this.endDate != null && value > this.endDate)
             this._dateTarget = !this._dateTarget;
         
         if(!this._dateTarget) {            
