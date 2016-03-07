@@ -1,0 +1,15 @@
+<div class="modal" [ngClass]="{customFadeIn: displayed}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" [style.display]="displayed ? 'block' : 'none'">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button *ngIf="closeButton" type="button" class="close" aria-label="Close" (click)="showModal(false)">
+                    <span aria-hidden="true">&#215;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+            </div>
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop" [ngClass]="{fade: displayed, in: displayed}" [style.display]="displayed ? 'block' : 'none'"></div>

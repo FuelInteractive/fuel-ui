@@ -1,0 +1,21 @@
+/*.theImage {transition: all 2s ease-in;}
+.theImage.ng-enter { opacity: 0; }
+.theImage.ng-enter-active { opacity: 1; }
+.theImage.ng-leave-active { opacity: 0; }*/
+.theImage {
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease; }
+
+.theImage.ng-enter-active {
+  -webkit-animation-name: zoomInDown;
+  -moz-animation-name: zoomInDown;
+  animation-name: zoomInDown; }
+
+.theImage.ng-leave-active {
+  -webkit-animation-name: zoomOutUp;
+  -moz-animation-name: zoomOutUp;
+  animation-name: zoomOutUp; }

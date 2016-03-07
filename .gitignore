@@ -18,7 +18,6 @@ x64/
 x86/
 build/
 bld/
-[Bb]in/
 [Oo]bj/
 [Tt]mp/
 
@@ -164,7 +163,11 @@ ClientBin/
 *.dbproj.schemaview
 *.pfx
 *.publishsettings
-node_modules/
+node_modules/*
+!node_modules/angular2
+!node_modules/es6-shim/
+!node_modules/rxjs/
+!node_modules/systemjs/
 **/jspm_packages/
 jspm_packages/
 CVS/
