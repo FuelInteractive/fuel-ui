@@ -176,7 +176,6 @@ ipch/
 _UpgradeReport_Files/
 .settings/
 **/wwwroot/lib/
-dist/
 .idea/
 .vscode/
 
