@@ -105,11 +105,11 @@ export class Person {
 				<div class="modal-body">
 					<carousel>
 						<img class="carousel-item"
-							src="./images/carouselImages/beach.png" alt="Beach" />
+							src="images/carouselImages/beach.png" alt="Beach" />
 						<img class="carousel-item"
-							src="./images/carouselImages/river.jpg" alt="River" />
+							src="images/carouselImages/river.jpg" alt="River" />
 						<img class="carousel-item"
-							src="./images/carouselImages/windmill.jpg" alt="Windmill" />
+							src="images/carouselImages/windmill.jpg" alt="Windmill" />
 					</carousel>
 					<ul>
 						<li>Testing 1</li>
@@ -292,9 +292,9 @@ export class Person {
 })
 export class DemoComponent {
     carouselImages: string[] = [
-        "/images/carouselImages/beach.png",
-        "/images/carouselImages/river.jpg",
-        "/images/carouselImages/windmill.jpg"
+        "images/carouselImages/beach.png",
+        "images/carouselImages/river.jpg",
+        "images/carouselImages/windmill.jpg"
     ];
 
     datePickerValue: Date;
