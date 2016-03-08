@@ -13,7 +13,7 @@ var core_2 = require("angular2/core");
 var common_1 = require("angular2/common");
 var DatePickerCalendar_1 = require("./DatePickerCalendar");
 var InfiniteScroller_1 = require("../InfiniteScroller/InfiniteScroller");
-var DetectionUtils_1 = require("../../Utilities/DetectionUtils");
+var DetectionUtils_1 = require("../../utilities/DetectionUtils");
 var DatePicker = (function () {
     function DatePicker(modal) {
         this._minDate = new Date(1900, 0, 1);

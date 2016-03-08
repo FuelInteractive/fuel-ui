@@ -227,40 +227,7 @@ System.registerDynamic("bin/components/Carousel/Carousel.js", ["node_modules/ang
   return module.exports;
 });
 
-System.registerDynamic("bin/Utilities/DetectionUtils.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var MobileDetection = (function() {
-    function MobileDetection() {}
-    MobileDetection.isAndroid = function() {
-      return navigator.userAgent.match(/Android/i) != null;
-    };
-    MobileDetection.isBlackBerry = function() {
-      return navigator.userAgent.match(/BlackBerry/i) != null;
-    };
-    MobileDetection.isIOS = function() {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i) != null;
-    };
-    MobileDetection.isOpera = function() {
-      return navigator.userAgent.match(/Opera Mini/i) != null;
-    };
-    MobileDetection.isWindows = function() {
-      return navigator.userAgent.match(/IEMobile|WPDesktop/i) != null;
-    };
-    MobileDetection.isAny = function() {
-      return (this.isAndroid() || this.isBlackBerry() || this.isIOS() || this.isOpera() || this.isWindows());
-    };
-    return MobileDetection;
-  }());
-  exports.MobileDetection = MobileDetection;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/Utilities/DetectionUtils.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/components/DatePicker/DatePickerCalendar.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/utilities/DetectionUtils.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -287,7 +254,7 @@ System.registerDynamic("bin/components/DatePicker/DatePicker.js", ["node_modules
   var common_1 = $__require('node_modules/angular2/common.js');
   var DatePickerCalendar_1 = $__require('bin/components/DatePicker/DatePickerCalendar.js');
   var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  var DetectionUtils_1 = $__require('bin/Utilities/DetectionUtils.js');
+  var DetectionUtils_1 = $__require('bin/utilities/DetectionUtils.js');
   var DatePicker = (function() {
     function DatePicker(modal) {
       this._minDate = new Date(1900, 0, 1);
