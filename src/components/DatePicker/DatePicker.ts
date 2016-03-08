@@ -3,8 +3,8 @@ import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "ang
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
-import {ElementUtils} from "../../Utilities/ElementUtils";
-import {MobileDetection} from "../../Utilities/DetectionUtils";
+import {ElementUtils} from "../../utilities/ElementUtils";
+import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DateRange} from "../../utilities/DateUtils";
 
 @Component({
