@@ -105,11 +105,11 @@ export class Person {
 				<div class="modal-body">
 					<carousel>
 						<img class="carousel-item"
-							src="/images/carouselImages/beach.png" alt="Beach" />
+							src="images/carouselImages/beach.png" alt="Beach" />
 						<img class="carousel-item"
-							src="/images/carouselImages/river.jpg" alt="River" />
+							src="images/carouselImages/river.jpg" alt="River" />
 						<img class="carousel-item"
-							src="/images/carouselImages/windmill.jpg" alt="Windmill" />
+							src="images/carouselImages/windmill.jpg" alt="Windmill" />
 					</carousel>
 					<ul>
 						<li>Testing 1</li>
