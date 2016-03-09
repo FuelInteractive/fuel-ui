@@ -12,7 +12,7 @@ This is currently a work in progress, check the source for additional readme doc
 - [InfiniteScroller](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/InfiniteScroller#readme)
 - [Modal](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Modal#readme)
 - [Pagination](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Pagination#readme)
-- [Progressbar](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Progressbar#readme)
+- [Progressbar](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Progress#readme)
 
 ##Directives
 - [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
