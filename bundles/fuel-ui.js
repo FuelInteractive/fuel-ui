@@ -5140,7 +5140,88 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
   return module.exports;
 });
 
-System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePickerProviders.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/Dropdown/Dropdown.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var Dropdown = (function() {
+    function Dropdown() {
+      this.dropdownOpen = false;
+    }
+    Dropdown.prototype.toggleDropdown = function() {
+      this.dropdownOpen = !this.dropdownOpen;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Dropdown.prototype, "label", void 0);
+    Dropdown = __decorate([core_1.Component({selector: "dropdown"}), core_1.View({template: "\n      <div class=\"dropdown open\">\n        <button class=\"btn btn-secondary\" type=\"button\" \n          aria-haspopup=\"true\" aria-expanded=\"false\" (click)=\"toggleDropdown()\">\n          {{label}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\"\n          *ngIf=\"dropdownOpen\" (click)=\"toggleDropdown()\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "}), __metadata('design:paramtypes', [])], Dropdown);
+    return Dropdown;
+  }());
+  exports.Dropdown = Dropdown;
+  exports.DROPDOWN_COMPONENT_PROVIDERS = [Dropdown];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/Collapse/Collapse.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var Collapse = (function() {
+    function Collapse() {
+      this.showCollapse = false;
+    }
+    Collapse.prototype.toggleCollapse = function() {
+      this.showCollapse = !this.showCollapse;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "collapseId", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "collapseButtonText", void 0);
+    Collapse = __decorate([core_1.Component({selector: "collapse"}), core_1.View({template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" \n              [attr.data-target]=\"'#' + collapseId\" (click)=\"toggleCollapse()\">\n          {{collapseButtonText}}\n        </button>\n      </p>\n      <div class=\"collapse\" id=\"{{collapseId}}\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "}), __metadata('design:paramtypes', [])], Collapse);
+    return Collapse;
+  }());
+  exports.Collapse = Collapse;
+  exports.COLLAPSE_PROVIDERS = [Collapse];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePickerProviders.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/components/Dropdown/Dropdown.js", "bin/components/Collapse/Collapse.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5157,13 +5238,17 @@ System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Al
   var Modal_1 = $__require('bin/components/Modal/Modal.js');
   var Pagination_1 = $__require('bin/components/Pagination/Pagination.js');
   var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS];
+  var Dropdown_1 = $__require('bin/components/Dropdown/Dropdown.js');
+  var Collapse_1 = $__require('bin/components/Collapse/Collapse.js');
+  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, Collapse_1.COLLAPSE_PROVIDERS];
   __export($__require('bin/components/Alert/Alert.js'));
   __export($__require('bin/components/Carousel/Carousel.js'));
   __export($__require('bin/components/DatePicker/DatePickerProviders.js'));
   __export($__require('bin/components/Modal/Modal.js'));
   __export($__require('bin/components/Pagination/Pagination.js'));
   __export($__require('bin/components/InfiniteScroller/InfiniteScroller.js'));
+  __export($__require('bin/components/Dropdown/Dropdown.js'));
+  __export($__require('bin/components/Collapse/Collapse.js'));
   global.define = __define;
   return module.exports;
 });

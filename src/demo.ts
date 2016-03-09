@@ -283,7 +283,26 @@ export class Person {
 				</div>
 			</div>
 		</section> 
-		<button (click)="addToArrays()" class="btn btn-primary">Add to Arrays</button>
+		<button (click)="addToArrays()" class="btn btn-primary">Add to Arrays</button><br><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <dropdown #dropdown label="test dropdown">
+                    <a href="" class="dropdown-item" onclick="return false;">Link 1</a>
+                    <a href="" class="dropdown-item" onclick="return false;">Link 2</a>
+                    <a href="" class="dropdown-item" onclick="return false;">Link 3</a>
+                </dropdown>
+            </div>
+            <div class="col-sm-6">
+                <collapse #collapse collapseId="collapseTest" collapseButtonText="Collapse">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry 
+                    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard 
+                    dolor brunch. Food truck quinoa nesciunt laborum eiusmod. 
+                    Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin 
+                    coffee nulla assumenda shoreditch et.
+                </collapse>
+            </div>
+            
+        </div>
 	</main>`,
     directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES],
     encapsulation: ViewEncapsulation.None,
