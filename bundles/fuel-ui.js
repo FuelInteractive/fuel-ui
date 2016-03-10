@@ -4279,30 +4279,30 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_class.js"
           v = v.split(' ');
         }
         this._rawClass = v;
+        this._iterableDiffer = null;
+        this._keyValueDiffer = null;
         if (lang_1.isPresent(v)) {
           if (collection_1.isListLikeIterable(v)) {
-            this._differ = this._iterableDiffers.find(v).create(null);
-            this._mode = 'iterable';
+            this._iterableDiffer = this._iterableDiffers.find(v).create(null);
           } else {
-            this._differ = this._keyValueDiffers.find(v).create(null);
-            this._mode = 'keyValue';
+            this._keyValueDiffer = this._keyValueDiffers.find(v).create(null);
           }
-        } else {
-          this._differ = null;
         }
       },
       enumerable: true,
       configurable: true
     });
     NgClass.prototype.ngDoCheck = function() {
-      if (lang_1.isPresent(this._differ)) {
-        var changes = this._differ.diff(this._rawClass);
+      if (lang_1.isPresent(this._iterableDiffer)) {
+        var changes = this._iterableDiffer.diff(this._rawClass);
         if (lang_1.isPresent(changes)) {
-          if (this._mode == 'iterable') {
-            this._applyIterableChanges(changes);
-          } else {
-            this._applyKeyValueChanges(changes);
-          }
+          this._applyIterableChanges(changes);
+        }
+      }
+      if (lang_1.isPresent(this._keyValueDiffer)) {
+        var changes = this._keyValueDiffer.diff(this._rawClass);
+        if (lang_1.isPresent(changes)) {
+          this._applyKeyValueChanges(changes);
         }
       }
     };
@@ -4355,7 +4355,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_class.js"
           });
         } else {
           collection_1.StringMapWrapper.forEach(rawClassVal, function(expVal, className) {
-            if (expVal)
+            if (lang_1.isPresent(expVal))
               _this._toggleClass(className, !isCleanup);
           });
         }
@@ -5212,7 +5212,7 @@ System.registerDynamic("bin/components/Collapse/Collapse.js", ["node_modules/ang
     };
     __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "collapseId", void 0);
     __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "collapseButtonText", void 0);
-    Collapse = __decorate([core_1.Component({selector: "collapse"}), core_1.View({template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" \n              [attr.data-target]=\"'#' + collapseId\" (click)=\"toggleCollapse()\">\n          {{collapseButtonText}}\n        </button>\n      </p>\n      <div class=\"collapse\" id=\"{{collapseId}}\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "}), __metadata('design:paramtypes', [])], Collapse);
+    Collapse = __decorate([core_1.Component({selector: "collapse"}), core_1.View({template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" \n              [attr.data-target]=\"'#' + collapseId\" (click)=\"toggleCollapse()\">\n          {{collapseButtonText}}\n        </button>\n      </p>\n\n      <div class=\"collapse fuel-ui-collapse\" id=\"{{collapseId}}\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "}), __metadata('design:paramtypes', [])], Collapse);
     return Collapse;
   }());
   exports.Collapse = Collapse;
@@ -7710,6 +7710,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection.js", ["n
   exports.SimpleChange = change_detection_1.SimpleChange;
   exports.IterableDiffers = change_detection_1.IterableDiffers;
   exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
+  exports.CollectionChangeRecord = change_detection_1.CollectionChangeRecord;
+  exports.KeyValueChangeRecord = change_detection_1.KeyValueChangeRecord;
   global.define = __define;
   return module.exports;
 });
@@ -8146,22 +8148,25 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       var item;
       var itemTrackBy;
       if (lang_2.isArray(collection)) {
-        var list = collection;
-        this._length = collection.length;
-        for (index = 0; index < this._length; index++) {
-          item = list[index];
-          itemTrackBy = this._trackByFn(index, item);
-          if (record === null || !lang_2.looseIdentical(record.trackById, itemTrackBy)) {
-            record = this._mismatch(record, item, itemTrackBy, index);
-            mayBeDirty = true;
-          } else {
-            if (mayBeDirty) {
-              record = this._verifyReinsertion(record, item, itemTrackBy, index);
+        if (collection !== this._collection || !collection_1.ListWrapper.isImmutable(collection)) {
+          var list = collection;
+          this._length = collection.length;
+          for (index = 0; index < this._length; index++) {
+            item = list[index];
+            itemTrackBy = this._trackByFn(index, item);
+            if (record === null || !lang_2.looseIdentical(record.trackById, itemTrackBy)) {
+              record = this._mismatch(record, item, itemTrackBy, index);
+              mayBeDirty = true;
+            } else {
+              if (mayBeDirty) {
+                record = this._verifyReinsertion(record, item, itemTrackBy, index);
+              }
+              if (!lang_2.looseIdentical(record.item, item))
+                this._addIdentityChange(record, item);
             }
-            if (!lang_2.looseIdentical(record.item, item))
-              this._addIdentityChange(record, item);
+            record = record._next;
           }
-          record = record._next;
+          this._truncate(record);
         }
       } else {
         index = 0;
@@ -8181,8 +8186,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
           index++;
         });
         this._length = index;
+        this._truncate(record);
       }
-      this._truncate(record);
       this._collection = collection;
       return this.isDirty;
     };
@@ -8724,7 +8729,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
           if (records.has(key)) {
             newSeqRecord = records.get(key);
           } else {
-            newSeqRecord = new KVChangeRecord(key);
+            newSeqRecord = new KeyValueChangeRecord(key);
             records.set(key, newSeqRecord);
             newSeqRecord.currentValue = value;
             _this._addToAdditions(newSeqRecord);
@@ -8867,8 +8872,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
     return DefaultKeyValueDiffer;
   })();
   exports.DefaultKeyValueDiffer = DefaultKeyValueDiffer;
-  var KVChangeRecord = (function() {
-    function KVChangeRecord(key) {
+  var KeyValueChangeRecord = (function() {
+    function KeyValueChangeRecord(key) {
       this.key = key;
       this.previousValue = null;
       this.currentValue = null;
@@ -8879,12 +8884,12 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       this._prevRemoved = null;
       this._nextChanged = null;
     }
-    KVChangeRecord.prototype.toString = function() {
+    KeyValueChangeRecord.prototype.toString = function() {
       return lang_1.looseIdentical(this.previousValue, this.currentValue) ? lang_1.stringify(this.key) : (lang_1.stringify(this.key) + '[' + lang_1.stringify(this.previousValue) + '->' + lang_1.stringify(this.currentValue) + ']');
     };
-    return KVChangeRecord;
+    return KeyValueChangeRecord;
   })();
-  exports.KVChangeRecord = KVChangeRecord;
+  exports.KeyValueChangeRecord = KeyValueChangeRecord;
   global.define = __define;
   return module.exports;
 });
@@ -13160,6 +13165,12 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
   var keyvalue_differs_1 = $__require('node_modules/angular2/src/core/change_detection/differs/keyvalue_differs.js');
   var default_keyvalue_differ_1 = $__require('node_modules/angular2/src/core/change_detection/differs/default_keyvalue_differ.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var default_keyvalue_differ_2 = $__require('node_modules/angular2/src/core/change_detection/differs/default_keyvalue_differ.js');
+  exports.DefaultKeyValueDifferFactory = default_keyvalue_differ_2.DefaultKeyValueDifferFactory;
+  exports.KeyValueChangeRecord = default_keyvalue_differ_2.KeyValueChangeRecord;
+  var default_iterable_differ_2 = $__require('node_modules/angular2/src/core/change_detection/differs/default_iterable_differ.js');
+  exports.DefaultIterableDifferFactory = default_iterable_differ_2.DefaultIterableDifferFactory;
+  exports.CollectionChangeRecord = default_iterable_differ_2.CollectionChangeRecord;
   var ast_1 = $__require('node_modules/angular2/src/core/change_detection/parser/ast.js');
   exports.ASTWithSource = ast_1.ASTWithSource;
   exports.AST = ast_1.AST;
@@ -18262,6 +18273,75 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflector.js",
   return module.exports;
 });
 
+System.registerDynamic("node_modules/angular2/src/facade/base_wrapped_exception.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var BaseWrappedException = (function(_super) {
+    __extends(BaseWrappedException, _super);
+    function BaseWrappedException(message) {
+      _super.call(this, message);
+    }
+    Object.defineProperty(BaseWrappedException.prototype, "wrapperMessage", {
+      get: function() {
+        return '';
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(BaseWrappedException.prototype, "wrapperStack", {
+      get: function() {
+        return null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(BaseWrappedException.prototype, "originalException", {
+      get: function() {
+        return null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(BaseWrappedException.prototype, "originalStack", {
+      get: function() {
+        return null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(BaseWrappedException.prototype, "context", {
+      get: function() {
+        return null;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(BaseWrappedException.prototype, "message", {
+      get: function() {
+        return '';
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return BaseWrappedException;
+  })(Error);
+  exports.BaseWrappedException = BaseWrappedException;
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -18918,6 +18998,11 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
     ListWrapper.clone = function(array) {
       return array.slice(0);
     };
+    ListWrapper.createImmutable = function(array) {
+      var result = ListWrapper.clone(array);
+      Object.seal(result);
+      return result;
+    };
     ListWrapper.forEachWithIndex = function(array, fn) {
       for (var i = 0; i < array.length; i++) {
         fn(array[i], i);
@@ -19039,6 +19124,9 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
       }
       return solution;
     };
+    ListWrapper.isImmutable = function(list) {
+      return Object.isSealed(list);
+    };
     return ListWrapper;
   })();
   exports.ListWrapper = ListWrapper;
@@ -19113,14 +19201,14 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/base_wrapped_exception.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
+  var base_wrapped_exception_1 = $__require('node_modules/angular2/src/facade/base_wrapped_exception.js');
   var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
   var _ArrayLogger = (function() {
     function _ArrayLogger() {
@@ -19193,14 +19281,14 @@ System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", 
         throw exception;
     };
     ExceptionHandler.prototype._extractMessage = function(exception) {
-      return exception instanceof exceptions_1.WrappedException ? exception.wrapperMessage : exception.toString();
+      return exception instanceof base_wrapped_exception_1.BaseWrappedException ? exception.wrapperMessage : exception.toString();
     };
     ExceptionHandler.prototype._longStackTrace = function(stackTrace) {
       return collection_1.isListLikeIterable(stackTrace) ? stackTrace.join("\n\n-----async gap-----\n") : stackTrace.toString();
     };
     ExceptionHandler.prototype._findContext = function(exception) {
       try {
-        if (!(exception instanceof exceptions_1.WrappedException))
+        if (!(exception instanceof base_wrapped_exception_1.BaseWrappedException))
           return null;
         return lang_1.isPresent(exception.context) ? exception.context : this._findContext(exception.originalException);
       } catch (e) {
@@ -19208,22 +19296,22 @@ System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", 
       }
     };
     ExceptionHandler.prototype._findOriginalException = function(exception) {
-      if (!(exception instanceof exceptions_1.WrappedException))
+      if (!(exception instanceof base_wrapped_exception_1.BaseWrappedException))
         return null;
       var e = exception.originalException;
-      while (e instanceof exceptions_1.WrappedException && lang_1.isPresent(e.originalException)) {
+      while (e instanceof base_wrapped_exception_1.BaseWrappedException && lang_1.isPresent(e.originalException)) {
         e = e.originalException;
       }
       return e;
     };
     ExceptionHandler.prototype._findOriginalStack = function(exception) {
-      if (!(exception instanceof exceptions_1.WrappedException))
+      if (!(exception instanceof base_wrapped_exception_1.BaseWrappedException))
         return null;
       var e = exception;
       var stack = exception.originalStack;
-      while (e instanceof exceptions_1.WrappedException && lang_1.isPresent(e.originalException)) {
+      while (e instanceof base_wrapped_exception_1.BaseWrappedException && lang_1.isPresent(e.originalException)) {
         e = e.originalException;
-        if (e instanceof exceptions_1.WrappedException && lang_1.isPresent(e.originalException)) {
+        if (e instanceof base_wrapped_exception_1.BaseWrappedException && lang_1.isPresent(e.originalException)) {
           stack = e.originalStack;
         }
       }
@@ -19236,7 +19324,7 @@ System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", 
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_modules/angular2/src/facade/exception_handler.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_modules/angular2/src/facade/base_wrapped_exception.js", "node_modules/angular2/src/facade/exception_handler.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19251,6 +19339,7 @@ System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_
     }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
+  var base_wrapped_exception_1 = $__require('node_modules/angular2/src/facade/base_wrapped_exception.js');
   var exception_handler_1 = $__require('node_modules/angular2/src/facade/exception_handler.js');
   var exception_handler_2 = $__require('node_modules/angular2/src/facade/exception_handler.js');
   exports.ExceptionHandler = exception_handler_2.ExceptionHandler;
@@ -19326,7 +19415,7 @@ System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_
       return this.message;
     };
     return WrappedException;
-  })(Error);
+  })(base_wrapped_exception_1.BaseWrappedException);
   exports.WrappedException = WrappedException;
   function makeTypeError(message) {
     return new TypeError(message);
