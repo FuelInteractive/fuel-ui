@@ -1,6 +1,5 @@
-import { ElementRef, EventEmitter, OnChanges } from 'angular2/core';
+import { EventEmitter, OnChanges } from 'angular2/core';
 export declare class Pagination implements OnChanges {
-    private _el;
     currentPage: number;
     pagesAtOnce: number;
     totalPages: number;
@@ -8,9 +7,8 @@ export declare class Pagination implements OnChanges {
     pagesBlank: Array<number>;
     startingIndex: number;
     endingIndex: number;
-    constructor(el: ElementRef);
+    constructor();
     ngOnChanges(changes: any): void;
-    getElement(): HTMLElement;
     setPage(newPage: number): void;
 }
 export declare var PAGINATION_PROVIDERS: typeof Pagination[];

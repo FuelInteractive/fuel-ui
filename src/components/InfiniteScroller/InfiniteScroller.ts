@@ -1,7 +1,6 @@
 import { 
 	Directive,
-	Component, 
-	View, 
+	Component,
 	ElementRef, 
 	Input, 
 	Output, 
@@ -35,9 +34,7 @@ export class ScrollItem implements AfterViewInit {
 }
 
 @Component({
-	selector: "infinite-scroller"
-})
-@View({
+	selector: "infinite-scroller",
 	template: `
 		<div class="scroll-container" 
 			(scroll)="doscroll($event)"

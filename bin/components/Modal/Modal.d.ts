@@ -8,6 +8,7 @@ export declare class Modal {
     constructor(el: ElementRef);
     clickElement(e: any): void;
     getElement(): HTMLElement;
+    closeModal(): boolean;
     showModal(isDisplayed: boolean): boolean;
 }
 export declare var MODAL_PROVIDERS: typeof Modal[];

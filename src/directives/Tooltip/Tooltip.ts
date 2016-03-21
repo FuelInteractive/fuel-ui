@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, View} from 'angular2/core';
+import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Directive({
@@ -8,7 +8,9 @@ import {CORE_DIRECTIVES} from 'angular2/common';
     ],
     host: {
         '(mouseover)': 'show()',
-        '(mouseout)': 'hide()'
+        '(mouseout)': 'hide()',
+        '(focus)': 'show()',
+        '(unfocus)': 'hide()'
     }
 })
 export class Tooltip {

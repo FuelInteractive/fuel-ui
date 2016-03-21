@@ -1,4 +1,4 @@
-﻿{
+{
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
@@ -18,5 +18,60 @@
     "filesGlob": [
         "./**/*.ts",
         "../typings/tsd.d.ts"
-    ]
+    ],
+    "files": [
+        "./components/Alert/Alert.Demo.ts",
+        "./components/Alert/Alert.ts",
+        "./components/Carousel/Carousel.Demo.ts",
+        "./components/Carousel/Carousel.ts",
+        "./components/Collapse/Collapse.Demo.ts",
+        "./components/Collapse/Collapse.ts",
+        "./components/components.ts",
+        "./components/DatePicker/DatePicker.Demo.ts",
+        "./components/DatePicker/DatePicker.ts",
+        "./components/DatePicker/DatePickerCalendar.ts",
+        "./components/DatePicker/DatePickerProviders.ts",
+        "./components/DatePicker/DateRangePicker.Demo.ts",
+        "./components/DatePicker/DateRangePicker.ts",
+        "./components/demoComponents.ts",
+        "./components/Dropdown/Dropdown.Demo.ts",
+        "./components/Dropdown/Dropdown.ts",
+        "./components/InfiniteScroller/InfiniteScroller.Demo.ts",
+        "./components/InfiniteScroller/InfiniteScroller.ts",
+        "./components/Modal/Modal.Demo.ts",
+        "./components/Modal/Modal.ts",
+        "./components/Pagination/Pagination.Demo.ts",
+        "./components/Pagination/Pagination.ts",
+        "./components/Progress/Progress.Demo.ts",
+        "./demo.ts",
+        "./directives/Animation/AnimatedScroller.ts",
+        "./directives/Animation/Animation.Demo.ts",
+        "./directives/Animation/Animation.ts",
+        "./directives/Animation/AnimationListener.ts",
+        "./directives/CodeHighlighter/CodeHighlighter.Demo.ts",
+        "./directives/CodeHighlighter/CodeHighlighter.ts",
+        "./directives/demoDirectives.ts",
+        "./directives/directives.ts",
+        "./directives/Tooltip/Tooltip.Demo.ts",
+        "./directives/Tooltip/Tooltip.ts",
+        "./fuel-ui-demo.ts",
+        "./fuel-ui.ts",
+        "./pipes/demoPipes.ts",
+        "./pipes/OrderBy/OrderBy.Demo.ts",
+        "./pipes/OrderBy/OrderBy.ts",
+        "./pipes/pipes.ts",
+        "./pipes/Range/Range.Demo.ts",
+        "./pipes/Range/Range.ts",
+        "./test.ts",
+        "./utilities/AnimationUtils.ts",
+        "./utilities/DateUtils.ts",
+        "./utilities/DetectionUtils.ts",
+        "./utilities/ElementUtils.ts",
+        "./utilities/StringUtils.ts",
+        "./utilities/utilities.ts",
+        "../typings/tsd.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }

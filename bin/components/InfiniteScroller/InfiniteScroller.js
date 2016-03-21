@@ -173,9 +173,7 @@ var InfiniteScroller = (function () {
     ], InfiniteScroller.prototype, "itemQuery", void 0);
     InfiniteScroller = __decorate([
         core_1.Component({
-            selector: "infinite-scroller"
-        }),
-        core_1.View({
+            selector: "infinite-scroller",
             template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
             styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
             directives: []

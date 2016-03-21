@@ -1,4 +1,4 @@
-import {Component, View, OnInit, OnChanges, AfterViewInit} from "angular2/core";
+import {Component, OnInit, OnChanges, AfterViewInit} from "angular2/core";
 import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
@@ -8,9 +8,7 @@ import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DateRange} from "../../utilities/DateUtils";
 
 @Component({
-    selector: "date-picker"
-})
-@View({
+    selector: "date-picker",
     styleUrls: ["components/DatePicker/DatePicker.css"],
     templateUrl: "components/DatePicker/DatePicker.html",
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES]

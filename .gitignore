@@ -169,6 +169,7 @@ node_modules/*
 !node_modules/rxjs/
 !node_modules/systemjs/
 !node_modules/font-awesome/
+!node_modules/prismjs/
 **/jspm_packages/
 jspm_packages/
 CVS/

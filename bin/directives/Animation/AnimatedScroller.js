@@ -1,3 +1,0 @@
-
-
-//# sourceMappingURL=AnimatedScroller.js.map

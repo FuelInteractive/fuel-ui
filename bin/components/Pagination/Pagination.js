@@ -12,16 +12,16 @@ var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
 var Range_1 = require('../../pipes/Range/Range');
 var Pagination = (function () {
-    function Pagination(el) {
+    function Pagination() {
+        this.currentPage = 1;
+        this.pagesAtOnce = 5;
+        this.totalPages = 10;
         this.currentPageChange = new core_1.EventEmitter();
         this.pagesBlank = [];
-        this._el = el.nativeElement;
+        this.setPage(this.currentPage);
     }
     Pagination.prototype.ngOnChanges = function (changes) {
         this.setPage(this.currentPage);
-    };
-    Pagination.prototype.getElement = function () {
-        return this._el;
     };
     Pagination.prototype.setPage = function (newPage) {
         if (newPage < 1 || newPage > this.totalPages)
@@ -67,15 +67,13 @@ var Pagination = (function () {
             properties: [
                 "totalPages: total-pages",
                 "pagesAtOnce: pages-at-once"
-            ]
-        }),
-        core_1.View({
+            ],
             styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
             template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"#page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
             directives: [common_1.CORE_DIRECTIVES],
             pipes: [common_1.SlicePipe, Range_1.Range]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [])
     ], Pagination);
     return Pagination;
 }());

@@ -1,0 +1,10 @@
+<div class="dropdown open">
+  <button class="btn btn-secondary" type="button" 
+    aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown()">
+    {{label}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu1"
+    *ngIf="dropdownOpen" (click)="toggleDropdown()">
+    <ng-content></ng-content>
+  </div>
+</div>
