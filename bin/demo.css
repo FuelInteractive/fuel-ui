@@ -1,0 +1,103 @@
+body {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; }
+
+.card-title {
+  color: #E24932; }
+
+.btn-fuel {
+  color: #fff;
+  background-color: #E24932;
+  border-color: #E24932; }
+  .btn-fuel:hover {
+    color: #fff;
+    background-color: #D33E28; }
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+  #wrapper .toggled {
+    padding-left: 275px; }
+    #wrapper .toggled #sidebar-wrapper {
+      width: 275px; }
+    #wrapper .toggled #page-content-wrapper {
+      position: absolute;
+      margin-right: -275px; }
+  #wrapper .source {
+    margin-top: 35px; }
+    #wrapper .source h3 {
+      margin-top: 25px; }
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 275px;
+  width: 0;
+  height: 100%;
+  margin-left: -275px;
+  overflow-y: auto;
+  background: #E24932;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px; }
+
+/* Sidebar Styles */
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px; }
+    .sidebar-nav li a {
+      display: block;
+      text-decoration: none;
+      color: #fff; }
+      .sidebar-nav li a:hover {
+        background: rgba(150, 22, 2, 0.2); }
+  .sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 22px;
+    line-height: 60px; }
+    .sidebar-nav > .sidebar-brand a {
+      color: #fff; }
+      .sidebar-nav > .sidebar-brand a span {
+        position: relative;
+        top: 2px; }
+      .sidebar-nav > .sidebar-brand a:hover {
+        color: #bbb;
+        background: none; }
+  .sidebar-nav > .sidebar-title {
+    color: #eee;
+    font-weight: bold;
+    text-indent: 0;
+    margin: 0 20px;
+    border-bottom: 1px solid #bbb;
+    font-size: 18px; }
+
+@media (min-width: 768px) {
+  #wrapper {
+    padding-left: 275px; }
+  #wrapper.toggled {
+    padding-left: 0; }
+  #sidebar-wrapper {
+    width: 275px; }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0; }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative; }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0; } }

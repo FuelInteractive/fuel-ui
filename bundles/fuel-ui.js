@@ -836,6 +836,9 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
     Modal.prototype.getElement = function() {
       return this._el;
     };
+    Modal.prototype.closeModal = function() {
+      return this.showModal(false);
+    };
     Modal.prototype.showModal = function(isDisplayed) {
       var _this = this;
       var body = document.body;
@@ -1625,7 +1628,7 @@ System.registerDynamic("node_modules/angular2/src/common/pipes/i18n_plural_pipe.
       }
       var key;
       var valueStr;
-      var pluralMap = (args[0]);
+      var pluralMap = args[0];
       if (!lang_1.isStringMap(pluralMap)) {
         throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
       }
@@ -1705,7 +1708,7 @@ System.registerDynamic("node_modules/angular2/src/common/pipes/i18n_select_pipe.
       if (args === void 0) {
         args = null;
       }
-      var mapping = (args[0]);
+      var mapping = args[0];
       if (!lang_1.isStringMap(mapping)) {
         throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(I18nSelectPipe, mapping);
       }
@@ -2438,16 +2441,6 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/normal
     }
   }
   exports.normalizeValidator = normalizeValidator;
-  function normalizeAsyncValidator(validator) {
-    if (validator.validate !== undefined) {
-      return function(c) {
-        return Promise.resolve(validator.validate(c));
-      };
-    } else {
-      return validator;
-    }
-  }
-  exports.normalizeAsyncValidator = normalizeAsyncValidator;
   global.define = __define;
   return module.exports;
 });
@@ -2511,7 +2504,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/shared
   }
   exports.composeValidators = composeValidators;
   function composeAsyncValidators(validators) {
-    return lang_1.isPresent(validators) ? validators_1.Validators.composeAsync(validators.map(normalize_validator_1.normalizeAsyncValidator)) : null;
+    return lang_1.isPresent(validators) ? validators_1.Validators.composeAsync(validators.map(normalize_validator_1.normalizeValidator)) : null;
   }
   exports.composeAsyncValidators = composeAsyncValidators;
   function isPropertyUpdated(changes, viewModel) {
@@ -3209,7 +3202,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/validators.js", [
       if (presentValidators.length == 0)
         return null;
       return function(control) {
-        var promises = _executeAsyncValidators(control, presentValidators).map(_convertToPromise);
+        var promises = _executeValidators(control, presentValidators).map(_convertToPromise);
         return promise_1.PromiseWrapper.all(promises).then(_mergeErrors);
       };
     };
@@ -3220,11 +3213,6 @@ System.registerDynamic("node_modules/angular2/src/common/forms/validators.js", [
     return promise_1.PromiseWrapper.isPromise(obj) ? obj : async_1.ObservableWrapper.toPromise(obj);
   }
   function _executeValidators(control, validators) {
-    return validators.map(function(v) {
-      return v(control);
-    });
-  }
-  function _executeAsyncValidators(control, validators) {
     return validators.map(function(v) {
       return v(control);
     });
@@ -3831,7 +3819,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/form_builder.js",
         extra = null;
       }
       var controls = this._reduceControls(controlsConfig);
-      var optionals = (lang_1.isPresent(extra) ? collection_1.StringMapWrapper.get(extra, "optionals") : null);
+      var optionals = lang_1.isPresent(extra) ? collection_1.StringMapWrapper.get(extra, "optionals") : null;
       var validator = lang_1.isPresent(extra) ? collection_1.StringMapWrapper.get(extra, "validator") : null;
       var asyncValidator = lang_1.isPresent(extra) ? collection_1.StringMapWrapper.get(extra, "asyncValidator") : null;
       return new modelModule.ControlGroup(controls, optionals, validator, asyncValidator);
@@ -4265,30 +4253,30 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_class.js"
           v = v.split(' ');
         }
         this._rawClass = v;
-        this._iterableDiffer = null;
-        this._keyValueDiffer = null;
         if (lang_1.isPresent(v)) {
           if (collection_1.isListLikeIterable(v)) {
-            this._iterableDiffer = this._iterableDiffers.find(v).create(null);
+            this._differ = this._iterableDiffers.find(v).create(null);
+            this._mode = 'iterable';
           } else {
-            this._keyValueDiffer = this._keyValueDiffers.find(v).create(null);
+            this._differ = this._keyValueDiffers.find(v).create(null);
+            this._mode = 'keyValue';
           }
+        } else {
+          this._differ = null;
         }
       },
       enumerable: true,
       configurable: true
     });
     NgClass.prototype.ngDoCheck = function() {
-      if (lang_1.isPresent(this._iterableDiffer)) {
-        var changes = this._iterableDiffer.diff(this._rawClass);
+      if (lang_1.isPresent(this._differ)) {
+        var changes = this._differ.diff(this._rawClass);
         if (lang_1.isPresent(changes)) {
-          this._applyIterableChanges(changes);
-        }
-      }
-      if (lang_1.isPresent(this._keyValueDiffer)) {
-        var changes = this._keyValueDiffer.diff(this._rawClass);
-        if (lang_1.isPresent(changes)) {
-          this._applyKeyValueChanges(changes);
+          if (this._mode == 'iterable') {
+            this._applyIterableChanges(changes);
+          } else {
+            this._applyKeyValueChanges(changes);
+          }
         }
       }
     };
@@ -4341,7 +4329,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_class.js"
           });
         } else {
           collection_1.StringMapWrapper.forEach(rawClassVal, function(expVal, className) {
-            if (lang_1.isPresent(expVal))
+            if (expVal)
               _this._toggleClass(className, !isCleanup);
           });
         }
@@ -4803,115 +4791,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_switch.js
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/directives/ng_plural.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/common/directives/ng_switch.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var __param = (this && this.__param) || function(paramIndex, decorator) {
-    return function(target, key) {
-      decorator(target, key, paramIndex);
-    };
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
-  var ng_switch_1 = $__require('node_modules/angular2/src/common/directives/ng_switch.js');
-  var _CATEGORY_DEFAULT = 'other';
-  var NgLocalization = (function() {
-    function NgLocalization() {}
-    return NgLocalization;
-  })();
-  exports.NgLocalization = NgLocalization;
-  var NgPluralCase = (function() {
-    function NgPluralCase(value, template, viewContainer) {
-      this.value = value;
-      this._view = new ng_switch_1.SwitchView(viewContainer, template);
-    }
-    NgPluralCase = __decorate([core_1.Directive({selector: '[ngPluralCase]'}), __param(0, core_1.Attribute('ngPluralCase')), __metadata('design:paramtypes', [String, core_1.TemplateRef, core_1.ViewContainerRef])], NgPluralCase);
-    return NgPluralCase;
-  })();
-  exports.NgPluralCase = NgPluralCase;
-  var NgPlural = (function() {
-    function NgPlural(_localization) {
-      this._localization = _localization;
-      this._caseViews = new collection_1.Map();
-      this.cases = null;
-    }
-    Object.defineProperty(NgPlural.prototype, "ngPlural", {
-      set: function(value) {
-        this._switchValue = value;
-        this._updateView();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    NgPlural.prototype.ngAfterContentInit = function() {
-      var _this = this;
-      this.cases.forEach(function(pluralCase) {
-        _this._caseViews.set(_this._formatValue(pluralCase), pluralCase._view);
-      });
-      this._updateView();
-    };
-    NgPlural.prototype._updateView = function() {
-      this._clearViews();
-      var view = this._caseViews.get(this._switchValue);
-      if (!lang_1.isPresent(view))
-        view = this._getCategoryView(this._switchValue);
-      this._activateView(view);
-    };
-    NgPlural.prototype._clearViews = function() {
-      if (lang_1.isPresent(this._activeView))
-        this._activeView.destroy();
-    };
-    NgPlural.prototype._activateView = function(view) {
-      if (!lang_1.isPresent(view))
-        return;
-      this._activeView = view;
-      this._activeView.create();
-    };
-    NgPlural.prototype._getCategoryView = function(value) {
-      var category = this._localization.getPluralCategory(value);
-      var categoryView = this._caseViews.get(category);
-      return lang_1.isPresent(categoryView) ? categoryView : this._caseViews.get(_CATEGORY_DEFAULT);
-    };
-    NgPlural.prototype._isValueView = function(pluralCase) {
-      return pluralCase.value[0] === "=";
-    };
-    NgPlural.prototype._formatValue = function(pluralCase) {
-      return this._isValueView(pluralCase) ? this._stripValue(pluralCase.value) : pluralCase.value;
-    };
-    NgPlural.prototype._stripValue = function(value) {
-      return lang_1.NumberWrapper.parseInt(value.substring(1), 10);
-    };
-    __decorate([core_1.ContentChildren(NgPluralCase), __metadata('design:type', core_1.QueryList)], NgPlural.prototype, "cases", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Number), __metadata('design:paramtypes', [Number])], NgPlural.prototype, "ngPlural", null);
-    NgPlural = __decorate([core_1.Directive({selector: '[ngPlural]'}), __metadata('design:paramtypes', [NgLocalization])], NgPlural);
-    return NgPlural;
-  })();
-  exports.NgPlural = NgPlural;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/common/directives/core_directives.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/common/directives/ng_class.js", "node_modules/angular2/src/common/directives/ng_for.js", "node_modules/angular2/src/common/directives/ng_if.js", "node_modules/angular2/src/common/directives/ng_style.js", "node_modules/angular2/src/common/directives/ng_switch.js", "node_modules/angular2/src/common/directives/ng_plural.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/directives/core_directives.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/common/directives/ng_class.js", "node_modules/angular2/src/common/directives/ng_for.js", "node_modules/angular2/src/common/directives/ng_if.js", "node_modules/angular2/src/common/directives/ng_style.js", "node_modules/angular2/src/common/directives/ng_switch.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4923,13 +4803,12 @@ System.registerDynamic("node_modules/angular2/src/common/directives/core_directi
   var ng_if_1 = $__require('node_modules/angular2/src/common/directives/ng_if.js');
   var ng_style_1 = $__require('node_modules/angular2/src/common/directives/ng_style.js');
   var ng_switch_1 = $__require('node_modules/angular2/src/common/directives/ng_switch.js');
-  var ng_plural_1 = $__require('node_modules/angular2/src/common/directives/ng_plural.js');
-  exports.CORE_DIRECTIVES = lang_1.CONST_EXPR([ng_class_1.NgClass, ng_for_1.NgFor, ng_if_1.NgIf, ng_style_1.NgStyle, ng_switch_1.NgSwitch, ng_switch_1.NgSwitchWhen, ng_switch_1.NgSwitchDefault, ng_plural_1.NgPlural, ng_plural_1.NgPluralCase]);
+  exports.CORE_DIRECTIVES = lang_1.CONST_EXPR([ng_class_1.NgClass, ng_for_1.NgFor, ng_if_1.NgIf, ng_style_1.NgStyle, ng_switch_1.NgSwitch, ng_switch_1.NgSwitchWhen, ng_switch_1.NgSwitchDefault]);
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/directives.js", ["node_modules/angular2/src/common/directives/ng_class.js", "node_modules/angular2/src/common/directives/ng_for.js", "node_modules/angular2/src/common/directives/ng_if.js", "node_modules/angular2/src/common/directives/ng_style.js", "node_modules/angular2/src/common/directives/ng_switch.js", "node_modules/angular2/src/common/directives/ng_plural.js", "node_modules/angular2/src/common/directives/observable_list_diff.js", "node_modules/angular2/src/common/directives/core_directives.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/directives.js", ["node_modules/angular2/src/common/directives/ng_class.js", "node_modules/angular2/src/common/directives/ng_for.js", "node_modules/angular2/src/common/directives/ng_if.js", "node_modules/angular2/src/common/directives/ng_style.js", "node_modules/angular2/src/common/directives/ng_switch.js", "node_modules/angular2/src/common/directives/observable_list_diff.js", "node_modules/angular2/src/common/directives/core_directives.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4952,10 +4831,6 @@ System.registerDynamic("node_modules/angular2/src/common/directives.js", ["node_
   exports.NgSwitch = ng_switch_1.NgSwitch;
   exports.NgSwitchWhen = ng_switch_1.NgSwitchWhen;
   exports.NgSwitchDefault = ng_switch_1.NgSwitchDefault;
-  var ng_plural_1 = $__require('node_modules/angular2/src/common/directives/ng_plural.js');
-  exports.NgPlural = ng_plural_1.NgPlural;
-  exports.NgPluralCase = ng_plural_1.NgPluralCase;
-  exports.NgLocalization = ng_plural_1.NgLocalization;
   __export($__require('node_modules/angular2/src/common/directives/observable_list_diff.js'));
   var core_directives_1 = $__require('node_modules/angular2/src/common/directives/core_directives.js');
   exports.CORE_DIRECTIVES = core_directives_1.CORE_DIRECTIVES;
@@ -5577,7 +5452,6 @@ System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angul
           offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
       this.hide();
       newEl.style.visibility = "";
-      newEl.style.position = "fixed";
       newEl.style.top = offset + 'px';
       newEl.style.left = elemRect.left + 'px';
       this.getElement().appendChild(newEl);
@@ -5895,7 +5769,7 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
     function PlatformRef() {}
     Object.defineProperty(PlatformRef.prototype, "injector", {
       get: function() {
-        throw exceptions_1.unimplemented();
+        return exceptions_1.unimplemented();
       },
       enumerable: true,
       configurable: true
@@ -5964,8 +5838,8 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
         try {
           injector = _this.injector.resolveAndCreateChild(providers);
           exceptionHandler = injector.get(exceptions_1.ExceptionHandler);
-          async_1.ObservableWrapper.subscribe(zone.onError, function(error) {
-            exceptionHandler.call(error.error, error.stackTrace);
+          zone.overrideOnErrorHandler(function(e, s) {
+            return exceptionHandler.call(e, s);
           });
         } catch (e) {
           if (lang_1.isPresent(exceptionHandler)) {
@@ -6063,7 +5937,7 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
       this._runningTick = false;
       this._enforceNoNewChanges = false;
       if (lang_1.isPresent(this._zone)) {
-        async_1.ObservableWrapper.subscribe(this._zone.onMicrotaskEmpty, function(_) {
+        async_1.ObservableWrapper.subscribe(this._zone.onTurnDone, function(_) {
           _this._zone.run(function() {
             _this.tick();
           });
@@ -6101,21 +5975,23 @@ System.registerDynamic("node_modules/angular2/src/core/application_ref.js", ["no
             completer.resolve(componentRef);
           };
           var tickResult = async_1.PromiseWrapper.then(compRefToken, tick);
+          if (lang_1.IS_DART) {
+            async_1.PromiseWrapper.then(tickResult, function(_) {});
+          }
           async_1.PromiseWrapper.then(tickResult, null, function(err, stackTrace) {
-            completer.reject(err, stackTrace);
-            exceptionHandler.call(err, stackTrace);
+            return completer.reject(err, stackTrace);
           });
         } catch (e) {
           exceptionHandler.call(e, e.stack);
           completer.reject(e, e.stack);
         }
       });
-      return completer.promise.then(function(ref) {
+      return completer.promise.then(function(_) {
         var c = _this._injector.get(console_1.Console);
         if (lang_1.assertionsEnabled()) {
           c.log("Angular 2 is running in the development mode. Call enableProdMode() to enable the production mode.");
         }
-        return ref;
+        return _;
       });
     };
     ApplicationRef_.prototype._loadComponent = function(componentRef) {
@@ -6480,12 +6356,16 @@ System.registerDynamic("node_modules/angular2/src/core/console.js", ["node_modul
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone_impl.js", [], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone.js", ["node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/core/profile/profile.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
+  var profile_1 = $__require('node_modules/angular2/src/core/profile/profile.js');
   var NgZoneError = (function() {
     function NgZoneError(error, stackTrace) {
       this.error = error;
@@ -6494,191 +6374,114 @@ System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone_impl.js", []
     return NgZoneError;
   })();
   exports.NgZoneError = NgZoneError;
-  var NgZoneImpl = (function() {
-    function NgZoneImpl(_a) {
-      var _this = this;
-      var trace = _a.trace,
-          onEnter = _a.onEnter,
-          onLeave = _a.onLeave,
-          setMicrotask = _a.setMicrotask,
-          setMacrotask = _a.setMacrotask,
-          onError = _a.onError;
-      this.onEnter = onEnter;
-      this.onLeave = onLeave;
-      this.setMicrotask = setMicrotask;
-      this.setMacrotask = setMacrotask;
-      this.onError = onError;
-      if (Zone) {
-        this.outer = this.inner = Zone.current;
-        if (Zone['wtfZoneSpec']) {
-          this.inner = this.inner.fork(Zone['wtfZoneSpec']);
-        }
-        if (trace) {
-          this.inner = this.inner.fork(Zone['longStackTraceZoneSpec']);
-        }
-        this.inner = this.inner.fork({
-          name: 'angular',
-          properties: {'isAngularZone': true},
-          onInvokeTask: function(delegate, current, target, task, applyThis, applyArgs) {
-            try {
-              _this.onEnter();
-              return delegate.invokeTask(target, task, applyThis, applyArgs);
-            } finally {
-              _this.onLeave();
-            }
-          },
-          onInvoke: function(delegate, current, target, callback, applyThis, applyArgs, source) {
-            try {
-              _this.onEnter();
-              return delegate.invoke(target, callback, applyThis, applyArgs, source);
-            } finally {
-              _this.onLeave();
-            }
-          },
-          onHasTask: function(delegate, current, target, hasTaskState) {
-            delegate.hasTask(target, hasTaskState);
-            if (current == target) {
-              if (hasTaskState.change == 'microTask') {
-                _this.setMicrotask(hasTaskState.microTask);
-              } else if (hasTaskState.change == 'macroTask') {
-                _this.setMacrotask(hasTaskState.macroTask);
-              }
-            }
-          },
-          onHandleError: function(delegate, current, target, error) {
-            delegate.handleError(target, error);
-            _this.onError(new NgZoneError(error, error.stack));
-            return false;
-          }
-        });
-      } else {
-        throw new Error('Angular2 needs to be run with Zone.js polyfill.');
-      }
-    }
-    NgZoneImpl.isInAngularZone = function() {
-      return Zone.current.get('isAngularZone') === true;
-    };
-    NgZoneImpl.prototype.runInner = function(fn) {
-      return this.inner.runGuarded(fn);
-    };
-    ;
-    NgZoneImpl.prototype.runOuter = function(fn) {
-      return this.outer.run(fn);
-    };
-    ;
-    return NgZoneImpl;
-  })();
-  exports.NgZoneImpl = NgZoneImpl;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone.js", ["node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/core/zone/ng_zone_impl.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
-  var ng_zone_impl_1 = $__require('node_modules/angular2/src/core/zone/ng_zone_impl.js');
-  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
-  var ng_zone_impl_2 = $__require('node_modules/angular2/src/core/zone/ng_zone_impl.js');
-  exports.NgZoneError = ng_zone_impl_2.NgZoneError;
   var NgZone = (function() {
     function NgZone(_a) {
-      var _this = this;
-      var _b = _a.enableLongStackTrace,
-          enableLongStackTrace = _b === void 0 ? false : _b;
-      this._hasPendingMicrotasks = false;
-      this._hasPendingMacrotasks = false;
-      this._isStable = true;
-      this._nesting = 0;
-      this._onUnstable = new async_1.EventEmitter(false);
-      this._onMicrotaskEmpty = new async_1.EventEmitter(false);
-      this._onStable = new async_1.EventEmitter(false);
+      var enableLongStackTrace = _a.enableLongStackTrace;
+      this._runScope = profile_1.wtfCreateScope("NgZone#run()");
+      this._microtaskScope = profile_1.wtfCreateScope("NgZone#microtask()");
+      this._pendingMicrotasks = 0;
+      this._hasExecutedCodeInInnerZone = false;
+      this._nestedRun = 0;
+      this._inVmTurnDone = false;
+      this._pendingTimeouts = [];
+      if (lang_1.global.zone) {
+        this._disabled = false;
+        this._mountZone = lang_1.global.zone;
+        this._innerZone = this._createInnerZone(this._mountZone, enableLongStackTrace);
+      } else {
+        this._disabled = true;
+        this._mountZone = null;
+      }
+      this._onTurnStartEvents = new async_1.EventEmitter(false);
+      this._onTurnDoneEvents = new async_1.EventEmitter(false);
+      this._onEventDoneEvents = new async_1.EventEmitter(false);
       this._onErrorEvents = new async_1.EventEmitter(false);
-      this._zoneImpl = new ng_zone_impl_1.NgZoneImpl({
-        trace: enableLongStackTrace,
-        onEnter: function() {
-          _this._nesting++;
-          if (_this._isStable) {
-            _this._isStable = false;
-            _this._onUnstable.emit(null);
-          }
-        },
-        onLeave: function() {
-          _this._nesting--;
-          _this._checkStable();
-        },
-        setMicrotask: function(hasMicrotasks) {
-          _this._hasPendingMicrotasks = hasMicrotasks;
-          _this._checkStable();
-        },
-        setMacrotask: function(hasMacrotasks) {
-          _this._hasPendingMacrotasks = hasMacrotasks;
-        },
-        onError: function(error) {
-          return _this._onErrorEvents.emit(error);
-        }
-      });
     }
-    NgZone.isInAngularZone = function() {
-      return ng_zone_impl_1.NgZoneImpl.isInAngularZone();
+    NgZone.prototype.overrideOnTurnStart = function(onTurnStartHook) {
+      this._onTurnStart = lang_1.normalizeBlank(onTurnStartHook);
     };
-    NgZone.assertInAngularZone = function() {
-      if (!ng_zone_impl_1.NgZoneImpl.isInAngularZone()) {
-        throw new exceptions_1.BaseException('Expected to be in Angular Zone, but it is not!');
-      }
-    };
-    NgZone.assertNotInAngularZone = function() {
-      if (ng_zone_impl_1.NgZoneImpl.isInAngularZone()) {
-        throw new exceptions_1.BaseException('Expected to not be in Angular Zone, but it is!');
-      }
-    };
-    NgZone.prototype._checkStable = function() {
+    Object.defineProperty(NgZone.prototype, "onTurnStart", {
+      get: function() {
+        return this._onTurnStartEvents;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    NgZone.prototype._notifyOnTurnStart = function(parentRun) {
       var _this = this;
-      if (this._nesting == 0) {
-        if (!this._hasPendingMicrotasks && !this._isStable) {
-          try {
-            this._nesting++;
-            this._onMicrotaskEmpty.emit(null);
-          } finally {
-            this._nesting--;
-            if (!this._hasPendingMicrotasks) {
-              try {
-                this.runOutsideAngular(function() {
-                  return _this._onStable.emit(null);
-                });
-              } finally {
-                this._isStable = true;
-              }
-            }
+      parentRun.call(this._innerZone, function() {
+        _this._onTurnStartEvents.emit(null);
+      });
+    };
+    NgZone.prototype.overrideOnTurnDone = function(onTurnDoneHook) {
+      this._onTurnDone = lang_1.normalizeBlank(onTurnDoneHook);
+    };
+    Object.defineProperty(NgZone.prototype, "onTurnDone", {
+      get: function() {
+        return this._onTurnDoneEvents;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    NgZone.prototype._notifyOnTurnDone = function(parentRun) {
+      var _this = this;
+      parentRun.call(this._innerZone, function() {
+        _this._onTurnDoneEvents.emit(null);
+      });
+    };
+    NgZone.prototype.overrideOnEventDone = function(onEventDoneFn, opt_waitForAsync) {
+      var _this = this;
+      if (opt_waitForAsync === void 0) {
+        opt_waitForAsync = false;
+      }
+      var normalizedOnEventDone = lang_1.normalizeBlank(onEventDoneFn);
+      if (opt_waitForAsync) {
+        this._onEventDone = function() {
+          if (!_this._pendingTimeouts.length) {
+            normalizedOnEventDone();
           }
-        }
+        };
+      } else {
+        this._onEventDone = normalizedOnEventDone;
       }
     };
-    ;
-    Object.defineProperty(NgZone.prototype, "onUnstable", {
+    Object.defineProperty(NgZone.prototype, "onEventDone", {
       get: function() {
-        return this._onUnstable;
+        return this._onEventDoneEvents;
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(NgZone.prototype, "onMicrotaskEmpty", {
+    NgZone.prototype._notifyOnEventDone = function() {
+      var _this = this;
+      this.runOutsideAngular(function() {
+        _this._onEventDoneEvents.emit(null);
+      });
+    };
+    Object.defineProperty(NgZone.prototype, "hasPendingMicrotasks", {
       get: function() {
-        return this._onMicrotaskEmpty;
+        return this._pendingMicrotasks > 0;
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(NgZone.prototype, "onStable", {
+    Object.defineProperty(NgZone.prototype, "hasPendingTimers", {
       get: function() {
-        return this._onStable;
+        return this._pendingTimeouts.length > 0;
       },
       enumerable: true,
       configurable: true
     });
+    Object.defineProperty(NgZone.prototype, "hasPendingAsyncTasks", {
+      get: function() {
+        return this.hasPendingMicrotasks || this.hasPendingTimers;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    NgZone.prototype.overrideOnErrorHandler = function(errorHandler) {
+      this._onErrorHandler = lang_1.normalizeBlank(errorHandler);
+    };
     Object.defineProperty(NgZone.prototype, "onError", {
       get: function() {
         return this._onErrorEvents;
@@ -6686,25 +6489,134 @@ System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone.js", ["node_
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(NgZone.prototype, "hasPendingMicrotasks", {
-      get: function() {
-        return this._hasPendingMicrotasks;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "hasPendingMacrotasks", {
-      get: function() {
-        return this._hasPendingMacrotasks;
-      },
-      enumerable: true,
-      configurable: true
-    });
     NgZone.prototype.run = function(fn) {
-      return this._zoneImpl.runInner(fn);
+      if (this._disabled) {
+        return fn();
+      } else {
+        var s = this._runScope();
+        try {
+          return this._innerZone.run(fn);
+        } finally {
+          profile_1.wtfLeave(s);
+        }
+      }
     };
     NgZone.prototype.runOutsideAngular = function(fn) {
-      return this._zoneImpl.runOuter(fn);
+      if (this._disabled) {
+        return fn();
+      } else {
+        return this._mountZone.run(fn);
+      }
+    };
+    NgZone.prototype._createInnerZone = function(zone, enableLongStackTrace) {
+      var microtaskScope = this._microtaskScope;
+      var ngZone = this;
+      var errorHandling;
+      if (enableLongStackTrace) {
+        errorHandling = collection_1.StringMapWrapper.merge(lang_1.global.Zone.longStackTraceZone, {onError: function(e) {
+            ngZone._notifyOnError(this, e);
+          }});
+      } else {
+        errorHandling = {onError: function(e) {
+            ngZone._notifyOnError(this, e);
+          }};
+      }
+      return zone.fork(errorHandling).fork({
+        '$run': function(parentRun) {
+          return function() {
+            try {
+              ngZone._nestedRun++;
+              if (!ngZone._hasExecutedCodeInInnerZone) {
+                ngZone._hasExecutedCodeInInnerZone = true;
+                ngZone._notifyOnTurnStart(parentRun);
+                if (ngZone._onTurnStart) {
+                  parentRun.call(ngZone._innerZone, ngZone._onTurnStart);
+                }
+              }
+              return parentRun.apply(this, arguments);
+            } finally {
+              ngZone._nestedRun--;
+              if (ngZone._pendingMicrotasks == 0 && ngZone._nestedRun == 0 && !this._inVmTurnDone) {
+                if (ngZone._hasExecutedCodeInInnerZone) {
+                  try {
+                    this._inVmTurnDone = true;
+                    ngZone._notifyOnTurnDone(parentRun);
+                    if (ngZone._onTurnDone) {
+                      parentRun.call(ngZone._innerZone, ngZone._onTurnDone);
+                    }
+                  } finally {
+                    this._inVmTurnDone = false;
+                    ngZone._hasExecutedCodeInInnerZone = false;
+                  }
+                }
+                if (ngZone._pendingMicrotasks === 0) {
+                  ngZone._notifyOnEventDone();
+                  if (lang_1.isPresent(ngZone._onEventDone)) {
+                    ngZone.runOutsideAngular(ngZone._onEventDone);
+                  }
+                }
+              }
+            }
+          };
+        },
+        '$scheduleMicrotask': function(parentScheduleMicrotask) {
+          return function(fn) {
+            ngZone._pendingMicrotasks++;
+            var microtask = function() {
+              var s = microtaskScope();
+              try {
+                fn();
+              } finally {
+                ngZone._pendingMicrotasks--;
+                profile_1.wtfLeave(s);
+              }
+            };
+            parentScheduleMicrotask.call(this, microtask);
+          };
+        },
+        '$setTimeout': function(parentSetTimeout) {
+          return function(fn, delay) {
+            var args = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+              args[_i - 2] = arguments[_i];
+            }
+            var id;
+            var cb = function() {
+              fn();
+              collection_1.ListWrapper.remove(ngZone._pendingTimeouts, id);
+            };
+            id = parentSetTimeout.call(this, cb, delay, args);
+            ngZone._pendingTimeouts.push(id);
+            return id;
+          };
+        },
+        '$clearTimeout': function(parentClearTimeout) {
+          return function(id) {
+            parentClearTimeout.call(this, id);
+            collection_1.ListWrapper.remove(ngZone._pendingTimeouts, id);
+          };
+        },
+        _innerZone: true
+      });
+    };
+    NgZone.prototype._notifyOnError = function(zone, e) {
+      if (lang_1.isPresent(this._onErrorHandler) || async_1.ObservableWrapper.hasSubscribers(this._onErrorEvents)) {
+        var trace = [lang_1.normalizeBlank(e.stack)];
+        while (zone && zone.constructedAtException) {
+          trace.push(zone.constructedAtException.get());
+          zone = zone.parent;
+        }
+        if (async_1.ObservableWrapper.hasSubscribers(this._onErrorEvents)) {
+          async_1.ObservableWrapper.callEmit(this._onErrorEvents, new NgZoneError(e, trace));
+        }
+        if (lang_1.isPresent(this._onErrorHandler)) {
+          this._onErrorHandler(e, trace);
+        }
+      } else {
+        console.log('## _notifyOnError ##');
+        console.log(e.stack);
+        throw e;
+      }
     };
     return NgZone;
   })();
@@ -6743,26 +6655,24 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
   var async_1 = $__require('node_modules/angular2/src/facade/async.js');
   var Testability = (function() {
     function Testability(_ngZone) {
-      this._ngZone = _ngZone;
       this._pendingCount = 0;
-      this._isZoneStable = true;
       this._didWork = false;
       this._callbacks = [];
-      this._watchAngularEvents();
+      this._isAngularEventPending = false;
+      this._watchAngularEvents(_ngZone);
     }
-    Testability.prototype._watchAngularEvents = function() {
+    Testability.prototype._watchAngularEvents = function(_ngZone) {
       var _this = this;
-      async_1.ObservableWrapper.subscribe(this._ngZone.onUnstable, function(_) {
+      async_1.ObservableWrapper.subscribe(_ngZone.onTurnStart, function(_) {
         _this._didWork = true;
-        _this._isZoneStable = false;
+        _this._isAngularEventPending = true;
       });
-      this._ngZone.runOutsideAngular(function() {
-        async_1.ObservableWrapper.subscribe(_this._ngZone.onStable, function(_) {
-          ng_zone_1.NgZone.assertNotInAngularZone();
-          lang_1.scheduleMicroTask(function() {
-            _this._isZoneStable = true;
+      _ngZone.runOutsideAngular(function() {
+        async_1.ObservableWrapper.subscribe(_ngZone.onEventDone, function(_) {
+          if (!_ngZone.hasPendingTimers) {
+            _this._isAngularEventPending = false;
             _this._runCallbacksIfReady();
-          });
+          }
         });
       });
     };
@@ -6780,20 +6690,20 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
       return this._pendingCount;
     };
     Testability.prototype.isStable = function() {
-      return this._isZoneStable && this._pendingCount == 0 && !this._ngZone.hasPendingMacrotasks;
+      return this._pendingCount == 0 && !this._isAngularEventPending;
     };
     Testability.prototype._runCallbacksIfReady = function() {
       var _this = this;
-      if (this.isStable()) {
-        lang_1.scheduleMicroTask(function() {
-          while (_this._callbacks.length !== 0) {
-            (_this._callbacks.pop())(_this._didWork);
-          }
-          _this._didWork = false;
-        });
-      } else {
+      if (!this.isStable()) {
         this._didWork = true;
+        return;
       }
+      async_1.PromiseWrapper.resolve(null).then(function(_) {
+        while (_this._callbacks.length !== 0) {
+          (_this._callbacks.pop())(_this._didWork);
+        }
+        _this._didWork = false;
+      });
     };
     Testability.prototype.whenStable = function(callback) {
       this._callbacks.push(callback);
@@ -6801,6 +6711,9 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
     };
     Testability.prototype.getPendingRequestCount = function() {
       return this._pendingCount;
+    };
+    Testability.prototype.isAngularEventPending = function() {
+      return this._isAngularEventPending;
     };
     Testability.prototype.findBindings = function(using, provider, exactMatch) {
       return [];
@@ -6993,7 +6906,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
       });
       if (lang_1.isPresent(compMeta)) {
         if (lang_1.isBlank(compMeta.template) && lang_1.isBlank(compMeta.templateUrl) && lang_1.isBlank(viewMeta)) {
-          throw new exceptions_1.BaseException("Component '" + lang_1.stringify(component) + "' must have either 'template' or 'templateUrl' set.");
+          throw new exceptions_1.BaseException("Component '" + lang_1.stringify(component) + "' must have either 'template', 'templateUrl', or '@View' set.");
         } else if (lang_1.isPresent(compMeta.template) && lang_1.isPresent(viewMeta)) {
           this._throwMixingViewAndComponent("template", component);
         } else if (lang_1.isPresent(compMeta.templateUrl) && lang_1.isPresent(viewMeta)) {
@@ -7023,7 +6936,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
         }
       } else {
         if (lang_1.isBlank(viewMeta)) {
-          throw new exceptions_1.BaseException("Could not compile '" + lang_1.stringify(component) + "' because it is not a component.");
+          throw new exceptions_1.BaseException("No View decorator found on component '" + lang_1.stringify(component) + "'");
         } else {
           return viewMeta;
         }
@@ -7268,11 +7181,11 @@ System.registerDynamic("node_modules/angular2/src/core/metadata.js", ["node_modu
   var view_2 = $__require('node_modules/angular2/src/core/metadata/view.js');
   var decorators_1 = $__require('node_modules/angular2/src/core/util/decorators.js');
   exports.Component = decorators_1.makeDecorator(directives_2.ComponentMetadata, function(fn) {
-    return fn.View = View;
+    return fn.View = exports.View;
   });
   exports.Directive = decorators_1.makeDecorator(directives_2.DirectiveMetadata);
-  var View = decorators_1.makeDecorator(view_2.ViewMetadata, function(fn) {
-    return fn.View = View;
+  exports.View = decorators_1.makeDecorator(view_2.ViewMetadata, function(fn) {
+    return fn.View = exports.View;
   });
   exports.Attribute = decorators_1.makeParamDecorator(di_2.AttributeMetadata);
   exports.Query = decorators_1.makeParamDecorator(di_2.QueryMetadata);
@@ -7820,8 +7733,6 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection.js", ["n
   exports.SimpleChange = change_detection_1.SimpleChange;
   exports.IterableDiffers = change_detection_1.IterableDiffers;
   exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
-  exports.CollectionChangeRecord = change_detection_1.CollectionChangeRecord;
-  exports.KeyValueChangeRecord = change_detection_1.KeyValueChangeRecord;
   global.define = __define;
   return module.exports;
 });
@@ -8258,25 +8169,22 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       var item;
       var itemTrackBy;
       if (lang_2.isArray(collection)) {
-        if (collection !== this._collection || !collection_1.ListWrapper.isImmutable(collection)) {
-          var list = collection;
-          this._length = collection.length;
-          for (index = 0; index < this._length; index++) {
-            item = list[index];
-            itemTrackBy = this._trackByFn(index, item);
-            if (record === null || !lang_2.looseIdentical(record.trackById, itemTrackBy)) {
-              record = this._mismatch(record, item, itemTrackBy, index);
-              mayBeDirty = true;
-            } else {
-              if (mayBeDirty) {
-                record = this._verifyReinsertion(record, item, itemTrackBy, index);
-              }
-              if (!lang_2.looseIdentical(record.item, item))
-                this._addIdentityChange(record, item);
+        var list = collection;
+        this._length = collection.length;
+        for (index = 0; index < this._length; index++) {
+          item = list[index];
+          itemTrackBy = this._trackByFn(index, item);
+          if (record === null || !lang_2.looseIdentical(record.trackById, itemTrackBy)) {
+            record = this._mismatch(record, item, itemTrackBy, index);
+            mayBeDirty = true;
+          } else {
+            if (mayBeDirty) {
+              record = this._verifyReinsertion(record, item, itemTrackBy, index);
             }
-            record = record._next;
+            if (!lang_2.looseIdentical(record.item, item))
+              this._addIdentityChange(record, item);
           }
-          this._truncate(record);
+          record = record._next;
         }
       } else {
         index = 0;
@@ -8296,8 +8204,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
           index++;
         });
         this._length = index;
-        this._truncate(record);
       }
+      this._truncate(record);
       this._collection = collection;
       return this.isDirty;
     };
@@ -8839,7 +8747,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
           if (records.has(key)) {
             newSeqRecord = records.get(key);
           } else {
-            newSeqRecord = new KeyValueChangeRecord(key);
+            newSeqRecord = new KVChangeRecord(key);
             records.set(key, newSeqRecord);
             newSeqRecord.currentValue = value;
             _this._addToAdditions(newSeqRecord);
@@ -8982,8 +8890,8 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
     return DefaultKeyValueDiffer;
   })();
   exports.DefaultKeyValueDiffer = DefaultKeyValueDiffer;
-  var KeyValueChangeRecord = (function() {
-    function KeyValueChangeRecord(key) {
+  var KVChangeRecord = (function() {
+    function KVChangeRecord(key) {
       this.key = key;
       this.previousValue = null;
       this.currentValue = null;
@@ -8994,12 +8902,12 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       this._prevRemoved = null;
       this._nextChanged = null;
     }
-    KeyValueChangeRecord.prototype.toString = function() {
+    KVChangeRecord.prototype.toString = function() {
       return lang_1.looseIdentical(this.previousValue, this.currentValue) ? lang_1.stringify(this.key) : (lang_1.stringify(this.key) + '[' + lang_1.stringify(this.previousValue) + '->' + lang_1.stringify(this.currentValue) + ']');
     };
-    return KeyValueChangeRecord;
+    return KVChangeRecord;
   })();
-  exports.KeyValueChangeRecord = KeyValueChangeRecord;
+  exports.KVChangeRecord = KVChangeRecord;
   global.define = __define;
   return module.exports;
 });
@@ -13069,8 +12977,14 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
     return SimpleChange;
   })();
   exports.SimpleChange = SimpleChange;
+  var _simpleChangesIndex = 0;
+  var _simpleChanges = [new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null), new SimpleChange(null, null)];
   function _simpleChange(previousValue, currentValue) {
-    return new SimpleChange(previousValue, currentValue);
+    var index = _simpleChangesIndex++ % 20;
+    var s = _simpleChanges[index];
+    s.previousValue = previousValue;
+    s.currentValue = currentValue;
+    return s;
   }
   var ChangeDetectionUtil = (function() {
     function ChangeDetectionUtil() {}
@@ -13269,12 +13183,6 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/change_d
   var keyvalue_differs_1 = $__require('node_modules/angular2/src/core/change_detection/differs/keyvalue_differs.js');
   var default_keyvalue_differ_1 = $__require('node_modules/angular2/src/core/change_detection/differs/default_keyvalue_differ.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var default_keyvalue_differ_2 = $__require('node_modules/angular2/src/core/change_detection/differs/default_keyvalue_differ.js');
-  exports.DefaultKeyValueDifferFactory = default_keyvalue_differ_2.DefaultKeyValueDifferFactory;
-  exports.KeyValueChangeRecord = default_keyvalue_differ_2.KeyValueChangeRecord;
-  var default_iterable_differ_2 = $__require('node_modules/angular2/src/core/change_detection/differs/default_iterable_differ.js');
-  exports.DefaultIterableDifferFactory = default_iterable_differ_2.DefaultIterableDifferFactory;
-  exports.CollectionChangeRecord = default_iterable_differ_2.CollectionChangeRecord;
   var ast_1 = $__require('node_modules/angular2/src/core/change_detection/parser/ast.js');
   exports.ASTWithSource = ast_1.ASTWithSource;
   exports.AST = ast_1.AST;
@@ -13334,17 +13242,6 @@ System.registerDynamic("node_modules/angular2/src/facade/promise.js", [], true, 
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var PromiseCompleter = (function() {
-    function PromiseCompleter() {
-      var _this = this;
-      this.promise = new Promise(function(res, rej) {
-        _this.resolve = res;
-        _this.reject = rej;
-      });
-    }
-    return PromiseCompleter;
-  })();
-  exports.PromiseCompleter = PromiseCompleter;
   var PromiseWrapper = (function() {
     function PromiseWrapper() {}
     PromiseWrapper.resolve = function(obj) {
@@ -13380,7 +13277,17 @@ System.registerDynamic("node_modules/angular2/src/facade/promise.js", [], true, 
       return obj instanceof Promise;
     };
     PromiseWrapper.completer = function() {
-      return new PromiseCompleter();
+      var resolve;
+      var reject;
+      var p = new Promise(function(res, rej) {
+        resolve = res;
+        reject = rej;
+      });
+      return {
+        promise: p,
+        resolve: resolve,
+        reject: reject
+      };
     };
     return PromiseWrapper;
   })();
@@ -14466,7 +14373,6 @@ System.registerDynamic("node_modules/angular2/src/facade/async.js", ["node_modul
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var promise_1 = $__require('node_modules/angular2/src/facade/promise.js');
   exports.PromiseWrapper = promise_1.PromiseWrapper;
-  exports.PromiseCompleter = promise_1.PromiseCompleter;
   var Subject_1 = $__require('node_modules/rxjs/Subject.js');
   var PromiseObservable_1 = $__require('node_modules/rxjs/observable/PromiseObservable.js');
   var toPromise_1 = $__require('node_modules/rxjs/operator/toPromise.js');
@@ -16255,11 +16161,9 @@ System.registerDynamic("node_modules/angular2/src/core/util/decorators.js", ["no
   }
   exports.Class = Class;
   var Reflect = lang_1.global.Reflect;
-  (function checkReflect() {
-    if (!(Reflect && Reflect.getMetadata)) {
-      throw 'reflect-metadata shim is required when using class decorators';
-    }
-  })();
+  if (!(Reflect && Reflect.getMetadata)) {
+    throw 'reflect-metadata shim is required when using class decorators';
+  }
   function makeDecorator(annotationCls, chainFn) {
     if (chainFn === void 0) {
       chainFn = null;
@@ -18381,75 +18285,6 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflector.js",
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/facade/base_wrapped_exception.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var BaseWrappedException = (function(_super) {
-    __extends(BaseWrappedException, _super);
-    function BaseWrappedException(message) {
-      _super.call(this, message);
-    }
-    Object.defineProperty(BaseWrappedException.prototype, "wrapperMessage", {
-      get: function() {
-        return '';
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(BaseWrappedException.prototype, "wrapperStack", {
-      get: function() {
-        return null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(BaseWrappedException.prototype, "originalException", {
-      get: function() {
-        return null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(BaseWrappedException.prototype, "originalStack", {
-      get: function() {
-        return null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(BaseWrappedException.prototype, "context", {
-      get: function() {
-        return null;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(BaseWrappedException.prototype, "message", {
-      get: function() {
-        return '';
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return BaseWrappedException;
-  })(Error);
-  exports.BaseWrappedException = BaseWrappedException;
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -18475,10 +18310,6 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
   } else {
     globalScope = window;
   }
-  function scheduleMicroTask(fn) {
-    Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
-  }
-  exports.scheduleMicroTask = scheduleMicroTask;
   exports.IS_DART = false;
   var _global = globalScope;
   exports.global = _global;
@@ -18585,10 +18416,6 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
     return val;
   }
   exports.deserializeEnum = deserializeEnum;
-  function resolveEnumToken(enumValue, val) {
-    return enumValue[val];
-  }
-  exports.resolveEnumToken = resolveEnumToken;
   var StringWrapper = (function() {
     function StringWrapper() {}
     StringWrapper.fromCharCode = function(code) {
@@ -18920,22 +18747,6 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
     return value.constructor === type;
   }
   exports.hasConstructor = hasConstructor;
-  function bitWiseOr(values) {
-    return values.reduce(function(a, b) {
-      return a | b;
-    });
-  }
-  exports.bitWiseOr = bitWiseOr;
-  function bitWiseAnd(values) {
-    return values.reduce(function(a, b) {
-      return a & b;
-    });
-  }
-  exports.bitWiseAnd = bitWiseAnd;
-  function escape(s) {
-    return _global.encodeURI(s);
-  }
-  exports.escape = escape;
   global.define = __define;
   return module.exports;
 });
@@ -19071,12 +18882,6 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
     StringMapWrapper.keys = function(map) {
       return Object.keys(map);
     };
-    StringMapWrapper.values = function(map) {
-      return Object.keys(map).reduce(function(r, a) {
-        r.push(map[a]);
-        return r;
-      }, []);
-    };
     StringMapWrapper.isEmpty = function(map) {
       for (var prop in map) {
         return false;
@@ -19135,11 +18940,6 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
     };
     ListWrapper.clone = function(array) {
       return array.slice(0);
-    };
-    ListWrapper.createImmutable = function(array) {
-      var result = ListWrapper.clone(array);
-      Object.seal(result);
-      return result;
     };
     ListWrapper.forEachWithIndex = function(array, fn) {
       for (var i = 0; i < array.length; i++) {
@@ -19262,9 +19062,6 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
       }
       return solution;
     };
-    ListWrapper.isImmutable = function(list) {
-      return Object.isSealed(list);
-    };
     return ListWrapper;
   })();
   exports.ListWrapper = ListWrapper;
@@ -19339,14 +19136,14 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/base_wrapped_exception.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var base_wrapped_exception_1 = $__require('node_modules/angular2/src/facade/base_wrapped_exception.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
   var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
   var _ArrayLogger = (function() {
     function _ArrayLogger() {
@@ -19419,14 +19216,14 @@ System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", 
         throw exception;
     };
     ExceptionHandler.prototype._extractMessage = function(exception) {
-      return exception instanceof base_wrapped_exception_1.BaseWrappedException ? exception.wrapperMessage : exception.toString();
+      return exception instanceof exceptions_1.WrappedException ? exception.wrapperMessage : exception.toString();
     };
     ExceptionHandler.prototype._longStackTrace = function(stackTrace) {
       return collection_1.isListLikeIterable(stackTrace) ? stackTrace.join("\n\n-----async gap-----\n") : stackTrace.toString();
     };
     ExceptionHandler.prototype._findContext = function(exception) {
       try {
-        if (!(exception instanceof base_wrapped_exception_1.BaseWrappedException))
+        if (!(exception instanceof exceptions_1.WrappedException))
           return null;
         return lang_1.isPresent(exception.context) ? exception.context : this._findContext(exception.originalException);
       } catch (e) {
@@ -19434,22 +19231,22 @@ System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", 
       }
     };
     ExceptionHandler.prototype._findOriginalException = function(exception) {
-      if (!(exception instanceof base_wrapped_exception_1.BaseWrappedException))
+      if (!(exception instanceof exceptions_1.WrappedException))
         return null;
       var e = exception.originalException;
-      while (e instanceof base_wrapped_exception_1.BaseWrappedException && lang_1.isPresent(e.originalException)) {
+      while (e instanceof exceptions_1.WrappedException && lang_1.isPresent(e.originalException)) {
         e = e.originalException;
       }
       return e;
     };
     ExceptionHandler.prototype._findOriginalStack = function(exception) {
-      if (!(exception instanceof base_wrapped_exception_1.BaseWrappedException))
+      if (!(exception instanceof exceptions_1.WrappedException))
         return null;
       var e = exception;
       var stack = exception.originalStack;
-      while (e instanceof base_wrapped_exception_1.BaseWrappedException && lang_1.isPresent(e.originalException)) {
+      while (e instanceof exceptions_1.WrappedException && lang_1.isPresent(e.originalException)) {
         e = e.originalException;
-        if (e instanceof base_wrapped_exception_1.BaseWrappedException && lang_1.isPresent(e.originalException)) {
+        if (e instanceof exceptions_1.WrappedException && lang_1.isPresent(e.originalException)) {
           stack = e.originalStack;
         }
       }
@@ -19462,7 +19259,7 @@ System.registerDynamic("node_modules/angular2/src/facade/exception_handler.js", 
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_modules/angular2/src/facade/base_wrapped_exception.js", "node_modules/angular2/src/facade/exception_handler.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_modules/angular2/src/facade/exception_handler.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19477,7 +19274,6 @@ System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_
     }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
-  var base_wrapped_exception_1 = $__require('node_modules/angular2/src/facade/base_wrapped_exception.js');
   var exception_handler_1 = $__require('node_modules/angular2/src/facade/exception_handler.js');
   var exception_handler_2 = $__require('node_modules/angular2/src/facade/exception_handler.js');
   exports.ExceptionHandler = exception_handler_2.ExceptionHandler;
@@ -19553,7 +19349,7 @@ System.registerDynamic("node_modules/angular2/src/facade/exceptions.js", ["node_
       return this.message;
     };
     return WrappedException;
-  })(base_wrapped_exception_1.BaseWrappedException);
+  })(Error);
   exports.WrappedException = WrappedException;
   function makeTypeError(message) {
     return new TypeError(message);
