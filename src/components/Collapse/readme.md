@@ -3,21 +3,17 @@
 
 ### collapse Settings
 
-  * `collapseId` _- string -
-    Id for the collapse content container
-  * `collapseButtonText` _- string -
+  * `buttonText` _- string -
     Text to show in the collapse button
  
 ### Collapse Example
 ```javascript
-collapseId: string = "collapse1";
-collapseButtonText: string = "Collapse Button";
+buttonText: string = "Collapse Button";
 ```
 
 ```html
 <collapse
-    collapseId="collapse1"
-    collapseButtonText="Collapse Button">
+    buttonText="Collapse Button">
     Collapse content goes here.
 </collapse>
 ```

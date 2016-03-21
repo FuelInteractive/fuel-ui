@@ -1,4 +1,4 @@
-import {Component, View, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from 'angular2/core';
+import {Component, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from 'angular2/core';
 import {CORE_DIRECTIVES, SlicePipe} from 'angular2/common';
 import {Range} from '../../pipes/Range/Range';
 
@@ -8,34 +8,27 @@ import {Range} from '../../pipes/Range/Range';
     properties: [
         "totalPages: total-pages",
         "pagesAtOnce: pages-at-once"
-    ]
-})
-@View({
+    ],
     styleUrls: ['components/Pagination/Pagination.css'],
     templateUrl: 'components/Pagination/Pagination.html',
     directives: [CORE_DIRECTIVES],
     pipes: [SlicePipe, Range]
 })
 export class Pagination implements OnChanges {
-    private _el:HTMLElement;
-    @Input() currentPage: number;
-    @Input() pagesAtOnce: number;
-    @Input() totalPages: number;
+    @Input() currentPage: number = 1;
+    @Input() pagesAtOnce: number = 5;
+    @Input() totalPages: number = 10;
     @Output() currentPageChange = new EventEmitter<any>();
     pagesBlank:Array<number> = [];
     startingIndex:number;
     endingIndex:number;
 
-    constructor(el: ElementRef){
-        this._el = el.nativeElement;
+    constructor(){
+        this.setPage(this.currentPage);
     }
 
     ngOnChanges(changes:any):void{
         this.setPage(this.currentPage);
-    }
-
-    getElement(): HTMLElement{
-        return this._el;
     }
 
     setPage(newPage:number):void{
