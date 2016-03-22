@@ -33,22 +33,25 @@
     "gulp-typescript": "^2.8.0",
     "gulp-webserver": "^0.9.1",
     "merge2": "^0.3.6",
+    "prismjs": "^1.4.1",
     "run-sequence": "^1.1.5",
     "systemjs-builder": "^0.14.11",
     "typescript": "^1.8.2",
+    "typings":"^0.7.9",
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.9",
+    "angular2": "^2.0.0-beta.11",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
-    "core-js": "^2.1.1",
-    "es6-shim": "^0.33.4",
+    "core-js": "^2.2.1",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.35.0",
     "font-awesome": "4.4.0",
     "reflect-metadata": "^0.1.3",
-    "rxjs": "^5.0.0-beta.2",
-    "systemjs": "0.19.22",
-    "zone.js": "^0.5.15"
+    "rxjs": "^5.0.0-beta.3",
+    "systemjs": "^0.19.24",
+    "zone.js": "^0.6.4"
   }
 }

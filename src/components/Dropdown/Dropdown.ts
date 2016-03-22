@@ -1,10 +1,8 @@
-import {Component, View, Input} from "angular2/core";
+import {Component, Input} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 
 @Component({
-    selector: "dropdown"
-})
-@View({
+    selector: "dropdown",
     templateUrl: 'components/Dropdown/Dropdown.html'
 })
 

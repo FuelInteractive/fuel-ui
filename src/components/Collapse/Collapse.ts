@@ -1,16 +1,13 @@
-import {Component, View, Input} from "angular2/core";
+import {Component, Input} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 
 @Component({
-    selector: "collapse"
-})
-@View({
+    selector: "collapse",
     templateUrl: 'components/Collapse/Collapse.html'
 })
 
 export class Collapse {
-    @Input() collapseId: string;
-    @Input() collapseButtonText: string;
+    @Input() buttonText: string;
     showCollapse: boolean = false;
     
     public toggleCollapse() : void{

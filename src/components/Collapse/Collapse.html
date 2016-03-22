@@ -1,11 +1,10 @@
 <p>
-  <button class="btn btn-primary" type="button" aria-expanded="false" 
-        [attr.data-target]="'#' + collapseId" (click)="toggleCollapse()">
-    {{collapseButtonText}}
+  <button class="btn btn-primary" type="button" aria-expanded="false" (click)="toggleCollapse()">
+    {{buttonText}}
   </button>
 </p>
 
-<div class="collapse fuel-ui-collapse" id="{{collapseId}}" *ngIf="showCollapse">
+<div class="collapse fuel-ui-collapse" *ngIf="showCollapse">
   <div class="card card-block">
     <ng-content></ng-content>
   </div>
