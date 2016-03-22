@@ -33,7 +33,6 @@
     "gulp-typescript": "^2.8.0",
     "gulp-webserver": "^0.9.1",
     "merge2": "^0.3.6",
-    "primejs": "^0.1.1",
     "prismjs": "^1.4.1",
     "run-sequence": "^1.1.5",
     "systemjs-builder": "^0.14.11",
