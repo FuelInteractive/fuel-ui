@@ -17,11 +17,12 @@ var Range = (function () {
     function Range() {
     }
     Range.prototype.transform = function (value, config) {
-        if (config === void 0) { config = [0, 4]; }
+        if (config === void 0) { config = [0, 4, 1]; }
         var newValue = [];
         var min = parseInt(config[0]);
         var max = parseInt(config[1]);
-        for (var i = min; i <= max; i++)
+        var step = parseInt(config[2]);
+        for (var i = min; i <= max; i += step)
             newValue.push(i);
         return newValue;
     };
