@@ -869,6 +869,9 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
     Modal.prototype.getElement = function() {
       return this._el;
     };
+    Modal.prototype.closeModal = function() {
+      return this.showModal(false);
+    };
     Modal.prototype.showModal = function(isDisplayed) {
       var _this = this;
       var body = document.body;
@@ -5610,7 +5613,6 @@ System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angul
           offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
       this.hide();
       newEl.style.visibility = "";
-      newEl.style.position = "fixed";
       newEl.style.top = offset + 'px';
       newEl.style.left = elemRect.left + 'px';
       this.getElement().appendChild(newEl);
@@ -13545,6 +13547,7 @@ System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Obser
       this.hasErrored = false;
       this.dispatching = false;
       this.hasCompleted = false;
+      this.source = source;
     }
     Subject.prototype.lift = function(operator) {
       var subject = new Subject(this.destination || this, this);
@@ -13688,7 +13691,7 @@ System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Obser
         throwError_1.throwError(new ObjectUnsubscribedError_1.ObjectUnsubscribedError());
       }
     };
-    Subject.prototype[rxSubscriber_1.rxSubscriber] = function() {
+    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function() {
       return new Subscriber_1.Subscriber(this);
     };
     Subject.create = function(destination, source) {
@@ -13860,6 +13863,30 @@ System.registerDynamic("node_modules/rxjs/operator/toPromise.js", ["node_modules
   return module.exports;
 });
 
+System.registerDynamic("node_modules/rxjs/symbol/observable.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var root_1 = $__require('node_modules/rxjs/util/root.js');
+  var Symbol = root_1.root.Symbol;
+  if (typeof Symbol === 'function') {
+    if (!Symbol.observable) {
+      if (typeof Symbol.for === 'function') {
+        exports.$$observable = Symbol.for('observable');
+      } else {
+        exports.$$observable = Symbol('observable');
+      }
+      Symbol.observable = exports.$$observable;
+    }
+  } else {
+    exports.$$observable = '@@observable';
+  }
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("node_modules/rxjs/util/isArray.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -13897,6 +13924,43 @@ System.registerDynamic("node_modules/rxjs/util/isFunction.js", [], true, functio
     return typeof x === 'function';
   }
   exports.isFunction = isFunction;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/tryCatch.js", ["node_modules/rxjs/util/errorObject.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
+  var tryCatchTarget;
+  function tryCatcher() {
+    try {
+      return tryCatchTarget.apply(this, arguments);
+    } catch (e) {
+      errorObject_1.errorObject.e = e;
+      return errorObject_1.errorObject;
+    }
+  }
+  function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+  }
+  exports.tryCatch = tryCatch;
+  ;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/rxjs/util/errorObject.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.errorObject = {e: {}};
   global.define = __define;
   return module.exports;
 });
@@ -14133,7 +14197,7 @@ System.registerDynamic("node_modules/rxjs/Subscriber.js", ["node_modules/rxjs/ut
       this.destination.complete();
       this.unsubscribe();
     };
-    Subscriber.prototype[rxSubscriber_1.rxSubscriber] = function() {
+    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function() {
       return this;
     };
     return Subscriber;
@@ -14261,85 +14325,15 @@ System.registerDynamic("node_modules/rxjs/util/root.js", [], true, function($__r
   return module.exports;
 });
 
-System.registerDynamic("node_modules/rxjs/util/SymbolShim.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/rxjs/symbol/rxSubscriber.js", ["node_modules/rxjs/util/root.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var root_1 = $__require('node_modules/rxjs/util/root.js');
-  function polyfillSymbol(root) {
-    var Symbol = ensureSymbol(root);
-    ensureIterator(Symbol, root);
-    ensureObservable(Symbol);
-    ensureFor(Symbol);
-    return Symbol;
-  }
-  exports.polyfillSymbol = polyfillSymbol;
-  function ensureFor(Symbol) {
-    if (!Symbol.for) {
-      Symbol.for = symbolForPolyfill;
-    }
-  }
-  exports.ensureFor = ensureFor;
-  var id = 0;
-  function ensureSymbol(root) {
-    if (!root.Symbol) {
-      root.Symbol = function symbolFuncPolyfill(description) {
-        return "@@Symbol(" + description + "):" + id++;
-      };
-    }
-    return root.Symbol;
-  }
-  exports.ensureSymbol = ensureSymbol;
-  function symbolForPolyfill(key) {
-    return '@@' + key;
-  }
-  exports.symbolForPolyfill = symbolForPolyfill;
-  function ensureIterator(Symbol, root) {
-    if (!Symbol.iterator) {
-      if (typeof Symbol.for === 'function') {
-        Symbol.iterator = Symbol.for('iterator');
-      } else if (root.Set && typeof new root.Set()['@@iterator'] === 'function') {
-        Symbol.iterator = '@@iterator';
-      } else if (root.Map) {
-        var keys = Object.getOwnPropertyNames(root.Map.prototype);
-        for (var i = 0; i < keys.length; ++i) {
-          var key = keys[i];
-          if (key !== 'entries' && key !== 'size' && root.Map.prototype[key] === root.Map.prototype['entries']) {
-            Symbol.iterator = key;
-            break;
-          }
-        }
-      } else {
-        Symbol.iterator = '@@iterator';
-      }
-    }
-  }
-  exports.ensureIterator = ensureIterator;
-  function ensureObservable(Symbol) {
-    if (!Symbol.observable) {
-      if (typeof Symbol.for === 'function') {
-        Symbol.observable = Symbol.for('observable');
-      } else {
-        Symbol.observable = '@@observable';
-      }
-    }
-  }
-  exports.ensureObservable = ensureObservable;
-  exports.SymbolShim = polyfillSymbol(root_1.root);
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/symbol/rxSubscriber.js", ["node_modules/rxjs/util/SymbolShim.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var SymbolShim_1 = $__require('node_modules/rxjs/util/SymbolShim.js');
-  exports.rxSubscriber = SymbolShim_1.SymbolShim.for('rxSubscriber');
+  var Symbol = root_1.root.Symbol;
+  exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ? Symbol.for('rxSubscriber') : '@@rxSubscriber';
   global.define = __define;
   return module.exports;
 });
@@ -14356,8 +14350,8 @@ System.registerDynamic("node_modules/rxjs/util/toSubscriber.js", ["node_modules/
     if (nextOrObserver && typeof nextOrObserver === 'object') {
       if (nextOrObserver instanceof Subscriber_1.Subscriber) {
         return nextOrObserver;
-      } else if (typeof nextOrObserver[rxSubscriber_1.rxSubscriber] === 'function') {
-        return nextOrObserver[rxSubscriber_1.rxSubscriber]();
+      } else if (typeof nextOrObserver[rxSubscriber_1.$$rxSubscriber] === 'function') {
+        return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
       }
     }
     return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
@@ -14367,54 +14361,15 @@ System.registerDynamic("node_modules/rxjs/util/toSubscriber.js", ["node_modules/
   return module.exports;
 });
 
-System.registerDynamic("node_modules/rxjs/util/tryCatch.js", ["node_modules/rxjs/util/errorObject.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
-  var tryCatchTarget;
-  function tryCatcher() {
-    try {
-      return tryCatchTarget.apply(this, arguments);
-    } catch (e) {
-      errorObject_1.errorObject.e = e;
-      return errorObject_1.errorObject;
-    }
-  }
-  function tryCatch(fn) {
-    tryCatchTarget = fn;
-    return tryCatcher;
-  }
-  exports.tryCatch = tryCatch;
-  ;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/util/errorObject.js", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.errorObject = {e: {}};
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/util/root.js", "node_modules/rxjs/util/SymbolShim.js", "node_modules/rxjs/util/toSubscriber.js", "node_modules/rxjs/util/tryCatch.js", "node_modules/rxjs/util/errorObject.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/util/root.js", "node_modules/rxjs/symbol/observable.js", "node_modules/rxjs/util/toSubscriber.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   var root_1 = $__require('node_modules/rxjs/util/root.js');
-  var SymbolShim_1 = $__require('node_modules/rxjs/util/SymbolShim.js');
+  var observable_1 = $__require('node_modules/rxjs/symbol/observable.js');
   var toSubscriber_1 = $__require('node_modules/rxjs/util/toSubscriber.js');
-  var tryCatch_1 = $__require('node_modules/rxjs/util/tryCatch.js');
-  var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
   var Observable = (function() {
     function Observable(subscribe) {
       this._isScalar = false;
@@ -14444,7 +14399,8 @@ System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/ut
       }
       return subscriber;
     };
-    Observable.prototype.forEach = function(next, thisArg, PromiseCtor) {
+    Observable.prototype.forEach = function(next, PromiseCtor) {
+      var _this = this;
       if (!PromiseCtor) {
         if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
           PromiseCtor = root_1.root.Rx.config.Promise;
@@ -14455,12 +14411,17 @@ System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/ut
       if (!PromiseCtor) {
         throw new Error('no Promise impl found');
       }
-      var source = this;
       return new PromiseCtor(function(resolve, reject) {
-        source.subscribe(function(value) {
-          var result = tryCatch_1.tryCatch(next).call(thisArg, value);
-          if (result === errorObject_1.errorObject) {
-            reject(errorObject_1.errorObject.e);
+        var subscription = _this.subscribe(function(value) {
+          if (subscription) {
+            try {
+              next(value);
+            } catch (err) {
+              reject(err);
+              subscription.unsubscribe();
+            }
+          } else {
+            next(value);
           }
         }, reject, resolve);
       });
@@ -14468,7 +14429,7 @@ System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/ut
     Observable.prototype._subscribe = function(subscriber) {
       return this.source.subscribe(subscriber);
     };
-    Observable.prototype[SymbolShim_1.SymbolShim.observable] = function() {
+    Observable.prototype[observable_1.$$observable] = function() {
       return this;
     };
     Observable.create = function(subscribe) {

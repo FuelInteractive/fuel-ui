@@ -22,7 +22,7 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
             <img src="{{image}}" />
             <div class="carousel-caption">
                 <h3>Some Title</h3>
-                <p>Link: {{image}}</p>
+                <p>Path: {{image}}</p>
             </div>
         </div>
     </carousel>
