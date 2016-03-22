@@ -1,7 +1,20 @@
 #Fuel-UI
 
-A set of UI components for use with Angular 2 and Bootstrap 4.
-This is currently a work in progress, check the source for additional readme docs
+A set of Angular 2 UI components for use with Angular 2 and Bootstrap 4.
+
+See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo and documentation.
+
+##Dependencies
+- Node
+- Gulp
+
+##Build
+Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at http://localhost:8000
+
+```
+npm install
+gulp
+```
 
 ##Components
 - [Alert](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Alert#readme)
