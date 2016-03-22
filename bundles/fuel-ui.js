@@ -19849,9 +19849,9 @@ System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.
         config = [0, 4, 1];
       }
       var newValue = [];
-      var min = parseInt(config[0]);
-      var max = parseInt(config[1]);
-      var step = parseInt(config[2]);
+      var min = !isNaN(parseInt(config[0])) ? parseInt(config[0]) : 0;
+      var max = !isNaN(parseInt(config[1])) ? parseInt(config[1]) : 4;
+      var step = !isNaN(parseInt(config[2])) ? parseInt(config[2]) : 1;
       for (var i = min; i <= max; i += step)
         newValue.push(i);
       return newValue;
