@@ -44,7 +44,6 @@ export class DemoHome {
 ])
 @Component({
 	selector: "fuel-ui",
-	changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div id="wrapper">
         <div id="sidebar-wrapper">

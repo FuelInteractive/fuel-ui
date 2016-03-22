@@ -1,4 +1,4 @@
-import {Component, Input, Output} from "angular2/core";
+import {Component, Input, Output, ChangeDetectionStrategy} from "angular2/core";
 import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DateRange} from "../../utilities/DateUtils";
@@ -11,7 +11,8 @@ import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller
 	selector: "date-range-picker",
 	styleUrls: ['components/DatePicker/DatePicker.css'],
 	templateUrl: 'components/DatePicker/DateRangePicker.html',
-	directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES]
+	directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateRangePicker extends DatePicker {
 	@Output() valueChange = new EventEmitter();
