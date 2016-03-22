@@ -1,6 +1,6 @@
 #Fuel-UI
 
-A set of Angular 2 UI components for use with Angular 2 and Bootstrap 4.
+A set of UI components for use with Angular 2 and Bootstrap 4.
 
 See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo and documentation.
 
