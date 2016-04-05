@@ -4,8 +4,8 @@ import {bootstrap} from "angular2/platform/browser";
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {DateRange, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
-    InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, OrderByDemo, RangeDemo} from './fuel-ui-demo';
+    InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -36,9 +36,12 @@ export class DemoHome {
   {path:'/component/modal', name: 'ModalDemo', component: ModalDemo},
   {path:'/component/pagination', name: 'PaginationDemo', component: PaginationDemo},
   {path:'/component/progress', name: 'ProgressDemo', component: ProgressDemo},
+  {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
   {path:'/directive/tooltip', name: 'TooltipDemo', component: TooltipDemo},
+  {path:'/pipe/format', name: 'FormatDemo', component: FormatDemo},
+  {path:'/pipe/maptoiterable', name: 'MapToIterableDemo', component: MapToIterableDemo},
   {path:'/pipe/orderby', name: 'OrderByDemo', component: OrderByDemo},
   {path:'/pipe/range', name: 'RangeDemo', component: RangeDemo}
 ])
@@ -65,11 +68,14 @@ export class DemoHome {
                 <li><a [routerLink]="['ModalDemo']">Modal</a></li>
                 <li><a [routerLink]="['PaginationDemo']">Pagination</a></li>
                 <li><a [routerLink]="['ProgressDemo']">Progress</a></li>
+                <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
                 <li><a [routerLink]="['CodeHighlighterDemo']">Code Highlighter</a></li>
                 <li><a [routerLink]="['TooltipDemo']">Tooltip</a></li>
                 <li class="sidebar-title">Pipes</li>
+                <li><a [routerLink]="['FormatDemo']">Format</a></li>
+                <li><a [routerLink]="['MapToIterableDemo']">MapToIterable</a></li>
                 <li><a [routerLink]="['OrderByDemo']">OrderBy</a></li>
                 <li><a [routerLink]="['RangeDemo']">Range</a></li>
             </ul>

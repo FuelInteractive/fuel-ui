@@ -10,7 +10,6 @@ export class CodeHighlighter{
         
     constructor(private el: ElementRef) {
         if(this.el && this.el.nativeElement){
-            this.el.nativeElement.innerHTML = StringHelper.escapeHtml(this.el.nativeElement.innerHTML);
             Prism.highlightElement(this.el.nativeElement);
         }
     }
