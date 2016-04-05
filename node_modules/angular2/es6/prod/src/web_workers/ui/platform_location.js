@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { BrowserPlatformLocation } from 'angular2/src/router/browser_platform_location';
+import { BrowserPlatformLocation } from 'angular2/src/router/location/browser_platform_location';
 import { Injectable } from 'angular2/src/core/di';
 import { ROUTER_CHANNEL } from 'angular2/src/web_workers/shared/messaging_api';
 import { ServiceMessageBrokerFactory } from 'angular2/src/web_workers/shared/service_message_broker';

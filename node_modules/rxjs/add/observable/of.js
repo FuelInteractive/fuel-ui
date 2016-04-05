@@ -1,5 +1,5 @@
 "use strict";
 var Observable_1 = require('../../Observable');
-var ArrayObservable_1 = require('../../observable/ArrayObservable');
-Observable_1.Observable.of = ArrayObservable_1.ArrayObservable.of;
+var of_1 = require('../../observable/of');
+Observable_1.Observable.of = of_1.of;
 //# sourceMappingURL=of.js.map

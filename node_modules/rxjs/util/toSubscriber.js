@@ -6,8 +6,8 @@ function toSubscriber(nextOrObserver, error, complete) {
         if (nextOrObserver instanceof Subscriber_1.Subscriber) {
             return nextOrObserver;
         }
-        else if (typeof nextOrObserver[rxSubscriber_1.rxSubscriber] === 'function') {
-            return nextOrObserver[rxSubscriber_1.rxSubscriber]();
+        else if (typeof nextOrObserver[rxSubscriber_1.$$rxSubscriber] === 'function') {
+            return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
         }
     }
     return new Subscriber_1.Subscriber(nextOrObserver, error, complete);

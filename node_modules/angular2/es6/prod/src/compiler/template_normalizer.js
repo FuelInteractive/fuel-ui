@@ -116,6 +116,7 @@ class TemplatePreparseVisitor {
         }
         return null;
     }
+    visitComment(ast, context) { return null; }
     visitAttr(ast, context) { return null; }
     visitText(ast, context) { return null; }
 }

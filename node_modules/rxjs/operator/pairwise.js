@@ -12,7 +12,9 @@ var Subscriber_1 = require('../Subscriber');
  *
  * <img src="./img/pairwise.png" width="100%">
  *
- * @returns {Observable<R>} an observable of pairs of values.
+ * @return {Observable<R>} an observable of pairs of values.
+ * @method pairwise
+ * @owner Observable
  */
 function pairwise() {
     return this.lift(new PairwiseOperator());
@@ -21,11 +23,16 @@ exports.pairwise = pairwise;
 var PairwiseOperator = (function () {
     function PairwiseOperator() {
     }
-    PairwiseOperator.prototype.call = function (subscriber) {
-        return new PairwiseSubscriber(subscriber);
+    PairwiseOperator.prototype.call = function (subscriber, source) {
+        return source._subscribe(new PairwiseSubscriber(subscriber));
     };
     return PairwiseOperator;
 }());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var PairwiseSubscriber = (function (_super) {
     __extends(PairwiseSubscriber, _super);
     function PairwiseSubscriber(destination) {

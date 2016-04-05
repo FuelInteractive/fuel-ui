@@ -1,1 +1,1 @@
-{"version":3,"file":"webSocket.js","sourceRoot":"","sources":["../../../../../src/add/observable/dom/webSocket.ts"],"names":[],"mappings":";AACA,2BAAyB,qBAAqB,CAAC,CAAA;AAC/C,iCAA+B,0CAA0C,CAAC,CAAA;AAE1E,uBAAU,CAAC,SAAS,GAAG,mCAAgB,CAAC,MAAM,CAAC;AAExB"}
+{"version":3,"file":"webSocket.js","sourceRoot":"","sources":["../../../src/add/observable/dom/webSocket.ts"],"names":[],"mappings":";AAAA,2BAAyB,qBAAqB,CAAC,CAAA;AAC/C,0BAA2C,mCAAmC,CAAC,CAAA;AAE/E,uBAAU,CAAC,SAAS,GAAG,qBAAe,CAAC"}

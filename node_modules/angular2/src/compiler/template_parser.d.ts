@@ -2,7 +2,7 @@ import { OpaqueToken } from 'angular2/core';
 import { Parser } from 'angular2/src/core/change_detection/change_detection';
 import { CompileDirectiveMetadata, CompilePipeMetadata } from './directive_metadata';
 import { HtmlParser } from './html_parser';
-import { ParseError, ParseLocation } from './parse_util';
+import { ParseSourceSpan, ParseError } from './parse_util';
 import { RecursiveAstVisitor, BindingPipe } from 'angular2/src/core/change_detection/parser/ast';
 import { TemplateAst, TemplateAstVisitor } from './template_ast';
 import { ElementSchemaRegistry } from 'angular2/src/compiler/schema/element_schema_registry';
@@ -15,7 +15,7 @@ import { ElementSchemaRegistry } from 'angular2/src/compiler/schema/element_sche
  */
 export declare const TEMPLATE_TRANSFORMS: OpaqueToken;
 export declare class TemplateParseError extends ParseError {
-    constructor(message: string, location: ParseLocation);
+    constructor(message: string, span: ParseSourceSpan);
 }
 export declare class TemplateParser {
     private _exprParser;

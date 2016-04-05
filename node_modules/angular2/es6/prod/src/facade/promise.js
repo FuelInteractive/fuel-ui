@@ -1,3 +1,11 @@
+export class PromiseCompleter {
+    constructor() {
+        this.promise = new Promise((res, rej) => {
+            this.resolve = res;
+            this.reject = rej;
+        });
+    }
+}
 export class PromiseWrapper {
     static resolve(obj) { return Promise.resolve(obj); }
     static reject(obj, _) { return Promise.reject(obj); }
@@ -28,13 +36,5 @@ export class PromiseWrapper {
         PromiseWrapper.then(PromiseWrapper.resolve(null), computation, (_) => { });
     }
     static isPromise(obj) { return obj instanceof Promise; }
-    static completer() {
-        var resolve;
-        var reject;
-        var p = new Promise(function (res, rej) {
-            resolve = res;
-            reject = rej;
-        });
-        return { promise: p, resolve: resolve, reject: reject };
-    }
+    static completer() { return new PromiseCompleter(); }
 }

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from 'angular2/src/core/di';
-import { PlatformLocation } from 'angular2/src/router/platform_location';
+import { PlatformLocation } from 'angular2/src/router/location/platform_location';
 import { FnArg, UiArguments, ClientMessageBrokerFactory } from 'angular2/src/web_workers/shared/client_message_broker';
 import { ROUTER_CHANNEL } from 'angular2/src/web_workers/shared/messaging_api';
 import { LocationType } from 'angular2/src/web_workers/shared/serialized_types';

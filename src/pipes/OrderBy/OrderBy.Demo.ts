@@ -146,7 +146,7 @@ export class Person {
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {OrderyBy} from 'fuel-ui/fuel-ui';
+import {OrderByPipe} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 

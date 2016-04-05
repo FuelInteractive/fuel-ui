@@ -9,7 +9,7 @@ import {Pipe, PipeTransform} from "angular2/core";
     name: 'range',
     pure: false
 })
-export class Range implements PipeTransform {
+export class RangePipe implements PipeTransform {
     transform(value:any, config:any = [0, 4, 1]){
 
         var newValue:any[] = [];
@@ -26,5 +26,5 @@ export class Range implements PipeTransform {
 }
 
 export var RANGE_PROVIDERS = [
-    Range
+    RangePipe
 ];

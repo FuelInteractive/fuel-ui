@@ -7,7 +7,7 @@ import { isPresent, escape } from 'angular2/src/facade/lang';
  * `description` is additional information provided to the translator.
  */
 export class Message {
-    constructor(content, meaning, description) {
+    constructor(content, meaning, description = null) {
         this.content = content;
         this.meaning = meaning;
         this.description = description;

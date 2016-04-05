@@ -26,11 +26,14 @@ gulp
 - [Modal](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Modal#readme)
 - [Pagination](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Pagination#readme)
 - [Progressbar](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Progress#readme)
+- [TableSortable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TableSortable#readme)
 
 ##Directives
 - [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
 - [Animation (helper)](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Animation#readme)
 
 ##Pipes
+- [Format](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/Format#readme)
+- [MapToIterable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/MapToIterable#readme)
 - [OrderBy](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/OrderBy#readme)
 - [Range](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/Range#readme)

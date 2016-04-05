@@ -8,7 +8,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Directive, ChangeDetectorRef, IterableDiffers, ViewContainerRef, TemplateRef } from 'angular2/core';
-import { isPresent, isBlank } from 'angular2/src/facade/lang';
+import { isPresent, isBlank, getTypeNameForDebugging } from 'angular2/src/facade/lang';
+import { BaseException } from "../../facade/exceptions";
 /**
  * The `NgFor` directive instantiates a template once per item from an iterable. The context for
  * each instantiated template inherits from the outer context with the given loop variable set
@@ -68,7 +69,12 @@ export let NgFor = class {
     set ngForOf(value) {
         this._ngForOf = value;
         if (isBlank(this._differ) && isPresent(value)) {
-            this._differ = this._iterableDiffers.find(value).create(this._cdr, this._ngForTrackBy);
+            try {
+                this._differ = this._iterableDiffers.find(value).create(this._cdr, this._ngForTrackBy);
+            }
+            catch (e) {
+                throw new BaseException(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
+            }
         }
     }
     set ngForTemplate(value) {

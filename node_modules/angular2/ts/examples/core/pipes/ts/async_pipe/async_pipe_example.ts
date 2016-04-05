@@ -1,5 +1,5 @@
 import {Component, provide} from 'angular2/core';
-import {bootstrap} from 'angular2/bootstrap';
+import {bootstrap} from 'angular2/platform/browser';
 import {Observable, Subscriber} from 'rxjs/Rx';
 
 // #docregion AsyncPipe
@@ -38,7 +38,7 @@ export class AsyncPipeExample {
 @Component({selector: "task-cmp", template: "Time: {{ time | async }}"})
 class Task {
   time = new Observable<number>((observer: Subscriber<number>) => {
-    setInterval(_ => observer.next(new Date().getTime()), 500);
+    setInterval(() => observer.next(new Date().getTime()), 500);
   });
 }
 // #enddocregion

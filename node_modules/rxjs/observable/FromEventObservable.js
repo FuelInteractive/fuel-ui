@@ -23,6 +23,11 @@ function isHTMLCollection(sourceObj) {
 function isEventTarget(sourceObj) {
     return !!sourceObj && typeof sourceObj.addEventListener === 'function' && typeof sourceObj.removeEventListener === 'function';
 }
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
 var FromEventObservable = (function (_super) {
     __extends(FromEventObservable, _super);
     function FromEventObservable(sourceObj, eventName, selector) {
@@ -31,6 +36,15 @@ var FromEventObservable = (function (_super) {
         this.eventName = eventName;
         this.selector = selector;
     }
+    /**
+     * @param sourceObj
+     * @param eventName
+     * @param selector
+     * @return {FromEventObservable}
+     * @static true
+     * @name fromEvent
+     * @owner Observable
+     */
     FromEventObservable.create = function (sourceObj, eventName, selector) {
         return new FromEventObservable(sourceObj, eventName, selector);
     };

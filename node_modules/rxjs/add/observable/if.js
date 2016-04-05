@@ -1,5 +1,5 @@
 "use strict";
 var Observable_1 = require('../../Observable');
-var IfObservable_1 = require('../../observable/IfObservable');
-Observable_1.Observable.if = IfObservable_1.IfObservable.create;
+var if_1 = require('../../observable/if');
+Observable_1.Observable.if = if_1._if;
 //# sourceMappingURL=if.js.map

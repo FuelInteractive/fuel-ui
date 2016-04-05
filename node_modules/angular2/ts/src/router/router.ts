@@ -9,10 +9,10 @@ import {
   ComponentInstruction,
   Instruction,
 } from './instruction';
-import {RouterOutlet} from './router_outlet';
-import {Location} from './location';
-import {getCanActivateHook} from './route_lifecycle_reflector';
-import {RouteDefinition} from './route_config_impl';
+import {RouterOutlet} from './directives/router_outlet';
+import {Location} from './location/location';
+import {getCanActivateHook} from './lifecycle/route_lifecycle_reflector';
+import {RouteDefinition} from './route_config/route_config_impl';
 
 let _resolveToTrue = PromiseWrapper.resolve(true);
 let _resolveToFalse = PromiseWrapper.resolve(false);
@@ -38,8 +38,10 @@ let _resolveToFalse = PromiseWrapper.resolve(false);
 export class Router {
   navigating: boolean = false;
   lastNavigationAttempt: string;
-
-  private _currentInstruction: Instruction = null;
+  /**
+   * The current `Instruction` for the router
+   */
+  public currentInstruction: Instruction = null;
 
   private _currentNavigation: Promise<any> = _resolveToTrue;
   private _outlet: RouterOutlet = null;
@@ -50,8 +52,8 @@ export class Router {
   private _subject: EventEmitter<any> = new EventEmitter();
 
 
-  constructor(public registry: RouteRegistry, public parent: Router, public hostComponent: any) {}
-
+  constructor(public registry: RouteRegistry, public parent: Router, public hostComponent: any,
+              public root?: Router) {}
 
   /**
    * Constructs a child router. You probably don't need to use this unless you're writing a reusable
@@ -73,24 +75,41 @@ export class Router {
    *
    * You probably don't need to use this unless you're writing a reusable component.
    */
-  registerPrimaryOutlet(outlet: RouterOutlet): Promise<boolean> {
+  registerPrimaryOutlet(outlet: RouterOutlet): Promise<any> {
     if (isPresent(outlet.name)) {
       throw new BaseException(`registerPrimaryOutlet expects to be called with an unnamed outlet.`);
     }
 
+    if (isPresent(this._outlet)) {
+      throw new BaseException(`Primary outlet is already registered.`);
+    }
+
     this._outlet = outlet;
-    if (isPresent(this._currentInstruction)) {
-      return this.commit(this._currentInstruction, false);
+    if (isPresent(this.currentInstruction)) {
+      return this.commit(this.currentInstruction, false);
     }
     return _resolveToTrue;
   }
+
+  /**
+   * Unregister an outlet (because it was destroyed, etc).
+   *
+   * You probably don't need to use this unless you're writing a custom outlet implementation.
+   */
+  unregisterPrimaryOutlet(outlet: RouterOutlet): void {
+    if (isPresent(outlet.name)) {
+      throw new BaseException(`registerPrimaryOutlet expects to be called with an unnamed outlet.`);
+    }
+    this._outlet = null;
+  }
+
 
   /**
    * Register an outlet to notified of auxiliary route changes.
    *
    * You probably don't need to use this unless you're writing a reusable component.
    */
-  registerAuxOutlet(outlet: RouterOutlet): Promise<boolean> {
+  registerAuxOutlet(outlet: RouterOutlet): Promise<any> {
     var outletName = outlet.name;
     if (isBlank(outletName)) {
       throw new BaseException(`registerAuxOutlet expects to be called with an outlet with a name.`);
@@ -102,8 +121,8 @@ export class Router {
     router._outlet = outlet;
 
     var auxInstruction;
-    if (isPresent(this._currentInstruction) &&
-        isPresent(auxInstruction = this._currentInstruction.auxInstruction[outletName])) {
+    if (isPresent(this.currentInstruction) &&
+        isPresent(auxInstruction = this.currentInstruction.auxInstruction[outletName])) {
       return router.commit(auxInstruction);
     }
     return _resolveToTrue;
@@ -120,8 +139,8 @@ export class Router {
       router = router.parent;
       instruction = instruction.child;
     }
-    return isPresent(this._currentInstruction) &&
-           this._currentInstruction.component == instruction.component;
+    return isPresent(this.currentInstruction) &&
+           this.currentInstruction.component == instruction.component;
   }
 
 
@@ -199,6 +218,26 @@ export class Router {
   }
 
   /** @internal */
+  _settleInstruction(instruction: Instruction): Promise<any> {
+    return instruction.resolveComponent().then((_) => {
+      var unsettledInstructions: Array<Promise<any>> = [];
+
+      if (isPresent(instruction.component)) {
+        instruction.component.reuse = false;
+      }
+
+      if (isPresent(instruction.child)) {
+        unsettledInstructions.push(this._settleInstruction(instruction.child));
+      }
+
+      StringMapWrapper.forEach(instruction.auxInstruction, (instruction: Instruction, _) => {
+        unsettledInstructions.push(this._settleInstruction(instruction));
+      });
+      return PromiseWrapper.all(unsettledInstructions);
+    });
+  }
+
+  /** @internal */
   _navigate(instruction: Instruction, _skipLocationChange: boolean): Promise<any> {
     return this._settleInstruction(instruction)
         .then((_) => this._routerCanReuse(instruction))
@@ -220,27 +259,8 @@ export class Router {
         });
   }
 
-  /** @internal */
-  _settleInstruction(instruction: Instruction): Promise<any> {
-    return instruction.resolveComponent().then((_) => {
-      var unsettledInstructions: Array<Promise<any>> = [];
-
-      if (isPresent(instruction.component)) {
-        instruction.component.reuse = false;
-      }
-
-      if (isPresent(instruction.child)) {
-        unsettledInstructions.push(this._settleInstruction(instruction.child));
-      }
-
-      StringMapWrapper.forEach(instruction.auxInstruction, (instruction, _) => {
-        unsettledInstructions.push(this._settleInstruction(instruction));
-      });
-      return PromiseWrapper.all(unsettledInstructions);
-    });
-  }
-
   private _emitNavigationFinish(url): void { ObservableWrapper.callEmit(this._subject, url); }
+  _emitNavigationFail(url): void { ObservableWrapper.callError(this._subject, url); }
 
   private _afterPromiseFinishNavigating(promise: Promise<any>): Promise<any> {
     return PromiseWrapper.catchError(promise.then((_) => this._finishNavigating()), (err) => {
@@ -270,7 +290,7 @@ export class Router {
   }
 
   private _canActivate(nextInstruction: Instruction): Promise<boolean> {
-    return canActivateOne(nextInstruction, this._currentInstruction);
+    return canActivateOne(nextInstruction, this.currentInstruction);
   }
 
   private _routerCanDeactivate(instruction: Instruction): Promise<boolean> {
@@ -292,7 +312,7 @@ export class Router {
       next = this._outlet.routerCanDeactivate(componentInstruction);
     }
     // TODO: aux route lifecycle hooks
-    return next.then((result) => {
+    return next.then<boolean>((result): boolean | Promise<boolean> => {
       if (result == false) {
         return false;
       }
@@ -307,7 +327,7 @@ export class Router {
    * Updates this router and all descendant routers according to the given instruction
    */
   commit(instruction: Instruction, _skipLocationChange: boolean = false): Promise<any> {
-    this._currentInstruction = instruction;
+    this.currentInstruction = instruction;
 
     var next: Promise<any> = _resolveToTrue;
     if (isPresent(this._outlet) && isPresent(instruction.component)) {
@@ -327,7 +347,7 @@ export class Router {
       }
     }
 
-    var promises = [];
+    var promises: Promise<any>[] = [];
     this._auxRouters.forEach((router, name) => {
       if (isPresent(instruction.auxInstruction[name])) {
         promises.push(router.commit(instruction.auxInstruction[name]));
@@ -348,8 +368,8 @@ export class Router {
   /**
    * Subscribe to URL updates from the router
    */
-  subscribe(onNext: (value: any) => void): Object {
-    return ObservableWrapper.subscribe(this._subject, onNext);
+  subscribe(onNext: (value: any) => void, onError?: (value: any) => void): Object {
+    return ObservableWrapper.subscribe(this._subject, onNext, onError);
   }
 
 
@@ -386,10 +406,10 @@ export class Router {
   }
 
   private _getAncestorInstructions(): Instruction[] {
-    var ancestorInstructions = [this._currentInstruction];
+    var ancestorInstructions: Instruction[] = [this.currentInstruction];
     var ancestorRouter: Router = this;
     while (isPresent(ancestorRouter = ancestorRouter.parent)) {
-      ancestorInstructions.unshift(ancestorRouter._currentInstruction);
+      ancestorInstructions.unshift(ancestorRouter.currentInstruction);
     }
     return ancestorInstructions;
   }
@@ -426,36 +446,41 @@ export class RootRouter extends Router {
   constructor(registry: RouteRegistry, location: Location,
               @Inject(ROUTER_PRIMARY_COMPONENT) primaryComponent: Type) {
     super(registry, null, primaryComponent);
+    this.root = this;
     this._location = location;
     this._locationSub = this._location.subscribe((change) => {
       // we call recognize ourselves
       this.recognize(change['url'])
           .then((instruction) => {
-            this.navigateByInstruction(instruction, isPresent(change['pop']))
-                .then((_) => {
-                  // this is a popstate event; no need to change the URL
-                  if (isPresent(change['pop']) && change['type'] != 'hashchange') {
-                    return;
-                  }
-                  var emitPath = instruction.toUrlPath();
-                  var emitQuery = instruction.toUrlQuery();
-                  if (emitPath.length > 0 && emitPath[0] != '/') {
-                    emitPath = '/' + emitPath;
-                  }
-
-                  // Because we've opted to use All hashchange events occur outside Angular.
-                  // However, apps that are migrating might have hash links that operate outside
-                  // angular to which routing must respond.
-                  // To support these cases where we respond to hashchanges and redirect as a
-                  // result, we need to replace the top item on the stack.
-                  if (change['type'] == 'hashchange') {
-                    if (instruction.toRootUrl() != this._location.path()) {
-                      this._location.replaceState(emitPath, emitQuery);
+            if (isPresent(instruction)) {
+              this.navigateByInstruction(instruction, isPresent(change['pop']))
+                  .then((_) => {
+                    // this is a popstate event; no need to change the URL
+                    if (isPresent(change['pop']) && change['type'] != 'hashchange') {
+                      return;
                     }
-                  } else {
-                    this._location.go(emitPath, emitQuery);
-                  }
-                });
+                    var emitPath = instruction.toUrlPath();
+                    var emitQuery = instruction.toUrlQuery();
+                    if (emitPath.length > 0 && emitPath[0] != '/') {
+                      emitPath = '/' + emitPath;
+                    }
+
+                    // Because we've opted to use All hashchange events occur outside Angular.
+                    // However, apps that are migrating might have hash links that operate outside
+                    // angular to which routing must respond.
+                    // To support these cases where we respond to hashchanges and redirect as a
+                    // result, we need to replace the top item on the stack.
+                    if (change['type'] == 'hashchange') {
+                      if (instruction.toRootUrl() != this._location.path()) {
+                        this._location.replaceState(emitPath, emitQuery);
+                      }
+                    } else {
+                      this._location.go(emitPath, emitQuery);
+                    }
+                  });
+            } else {
+              this._emitNavigationFail(change['url']);
+            }
           });
     });
 
@@ -486,7 +511,7 @@ export class RootRouter extends Router {
 
 class ChildRouter extends Router {
   constructor(parent: Router, hostComponent) {
-    super(parent.registry, parent, hostComponent);
+    super(parent.registry, parent, hostComponent, parent.root);
     this.parent = parent;
   }
 
@@ -514,7 +539,7 @@ function canActivateOne(nextInstruction: Instruction,
     next = canActivateOne(nextInstruction.child,
                           isPresent(prevInstruction) ? prevInstruction.child : null);
   }
-  return next.then((result) => {
+  return next.then<boolean>((result: boolean): boolean => {
     if (result == false) {
       return false;
     }

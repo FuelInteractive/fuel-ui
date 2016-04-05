@@ -46,7 +46,7 @@ export let I18nPluralPipe = class {
     transform(value, args = null) {
         var key;
         var valueStr;
-        var pluralMap = args[0];
+        var pluralMap = (args[0]);
         if (!isStringMap(pluralMap)) {
             throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
         }

@@ -183,9 +183,9 @@ export let TestComponentBuilder = class {
             DOM.remove(oldRoots[i]);
         }
         DOM.appendChild(doc.body, rootEl);
-        return this._injector.get(DynamicComponentLoader)
-            .loadAsRoot(rootComponentType, `#${rootElId}`, this._injector)
-            .then((componentRef) => { return new ComponentFixture_(componentRef); });
+        var promise = this._injector.get(DynamicComponentLoader)
+            .loadAsRoot(rootComponentType, `#${rootElId}`, this._injector);
+        return promise.then((componentRef) => { return new ComponentFixture_(componentRef); });
     }
 };
 TestComponentBuilder = __decorate([

@@ -3,6 +3,16 @@
  * Separated into its own file as this is the part needed for full AMD support in SFX builds
  * NB since implementations have now diverged this can be merged back with amd.js
  */
+
+hook('fetch', function(fetch) {
+  return function(load) {
+    // script load implies define global leak
+    if (load.metadata.scriptLoad && isBrowser)
+      __global.define = this.amdDefine;
+    return fetch.call(this, load);
+  };
+});
+ 
 hookConstructor(function(constructor) {
   return function() {
     var loader = this;
@@ -69,7 +79,7 @@ hookConstructor(function(constructor) {
           normalized = normalized.substr(0, normalized.length - 3);
         var module = loader.get(normalized);
         if (!module)
-          throw new Error('Module not already loaded loading "' + names + '" from "' + referer + '".');
+          throw new Error('Module not already loaded loading "' + names + '" as ' + normalized + (referer ? ' from "' + referer + '".' : '.'));
         return module.__useDefault ? module['default'] : module;
       }
 
@@ -194,9 +204,8 @@ hookConstructor(function(constructor) {
           if (!curMeta)
             throw new TypeError('Unexpected anonymous AMD define.');
 
-          // already defined anonymously -> throw
-          if (curMeta.entry)
-            throw new TypeError('Multiple defines for anonymous module ' + load.name);
+          if (curMeta.entry && !curMeta.entry.name)
+            throw new Error('Multiple anonymous defines in module ' + load.name);
           
           curMeta.entry = entry;
         }
@@ -212,7 +221,7 @@ hookConstructor(function(constructor) {
           if (curMeta) {
             if (!curMeta.entry && !curMeta.bundle)
               curMeta.entry = entry;
-            else
+            else if (curMeta.entry && curMeta.entry.name)
               curMeta.entry = undefined;
 
             // note this is now a bundle
@@ -226,29 +235,6 @@ hookConstructor(function(constructor) {
       };
     });
 
-    // adds define as a global (potentially just temporarily)
-    function createDefine() {
-      // ensure no NodeJS environment detection
-      var oldModule = __global.module;
-      var oldExports = __global.exports;
-      var oldDefine = __global.define;
-
-      __global.module = undefined;
-      __global.exports = undefined;
-      __global.define = define;
-
-      return function() {
-        __global.define = oldDefine;
-        __global.module = oldModule;
-        __global.exports = oldExports;
-      };
-    }
-
-    loader.set('@@amd-helpers', loader.newModule({
-      createDefine: createDefine,
-      require: require,
-      define: define
-    }));
     loader.amdDefine = define;
     loader.amdRequire = require;
   };

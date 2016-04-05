@@ -205,6 +205,3 @@ export class SpyObject {
         return newSpy;
     }
 }
-export function isInInnerZone() {
-    return global.zone._innerZone === true;
-}

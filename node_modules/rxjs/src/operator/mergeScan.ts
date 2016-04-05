@@ -32,13 +32,18 @@ export class MergeScanOperator<T, R> implements Operator<T, R> {
               private concurrent: number) {
   }
 
-  call(subscriber: Subscriber<R>): Subscriber<T> {
-    return new MergeScanSubscriber(
+  call(subscriber: Subscriber<R>, source: any): any {
+    return source._subscribe(new MergeScanSubscriber(
       subscriber, this.project, this.seed, this.concurrent
-    );
+    ));
   }
 }
 
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 export class MergeScanSubscriber<T, R> extends OuterSubscriber<T, R> {
   private hasValue: boolean = false;
   private hasCompleted: boolean = false;

@@ -141,6 +141,24 @@ asyncTest('Global script loading that detects as AMD with shim config', function
   }, err);
 });
 
+asyncTest('Global script with exports as an array', function() {
+  System.config({
+    meta: {
+      'tests/global-exports-array.js': {
+        exports: ['A', 'B']
+      }
+    }
+  });
+
+  System['import']('tests/global-exports-array.js').then(function(m) {
+    ok(m.A == 'A');
+    ok(m.B == 'B');
+    ok(!m.C);
+    ok(m['default'] == 'A');
+    start();
+  }, err);
+});
+
 if (!ie8)
 asyncTest('Meta should override meta syntax', function() {
   System.meta[System.normalizeSync('tests/meta-override.js')] = { format: 'esm' };
@@ -294,6 +312,23 @@ asyncTest('Loading an AMD named define', function() {
   }, err);
 });
 
+asyncTest('Loading an AMD bundle with an anonymous define', function() {
+  System['import']('tests/anon-named.js').then(function(m) {
+    ok(m.anon == true);
+    start();
+  }, err);
+});
+
+asyncTest('Loading an AMD bundle with multiple anonymous defines', function() {
+  System['import']('tests/multiple-anonymous.js').then(function(m) {
+    ok(false);
+    start();
+  }, function(e) {
+    ok(e.toString().indexOf('Multiple anonymous') != -1)
+    start();
+  });
+})
+
 asyncTest('Loading AMD CommonJS form', function() {
   System['import']('tests/amd-cjs-module.js').then(function(m) {
     ok(m.test == 'hi', 'Not defined');
@@ -388,6 +423,13 @@ asyncTest('CommonJS globals', function() {
     start();
   }, err);
 });
+
+asyncTest('CommonJS require.resolve', function() {
+  System['import']('tests/cjs-resolve.js').then(function(m) {
+    ok(m.substr(m.length - 12, 12) == 'test/tests/a');
+    start();
+  }, err);
+})
 
 asyncTest('Loading a UMD module', function() {
   System['import']('tests/umd.js').then(function(m) {
@@ -1019,10 +1061,9 @@ asyncTest('Package edge cases', function() {
 
   // ensure trailing "/" is equivalent to "tests/testpkg"
   clonedSystem.config({
-    packageConfigPaths: ['tests/*.json/'],
+    packageConfigPaths: ['tests/*.json'],
     packages: {
       'tests/testpkg2/': {
-        basePath: '.',
         defaultExtension: 'js'
       }
     }
@@ -1031,7 +1072,7 @@ asyncTest('Package edge cases', function() {
   // we now have nested packages:
   // testpkg/ within test/ within / root://
   // we're testing that we always select the rules of the inner package
-  clonedSystem['import']('tests/testpkg2/asdf.asdf').then(function(m) {
+  clonedSystem['import']('tests/testpkg2/').then(function(m) {
     ok(m.asdf == 'asdf');
     start();
   }, err);

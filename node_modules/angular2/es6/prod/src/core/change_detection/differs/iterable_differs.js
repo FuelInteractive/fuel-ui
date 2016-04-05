@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { isBlank, isPresent, CONST } from 'angular2/src/facade/lang';
+import { isBlank, isPresent, CONST, getTypeNameForDebugging } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { ListWrapper } from 'angular2/src/facade/collection';
 import { Provider, SkipSelfMetadata, OptionalMetadata, Injectable } from 'angular2/src/core/di';
@@ -68,7 +68,7 @@ export let IterableDiffers = class {
             return factory;
         }
         else {
-            throw new BaseException(`Cannot find a differ supporting object '${iterable}'`);
+            throw new BaseException(`Cannot find a differ supporting object '${iterable}' of type '${getTypeNameForDebugging(iterable)}'`);
         }
     }
 };

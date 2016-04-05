@@ -5,11 +5,15 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Observable_1 = require('../Observable');
-var Subscriber_1 = require('../Subscriber');
-var PromiseObservable_1 = require('./PromiseObservable');
 var EmptyObservable_1 = require('./EmptyObservable');
-var isPromise_1 = require('../util/isPromise');
 var isArray_1 = require('../util/isArray');
+var subscribeToResult_1 = require('../util/subscribeToResult');
+var OuterSubscriber_1 = require('../OuterSubscriber');
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
 var ForkJoinObservable = (function (_super) {
     __extends(ForkJoinObservable, _super);
     function ForkJoinObservable(sources, resultSelector) {
@@ -17,6 +21,13 @@ var ForkJoinObservable = (function (_super) {
         this.sources = sources;
         this.resultSelector = resultSelector;
     }
+    /**
+     * @param sources
+     * @return {any}
+     * @static true
+     * @name forkJoin
+     * @owner Observable
+     */
     ForkJoinObservable.create = function () {
         var sources = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -40,60 +51,61 @@ var ForkJoinObservable = (function (_super) {
         return new ForkJoinObservable(sources, resultSelector);
     };
     ForkJoinObservable.prototype._subscribe = function (subscriber) {
-        var sources = this.sources;
-        var len = sources.length;
-        var context = { completed: 0, total: len, values: emptyArray(len), selector: this.resultSelector };
-        for (var i = 0; i < len; i++) {
-            var source = sources[i];
-            if (isPromise_1.isPromise(source)) {
-                source = new PromiseObservable_1.PromiseObservable(source);
-            }
-            source.subscribe(new AllSubscriber(subscriber, i, context));
-        }
+        return new ForkJoinSubscriber(subscriber, this.sources, this.resultSelector);
     };
     return ForkJoinObservable;
 }(Observable_1.Observable));
 exports.ForkJoinObservable = ForkJoinObservable;
-var AllSubscriber = (function (_super) {
-    __extends(AllSubscriber, _super);
-    function AllSubscriber(destination, index, context) {
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var ForkJoinSubscriber = (function (_super) {
+    __extends(ForkJoinSubscriber, _super);
+    function ForkJoinSubscriber(destination, sources, resultSelector) {
         _super.call(this, destination);
-        this.index = index;
-        this.context = context;
-        this._value = null;
-    }
-    AllSubscriber.prototype._next = function (value) {
-        this._value = value;
-    };
-    AllSubscriber.prototype._complete = function () {
-        var destination = this.destination;
-        if (this._value == null) {
-            destination.complete();
+        this.sources = sources;
+        this.resultSelector = resultSelector;
+        this.completed = 0;
+        this.haveValues = 0;
+        var len = sources.length;
+        this.total = len;
+        this.values = new Array(len);
+        for (var i = 0; i < len; i++) {
+            var source = sources[i];
+            var innerSubscription = subscribeToResult_1.subscribeToResult(this, source, null, i);
+            if (innerSubscription) {
+                innerSubscription.outerIndex = i;
+                this.add(innerSubscription);
+            }
         }
-        var context = this.context;
-        context.completed++;
-        context.values[this.index] = this._value;
-        var values = context.values;
-        if (context.completed !== values.length) {
+    }
+    ForkJoinSubscriber.prototype.notifyNext = function (outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+        this.values[outerIndex] = innerValue;
+        if (!innerSub._hasValue) {
+            innerSub._hasValue = true;
+            this.haveValues++;
+        }
+    };
+    ForkJoinSubscriber.prototype.notifyComplete = function (innerSub) {
+        var destination = this.destination;
+        var _a = this, haveValues = _a.haveValues, resultSelector = _a.resultSelector, values = _a.values;
+        var len = values.length;
+        if (!innerSub._hasValue) {
+            destination.complete();
             return;
         }
-        if (values.every(hasValue)) {
-            var value = context.selector ? context.selector.apply(this, values) :
-                values;
+        this.completed++;
+        if (this.completed !== len) {
+            return;
+        }
+        if (haveValues === len) {
+            var value = resultSelector ? resultSelector.apply(this, values) : values;
             destination.next(value);
         }
         destination.complete();
     };
-    return AllSubscriber;
-}(Subscriber_1.Subscriber));
-function hasValue(x) {
-    return x !== null;
-}
-function emptyArray(len) {
-    var arr = [];
-    for (var i = 0; i < len; i++) {
-        arr.push(null);
-    }
-    return arr;
-}
+    return ForkJoinSubscriber;
+}(OuterSubscriber_1.OuterSubscriber));
 //# sourceMappingURL=ForkJoinObservable.js.map

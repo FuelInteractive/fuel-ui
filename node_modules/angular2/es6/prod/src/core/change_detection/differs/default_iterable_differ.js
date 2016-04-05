@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { CONST } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
-import { isListLikeIterable, iterateListLike } from 'angular2/src/facade/collection';
+import { isListLikeIterable, iterateListLike, ListWrapper } from 'angular2/src/facade/collection';
 import { isBlank, isPresent, stringify, getMapKey, looseIdentical, isArray } from 'angular2/src/facade/lang';
 export let DefaultIterableDifferFactory = class {
     supports(obj) { return isListLikeIterable(obj); }
@@ -97,7 +97,6 @@ export class DefaultIterableDiffer {
         }
     }
     onDestroy() { }
-    // todo(vicb): optim for UnmodifiableListView (frozen arrays)
     check(collection) {
         this._reset();
         var record = this._itHead;
@@ -106,24 +105,27 @@ export class DefaultIterableDiffer {
         var item;
         var itemTrackBy;
         if (isArray(collection)) {
-            var list = collection;
-            this._length = collection.length;
-            for (index = 0; index < this._length; index++) {
-                item = list[index];
-                itemTrackBy = this._trackByFn(index, item);
-                if (record === null || !looseIdentical(record.trackById, itemTrackBy)) {
-                    record = this._mismatch(record, item, itemTrackBy, index);
-                    mayBeDirty = true;
-                }
-                else {
-                    if (mayBeDirty) {
-                        // TODO(misko): can we limit this to duplicates only?
-                        record = this._verifyReinsertion(record, item, itemTrackBy, index);
+            if (collection !== this._collection || !ListWrapper.isImmutable(collection)) {
+                var list = collection;
+                this._length = collection.length;
+                for (index = 0; index < this._length; index++) {
+                    item = list[index];
+                    itemTrackBy = this._trackByFn(index, item);
+                    if (record === null || !looseIdentical(record.trackById, itemTrackBy)) {
+                        record = this._mismatch(record, item, itemTrackBy, index);
+                        mayBeDirty = true;
                     }
-                    if (!looseIdentical(record.item, item))
-                        this._addIdentityChange(record, item);
+                    else {
+                        if (mayBeDirty) {
+                            // TODO(misko): can we limit this to duplicates only?
+                            record = this._verifyReinsertion(record, item, itemTrackBy, index);
+                        }
+                        if (!looseIdentical(record.item, item))
+                            this._addIdentityChange(record, item);
+                    }
+                    record = record._next;
                 }
-                record = record._next;
+                this._truncate(record);
             }
         }
         else {
@@ -146,8 +148,8 @@ export class DefaultIterableDiffer {
                 index++;
             });
             this._length = index;
+            this._truncate(record);
         }
-        this._truncate(record);
         this._collection = collection;
         return this.isDirty;
     }

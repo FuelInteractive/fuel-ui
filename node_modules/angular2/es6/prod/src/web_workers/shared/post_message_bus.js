@@ -20,7 +20,7 @@ export class PostMessageBusSink {
     attachToZone(zone) {
         this._zone = zone;
         this._zone.runOutsideAngular(() => {
-            ObservableWrapper.subscribe(this._zone.onEventDone, (_) => { this._handleOnEventDone(); });
+            ObservableWrapper.subscribe(this._zone.onStable, (_) => { this._handleOnEventDone(); });
         });
     }
     initChannel(channel, runInZone = true) {

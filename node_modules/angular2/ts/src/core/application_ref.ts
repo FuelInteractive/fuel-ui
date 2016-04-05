@@ -1,4 +1,4 @@
-import {NgZone} from 'angular2/src/core/zone/ng_zone';
+import {NgZone, NgZoneError} from 'angular2/src/core/zone/ng_zone';
 import {
   Type,
   isBlank,
@@ -128,7 +128,7 @@ function _createPlatform(providers?: Array<Type | Provider | any[]>): PlatformRe
 }
 
 function _runPlatformInitializers(injector: Injector): void {
-  let inits: Function[] = injector.getOptional(PLATFORM_INITIALIZER);
+  let inits: Function[] = <Function[]>injector.getOptional(PLATFORM_INITIALIZER);
   if (isPresent(inits)) inits.forEach(init => init());
 }
 
@@ -150,7 +150,7 @@ export abstract class PlatformRef {
    * Retrieve the platform {@link Injector}, which is the parent injector for
    * every Angular application on the page and provides singleton providers.
    */
-  get injector(): Injector { return unimplemented(); };
+  get injector(): Injector { throw unimplemented(); };
 
   /**
    * Instantiate a new Angular application on the page.
@@ -222,7 +222,7 @@ export class PlatformRef_ extends PlatformRef {
   asyncApplication(bindingFn: (zone: NgZone) => Promise<Array<Type | Provider | any[]>>,
                    additionalProviders?: Array<Type | Provider | any[]>): Promise<ApplicationRef> {
     var zone = createNgZone();
-    var completer = PromiseWrapper.completer();
+    var completer = PromiseWrapper.completer<ApplicationRef>();
     if (bindingFn === null) {
       completer.resolve(this._initApp(zone, additionalProviders));
     } else {
@@ -254,7 +254,9 @@ export class PlatformRef_ extends PlatformRef {
       try {
         injector = this.injector.resolveAndCreateChild(providers);
         exceptionHandler = injector.get(ExceptionHandler);
-        zone.overrideOnErrorHandler((e, s) => exceptionHandler.call(e, s));
+        ObservableWrapper.subscribe(zone.onError, (error: NgZoneError) => {
+          exceptionHandler.call(error.error, error.stackTrace);
+        });
       } catch (e) {
         if (isPresent(exceptionHandler)) {
           exceptionHandler.call(e, e.stack);
@@ -342,12 +344,12 @@ export abstract class ApplicationRef {
   /**
    * Retrieve the application {@link Injector}.
    */
-  get injector(): Injector { return unimplemented(); };
+  get injector(): Injector { return <Injector>unimplemented(); };
 
   /**
    * Retrieve the application {@link NgZone}.
    */
-  get zone(): NgZone { return unimplemented(); };
+  get zone(): NgZone { return <NgZone>unimplemented(); };
 
   /**
    * Dispose of this application and all of its components.
@@ -369,7 +371,7 @@ export abstract class ApplicationRef {
   /**
    * Get a list of component types registered to this application.
    */
-  get componentTypes(): Type[] { return unimplemented(); };
+  get componentTypes(): Type[] { return <Type[]>unimplemented(); };
 }
 
 export class ApplicationRef_ extends ApplicationRef {
@@ -394,7 +396,7 @@ export class ApplicationRef_ extends ApplicationRef {
   constructor(private _platform: PlatformRef_, private _zone: NgZone, private _injector: Injector) {
     super();
     if (isPresent(this._zone)) {
-      ObservableWrapper.subscribe(this._zone.onTurnDone,
+      ObservableWrapper.subscribe(this._zone.onMicrotaskEmpty,
                                   (_) => { this._zone.run(() => { this.tick(); }); });
     }
     this._enforceNoNewChanges = assertionsEnabled();
@@ -434,28 +436,22 @@ export class ApplicationRef_ extends ApplicationRef {
 
         var tickResult = PromiseWrapper.then(compRefToken, tick);
 
-        // THIS MUST ONLY RUN IN DART.
-        // This is required to report an error when no components with a matching selector found.
-        // Otherwise the promise will never be completed.
-        // Doing this in JS causes an extra error message to appear.
-        if (IS_DART) {
-          PromiseWrapper.then(tickResult, (_) => {});
-        }
-
-        PromiseWrapper.then(tickResult, null,
-                            (err, stackTrace) => completer.reject(err, stackTrace));
+        PromiseWrapper.then(tickResult, null, (err, stackTrace) => {
+          completer.reject(err, stackTrace);
+          exceptionHandler.call(err, stackTrace);
+        });
       } catch (e) {
         exceptionHandler.call(e, e.stack);
         completer.reject(e, e.stack);
       }
     });
-    return completer.promise.then(_ => {
+    return completer.promise.then<ComponentRef>((ref: ComponentRef) => {
       let c = this._injector.get(Console);
       if (assertionsEnabled()) {
         c.log(
             "Angular 2 is running in the development mode. Call enableProdMode() to enable the production mode.");
       }
-      return _;
+      return ref;
     });
   }
 

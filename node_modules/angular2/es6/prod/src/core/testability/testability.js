@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from 'angular2/src/core/di';
 import { Map, MapWrapper } from 'angular2/src/facade/collection';
-import { CONST, CONST_EXPR } from 'angular2/src/facade/lang';
+import { CONST, CONST_EXPR, scheduleMicroTask } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { NgZone } from '../zone/ng_zone';
-import { PromiseWrapper, ObservableWrapper } from 'angular2/src/facade/async';
+import { ObservableWrapper } from 'angular2/src/facade/async';
 /**
  * The Testability service provides testing hooks that can be accessed from
  * the browser and by services such as Protractor. Each bootstrapped Angular
@@ -20,8 +20,10 @@ import { PromiseWrapper, ObservableWrapper } from 'angular2/src/facade/async';
  */
 export let Testability = class {
     constructor(_ngZone) {
+        this._ngZone = _ngZone;
         /** @internal */
         this._pendingCount = 0;
+        this._isZoneStable = true;
         /**
          * Whether any work was done since the last 'whenStable' callback. This is
          * useful to detect if this could have potentially destabilized another
@@ -31,22 +33,21 @@ export let Testability = class {
         this._didWork = false;
         /** @internal */
         this._callbacks = [];
-        /** @internal */
-        this._isAngularEventPending = false;
-        this._watchAngularEvents(_ngZone);
+        this._watchAngularEvents();
     }
     /** @internal */
-    _watchAngularEvents(_ngZone) {
-        ObservableWrapper.subscribe(_ngZone.onTurnStart, (_) => {
+    _watchAngularEvents() {
+        ObservableWrapper.subscribe(this._ngZone.onUnstable, (_) => {
             this._didWork = true;
-            this._isAngularEventPending = true;
+            this._isZoneStable = false;
         });
-        _ngZone.runOutsideAngular(() => {
-            ObservableWrapper.subscribe(_ngZone.onEventDone, (_) => {
-                if (!_ngZone.hasPendingTimers) {
-                    this._isAngularEventPending = false;
+        this._ngZone.runOutsideAngular(() => {
+            ObservableWrapper.subscribe(this._ngZone.onStable, (_) => {
+                NgZone.assertNotInAngularZone();
+                scheduleMicroTask(() => {
+                    this._isZoneStable = true;
                     this._runCallbacksIfReady();
-                }
+                });
             });
         });
     }
@@ -63,29 +64,30 @@ export let Testability = class {
         this._runCallbacksIfReady();
         return this._pendingCount;
     }
-    isStable() { return this._pendingCount == 0 && !this._isAngularEventPending; }
+    isStable() {
+        return this._isZoneStable && this._pendingCount == 0 && !this._ngZone.hasPendingMacrotasks;
+    }
     /** @internal */
     _runCallbacksIfReady() {
-        if (!this.isStable()) {
-            this._didWork = true;
-            return; // Not ready
+        if (this.isStable()) {
+            // Schedules the call backs in a new frame so that it is always async.
+            scheduleMicroTask(() => {
+                while (this._callbacks.length !== 0) {
+                    (this._callbacks.pop())(this._didWork);
+                }
+                this._didWork = false;
+            });
         }
-        // Schedules the call backs in a new frame so that it is always async.
-        PromiseWrapper.resolve(null).then((_) => {
-            while (this._callbacks.length !== 0) {
-                (this._callbacks.pop())(this._didWork);
-            }
-            this._didWork = false;
-        });
+        else {
+            // Not Ready
+            this._didWork = true;
+        }
     }
     whenStable(callback) {
         this._callbacks.push(callback);
         this._runCallbacksIfReady();
     }
     getPendingRequestCount() { return this._pendingCount; }
-    // This only accounts for ngZone, and not pending counts. Use `whenStable` to
-    // check for stability.
-    isAngularEventPending() { return this._isAngularEventPending; }
     findBindings(using, provider, exactMatch) {
         // TODO(juliemr): implement.
         return [];

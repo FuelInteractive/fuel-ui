@@ -10,6 +10,7 @@ var Pagination_1 = require("./Pagination/Pagination");
 var InfiniteScroller_1 = require("./InfiniteScroller/InfiniteScroller");
 var Dropdown_1 = require("./Dropdown/Dropdown");
 var Collapse_1 = require("./Collapse/Collapse");
+var TableSortable_1 = require("./TableSortable/TableSortable");
 exports.FUELUI_COMPONENT_PROVIDERS = [
     Alert_1.ALERT_PROVIDERS,
     Carousel_1.CAROUSEL_PROVIDERS,
@@ -18,7 +19,8 @@ exports.FUELUI_COMPONENT_PROVIDERS = [
     Pagination_1.PAGINATION_PROVIDERS,
     InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS,
     Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS,
-    Collapse_1.COLLAPSE_PROVIDERS
+    Collapse_1.COLLAPSE_PROVIDERS,
+    TableSortable_1.TABLESORTABLE_PROVIDERS
 ];
 __export(require("./Alert/Alert"));
 __export(require("./Carousel/Carousel"));
@@ -28,5 +30,8 @@ __export(require("./Pagination/Pagination"));
 __export(require("./InfiniteScroller/InfiniteScroller"));
 __export(require("./Dropdown/Dropdown"));
 __export(require("./Collapse/Collapse"));
+__export(require("./TableSortable/TableSortable"));
+__export(require("./TableSortable/TableSortableColumn"));
+__export(require("./TableSortable/TableSortableSorting"));
 
 //# sourceMappingURL=components.js.map

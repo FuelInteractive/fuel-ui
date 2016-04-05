@@ -11,6 +11,9 @@
 
   var stringRegEx = /("[^"\\\n\r]*(\\.[^"\\\n\r]*)*"|'[^'\\\n\r]*(\\.[^'\\\n\r]*)*')/g;
 
+  // used to support leading #!/usr/bin/env in scripts as supported in Node
+  var hashBangRegEx = /^\#\!.*/;
+
   function getCJSDeps(source) {
     cjsRequireRegEx.lastIndex = commentRegEx.lastIndex = stringRegEx.lastIndex = 0;
 
@@ -86,30 +89,36 @@
               name = name.substr(0, name.length - 1);
             return _require.apply(this, arguments);
           }
+          require.resolve = function(name) {
+            return loader.get('@@cjs-helpers').requireResolve(name, module.id);
+          };
 
           // ensure meta deps execute first
-          for (var i = 0; i < metaDeps.length; i++)
-            require(metaDeps[i]);
-
-          // disable AMD detection
-          var define = __global.define;
-          __global.define = undefined;
+          if (!load.metadata.cjsDeferDepsExecute)
+            for (var i = 0; i < metaDeps.length; i++)
+              require(metaDeps[i]);
 
           var pathVars = loader.get('@@cjs-helpers').getPathVars(module.id);
-
-          __global.__cjsWrapper = {
+          var __cjsWrapper = {
             exports: exports,
             args: [require, exports, module, pathVars.filename, pathVars.dirname, __global, __global]
           };
 
-          var globals = '';
-          if (load.metadata.globals) {
-            for (var g in load.metadata.globals)
-              globals += 'var ' + g + ' = require("' + load.metadata.globals[g] + '");';
-          }
+          var cjsWrapper = "(function(require, exports, module, __filename, __dirname, global, GLOBAL";
 
-          load.source = "(function(require, exports, module, __filename, __dirname, global, GLOBAL) {" + globals
-              + load.source + "\n}).apply(__cjsWrapper.exports, __cjsWrapper.args);";
+          // add metadata.globals to the wrapper arguments
+          if (load.metadata.globals)
+            for (var g in load.metadata.globals) {
+              __cjsWrapper.args.push(require(load.metadata.globals[g]));
+              cjsWrapper += ", " + g;
+            }
+
+          // disable AMD detection
+          var define = __global.define;
+          __global.define = undefined;
+          __global.__cjsWrapper = __cjsWrapper;
+
+          load.source = cjsWrapper + ") {" + load.source.replace(hashBangRegEx, '') + "\n}).apply(__cjsWrapper.exports, __cjsWrapper.args);";
 
           __exec.call(loader, load);
 

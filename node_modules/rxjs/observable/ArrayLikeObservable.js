@@ -7,6 +7,11 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Observable_1 = require('../Observable');
 var ScalarObservable_1 = require('./ScalarObservable');
 var EmptyObservable_1 = require('./EmptyObservable');
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
 var ArrayLikeObservable = (function (_super) {
     __extends(ArrayLikeObservable, _super);
     function ArrayLikeObservable(arrayLike, mapFn, thisArg, scheduler) {

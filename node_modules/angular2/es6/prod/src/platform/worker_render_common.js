@@ -22,7 +22,7 @@ import { BrowserDomAdapter } from './browser/browser_adapter';
 import { wtfInit } from 'angular2/src/core/profile/wtf_init';
 import { MessageBasedRenderer } from 'angular2/src/web_workers/ui/renderer';
 import { MessageBasedXHRImpl } from 'angular2/src/web_workers/ui/xhr_impl';
-import { BrowserPlatformLocation } from 'angular2/src/router/browser_platform_location';
+import { BrowserPlatformLocation } from 'angular2/src/router/location/browser_platform_location';
 import { ServiceMessageBrokerFactory, ServiceMessageBrokerFactory_ } from 'angular2/src/web_workers/shared/service_message_broker';
 import { ClientMessageBrokerFactory, ClientMessageBrokerFactory_ } from 'angular2/src/web_workers/shared/client_message_broker';
 import { Serializer } from 'angular2/src/web_workers/shared/serializer';

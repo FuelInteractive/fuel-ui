@@ -42,7 +42,7 @@ export declare abstract class ComponentRef {
      *
      * TODO(i): rename to destroy to be consistent with AppViewManager and ViewContainerRef
      */
-    abstract dispose(): any;
+    abstract dispose(): void;
 }
 export declare class ComponentRef_ extends ComponentRef {
     private _dispose;

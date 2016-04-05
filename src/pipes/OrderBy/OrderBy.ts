@@ -8,7 +8,7 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 
 @Pipe({name: 'orderBy', pure: false})
-export class OrderBy implements PipeTransform {
+export class OrderByPipe implements PipeTransform {
 
 	value:string[] =[];
 
@@ -51,8 +51,8 @@ export class OrderBy implements PipeTransform {
 
                 return value.sort(function(a:any,b:any){
                     return !desc 
-                        ? OrderBy._orderByComparator(a[property], b[property]) 
-                        : -OrderBy._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(a[property], b[property]) 
+                        : -OrderByPipe._orderByComparator(a[property], b[property]);
                 });
             }
         }
@@ -66,8 +66,8 @@ export class OrderBy implements PipeTransform {
                         : config[i];
 
                     var comparison = !desc 
-                        ? OrderBy._orderByComparator(a[property], b[property]) 
-                        : -OrderBy._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(a[property], b[property]) 
+                        : -OrderByPipe._orderByComparator(a[property], b[property]);
                     
                     //Don't return 0 yet in case of needing to sort by next property
                     if(comparison != 0) return comparison;
@@ -80,5 +80,5 @@ export class OrderBy implements PipeTransform {
 }
 
 export var ORDERBY_PROVIDERS = [
-    OrderBy
+    OrderByPipe
 ];

@@ -929,12 +929,12 @@ export declare class PipeMetadata extends InjectableMetadata {
  */
 export declare class InputMetadata {
     /**
-     * Name used when instantiating a component in the temlate.
+     * Name used when instantiating a component in the template.
      */
     bindingPropertyName: string;
     constructor(
         /**
-         * Name used when instantiating a component in the temlate.
+         * Name used when instantiating a component in the template.
          */
         bindingPropertyName?: string);
 }

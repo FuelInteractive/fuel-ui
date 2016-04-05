@@ -1,1 +1,6 @@
-export declare var _void: void;
+import { DistinctKeySignature } from '../../operator/distinctKey';
+declare module '../../Observable' {
+    interface Observable<T> {
+        distinctKey: DistinctKeySignature<T>;
+    }
+}

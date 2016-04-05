@@ -711,7 +711,7 @@ PipeMetadata = __decorate([
 export let InputMetadata = class {
     constructor(
         /**
-         * Name used when instantiating a component in the temlate.
+         * Name used when instantiating a component in the template.
          */
         bindingPropertyName) {
         this.bindingPropertyName = bindingPropertyName;

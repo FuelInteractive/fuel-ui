@@ -22,11 +22,16 @@ export interface IgnoreElementsSignature<T> {
 }
 
 class IgnoreElementsOperator<T, R> implements Operator<T, R> {
-  call(subscriber: Subscriber<R>): Subscriber<T> {
-    return new IgnoreElementsSubscriber(subscriber);
+  call(subscriber: Subscriber<R>, source: any): any {
+    return source._subscribe(new IgnoreElementsSubscriber(subscriber));
   }
 }
 
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 class IgnoreElementsSubscriber<T> extends Subscriber<T> {
   protected _next(unused: T): void {
     noop();

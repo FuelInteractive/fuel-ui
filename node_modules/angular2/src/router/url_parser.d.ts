@@ -1,3 +1,9 @@
+export declare function convertUrlParamsToArray(urlParams: {
+    [key: string]: any;
+}): string[];
+export declare function serializeParams(urlParams: {
+    [key: string]: any;
+}, joiner?: string): string;
 /**
  * This class represents a parsed URL
  */
@@ -29,7 +35,7 @@ export declare class UrlParser {
     peekStartsWith(str: string): boolean;
     capture(str: string): void;
     parse(url: string): Url;
-    parseRoot(): Url;
+    parseRoot(): RootUrl;
     parseSegment(): Url;
     parseQueryParams(): {
         [key: string]: any;
@@ -43,6 +49,3 @@ export declare class UrlParser {
     parseAuxiliaryRoutes(): Url[];
 }
 export declare var parser: UrlParser;
-export declare function serializeParams(paramMap: {
-    [key: string]: any;
-}): string[];

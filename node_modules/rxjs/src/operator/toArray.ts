@@ -16,11 +16,16 @@ export interface ToArraySignature<T> {
 }
 
 class ToArrayOperator<T> implements Operator<T, T[]> {
-  call(subscriber: Subscriber<T[]>): Subscriber<T> {
-    return new ToArraySubscriber(subscriber);
+  call(subscriber: Subscriber<T[]>, source: any): any {
+    return source._subscribe(new ToArraySubscriber(subscriber));
   }
 }
 
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 class ToArraySubscriber<T> extends Subscriber<T> {
 
   private array: T[] = [];

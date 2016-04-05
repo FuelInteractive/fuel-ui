@@ -9,12 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var StringUtils_1 = require('../../utilities/StringUtils');
 var CodeHighlighter = (function () {
     function CodeHighlighter(el) {
         this.el = el;
         if (this.el && this.el.nativeElement) {
-            this.el.nativeElement.innerHTML = StringUtils_1.StringHelper.escapeHtml(this.el.nativeElement.innerHTML);
             Prism.highlightElement(this.el.nativeElement);
         }
     }

@@ -12,6 +12,7 @@ var InfiniteScroller_Demo_1 = require("./InfiniteScroller/InfiniteScroller.Demo"
 var Modal_Demo_1 = require("./Modal/Modal.Demo");
 var Pagination_Demo_1 = require("./Pagination/Pagination.Demo");
 var Progress_Demo_1 = require("./Progress/Progress.Demo");
+var TableSortable_Demo_1 = require("./TableSortable/TableSortable.Demo");
 exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Alert_Demo_1.ALERT_DEMO_PROVIDERS,
     Carousel_Demo_1.CAROUSEL_DEMO_PROVIDERS,
@@ -22,7 +23,8 @@ exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     InfiniteScroller_Demo_1.INFINITESCROLLER_DEMO_PROVIDERS,
     Modal_Demo_1.MODAL_DEMO_PROVIDERS,
     Pagination_Demo_1.PAGINATION_DEMO_PROVIDERS,
-    Progress_Demo_1.PROGRESS_DEMO_PROVIDERS
+    Progress_Demo_1.PROGRESS_DEMO_PROVIDERS,
+    TableSortable_Demo_1.TABLESORTABLE_DEMO_PROVIDERS
 ];
 __export(require("./Alert/Alert.Demo"));
 __export(require("./Carousel/Carousel.Demo"));
@@ -34,5 +36,6 @@ __export(require("./InfiniteScroller/InfiniteScroller.Demo"));
 __export(require("./Modal/Modal.Demo"));
 __export(require("./Pagination/Pagination.Demo"));
 __export(require("./Progress/Progress.Demo"));
+__export(require("./TableSortable/TableSortable.Demo"));
 
 //# sourceMappingURL=demoComponents.js.map

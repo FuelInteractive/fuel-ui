@@ -13,7 +13,9 @@ var subscribeToResult_1 = require('../util/subscribeToResult');
  * by a subscription delay and a delay selector function for each element.
  * @param {Function} selector function to retrieve a sequence indicating the delay for each given element.
  * @param {Observable} sequence indicating the delay for the subscription to the source.
- * @returns {Observable} an Observable that delays the emissions of the source Observable by the specified timeout or Date.
+ * @return {Observable} an Observable that delays the emissions of the source Observable by the specified timeout or Date.
+ * @method delayWhen
+ * @owner Observable
  */
 function delayWhen(delayDurationSelector, subscriptionDelay) {
     if (subscriptionDelay) {
@@ -27,11 +29,16 @@ var DelayWhenOperator = (function () {
     function DelayWhenOperator(delayDurationSelector) {
         this.delayDurationSelector = delayDurationSelector;
     }
-    DelayWhenOperator.prototype.call = function (subscriber) {
-        return new DelayWhenSubscriber(subscriber, this.delayDurationSelector);
+    DelayWhenOperator.prototype.call = function (subscriber, source) {
+        return source._subscribe(new DelayWhenSubscriber(subscriber, this.delayDurationSelector));
     };
     return DelayWhenOperator;
 }());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var DelayWhenSubscriber = (function (_super) {
     __extends(DelayWhenSubscriber, _super);
     function DelayWhenSubscriber(destination, delayDurationSelector) {
@@ -95,6 +102,11 @@ var DelayWhenSubscriber = (function (_super) {
     };
     return DelayWhenSubscriber;
 }(OuterSubscriber_1.OuterSubscriber));
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var SubscriptionDelayObservable = (function (_super) {
     __extends(SubscriptionDelayObservable, _super);
     function SubscriptionDelayObservable(source, subscriptionDelay) {
@@ -107,6 +119,11 @@ var SubscriptionDelayObservable = (function (_super) {
     };
     return SubscriptionDelayObservable;
 }(Observable_1.Observable));
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var SubscriptionDelaySubscriber = (function (_super) {
     __extends(SubscriptionDelaySubscriber, _super);
     function SubscriptionDelaySubscriber(parent, source) {

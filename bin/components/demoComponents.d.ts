@@ -10,3 +10,4 @@ export * from "./InfiniteScroller/InfiniteScroller.Demo";
 export * from "./Modal/Modal.Demo";
 export * from "./Pagination/Pagination.Demo";
 export * from "./Progress/Progress.Demo";
+export * from "./TableSortable/TableSortable.Demo";

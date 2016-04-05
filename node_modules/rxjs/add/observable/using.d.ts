@@ -1,6 +1,6 @@
-import { UsingObservable } from '../../observable/UsingObservable';
+import { using as staticUsing } from '../../observable/using';
 declare module '../../Observable' {
     namespace Observable {
-        let using: typeof UsingObservable.create;
+        let using: typeof staticUsing;
     }
 }

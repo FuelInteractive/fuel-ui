@@ -1,5 +1,5 @@
 import { global, noop } from 'angular2/src/facade/lang';
-export { PromiseWrapper } from 'angular2/src/facade/promise';
+export { PromiseWrapper, PromiseCompleter } from 'angular2/src/facade/promise';
 import { Subject } from 'rxjs/Subject';
 import { PromiseObservable } from 'rxjs/observable/PromiseObservable';
 import { toPromise } from 'rxjs/operator/toPromise';

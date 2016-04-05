@@ -102,9 +102,18 @@ export interface IControllerService {
 export interface IInjectorService {
     get(key: string): any;
 }
+export interface ITestabilityService {
+    findBindings(element: Element, expression: string, opt_exactMatch?: boolean): Element[];
+    findModels(element: Element, expression: string, opt_exactMatch?: boolean): Element[];
+    getLocation(): string;
+    setLocation(url: string): void;
+    whenStable(callback: Function): void;
+}
 export declare var bootstrap: (e: Element, modules: string[], config: IAngularBootstrapConfig) => void;
 export declare var module: (prefix: string, dependencies?: string[]) => IModule;
 export declare var element: (e: Element) => IAugmentedJQuery;
 export declare var version: {
     major: number;
 };
+export declare var resumeBootstrap: () => void;
+export declare var getTestability: (e: Element) => ITestabilityService;

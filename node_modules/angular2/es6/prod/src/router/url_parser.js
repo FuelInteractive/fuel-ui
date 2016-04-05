@@ -1,11 +1,23 @@
 import { StringMapWrapper } from 'angular2/src/facade/collection';
 import { isPresent, isBlank, RegExpWrapper, CONST_EXPR } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
+export function convertUrlParamsToArray(urlParams) {
+    var paramsArray = [];
+    if (isBlank(urlParams)) {
+        return [];
+    }
+    StringMapWrapper.forEach(urlParams, (value, key) => { paramsArray.push((value === true) ? key : key + '=' + value); });
+    return paramsArray;
+}
+// Convert an object of url parameters into a string that can be used in an URL
+export function serializeParams(urlParams, joiner = '&') {
+    return convertUrlParamsToArray(urlParams).join(joiner);
+}
 /**
  * This class represents a parsed URL
  */
 export class Url {
-    constructor(path, child = null, auxiliary = CONST_EXPR([]), params = null) {
+    constructor(path, child = null, auxiliary = CONST_EXPR([]), params = CONST_EXPR({})) {
         this.path = path;
         this.child = child;
         this.auxiliary = auxiliary;
@@ -22,10 +34,11 @@ export class Url {
             '';
     }
     _matrixParamsToString() {
-        if (isBlank(this.params)) {
-            return '';
+        var paramString = serializeParams(this.params, ';');
+        if (paramString.length > 0) {
+            return ';' + paramString;
         }
-        return ';' + serializeParams(this.params).join(';');
+        return '';
     }
     /** @internal */
     _childString() { return isPresent(this.child) ? ('/' + this.child.toString()) : ''; }
@@ -42,7 +55,7 @@ export class RootUrl extends Url {
         if (isBlank(this.params)) {
             return '';
         }
-        return '?' + serializeParams(this.params).join('&');
+        return '?' + serializeParams(this.params);
     }
 }
 export function pathSegmentsToUrl(pathSegments) {
@@ -172,17 +185,3 @@ export class UrlParser {
     }
 }
 export var parser = new UrlParser();
-export function serializeParams(paramMap) {
-    var params = [];
-    if (isPresent(paramMap)) {
-        StringMapWrapper.forEach(paramMap, (value, key) => {
-            if (value === true) {
-                params.push(key);
-            }
-            else {
-                params.push(key + '=' + value);
-            }
-        });
-    }
-    return params;
-}

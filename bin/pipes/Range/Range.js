@@ -13,10 +13,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("angular2/core");
-var Range = (function () {
-    function Range() {
+var RangePipe = (function () {
+    function RangePipe() {
     }
-    Range.prototype.transform = function (value, config) {
+    RangePipe.prototype.transform = function (value, config) {
         if (config === void 0) { config = [0, 4, 1]; }
         var newValue = [];
         var min = !isNaN(parseInt(config[0])) ? parseInt(config[0]) : 0;
@@ -26,18 +26,18 @@ var Range = (function () {
             newValue.push(i);
         return newValue;
     };
-    Range = __decorate([
+    RangePipe = __decorate([
         core_1.Pipe({
             name: 'range',
             pure: false
         }), 
         __metadata('design:paramtypes', [])
-    ], Range);
-    return Range;
+    ], RangePipe);
+    return RangePipe;
 }());
-exports.Range = Range;
+exports.RangePipe = RangePipe;
 exports.RANGE_PROVIDERS = [
-    Range
+    RangePipe
 ];
 
 //# sourceMappingURL=Range.js.map

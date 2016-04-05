@@ -28,9 +28,9 @@ export let HammerGesturesPlugin = class extends HammerGesturesPluginCommon {
             var mc = new Hammer(element);
             mc.get('pinch').set({ enable: true });
             mc.get('rotate').set({ enable: true });
-            var handler = function (eventObj) { zone.run(function () { handler(eventObj); }); };
-            mc.on(eventName, handler);
-            return () => { mc.off(eventName, handler); };
+            var callback = function (eventObj) { zone.run(function () { handler(eventObj); }); };
+            mc.on(eventName, callback);
+            return () => { mc.off(eventName, callback); };
         });
     }
 };

@@ -59,8 +59,10 @@ export class RouteParams {
  * ])
  * class AppCmp {}
  *
- * @Component({...})
- * @View({ template: 'user: {{isAdmin}}' })
+ * @Component({
+ *   ...,
+ *   template: 'user: {{isAdmin}}'
+ * })
  * class UserCmp {
  *   string: isAdmin;
  *   constructor(data: RouteData) {
@@ -160,7 +162,7 @@ export abstract class Instruction {
   // default instructions override these
   toLinkUrl(): string {
     return this.urlPath + this._stringifyAux() +
-           (isPresent(this.child) ? this.child._toLinkUrl() : '');
+           (isPresent(this.child) ? this.child._toLinkUrl() : '') + this.toUrlQuery();
   }
 
   // this is the non-root version (called recursively)
@@ -195,7 +197,7 @@ export abstract class Instruction {
   /** @internal */
   _stringifyAux(): string {
     var routes = [];
-    StringMapWrapper.forEach(this.auxInstruction, (auxInstruction, _) => {
+    StringMapWrapper.forEach(this.auxInstruction, (auxInstruction: Instruction, _: string) => {
       routes.push(auxInstruction._stringifyPathMatrixAux());
     });
     if (routes.length > 0) {
@@ -224,13 +226,9 @@ export class ResolvedInstruction extends Instruction {
 /**
  * Represents a resolved default route
  */
-export class DefaultInstruction extends Instruction {
+export class DefaultInstruction extends ResolvedInstruction {
   constructor(component: ComponentInstruction, child: DefaultInstruction) {
     super(component, child, {});
-  }
-
-  resolveComponent(): Promise<ComponentInstruction> {
-    return PromiseWrapper.resolve(this.component);
   }
 
   toLinkUrl(): string { return ''; }
@@ -273,9 +271,9 @@ export class UnresolvedInstruction extends Instruction {
     if (isPresent(this.component)) {
       return PromiseWrapper.resolve(this.component);
     }
-    return this._resolver().then((resolution: Instruction) => {
-      this.child = resolution.child;
-      return this.component = resolution.component;
+    return this._resolver().then((instruction: Instruction) => {
+      this.child = isPresent(instruction) ? instruction.child : null;
+      return this.component = isPresent(instruction) ? instruction.component : null;
     });
   }
 }
@@ -292,8 +290,7 @@ export class RedirectInstruction extends ResolvedInstruction {
 
 
 /**
- * A `ComponentInstruction` represents the route state for a single component. An `Instruction` is
- * composed of a tree of these `ComponentInstruction`s.
+ * A `ComponentInstruction` represents the route state for a single component.
  *
  * `ComponentInstructions` is a public API. Instances of `ComponentInstruction` are passed
  * to route lifecycle hooks, like {@link CanActivate}.
@@ -308,9 +305,12 @@ export class ComponentInstruction {
   reuse: boolean = false;
   public routeData: RouteData;
 
+  /**
+   * @internal
+   */
   constructor(public urlPath: string, public urlParams: string[], data: RouteData,
               public componentType, public terminal: boolean, public specificity: string,
-              public params: {[key: string]: any} = null) {
+              public params: {[key: string]: string} = null) {
     this.routeData = isPresent(data) ? data : BLANK_ROUTE_DATA;
   }
 }

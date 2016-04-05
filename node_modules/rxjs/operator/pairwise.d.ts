@@ -6,6 +6,11 @@ import { Observable } from '../Observable';
  *
  * <img src="./img/pairwise.png" width="100%">
  *
- * @returns {Observable<R>} an observable of pairs of values.
+ * @return {Observable<R>} an observable of pairs of values.
+ * @method pairwise
+ * @owner Observable
  */
 export declare function pairwise<T>(): Observable<[T, T]>;
+export interface PairwiseSignature<T> {
+    (): Observable<[T, T]>;
+}

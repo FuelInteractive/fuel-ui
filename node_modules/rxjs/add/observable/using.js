@@ -1,5 +1,5 @@
 "use strict";
 var Observable_1 = require('../../Observable');
-var UsingObservable_1 = require('../../observable/UsingObservable');
-Observable_1.Observable.using = UsingObservable_1.UsingObservable.create;
+var using_1 = require('../../observable/using');
+Observable_1.Observable.using = using_1.using;
 //# sourceMappingURL=using.js.map

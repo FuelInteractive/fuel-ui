@@ -28,7 +28,7 @@ export { RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValid
 export { NgControl } from './directives/ng_control';
 /**
  *
- * A list of all the form directives used as part of a `@View` annotation.
+ * A list of all the form directives used as part of a `@Component` annotation.
  *
  *  This is a shorthand for importing them each individually.
  *

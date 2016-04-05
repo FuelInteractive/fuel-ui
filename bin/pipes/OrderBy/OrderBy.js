@@ -15,11 +15,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var OrderBy = (function () {
-    function OrderBy() {
+var OrderByPipe = (function () {
+    function OrderByPipe() {
         this.value = [];
     }
-    OrderBy._orderByComparator = function (a, b) {
+    OrderByPipe._orderByComparator = function (a, b) {
         if ((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))) {
             //Isn't a number so lowercase the string to properly compare
             if (a.toLowerCase() < b.toLowerCase())
@@ -36,7 +36,7 @@ var OrderBy = (function () {
         }
         return 0; //equal each other
     };
-    OrderBy.prototype.transform = function (input, _a) {
+    OrderByPipe.prototype.transform = function (input, _a) {
         var _b = _a[0], config = _b === void 0 ? '+' : _b;
         //make a copy of the input's reference
         this.value = input.slice();
@@ -56,8 +56,8 @@ var OrderBy = (function () {
                     : propertyToCheck;
                 return value.sort(function (a, b) {
                     return !desc
-                        ? OrderBy._orderByComparator(a[property], b[property])
-                        : -OrderBy._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(a[property], b[property])
+                        : -OrderByPipe._orderByComparator(a[property], b[property]);
                 });
             }
         }
@@ -70,8 +70,8 @@ var OrderBy = (function () {
                         ? config[i].substr(1)
                         : config[i];
                     var comparison = !desc
-                        ? OrderBy._orderByComparator(a[property], b[property])
-                        : -OrderBy._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(a[property], b[property])
+                        : -OrderByPipe._orderByComparator(a[property], b[property]);
                     //Don't return 0 yet in case of needing to sort by next property
                     if (comparison != 0)
                         return comparison;
@@ -80,15 +80,15 @@ var OrderBy = (function () {
             });
         }
     };
-    OrderBy = __decorate([
+    OrderByPipe = __decorate([
         core_1.Pipe({ name: 'orderBy', pure: false }), 
         __metadata('design:paramtypes', [])
-    ], OrderBy);
-    return OrderBy;
+    ], OrderByPipe);
+    return OrderByPipe;
 }());
-exports.OrderBy = OrderBy;
+exports.OrderByPipe = OrderByPipe;
 exports.ORDERBY_PROVIDERS = [
-    OrderBy
+    OrderByPipe
 ];
 
 //# sourceMappingURL=OrderBy.js.map

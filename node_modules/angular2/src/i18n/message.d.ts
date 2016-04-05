@@ -9,7 +9,7 @@ export declare class Message {
     content: string;
     meaning: string;
     description: string;
-    constructor(content: string, meaning: string, description: string);
+    constructor(content: string, meaning: string, description?: string);
 }
 /**
  * Computes the id of a message

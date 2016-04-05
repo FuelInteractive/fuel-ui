@@ -8,6 +8,11 @@ var Observable_1 = require('../Observable');
 var Subscription_1 = require('../Subscription');
 var tryCatch_1 = require('../util/tryCatch');
 var errorObject_1 = require('../util/errorObject');
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
 var FromEventPatternObservable = (function (_super) {
     __extends(FromEventPatternObservable, _super);
     function FromEventPatternObservable(addHandler, removeHandler, selector) {
@@ -16,6 +21,15 @@ var FromEventPatternObservable = (function (_super) {
         this.removeHandler = removeHandler;
         this.selector = selector;
     }
+    /**
+     * @param addHandler
+     * @param removeHandler
+     * @param selector
+     * @return {FromEventPatternObservable}
+     * @static true
+     * @name fromEventPattern
+     * @owner Observable
+     */
     FromEventPatternObservable.create = function (addHandler, removeHandler, selector) {
         return new FromEventPatternObservable(addHandler, removeHandler, selector);
     };

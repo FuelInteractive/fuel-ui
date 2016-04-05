@@ -43,7 +43,8 @@ function setProduction(isProduction) {
   this.set('@system-env', this.newModule({
     browser: isBrowser,
     node: !!this._nodeRequire,
-    production: isProduction
+    production: isProduction,
+    'default': true
   }));
 }
 
@@ -64,6 +65,7 @@ hookConstructor(function(constructor) {
     this.warnings = false;
     this.defaultJSExtensions = false;
     this.pluginFirst = false;
+    this.loaderErrorStack = false;
 
     // by default load ".json" files as json
     // leading * meta doesn't need normalization
@@ -100,59 +102,60 @@ var nodeCoreModules = ['assert', 'buffer', 'child_process', 'cluster', 'console'
   a URL.
  */
 
-function applyMap(name) {
-  // first run map config
-  if (name[0] != '.' && name[0] != '/' && !name.match(absURLRegEx)) {
-    var mapMatch = getMapMatch(this.map, name);
-    if (mapMatch)
-      return this.map[mapMatch] + name.substr(mapMatch.length);
+function isPlain(name) {
+  return (name[0] != '.' || (!!name[1] && name[1] != '/' && name[1] != '.')) && name[0] != '/' && !name.match(absURLRegEx);
+}
+
+function urlResolve(name, parent) {
+  if (parent)
+    parent = parent.replace(/#/g, '%05');
+  return new URL(name, parent || baseURIObj).href.replace(/%05/g, '#');
+}
+
+// only applies to plain names
+function baseURLResolve(loader, name) {
+  return new URL(name, getBaseURLObj.call(loader)).href;
+}
+
+function coreResolve(name, parentName) {
+  // standard URL resolution
+  if (!isPlain(name))
+    return urlResolve(name, parentName);
+
+  // plain names not starting with './', '://' and '/' go through custom resolution
+  var mapMatch = getMapMatch(this.map, name);
+
+  if (mapMatch) {
+    name = this.map[mapMatch] + name.substr(mapMatch.length);
+
+    if (!isPlain(name))
+      return urlResolve(name);
   }
-  return name;
+
+  if (this.has(name))
+    return name;
+  // dynamically load node-core modules when requiring `@node/fs` for example
+  if (name.substr(0, 6) == '@node/' && nodeCoreModules.indexOf(name.substr(6)) != -1) {
+    if (!this._nodeRequire)
+      throw new TypeError('Error loading ' + name + '. Can only load node core modules in Node.');
+    this.set(name, this.newModule(getESModule(this._nodeRequire(name.substr(6)))));
+    return name;
+  }
+
+  var pathed = applyPaths(this.paths, name);
+
+  if (pathed && !isPlain(pathed))
+    return urlResolve(pathed);
+
+  return baseURLResolve(this, pathed || name);
 }
 
 hook('normalize', function(normalize) {
   return function(name, parentName, skipExt) {
-    name = applyMap.call(this, name);
-
-    // dynamically load node-core modules when requiring `@node/fs` for example
-    if (name.substr(0, 6) == '@node/' && nodeCoreModules.indexOf(name.substr(6)) != -1) {
-      if (!this._nodeRequire)
-        throw new TypeError('Error loading ' + name + '. Can only load node core modules in Node.');
-      this.set(name, this.newModule(getESModule(this._nodeRequire(name.substr(6)))));
-    }
-    
-    // relative URL-normalization
-    if (name[0] == '.' || name[0] == '/') {
-      if (parentName)
-        name = new URL(name, parentName.replace(/#/g, '%05')).href.replace(/%05/g, '#');
-      else
-        name = new URL(name, baseURIObj).href;
-    }
-
-    // if the module is in the registry already, use that
-    if (this.has(name))
-      return name;
-
-    if (name.match(absURLRegEx)) {
-      // defaultJSExtensions backwards compatibility
-      if (this.defaultJSExtensions && name.substr(name.length - 3, 3) != '.js' && !skipExt)
-        name += '.js';
-      return name;
-    }
-
-    // applyPaths implementation provided from ModuleLoader system.js source
-    name = applyPaths(this.paths, name) || name;
-
-    // defaultJSExtensions backwards compatibility
-    if (this.defaultJSExtensions && name.substr(name.length - 3, 3) != '.js' && !skipExt)
-      name += '.js';
-
-    // ./x, /x -> page-relative
-    if (name[0] == '.' || name[0] == '/')
-      return new URL(name, baseURIObj).href;
-    // x -> baseURL-relative
-    else
-      return new URL(name, getBaseURLObj.call(this)).href;
+    var resolved = coreResolve.call(this, name, parentName);
+    if (!skipExt && this.defaultJSExtensions && resolved.substr(resolved.length - 3, 3) != '.js' && !isPlain(resolved))
+      resolved += '.js';
+    return resolved;
   };
 });
 
@@ -290,8 +293,17 @@ hook('instantiate', function(instantiate) {
 */
 SystemJSLoader.prototype.env = 'development';
 
+var curCurScript;
 SystemJSLoader.prototype.config = function(cfg) {
   var loader = this;
+
+  if ('loaderErrorStack' in cfg) {
+    curCurScript = $__curScript;
+    if (cfg.loaderErrorStack)
+      $__curScript = undefined;
+    else
+      $__curScript = curCurScript;
+  }
 
   if ('warnings' in cfg)
     loader.warnings = cfg.warnings;
@@ -402,10 +414,7 @@ SystemJSLoader.prototype.config = function(cfg) {
       if (p.match(/^([^\/]+:)?\/\/$/))
         throw new TypeError('"' + p + '" is not a valid package name.');
 
-      var defaultJSExtension = loader.defaultJSExtensions && p.substr(p.length - 3, 3) != '.js';
-      var prop = loader.decanonicalize(applyMap(p));
-      if (defaultJSExtension && prop.substr(prop.length - 3, 3) == '.js')
-        prop = prop.substr(0, prop.length - 3);
+      var prop = coreResolve.call(loader, p);
 
       // allow trailing slash in packages
       if (prop[prop.length - 1] == '/')
@@ -413,25 +422,34 @@ SystemJSLoader.prototype.config = function(cfg) {
 
       loader.packages[prop] = loader.packages[prop] || {};
 
+      var pkg = cfg.packages[p];
+
       // meta backwards compatibility
-      if (cfg.packages[p].modules) {
+      if (pkg.modules) {
         warn.call(loader, 'Package ' + p + ' is configured with "modules", which is deprecated as it has been renamed to "meta".');
-        cfg.packages[p].meta = cfg.packages[p].modules;
-        delete cfg.packages[p].modules;
+        pkg.meta = pkg.modules;
+        delete pkg.modules;
       }
 
-      for (var q in cfg.packages[p])
+      if (typeof pkg.main == 'object') {
+        pkg.map = pkg.map || {};
+        pkg.map['./@main'] = pkg.main;
+        pkg.main['default'] = pkg.main['default'] || './';
+        pkg.main = '@main';
+      }
+
+      for (var q in pkg)
         if (indexOf.call(packageProperties, q) == -1)
           warn.call(loader, '"' + q + '" is not a valid package configuration option in package ' + p);
 
-      extendMeta(loader.packages[prop], cfg.packages[p]);
+      extendMeta(loader.packages[prop], pkg);
     }
   }
 
   for (var c in cfg) {
     var v = cfg[c];
 
-    if (c == 'baseURL' || c == 'map' || c == 'packages' || c == 'bundles' || c == 'paths' || c == 'warnings' || c == 'packageConfigPaths')
+    if (c == 'baseURL' || c == 'map' || c == 'packages' || c == 'bundles' || c == 'paths' || c == 'warnings' || c == 'packageConfigPaths' || c == 'loaderErrorStack')
       continue;
 
     if (typeof v != 'object' || v instanceof Array) {
@@ -446,8 +464,11 @@ SystemJSLoader.prototype.config = function(cfg) {
           loader[c][p] = v[p];
         }
         else if (c == 'meta') {
-          // meta can go through global map
-          loader[c][loader.decanonicalize(applyMap(p))] = v[p];
+          // meta can go through global map, with defaultJSExtensions adding
+          var resolved = coreResolve.call(loader, p);
+          if (loader.defaultJSExtensions && resolved.substr(resolved.length - 3, 3) != '.js' && !isPlain(resolved))
+            resolved += '.js';
+          loader[c][resolved] = v[p];
         }
         else if (c == 'depCache') {
           var defaultJSExtension = loader.defaultJSExtensions && p.substr(p.length - 3, 3) != '.js';

@@ -7,6 +7,14 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Subscriber_1 = require('../Subscriber');
 var ArgumentOutOfRangeError_1 = require('../util/ArgumentOutOfRangeError');
 var EmptyObservable_1 = require('../observable/EmptyObservable');
+/**
+ * @throws {ArgumentOutOfRangeError} When using `takeLast(i)`, it delivers an
+ * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0`.
+ * @param total
+ * @return {any}
+ * @method takeLast
+ * @owner Observable
+ */
 function takeLast(total) {
     if (total === 0) {
         return new EmptyObservable_1.EmptyObservable();
@@ -23,54 +31,46 @@ var TakeLastOperator = (function () {
             throw new ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
         }
     }
-    TakeLastOperator.prototype.call = function (subscriber) {
-        return new TakeLastSubscriber(subscriber, this.total);
+    TakeLastOperator.prototype.call = function (subscriber, source) {
+        return source._subscribe(new TakeLastSubscriber(subscriber, this.total));
     };
     return TakeLastOperator;
 }());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var TakeLastSubscriber = (function (_super) {
     __extends(TakeLastSubscriber, _super);
     function TakeLastSubscriber(destination, total) {
         _super.call(this, destination);
         this.total = total;
+        this.ring = new Array();
         this.count = 0;
-        this.index = 0;
-        this.ring = new Array(total);
     }
     TakeLastSubscriber.prototype._next = function (value) {
-        var index = this.index;
         var ring = this.ring;
         var total = this.total;
-        var count = this.count;
-        if (total > 1) {
-            if (count < total) {
-                this.count = count + 1;
-                this.index = index + 1;
-            }
-            else if (index === 0) {
-                this.index = ++index;
-            }
-            else if (index < total) {
-                this.index = index + 1;
-            }
-            else {
-                this.index = index = 0;
-            }
+        var count = this.count++;
+        if (ring.length < total) {
+            ring.push(value);
         }
-        else if (count < total) {
-            this.count = total;
+        else {
+            var index = count % total;
+            ring[index] = value;
         }
-        ring[index] = value;
     };
     TakeLastSubscriber.prototype._complete = function () {
-        var iter = -1;
-        var _a = this, ring = _a.ring, count = _a.count, total = _a.total, destination = _a.destination;
-        var index = (total === 1 || count < total) ? 0 : this.index - 1;
-        while (++iter < count) {
-            if (iter + index === total) {
-                index = total - iter;
+        var destination = this.destination;
+        var count = this.count;
+        if (count > 0) {
+            var total = this.count >= this.total ? this.total : this.count;
+            var ring = this.ring;
+            for (var i = 0; i < total; i++) {
+                var idx = (count++) % total;
+                destination.next(ring[idx]);
             }
-            destination.next(ring[iter + index]);
         }
         destination.complete();
     };

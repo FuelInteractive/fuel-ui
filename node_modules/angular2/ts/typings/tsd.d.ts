@@ -5,4 +5,3 @@
 /// <reference path="jasmine/jasmine.d.ts" />
 /// <reference path="node/node.d.ts" />
 /// <reference path="selenium-webdriver/selenium-webdriver.d.ts" />
-/// <reference path="zone.js/zone.js.d.ts" />

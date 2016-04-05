@@ -12,6 +12,6 @@ import { ReplacePipe } from './replace_pipe';
  * application.
  *
  * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
- * property of the `@Component` or `@View` decorators.
+ * property of the `@Component` decorator.
  */
 export declare const COMMON_PIPES: (typeof AsyncPipe | typeof UpperCasePipe | typeof SlicePipe | typeof ReplacePipe)[];

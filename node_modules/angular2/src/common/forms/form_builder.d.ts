@@ -1,4 +1,5 @@
 import * as modelModule from './model';
+import { ValidatorFn, AsyncValidatorFn } from './directives/validators';
 /**
  * Creates a form object from a user-specified configuration.
  *
@@ -55,10 +56,10 @@ export declare class FormBuilder {
     /**
      * Construct a new {@link Control} with the given `value`,`validator`, and `asyncValidator`.
      */
-    control(value: Object, validator?: Function, asyncValidator?: Function): modelModule.Control;
+    control(value: Object, validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn): modelModule.Control;
     /**
      * Construct an array of {@link Control}s from the given `controlsConfig` array of
      * configuration, with the given optional `validator` and `asyncValidator`.
      */
-    array(controlsConfig: any[], validator?: Function, asyncValidator?: Function): modelModule.ControlArray;
+    array(controlsConfig: any[], validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn): modelModule.ControlArray;
 }

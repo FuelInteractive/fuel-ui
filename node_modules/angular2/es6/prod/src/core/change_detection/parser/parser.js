@@ -22,6 +22,12 @@ class ParseException extends BaseException {
         super(`Parser Error: ${message} ${errLocation} [${input}] in ${ctxLocation}`);
     }
 }
+export class SplitInterpolation {
+    constructor(strings, expressions) {
+        this.strings = strings;
+        this.expressions = expressions;
+    }
+}
 export let Parser = class {
     constructor(/** @internal */ _lexer, providedReflector = null) {
         this._lexer = _lexer;
@@ -72,6 +78,18 @@ export let Parser = class {
         return new _ParseAST(input, location, tokens, this._reflector, false).parseTemplateBindings();
     }
     parseInterpolation(input, location) {
+        let split = this.splitInterpolation(input, location);
+        if (split == null)
+            return null;
+        let expressions = [];
+        for (let i = 0; i < split.expressions.length; ++i) {
+            var tokens = this._lexer.tokenize(split.expressions[i]);
+            var ast = new _ParseAST(input, location, tokens, this._reflector, false).parseChain();
+            expressions.push(ast);
+        }
+        return new ASTWithSource(new Interpolation(split.strings, expressions), input, location);
+    }
+    splitInterpolation(input, location) {
         var parts = StringWrapper.split(input, INTERPOLATION_REGEXP);
         if (parts.length <= 1) {
             return null;
@@ -85,15 +103,13 @@ export let Parser = class {
                 strings.push(part);
             }
             else if (part.trim().length > 0) {
-                var tokens = this._lexer.tokenize(part);
-                var ast = new _ParseAST(input, location, tokens, this._reflector, false).parseChain();
-                expressions.push(ast);
+                expressions.push(part);
             }
             else {
                 throw new ParseException('Blank expressions are not allowed in interpolated strings', input, `at column ${this._findInterpolationErrorColumn(parts, i)} in`, location);
             }
         }
-        return new ASTWithSource(new Interpolation(strings, expressions), input, location);
+        return new SplitInterpolation(strings, expressions);
     }
     wrapLiteralPrimitive(input, location) {
         return new ASTWithSource(new LiteralPrimitive(input), input, location);

@@ -133,10 +133,26 @@
 
       return locate.call(loader, load)
       .then(function(address) {
+        if (pluginSyntaxIndex != -1 || !load.metadata.loader)
+          return address;
+
+        // normalize plugin relative to parent in locate here when
+        // using plugin via loader metadata
+        return loader.normalize(load.metadata.loader, load.name)
+        .then(function(loaderNormalized) {
+          load.metadata.loader = loaderNormalized;
+          return address;
+        });
+      })
+      .then(function(address) {
         var plugin = load.metadata.loader;
 
         if (!plugin)
           return address;
+
+        // don't allow a plugin to load itself
+        if (load.name == plugin)
+          throw new Error('Plugin ' + plugin + ' cannot load itself, make sure it is excluded from any wildcard meta configuration via a custom loader: false rule.');
 
         // only fetch the plugin itself if this name isn't defined
         if (loader.defined && loader.defined[name])
@@ -217,9 +233,18 @@
   hook('instantiate', function(instantiate) {
     return function(load) {
       var loader = this;
+      var calledInstantiate = false;
 
       if (load.metadata.loaderModule && load.metadata.loaderModule.instantiate && !loader.builder && load.metadata.format != 'defined')
-        return Promise.resolve(load.metadata.loaderModule.instantiate.call(loader, load)).then(function(result) {
+        return Promise.resolve(load.metadata.loaderModule.instantiate.call(loader, load, function(load) {
+          if (calledInstantiate)
+            throw new Error('Instantiate must only be called once.');
+          calledInstantiate = true;
+          return instantiate.call(loader, load);
+        })).then(function(result) {
+          if (calledInstantiate)
+            return result;
+
           load.metadata.entry = createEntry();
           load.metadata.entry.execute = function() {
             return result;

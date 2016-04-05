@@ -1,5 +1,7 @@
 import { IterableDiffers, IterableDifferFactory } from './differs/iterable_differs';
 import { KeyValueDiffers, KeyValueDifferFactory } from './differs/keyvalue_differs';
+export { DefaultKeyValueDifferFactory, KeyValueChangeRecord } from './differs/default_keyvalue_differ';
+export { DefaultIterableDifferFactory, CollectionChangeRecord } from './differs/default_iterable_differ';
 export { ASTWithSource, AST, AstTransformer, PropertyRead, LiteralArray, ImplicitReceiver } from './parser/ast';
 export { Lexer } from './parser/lexer';
 export { Parser } from './parser/parser';

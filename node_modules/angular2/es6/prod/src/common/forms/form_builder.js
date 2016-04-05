@@ -61,7 +61,7 @@ export let FormBuilder = class {
      */
     group(controlsConfig, extra = null) {
         var controls = this._reduceControls(controlsConfig);
-        var optionals = isPresent(extra) ? StringMapWrapper.get(extra, "optionals") : null;
+        var optionals = (isPresent(extra) ? StringMapWrapper.get(extra, "optionals") : null);
         var validator = isPresent(extra) ? StringMapWrapper.get(extra, "validator") : null;
         var asyncValidator = isPresent(extra) ? StringMapWrapper.get(extra, "asyncValidator") : null;
         return new modelModule.ControlGroup(controls, optionals, validator, asyncValidator);

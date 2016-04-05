@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, provide } from 'angular2/core';
-import { bootstrap } from 'angular2/bootstrap';
+import { bootstrap } from 'angular2/platform/browser';
 import { RouteConfig, ROUTER_DIRECTIVES, APP_BASE_HREF, RouteParams } from 'angular2/router';
 // #docregion reuseCmp
 let MyCmp = class {

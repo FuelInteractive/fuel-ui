@@ -5,13 +5,14 @@ import { NgZone } from '../zone/ng_zone';
  * application on the page will have an instance of Testability.
  */
 export declare class Testability {
+    private _ngZone;
+    _isZoneStable: boolean;
     constructor(_ngZone: NgZone);
     increasePendingRequestCount(): number;
     decreasePendingRequestCount(): number;
     isStable(): boolean;
     whenStable(callback: Function): void;
     getPendingRequestCount(): number;
-    isAngularEventPending(): boolean;
     findBindings(using: any, provider: string, exactMatch: boolean): any[];
     findProviders(using: any, provider: string, exactMatch: boolean): any[];
 }

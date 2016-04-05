@@ -9,6 +9,7 @@
     var head = document.getElementsByTagName('head')[0];
 
   var curSystem;
+  var curRequire;
 
   // if doing worker executing, this is set to the load record being executed
   var workerLoad = null;
@@ -111,7 +112,10 @@
         var s = document.createElement('script');
         
         s.async = true;
-        
+
+        if (load.metadata.crossOrigin)
+          s.crossOrigin = load.metadata.crossOrigin;
+
         if (load.metadata.integrity)
           s.setAttribute('integrity', load.metadata.integrity);
 
@@ -130,6 +134,7 @@
         loadingCnt++;
 
         curSystem = __global.System;
+        curRequire = __global.require;
 
         s.src = load.address;
         head.appendChild(s);
@@ -167,6 +172,7 @@
 
         function cleanup() {
           __global.System = curSystem;
+          __global.require = curRequire;
 
           if (s.detachEvent) {
             s.detachEvent('onreadystatechange', complete);

@@ -3,7 +3,7 @@
  */
 (function() {
   // good enough ES6 module detection regex - format detections not designed to be accurate, but to handle the 99% use case
-  var esmRegEx = /(^\s*|[}\);\n]\s*)(import\s+(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s+from\s+['"]|\{)|export\s+\*\s+from\s+["']|export\s+(\{|default|function|class|var|const|let|async\s+function))/;
+  var esmRegEx = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s*(\{|default|function|class|var|const|let|async\s+function))/;
 
   var traceurRuntimeRegEx = /\$traceurRuntime\s*\./;
   var babelHelpersRegEx = /babelHelpers\s*\./;
@@ -14,7 +14,7 @@
       return translate.call(loader, load)
       .then(function(source) {
         // detect & transpile ES6
-        if (load.metadata.format == 'esm' || load.metadata.format == 'es6' || !load.metadata.format && loader.transpiler !== false && source.match(esmRegEx)) {
+        if (load.metadata.format == 'esm' || load.metadata.format == 'es6' || !load.metadata.format && source.match(esmRegEx)) {
           if (load.metadata.format == 'es6')
             warn.call(loader, 'Module ' + load.name + ' has metadata setting its format to "es6", which is deprecated.\nThis should be updated to "esm".');
 

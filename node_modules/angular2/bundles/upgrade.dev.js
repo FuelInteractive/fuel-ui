@@ -91,6 +91,7 @@ System.register("angular2/src/upgrade/constants", [], true, function(require, ex
   exports.NG1_INJECTOR = '$injector';
   exports.NG1_PARSE = '$parse';
   exports.NG1_TEMPLATE_CACHE = '$templateCache';
+  exports.NG1_TESTABILITY = '$$testability';
   exports.REQUIRE_INJECTOR = '^' + exports.NG2_INJECTOR;
   global.define = __define;
   return module.exports;
@@ -277,7 +278,9 @@ System.register("angular2/src/upgrade/angular_js", [], true, function(require, e
     bootstrap: noNg,
     module: noNg,
     element: noNg,
-    version: noNg
+    version: noNg,
+    resumeBootstrap: noNg,
+    getTestability: noNg
   };
   try {
     if (window.hasOwnProperty('angular')) {
@@ -288,6 +291,8 @@ System.register("angular2/src/upgrade/angular_js", [], true, function(require, e
   exports.module = angular.module;
   exports.element = angular.element;
   exports.version = angular.version;
+  exports.resumeBootstrap = angular.resumeBootstrap;
+  exports.getTestability = angular.getTestability;
   global.define = __define;
   return module.exports;
 });
@@ -581,11 +586,12 @@ System.register("angular2/src/upgrade/upgrade_ng1_adapter", ["angular2/core", "a
   return module.exports;
 });
 
-System.register("angular2/src/upgrade/upgrade_adapter", ["angular2/core", "angular2/src/facade/async", "angular2/platform/browser", "angular2/src/upgrade/metadata", "angular2/src/upgrade/util", "angular2/src/upgrade/constants", "angular2/src/upgrade/downgrade_ng2_adapter", "angular2/src/upgrade/upgrade_ng1_adapter", "angular2/src/upgrade/angular_js"], true, function(require, exports, module) {
+System.register("angular2/src/upgrade/upgrade_adapter", ["angular2/core", "angular2/src/facade/lang", "angular2/src/facade/async", "angular2/platform/browser", "angular2/src/upgrade/metadata", "angular2/src/upgrade/util", "angular2/src/upgrade/constants", "angular2/src/upgrade/downgrade_ng2_adapter", "angular2/src/upgrade/upgrade_ng1_adapter", "angular2/src/upgrade/angular_js"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   var core_1 = require("angular2/core");
+  var lang_1 = require("angular2/src/facade/lang");
   var async_1 = require("angular2/src/facade/async");
   var browser_1 = require("angular2/platform/browser");
   var metadata_1 = require("angular2/src/upgrade/metadata");
@@ -633,6 +639,7 @@ System.register("angular2/src/upgrade/upgrade_adapter", ["angular2/core", "angul
       var rootScope;
       var hostViewFactoryRefMap = {};
       var ng1Module = angular.module(this.idPrefix, modules);
+      var ng1BootstrapPromise = null;
       var ng1compilePromise = null;
       ng1Module.value(constants_1.NG2_INJECTOR, injector).value(constants_1.NG2_ZONE, ngZone).value(constants_1.NG2_COMPILER, compiler).value(constants_1.NG2_HOST_VIEW_FACTORY_REF_MAP, hostViewFactoryRefMap).value(constants_1.NG2_APP_VIEW_MANAGER, injector.get(core_1.AppViewManager)).config(['$provide', function(provide) {
         provide.decorator(constants_1.NG1_ROOT_SCOPE, ['$delegate', function(rootScopeDelegate) {
@@ -647,20 +654,54 @@ System.register("angular2/src/upgrade/upgrade_adapter", ["angular2/core", "angul
           }
           return rootScope = rootScopeDelegate;
         }]);
-      }]).run(['$injector', '$rootScope', function(injector, rootScope) {
-        ng1Injector = injector;
-        async_1.ObservableWrapper.subscribe(ngZone.onTurnDone, function(_) {
-          return ngZone.runOutsideAngular(function() {
-            return rootScope.$apply();
-          });
-        });
-        ng1compilePromise = upgrade_ng1_adapter_1.UpgradeNg1ComponentAdapterBuilder.resolve(_this.downgradedComponents, injector);
+        provide.decorator(constants_1.NG1_TESTABILITY, ['$delegate', function(testabilityDelegate) {
+          var _this = this;
+          var ng2Testability = injector.get(core_1.Testability);
+          var origonalWhenStable = testabilityDelegate.whenStable;
+          var newWhenStable = function(callback) {
+            var whenStableContext = _this;
+            origonalWhenStable.call(_this, function() {
+              if (ng2Testability.isStable()) {
+                callback.apply(this, arguments);
+              } else {
+                ng2Testability.whenStable(newWhenStable.bind(whenStableContext, callback));
+              }
+            });
+          };
+          testabilityDelegate.whenStable = newWhenStable;
+          return testabilityDelegate;
+        }]);
       }]);
+      ng1compilePromise = new Promise(function(resolve, reject) {
+        ng1Module.run(['$injector', '$rootScope', function(injector, rootScope) {
+          ng1Injector = injector;
+          async_1.ObservableWrapper.subscribe(ngZone.onMicrotaskEmpty, function(_) {
+            return ngZone.runOutsideAngular(function() {
+              return rootScope.$apply();
+            });
+          });
+          upgrade_ng1_adapter_1.UpgradeNg1ComponentAdapterBuilder.resolve(_this.downgradedComponents, injector).then(resolve, reject);
+        }]);
+      });
+      var windowAngular = lang_1.global.angular;
+      windowAngular.resumeBootstrap = undefined;
       angular.element(element).data(util_1.controllerKey(constants_1.NG2_INJECTOR), injector);
       ngZone.run(function() {
         angular.bootstrap(element, [_this.idPrefix], config);
       });
-      Promise.all([this.compileNg2Components(compiler, hostViewFactoryRefMap), ng1compilePromise]).then(function() {
+      ng1BootstrapPromise = new Promise(function(resolve, reject) {
+        if (windowAngular.resumeBootstrap) {
+          var originalResumeBootstrap = windowAngular.resumeBootstrap;
+          windowAngular.resumeBootstrap = function() {
+            windowAngular.resumeBootstrap = originalResumeBootstrap;
+            windowAngular.resumeBootstrap.apply(this, arguments);
+            resolve();
+          };
+        } else {
+          resolve();
+        }
+      });
+      Promise.all([this.compileNg2Components(compiler, hostViewFactoryRefMap), ng1BootstrapPromise, ng1compilePromise]).then(function() {
         ngZone.run(function() {
           if (rootScopePrototype) {
             rootScopePrototype.$apply = original$applyFn;

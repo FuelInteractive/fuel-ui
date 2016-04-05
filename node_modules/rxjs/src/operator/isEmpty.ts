@@ -20,11 +20,16 @@ export interface IsEmptySignature<T> {
 }
 
 class IsEmptyOperator implements Operator<any, boolean> {
-  call (observer: Subscriber<boolean>): Subscriber<any> {
-    return new IsEmptySubscriber(observer);
+  call (observer: Subscriber<boolean>, source: any): any {
+    return source._subscribe(new IsEmptySubscriber(observer));
   }
 }
 
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 class IsEmptySubscriber extends Subscriber<any> {
   constructor(destination: Subscriber<boolean>) {
     super(destination);

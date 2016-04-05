@@ -6,6 +6,11 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var FutureAction_1 = require('./FutureAction');
 var AnimationFrame_1 = require('../util/AnimationFrame');
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var AnimationFrameAction = (function (_super) {
     __extends(AnimationFrameAction, _super);
     function AnimationFrameAction() {

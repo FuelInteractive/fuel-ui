@@ -12,7 +12,9 @@ var subscribeToResult_1 = require('../util/subscribeToResult');
  * Returns an Observable that mirrors the first source Observable to emit an item
  * from the combination of this Observable and supplied Observables
  * @param {...Observables} ...observables sources used to race for which Observable emits first.
- * @returns {Observable} an Observable that mirrors the output of the first Observable to emit an item.
+ * @return {Observable} an Observable that mirrors the output of the first Observable to emit an item.
+ * @method race
+ * @owner Observable
  */
 function race() {
     var observables = [];
@@ -28,11 +30,6 @@ function race() {
     return raceStatic.apply(this, observables);
 }
 exports.race = race;
-/**
- * Returns an Observable that mirrors the first source Observable to emit an item.
- * @param {...Observables} ...observables sources used to race for which Observable emits first.
- * @returns {Observable} an Observable that mirrors the output of the first Observable to emit an item.
- */
 function raceStatic() {
     var observables = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -54,12 +51,17 @@ exports.raceStatic = raceStatic;
 var RaceOperator = (function () {
     function RaceOperator() {
     }
-    RaceOperator.prototype.call = function (subscriber) {
-        return new RaceSubscriber(subscriber);
+    RaceOperator.prototype.call = function (subscriber, source) {
+        return source._subscribe(new RaceSubscriber(subscriber));
     };
     return RaceOperator;
 }());
 exports.RaceOperator = RaceOperator;
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
 var RaceSubscriber = (function (_super) {
     __extends(RaceSubscriber, _super);
     function RaceSubscriber(destination) {

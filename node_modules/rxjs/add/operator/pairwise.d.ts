@@ -1,1 +1,6 @@
-export declare var _void: void;
+import { PairwiseSignature } from '../../operator/pairwise';
+declare module '../../Observable' {
+    interface Observable<T> {
+        pairwise: PairwiseSignature<T>;
+    }
+}
