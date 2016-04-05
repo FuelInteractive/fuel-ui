@@ -52,7 +52,7 @@ import {Pagination} from 'fuel-ui/fuel-ui';
 </pre>
 
 <h3>Getting Started</h3>
-<p>Modal is a custom element to create a popup</p>
+<p>Pagination is a custom element to show an interactive list of page numbers to use for paging</p>
 
 <h3>Usage</h3>
 <pre>

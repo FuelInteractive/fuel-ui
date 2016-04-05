@@ -55,7 +55,7 @@ import {INFINITE_SCROLLER_PROVIDERS} from 'fuel-ui/fuel-ui';
         class=&quot;card p-a scroll-item&quot;&gt;
         &lt;div class=&quot;card-block&quot;&gt;
             &lt;h4 class=&quot;card-title&quot;&gt;Some Item&lt;/h4&gt;
-            &lt;p class=&quot;card-text&quot;&gt;&#123; &#123;item&#125; &#125;&lt;/p&gt;
+            &lt;p class=&quot;card-text&quot;&gt;<pre>{</pre>{item}}&lt;/p&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/infinite-scroller&gt;

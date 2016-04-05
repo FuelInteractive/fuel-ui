@@ -43,7 +43,7 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Range} from 'fuel-ui/fuel-ui';
+import {RangePipe} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 

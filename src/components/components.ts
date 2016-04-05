@@ -6,6 +6,9 @@ import {PAGINATION_PROVIDERS, Pagination} from "./Pagination/Pagination";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./InfiniteScroller/InfiniteScroller";
 import {DROPDOWN_COMPONENT_PROVIDERS, Dropdown} from "./Dropdown/Dropdown";
 import {COLLAPSE_PROVIDERS, Collapse} from "./Collapse/Collapse";
+import {TABLESORTABLE_PROVIDERS, TableSortable} from "./TableSortable/TableSortable";
+import {TableSortableColumn} from "./TableSortable/TableSortableColumn";
+import {TableSortableSorting} from "./TableSortable/TableSortableSorting";
 
 export var FUELUI_COMPONENT_PROVIDERS = [
 	ALERT_PROVIDERS,
@@ -15,7 +18,8 @@ export var FUELUI_COMPONENT_PROVIDERS = [
 	PAGINATION_PROVIDERS,
 	INFINITE_SCROLLER_PROVIDERS,
     DROPDOWN_COMPONENT_PROVIDERS,
-    COLLAPSE_PROVIDERS
+    COLLAPSE_PROVIDERS,
+    TABLESORTABLE_PROVIDERS
 ];
 
 export * from "./Alert/Alert";
@@ -26,3 +30,6 @@ export * from "./Pagination/Pagination";
 export * from "./InfiniteScroller/InfiniteScroller";
 export * from "./Dropdown/Dropdown";
 export * from "./Collapse/Collapse";
+export * from "./TableSortable/TableSortable";
+export * from "./TableSortable/TableSortableColumn";
+export * from "./TableSortable/TableSortableSorting";

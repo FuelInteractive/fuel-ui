@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from 'angular2/core';
 import {CORE_DIRECTIVES, SlicePipe} from 'angular2/common';
-import {Range} from '../../pipes/Range/Range';
+import {RangePipe} from '../../pipes/Range/Range';
 
 @Component({
     selector: 'pagination',
@@ -12,7 +12,7 @@ import {Range} from '../../pipes/Range/Range';
     styleUrls: ['components/Pagination/Pagination.css'],
     templateUrl: 'components/Pagination/Pagination.html',
     directives: [CORE_DIRECTIVES],
-    pipes: [SlicePipe, Range]
+    pipes: [SlicePipe, RangePipe]
 })
 export class Pagination implements OnChanges {
     @Input() currentPage: number = 1;

@@ -914,6 +914,784 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
   return module.exports;
 });
 
+System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var Range_1 = $__require('bin/pipes/Range/Range.js');
+  var Pagination = (function() {
+    function Pagination() {
+      this.currentPage = 1;
+      this.pagesAtOnce = 5;
+      this.totalPages = 10;
+      this.currentPageChange = new core_1.EventEmitter();
+      this.pagesBlank = [];
+      this.setPage(this.currentPage);
+    }
+    Pagination.prototype.ngOnChanges = function(changes) {
+      this.setPage(this.currentPage);
+    };
+    Pagination.prototype.setPage = function(newPage) {
+      if (newPage < 1 || newPage > this.totalPages)
+        return;
+      this.currentPage = newPage;
+      if (this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0) {
+        this.startingIndex = 0;
+        this.endingIndex = this.pagesAtOnce;
+      } else if (this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
+        this.startingIndex = this.totalPages - this.pagesAtOnce;
+        this.endingIndex = this.totalPages;
+      } else {
+        this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
+        this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages ? this.startingIndex + this.pagesAtOnce : this.totalPages;
+      }
+      this.currentPageChange.next(this.currentPage);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
+    Pagination = __decorate([core_1.Component({
+      selector: 'pagination',
+      changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+      properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"],
+      styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
+      template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"#page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES],
+      pipes: [common_1.SlicePipe, Range_1.Range]
+    }), __metadata('design:paramtypes', [])], Pagination);
+    return Pagination;
+  }());
+  exports.Pagination = Pagination;
+  exports.PAGINATION_PROVIDERS = [Pagination];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["node_modules/angular2/core.js", "bin/utilities/ElementUtils.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var ElementUtils_1 = $__require('bin/utilities/ElementUtils.js');
+  var ScrollItem = (function() {
+    function ScrollItem(element) {
+      this.element = element.nativeElement;
+    }
+    Object.defineProperty(ScrollItem.prototype, "height", {
+      get: function() {
+        return ElementUtils_1.ElementUtils.outerHeight(this.element);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ScrollItem.prototype.ngAfterViewInit = function() {
+      this.element = this.element.firstElementChild;
+    };
+    ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [core_1.ElementRef])], ScrollItem);
+    return ScrollItem;
+  }());
+  exports.ScrollItem = ScrollItem;
+  var InfiniteScroller = (function() {
+    function InfiniteScroller(element) {
+      this.distance = 100;
+      this.height = 'auto';
+      this.hideScrollbar = false;
+      this.next = new core_1.EventEmitter();
+      this.prev = new core_1.EventEmitter();
+      this.topIndexChange = new core_1.EventEmitter();
+      this.topIndex = 0;
+      this.bottomIndexChange = new core_1.EventEmitter();
+      this.bottomIndex = 0;
+      this.lastScroll = 0;
+      this.container = element.nativeElement;
+    }
+    InfiniteScroller.prototype.ngAfterContentInit = function() {
+      var _this = this;
+      this.firstItem = this.itemQuery.first;
+      this.itemQuery.changes.subscribe(function() {
+        _this.handleItemChanges();
+      });
+    };
+    InfiniteScroller.prototype.ngAfterViewInit = function() {
+      this.container = this.container.firstElementChild;
+      this.container.scrollTop += 1;
+    };
+    InfiniteScroller.prototype.handleItemChanges = function() {
+      if (this.firstItem == null)
+        this.firstItem = this.itemQuery.first;
+      if (this.firstItem !== this.itemQuery.first) {
+        this.container.scrollTop += this.itemQuery.first.height;
+        this.firstItem = this.itemQuery.first;
+      }
+    };
+    InfiniteScroller.prototype.getVisableIndicies = function() {
+      var _this = this;
+      var itemArray = this.itemQuery.toArray();
+      var visableIndicies = itemArray.filter(function(i) {
+        return _this.checkVisableItem(i);
+      }).map(function(i) {
+        return itemArray.indexOf(i);
+      });
+      if (visableIndicies.length > 1) {
+        this.topIndex = visableIndicies[0];
+        this.bottomIndex = visableIndicies[visableIndicies.length - 1];
+        this.topIndexChange.next(this.topIndex);
+        this.bottomIndexChange.next(this.bottomIndex);
+      } else if (visableIndicies.length > 0) {
+        this.topIndex = visableIndicies[0];
+        this.topIndexChange.next(this.topIndex);
+      }
+    };
+    InfiniteScroller.prototype.checkVisableItem = function(item) {
+      var itemTop = item.element.offsetTop;
+      var itemBottom = itemTop + ElementUtils_1.ElementUtils.outerHeight(item.element);
+      var viewTop = this.container.scrollTop + this.container.offsetTop;
+      var viewBottom = viewTop + this.container.clientHeight;
+      if (itemTop > viewTop && itemTop < viewBottom)
+        return true;
+      if (itemBottom > viewTop && itemBottom < viewBottom)
+        return true;
+      if (itemTop < viewTop && itemBottom > viewBottom)
+        return true;
+      return false;
+    };
+    InfiniteScroller.prototype.doscroll = function(event) {
+      var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
+      var targetRect = target.getBoundingClientRect();
+      var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
+      var scrollDown = target.scrollTop > this.lastScroll;
+      var saveLastScroll = this.lastScroll;
+      this.lastScroll = target.scrollTop;
+      if (scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance * 2) {
+        this.next.emit(null);
+        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+          target.scrollTop -= 10;
+        }
+      } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
+        this.prev.emit(null);
+      }
+      this.getVisableIndicies();
+      if (target.scrollTop < 1)
+        target.scrollTop = 1;
+    };
+    InfiniteScroller.prototype.scrollTo = function(position) {
+      ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
+    };
+    InfiniteScroller.prototype.scrollToIndex = function(index) {
+      var itemArray = this.itemQuery.toArray();
+      var targetIndex = 0;
+      if (index > 0 && index < itemArray.length)
+        targetIndex = index;
+      else if (index >= itemArray.length)
+        targetIndex = itemArray.length - 1;
+      if (targetIndex < 0)
+        targetIndex = 0;
+      var target = this.itemQuery.toArray()[targetIndex];
+      var targetPos = target.element.offsetTop - this.container.offsetTop;
+      this.scrollTo(targetPos);
+    };
+    InfiniteScroller.prototype.isTop = function() {
+      return this.lastScroll <= 1;
+    };
+    InfiniteScroller.prototype.isBottom = function() {
+      return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "topIndexChange", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "bottomIndexChange", void 0);
+    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
+    InfiniteScroller = __decorate([core_1.Component({
+      selector: "infinite-scroller",
+      template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
+      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
+      directives: []
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
+    return InfiniteScroller;
+  }());
+  exports.InfiniteScroller = InfiniteScroller;
+  exports.INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/Dropdown/Dropdown.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var Dropdown = (function() {
+    function Dropdown() {
+      this.dropdownOpen = false;
+    }
+    Dropdown.prototype.toggleDropdown = function() {
+      this.dropdownOpen = !this.dropdownOpen;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Dropdown.prototype, "label", void 0);
+    Dropdown = __decorate([core_1.Component({
+      selector: "dropdown",
+      template: "\n      <div class=\"dropdown open\">\n        <button class=\"btn btn-secondary\" type=\"button\" \n          aria-haspopup=\"true\" aria-expanded=\"false\" (click)=\"toggleDropdown()\">\n          {{label}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\"\n          *ngIf=\"dropdownOpen\" (click)=\"toggleDropdown()\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
+    }), __metadata('design:paramtypes', [])], Dropdown);
+    return Dropdown;
+  }());
+  exports.Dropdown = Dropdown;
+  exports.DROPDOWN_COMPONENT_PROVIDERS = [Dropdown];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/Collapse/Collapse.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var Collapse = (function() {
+    function Collapse() {
+      this.showCollapse = false;
+    }
+    Collapse.prototype.toggleCollapse = function() {
+      this.showCollapse = !this.showCollapse;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "buttonText", void 0);
+    Collapse = __decorate([core_1.Component({
+      selector: "collapse",
+      template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"collapse fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
+    }), __metadata('design:paramtypes', [])], Collapse);
+    return Collapse;
+  }());
+  exports.Collapse = Collapse;
+  exports.COLLAPSE_PROVIDERS = [Collapse];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/TableSortable/TableSortable.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/pipes/OrderBy/OrderBy.js", "bin/pipes/MapToIterable/MapToIterable.js", "bin/pipes/Format/Format.js", "bin/components/TableSortable/TableSortableSorting.js", "bin/components/TableSortable/TableSortableColumn.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var common_1 = $__require('node_modules/angular2/common.js');
+  var OrderBy_1 = $__require('bin/pipes/OrderBy/OrderBy.js');
+  var MapToIterable_1 = $__require('bin/pipes/MapToIterable/MapToIterable.js');
+  var Format_1 = $__require('bin/pipes/Format/Format.js');
+  var TableSortableSorting_1 = $__require('bin/components/TableSortable/TableSortableSorting.js');
+  var TableSortable = (function() {
+    function TableSortable() {}
+    TableSortable.prototype.selectedClass = function(columnName) {
+      return columnName == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
+    };
+    TableSortable.prototype.changeSorting = function(columnName) {
+      var sort = this.sort;
+      if (sort.column == columnName) {
+        sort.descending = !sort.descending;
+      } else {
+        sort.column = columnName;
+        sort.descending = false;
+      }
+    };
+    TableSortable.prototype.convertSorting = function() {
+      return this.sort.descending ? '-' + this.sort.column : this.sort.column;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TableSortable.prototype, "columns", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TableSortable.prototype, "data", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
+    TableSortable = __decorate([core_1.Component({
+      selector: 'table-sortable',
+      template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"#key of object | mapToIterable; #i = index\">\n                {{object[columns[i].variable] | format : columns[i].filter }}\n            </td>\n        </tr>\n      </tbody>\n    </table>\n  ",
+      directives: [common_1.CORE_DIRECTIVES],
+      pipes: [OrderBy_1.OrderBy, common_1.JsonPipe, MapToIterable_1.MapToIterable, Format_1.Format]
+    }), __metadata('design:paramtypes', [])], TableSortable);
+    return TableSortable;
+  }());
+  exports.TableSortable = TableSortable;
+  exports.TABLESORTABLE_PROVIDERS = [TableSortable];
+  var TableSortableColumn_1 = $__require('bin/components/TableSortable/TableSortableColumn.js');
+  exports.TableSortableColumn = TableSortableColumn_1.TableSortableColumn;
+  var TableSortableSorting_2 = $__require('bin/components/TableSortable/TableSortableSorting.js');
+  exports.TableSortableSorting = TableSortableSorting_2.TableSortableSorting;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/TableSortable/TableSortableColumn.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var TableSortableColumn = (function() {
+    function TableSortableColumn(display, variable, filter) {
+      this.display = display;
+      this.variable = variable;
+      this.filter = filter;
+    }
+    return TableSortableColumn;
+  }());
+  exports.TableSortableColumn = TableSortableColumn;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/TableSortable/TableSortableSorting.js", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var TableSortableSorting = (function() {
+    function TableSortableSorting(column, descending) {
+      this.column = column;
+      this.descending = descending;
+    }
+    return TableSortableSorting;
+  }());
+  exports.TableSortableSorting = TableSortableSorting;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePickerProviders.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/components/Dropdown/Dropdown.js", "bin/components/Collapse/Collapse.js", "bin/components/TableSortable/TableSortable.js", "bin/components/TableSortable/TableSortableColumn.js", "bin/components/TableSortable/TableSortableSorting.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
+  }
+  var Alert_1 = $__require('bin/components/Alert/Alert.js');
+  var Carousel_1 = $__require('bin/components/Carousel/Carousel.js');
+  var DatePickerProviders_1 = $__require('bin/components/DatePicker/DatePickerProviders.js');
+  var Modal_1 = $__require('bin/components/Modal/Modal.js');
+  var Pagination_1 = $__require('bin/components/Pagination/Pagination.js');
+  var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
+  var Dropdown_1 = $__require('bin/components/Dropdown/Dropdown.js');
+  var Collapse_1 = $__require('bin/components/Collapse/Collapse.js');
+  var TableSortable_1 = $__require('bin/components/TableSortable/TableSortable.js');
+  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, Collapse_1.COLLAPSE_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS];
+  __export($__require('bin/components/Alert/Alert.js'));
+  __export($__require('bin/components/Carousel/Carousel.js'));
+  __export($__require('bin/components/DatePicker/DatePickerProviders.js'));
+  __export($__require('bin/components/Modal/Modal.js'));
+  __export($__require('bin/components/Pagination/Pagination.js'));
+  __export($__require('bin/components/InfiniteScroller/InfiniteScroller.js'));
+  __export($__require('bin/components/Dropdown/Dropdown.js'));
+  __export($__require('bin/components/Collapse/Collapse.js'));
+  __export($__require('bin/components/TableSortable/TableSortable.js'));
+  __export($__require('bin/components/TableSortable/TableSortableColumn.js'));
+  __export($__require('bin/components/TableSortable/TableSortableSorting.js'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/directives/Animation/AnimationListener.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var AnimationListener = (function() {
+    function AnimationListener() {
+      this.animationStart = new core_1.EventEmitter();
+      this.animationEnd = new core_1.EventEmitter();
+    }
+    AnimationListener.prototype.animationStarted = function($event) {
+      this.animationStart.next($event);
+    };
+    AnimationListener.prototype.animationEnded = function($event) {
+      this.animationEnd.next($event);
+    };
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationEnd", void 0);
+    AnimationListener = __decorate([core_1.Directive({
+      selector: '[.animated]',
+      host: {
+        '(animationstart)': 'animationStarted($event)',
+        '(webkitAnimationStart)': 'animationStarted($event)',
+        '(oanimationstart)': 'animationStarted($event)',
+        '(MSAnimationStart)': 'animationStarted($event)',
+        '(animationend)': 'animationEnded($event)',
+        '(webkitAnimationEnd)': 'animationEnded($event)',
+        '(oanimationend)': 'animationEnded($event)',
+        '(MSAnimationEnd)': 'animationEnded($event)'
+      }
+    }), __metadata('design:paramtypes', [])], AnimationListener);
+    return AnimationListener;
+  }());
+  exports.AnimationListener = AnimationListener;
+  exports.ANIMATION_LISTENER_PROVIDERS = [AnimationListener];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var Animation = (function() {
+    function Animation(element) {
+      this.onAnimationStart = new core_1.EventEmitter();
+      this.onAnimationEnd = new core_1.EventEmitter();
+      this.animationClasses = '';
+      this.play = false;
+      this.id = '';
+      this.group = '';
+      this._animationQueue = [];
+      this._callbacks = [];
+      this.element = element.nativeElement;
+    }
+    Animation.prototype.ngOnChanges = function() {
+      this.setup();
+    };
+    Animation.prototype.ngOnInit = function() {
+      this.setup();
+    };
+    Animation.prototype.addAnimation = function(animationClasses) {
+      var _this = this;
+      animationClasses.split(' ').map(function(c) {
+        return _this._animationQueue.push(c);
+      });
+      this.animationClasses += " " + animationClasses;
+      return this;
+    };
+    Animation.prototype.setup = function() {
+      this._animationQueue = this.animationClasses.split(" ").filter(function(c) {
+        return c.length > 0;
+      });
+      if (this.play && this._animationQueue.length > 0)
+        this.startAnimation();
+      return this;
+    };
+    Animation.prototype.startAnimation = function(callback) {
+      var _this = this;
+      if (callback === void 0) {
+        callback = null;
+      }
+      if (callback != null)
+        this._callbacks.push(callback);
+      this._animationQueue.shift().split('.').filter(function(c) {
+        return c.length > 0;
+      }).map(function(c) {
+        return _this.element.classList.add(c);
+      });
+      return this;
+    };
+    Animation.prototype.cleanAnimation = function() {
+      var _this = this;
+      this.animationClasses.replace('.', ' ').split(' ').filter(function(c) {
+        return c.length > 0;
+      }).map(function(c) {
+        _this.element.classList.remove(c);
+      });
+      return this;
+    };
+    Animation.prototype.animationStarted = function(event) {
+      this.onAnimationStart.next(null);
+    };
+    Animation.prototype.animationEnded = function(event) {
+      this.cleanAnimation();
+      if (this._animationQueue.length > 0) {
+        this.startAnimation();
+        return;
+      }
+      while (this._callbacks.length > 0)
+        this._callbacks.shift()();
+      this.onAnimationEnd.next(null);
+    };
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
+    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
+    Animation = __decorate([core_1.Directive({
+      selector: '[animation]',
+      host: {
+        '(animationstart)': 'animationStarted($event)',
+        '(webkitAnimationStart)': 'animationStarted($event)',
+        '(oanimationstart)': 'animationStarted($event)',
+        '(MSAnimationStart)': 'animationStarted($event)',
+        '(animationend)': 'animationEnded($event)',
+        '(webkitAnimationEnd)': 'animationEnded($event)',
+        '(oanimationend)': 'animationEnded($event)',
+        '(MSAnimationEnd)': 'animationEnded($event)'
+      }
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
+    return Animation;
+  }());
+  exports.Animation = Animation;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var Tooltip = (function() {
+    function Tooltip(el) {
+      this._el = el.nativeElement;
+    }
+    Tooltip.prototype.getElement = function() {
+      return this._el;
+    };
+    Tooltip.prototype.show = function() {
+      this.hide();
+      var html = "\n        <div class=\"tooltip top customFadeIn\" role=\"tooltip\">\n          <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>\n        </div>\n        ";
+      var newEl = document.createElement('div');
+      newEl.setAttribute('role', 'tooltip');
+      newEl.className = 'tooltip top customFadeIn';
+      newEl.innerHTML = "\n        <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>";
+      newEl.style.visibility = "hidden";
+      this.getElement().appendChild(newEl);
+      var bodyRect = document.body.getBoundingClientRect(),
+          elemRect = this.getElement().getBoundingClientRect(),
+          offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
+      this.hide();
+      newEl.style.visibility = "";
+      newEl.style.top = offset + 'px';
+      newEl.style.left = elemRect.left + 'px';
+      this.getElement().appendChild(newEl);
+    };
+    Tooltip.prototype.hide = function() {
+      var tooltips = this.getElement().getElementsByClassName('tooltip');
+      for (var i = 0; i < tooltips.length; i++) {
+        tooltips[i].remove();
+      }
+    };
+    Tooltip = __decorate([core_1.Directive({
+      selector: '[tooltip]',
+      properties: ['text: tooltip'],
+      host: {
+        '(mouseover)': 'show()',
+        '(mouseout)': 'hide()',
+        '(focus)': 'show()',
+        '(unfocus)': 'hide()'
+      }
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Tooltip);
+    return Tooltip;
+  }());
+  exports.Tooltip = Tooltip;
+  exports.TOOLTIP_PROVIDERS = [Tooltip];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/directives/CodeHighlighter/CodeHighlighter.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('node_modules/angular2/core.js');
+  var CodeHighlighter = (function() {
+    function CodeHighlighter(el) {
+      this.el = el;
+      if (this.el && this.el.nativeElement) {
+        Prism.highlightElement(this.el.nativeElement);
+      }
+    }
+    CodeHighlighter = __decorate([core_1.Directive({selector: '[code-highlight]'}), __metadata('design:paramtypes', [core_1.ElementRef])], CodeHighlighter);
+    return CodeHighlighter;
+  }());
+  exports.CodeHighlighter = CodeHighlighter;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("bin/directives/directives.js", ["bin/directives/Animation/AnimationListener.js", "bin/directives/Animation/Animation.js", "bin/directives/Tooltip/Tooltip.js", "bin/directives/CodeHighlighter/CodeHighlighter.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
+  }
+  var AnimationListener_1 = $__require('bin/directives/Animation/AnimationListener.js');
+  var Animation_1 = $__require('bin/directives/Animation/Animation.js');
+  var Tooltip_1 = $__require('bin/directives/Tooltip/Tooltip.js');
+  var CodeHighlighter_1 = $__require('bin/directives/CodeHighlighter/CodeHighlighter.js');
+  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, AnimationListener_1.AnimationListener, CodeHighlighter_1.CodeHighlighter];
+  __export($__require('bin/directives/Animation/AnimationListener.js'));
+  __export($__require('bin/directives/Animation/Animation.js'));
+  __export($__require('bin/directives/Tooltip/Tooltip.js'));
+  __export($__require('bin/directives/CodeHighlighter/CodeHighlighter.js'));
+  global.define = __define;
+  return module.exports;
+});
+
 System.registerDynamic("node_modules/angular2/src/common/pipes/async_pipe.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/core.js", "node_modules/angular2/src/common/pipes/invalid_pipe_argument_exception.js"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -4410,7 +5188,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_class.js"
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4434,6 +5212,7 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
   };
   var core_1 = $__require('node_modules/angular2/core.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
+  var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
   var NgFor = (function() {
     function NgFor(_viewContainer, _templateRef, _iterableDiffers, _cdr) {
       this._viewContainer = _viewContainer;
@@ -4445,7 +5224,11 @@ System.registerDynamic("node_modules/angular2/src/common/directives/ng_for.js", 
       set: function(value) {
         this._ngForOf = value;
         if (lang_1.isBlank(this._differ) && lang_1.isPresent(value)) {
-          this._differ = this._iterableDiffers.find(value).create(this._cdr, this._ngForTrackBy);
+          try {
+            this._differ = this._iterableDiffers.find(value).create(this._cdr, this._ngForTrackBy);
+          } catch (e) {
+            throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+          }
         }
       },
       enumerable: true,
@@ -5034,7 +5817,7 @@ System.registerDynamic("node_modules/angular2/common.js", ["node_modules/angular
   return module.exports;
 });
 
-System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5058,57 +5841,55 @@ System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules
   };
   var core_1 = $__require('node_modules/angular2/core.js');
   var common_1 = $__require('node_modules/angular2/common.js');
-  var Range_1 = $__require('bin/pipes/Range/Range.js');
-  var Pagination = (function() {
-    function Pagination() {
-      this.currentPage = 1;
-      this.pagesAtOnce = 5;
-      this.totalPages = 10;
-      this.currentPageChange = new core_1.EventEmitter();
-      this.pagesBlank = [];
-      this.setPage(this.currentPage);
+  var Format = (function() {
+    function Format() {
+      this.datePipe = new common_1.DatePipe();
+      this.decimalPipe = new common_1.DecimalPipe();
     }
-    Pagination.prototype.ngOnChanges = function(changes) {
-      this.setPage(this.currentPage);
-    };
-    Pagination.prototype.setPage = function(newPage) {
-      if (newPage < 1 || newPage > this.totalPages)
-        return;
-      this.currentPage = newPage;
-      if (this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0) {
-        this.startingIndex = 0;
-        this.endingIndex = this.pagesAtOnce;
-      } else if (this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
-        this.startingIndex = this.totalPages - this.pagesAtOnce;
-        this.endingIndex = this.totalPages;
-      } else {
-        this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
-        this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages ? this.startingIndex + this.pagesAtOnce : this.totalPages;
+    Format.prototype.transform = function(input, args) {
+      var format = '';
+      var parsedFloat = 0;
+      var pipeArgs = args[0].split(':');
+      for (var i = 0; i < pipeArgs.length; i++) {
+        pipeArgs[i] = pipeArgs[i].trim(' ');
       }
-      this.currentPageChange.next(this.currentPage);
+      switch (pipeArgs[0].toLowerCase()) {
+        case 'text':
+          return input;
+        case 'decimal':
+        case 'number':
+          parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
+          format = pipeArgs.length > 1 ? pipeArgs[1] : null;
+          return this.decimalPipe.transform(parsedFloat, [format]);
+        case 'percentage':
+          parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
+          format = pipeArgs.length > 1 ? pipeArgs[1] : null;
+          return this.decimalPipe.transform(parsedFloat, [format]) + '%';
+        case 'date':
+        case 'datetime':
+          var date = !isNaN(parseInt(input)) ? parseInt(input) : new Date(input);
+          format = 'MMM d, y h:mm:ss a';
+          if (pipeArgs.length > 1) {
+            format = '';
+            for (var i = 1; i < pipeArgs.length; i++) {
+              format += pipeArgs[i];
+            }
+          }
+          return this.datePipe.transform(date, [format]);
+        default:
+          return input;
+      }
     };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
-    Pagination = __decorate([core_1.Component({
-      selector: 'pagination',
-      changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-      properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"],
-      styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
-      template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"#page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES],
-      pipes: [common_1.SlicePipe, Range_1.Range]
-    }), __metadata('design:paramtypes', [])], Pagination);
-    return Pagination;
+    Format = __decorate([core_1.Pipe({name: 'format'}), __metadata('design:paramtypes', [])], Format);
+    return Format;
   }());
-  exports.Pagination = Pagination;
-  exports.PAGINATION_PROVIDERS = [Pagination];
+  exports.Format = Format;
+  exports.FORMAT_PROVIDERS = [Format];
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["node_modules/angular2/core.js", "bin/utilities/ElementUtils.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/pipes/MapToIterable/MapToIterable.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5131,578 +5912,28 @@ System.registerDynamic("bin/components/InfiniteScroller/InfiniteScroller.js", ["
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('node_modules/angular2/core.js');
-  var ElementUtils_1 = $__require('bin/utilities/ElementUtils.js');
-  var ScrollItem = (function() {
-    function ScrollItem(element) {
-      this.element = element.nativeElement;
-    }
-    Object.defineProperty(ScrollItem.prototype, "height", {
-      get: function() {
-        return ElementUtils_1.ElementUtils.outerHeight(this.element);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ScrollItem.prototype.ngAfterViewInit = function() {
-      this.element = this.element.firstElementChild;
-    };
-    ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [core_1.ElementRef])], ScrollItem);
-    return ScrollItem;
-  }());
-  exports.ScrollItem = ScrollItem;
-  var InfiniteScroller = (function() {
-    function InfiniteScroller(element) {
-      this.distance = 100;
-      this.height = 'auto';
-      this.hideScrollbar = false;
-      this.next = new core_1.EventEmitter();
-      this.prev = new core_1.EventEmitter();
-      this.topIndexChange = new core_1.EventEmitter();
-      this.topIndex = 0;
-      this.bottomIndexChange = new core_1.EventEmitter();
-      this.bottomIndex = 0;
-      this.lastScroll = 0;
-      this.container = element.nativeElement;
-    }
-    InfiniteScroller.prototype.ngAfterContentInit = function() {
-      var _this = this;
-      this.firstItem = this.itemQuery.first;
-      this.itemQuery.changes.subscribe(function() {
-        _this.handleItemChanges();
-      });
-    };
-    InfiniteScroller.prototype.ngAfterViewInit = function() {
-      this.container = this.container.firstElementChild;
-      this.container.scrollTop += 1;
-    };
-    InfiniteScroller.prototype.handleItemChanges = function() {
-      if (this.firstItem == null)
-        this.firstItem = this.itemQuery.first;
-      if (this.firstItem !== this.itemQuery.first) {
-        this.container.scrollTop += this.itemQuery.first.height;
-        this.firstItem = this.itemQuery.first;
+  var MapToIterable = (function() {
+    function MapToIterable() {}
+    MapToIterable.prototype.transform = function(dict, args) {
+      if (args === void 0) {
+        args = [];
       }
-    };
-    InfiniteScroller.prototype.getVisableIndicies = function() {
-      var _this = this;
-      var itemArray = this.itemQuery.toArray();
-      var visableIndicies = itemArray.filter(function(i) {
-        return _this.checkVisableItem(i);
-      }).map(function(i) {
-        return itemArray.indexOf(i);
-      });
-      if (visableIndicies.length > 1) {
-        this.topIndex = visableIndicies[0];
-        this.bottomIndex = visableIndicies[visableIndicies.length - 1];
-        this.topIndexChange.next(this.topIndex);
-        this.bottomIndexChange.next(this.bottomIndex);
-      } else if (visableIndicies.length > 0) {
-        this.topIndex = visableIndicies[0];
-        this.topIndexChange.next(this.topIndex);
-      }
-    };
-    InfiniteScroller.prototype.checkVisableItem = function(item) {
-      var itemTop = item.element.offsetTop;
-      var itemBottom = itemTop + ElementUtils_1.ElementUtils.outerHeight(item.element);
-      var viewTop = this.container.scrollTop + this.container.offsetTop;
-      var viewBottom = viewTop + this.container.clientHeight;
-      if (itemTop > viewTop && itemTop < viewBottom)
-        return true;
-      if (itemBottom > viewTop && itemBottom < viewBottom)
-        return true;
-      if (itemTop < viewTop && itemBottom > viewBottom)
-        return true;
-      return false;
-    };
-    InfiniteScroller.prototype.doscroll = function(event) {
-      var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
-      var targetRect = target.getBoundingClientRect();
-      var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
-      var scrollDown = target.scrollTop > this.lastScroll;
-      var saveLastScroll = this.lastScroll;
-      this.lastScroll = target.scrollTop;
-      if (scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance * 2) {
-        this.next.emit(null);
-        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-          target.scrollTop -= 10;
+      var a = [];
+      for (var key in dict) {
+        if (dict.hasOwnProperty(key)) {
+          a.push({
+            key: key,
+            val: dict[key]
+          });
         }
-      } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
-        this.prev.emit(null);
       }
-      this.getVisableIndicies();
-      if (target.scrollTop < 1)
-        target.scrollTop = 1;
+      return a;
     };
-    InfiniteScroller.prototype.scrollTo = function(position) {
-      ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
-    };
-    InfiniteScroller.prototype.scrollToIndex = function(index) {
-      var itemArray = this.itemQuery.toArray();
-      var targetIndex = 0;
-      if (index > 0 && index < itemArray.length)
-        targetIndex = index;
-      else if (index >= itemArray.length)
-        targetIndex = itemArray.length - 1;
-      if (targetIndex < 0)
-        targetIndex = 0;
-      var target = this.itemQuery.toArray()[targetIndex];
-      var targetPos = target.element.offsetTop - this.container.offsetTop;
-      this.scrollTo(targetPos);
-    };
-    InfiniteScroller.prototype.isTop = function() {
-      return this.lastScroll <= 1;
-    };
-    InfiniteScroller.prototype.isBottom = function() {
-      return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "topIndexChange", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "bottomIndexChange", void 0);
-    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
-    InfiniteScroller = __decorate([core_1.Component({
-      selector: "infinite-scroller",
-      template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
-      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
-      directives: []
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
-    return InfiniteScroller;
+    MapToIterable = __decorate([core_1.Pipe({name: 'mapToIterable'}), __metadata('design:paramtypes', [])], MapToIterable);
+    return MapToIterable;
   }());
-  exports.InfiniteScroller = InfiniteScroller;
-  exports.INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/Dropdown/Dropdown.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var Dropdown = (function() {
-    function Dropdown() {
-      this.dropdownOpen = false;
-    }
-    Dropdown.prototype.toggleDropdown = function() {
-      this.dropdownOpen = !this.dropdownOpen;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', String)], Dropdown.prototype, "label", void 0);
-    Dropdown = __decorate([core_1.Component({
-      selector: "dropdown",
-      template: "\n      <div class=\"dropdown open\">\n        <button class=\"btn btn-secondary\" type=\"button\" \n          aria-haspopup=\"true\" aria-expanded=\"false\" (click)=\"toggleDropdown()\">\n          {{label}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\"\n          *ngIf=\"dropdownOpen\" (click)=\"toggleDropdown()\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
-    }), __metadata('design:paramtypes', [])], Dropdown);
-    return Dropdown;
-  }());
-  exports.Dropdown = Dropdown;
-  exports.DROPDOWN_COMPONENT_PROVIDERS = [Dropdown];
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/Collapse/Collapse.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var Collapse = (function() {
-    function Collapse() {
-      this.showCollapse = false;
-    }
-    Collapse.prototype.toggleCollapse = function() {
-      this.showCollapse = !this.showCollapse;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "buttonText", void 0);
-    Collapse = __decorate([core_1.Component({
-      selector: "collapse",
-      template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"collapse fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
-    }), __metadata('design:paramtypes', [])], Collapse);
-    return Collapse;
-  }());
-  exports.Collapse = Collapse;
-  exports.COLLAPSE_PROVIDERS = [Collapse];
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/components/components.js", ["bin/components/Alert/Alert.js", "bin/components/Carousel/Carousel.js", "bin/components/DatePicker/DatePickerProviders.js", "bin/components/Modal/Modal.js", "bin/components/Pagination/Pagination.js", "bin/components/InfiniteScroller/InfiniteScroller.js", "bin/components/Dropdown/Dropdown.js", "bin/components/Collapse/Collapse.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function __export(m) {
-    for (var p in m)
-      if (!exports.hasOwnProperty(p))
-        exports[p] = m[p];
-  }
-  var Alert_1 = $__require('bin/components/Alert/Alert.js');
-  var Carousel_1 = $__require('bin/components/Carousel/Carousel.js');
-  var DatePickerProviders_1 = $__require('bin/components/DatePicker/DatePickerProviders.js');
-  var Modal_1 = $__require('bin/components/Modal/Modal.js');
-  var Pagination_1 = $__require('bin/components/Pagination/Pagination.js');
-  var InfiniteScroller_1 = $__require('bin/components/InfiniteScroller/InfiniteScroller.js');
-  var Dropdown_1 = $__require('bin/components/Dropdown/Dropdown.js');
-  var Collapse_1 = $__require('bin/components/Collapse/Collapse.js');
-  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, Collapse_1.COLLAPSE_PROVIDERS];
-  __export($__require('bin/components/Alert/Alert.js'));
-  __export($__require('bin/components/Carousel/Carousel.js'));
-  __export($__require('bin/components/DatePicker/DatePickerProviders.js'));
-  __export($__require('bin/components/Modal/Modal.js'));
-  __export($__require('bin/components/Pagination/Pagination.js'));
-  __export($__require('bin/components/InfiniteScroller/InfiniteScroller.js'));
-  __export($__require('bin/components/Dropdown/Dropdown.js'));
-  __export($__require('bin/components/Collapse/Collapse.js'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/directives/Animation/AnimationListener.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var AnimationListener = (function() {
-    function AnimationListener() {
-      this.animationStart = new core_1.EventEmitter();
-      this.animationEnd = new core_1.EventEmitter();
-    }
-    AnimationListener.prototype.animationStarted = function($event) {
-      this.animationStart.next($event);
-    };
-    AnimationListener.prototype.animationEnded = function($event) {
-      this.animationEnd.next($event);
-    };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationStart", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationEnd", void 0);
-    AnimationListener = __decorate([core_1.Directive({
-      selector: '[.animated]',
-      host: {
-        '(animationstart)': 'animationStarted($event)',
-        '(webkitAnimationStart)': 'animationStarted($event)',
-        '(oanimationstart)': 'animationStarted($event)',
-        '(MSAnimationStart)': 'animationStarted($event)',
-        '(animationend)': 'animationEnded($event)',
-        '(webkitAnimationEnd)': 'animationEnded($event)',
-        '(oanimationend)': 'animationEnded($event)',
-        '(MSAnimationEnd)': 'animationEnded($event)'
-      }
-    }), __metadata('design:paramtypes', [])], AnimationListener);
-    return AnimationListener;
-  }());
-  exports.AnimationListener = AnimationListener;
-  exports.ANIMATION_LISTENER_PROVIDERS = [AnimationListener];
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/directives/Animation/Animation.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var Animation = (function() {
-    function Animation(element) {
-      this.onAnimationStart = new core_1.EventEmitter();
-      this.onAnimationEnd = new core_1.EventEmitter();
-      this.animationClasses = '';
-      this.play = false;
-      this.id = '';
-      this.group = '';
-      this._animationQueue = [];
-      this._callbacks = [];
-      this.element = element.nativeElement;
-    }
-    Animation.prototype.ngOnChanges = function() {
-      this.setup();
-    };
-    Animation.prototype.ngOnInit = function() {
-      this.setup();
-    };
-    Animation.prototype.addAnimation = function(animationClasses) {
-      var _this = this;
-      animationClasses.split(' ').map(function(c) {
-        return _this._animationQueue.push(c);
-      });
-      this.animationClasses += " " + animationClasses;
-      return this;
-    };
-    Animation.prototype.setup = function() {
-      this._animationQueue = this.animationClasses.split(" ").filter(function(c) {
-        return c.length > 0;
-      });
-      if (this.play && this._animationQueue.length > 0)
-        this.startAnimation();
-      return this;
-    };
-    Animation.prototype.startAnimation = function(callback) {
-      var _this = this;
-      if (callback === void 0) {
-        callback = null;
-      }
-      if (callback != null)
-        this._callbacks.push(callback);
-      this._animationQueue.shift().split('.').filter(function(c) {
-        return c.length > 0;
-      }).map(function(c) {
-        return _this.element.classList.add(c);
-      });
-      return this;
-    };
-    Animation.prototype.cleanAnimation = function() {
-      var _this = this;
-      this.animationClasses.replace('.', ' ').split(' ').filter(function(c) {
-        return c.length > 0;
-      }).map(function(c) {
-        _this.element.classList.remove(c);
-      });
-      return this;
-    };
-    Animation.prototype.animationStarted = function(event) {
-      this.onAnimationStart.next(null);
-    };
-    Animation.prototype.animationEnded = function(event) {
-      this.cleanAnimation();
-      if (this._animationQueue.length > 0) {
-        this.startAnimation();
-        return;
-      }
-      while (this._callbacks.length > 0)
-        this._callbacks.shift()();
-      this.onAnimationEnd.next(null);
-    };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
-    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
-    Animation = __decorate([core_1.Directive({
-      selector: '[animation]',
-      host: {
-        '(animationstart)': 'animationStarted($event)',
-        '(webkitAnimationStart)': 'animationStarted($event)',
-        '(oanimationstart)': 'animationStarted($event)',
-        '(MSAnimationStart)': 'animationStarted($event)',
-        '(animationend)': 'animationEnded($event)',
-        '(webkitAnimationEnd)': 'animationEnded($event)',
-        '(oanimationend)': 'animationEnded($event)',
-        '(MSAnimationEnd)': 'animationEnded($event)'
-      }
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
-    return Animation;
-  }());
-  exports.Animation = Animation;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/directives/Tooltip/Tooltip.js", ["node_modules/angular2/core.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var Tooltip = (function() {
-    function Tooltip(el) {
-      this._el = el.nativeElement;
-    }
-    Tooltip.prototype.getElement = function() {
-      return this._el;
-    };
-    Tooltip.prototype.show = function() {
-      this.hide();
-      var html = "\n        <div class=\"tooltip top customFadeIn\" role=\"tooltip\">\n          <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>\n        </div>\n        ";
-      var newEl = document.createElement('div');
-      newEl.setAttribute('role', 'tooltip');
-      newEl.className = 'tooltip top customFadeIn';
-      newEl.innerHTML = "\n        <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>";
-      newEl.style.visibility = "hidden";
-      this.getElement().appendChild(newEl);
-      var bodyRect = document.body.getBoundingClientRect(),
-          elemRect = this.getElement().getBoundingClientRect(),
-          offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
-      this.hide();
-      newEl.style.visibility = "";
-      newEl.style.top = offset + 'px';
-      newEl.style.left = elemRect.left + 'px';
-      this.getElement().appendChild(newEl);
-    };
-    Tooltip.prototype.hide = function() {
-      var tooltips = this.getElement().getElementsByClassName('tooltip');
-      for (var i = 0; i < tooltips.length; i++) {
-        tooltips[i].remove();
-      }
-    };
-    Tooltip = __decorate([core_1.Directive({
-      selector: '[tooltip]',
-      properties: ['text: tooltip'],
-      host: {
-        '(mouseover)': 'show()',
-        '(mouseout)': 'hide()',
-        '(focus)': 'show()',
-        '(unfocus)': 'hide()'
-      }
-    }), __metadata('design:paramtypes', [core_1.ElementRef])], Tooltip);
-    return Tooltip;
-  }());
-  exports.Tooltip = Tooltip;
-  exports.TOOLTIP_PROVIDERS = [Tooltip];
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/directives/CodeHighlighter/CodeHighlighter.js", ["node_modules/angular2/core.js", "bin/utilities/StringUtils.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('node_modules/angular2/core.js');
-  var StringUtils_1 = $__require('bin/utilities/StringUtils.js');
-  var CodeHighlighter = (function() {
-    function CodeHighlighter(el) {
-      this.el = el;
-      if (this.el && this.el.nativeElement) {
-        this.el.nativeElement.innerHTML = StringUtils_1.StringHelper.escapeHtml(this.el.nativeElement.innerHTML);
-        Prism.highlightElement(this.el.nativeElement);
-      }
-    }
-    CodeHighlighter = __decorate([core_1.Directive({selector: '[code-highlight]'}), __metadata('design:paramtypes', [core_1.ElementRef])], CodeHighlighter);
-    return CodeHighlighter;
-  }());
-  exports.CodeHighlighter = CodeHighlighter;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("bin/directives/directives.js", ["bin/directives/Animation/AnimationListener.js", "bin/directives/Animation/Animation.js", "bin/directives/Tooltip/Tooltip.js", "bin/directives/CodeHighlighter/CodeHighlighter.js"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function __export(m) {
-    for (var p in m)
-      if (!exports.hasOwnProperty(p))
-        exports[p] = m[p];
-  }
-  var AnimationListener_1 = $__require('bin/directives/Animation/AnimationListener.js');
-  var Animation_1 = $__require('bin/directives/Animation/Animation.js');
-  var Tooltip_1 = $__require('bin/directives/Tooltip/Tooltip.js');
-  var CodeHighlighter_1 = $__require('bin/directives/CodeHighlighter/CodeHighlighter.js');
-  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, AnimationListener_1.AnimationListener, CodeHighlighter_1.CodeHighlighter];
-  __export($__require('bin/directives/Animation/AnimationListener.js'));
-  __export($__require('bin/directives/Animation/Animation.js'));
-  __export($__require('bin/directives/Tooltip/Tooltip.js'));
-  __export($__require('bin/directives/CodeHighlighter/CodeHighlighter.js'));
+  exports.MapToIterable = MapToIterable;
+  exports.MAPTOITERABLE_PROVIDERS = [MapToIterable];
   global.define = __define;
   return module.exports;
 });
@@ -6550,7 +6781,7 @@ System.registerDynamic("node_modules/angular2/src/core/zone/ng_zone_impl.js", []
         if (Zone['wtfZoneSpec']) {
           this.inner = this.inner.fork(Zone['wtfZoneSpec']);
         }
-        if (trace) {
+        if (trace && Zone['longStackTraceZoneSpec']) {
           this.inner = this.inner.fork(Zone['longStackTraceZoneSpec']);
         }
         this.inner = this.inner.fork({
@@ -6894,7 +7125,7 @@ System.registerDynamic("node_modules/angular2/src/core/testability/testability.j
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/platform_common_providers.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/console.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/testability/testability.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/platform_common_providers.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/console.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/reflection/reflector_reader.js", "node_modules/angular2/src/core/testability/testability.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -6904,6 +7135,7 @@ System.registerDynamic("node_modules/angular2/src/core/platform_common_providers
   var di_1 = $__require('node_modules/angular2/src/core/di.js');
   var console_1 = $__require('node_modules/angular2/src/core/console.js');
   var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
+  var reflector_reader_1 = $__require('node_modules/angular2/src/core/reflection/reflector_reader.js');
   var testability_1 = $__require('node_modules/angular2/src/core/testability/testability.js');
   function _reflector() {
     return reflection_1.reflector;
@@ -6911,7 +7143,7 @@ System.registerDynamic("node_modules/angular2/src/core/platform_common_providers
   exports.PLATFORM_COMMON_PROVIDERS = lang_1.CONST_EXPR([new di_1.Provider(reflection_1.Reflector, {
     useFactory: _reflector,
     deps: []
-  }), testability_1.TestabilityRegistry, console_1.Console]);
+  }), new di_1.Provider(reflector_reader_1.ReflectorReader, {useExisting: reflection_1.Reflector}), testability_1.TestabilityRegistry, console_1.Console]);
   global.define = __define;
   return module.exports;
 });
@@ -6976,7 +7208,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/resolved_metadata_
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/metadata/view.js", "node_modules/angular2/src/core/metadata/directives.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/core/metadata/view.js", "node_modules/angular2/src/core/metadata/directives.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/reflection/reflector_reader.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -7004,10 +7236,16 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
   var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var reflector_reader_1 = $__require('node_modules/angular2/src/core/reflection/reflector_reader.js');
   var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
   var ViewResolver = (function() {
-    function ViewResolver() {
+    function ViewResolver(_reflector) {
       this._cache = new collection_1.Map();
+      if (lang_1.isPresent(_reflector)) {
+        this._reflector = _reflector;
+      } else {
+        this._reflector = reflection_1.reflector;
+      }
     }
     ViewResolver.prototype.resolve = function(component) {
       var view = this._cache.get(component);
@@ -7020,7 +7258,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
     ViewResolver.prototype._resolve = function(component) {
       var compMeta;
       var viewMeta;
-      reflection_1.reflector.annotations(component).forEach(function(m) {
+      this._reflector.annotations(component).forEach(function(m) {
         if (m instanceof view_1.ViewMetadata) {
           viewMeta = m;
         }
@@ -7070,7 +7308,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
     ViewResolver.prototype._throwMixingViewAndComponent = function(propertyName, component) {
       throw new exceptions_1.BaseException("Component '" + lang_1.stringify(component) + "' cannot have both '" + propertyName + "' and '@View' set at the same time\"");
     };
-    ViewResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], ViewResolver);
+    ViewResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [reflector_reader_1.ReflectorReader])], ViewResolver);
     return ViewResolver;
   })();
   exports.ViewResolver = ViewResolver;
@@ -7078,7 +7316,7 @@ System.registerDynamic("node_modules/angular2/src/core/linker/view_resolver.js",
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/linker/directive_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/directive_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflection.js", "node_modules/angular2/src/core/reflection/reflector_reader.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -7106,17 +7344,24 @@ System.registerDynamic("node_modules/angular2/src/core/linker/directive_resolver
   var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
   var metadata_1 = $__require('node_modules/angular2/src/core/metadata.js');
   var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
+  var reflector_reader_1 = $__require('node_modules/angular2/src/core/reflection/reflector_reader.js');
   function _isDirectiveMetadata(type) {
     return type instanceof metadata_1.DirectiveMetadata;
   }
   var DirectiveResolver = (function() {
-    function DirectiveResolver() {}
+    function DirectiveResolver(_reflector) {
+      if (lang_1.isPresent(_reflector)) {
+        this._reflector = _reflector;
+      } else {
+        this._reflector = reflection_1.reflector;
+      }
+    }
     DirectiveResolver.prototype.resolve = function(type) {
-      var typeMetadata = reflection_1.reflector.annotations(di_1.resolveForwardRef(type));
+      var typeMetadata = this._reflector.annotations(di_1.resolveForwardRef(type));
       if (lang_1.isPresent(typeMetadata)) {
         var metadata = typeMetadata.find(_isDirectiveMetadata);
         if (lang_1.isPresent(metadata)) {
-          var propertyMetadata = reflection_1.reflector.propMetadata(type);
+          var propertyMetadata = this._reflector.propMetadata(type);
           return this._mergeWithPropertyMetadata(metadata, propertyMetadata, type);
         }
       }
@@ -7210,11 +7455,11 @@ System.registerDynamic("node_modules/angular2/src/core/linker/directive_resolver
         });
       }
     };
-    DirectiveResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], DirectiveResolver);
+    DirectiveResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [reflector_reader_1.ReflectorReader])], DirectiveResolver);
     return DirectiveResolver;
   })();
   exports.DirectiveResolver = DirectiveResolver;
-  exports.CODEGEN_DIRECTIVE_RESOLVER = new DirectiveResolver();
+  exports.CODEGEN_DIRECTIVE_RESOLVER = new DirectiveResolver(reflection_1.reflector);
   global.define = __define;
   return module.exports;
 });
@@ -7327,7 +7572,7 @@ System.registerDynamic("node_modules/angular2/src/core/metadata.js", ["node_modu
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/linker/pipe_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/linker/pipe_resolver.js", ["node_modules/angular2/src/core/di.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/core/metadata.js", "node_modules/angular2/src/core/reflection/reflector_reader.js", "node_modules/angular2/src/core/reflection/reflection.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -7353,14 +7598,21 @@ System.registerDynamic("node_modules/angular2/src/core/linker/pipe_resolver.js",
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
   var metadata_1 = $__require('node_modules/angular2/src/core/metadata.js');
+  var reflector_reader_1 = $__require('node_modules/angular2/src/core/reflection/reflector_reader.js');
   var reflection_1 = $__require('node_modules/angular2/src/core/reflection/reflection.js');
   function _isPipeMetadata(type) {
     return type instanceof metadata_1.PipeMetadata;
   }
   var PipeResolver = (function() {
-    function PipeResolver() {}
+    function PipeResolver(_reflector) {
+      if (lang_1.isPresent(_reflector)) {
+        this._reflector = _reflector;
+      } else {
+        this._reflector = reflection_1.reflector;
+      }
+    }
     PipeResolver.prototype.resolve = function(type) {
-      var metas = reflection_1.reflector.annotations(di_1.resolveForwardRef(type));
+      var metas = this._reflector.annotations(di_1.resolveForwardRef(type));
       if (lang_1.isPresent(metas)) {
         var annotation = metas.find(_isPipeMetadata);
         if (lang_1.isPresent(annotation)) {
@@ -7369,11 +7621,11 @@ System.registerDynamic("node_modules/angular2/src/core/linker/pipe_resolver.js",
       }
       throw new exceptions_1.BaseException("No Pipe decorator found on " + lang_1.stringify(type));
     };
-    PipeResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], PipeResolver);
+    PipeResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [reflector_reader_1.ReflectorReader])], PipeResolver);
     return PipeResolver;
   })();
   exports.PipeResolver = PipeResolver;
-  exports.CODEGEN_PIPE_RESOLVER = new PipeResolver();
+  exports.CODEGEN_PIPE_RESOLVER = new PipeResolver(reflection_1.reflector);
   global.define = __define;
   return module.exports;
 });
@@ -8151,7 +8403,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
       if (lang_1.isPresent(factory)) {
         return factory;
       } else {
-        throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + iterable + "'");
+        throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + iterable + "' of type '" + lang_1.getTypeNameForDebugging(iterable) + "'");
       }
     };
     IterableDiffers = __decorate([di_1.Injectable(), lang_1.CONST(), __metadata('design:paramtypes', [Array])], IterableDiffers);
@@ -9530,6 +9782,14 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/p
     }
     return ParseException;
   })(exceptions_1.BaseException);
+  var SplitInterpolation = (function() {
+    function SplitInterpolation(strings, expressions) {
+      this.strings = strings;
+      this.expressions = expressions;
+    }
+    return SplitInterpolation;
+  })();
+  exports.SplitInterpolation = SplitInterpolation;
   var Parser = (function() {
     function Parser(_lexer, providedReflector) {
       if (providedReflector === void 0) {
@@ -9581,6 +9841,18 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/p
       return new _ParseAST(input, location, tokens, this._reflector, false).parseTemplateBindings();
     };
     Parser.prototype.parseInterpolation = function(input, location) {
+      var split = this.splitInterpolation(input, location);
+      if (split == null)
+        return null;
+      var expressions = [];
+      for (var i = 0; i < split.expressions.length; ++i) {
+        var tokens = this._lexer.tokenize(split.expressions[i]);
+        var ast = new _ParseAST(input, location, tokens, this._reflector, false).parseChain();
+        expressions.push(ast);
+      }
+      return new ast_1.ASTWithSource(new ast_1.Interpolation(split.strings, expressions), input, location);
+    };
+    Parser.prototype.splitInterpolation = function(input, location) {
       var parts = lang_1.StringWrapper.split(input, INTERPOLATION_REGEXP);
       if (parts.length <= 1) {
         return null;
@@ -9592,14 +9864,12 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/parser/p
         if (i % 2 === 0) {
           strings.push(part);
         } else if (part.trim().length > 0) {
-          var tokens = this._lexer.tokenize(part);
-          var ast = new _ParseAST(input, location, tokens, this._reflector, false).parseChain();
-          expressions.push(ast);
+          expressions.push(part);
         } else {
           throw new ParseException('Blank expressions are not allowed in interpolated strings', input, "at column " + this._findInterpolationErrorColumn(parts, i) + " in", location);
         }
       }
-      return new ast_1.ASTWithSource(new ast_1.Interpolation(strings, expressions), input, location);
+      return new SplitInterpolation(strings, expressions);
     };
     Parser.prototype.wrapLiteralPrimitive = function(input, location) {
       return new ast_1.ASTWithSource(new ast_1.LiteralPrimitive(input), input, location);
@@ -13426,7 +13696,7 @@ System.registerDynamic("node_modules/angular2/src/facade/promise.js", [], true, 
   return module.exports;
 });
 
-System.registerDynamic("node_modules/rxjs/subject/SubjectSubscription.js", ["node_modules/rxjs/Subscription.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/rxjs/SubjectSubscription.js", ["node_modules/rxjs/Subscription.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -13515,7 +13785,7 @@ System.registerDynamic("node_modules/rxjs/util/ObjectUnsubscribedError.js", [], 
   return module.exports;
 });
 
-System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Observable.js", "node_modules/rxjs/Subscriber.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/subject/SubjectSubscription.js", "node_modules/rxjs/symbol/rxSubscriber.js", "node_modules/rxjs/util/throwError.js", "node_modules/rxjs/util/ObjectUnsubscribedError.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Observable.js", "node_modules/rxjs/Subscriber.js", "node_modules/rxjs/Subscription.js", "node_modules/rxjs/SubjectSubscription.js", "node_modules/rxjs/symbol/rxSubscriber.js", "node_modules/rxjs/util/throwError.js", "node_modules/rxjs/util/ObjectUnsubscribedError.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -13533,7 +13803,7 @@ System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Obser
   var Observable_1 = $__require('node_modules/rxjs/Observable.js');
   var Subscriber_1 = $__require('node_modules/rxjs/Subscriber.js');
   var Subscription_1 = $__require('node_modules/rxjs/Subscription.js');
-  var SubjectSubscription_1 = $__require('node_modules/rxjs/subject/SubjectSubscription.js');
+  var SubjectSubscription_1 = $__require('node_modules/rxjs/SubjectSubscription.js');
   var rxSubscriber_1 = $__require('node_modules/rxjs/symbol/rxSubscriber.js');
   var throwError_1 = $__require('node_modules/rxjs/util/throwError.js');
   var ObjectUnsubscribedError_1 = $__require('node_modules/rxjs/util/ObjectUnsubscribedError.js');
@@ -13557,7 +13827,7 @@ System.registerDynamic("node_modules/rxjs/Subject.js", ["node_modules/rxjs/Obser
       return subject;
     };
     Subject.prototype.add = function(subscription) {
-      Subscription_1.Subscription.prototype.add.call(this, subscription);
+      return Subscription_1.Subscription.prototype.add.call(this, subscription);
     };
     Subject.prototype.remove = function(subscription) {
       Subscription_1.Subscription.prototype.remove.call(this, subscription);
@@ -13874,7 +14144,9 @@ System.registerDynamic("node_modules/rxjs/symbol/observable.js", ["node_modules/
   var root_1 = $__require('node_modules/rxjs/util/root.js');
   var Symbol = root_1.root.Symbol;
   if (typeof Symbol === 'function') {
-    if (!Symbol.observable) {
+    if (Symbol.observable) {
+      exports.$$observable = Symbol.observable;
+    } else {
       if (typeof Symbol.for === 'function') {
         exports.$$observable = Symbol.for('observable');
       } else {
@@ -13988,10 +14260,10 @@ System.registerDynamic("node_modules/rxjs/Subscription.js", ["node_modules/rxjs/
   var tryCatch_1 = $__require('node_modules/rxjs/util/tryCatch.js');
   var errorObject_1 = $__require('node_modules/rxjs/util/errorObject.js');
   var Subscription = (function() {
-    function Subscription(_unsubscribe) {
+    function Subscription(unsubscribe) {
       this.isUnsubscribed = false;
-      if (_unsubscribe) {
-        this._unsubscribe = _unsubscribe;
+      if (unsubscribe) {
+        this._unsubscribe = unsubscribe;
       }
     }
     Subscription.prototype.unsubscribe = function() {
@@ -14036,14 +14308,14 @@ System.registerDynamic("node_modules/rxjs/Subscription.js", ["node_modules/rxjs/
         throw new UnsubscriptionError(errors);
       }
     };
-    Subscription.prototype.add = function(subscription) {
-      if (!subscription || (subscription === this) || (subscription === Subscription.EMPTY)) {
+    Subscription.prototype.add = function(teardown) {
+      if (!teardown || (teardown === this) || (teardown === Subscription.EMPTY)) {
         return;
       }
-      var sub = subscription;
-      switch (typeof subscription) {
+      var sub = teardown;
+      switch (typeof teardown) {
         case 'function':
-          sub = new Subscription(subscription);
+          sub = new Subscription(teardown);
         case 'object':
           if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
             break;
@@ -14054,8 +14326,9 @@ System.registerDynamic("node_modules/rxjs/Subscription.js", ["node_modules/rxjs/
           }
           break;
         default:
-          throw new Error('Unrecognized subscription ' + subscription + ' added to Subscription.');
+          throw new Error('Unrecognized teardown ' + teardown + ' added to Subscription.');
       }
+      return sub;
     };
     Subscription.prototype.remove = function(subscription) {
       if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
@@ -14147,6 +14420,7 @@ System.registerDynamic("node_modules/rxjs/Subscriber.js", ["node_modules/rxjs/ut
           if (typeof destinationOrNext === 'object') {
             if (destinationOrNext instanceof Subscriber) {
               this.destination = destinationOrNext;
+              this.destination.add(this);
             } else {
               this.syncErrorThrowable = true;
               this.destination = new SafeSubscriber(this, destinationOrNext);
@@ -14219,6 +14493,10 @@ System.registerDynamic("node_modules/rxjs/Subscriber.js", ["node_modules/rxjs/ut
         next = observerOrNext.next;
         error = observerOrNext.error;
         complete = observerOrNext.complete;
+        if (isFunction_1.isFunction(context.unsubscribe)) {
+          this.add(context.unsubscribe.bind(context));
+        }
+        context.unsubscribe = this.unsubscribe.bind(this);
       }
       this._context = context;
       this._next = next;
@@ -14387,19 +14665,15 @@ System.registerDynamic("node_modules/rxjs/Observable.js", ["node_modules/rxjs/ut
     };
     Observable.prototype.subscribe = function(observerOrNext, error, complete) {
       var operator = this.operator;
-      var subscriber = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
-      if (operator) {
-        subscriber.add(this._subscribe(operator.call(subscriber)));
-      } else {
-        subscriber.add(this._subscribe(subscriber));
-      }
-      if (subscriber.syncErrorThrowable) {
-        subscriber.syncErrorThrowable = false;
-        if (subscriber.syncErrorThrown) {
-          throw subscriber.syncErrorValue;
+      var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+      sink.add(operator ? operator.call(sink, this) : this._subscribe(sink));
+      if (sink.syncErrorThrowable) {
+        sink.syncErrorThrowable = false;
+        if (sink.syncErrorThrown) {
+          throw sink.syncErrorValue;
         }
       }
-      return subscriber;
+      return sink;
     };
     Observable.prototype.forEach = function(next, PromiseCtor) {
       var _this = this;
@@ -18232,15 +18506,40 @@ System.registerDynamic("node_modules/angular2/src/core/application_common_provid
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/core/reflection/reflector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/core/reflection/reflector_reader.js", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  var ReflectorReader = (function() {
+    function ReflectorReader() {}
+    return ReflectorReader;
+  })();
+  exports.ReflectorReader = ReflectorReader;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("node_modules/angular2/src/core/reflection/reflector.js", ["node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/exceptions.js", "node_modules/angular2/src/facade/collection.js", "node_modules/angular2/src/core/reflection/reflector_reader.js"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var exceptions_1 = $__require('node_modules/angular2/src/facade/exceptions.js');
   var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
+  var reflector_reader_1 = $__require('node_modules/angular2/src/core/reflection/reflector_reader.js');
   var ReflectionInfo = (function() {
     function ReflectionInfo(annotations, parameters, factory, interfaces, propMetadata) {
       this.annotations = annotations;
@@ -18252,8 +18551,10 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflector.js",
     return ReflectionInfo;
   })();
   exports.ReflectionInfo = ReflectionInfo;
-  var Reflector = (function() {
+  var Reflector = (function(_super) {
+    __extends(Reflector, _super);
     function Reflector(reflectionCapabilities) {
+      _super.call(this);
       this._injectableInfo = new collection_1.Map();
       this._getters = new collection_1.Map();
       this._setters = new collection_1.Map();
@@ -18366,7 +18667,7 @@ System.registerDynamic("node_modules/angular2/src/core/reflection/reflector.js",
       return this.reflectionCapabilities.importUri(type);
     };
     return Reflector;
-  })();
+  })(reflector_reader_1.ReflectorReader);
   exports.Reflector = Reflector;
   function _mergeMaps(target, config) {
     collection_1.StringMapWrapper.forEach(config, function(v, k) {
@@ -18480,7 +18781,10 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
   exports.global = _global;
   exports.Type = Function;
   function getTypeNameForDebugging(type) {
-    return type['name'];
+    if (type['name']) {
+      return type['name'];
+    }
+    return typeof type;
   }
   exports.getTypeNameForDebugging = getTypeNameForDebugging;
   exports.Math = _global.Math;
@@ -18766,6 +19070,21 @@ System.registerDynamic("node_modules/angular2/src/facade/lang.js", [], true, fun
         re: regExp,
         input: input
       };
+    };
+    RegExpWrapper.replaceAll = function(regExp, input, replace) {
+      var c = regExp.exec(input);
+      var res = '';
+      regExp.lastIndex = 0;
+      var prev = 0;
+      while (c) {
+        res += input.substring(prev, c.index);
+        res += replace(c);
+        prev = c.index + c[0].length;
+        regExp.lastIndex = prev;
+        c = regExp.exec(input);
+      }
+      res += input.substring(prev);
+      return res;
     };
     return RegExpWrapper;
   })();
@@ -19260,6 +19579,13 @@ System.registerDynamic("node_modules/angular2/src/facade/collection.js", ["node_
     };
     ListWrapper.isImmutable = function(list) {
       return Object.isSealed(list);
+    };
+    ListWrapper.flatten = function(array) {
+      var res = [];
+      array.forEach(function(a) {
+        return res = res.concat(a);
+      });
+      return res;
     };
     return ListWrapper;
   })();
@@ -19868,7 +20194,7 @@ System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.
   return module.exports;
 });
 
-System.registerDynamic("bin/pipes/pipes.js", ["bin/pipes/OrderBy/OrderBy.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/pipes/pipes.js", ["bin/pipes/Format/Format.js", "bin/pipes/MapToIterable/MapToIterable.js", "bin/pipes/OrderBy/OrderBy.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19879,9 +20205,13 @@ System.registerDynamic("bin/pipes/pipes.js", ["bin/pipes/OrderBy/OrderBy.js", "b
       if (!exports.hasOwnProperty(p))
         exports[p] = m[p];
   }
+  var Format_1 = $__require('bin/pipes/Format/Format.js');
+  var MapToIterable_1 = $__require('bin/pipes/MapToIterable/MapToIterable.js');
   var OrderBy_1 = $__require('bin/pipes/OrderBy/OrderBy.js');
   var Range_1 = $__require('bin/pipes/Range/Range.js');
-  exports.FUELUI_PIPE_PROVIDERS = [OrderBy_1.ORDERBY_PROVIDERS, Range_1.RANGE_PROVIDERS];
+  exports.FUELUI_PIPE_PROVIDERS = [Format_1.FORMAT_PROVIDERS, MapToIterable_1.MAPTOITERABLE_PROVIDERS, OrderBy_1.ORDERBY_PROVIDERS, Range_1.RANGE_PROVIDERS];
+  __export($__require('bin/pipes/Format/Format.js'));
+  __export($__require('bin/pipes/MapToIterable/MapToIterable.js'));
   __export($__require('bin/pipes/OrderBy/OrderBy.js'));
   __export($__require('bin/pipes/Range/Range.js'));
   global.define = __define;
