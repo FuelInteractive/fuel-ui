@@ -828,7 +828,7 @@ System.registerDynamic("bin/components/DatePicker/DatePickerProviders.js", ["bin
   return module.exports;
 });
 
-System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/directives/Animation/AnimationListener.js", "bin/pipes/Range/Range.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/directives/Animation/AnimationListener.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -853,7 +853,6 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
   var core_1 = $__require('node_modules/angular2/core.js');
   var common_1 = $__require('node_modules/angular2/common.js');
   var AnimationListener_1 = $__require('bin/directives/Animation/AnimationListener.js');
-  var Range_1 = $__require('bin/pipes/Range/Range.js');
   var Modal = (function() {
     function Modal(el) {
       this.displayed = false;
@@ -903,8 +902,7 @@ System.registerDynamic("bin/components/Modal/Modal.js", ["node_modules/angular2/
       host: {'(click)': 'clickElement($event)'},
       styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
       template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, AnimationListener_1.AnimationListener],
-      pipes: [Range_1.Range]
+      directives: [common_1.CORE_DIRECTIVES, AnimationListener_1.AnimationListener]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
     return Modal;
   }());
@@ -978,7 +976,7 @@ System.registerDynamic("bin/components/Pagination/Pagination.js", ["node_modules
       styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
       template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"#page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"#page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES],
-      pipes: [common_1.SlicePipe, Range_1.Range]
+      pipes: [common_1.SlicePipe, Range_1.RangePipe]
     }), __metadata('design:paramtypes', [])], Pagination);
     return Pagination;
   }());
@@ -1295,7 +1293,7 @@ System.registerDynamic("bin/components/TableSortable/TableSortable.js", ["node_m
       selector: 'table-sortable',
       template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"#key of object | mapToIterable; #i = index\">\n                {{object[columns[i].variable] | format : columns[i].filter }}\n            </td>\n        </tr>\n      </tbody>\n    </table>\n  ",
       directives: [common_1.CORE_DIRECTIVES],
-      pipes: [OrderBy_1.OrderBy, common_1.JsonPipe, MapToIterable_1.MapToIterable, Format_1.Format]
+      pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, MapToIterable_1.MapToIterablePipe, Format_1.FormatPipe]
     }), __metadata('design:paramtypes', [])], TableSortable);
     return TableSortable;
   }());
@@ -5841,12 +5839,12 @@ System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/cor
   };
   var core_1 = $__require('node_modules/angular2/core.js');
   var common_1 = $__require('node_modules/angular2/common.js');
-  var Format = (function() {
-    function Format() {
+  var FormatPipe = (function() {
+    function FormatPipe() {
       this.datePipe = new common_1.DatePipe();
       this.decimalPipe = new common_1.DecimalPipe();
     }
-    Format.prototype.transform = function(input, args) {
+    FormatPipe.prototype.transform = function(input, args) {
       var format = '';
       var parsedFloat = 0;
       var pipeArgs = args[0].split(':');
@@ -5880,11 +5878,11 @@ System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/cor
           return input;
       }
     };
-    Format = __decorate([core_1.Pipe({name: 'format'}), __metadata('design:paramtypes', [])], Format);
-    return Format;
+    FormatPipe = __decorate([core_1.Pipe({name: 'format'}), __metadata('design:paramtypes', [])], FormatPipe);
+    return FormatPipe;
   }());
-  exports.Format = Format;
-  exports.FORMAT_PROVIDERS = [Format];
+  exports.FormatPipe = FormatPipe;
+  exports.FORMAT_PROVIDERS = [FormatPipe];
   global.define = __define;
   return module.exports;
 });
@@ -5912,9 +5910,9 @@ System.registerDynamic("bin/pipes/MapToIterable/MapToIterable.js", ["node_module
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('node_modules/angular2/core.js');
-  var MapToIterable = (function() {
-    function MapToIterable() {}
-    MapToIterable.prototype.transform = function(dict, args) {
+  var MapToIterablePipe = (function() {
+    function MapToIterablePipe() {}
+    MapToIterablePipe.prototype.transform = function(dict, args) {
       if (args === void 0) {
         args = [];
       }
@@ -5929,11 +5927,11 @@ System.registerDynamic("bin/pipes/MapToIterable/MapToIterable.js", ["node_module
       }
       return a;
     };
-    MapToIterable = __decorate([core_1.Pipe({name: 'mapToIterable'}), __metadata('design:paramtypes', [])], MapToIterable);
-    return MapToIterable;
+    MapToIterablePipe = __decorate([core_1.Pipe({name: 'mapToIterable'}), __metadata('design:paramtypes', [])], MapToIterablePipe);
+    return MapToIterablePipe;
   }());
-  exports.MapToIterable = MapToIterable;
-  exports.MAPTOITERABLE_PROVIDERS = [MapToIterable];
+  exports.MapToIterablePipe = MapToIterablePipe;
+  exports.MAPTOITERABLE_PROVIDERS = [MapToIterablePipe];
   global.define = __define;
   return module.exports;
 });
@@ -5961,11 +5959,11 @@ System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/c
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('node_modules/angular2/core.js');
-  var OrderBy = (function() {
-    function OrderBy() {
+  var OrderByPipe = (function() {
+    function OrderByPipe() {
       this.value = [];
     }
-    OrderBy._orderByComparator = function(a, b) {
+    OrderByPipe._orderByComparator = function(a, b) {
       if ((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))) {
         if (a.toLowerCase() < b.toLowerCase())
           return -1;
@@ -5979,7 +5977,7 @@ System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/c
       }
       return 0;
     };
-    OrderBy.prototype.transform = function(input, _a) {
+    OrderByPipe.prototype.transform = function(input, _a) {
       var _b = _a[0],
           config = _b === void 0 ? '+' : _b;
       this.value = input.slice();
@@ -5994,7 +5992,7 @@ System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/c
         } else {
           var property = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-' ? propertyToCheck.substr(1) : propertyToCheck;
           return value.sort(function(a, b) {
-            return !desc ? OrderBy._orderByComparator(a[property], b[property]) : -OrderBy._orderByComparator(a[property], b[property]);
+            return !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
           });
         }
       } else {
@@ -6002,7 +6000,7 @@ System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/c
           for (var i = 0; i < config.length; i++) {
             var desc = config[i].substr(0, 1) == '-';
             var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-' ? config[i].substr(1) : config[i];
-            var comparison = !desc ? OrderBy._orderByComparator(a[property], b[property]) : -OrderBy._orderByComparator(a[property], b[property]);
+            var comparison = !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
             if (comparison != 0)
               return comparison;
           }
@@ -6010,14 +6008,14 @@ System.registerDynamic("bin/pipes/OrderBy/OrderBy.js", ["node_modules/angular2/c
         });
       }
     };
-    OrderBy = __decorate([core_1.Pipe({
+    OrderByPipe = __decorate([core_1.Pipe({
       name: 'orderBy',
       pure: false
-    }), __metadata('design:paramtypes', [])], OrderBy);
-    return OrderBy;
+    }), __metadata('design:paramtypes', [])], OrderByPipe);
+    return OrderByPipe;
   }());
-  exports.OrderBy = OrderBy;
-  exports.ORDERBY_PROVIDERS = [OrderBy];
+  exports.OrderByPipe = OrderByPipe;
+  exports.ORDERBY_PROVIDERS = [OrderByPipe];
   global.define = __define;
   return module.exports;
 });
@@ -20168,9 +20166,9 @@ System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('node_modules/angular2/core.js');
-  var Range = (function() {
-    function Range() {}
-    Range.prototype.transform = function(value, config) {
+  var RangePipe = (function() {
+    function RangePipe() {}
+    RangePipe.prototype.transform = function(value, config) {
       if (config === void 0) {
         config = [0, 4, 1];
       }
@@ -20182,14 +20180,14 @@ System.registerDynamic("bin/pipes/Range/Range.js", ["node_modules/angular2/core.
         newValue.push(i);
       return newValue;
     };
-    Range = __decorate([core_1.Pipe({
+    RangePipe = __decorate([core_1.Pipe({
       name: 'range',
       pure: false
-    }), __metadata('design:paramtypes', [])], Range);
-    return Range;
+    }), __metadata('design:paramtypes', [])], RangePipe);
+    return RangePipe;
   }());
-  exports.Range = Range;
-  exports.RANGE_PROVIDERS = [Range];
+  exports.RangePipe = RangePipe;
+  exports.RANGE_PROVIDERS = [RangePipe];
   global.define = __define;
   return module.exports;
 });
