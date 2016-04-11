@@ -1,1 +1,4 @@
-export * from './src/fuel-ui';
+export * from "./components/components";
+export * from "./directives/directives";
+export * from "./pipes/pipes";
+export * from './utilities/utilities';

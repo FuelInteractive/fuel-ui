@@ -2,8 +2,8 @@
   "name": "fuel-ui",
   "version": "0.1.2",
   "description": "A set of utilities and Angular2 components implementing Twitter's Bootstrap 4 components",
-  "main": "bundles/fuel-ui.js",
-  "typings": "fuel-ui",
+  "main": "fuel-ui.js",
+  "typings": "fuel-ui.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "bower install",
@@ -19,6 +19,10 @@
   ],
   "author": "Fuel Travel",
   "license": "ISC",
+  "repository": {
+      "type": "git",
+      "url": "git+ssh://git@github.com/FuelInteractive/fuel-ui.git"
+  },
   "devDependencies": {
     "bourbon": "^4.2.6",
     "del": "^1.2.1",
@@ -42,8 +46,11 @@
     "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
+  "peerDependencies": {
+      "angular2": "^2.0.0-beta.14"
+  },
   "dependencies": {
-    "angular2": "^2.0.0-beta.13",
+    "angular2": "^2.0.0-beta.14",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
     "core-js": "^2.2.1",
     "es6-shim": "^0.35.0",

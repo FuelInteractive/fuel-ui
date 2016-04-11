@@ -79,7 +79,18 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         ]);
 });
 
-gulp.task('bundle', ['scripts'], function() {    
+gulp.task('copyRootFiles', ['scripts'], function() {
+    return gulp.src([
+            paths.dest + '/fuel-ui.js',
+            paths.dest + '/fuel-ui.d.ts',
+            paths.dest + '/styles/fuel-ui.js'
+        ])
+        .pipe(gulp.dest('.'));
+});
+
+gulp.task('bundle', ['copyRootFiles','scripts'], function() {    
+    // copy
+    
     // optional constructor options
     // sets the baseURL and loads the configuration file
     var builder = new Builder('./', './builderConfig.js');
