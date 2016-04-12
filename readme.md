@@ -16,6 +16,37 @@ npm install
 gulp
 ```
 
+##Installation
+
+####Fork our Quickstart! [https://github.com/coryshaw1/ng2-play/](https://github.com/coryshaw1/ng2-play/)
+
+If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:
+
+```
+npm install fuel-ui font-awesome --save
+```
+Add this line to your dependencies in your `package.json`
+
+```
+"dependencies": {
+  ...
+    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2"
+}
+```
+And finally, add the proper script tags to your `index.html`
+```html
+<head>
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="node_modules/fuel-ui/bundles/fuel-ui.css" />
+</head>
+
+...
+
+<!-- All your SystemJS, Angular2, Rx, etc. scripts first! -->
+<script src="node_modules/fuel-ui/bundles/fuel-ui.js"></script>
+```
+
 ##Components
 - [Alert](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Alert#readme)
 - Carousel (documentation in progress)
