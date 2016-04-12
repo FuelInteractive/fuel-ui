@@ -2,9 +2,9 @@
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(require("./components/components"));
-__export(require("./directives/directives"));
-__export(require("./pipes/pipes"));
-__export(require('./utilities/utilities'));
+__export(require("./bin/components/components"));
+__export(require("./bin/directives/directives"));
+__export(require("./bin/pipes/pipes"));
+__export(require('./bin/utilities/utilities'));
 
-//# sourceMappingURL=fuel-ui.js.map
+//# sourceMappingURL=./bin/fuel-ui.js.map

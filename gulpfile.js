@@ -14,6 +14,9 @@ var webserver = require('gulp-webserver');
 var Builder = require('systemjs-builder');
 var runSequence = require('run-sequence');
 var server = require('gulp-server-livereload');
+var pkg = require('./package.json');
+var name = pkg.name;
+var path = require('path');
 
 var paths = {
     source: 'src',
@@ -86,19 +89,37 @@ gulp.task('bundle', function(){
     );
 })
 
-gulp.task('bundleScripts', ['scripts'], function() {
-    // optional constructor options
-    // sets the baseURL and loads the configuration file
-    var builder = new Builder('./', './builderConfig.js');
-    
+gulp.task('bundleScripts', ['scripts'], function() { 
+    var builder = new Builder();
+    var config = {
+        baseURL: '..',
+        transpiler: 'typescript',
+        typescriptOptions: {
+            module: 'cjs'
+        },
+        map: {
+            typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
+            angular2: path.resolve('node_modules/angular2'),
+            rxjs: path.resolve('node_modules/rxjs')
+        },
+        paths: {
+            '*': '*.js'
+        },
+        meta: {
+            'fuel-ui/node_modules/angular2/*': { build: false },
+            'fuel-ui/node_modules/rxjs/*': { build: false }
+        }
+    };
+
+    builder.config(config);
+
     return builder
-        .bundle(paths.dest+'/fuel-ui.js', paths.bundle+'/fuel-ui.js')
+        .bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
-            console.log('bundle complete');
+            console.log('Build complete.');
         })
         .catch(function(err) {
-            console.log('Build error');
-            console.log(err);
+            console.log('Error', err);
         });
 });
 
