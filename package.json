@@ -20,8 +20,8 @@
   "author": "Fuel Travel",
   "license": "ISC",
   "repository": {
-      "type": "git",
-      "url": "git+ssh://git@github.com/FuelInteractive/fuel-ui.git"
+    "type": "git",
+    "url": "git+ssh://git@github.com/FuelInteractive/fuel-ui.git"
   },
   "devDependencies": {
     "bourbon": "^4.2.6",
@@ -37,17 +37,18 @@
     "gulp-typescript": "^2.8.0",
     "gulp-webserver": "^0.9.1",
     "merge2": "^0.3.6",
+    "path": "^0.12.7",
     "prismjs": "^1.4.1",
     "run-sequence": "^1.1.5",
-    "systemjs-builder": "^0.14.11",
+    "systemjs-builder": "^0.15.15",
     "typescript": "^1.8.9",
-    "typings":"^0.7.12",
+    "typings": "^0.7.12",
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "peerDependencies": {
-      "angular2": "^2.0.0-beta.14"
+    "angular2": "^2.0.0-beta.14"
   },
   "dependencies": {
     "angular2": "^2.0.0-beta.14",
