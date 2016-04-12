@@ -114,6 +114,12 @@ export class FormatExample {
             <td>1442187616000</td>
         </tr>
         <tr>
+            <td>html</td>
+            <td>false</td>
+            <td>"&lt;a href=&quot;http://fueltravel.com&quot; target=&quot;_blank&quot;&gt;Fuel Travel&lt;/a&gt;"</td>
+            <td><a href="http://fueltravel.com" target="_blank">Fuel Travel</a></td>
+        </tr>
+        <tr>
             <td>number</td>
             <td>true - number formatting - default: '1.0-0'</td>
             <td>"1442187616000"</td>
@@ -128,8 +134,8 @@ export class FormatExample {
         <tr>
             <td>text</td>
             <td>false</td>
-            <td>"1442187616000"</td>
-            <td>"1442187616000"</td>
+            <td>"&lt;a href=&quot;http://fueltravel.com&quot; target=&quot;_blank&quot;&gt;Fuel Travel&lt;/a&gt;"</td>
+            <td>"&lt;a href=&quot;http://fueltravel.com&quot; target=&quot;_blank&quot;&gt;Fuel Travel&lt;/a&gt;"</td>
         </tr>
     </tbody>
 </table>

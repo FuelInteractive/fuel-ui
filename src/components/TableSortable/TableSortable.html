@@ -8,9 +8,7 @@
   </thead>
   <tbody>
     <tr *ngFor="#object of data | orderBy : convertSorting()">
-        <td *ngFor="#key of object | mapToIterable; #i = index">
-            {{object[columns[i].variable] | format : columns[i].filter }}
-        </td>
+        <td *ngFor="#key of object | mapToIterable; #i = index" [innerHtml]="object[columns[i].variable] | format : columns[i].filter"></td>
     </tr>
   </tbody>
 </table>

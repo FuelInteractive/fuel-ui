@@ -58,7 +58,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     var sourceFiles = [
         paths.source + '/**/*.ts',
         '!./bin/**/*.*',
-        './typings/tsd.d.ts',
+        './typings/browser.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
     ];
@@ -79,24 +79,19 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         ]);
 });
 
-gulp.task('copyRootFiles', ['scripts'], function() {
-    return gulp.src([
-            paths.dest + '/fuel-ui.js',
-            paths.dest + '/fuel-ui.d.ts',
-            paths.dest + '/styles/fuel-ui.js'
-        ])
-        .pipe(gulp.dest('.'));
-});
+gulp.task('bundle', function(){
+    runSequence(
+        'bundleScripts',
+        'bundleSass'
+    );
+})
 
-gulp.task('bundle', ['copyRootFiles','scripts'], function() {    
-    // copy
-    
+gulp.task('bundleScripts', ['scripts'], function() {
     // optional constructor options
     // sets the baseURL and loads the configuration file
     var builder = new Builder('./', './builderConfig.js');
     
     return builder
-        //.buildStatic(paths.dest+'/fuel-ui.js', 'fuel-ui.js')
         .bundle(paths.dest+'/fuel-ui.js', paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('bundle complete');
@@ -106,6 +101,11 @@ gulp.task('bundle', ['copyRootFiles','scripts'], function() {
             console.log(err);
         });
 });
+
+gulp.task('bundleSass', ['sass'], function(){
+    return gulp.src(paths.dest + '/styles/fuel-ui.css')
+        .pipe(gulp.dest(paths.bundle));
+})
 
 gulp.task('views', ['cleanViews'], function () {
     return gulp.src(paths.source + '/**/*.html')
