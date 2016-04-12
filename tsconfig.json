@@ -11,10 +11,12 @@
         "declaration": true
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "typings/main",
+        "typings/main.d.ts"
     ],
-    "files": [
-        "./typings/tsd.d.ts",
-        "./fuel-ui.ts"
+    "filesGlob": [
+        "./**/*.ts",
+        "./typings/browser.d.ts"
     ]
 }
