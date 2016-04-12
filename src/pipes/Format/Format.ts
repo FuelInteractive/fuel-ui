@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 import {DatePipe, DecimalPipe} from 'angular2/common';
+import {StringHelper} from '../../utilities/StringUtils';
 
 @Pipe({
   name: 'format'
@@ -18,6 +19,10 @@ export class FormatPipe implements PipeTransform  {
     for(var i = 0; i < pipeArgs.length; i++){
       pipeArgs[i] = pipeArgs[i].trim(' ');
     }
+    
+    //Escape all html if not explicitly set
+    if(pipeArgs[0].toLowerCase() !== 'html')
+        input = StringHelper.escapeHtml(input);
     
     switch(pipeArgs[0].toLowerCase()) {
       case 'text':
