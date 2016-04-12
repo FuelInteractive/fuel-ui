@@ -97,7 +97,6 @@ export class DemoHome {
     </div>`,
     directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ["directives/Tooltip/Tooltip.css"],
     pipes: [FUELUI_PIPE_PROVIDERS]
 })
 export class DemoComponent {

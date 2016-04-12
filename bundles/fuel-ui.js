@@ -1291,7 +1291,7 @@ System.registerDynamic("bin/components/TableSortable/TableSortable.js", ["node_m
     __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
     TableSortable = __decorate([core_1.Component({
       selector: 'table-sortable',
-      template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"#key of object | mapToIterable; #i = index\">\n                {{object[columns[i].variable] | format : columns[i].filter }}\n            </td>\n        </tr>\n      </tbody>\n    </table>\n  ",
+      template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"#key of object | mapToIterable; #i = index\" [innerHtml]=\"object[columns[i].variable] | format : columns[i].filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
       directives: [common_1.CORE_DIRECTIVES],
       pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, MapToIterable_1.MapToIterablePipe, Format_1.FormatPipe]
     }), __metadata('design:paramtypes', [])], TableSortable);
@@ -3811,7 +3811,7 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/ng_con
   return module.exports;
 });
 
-System.registerDynamic("node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/common/forms/directives/control_value_accessor.js", "node_modules/angular2/src/facade/lang.js", "node_modules/angular2/src/facade/collection.js"], true, function($__require, exports, module) {
+System.registerDynamic("node_modules/angular2/src/common/forms/directives/select_control_value_accessor.js", ["node_modules/angular2/core.js", "node_modules/angular2/src/facade/async.js", "node_modules/angular2/src/common/forms/directives/control_value_accessor.js", "node_modules/angular2/src/facade/lang.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3839,63 +3839,44 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/select
     };
   };
   var core_1 = $__require('node_modules/angular2/core.js');
+  var async_1 = $__require('node_modules/angular2/src/facade/async.js');
   var control_value_accessor_1 = $__require('node_modules/angular2/src/common/forms/directives/control_value_accessor.js');
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
-  var collection_1 = $__require('node_modules/angular2/src/facade/collection.js');
   var SELECT_VALUE_ACCESSOR = lang_1.CONST_EXPR(new core_1.Provider(control_value_accessor_1.NG_VALUE_ACCESSOR, {
     useExisting: core_1.forwardRef(function() {
       return SelectControlValueAccessor;
     }),
     multi: true
   }));
-  function _buildValueString(id, value) {
-    if (lang_1.isBlank(id))
-      return "" + value;
-    if (!lang_1.isPrimitive(value))
-      value = "Object";
-    return lang_1.StringWrapper.slice(id + ": " + value, 0, 50);
-  }
-  function _extractId(valueString) {
-    return valueString.split(":")[0];
-  }
+  var NgSelectOption = (function() {
+    function NgSelectOption() {}
+    NgSelectOption = __decorate([core_1.Directive({selector: 'option'}), __metadata('design:paramtypes', [])], NgSelectOption);
+    return NgSelectOption;
+  })();
+  exports.NgSelectOption = NgSelectOption;
   var SelectControlValueAccessor = (function() {
-    function SelectControlValueAccessor(_renderer, _elementRef) {
+    function SelectControlValueAccessor(_renderer, _elementRef, query) {
       this._renderer = _renderer;
       this._elementRef = _elementRef;
-      this._optionMap = new Map();
-      this._idCounter = 0;
       this.onChange = function(_) {};
       this.onTouched = function() {};
+      this._updateValueWhenListOfOptionsChanges(query);
     }
     SelectControlValueAccessor.prototype.writeValue = function(value) {
       this.value = value;
-      var valueString = _buildValueString(this._getOptionId(value), value);
-      this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', valueString);
+      this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', value);
     };
     SelectControlValueAccessor.prototype.registerOnChange = function(fn) {
-      var _this = this;
-      this.onChange = function(valueString) {
-        fn(_this._getOptionValue(valueString));
-      };
+      this.onChange = fn;
     };
     SelectControlValueAccessor.prototype.registerOnTouched = function(fn) {
       this.onTouched = fn;
     };
-    SelectControlValueAccessor.prototype._registerOption = function() {
-      return (this._idCounter++).toString();
-    };
-    SelectControlValueAccessor.prototype._getOptionId = function(value) {
-      for (var _i = 0,
-          _a = collection_1.MapWrapper.keys(this._optionMap); _i < _a.length; _i++) {
-        var id = _a[_i];
-        if (lang_1.looseIdentical(this._optionMap.get(id), value))
-          return id;
-      }
-      return null;
-    };
-    SelectControlValueAccessor.prototype._getOptionValue = function(valueString) {
-      var value = this._optionMap.get(_extractId(valueString));
-      return lang_1.isPresent(value) ? value : valueString;
+    SelectControlValueAccessor.prototype._updateValueWhenListOfOptionsChanges = function(query) {
+      var _this = this;
+      async_1.ObservableWrapper.subscribe(query.changes, function(_) {
+        return _this.writeValue(_this.value);
+      });
     };
     SelectControlValueAccessor = __decorate([core_1.Directive({
       selector: 'select[ngControl],select[ngFormControl],select[ngModel]',
@@ -3903,55 +3884,11 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/select
         '(input)': 'onChange($event.target.value)',
         '(blur)': 'onTouched()'
       },
-      providers: [SELECT_VALUE_ACCESSOR]
-    }), __metadata('design:paramtypes', [core_1.Renderer, core_1.ElementRef])], SelectControlValueAccessor);
+      bindings: [SELECT_VALUE_ACCESSOR]
+    }), __param(2, core_1.Query(NgSelectOption, {descendants: true})), __metadata('design:paramtypes', [core_1.Renderer, core_1.ElementRef, core_1.QueryList])], SelectControlValueAccessor);
     return SelectControlValueAccessor;
   })();
   exports.SelectControlValueAccessor = SelectControlValueAccessor;
-  var NgSelectOption = (function() {
-    function NgSelectOption(_element, _renderer, _select) {
-      this._element = _element;
-      this._renderer = _renderer;
-      this._select = _select;
-      if (lang_1.isPresent(this._select))
-        this.id = this._select._registerOption();
-    }
-    Object.defineProperty(NgSelectOption.prototype, "ngValue", {
-      set: function(value) {
-        if (this._select == null)
-          return;
-        this._select._optionMap.set(this.id, value);
-        this._setElementValue(_buildValueString(this.id, value));
-        this._select.writeValue(this._select.value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(NgSelectOption.prototype, "value", {
-      set: function(value) {
-        if (this._select == null)
-          return;
-        this._setElementValue(value);
-        this._select.writeValue(this._select.value);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    NgSelectOption.prototype._setElementValue = function(value) {
-      this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
-    };
-    NgSelectOption.prototype.ngOnDestroy = function() {
-      if (lang_1.isPresent(this._select)) {
-        this._select._optionMap.delete(this.id);
-        this._select.writeValue(this._select.value);
-      }
-    };
-    __decorate([core_1.Input('ngValue'), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], NgSelectOption.prototype, "ngValue", null);
-    __decorate([core_1.Input('value'), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], NgSelectOption.prototype, "value", null);
-    NgSelectOption = __decorate([core_1.Directive({selector: 'option'}), __param(2, core_1.Optional()), __param(2, core_1.Host()), __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, SelectControlValueAccessor])], NgSelectOption);
-    return NgSelectOption;
-  })();
-  exports.NgSelectOption = NgSelectOption;
   global.define = __define;
   return module.exports;
 });
@@ -4147,9 +4084,8 @@ System.registerDynamic("node_modules/angular2/src/common/forms/directives/valida
   var lang_1 = $__require('node_modules/angular2/src/facade/lang.js');
   var validators_1 = $__require('node_modules/angular2/src/common/forms/validators.js');
   var lang_2 = $__require('node_modules/angular2/src/facade/lang.js');
-  var REQUIRED = validators_1.Validators.required;
   var REQUIRED_VALIDATOR = lang_1.CONST_EXPR(new core_1.Provider(validators_1.NG_VALIDATORS, {
-    useValue: REQUIRED,
+    useValue: validators_1.Validators.required,
     multi: true
   }));
   var RequiredValidator = (function() {
@@ -5879,7 +5815,7 @@ System.registerDynamic("node_modules/angular2/common.js", ["node_modules/angular
   return module.exports;
 });
 
-System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js"], true, function($__require, exports, module) {
+System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/core.js", "node_modules/angular2/common.js", "bin/utilities/StringUtils.js"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -5903,6 +5839,7 @@ System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/cor
   };
   var core_1 = $__require('node_modules/angular2/core.js');
   var common_1 = $__require('node_modules/angular2/common.js');
+  var StringUtils_1 = $__require('bin/utilities/StringUtils.js');
   var FormatPipe = (function() {
     function FormatPipe() {
       this.datePipe = new common_1.DatePipe();
@@ -5915,6 +5852,8 @@ System.registerDynamic("bin/pipes/Format/Format.js", ["node_modules/angular2/cor
       for (var i = 0; i < pipeArgs.length; i++) {
         pipeArgs[i] = pipeArgs[i].trim(' ');
       }
+      if (pipeArgs[0].toLowerCase() !== 'html')
+        input = StringUtils_1.StringHelper.escapeHtml(input);
       switch (pipeArgs[0].toLowerCase()) {
         case 'text':
           return input;
@@ -8468,7 +8407,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
         throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + iterable + "' of type '" + lang_1.getTypeNameForDebugging(iterable) + "'");
       }
     };
-    IterableDiffers = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Array])], IterableDiffers);
+    IterableDiffers = __decorate([di_1.Injectable(), lang_1.CONST(), __metadata('design:paramtypes', [Array])], IterableDiffers);
     return IterableDiffers;
   })();
   exports.IterableDiffers = IterableDiffers;
@@ -9056,7 +8995,7 @@ System.registerDynamic("node_modules/angular2/src/core/change_detection/differs/
         throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + kv + "'");
       }
     };
-    KeyValueDiffers = __decorate([lang_1.CONST(), __metadata('design:paramtypes', [Array])], KeyValueDiffers);
+    KeyValueDiffers = __decorate([di_1.Injectable(), lang_1.CONST(), __metadata('design:paramtypes', [Array])], KeyValueDiffers);
     return KeyValueDiffers;
   })();
   exports.KeyValueDiffers = KeyValueDiffers;
