@@ -9,7 +9,6 @@ import {COLLAPSE_PROVIDERS, Collapse} from "./Collapse/Collapse";
 import {TABLESORTABLE_PROVIDERS, TableSortable} from "./TableSortable/TableSortable";
 import {TableSortableColumn} from "./TableSortable/TableSortableColumn";
 import {TableSortableSorting} from "./TableSortable/TableSortableSorting";
-import {SLIDER_COMPONENT_PROVIDERS, Slider} from "./Slider/Slider";
 
 export var FUELUI_COMPONENT_PROVIDERS = [
 	ALERT_PROVIDERS,
@@ -20,8 +19,7 @@ export var FUELUI_COMPONENT_PROVIDERS = [
 	INFINITE_SCROLLER_PROVIDERS,
     DROPDOWN_COMPONENT_PROVIDERS,
     COLLAPSE_PROVIDERS,
-    TABLESORTABLE_PROVIDERS,
-    SLIDER_COMPONENT_PROVIDERS
+    TABLESORTABLE_PROVIDERS
 ];
 
 export * from "./Alert/Alert";
@@ -35,4 +33,3 @@ export * from "./Collapse/Collapse";
 export * from "./TableSortable/TableSortable";
 export * from "./TableSortable/TableSortableColumn";
 export * from "./TableSortable/TableSortableSorting";
-export * from "./Slider/Slider";

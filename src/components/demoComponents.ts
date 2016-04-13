@@ -9,7 +9,6 @@ import {MODAL_DEMO_PROVIDERS, ModalDemo} from "./Modal/Modal.Demo";
 import {PAGINATION_DEMO_PROVIDERS, PaginationDemo} from "./Pagination/Pagination.Demo";
 import {PROGRESS_DEMO_PROVIDERS, ProgressDemo} from "./Progress/Progress.Demo";
 import {TABLESORTABLE_DEMO_PROVIDERS, TableSortableDemo} from "./TableSortable/TableSortable.Demo";
-import {SLIDER_DEMO_PROVIDERS, SliderDemo} from "./Slider/Slider.Demo";
 
 export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
 	ALERT_DEMO_PROVIDERS,
@@ -22,8 +21,7 @@ export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     MODAL_DEMO_PROVIDERS,
     PAGINATION_DEMO_PROVIDERS,
     PROGRESS_DEMO_PROVIDERS,
-    TABLESORTABLE_DEMO_PROVIDERS,
-    SLIDER_DEMO_PROVIDERS
+    TABLESORTABLE_DEMO_PROVIDERS
 ];
 
 export * from "./Alert/Alert.Demo";
@@ -37,4 +35,3 @@ export * from "./Modal/Modal.Demo";
 export * from "./Pagination/Pagination.Demo";
 export * from "./Progress/Progress.Demo";
 export * from "./TableSortable/TableSortable.Demo";
-export * from "./Slider/Slider.Demo";

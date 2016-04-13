@@ -1,19 +1,15 @@
-import {Component, View, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {AnimationListener} from "../../directives/Animation/AnimationListener";
-import {Range} from "../../pipes/Range/Range";
 
 @Component({
 	selector: 'modal',
 	host:{
 		'(click)': 'clickElement($event)'
-	}
-})
-@View({
+	},
 	styleUrls: ['components/Modal/Modal.css'],
 	templateUrl: 'components/Modal/Modal.html',
-	directives: [CORE_DIRECTIVES, AnimationListener],
-	pipes: [Range]
+	directives: [CORE_DIRECTIVES, AnimationListener]
 })
 export class Modal {
 	private _el:HTMLElement;
@@ -36,6 +32,10 @@ export class Modal {
 	getElement(): HTMLElement{
 		return this._el;
 	}
+    
+    closeModal(): boolean {
+        return this.showModal(false);
+    }
 
 	showModal(isDisplayed: boolean): boolean {
 		var body = document.body;

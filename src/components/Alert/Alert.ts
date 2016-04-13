@@ -1,10 +1,8 @@
-import {Component, View, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
-    selector: 'alert'
-})
-@View({
+    selector: 'alert',
     styleUrls: ['components/Alert/Alert.css'],
     templateUrl: 'components/Alert/Alert.html',
     directives: [CORE_DIRECTIVES]

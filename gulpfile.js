@@ -14,6 +14,9 @@ var webserver = require('gulp-webserver');
 var Builder = require('systemjs-builder');
 var runSequence = require('run-sequence');
 var server = require('gulp-server-livereload');
+var pkg = require('./package.json');
+var name = pkg.name;
+var path = require('path');
 
 var paths = {
     source: 'src',
@@ -58,7 +61,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     var sourceFiles = [
         paths.source + '/**/*.ts',
         '!./bin/**/*.*',
-        './typings/tsd.d.ts',
+        './typings/browser.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
     ];
@@ -79,22 +82,51 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         ]);
 });
 
-gulp.task('bundle', ['scripts'], function() {    
-    // optional constructor options
-    // sets the baseURL and loads the configuration file
-    var builder = new Builder('./', './builderConfig.js');
-    
+gulp.task('bundle', function(){
+    runSequence(
+        'bundleScripts',
+        'bundleSass'
+    );
+})
+
+gulp.task('bundleScripts', ['scripts'], function() { 
+    var builder = new Builder();
+    var config = {
+        baseURL: '..',
+        transpiler: 'typescript',
+        typescriptOptions: {
+            module: 'cjs'
+        },
+        map: {
+            typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
+            angular2: path.resolve('node_modules/angular2'),
+            rxjs: path.resolve('node_modules/rxjs')
+        },
+        paths: {
+            '*': '*.js'
+        },
+        meta: {
+            'fuel-ui/node_modules/angular2/*': { build: false },
+            'fuel-ui/node_modules/rxjs/*': { build: false }
+        }
+    };
+
+    builder.config(config);
+
     return builder
-        //.buildStatic(paths.dest+'/fuel-ui.js', 'fuel-ui.js')
-        .bundle(paths.dest+'/fuel-ui.js', paths.bundle+'/fuel-ui.js')
+        .bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
-            console.log('bundle complete');
+            console.log('Build complete.');
         })
         .catch(function(err) {
-            console.log('Build error');
-            console.log(err);
+            console.log('Error', err);
         });
 });
+
+gulp.task('bundleSass', ['sass'], function(){
+    return gulp.src(paths.dest + '/styles/fuel-ui.css')
+        .pipe(gulp.dest(paths.bundle));
+})
 
 gulp.task('views', ['cleanViews'], function () {
     return gulp.src(paths.source + '/**/*.html')
