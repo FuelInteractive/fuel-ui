@@ -5,7 +5,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, Hash
 import {DateRange, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo} from './fuel-ui-demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -43,7 +43,8 @@ export class DemoHome {
   {path:'/pipe/format', name: 'FormatDemo', component: FormatDemo},
   {path:'/pipe/maptoiterable', name: 'MapToIterableDemo', component: MapToIterableDemo},
   {path:'/pipe/orderby', name: 'OrderByDemo', component: OrderByDemo},
-  {path:'/pipe/range', name: 'RangeDemo', component: RangeDemo}
+  {path:'/pipe/range', name: 'RangeDemo', component: RangeDemo},
+  {path:'/component/slider', name: 'SliderDemo', component: SliderDemo}
 ])
 @Component({
 	selector: "fuel-ui",
@@ -78,6 +79,7 @@ export class DemoHome {
                 <li><a [routerLink]="['MapToIterableDemo']">MapToIterable</a></li>
                 <li><a [routerLink]="['OrderByDemo']">OrderBy</a></li>
                 <li><a [routerLink]="['RangeDemo']">Range</a></li>
+                <li><a [routerLink]="['SliderDemo']">Slider</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
