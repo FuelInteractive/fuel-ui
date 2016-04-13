@@ -18,19 +18,32 @@ export class Slider implements AfterViewInit {
     
     sliderElement: any;
     
-    constructor(){
-        console.log(this);
-    }
-        
     ngAfterViewInit(){
         var slider = document.getElementById(this.elementId);
-       
+        
+        if(!(!isNaN(this.rangeStart) && isFinite(this.rangeStart) 
+            && this.rangeStart.toString() != "")){
+            this.rangeStart = 0;
+        }
+        if(!(!isNaN(this.rangeEnd) && isFinite(this.rangeEnd)
+            && this.rangeEnd.toString() != "")){
+            this.rangeEnd = 200;
+        }
+        if(!(!isNaN(this.step) && isFinite(this.step)
+            && this.step.toString() != "")){
+            this.step = 10;
+        }  
         if(!(!isNaN(this.selectedValueStart) && isFinite(this.selectedValueStart) 
-            && this.selectedValueStart.toString() != "")){
+            && this.selectedValueStart.toString() != ""
+            && this.selectedValueStart >= this.rangeStart 
+            && this.selectedValueStart <= this.rangeEnd)){
             this.selectedValueStart = this.rangeStart;
         }
         if(!(!isNaN(this.selectedValueEnd) && isFinite(this.selectedValueEnd)
-            && this.selectedValueEnd.toString() != "")){
+            && this.selectedValueEnd.toString() != ""
+            && this.selectedValueEnd >= this.rangeStart
+            && this.selectedValueEnd <= this.rangeEnd
+            && this.selectedValueEnd > this.selectedValueStart)){
             this.selectedValueEnd = this.rangeEnd;
         }
         noUiSlider.create(slider, {
@@ -51,15 +64,13 @@ export class Slider implements AfterViewInit {
             }
         });
         this.sliderElement = document.getElementById(this.elementId);
-        //his.sliderElement.noUiSlider.on('end', this.showSelectedValues());
-        setTimeout(this.showSelectedValues(), 1);
+        setInterval(() => this.showSelectedValues(), 100);
     }
     
     public showSelectedValues = () => {
         var idsArray = [this.minElementDisplayId, this.maxElementDisplayId];
-console.log('1');
         for(var i=0; i< idsArray.length; i++){
-            if(document.getElementById(idsArray[i]) != null){
+            if(idsArray[i] != null && document.getElementById(idsArray[i]) != null){
                 var element = (<HTMLInputElement>document.getElementById(idsArray[i]));
                 element.value=this.sliderElement.noUiSlider.get()[i];
             }
