@@ -13,42 +13,67 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
     </div>
 </div>
 <div class="row" style="margin-left:9px;margin-top:45px;">
-    <slider elementId="test" rangeStart=0 rangeEnd=400 step=10
-        selectedValueStart='' selectedValueEnd='' 
-        minElementDisplayId='slider-value-min' maxElementDisplayId='slider-value-max'
-        >
-    </slider>
+    <div class="col-md-3">
+        <slider minValue="0" maxValue="400" step="10"
+            [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue">
+        </slider>
+    </div>
+    <div class="col-md-6">
+            <div class="col-md-6">
+                <slider minValue="0" maxValue="400" step="10"
+                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue"
+                    orientation="vertical" height="200px">
+                </slider>
+            </div>
+            <div class="col-md-6">
+                <slider minValue="0" maxValue="400" step="10"
+                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue" [(secondValue)]="secondSliderValue"
+                    orientation="vertical" height="200px">
+                </slider>
+            </div>
+    </div>
+    <div class="col-md-3">
+        <slider minValue="0" maxValue="400" step="10"
+            [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue" [(secondValue)]="secondSliderValue">
+        </slider>
+    </div>
 </div>
 <div class="row" style="margin-top:50px;">
-    <div class="col-sm-2">
-        <label>Min Value</label>
-        <input type="text" class="form-control" id="slider-value-min" value="" />
-    </div>
-    <div class="col-sm-2">
-        <label>Max Value</label>
-        <input type="text" class="form-control" id="slider-value-max" value="" />
-    </div>
+    <form>
+        <div class="form-group row">
+            <label for="sliderValue" class="col-sm-2 form-control-label">Slider Value</label>
+            <div class="col-sm-2">
+                <input class="form-control" step="10" [(ngModel)]="sliderValue" [min]="minValue" [max]="maxValue" type="number" name="sliderValue">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="secondSliderValue" class="col-sm-2 form-control-label">Slider Value</label>
+            <div class="col-sm-2">
+                <input class="form-control" step="10" [(ngModel)]="secondSliderValue" [min]="minValue" [max]="maxValue" type="number" name="secondSliderValue" [disabled]="secondSliderValue == null">
+            </div>
+        </div>
+    </form>
 </div>
 <div class="source">
-    <h3>Import</h3>
-    <pre>
-        <code class="language-javascript" code-highlight>
-            import {Slider} from 'fuel-ui/fuel-ui';
-        </code>
-    </pre>
-    <h3>Getting Started</h3>
-    <p>Slider is a custom element to programmatically create range sliders</p>
-    
-    <h3>Usage</h3>
-    <pre>
-        <code class="language-markup" code-highlight>
-            &lt;slider elementId=&quot;test&quot; rangeStart=0 rangeEnd=400
-                step=10 selectedValueStart=&quot;&quot; selectedValueEnd=&quot;&quot;
-                minElementDisplayId=&quot;slider-value-min&quot; 
-                maxElementDisplayId=&quot;slider-value-max&quot;&gt;
-            &lt;/slider&gt;
-        </code>
-    </pre>
+<h3>Import</h3>
+<pre>
+<code class="language-javascript" code-highlight>
+import {Slider} from 'fuel-ui/fuel-ui';
+</code>
+</pre>
+<h3>Getting Started</h3>
+<p>Slider is a custom element to programmatically create range sliders</p>
+
+<h3>Usage</h3>
+<pre>
+<code class="language-markup" code-highlight>
+&lt;slider elementId=&quot;test&quot; rangeStart=0 rangeEnd=400
+    step=10 selectedValueStart=&quot;&quot; selectedValueEnd=&quot;&quot;
+    minElementDisplayId=&quot;slider-value-min&quot; 
+    maxElementDisplayId=&quot;slider-value-max&quot;&gt;
+&lt;/slider&gt;
+</code>
+</pre>
     <h3>Attributes</h3>
     <table class="table table-bordered table-striped">
         <thead>
@@ -61,22 +86,70 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
         </thead>
         <tbody>
             <tr>
-                <td>elementId</td>
+                <td>background</td>
                 <td>string</td>
-                <td>null</td>
-                <td>A DOM element (div) that will be turned into a slider</td>
+                <td>"#E24932"</td>
+                <td>Background color of the area of the slider that counts toward the value</td>
             </tr>
             <tr>
-                <td>rangeStart</td>
+                <td>behavior</td>
+                <td>string</td>
+                <td>"tap"</td>
+                <td>The way a user can interact with the slider. Can use "tap" or "fixed". "tap" allows for tapping and dragging. "fixed" disables the slider without greying it out.</td>
+            </tr>
+            <tr>
+                <td>decimals</td>
                 <td>number</td>
                 <td>0</td>
-                <td>Slider minimal value</td>
+                <td>Number of decimals on the value(s) and pips</td>
             </tr>
             <tr>
-                <td>rangeEnd</td>
+                <td>direction</td>
+                <td>string</td>
+                <td>"ltr"</td>
+                <td>The direction of the values on the slider, can be "ltr" for left to right or "rtl" for right to left</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>string</td>
+                <td>null or "200px"</td>
+                <td>Height of the slider element. Is <b>REQUIRED</b> when orientation is set to "vertical". Defaults to "200px" when using vertical slider</td>
+            </tr>
+            <tr>
+                <td>margin</td>
                 <td>number</td>
-                <td>200</td>
-                <td>Slider maximal value</td>
+                <td>10</td>
+                <td>The least amount of distance between the first and second values</td>
+            </tr>
+            <tr>
+                <td>maxValue</td>
+                <td>number</td>
+                <td>100</td>
+                <td>The maximum value allowed on the entire slider</td>
+            </tr>
+            <tr>
+                <td>minValue</td>
+                <td>number</td>
+                <td>rangeStart</td>
+                <td>The minimum value allowed on the entire slider</td>
+            </tr>
+            <tr>
+                <td>orientation</td>
+                <td>string</td>
+                <td>"horizontal"</td>
+                <td>The orientation of the slider, can be "horizontal" or "vertical"</td>
+            </tr>
+            <tr>
+                <td>pips</td>
+                <td>number</td>
+                <td>5</td>
+                <td>The number of numbers on the legend, <i>including the min and max numbers</i>. They are spread out evenly, so in the case of 5 pips: 0% (min), 25%, 50%, 75%, and 100% (max) numbers are on the legend. 2 pips would mean only the min and the max are showing.</td>
+            </tr>
+            <tr>
+                <td>secondValue</td>
+                <td>number</td>
+                <td>null</td>
+                <td>The value of the second number of the slider. When set to null the second handle will not display.</td>
             </tr>
             <tr>
                 <td>step</td>
@@ -85,28 +158,16 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
                 <td>Slider increment</td>
             </tr>
             <tr>
-                <td>selectedValueStart</td>
+                <td>value</td>
                 <td>number</td>
-                <td>rangeStart</td>
-                <td>Set the slider starting min value.Must be >= than rangeStart and <= than rangeEnd.</td>
+                <td>0</td>
+                <td>The value of the first number of the slider</td>
             </tr>
             <tr>
-                <td>selectedValueEnd</td>
-                <td>number</td>
-                <td>rangeEnd</td>
-                <td>Set the slider starting max value.Must be >= than rangeStart and <= than rangeEnd and > than selectedValueStart.</td>
-            </tr>
-            <tr>
-                <td>minElementDisplayId</td>
+                <td>width</td>
                 <td>string</td>
                 <td>null</td>
-                <td>Id of an element, in which to display the selected minimal value.</td>
-            </tr>
-            <tr>
-                <td>maxElementDisplayId</td>
-                <td>string</td>
-                <td>null</td>
-                <td>Id of an element, in which to display the selected maximal value.</td>
+                <td>Width of the slider element</td>
             </tr>
         </tbody>
     </table>
@@ -116,6 +177,17 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 })
 
 export class SliderDemo{
+    sliderValue: number = 50;
+    secondSliderValue: number = 250;
+    minValue: number = 0;
+    maxValue: number = 400;
+    
+    disableSecondValue(value: boolean){
+        if(value === true)
+            this.secondSliderValue = null;
+        else
+            this.secondSliderValue = 150;
+    }
 }
 
 export var SLIDER_DEMO_PROVIDERS = [

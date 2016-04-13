@@ -1,23 +1,8 @@
 /*! nouislider - 8.3.0 - 2016-02-14 17:37:19 */
 
 (function (factory) {
-
-    if ( typeof define === 'function' && define.amd ) {
-
-        // AMD. Register as an anonymous module.
-        define([], factory);
-
-    } else if ( typeof exports === 'object' ) {
-
-        // Node/CommonJS
-        module.exports = factory();
-
-    } else {
-
-        // Browser globals
-        window.noUiSlider = factory();
-    }
-
+    // Browser globals
+    window.noUiSlider = factory();
 }(function( ){
 
 	'use strict';
@@ -93,6 +78,8 @@
 
 	// http://youmightnotneedjquery.com/#add_class
 	function addClass ( el, className ) {
+        if(!el) return;
+        
 		if ( el.classList ) {
 			el.classList.add(className);
 		} else {
@@ -1275,8 +1262,10 @@ function closure ( target, options ){
 
 		// Bind a closure on the target for every event type.
 		events.split(' ').forEach(function( eventName ){
-			element.addEventListener(eventName, method, false);
-			methods.push([eventName, method]);
+            if(element){
+                element.addEventListener(eventName, method, false);
+			    methods.push([eventName, method]);
+            }
 		});
 
 		return methods;

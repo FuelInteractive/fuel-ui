@@ -20,7 +20,7 @@ var path = require('path');
 
 var paths = {
     source: 'src',
-    dest: 'bin',
+    dest: 'dist',
     bundle: 'bundles'
 };
 
@@ -60,7 +60,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     
     var sourceFiles = [
         paths.source + '/**/*.ts',
-        '!./bin/**/*.*',
+        '!./dist/**/*.*',
         './typings/browser.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
@@ -71,6 +71,12 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         .pipe(inlineNg2Template(inlineTemplateConfig))
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject));
+        
+    //copy NoUiSlider to dist for demo
+    var noUiSlider = gulp
+        .src('./src/**/NoUiSlider.js')
+        .pipe(rename({dirname: 'components/Slider'}))
+        .pipe(gulp.dest(paths.dest));
 
     return merge(
         [
@@ -113,8 +119,7 @@ gulp.task('bundleScripts', ['scripts'], function() {
 
     builder.config(config);
 
-    return builder
-        .bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
+    return builder.bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('Build complete.');
         })
@@ -151,7 +156,7 @@ gulp.task('serve', function(){
 				enable: true,
 				filter: function(filePath, cb) {
 					cb( 
-						/bin\/[^\/]*\.js$/.test(filePath) &&
+						/dist\/[^\/]*\.js$/.test(filePath) &&
 						!(/node_modules/.test(filePath)) &&  
 						!(/.*ts$/.test(filePath)) && 
 						!(/gulpfile.js$/.test(filePath))

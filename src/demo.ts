@@ -36,6 +36,7 @@ export class DemoHome {
   {path:'/component/modal', name: 'ModalDemo', component: ModalDemo},
   {path:'/component/pagination', name: 'PaginationDemo', component: PaginationDemo},
   {path:'/component/progress', name: 'ProgressDemo', component: ProgressDemo},
+  {path:'/component/slider', name: 'SliderDemo', component: SliderDemo},
   {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
@@ -43,8 +44,7 @@ export class DemoHome {
   {path:'/pipe/format', name: 'FormatDemo', component: FormatDemo},
   {path:'/pipe/maptoiterable', name: 'MapToIterableDemo', component: MapToIterableDemo},
   {path:'/pipe/orderby', name: 'OrderByDemo', component: OrderByDemo},
-  {path:'/pipe/range', name: 'RangeDemo', component: RangeDemo},
-  {path:'/component/slider', name: 'SliderDemo', component: SliderDemo}
+  {path:'/pipe/range', name: 'RangeDemo', component: RangeDemo}
 ])
 @Component({
 	selector: "fuel-ui",
@@ -69,6 +69,7 @@ export class DemoHome {
                 <li><a [routerLink]="['ModalDemo']">Modal</a></li>
                 <li><a [routerLink]="['PaginationDemo']">Pagination</a></li>
                 <li><a [routerLink]="['ProgressDemo']">Progress</a></li>
+                <li><a [routerLink]="['SliderDemo']">Slider</a></li>
                 <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
@@ -79,7 +80,6 @@ export class DemoHome {
                 <li><a [routerLink]="['MapToIterableDemo']">MapToIterable</a></li>
                 <li><a [routerLink]="['OrderByDemo']">OrderBy</a></li>
                 <li><a [routerLink]="['RangeDemo']">Range</a></li>
-                <li><a [routerLink]="['SliderDemo']">Slider</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
