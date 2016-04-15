@@ -78,6 +78,12 @@ export class Slider implements AfterViewInit, OnChanges {
             this.valueChange.next(val[0]);
             this.secondValueChange.next(this.secondValue);
         });
+        
+        var noUI = this.element.nativeElement.getElementsByClassName('noUi-connect');
+        noUI = [].slice.call(noUI);
+        Array.prototype.forEach.call(noUI, function(slider) {
+            console.log(slider);
+        });        
     }
     
     ngOnChanges(changes:any):void{
