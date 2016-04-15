@@ -84,6 +84,7 @@ export class DateRangePicker extends DatePicker {
 	@Input()
 	set startDate(value: any) {
 		this._startDate = this.handleDateInput(value);
+        this.inputStartDate = this._startDate.toLocaleDateString();
 	}
     get startDate(): any { return this._startDate; }
     
@@ -91,6 +92,7 @@ export class DateRangePicker extends DatePicker {
 	@Input()
 	set endDate(value: any) {
 		this._endDate = this.handleDateInput(value);
+        this.inputEndDate = this._endDate.toLocaleDateString();
 	}
     get endDate(): any { return this._endDate; }
     
@@ -118,10 +120,15 @@ export class DateRangePicker extends DatePicker {
     }
     
     handleRangeInput(value: any): DateRange {
-		if(value instanceof DateRange)
-			return value;
-		else
+        console.log(value);
+		if(!(value instanceof DateRange))
 			throw "DateRangePicker error: input is not of type DateRange";
+		
+        var range = <DateRange>value;
+        
+        this.startDate = range.start;
+        this.endDate = range.end;
+        return range;
 	}
     
     focusStartDate(): void {

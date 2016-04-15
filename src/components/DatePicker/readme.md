@@ -43,9 +43,9 @@
     Optional method for determining calendar date eligability
   * `[(value)]` _- DateRange_ -
     Object containing start and end Date properties
-  * `[(startDate)]` _- DateRange_ -
+  * `[(startDate)]` _- Date_ -
     Selected start Date
-  * `[(endDate)]` _- DateRange_ -
+  * `[(endDate)]` _- Date_ -
     Selected end Date
 
 
@@ -57,6 +57,6 @@
     [dateFilter]="dateFilter"
     startLabel="Arrival"
     endLabel="Departure"
-    (value)="dateRangePickerValue">
+    [(value)]="dateRangePickerValue">
 </date-range-picker>
 ```

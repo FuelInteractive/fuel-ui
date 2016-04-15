@@ -1,7 +1,6 @@
 import {Component, ChangeDetectionStrategy, Input} from 'angular2/core'
 import {CORE_DIRECTIVES, JsonPipe} from 'angular2/common'
 import {OrderByPipe} from "../../pipes/OrderBy/OrderBy"
-import {MapToIterablePipe} from "../../pipes/MapToIterable/MapToIterable"
 import {FormatPipe} from "../../pipes/Format/Format"
 import {TableSortableColumn} from "./TableSortableColumn";
 import {TableSortableSorting} from "./TableSortableSorting";
@@ -10,7 +9,7 @@ import {TableSortableSorting} from "./TableSortableSorting";
   selector: 'table-sortable',
   templateUrl: 'components/TableSortable/TableSortable.html',
   directives: [CORE_DIRECTIVES],
-  pipes: [OrderByPipe, JsonPipe, MapToIterablePipe, FormatPipe]
+  pipes: [OrderByPipe, JsonPipe, FormatPipe]
 })
 export class TableSortable {
   

@@ -119,9 +119,21 @@ export class DateRangePickerExample {
         </tr>
         <tr>
             <td>value</td>
+            <td>DateRange</td>
+            <td>null</td>
+            <td>Two-way binding of the selected DateRange</td>
+        </tr>
+        <tr>
+            <td>startDate</td>
             <td>Date</td>
             <td>null</td>
-            <td>Two-way binding of the selected date</td>
+            <td>Two-way binding of the selected start date</td>
+        </tr>
+        <tr>
+            <td>endDate</td>
+            <td>Date</td>
+            <td>null</td>
+            <td>Two-way binding of the selected end date</td>
         </tr>
     </tbody>
 </table>
