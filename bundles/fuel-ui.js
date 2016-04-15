@@ -721,6 +721,7 @@ System.registerDynamic("fuel-ui/bin/components/DatePicker/DateRangePicker", ["an
       },
       set: function(value) {
         this._startDate = this.handleDateInput(value);
+        this.inputStartDate = this._startDate.toLocaleDateString();
       },
       enumerable: true,
       configurable: true
@@ -731,6 +732,7 @@ System.registerDynamic("fuel-ui/bin/components/DatePicker/DateRangePicker", ["an
       },
       set: function(value) {
         this._endDate = this.handleDateInput(value);
+        this.inputEndDate = this._endDate.toLocaleDateString();
       },
       enumerable: true,
       configurable: true
@@ -760,10 +762,13 @@ System.registerDynamic("fuel-ui/bin/components/DatePicker/DateRangePicker", ["an
     });
     ;
     DateRangePicker.prototype.handleRangeInput = function(value) {
-      if (value instanceof DateUtils_1.DateRange)
-        return value;
-      else
+      console.log(value);
+      if (!(value instanceof DateUtils_1.DateRange))
         throw "DateRangePicker error: input is not of type DateRange";
+      var range = value;
+      this.startDate = range.start;
+      this.endDate = range.end;
+      return range;
     };
     DateRangePicker.prototype.focusStartDate = function() {
       this._dateTarget = false;
@@ -1229,7 +1234,7 @@ System.registerDynamic("fuel-ui/bin/components/Collapse/Collapse", ["angular2/co
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/bin/components/TableSortable/TableSortable", ["angular2/core", "angular2/common", "../../pipes/OrderBy/OrderBy", "../../pipes/MapToIterable/MapToIterable", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/bin/components/TableSortable/TableSortable", ["angular2/core", "angular2/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1254,7 +1259,6 @@ System.registerDynamic("fuel-ui/bin/components/TableSortable/TableSortable", ["a
   var core_1 = $__require('angular2/core');
   var common_1 = $__require('angular2/common');
   var OrderBy_1 = $__require('../../pipes/OrderBy/OrderBy');
-  var MapToIterable_1 = $__require('../../pipes/MapToIterable/MapToIterable');
   var Format_1 = $__require('../../pipes/Format/Format');
   var TableSortableSorting_1 = $__require('./TableSortableSorting');
   var TableSortable = (function() {
@@ -1279,9 +1283,9 @@ System.registerDynamic("fuel-ui/bin/components/TableSortable/TableSortable", ["a
     __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
     TableSortable = __decorate([core_1.Component({
       selector: 'table-sortable',
-      template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"#key of object | mapToIterable; #i = index\" [innerHtml]=\"object[columns[i].variable] | format : columns[i].filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
+      template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n          <td *ngFor=\"#column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
       directives: [common_1.CORE_DIRECTIVES],
-      pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, MapToIterable_1.MapToIterablePipe, Format_1.FormatPipe]
+      pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
     }), __metadata('design:paramtypes', [])], TableSortable);
     return TableSortable;
   }());
