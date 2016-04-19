@@ -72,6 +72,15 @@ export class Slider implements AfterViewInit, OnChanges {
             }
         });
         
+        if(!(<HTMLInputElement>this.element.nativeElement).disabled){
+            var noUI:HTMLCollection = this.element.nativeElement.getElementsByClassName('noUi-connect');
+            
+            //convert HTMLCollection to array to loop
+            [].slice.call(noUI).forEach((el:HTMLElement) => {
+                el.style.background = this.background;
+            });
+        }
+        
         this.sliderElement.noUiSlider.on('slide', (val: number[]) => {
             this.value = val[0];
             this.secondValue = val.length > 1 ? val[1] : null;
