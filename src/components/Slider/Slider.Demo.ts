@@ -8,7 +8,7 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
     <div class="col-md-12">
         <div class="card card-block">
             <h2 class="card-title">Slider</h2>
-            <p class="card-text">This is the NoUiSlider (from Refreshless.com), wrapped in an Angular2 component</p>
+            <p class="card-text">This is the NoUiSlider (from <a href="http://refreshless.com/nouislider/" target="_blank">Refreshless.com</a>), wrapped in an Angular2 component</p>
         </div>
     </div>
 </div>
@@ -67,11 +67,37 @@ import {Slider} from 'fuel-ui/fuel-ui';
 <h3>Usage</h3>
 <pre>
 <code class="language-markup" code-highlight>
-&lt;slider elementId=&quot;test&quot; rangeStart=0 rangeEnd=400
-    step=10 selectedValueStart=&quot;&quot; selectedValueEnd=&quot;&quot;
-    minElementDisplayId=&quot;slider-value-min&quot; 
-    maxElementDisplayId=&quot;slider-value-max&quot;&gt;
+&lt;!--horizontal--&gt;
+&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+    [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot;&gt;
 &lt;/slider&gt;
+
+&lt;!--vertical--&gt;
+&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+    [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot;
+    orientation=&quot;vertical&quot; height=&quot;200px&quot;&gt;
+&lt;/slider&gt;
+
+&lt;!--horizontal with 2 values--&gt;
+&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+    [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot; [(secondValue)]=&quot;secondSliderValue&quot;&gt;
+&lt;/slider&gt;
+
+&lt;!--vertical with 2 values--&gt;
+&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+    [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot; [(secondValue)]=&quot;secondSliderValue&quot;
+    orientation=&quot;vertical&quot; height=&quot;200px&quot;&gt;
+&lt;/slider&gt;
+</code>
+</pre>
+<pre>
+<code class="language-javascript" code-highlight>
+export class SliderExample{
+    sliderValue: number = 50;
+    secondSliderValue: number = 250;
+    minValue: number = 0;
+    maxValue: number = 400;
+}
 </code>
 </pre>
     <h3>Attributes</h3>
