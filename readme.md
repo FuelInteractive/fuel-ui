@@ -57,6 +57,7 @@ And finally, add the proper script tags to your `index.html`
 - [Modal](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Modal#readme)
 - [Pagination](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Pagination#readme)
 - [Progressbar](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Progress#readme)
+- [Slider](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Slider#readme)
 - [TableSortable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TableSortable#readme)
 
 ##Directives

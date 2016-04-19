@@ -155,7 +155,7 @@ import {Slider} from 'fuel-ui/fuel-ui';
                 <td>step</td>
                 <td>number</td>
                 <td>10</td>
-                <td>Slider increment</td>
+                <td>Slider increment on dragging</td>
             </tr>
             <tr>
                 <td>value</td>

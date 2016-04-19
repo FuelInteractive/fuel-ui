@@ -2526,10 +2526,6 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
     Slider.prototype.ngAfterViewInit = function() {
       var _this = this;
       this.sliderElement = this.element.nativeElement.children[0];
-      if (!this.element.nativeElement.disabled) {
-        var connects = this.element.nativeElement.getElementsByClassName('noUi-connect');
-        console.log(connects, connects.length);
-      }
       if (this.orientation == 'vertical')
         this.sliderElement.style.height = this.height.length > 0 ? this.height : "200px";
       if (this.orientation == 'horizontal')
@@ -2560,6 +2556,12 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
           }
         }
       });
+      if (!this.element.nativeElement.disabled) {
+        var noUI = this.element.nativeElement.getElementsByClassName('noUi-connect');
+        [].slice.call(noUI).forEach(function(el) {
+          el.style.background = _this.background;
+        });
+      }
       this.sliderElement.noUiSlider.on('slide', function(val) {
         _this.value = val[0];
         _this.secondValue = val.length > 1 ? val[1] : null;
