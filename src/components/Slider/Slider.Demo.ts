@@ -13,46 +13,62 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
     </div>
 </div>
 <div class="row" style="margin-left:9px;margin-top:45px;">
-    <div class="col-md-3">
-        <slider minValue="0" maxValue="400" step="10"
-            [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue">
-        </slider>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <slider background="#E24932" step="5" pips="6" pipDensity="5"
+                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="singleSliderValue">
+                </slider>
+            </div>
+            <div class="col-md-6">
+                <slider background="#E24932" step="5" pips="6" pipDensity="5"
+                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="singleSliderValue"
+                    orientation="vertical" height="200px">
+                </slider>
+            </div>
+        </div>
+        <div class="row" style="margin-top:50px;">
+            <form>
+                <div class="form-group row">
+                    <label for="singleSliderValue" class="col-sm-4 form-control-label">Slider Value</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" step="5" [(ngModel)]="singleSliderValue" [min]="minValue" [max]="maxValue" type="number" name="singleSliderValue">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="col-md-6">
-            <div class="col-md-6">
-                <slider minValue="0" maxValue="400" step="10"
-                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue"
+        <div class="row">
+            <div class="col-md-2">
+                <slider background="#E24932" step="5" pips="6" pipDensity="5"
+                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="doubleSliderValue" [(secondValue)]="secondDoubleSliderValue"
                     orientation="vertical" height="200px">
                 </slider>
             </div>
             <div class="col-md-6">
-                <slider minValue="0" maxValue="400" step="10"
-                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue" [(secondValue)]="secondSliderValue"
-                    orientation="vertical" height="200px">
+                <slider background="#E24932" step="5" pips="6" pipDensity="5"
+                    [minValue]="minValue" [maxValue]="maxValue" [(value)]="doubleSliderValue" [(secondValue)]="secondDoubleSliderValue">
                 </slider>
             </div>
-    </div>
-    <div class="col-md-3">
-        <slider minValue="0" maxValue="400" step="10"
-            [minValue]="minValue" [maxValue]="maxValue" [(value)]="sliderValue" [(secondValue)]="secondSliderValue">
-        </slider>
-    </div>
-</div>
-<div class="row" style="margin-top:50px;">
-    <form>
-        <div class="form-group row">
-            <label for="sliderValue" class="col-sm-2 form-control-label">Slider Value</label>
-            <div class="col-sm-2">
-                <input class="form-control" step="10" [(ngModel)]="sliderValue" [min]="minValue" [max]="maxValue" type="number" name="sliderValue">
-            </div>
         </div>
-        <div class="form-group row">
-            <label for="secondSliderValue" class="col-sm-2 form-control-label">Slider Value</label>
-            <div class="col-sm-2">
-                <input class="form-control" step="10" [(ngModel)]="secondSliderValue" [min]="minValue" [max]="maxValue" type="number" name="secondSliderValue" [disabled]="secondSliderValue == null">
-            </div>
+        <div class="row" style="margin-top:50px;">
+            <form>
+                <div class="form-group row">
+                    <label for="doubleSliderValue" class="col-sm-4 form-control-label">Slider Value</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" step="5" [(ngModel)]="doubleSliderValue" [min]="minValue" [max]="maxValue" type="number" name="doubleSliderValue">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="secondDoubleSliderValue" class="col-sm-4 form-control-label">Second Slider Value</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" step="5" [(ngModel)]="secondDoubleSliderValue" [min]="minValue" [max]="maxValue" type="number" name="secondDoubleSliderValue">
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 <div class="source">
 <h3>Import</h3>
@@ -68,23 +84,23 @@ import {Slider} from 'fuel-ui/fuel-ui';
 <pre>
 <code class="language-markup" code-highlight>
 &lt;!--horizontal--&gt;
-&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+&lt;slider background=&quot;#E24932&quot; step=&quot;10&quot; pips=&quot;6&quot; pipDensity=&quot;5&quot;
     [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot;&gt;
 &lt;/slider&gt;
 
 &lt;!--vertical--&gt;
-&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+&lt;slider background=&quot;#E24932&quot; step=&quot;10&quot; pips=&quot;6&quot; pipDensity=&quot;5&quot;
     [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot;
     orientation=&quot;vertical&quot; height=&quot;200px&quot;&gt;
 &lt;/slider&gt;
 
 &lt;!--horizontal with 2 values--&gt;
-&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+&lt;slider background=&quot;#E24932&quot; step=&quot;10&quot; pips=&quot;6&quot; pipDensity=&quot;5&quot;
     [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot; [(secondValue)]=&quot;secondSliderValue&quot;&gt;
 &lt;/slider&gt;
 
 &lt;!--vertical with 2 values--&gt;
-&lt;slider background=&quot;#E24932&quot; minValue=&quot;0&quot; maxValue=&quot;400&quot; step=&quot;10&quot;
+&lt;slider background=&quot;#E24932&quot; step=&quot;10&quot; pips=&quot;6&quot; pipDensity=&quot;5&quot;
     [minValue]=&quot;minValue&quot; [maxValue]=&quot;maxValue&quot; [(value)]=&quot;sliderValue&quot; [(secondValue)]=&quot;secondSliderValue&quot;
     orientation=&quot;vertical&quot; height=&quot;200px&quot;&gt;
 &lt;/slider&gt;
@@ -93,10 +109,10 @@ import {Slider} from 'fuel-ui/fuel-ui';
 <pre>
 <code class="language-javascript" code-highlight>
 export class SliderExample{
-    sliderValue: number = 50;
-    secondSliderValue: number = 250;
+    sliderValue: number = 20;
+    secondSliderValue: number = 80;
     minValue: number = 0;
-    maxValue: number = 400;
+    maxValue: number = 100;
 }
 </code>
 </pre>
@@ -166,10 +182,16 @@ export class SliderExample{
                 <td>The orientation of the slider, can be "horizontal" or "vertical"</td>
             </tr>
             <tr>
+                <td>pipDensity</td>
+                <td>number</td>
+                <td>5</td>
+                <td>The number to scale the amount of pips or lines on the legend. So every X amount will cause a pip to display on the legend.</td>
+            </tr>
+            <tr>
                 <td>pips</td>
                 <td>number</td>
                 <td>5</td>
-                <td>The number of numbers on the legend, <i>including the min and max numbers</i>. They are spread out evenly, so in the case of 5 pips: 0% (min), 25%, 50%, 75%, and 100% (max) numbers are on the legend. 2 pips would mean only the min and the max are showing.</td>
+                <td>The number of numbers on the legend, <i>including the min and max numbers</i>. They are spread out evenly, so in the case of 5 pips: 0% (min), 25%, 50%, 75%, and 100% (max) numbers are on the legend. 2 pips would mean only the min and the max are showing. The pipDensity determines the amount of lines on the legend.</td>
             </tr>
             <tr>
                 <td>secondValue</td>
@@ -203,17 +225,11 @@ export class SliderExample{
 })
 
 export class SliderDemo{
-    sliderValue: number = 50;
-    secondSliderValue: number = 250;
+    singleSliderValue: number = 40;
+    doubleSliderValue: number = 20;
+    secondDoubleSliderValue: number = 80;
     minValue: number = 0;
-    maxValue: number = 400;
-    
-    disableSecondValue(value: boolean){
-        if(value === true)
-            this.secondSliderValue = null;
-        else
-            this.secondSliderValue = 150;
-    }
+    maxValue: number = 100;
 }
 
 export var SLIDER_DEMO_PROVIDERS = [

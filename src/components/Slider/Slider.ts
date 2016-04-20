@@ -18,6 +18,7 @@ export class Slider implements AfterViewInit, OnChanges {
     @Input() direction: string = "ltr";
     @Input() behavior: string = "tap";
     @Input() pips: number = 5;
+    @Input() pipDensity: number = 4;
     @Input() step: number = 10;
     @Input() decimals: number = 0;
     @Input() minValue: number = 0;
@@ -60,7 +61,7 @@ export class Slider implements AfterViewInit, OnChanges {
             pips: { // Show a scale with the slider
                 mode: 'count',
                 values: this.pips,
-                density: 4
+                density: this.pipDensity
             },
             format: {
                 to: ( value:string ) => {
