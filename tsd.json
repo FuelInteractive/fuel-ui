@@ -1,0 +1,15 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "nouislider/nouislider.d.ts": {
+      "commit": "be1056420eb6f7d48be5692baf7e07470187a36e"
+    },
+    "wnumb/wnumb.d.ts": {
+      "commit": "be1056420eb6f7d48be5692baf7e07470187a36e"
+    }
+  }
+}
