@@ -57,13 +57,13 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
                 <div class="form-group row">
                     <label for="doubleSliderValue" class="col-sm-4 form-control-label">Slider Value</label>
                     <div class="col-sm-4">
-                        <input class="form-control" step="5" [(ngModel)]="doubleSliderValue" [min]="minValue" [max]="maxValue" type="number" name="doubleSliderValue">
+                        <input class="form-control" step="5" [(ngModel)]="doubleSliderValue" [min]="minValue" [max]="secondDoubleSliderValue" type="number" name="doubleSliderValue">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="secondDoubleSliderValue" class="col-sm-4 form-control-label">Second Slider Value</label>
                     <div class="col-sm-4">
-                        <input class="form-control" step="5" [(ngModel)]="secondDoubleSliderValue" [min]="minValue" [max]="maxValue" type="number" name="secondDoubleSliderValue">
+                        <input class="form-control" step="5" [(ngModel)]="secondDoubleSliderValue" [min]="doubleSliderValue" [max]="maxValue" type="number" name="secondDoubleSliderValue">
                     </div>
                 </div>
             </form>
