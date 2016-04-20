@@ -16,7 +16,7 @@ import { bind } from './bind';
 import { LocationType } from 'angular2/src/web_workers/shared/serialized_types';
 import { MessageBus } from 'angular2/src/web_workers/shared/message_bus';
 import { ObservableWrapper, PromiseWrapper } from 'angular2/src/facade/async';
-export let MessageBasedPlatformLocation = class {
+export let MessageBasedPlatformLocation = class MessageBasedPlatformLocation {
     constructor(_brokerFactory, _platformLocation, bus, _serializer) {
         this._brokerFactory = _brokerFactory;
         this._platformLocation = _platformLocation;

@@ -40,16 +40,17 @@ import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception'
  *  }
  *  ```
  */
-export let I18nSelectPipe = class {
+let I18nSelectPipe_1;
+export let I18nSelectPipe = I18nSelectPipe_1 = class I18nSelectPipe {
     transform(value, args = null) {
         var mapping = (args[0]);
         if (!isStringMap(mapping)) {
-            throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
+            throw new InvalidPipeArgumentException(I18nSelectPipe_1, mapping);
         }
         return StringMapWrapper.contains(mapping, value) ? mapping[value] : mapping['other'];
     }
 };
-I18nSelectPipe = __decorate([
+I18nSelectPipe = I18nSelectPipe_1 = __decorate([
     CONST(),
     Pipe({ name: 'i18nSelect', pure: true }),
     Injectable(), 

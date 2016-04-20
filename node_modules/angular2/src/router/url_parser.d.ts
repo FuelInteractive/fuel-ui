@@ -46,6 +46,9 @@ export declare class UrlParser {
     parseParam(params: {
         [key: string]: any;
     }): void;
+    parseQueryParam(params: {
+        [key: string]: any;
+    }): void;
     parseAuxiliaryRoutes(): Url[];
 }
 export declare var parser: UrlParser;

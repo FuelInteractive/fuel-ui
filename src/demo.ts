@@ -5,7 +5,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, Hash
 import {DateRange, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo} from './fuel-ui-demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -36,6 +36,7 @@ export class DemoHome {
   {path:'/component/modal', name: 'ModalDemo', component: ModalDemo},
   {path:'/component/pagination', name: 'PaginationDemo', component: PaginationDemo},
   {path:'/component/progress', name: 'ProgressDemo', component: ProgressDemo},
+  {path:'/component/slider', name: 'SliderDemo', component: SliderDemo},
   {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
@@ -68,6 +69,7 @@ export class DemoHome {
                 <li><a [routerLink]="['ModalDemo']">Modal</a></li>
                 <li><a [routerLink]="['PaginationDemo']">Pagination</a></li>
                 <li><a [routerLink]="['ProgressDemo']">Progress</a></li>
+                <li><a [routerLink]="['SliderDemo']">Slider</a></li>
                 <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
@@ -97,7 +99,6 @@ export class DemoHome {
     </div>`,
     directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ["directives/Tooltip/Tooltip.css"],
     pipes: [FUELUI_PIPE_PROVIDERS]
 })
 export class DemoComponent {

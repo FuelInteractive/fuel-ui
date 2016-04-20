@@ -63,7 +63,7 @@ export const ROUTER_PRIMARY_COMPONENT = CONST_EXPR(new OpaqueToken('RouterPrimar
  * It is responsible for creating Instructions from URLs, and generating URLs based on route and
  * parameters.
  */
-export let RouteRegistry = class {
+export let RouteRegistry = class RouteRegistry {
     constructor(_rootComponent) {
         this._rootComponent = _rootComponent;
         this._rules = new Map();

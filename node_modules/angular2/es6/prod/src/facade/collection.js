@@ -165,11 +165,6 @@ export class ListWrapper {
     static createFixedSize(size) { return new Array(size); }
     static createGrowableSize(size) { return new Array(size); }
     static clone(array) { return array.slice(0); }
-    static createImmutable(array) {
-        var result = ListWrapper.clone(array);
-        Object.seal(result);
-        return result;
-    }
     static forEachWithIndex(array, fn) {
         for (var i = 0; i < array.length; i++) {
             fn(array[i], i);
@@ -261,7 +256,6 @@ export class ListWrapper {
         }
         return solution;
     }
-    static isImmutable(list) { return Object.isSealed(list); }
     static flatten(array) {
         let res = [];
         array.forEach((a) => res = res.concat(a));

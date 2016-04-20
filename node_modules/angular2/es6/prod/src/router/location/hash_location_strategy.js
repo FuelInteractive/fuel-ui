@@ -52,7 +52,7 @@ import { PlatformLocation } from './platform_location';
  * ]);
  * ```
  */
-export let HashLocationStrategy = class extends LocationStrategy {
+export let HashLocationStrategy = class HashLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, _baseHref) {
         super();
         this._platformLocation = _platformLocation;

@@ -11,7 +11,7 @@ import { Component, provide } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
 import { RouteConfig, ROUTER_DIRECTIVES, APP_BASE_HREF, RouteParams } from 'angular2/router';
 // #docregion reuseCmp
-let MyCmp = class {
+let MyCmp = class MyCmp {
     constructor(params) {
         this.name = params.get('name') || 'NOBODY';
     }
@@ -31,7 +31,7 @@ MyCmp = __decorate([
     __metadata('design:paramtypes', [RouteParams])
 ], MyCmp);
 // #enddocregion
-let AppCmp = class {
+let AppCmp = class AppCmp {
 };
 AppCmp = __decorate([
     Component({

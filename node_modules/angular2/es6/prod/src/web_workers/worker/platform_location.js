@@ -19,7 +19,7 @@ import { MessageBus } from 'angular2/src/web_workers/shared/message_bus';
 import { StringMapWrapper } from 'angular2/src/facade/collection';
 import { StringWrapper } from 'angular2/src/facade/lang';
 import { deserializeGenericEvent } from './event_deserializer';
-export let WebWorkerPlatformLocation = class extends PlatformLocation {
+export let WebWorkerPlatformLocation = class WebWorkerPlatformLocation extends PlatformLocation {
     constructor(brokerFactory, bus, _serializer) {
         super();
         this._serializer = _serializer;

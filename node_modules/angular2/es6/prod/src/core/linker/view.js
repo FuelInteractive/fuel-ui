@@ -242,7 +242,7 @@ export class AppProtoView {
         return new AppProtoView(type, protoPipes, templateVariableBindings);
     }
 }
-export let HostViewFactory = class {
+export let HostViewFactory = class HostViewFactory {
     constructor(selector, viewFactory) {
         this.selector = selector;
         this.viewFactory = viewFactory;

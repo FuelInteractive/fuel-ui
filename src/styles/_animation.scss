@@ -1,5 +1,6 @@
 @import "../../bower_components/animatewithsass/animate.scss";
-@import "bourbon";
+@import "../../bower_components/animatewithsass/properties";
+@import "../../bower_components/animatewithsass/_fading-entrances/fading-entrances.scss";
 
 @include keyframes(slideInLeft) {
 	0% {

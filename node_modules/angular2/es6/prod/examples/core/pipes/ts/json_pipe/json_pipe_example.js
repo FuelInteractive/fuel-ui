@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
 // #docregion JsonPipe
-export let JsonPipeExample = class {
+export let JsonPipeExample = class JsonPipeExample {
     constructor() {
         this.object = { foo: 'bar', baz: 'qux', nested: { xyz: 3, numbers: [1, 2, 3, 4, 5] } };
     }
@@ -28,7 +28,7 @@ JsonPipeExample = __decorate([
     __metadata('design:paramtypes', [])
 ], JsonPipeExample);
 // #enddocregion
-export let AppCmp = class {
+export let AppCmp = class AppCmp {
 };
 AppCmp = __decorate([
     Component({

@@ -50,7 +50,7 @@ import { Injectable } from 'angular2/core';
  * bootstrap(AppCmp, [ROUTER_PROVIDERS]);
  * ```
  */
-export let Location = class {
+export let Location = class Location {
     constructor(platformStrategy) {
         this.platformStrategy = platformStrategy;
         /** @internal */

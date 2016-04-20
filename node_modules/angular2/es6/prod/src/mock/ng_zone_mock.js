@@ -13,7 +13,7 @@ import { EventEmitter, ObservableWrapper } from 'angular2/src/facade/async';
 /**
  * A mock implementation of {@link NgZone}.
  */
-export let MockNgZone = class extends NgZone {
+export let MockNgZone = class MockNgZone extends NgZone {
     constructor() {
         super({ enableLongStackTrace: false });
         /** @internal */

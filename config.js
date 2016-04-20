@@ -1,3 +1,3 @@
 System.config({
-	packages: {'bin': {defaultExtension: 'js'}}
+	packages: {'dist': {defaultExtension: 'js'}}
 });

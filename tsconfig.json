@@ -11,13 +11,10 @@
         "declaration": true
     },
     "exclude": [
-        "node_modules",
-        "jspm_packages",
-        "node_modules/angular2/typings/es6-collections/es6-collections.d.ts",
-        "node_modules/angular2/typings/es6-promise/es6-promise.d.ts"
+        "node_modules"
     ],
     "filesGlob": [
         "./**/*.ts",
-        "../typings/tsd.d.ts"
+        "./typings/browser.d.ts"
     ]
 }

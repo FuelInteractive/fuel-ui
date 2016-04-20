@@ -273,13 +273,14 @@ export class ComponentInstruction {
     /**
      * @internal
      */
-    constructor(urlPath, urlParams, data, componentType, terminal, specificity, params = null) {
+    constructor(urlPath, urlParams, data, componentType, terminal, specificity, params = null, routeName) {
         this.urlPath = urlPath;
         this.urlParams = urlParams;
         this.componentType = componentType;
         this.terminal = terminal;
         this.specificity = specificity;
         this.params = params;
+        this.routeName = routeName;
         this.reuse = false;
         this.routeData = isPresent(data) ? data : BLANK_ROUTE_DATA;
     }

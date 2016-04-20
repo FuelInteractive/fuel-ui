@@ -28,7 +28,7 @@ export class SplitInterpolation {
         this.expressions = expressions;
     }
 }
-export let Parser = class {
+export let Parser = class Parser {
     constructor(/** @internal */ _lexer, providedReflector = null) {
         this._lexer = _lexer;
         this._reflector = isPresent(providedReflector) ? providedReflector : reflector;

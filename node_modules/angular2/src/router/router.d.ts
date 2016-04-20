@@ -111,7 +111,6 @@ export declare class Router {
      */
     navigateByInstruction(instruction: Instruction, _skipLocationChange?: boolean): Promise<any>;
     private _emitNavigationFinish(url);
-    _emitNavigationFail(url: any): void;
     private _afterPromiseFinishNavigating(promise);
     private _canActivate(nextInstruction);
     private _routerCanDeactivate(instruction);

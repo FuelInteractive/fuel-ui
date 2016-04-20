@@ -14,7 +14,7 @@ var __make_dart_analyzer_happy = null;
  *
  * It takes an array of {@link RouteDefinition}s.
  */
-export let RouteConfig = class {
+export let RouteConfig = class RouteConfig {
     constructor(configs) {
         this.configs = configs;
     }
@@ -23,7 +23,7 @@ RouteConfig = __decorate([
     CONST(), 
     __metadata('design:paramtypes', [Array])
 ], RouteConfig);
-export let AbstractRoute = class {
+export let AbstractRoute = class AbstractRoute {
     constructor({ name, useAsDefault, path, regex, serializer, data }) {
         this.name = name;
         this.useAsDefault = useAsDefault;
@@ -59,7 +59,7 @@ AbstractRoute = __decorate([
  * class MyApp {}
  * ```
  */
-export let Route = class extends AbstractRoute {
+export let Route = class Route extends AbstractRoute {
     constructor({ name, useAsDefault, path, regex, serializer, data, component }) {
         super({
             name: name,
@@ -97,7 +97,7 @@ Route = __decorate([
  * class MyApp {}
  * ```
  */
-export let AuxRoute = class extends AbstractRoute {
+export let AuxRoute = class AuxRoute extends AbstractRoute {
     constructor({ name, useAsDefault, path, regex, serializer, data, component }) {
         super({
             name: name,
@@ -138,7 +138,7 @@ AuxRoute = __decorate([
  * class MyApp {}
  * ```
  */
-export let AsyncRoute = class extends AbstractRoute {
+export let AsyncRoute = class AsyncRoute extends AbstractRoute {
     constructor({ name, useAsDefault, path, regex, serializer, data, loader }) {
         super({
             name: name,
@@ -177,7 +177,7 @@ AsyncRoute = __decorate([
  * class MyApp {}
  * ```
  */
-export let Redirect = class extends AbstractRoute {
+export let Redirect = class Redirect extends AbstractRoute {
     constructor({ name, useAsDefault, path, regex, serializer, data, redirectTo }) {
         super({
             name: name,

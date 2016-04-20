@@ -26,7 +26,7 @@ import { PLATFORM_DIRECTIVES, PLATFORM_PIPES } from 'angular2/src/core/platform_
 import { MODULE_SUFFIX } from './util';
 import { assertArrayOfStrings } from './assertions';
 import { getUrlScheme } from 'angular2/src/compiler/url_resolver';
-export let RuntimeMetadataResolver = class {
+export let RuntimeMetadataResolver = class RuntimeMetadataResolver {
     constructor(_directiveResolver, _pipeResolver, _viewResolver, _platformDirectives, _platformPipes) {
         this._directiveResolver = _directiveResolver;
         this._pipeResolver = _pipeResolver;

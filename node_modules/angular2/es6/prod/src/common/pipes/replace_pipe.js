@@ -36,7 +36,8 @@ import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception'
  * string properly if you are matching for regular expression special characters like parenthesis,
  * brackets etc.
  */
-export let ReplacePipe = class {
+let ReplacePipe_1;
+export let ReplacePipe = ReplacePipe_1 = class ReplacePipe {
     transform(value, args) {
         if (isBlank(args) || args.length !== 2) {
             throw new BaseException('ReplacePipe requires two arguments');
@@ -45,16 +46,16 @@ export let ReplacePipe = class {
             return value;
         }
         if (!this._supportedInput(value)) {
-            throw new InvalidPipeArgumentException(ReplacePipe, value);
+            throw new InvalidPipeArgumentException(ReplacePipe_1, value);
         }
         var input = value.toString();
         var pattern = args[0];
         var replacement = args[1];
         if (!this._supportedPattern(pattern)) {
-            throw new InvalidPipeArgumentException(ReplacePipe, pattern);
+            throw new InvalidPipeArgumentException(ReplacePipe_1, pattern);
         }
         if (!this._supportedReplacement(replacement)) {
-            throw new InvalidPipeArgumentException(ReplacePipe, replacement);
+            throw new InvalidPipeArgumentException(ReplacePipe_1, replacement);
         }
         // template fails with literal RegExp e.g /pattern/igm
         // var rgx = pattern instanceof RegExp ? pattern : RegExpWrapper.create(pattern);
@@ -76,7 +77,7 @@ export let ReplacePipe = class {
         return isString(replacement) || isFunction(replacement);
     }
 };
-ReplacePipe = __decorate([
+ReplacePipe = ReplacePipe_1 = __decorate([
     Pipe({ name: 'replace' }),
     Injectable(), 
     __metadata('design:paramtypes', [])

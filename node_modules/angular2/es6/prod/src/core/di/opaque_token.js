@@ -29,7 +29,7 @@ import { CONST } from 'angular2/src/facade/lang';
  * Using an `OpaqueToken` is preferable to using an `Object` as tokens because it provides better
  * error messages.
  */
-export let OpaqueToken = class {
+export let OpaqueToken = class OpaqueToken {
     constructor(_desc) {
         this._desc = _desc;
     }

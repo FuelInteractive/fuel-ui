@@ -1,8 +1,5 @@
 @import "variables";
-@import "animation";
 @import "bourbon";
-@import "media_queries";
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
-@import "../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
-@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+@import "animation";
+@import "slider";
+@import "slider_pips";

@@ -11,7 +11,7 @@ import { Component } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
 import { Observable } from 'rxjs/Rx';
 // #docregion AsyncPipe
-export let AsyncPipeExample = class {
+export let AsyncPipeExample = class AsyncPipeExample {
     constructor() {
         this.greeting = null;
         this.arrived = false;
@@ -44,7 +44,7 @@ AsyncPipeExample = __decorate([
 ], AsyncPipeExample);
 // #enddocregion
 // #docregion AsyncPipeObservable
-let Task = class {
+let Task = class Task {
     constructor() {
         this.time = new Observable((observer) => {
             setInterval(() => observer.next(new Date().getTime()), 500);
@@ -56,7 +56,7 @@ Task = __decorate([
     __metadata('design:paramtypes', [])
 ], Task);
 // #enddocregion
-export let AppCmp = class {
+export let AppCmp = class AppCmp {
 };
 AppCmp = __decorate([
     Component({

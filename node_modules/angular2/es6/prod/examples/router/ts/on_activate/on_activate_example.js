@@ -11,13 +11,13 @@ import { Component, provide } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
 import { RouteConfig, ROUTER_DIRECTIVES, APP_BASE_HREF } from 'angular2/router';
 // #docregion routerOnActivate
-let ChildCmp = class {
+let ChildCmp = class ChildCmp {
 };
 ChildCmp = __decorate([
     Component({ template: `Child` }), 
     __metadata('design:paramtypes', [])
 ], ChildCmp);
-let ParentCmp = class {
+let ParentCmp = class ParentCmp {
     constructor() {
         this.log = '';
     }
@@ -40,7 +40,7 @@ ParentCmp = __decorate([
     __metadata('design:paramtypes', [])
 ], ParentCmp);
 // #enddocregion
-export let AppCmp = class {
+export let AppCmp = class AppCmp {
 };
 AppCmp = __decorate([
     Component({

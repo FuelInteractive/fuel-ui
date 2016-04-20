@@ -60,7 +60,7 @@ import { PlatformLocation } from './platform_location';
  * ]);
  * ```
  */
-export let PathLocationStrategy = class extends LocationStrategy {
+export let PathLocationStrategy = class PathLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, href) {
         super();
         this._platformLocation = _platformLocation;

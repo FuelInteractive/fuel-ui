@@ -15,7 +15,7 @@ import { DOM } from 'angular2/src/platform/dom/dom_adapter';
  * This class should not be used directly by an application developer. Instead, use
  * {@link Location}.
  */
-export let BrowserPlatformLocation = class extends PlatformLocation {
+export let BrowserPlatformLocation = class BrowserPlatformLocation extends PlatformLocation {
     constructor() {
         super();
         this._init();

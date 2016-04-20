@@ -3,6 +3,7 @@ System.register("angular2/src/mock/animation_builder_mock", ["angular2/src/core/
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -43,7 +44,7 @@ System.register("angular2/src/mock/animation_builder_mock", ["angular2/src/core/
     };
     MockAnimationBuilder = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], MockAnimationBuilder);
     return MockAnimationBuilder;
-  })(animation_builder_1.AnimationBuilder);
+  }(animation_builder_1.AnimationBuilder));
   exports.MockAnimationBuilder = MockAnimationBuilder;
   var MockCssAnimationBuilder = (function(_super) {
     __extends(MockCssAnimationBuilder, _super);
@@ -54,7 +55,7 @@ System.register("angular2/src/mock/animation_builder_mock", ["angular2/src/core/
       return new MockAnimation(element, this.data);
     };
     return MockCssAnimationBuilder;
-  })(css_animation_builder_1.CssAnimationBuilder);
+  }(css_animation_builder_1.CssAnimationBuilder));
   var MockBrowserAbstraction = (function(_super) {
     __extends(MockBrowserAbstraction, _super);
     function MockBrowserAbstraction() {
@@ -64,7 +65,7 @@ System.register("angular2/src/mock/animation_builder_mock", ["angular2/src/core/
       this.elapsedTimeIncludesDelay = false;
     };
     return MockBrowserAbstraction;
-  })(browser_details_1.BrowserDetails);
+  }(browser_details_1.BrowserDetails));
   var MockAnimation = (function(_super) {
     __extends(MockAnimation, _super);
     function MockAnimation(element, data) {
@@ -78,7 +79,7 @@ System.register("angular2/src/mock/animation_builder_mock", ["angular2/src/core/
       this._callback = null;
     };
     return MockAnimation;
-  })(animation_1.Animation);
+  }(animation_1.Animation));
   global.define = __define;
   return module.exports;
 });
@@ -87,6 +88,7 @@ System.register("angular2/src/mock/directive_resolver_mock", ["angular2/src/core
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -174,7 +176,7 @@ System.register("angular2/src/mock/directive_resolver_mock", ["angular2/src/core
     };
     MockDirectiveResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], MockDirectiveResolver);
     return MockDirectiveResolver;
-  })(directive_resolver_1.DirectiveResolver);
+  }(directive_resolver_1.DirectiveResolver));
   exports.MockDirectiveResolver = MockDirectiveResolver;
   global.define = __define;
   return module.exports;
@@ -184,6 +186,7 @@ System.register("angular2/src/mock/view_resolver_mock", ["angular2/src/core/di",
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -285,7 +288,7 @@ System.register("angular2/src/mock/view_resolver_mock", ["angular2/src/core/di",
     };
     MockViewResolver = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], MockViewResolver);
     return MockViewResolver;
-  })(view_resolver_1.ViewResolver);
+  }(view_resolver_1.ViewResolver));
   exports.MockViewResolver = MockViewResolver;
   global.define = __define;
   return module.exports;
@@ -295,12 +298,13 @@ System.register("angular2/src/router/location/location_strategy", ["angular2/src
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var lang_1 = require("angular2/src/facade/lang");
   var core_1 = require("angular2/core");
   var LocationStrategy = (function() {
     function LocationStrategy() {}
     return LocationStrategy;
-  })();
+  }());
   exports.LocationStrategy = LocationStrategy;
   exports.APP_BASE_HREF = lang_1.CONST_EXPR(new core_1.OpaqueToken('appBaseHref'));
   function normalizeQueryParams(params) {
@@ -338,6 +342,7 @@ System.register("angular2/src/mock/ng_zone_mock", ["angular2/src/core/di", "angu
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -390,7 +395,7 @@ System.register("angular2/src/mock/ng_zone_mock", ["angular2/src/core/di", "angu
     };
     MockNgZone = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], MockNgZone);
     return MockNgZone;
-  })(ng_zone_1.NgZone);
+  }(ng_zone_1.NgZone));
   exports.MockNgZone = MockNgZone;
   global.define = __define;
   return module.exports;
@@ -400,6 +405,7 @@ System.register("angular2/src/testing/utils", ["angular2/core", "angular2/src/fa
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -456,7 +462,7 @@ System.register("angular2/src/testing/utils", ["angular2/core", "angular2/src/fa
     };
     Log = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], Log);
     return Log;
-  })();
+  }());
   exports.Log = Log;
   exports.browserDetection = null;
   var BrowserDetection = (function() {
@@ -527,7 +533,7 @@ System.register("angular2/src/testing/utils", ["angular2/core", "angular2/src/fa
       configurable: true
     });
     return BrowserDetection;
-  })();
+  }());
   exports.BrowserDetection = BrowserDetection;
   function dispatchEvent(element, eventType) {
     dom_adapter_1.DOM.dispatchEvent(element, dom_adapter_1.DOM.createEvent(eventType));
@@ -605,6 +611,7 @@ System.register("angular2/src/mock/mock_location_strategy", ["angular2/src/core/
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -688,7 +695,7 @@ System.register("angular2/src/mock/mock_location_strategy", ["angular2/src/core/
     };
     MockLocationStrategy = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], MockLocationStrategy);
     return MockLocationStrategy;
-  })(location_strategy_1.LocationStrategy);
+  }(location_strategy_1.LocationStrategy));
   exports.MockLocationStrategy = MockLocationStrategy;
   var _MockPopStateEvent = (function() {
     function _MockPopStateEvent(newUrl) {
@@ -697,7 +704,7 @@ System.register("angular2/src/mock/mock_location_strategy", ["angular2/src/core/
       this.type = 'popstate';
     }
     return _MockPopStateEvent;
-  })();
+  }());
   global.define = __define;
   return module.exports;
 });
@@ -706,6 +713,7 @@ System.register("angular2/src/testing/test_component_builder", ["angular2/core",
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -741,7 +749,7 @@ System.register("angular2/src/testing/test_component_builder", ["angular2/core",
   var ComponentFixture = (function() {
     function ComponentFixture() {}
     return ComponentFixture;
-  })();
+  }());
   exports.ComponentFixture = ComponentFixture;
   var ComponentFixture_ = (function(_super) {
     __extends(ComponentFixture_, _super);
@@ -762,7 +770,7 @@ System.register("angular2/src/testing/test_component_builder", ["angular2/core",
       this._componentRef.dispose();
     };
     return ComponentFixture_;
-  })(ComponentFixture);
+  }(ComponentFixture));
   exports.ComponentFixture_ = ComponentFixture_;
   var _nextRootElementId = 0;
   var TestComponentBuilder = (function() {
@@ -852,7 +860,7 @@ System.register("angular2/src/testing/test_component_builder", ["angular2/core",
     };
     TestComponentBuilder = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [core_1.Injector])], TestComponentBuilder);
     return TestComponentBuilder;
-  })();
+  }());
   exports.TestComponentBuilder = TestComponentBuilder;
   global.define = __define;
   return module.exports;
@@ -862,6 +870,7 @@ System.register("angular2/platform/testing/browser_static", ["angular2/core", "a
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var core_1 = require("angular2/core");
   var browser_common_1 = require("angular2/src/platform/browser_common");
   var browser_adapter_1 = require("angular2/src/platform/browser/browser_adapter");
@@ -893,13 +902,16 @@ System.register("angular2/platform/testing/browser_static", ["angular2/core", "a
   return module.exports;
 });
 
-System.register("angular2/platform/testing/browser", ["angular2/platform/testing/browser_static", "angular2/platform/browser", "angular2/src/facade/lang"], true, function(require, exports, module) {
+System.register("angular2/platform/testing/browser", ["angular2/platform/testing/browser_static", "angular2/platform/browser", "angular2/src/facade/lang", "angular2/platform/browser"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var browser_static_1 = require("angular2/platform/testing/browser_static");
   var browser_1 = require("angular2/platform/browser");
   var lang_1 = require("angular2/src/facade/lang");
+  var browser_2 = require("angular2/platform/browser");
+  exports.CACHED_TEMPLATE_PROVIDER = browser_2.CACHED_TEMPLATE_PROVIDER;
   exports.TEST_BROWSER_PLATFORM_PROVIDERS = lang_1.CONST_EXPR([browser_static_1.TEST_BROWSER_STATIC_PLATFORM_PROVIDERS]);
   exports.TEST_BROWSER_APPLICATION_PROVIDERS = lang_1.CONST_EXPR([browser_1.BROWSER_APP_PROVIDERS, browser_static_1.ADDITIONAL_TEST_BROWSER_PROVIDERS]);
   global.define = __define;
@@ -910,6 +922,7 @@ System.register("angular2/src/mock/location_mock", ["angular2/src/core/di", "ang
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -1006,7 +1019,7 @@ System.register("angular2/src/mock/location_mock", ["angular2/src/core/di", "ang
     };
     SpyLocation = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], SpyLocation);
     return SpyLocation;
-  })();
+  }());
   exports.SpyLocation = SpyLocation;
   global.define = __define;
   return module.exports;
@@ -1016,6 +1029,7 @@ System.register("angular2/router/testing", ["angular2/src/mock/mock_location_str
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   function __export(m) {
     for (var p in m)
       if (!exports.hasOwnProperty(p))
@@ -1031,6 +1045,7 @@ System.register("angular2/src/http/headers", ["angular2/src/facade/lang", "angul
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var lang_1 = require("angular2/src/facade/lang");
   var exceptions_1 = require("angular2/src/facade/exceptions");
   var collection_1 = require("angular2/src/facade/collection");
@@ -1115,7 +1130,7 @@ System.register("angular2/src/http/headers", ["angular2/src/facade/lang", "angul
       throw new exceptions_1.BaseException('"entries" method is not implemented on Headers class');
     };
     return Headers;
-  })();
+  }());
   exports.Headers = Headers;
   global.define = __define;
   return module.exports;
@@ -1125,6 +1140,7 @@ System.register("angular2/src/http/enums", [], true, function(require, exports, 
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   (function(RequestMethod) {
     RequestMethod[RequestMethod["Get"] = 0] = "Get";
     RequestMethod[RequestMethod["Post"] = 1] = "Post";
@@ -1160,6 +1176,7 @@ System.register("angular2/src/http/http_utils", ["angular2/src/facade/lang", "an
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var lang_1 = require("angular2/src/facade/lang");
   var enums_1 = require("angular2/src/http/enums");
   var exceptions_1 = require("angular2/src/facade/exceptions");
@@ -1199,6 +1216,7 @@ System.register("angular2/src/http/static_request", ["angular2/src/http/headers"
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var headers_1 = require("angular2/src/http/headers");
   var http_utils_1 = require("angular2/src/http/http_utils");
   var lang_1 = require("angular2/src/facade/lang");
@@ -1224,7 +1242,7 @@ System.register("angular2/src/http/static_request", ["angular2/src/http/headers"
       return lang_1.isPresent(this._body) ? this._body.toString() : '';
     };
     return Request;
-  })();
+  }());
   exports.Request = Request;
   global.define = __define;
   return module.exports;
@@ -1234,6 +1252,7 @@ System.register("angular2/src/http/backends/mock_backend", ["angular2/core", "an
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -1278,7 +1297,7 @@ System.register("angular2/src/http/backends/mock_backend", ["angular2/core", "an
       this.response.error(err);
     };
     return MockConnection;
-  })();
+  }());
   exports.MockConnection = MockConnection;
   var MockBackend = (function() {
     function MockBackend() {
@@ -1313,7 +1332,7 @@ System.register("angular2/src/http/backends/mock_backend", ["angular2/core", "an
     };
     MockBackend = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], MockBackend);
     return MockBackend;
-  })();
+  }());
   exports.MockBackend = MockBackend;
   global.define = __define;
   return module.exports;
@@ -1323,6 +1342,7 @@ System.register("angular2/http/testing", ["angular2/src/http/backends/mock_backe
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   function __export(m) {
     for (var p in m)
       if (!exports.hasOwnProperty(p))
@@ -1337,6 +1357,7 @@ System.register("angular2/src/testing/fake_async", ["angular2/src/facade/lang", 
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var lang_1 = require("angular2/src/facade/lang");
   var exceptions_1 = require("angular2/src/facade/exceptions");
   var collection_1 = require("angular2/src/facade/collection");
@@ -1388,7 +1409,7 @@ System.register("angular2/src/testing/fake_async", ["angular2/src/facade/lang", 
       }
     };
     return FakeAsyncZoneSpec;
-  })();
+  }());
   function fakeAsync(fn) {
     if (Zone.current.get('inFakeAsyncZone')) {
       throw new Error('fakeAsync() calls can not be nested');
@@ -1489,6 +1510,7 @@ System.register("angular2/src/mock/mock_application_ref", ["angular2/src/core/ap
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -1554,7 +1576,7 @@ System.register("angular2/src/mock/mock_application_ref", ["angular2/src/core/ap
     ;
     MockApplicationRef = __decorate([di_1.Injectable(), __metadata('design:paramtypes', [])], MockApplicationRef);
     return MockApplicationRef;
-  })(application_ref_1.ApplicationRef);
+  }(application_ref_1.ApplicationRef));
   exports.MockApplicationRef = MockApplicationRef;
   global.define = __define;
   return module.exports;
@@ -1564,6 +1586,7 @@ System.register("angular2/src/testing/matchers", ["angular2/src/platform/dom/dom
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var dom_adapter_1 = require("angular2/src/platform/dom/dom_adapter");
   var lang_1 = require("angular2/src/facade/lang");
   var collection_1 = require("angular2/src/facade/collection");
@@ -1766,6 +1789,7 @@ System.register("angular2/src/compiler/xhr_mock", ["angular2/src/compiler/xhr", 
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -1837,7 +1861,7 @@ System.register("angular2/src/compiler/xhr_mock", ["angular2/src/compiler/xhr", 
       throw new exceptions_1.BaseException("Unexpected request " + url);
     };
     return MockXHR;
-  })(xhr_1.XHR);
+  }(xhr_1.XHR));
   exports.MockXHR = MockXHR;
   var _PendingRequest = (function() {
     function _PendingRequest(url) {
@@ -1855,14 +1879,14 @@ System.register("angular2/src/compiler/xhr_mock", ["angular2/src/compiler/xhr", 
       return this.completer.promise;
     };
     return _PendingRequest;
-  })();
+  }());
   var _Expectation = (function() {
     function _Expectation(url, response) {
       this.url = url;
       this.response = response;
     }
     return _Expectation;
-  })();
+  }());
   global.define = __define;
   return module.exports;
 });
@@ -1871,6 +1895,7 @@ System.register("angular2/src/testing/test_injector", ["angular2/core", "angular
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var core_1 = require("angular2/core");
   var exceptions_1 = require("angular2/src/facade/exceptions");
   var collection_1 = require("angular2/src/facade/collection");
@@ -1911,7 +1936,7 @@ System.register("angular2/src/testing/test_injector", ["angular2/core", "angular
       return fn.execute(this._injector);
     };
     return TestInjector;
-  })();
+  }());
   exports.TestInjector = TestInjector;
   var _testInjector = null;
   function getTestInjector() {
@@ -1960,7 +1985,7 @@ System.register("angular2/src/testing/test_injector", ["angular2/core", "angular
       return new FunctionWithParamTokens(tokens, fn, true, this._providers);
     };
     return InjectSetupWrapper;
-  })();
+  }());
   exports.InjectSetupWrapper = InjectSetupWrapper;
   function withProviders(providers) {
     return new InjectSetupWrapper(providers);
@@ -1993,7 +2018,7 @@ System.register("angular2/src/testing/test_injector", ["angular2/core", "angular
       return this._tokens.indexOf(token) > -1;
     };
     return FunctionWithParamTokens;
-  })();
+  }());
   exports.FunctionWithParamTokens = FunctionWithParamTokens;
   global.define = __define;
   return module.exports;
@@ -2003,6 +2028,7 @@ System.register("angular2/src/testing/testing", ["angular2/src/facade/lang", "an
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   var lang_1 = require("angular2/src/facade/lang");
   var test_injector_1 = require("angular2/src/testing/test_injector");
   var test_injector_2 = require("angular2/src/testing/test_injector");
@@ -2043,15 +2069,16 @@ System.register("angular2/src/testing/testing", ["angular2/src/facade/lang", "an
   function _it(jsmFn, name, testFn, testTimeOut) {
     var timeOut = testTimeOut;
     if (testFn instanceof test_injector_1.FunctionWithParamTokens) {
+      var testFnT_1 = testFn;
       jsmFn(name, function(done) {
         var returnedTestValue;
         try {
-          returnedTestValue = testInjector.execute(testFn);
+          returnedTestValue = testInjector.execute(testFnT_1);
         } catch (err) {
           done.fail(err);
           return ;
         }
-        if (testFn.isAsync) {
+        if (testFnT_1.isAsync) {
           if (_isPromiseLike(returnedTestValue)) {
             returnedTestValue.then(function() {
               done();
@@ -2074,15 +2101,16 @@ System.register("angular2/src/testing/testing", ["angular2/src/facade/lang", "an
   }
   function beforeEach(fn) {
     if (fn instanceof test_injector_1.FunctionWithParamTokens) {
+      var fnT_1 = fn;
       jsmBeforeEach(function(done) {
         var returnedTestValue;
         try {
-          returnedTestValue = testInjector.execute(fn);
+          returnedTestValue = testInjector.execute(fnT_1);
         } catch (err) {
           done.fail(err);
           return ;
         }
-        if (fn.isAsync) {
+        if (fnT_1.isAsync) {
           if (_isPromiseLike(returnedTestValue)) {
             returnedTestValue.then(function() {
               done();
@@ -2148,6 +2176,7 @@ System.register("angular2/testing", ["angular2/src/testing/testing", "angular2/s
   var global = System.global,
       __define = global.define;
   global.define = undefined;
+  "use strict";
   function __export(m) {
     for (var p in m)
       if (!exports.hasOwnProperty(p))

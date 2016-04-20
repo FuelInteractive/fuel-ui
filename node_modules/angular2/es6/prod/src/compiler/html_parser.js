@@ -29,7 +29,7 @@ export class HtmlParseTreeResult {
         this.errors = errors;
     }
 }
-export let HtmlParser = class {
+export let HtmlParser = class HtmlParser {
     parse(sourceContent, sourceUrl) {
         var tokensAndErrors = tokenizeHtml(sourceContent, sourceUrl);
         var treeAndErrors = new TreeBuilder(tokensAndErrors.tokens).build();

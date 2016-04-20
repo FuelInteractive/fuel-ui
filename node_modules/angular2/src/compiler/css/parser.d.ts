@@ -1,5 +1,5 @@
 import { ParseSourceSpan, ParseSourceFile, ParseError } from "angular2/src/compiler/parse_util";
-import { CssToken, CssTokenType, CssScanner } from "angular2/src/compiler/css/lexer";
+import { CssToken, CssScanner } from "angular2/src/compiler/css/lexer";
 export { CssToken } from "angular2/src/compiler/css/lexer";
 export declare enum BlockType {
     Import = 0,
@@ -42,26 +42,7 @@ export declare class CssParser {
     private _errors;
     private _file;
     constructor(_scanner: CssScanner, _fileName: string);
-    _resolveBlockType(token: CssToken): BlockType;
     parse(): ParsedCssResult;
-    _parseStyleSheet(delimiters: any): CssStyleSheetAST;
-    _parseRule(delimiters: number): CssRuleAST;
-    _parseAtRule(delimiters: number): CssRuleAST;
-    _parseSelectorRule(delimiters: number): CssSelectorRuleAST;
-    _parseSelectors(delimiters: number): CssSelectorAST[];
-    _scan(): CssToken;
-    _consume(type: CssTokenType, value?: string): CssToken;
-    _parseKeyframeBlock(delimiters: number): CssBlockAST;
-    _parseKeyframeDefinition(delimiters: number): CssKeyframeDefinitionAST;
-    _parseKeyframeLabel(delimiters: number): CssToken;
-    _parseSelector(delimiters: number): CssSelectorAST;
-    _parseValue(delimiters: number): CssStyleValueAST;
-    _collectUntilDelim(delimiters: number, assertType?: CssTokenType): CssToken[];
-    _parseBlock(delimiters: number): CssBlockAST;
-    _parseStyleBlock(delimiters: number): CssBlockAST;
-    _parseDefinition(delimiters: number): CssDefinitionAST;
-    _assertCondition(status: boolean, errorMessage: string, problemToken: CssToken): boolean;
-    _error(message: string, problemToken: CssToken): void;
 }
 export declare class CssStyleValueAST extends CssAST {
     tokens: CssToken[];

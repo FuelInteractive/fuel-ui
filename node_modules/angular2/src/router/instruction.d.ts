@@ -194,6 +194,7 @@ export declare class ComponentInstruction {
     params: {
         [key: string]: string;
     };
+    routeName: string;
     reuse: boolean;
     routeData: RouteData;
 }

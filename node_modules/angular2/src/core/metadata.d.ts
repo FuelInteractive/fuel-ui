@@ -913,7 +913,7 @@ export declare var Attribute: AttributeFactory;
  *   <div #findme>...</div>
  * </seeker>
  *
- * @Component({ selector: 'foo' })
+ * @Component({ selector: 'seeker' })
  * class seeker {
  *   constructor(@Query('findme') elList: QueryList<ElementRef>) {...}
  * }
@@ -931,7 +931,7 @@ export declare var Attribute: AttributeFactory;
  * </seeker>
  *
  *  @Component({
- *   selector: 'foo'
+ *   selector: 'seeker'
  * })
  * class Seeker {
  *   constructor(@Query('findMe, findMeToo') elList: QueryList<ElementRef>) {...}

@@ -16,7 +16,7 @@ const RADIO_VALUE_ACCESSOR = CONST_EXPR(new Provider(NG_VALUE_ACCESSOR, { useExi
 /**
  * Internal class used by Angular to uncheck radio buttons with the matching name.
  */
-export let RadioControlRegistry = class {
+export let RadioControlRegistry = class RadioControlRegistry {
     constructor() {
         this._accessors = [];
     }
@@ -71,7 +71,7 @@ export class RadioButtonState {
  *  }
  *  ```
  */
-export let RadioControlValueAccessor = class {
+export let RadioControlValueAccessor = class RadioControlValueAccessor {
     constructor(_renderer, _elementRef, _registry, _injector) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;

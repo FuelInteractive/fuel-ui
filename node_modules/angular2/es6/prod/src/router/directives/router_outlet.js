@@ -28,7 +28,7 @@ let _resolveToTrue = PromiseWrapper.resolve(true);
  * <router-outlet></router-outlet>
  * ```
  */
-export let RouterOutlet = class {
+export let RouterOutlet = class RouterOutlet {
     constructor(_elementRef, _loader, _parentRouter, nameAttr) {
         this._elementRef = _elementRef;
         this._loader = _loader;

@@ -16,7 +16,7 @@ import { DirectiveResolver } from 'angular2/src/core/linker/directive_resolver';
  * An implementation of {@link DirectiveResolver} that allows overriding
  * various properties of directives.
  */
-export let MockDirectiveResolver = class extends DirectiveResolver {
+export let MockDirectiveResolver = class MockDirectiveResolver extends DirectiveResolver {
     constructor(...args) {
         super(...args);
         this._providerOverrides = new Map();

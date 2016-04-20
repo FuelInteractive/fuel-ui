@@ -40,7 +40,7 @@ export class DomRootRenderer {
         return renderer;
     }
 }
-export let DomRootRenderer_ = class extends DomRootRenderer {
+export let DomRootRenderer_ = class DomRootRenderer_ extends DomRootRenderer {
     constructor(_document, _eventManager, sharedStylesHost, animate) {
         super(_document, _eventManager, sharedStylesHost, animate);
     }

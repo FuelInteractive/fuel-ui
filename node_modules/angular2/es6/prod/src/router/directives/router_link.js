@@ -40,7 +40,7 @@ import { Location } from '../location/location';
  * children for the route. And if the route begins with `../`, the router will look at the
  * current component's parent.
  */
-export let RouterLink = class {
+export let RouterLink = class RouterLink {
     constructor(_router, _location) {
         this._router = _router;
         this._location = _location;

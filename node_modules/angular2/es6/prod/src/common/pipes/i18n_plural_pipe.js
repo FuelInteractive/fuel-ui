@@ -42,20 +42,21 @@ var interpolationExp = RegExpWrapper.create('#');
  *  ```
  *
  */
-export let I18nPluralPipe = class {
+let I18nPluralPipe_1;
+export let I18nPluralPipe = I18nPluralPipe_1 = class I18nPluralPipe {
     transform(value, args = null) {
         var key;
         var valueStr;
         var pluralMap = (args[0]);
         if (!isStringMap(pluralMap)) {
-            throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
+            throw new InvalidPipeArgumentException(I18nPluralPipe_1, pluralMap);
         }
         key = value === 0 || value === 1 ? `=${value}` : 'other';
         valueStr = isPresent(value) ? value.toString() : '';
         return StringWrapper.replaceAll(pluralMap[key], interpolationExp, valueStr);
     }
 };
-I18nPluralPipe = __decorate([
+I18nPluralPipe = I18nPluralPipe_1 = __decorate([
     CONST(),
     Pipe({ name: 'i18nPlural', pure: true }),
     Injectable(), 

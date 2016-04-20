@@ -27,7 +27,7 @@ import { ViewType } from './view_type';
  */
 export class AppViewManager {
 }
-export let AppViewManager_ = class extends AppViewManager {
+export let AppViewManager_ = class AppViewManager_ extends AppViewManager {
     constructor(_renderer, _appId) {
         super();
         this._renderer = _renderer;

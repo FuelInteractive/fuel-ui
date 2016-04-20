@@ -32,8 +32,8 @@ export declare class LexedCssResult {
     token: CssToken;
     constructor(error: CssScannerError, token: CssToken);
 }
-export declare function generateErrorMessage(input: any, message: any, errorValue: any, index: any, row: any, column: any): string;
-export declare function findProblemCode(input: any, errorValue: any, index: any, column: any): string;
+export declare function generateErrorMessage(input: string, message: string, errorValue: string, index: number, row: number, column: number): string;
+export declare function findProblemCode(input: string, errorValue: string, index: number, column: number): string;
 export declare class CssToken {
     index: number;
     column: number;
@@ -62,18 +62,15 @@ export declare class CssScanner {
     index: number;
     column: number;
     line: number;
-    _currentMode: CssLexerMode;
-    _currentError: CssScannerError;
     constructor(input: string, _trackComments?: boolean);
     getMode(): CssLexerMode;
     setMode(mode: CssLexerMode): void;
     advance(): void;
-    peekAt(index: any): number;
+    peekAt(index: number): number;
     consumeEmptyStatements(): void;
     consumeWhitespace(): void;
     consume(type: CssTokenType, value?: string): LexedCssResult;
     scan(): LexedCssResult;
-    _scan(): CssToken;
     scanComment(): CssToken;
     scanWhitespace(): CssToken;
     scanString(): CssToken;

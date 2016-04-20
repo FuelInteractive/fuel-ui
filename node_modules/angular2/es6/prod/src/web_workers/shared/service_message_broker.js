@@ -15,7 +15,7 @@ import { MessageBus } from "angular2/src/web_workers/shared/message_bus";
 import { PromiseWrapper, ObservableWrapper } from 'angular2/src/facade/async';
 export class ServiceMessageBrokerFactory {
 }
-export let ServiceMessageBrokerFactory_ = class extends ServiceMessageBrokerFactory {
+export let ServiceMessageBrokerFactory_ = class ServiceMessageBrokerFactory_ extends ServiceMessageBrokerFactory {
     constructor(_messageBus, _serializer) {
         super();
         this._messageBus = _messageBus;

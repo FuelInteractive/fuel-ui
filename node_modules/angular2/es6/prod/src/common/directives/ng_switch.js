@@ -78,7 +78,7 @@ export class SwitchView {
  * bootstrap(App).catch(err => console.error(err));
  * ```
  */
-export let NgSwitch = class {
+export let NgSwitch = class NgSwitch {
     constructor() {
         this._useDefault = false;
         this._valueViews = new Map();
@@ -172,7 +172,7 @@ NgSwitch = __decorate([
  *
  * See {@link NgSwitch} for more details and example.
  */
-export let NgSwitchWhen = class {
+export let NgSwitchWhen = class NgSwitchWhen {
     constructor(viewContainer, templateRef, ngSwitch) {
         // `_WHEN_DEFAULT` is used as a marker for a not yet initialized value
         /** @internal */
@@ -196,7 +196,7 @@ NgSwitchWhen = __decorate([
  *
  * See {@link NgSwitch} for more details and example.
  */
-export let NgSwitchDefault = class {
+export let NgSwitchDefault = class NgSwitchDefault {
     constructor(viewContainer, templateRef, sswitch) {
         sswitch._registerView(_WHEN_DEFAULT, new SwitchView(viewContainer, templateRef));
     }

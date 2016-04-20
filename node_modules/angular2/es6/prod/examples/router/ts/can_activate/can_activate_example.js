@@ -14,7 +14,7 @@ function checkIfWeHavePermission(instruction) {
     return instruction.params['id'] == '1';
 }
 // #docregion canActivate
-let ControlPanelCmp = class {
+let ControlPanelCmp = class ControlPanelCmp {
 };
 ControlPanelCmp = __decorate([
     Component({ selector: 'control-panel-cmp', template: `<div>Settings: ...</div>` }),
@@ -22,7 +22,7 @@ ControlPanelCmp = __decorate([
     __metadata('design:paramtypes', [])
 ], ControlPanelCmp);
 // #enddocregion
-let HomeCmp = class {
+let HomeCmp = class HomeCmp {
 };
 HomeCmp = __decorate([
     Component({
@@ -38,7 +38,7 @@ HomeCmp = __decorate([
     }), 
     __metadata('design:paramtypes', [])
 ], HomeCmp);
-let AppCmp = class {
+let AppCmp = class AppCmp {
 };
 AppCmp = __decorate([
     Component({

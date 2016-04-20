@@ -99,7 +99,9 @@ export class CssScanner {
         this.index = -1;
         this.column = -1;
         this.line = 0;
+        /** @internal */
         this._currentMode = CssLexerMode.BLOCK;
+        /** @internal */
         this._currentError = null;
         this.length = this.input.length;
         this.peekPeek = this.peekAt(0);
@@ -206,6 +208,7 @@ export class CssScanner {
         }
         return new LexedCssResult(error, token);
     }
+    /** @internal */
     _scan() {
         var peek = this.peek;
         var peekPeek = this.peekPeek;

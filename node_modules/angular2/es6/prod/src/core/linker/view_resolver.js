@@ -18,7 +18,7 @@ import { reflector } from 'angular2/src/core/reflection/reflection';
 /**
  * Resolves types to {@link ViewMetadata}.
  */
-export let ViewResolver = class {
+export let ViewResolver = class ViewResolver {
     constructor(_reflector) {
         /** @internal */
         this._cache = new Map();

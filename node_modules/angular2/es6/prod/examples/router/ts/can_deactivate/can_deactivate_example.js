@@ -11,7 +11,7 @@ import { provide, Component } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
 import { RouteConfig, RouteParams, ROUTER_DIRECTIVES, APP_BASE_HREF } from 'angular2/router';
 // #docregion routerCanDeactivate
-let NoteCmp = class {
+let NoteCmp = class NoteCmp {
     constructor(params) {
         this.id = params.get('id');
     }
@@ -31,7 +31,7 @@ NoteCmp = __decorate([
     __metadata('design:paramtypes', [RouteParams])
 ], NoteCmp);
 // #enddocregion
-let NoteIndexCmp = class {
+let NoteIndexCmp = class NoteIndexCmp {
 };
 NoteIndexCmp = __decorate([
     Component({
@@ -47,7 +47,7 @@ NoteIndexCmp = __decorate([
     }), 
     __metadata('design:paramtypes', [])
 ], NoteIndexCmp);
-let AppCmp = class {
+let AppCmp = class AppCmp {
 };
 AppCmp = __decorate([
     Component({

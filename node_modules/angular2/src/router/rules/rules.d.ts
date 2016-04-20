@@ -41,11 +41,12 @@ export declare class RedirectRule implements AbstractRule {
 export declare class RouteRule implements AbstractRule {
     private _routePath;
     handler: RouteHandler;
+    private _routeName;
     specificity: string;
     terminal: boolean;
     hash: string;
     private _cache;
-    constructor(_routePath: RoutePath, handler: RouteHandler);
+    constructor(_routePath: RoutePath, handler: RouteHandler, _routeName: string);
     path: string;
     recognize(beginningSegment: Url): Promise<RouteMatch>;
     generate(params: {

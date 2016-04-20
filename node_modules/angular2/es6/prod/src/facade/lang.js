@@ -71,6 +71,12 @@ export function isPresent(obj) {
 export function isBlank(obj) {
     return obj === undefined || obj === null;
 }
+export function isBoolean(obj) {
+    return typeof obj === "boolean";
+}
+export function isNumber(obj) {
+    return typeof obj === "number";
+}
 export function isString(obj) {
     return typeof obj === "string";
 }
@@ -88,9 +94,6 @@ export function isPromise(obj) {
 }
 export function isArray(obj) {
     return Array.isArray(obj);
-}
-export function isNumber(obj) {
-    return typeof obj === 'number';
 }
 export function isDate(obj) {
     return obj instanceof Date && !isNaN(obj.valueOf());

@@ -17,6 +17,11 @@ export declare const TEMPLATE_TRANSFORMS: OpaqueToken;
 export declare class TemplateParseError extends ParseError {
     constructor(message: string, span: ParseSourceSpan);
 }
+export declare class TemplateParseResult {
+    templateAst: TemplateAst[];
+    errors: ParseError[];
+    constructor(templateAst?: TemplateAst[], errors?: ParseError[]);
+}
 export declare class TemplateParser {
     private _exprParser;
     private _schemaRegistry;
@@ -24,6 +29,7 @@ export declare class TemplateParser {
     transforms: TemplateAstVisitor[];
     constructor(_exprParser: Parser, _schemaRegistry: ElementSchemaRegistry, _htmlParser: HtmlParser, transforms: TemplateAstVisitor[]);
     parse(template: string, directives: CompileDirectiveMetadata[], pipes: CompilePipeMetadata[], templateUrl: string): TemplateAst[];
+    tryParse(template: string, directives: CompileDirectiveMetadata[], pipes: CompilePipeMetadata[], templateUrl: string): TemplateParseResult;
 }
 export declare function splitClasses(classAttrValue: string): string[];
 export declare class PipeCollector extends RecursiveAstVisitor {

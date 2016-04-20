@@ -516,7 +516,7 @@ export var Attribute = makeParamDecorator(AttributeMetadata);
  *   <div #findme>...</div>
  * </seeker>
  *
- * @Component({ selector: 'foo' })
+ * @Component({ selector: 'seeker' })
  * class seeker {
  *   constructor(@Query('findme') elList: QueryList<ElementRef>) {...}
  * }
@@ -534,7 +534,7 @@ export var Attribute = makeParamDecorator(AttributeMetadata);
  * </seeker>
  *
  *  @Component({
- *   selector: 'foo'
+ *   selector: 'seeker'
  * })
  * class Seeker {
  *   constructor(@Query('findMe, findMeToo') elList: QueryList<ElementRef>) {...}

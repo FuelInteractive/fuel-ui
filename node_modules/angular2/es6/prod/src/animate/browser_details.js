@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Injectable } from 'angular2/src/core/di';
 import { Math } from 'angular2/src/facade/math';
 import { DOM } from 'angular2/src/platform/dom/dom_adapter';
-export let BrowserDetails = class {
+export let BrowserDetails = class BrowserDetails {
     constructor() {
         this.elapsedTimeIncludesDelay = false;
         this.doesElapsedTimeIncludesDelay();

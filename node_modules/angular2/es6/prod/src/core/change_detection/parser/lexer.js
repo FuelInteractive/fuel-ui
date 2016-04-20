@@ -20,7 +20,7 @@ export var TokenType;
     TokenType[TokenType["Operator"] = 4] = "Operator";
     TokenType[TokenType["Number"] = 5] = "Number";
 })(TokenType || (TokenType = {}));
-export let Lexer = class {
+export let Lexer = class Lexer {
     tokenize(text) {
         var scanner = new _Scanner(text);
         var tokens = [];

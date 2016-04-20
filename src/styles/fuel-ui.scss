@@ -1,5 +1,18 @@
 @import "framework";
 
+.customFadeIn{
+  cursor: pointer;
+  opacity: 1 !important;
+  @include fadeIn(
+    $count: $countDefault,
+    $duration: .5s,
+    $delay: $delayDefault,
+    $function: $functionDefault,
+    $fill: $fillDefault,
+    $visibility: $visibilityDefault
+  )
+}
+
 @include keyframes(slideInLeft) {
 	0% {
   		@include transform(translateX(100%));
@@ -48,13 +61,6 @@
 	width: 50px;
 	height: 50px;
 	background: blue;
-}
-
-.vertical-bar {
-    display: inline-block;
-    height: 100%;
-    width: 5px;
-    border-right: $border-width solid $hr-border-color; 
 }
 
 .fuel-ui-collapse{

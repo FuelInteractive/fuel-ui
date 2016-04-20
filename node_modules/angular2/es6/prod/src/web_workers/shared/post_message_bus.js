@@ -107,7 +107,7 @@ export class PostMessageBusSource {
  * A TypeScript implementation of {@link MessageBus} for communicating via JavaScript's
  * postMessage API.
  */
-export let PostMessageBus = class {
+export let PostMessageBus = class PostMessageBus {
     constructor(sink, source) {
         this.sink = sink;
         this.source = source;

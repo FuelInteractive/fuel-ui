@@ -173,7 +173,7 @@ export class LegacyHtmlAstTransformer {
         return ast;
     }
 }
-export let LegacyHtmlParser = class extends HtmlParser {
+export let LegacyHtmlParser = class LegacyHtmlParser extends HtmlParser {
     parse(sourceContent, sourceUrl) {
         let transformer = new LegacyHtmlAstTransformer();
         let htmlParseTreeResult = super.parse(sourceContent, sourceUrl);

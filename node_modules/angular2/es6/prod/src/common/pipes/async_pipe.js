@@ -46,7 +46,8 @@ var __unused; // avoid unused import when Promise union types are erased
  * ```typescript
  * ```
  */
-export let AsyncPipe = class {
+let AsyncPipe_1;
+export let AsyncPipe = AsyncPipe_1 = class AsyncPipe {
     constructor(_ref) {
         /** @internal */
         this._latestValue = null;
@@ -99,7 +100,7 @@ export let AsyncPipe = class {
             return _observableStrategy;
         }
         else {
-            throw new InvalidPipeArgumentException(AsyncPipe, obj);
+            throw new InvalidPipeArgumentException(AsyncPipe_1, obj);
         }
     }
     /** @internal */
@@ -118,7 +119,7 @@ export let AsyncPipe = class {
         }
     }
 };
-AsyncPipe = __decorate([
+AsyncPipe = AsyncPipe_1 = __decorate([
     // avoid unused import when Promise union types are erased
     Pipe({ name: 'async', pure: false }),
     Injectable(), 

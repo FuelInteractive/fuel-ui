@@ -1,7 +1,10 @@
+@import "./styles/variables";
+@import "./styles/media_queries";
+
 $primary-branding: #E24932;
 
 body {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
 }
 
 .card-title {

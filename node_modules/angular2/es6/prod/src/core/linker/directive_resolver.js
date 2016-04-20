@@ -24,7 +24,7 @@ function _isDirectiveMetadata(type) {
  *
  * See {@link Compiler}
  */
-export let DirectiveResolver = class {
+export let DirectiveResolver = class DirectiveResolver {
     constructor(_reflector) {
         if (isPresent(_reflector)) {
             this._reflector = _reflector;

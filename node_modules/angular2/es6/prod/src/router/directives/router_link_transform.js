@@ -155,7 +155,7 @@ export function parseRouterLinkExpression(parser, exp) {
 /**
  * A compiler plugin that implements the router link DSL.
  */
-export let RouterLinkTransform = class {
+export let RouterLinkTransform = class RouterLinkTransform {
     constructor(parser) {
         this.astTransformer = new RouterLinkAstTransformer(parser);
     }

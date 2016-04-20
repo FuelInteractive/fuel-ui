@@ -69,7 +69,7 @@ import { StringMapWrapper, isListLikeIterable } from 'angular2/src/facade/collec
  * }
  * ```
  */
-export let NgClass = class {
+export let NgClass = class NgClass {
     constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;

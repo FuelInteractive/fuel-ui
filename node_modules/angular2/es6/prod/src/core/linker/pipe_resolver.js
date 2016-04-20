@@ -23,7 +23,7 @@ function _isPipeMetadata(type) {
  *
  * See {@link Compiler}
  */
-export let PipeResolver = class {
+export let PipeResolver = class PipeResolver {
     constructor(_reflector) {
         if (isPresent(_reflector)) {
             this._reflector = _reflector;

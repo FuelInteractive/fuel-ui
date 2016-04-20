@@ -388,7 +388,7 @@ import { ChangeDetectionStrategy } from 'angular2/src/core/change_detection';
  * the instantiated
  * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
  */
-export let DirectiveMetadata = class extends InjectableMetadata {
+export let DirectiveMetadata = class DirectiveMetadata extends InjectableMetadata {
     constructor({ selector, inputs, outputs, properties, events, host, bindings, providers, exportAs, queries } = {}) {
         super();
         this.selector = selector;
@@ -570,7 +570,7 @@ DirectiveMetadata = __decorate([
  *
  * {@example core/ts/metadata/metadata.ts region='component'}
  */
-export let ComponentMetadata = class extends DirectiveMetadata {
+export let ComponentMetadata = class ComponentMetadata extends DirectiveMetadata {
     constructor({ selector, inputs, outputs, properties, events, host, exportAs, moduleId, bindings, providers, viewBindings, viewProviders, changeDetection = ChangeDetectionStrategy.Default, queries, templateUrl, template, styleUrls, styles, directives, pipes, encapsulation } = {}) {
         super({
             selector: selector,
@@ -655,7 +655,7 @@ ComponentMetadata = __decorate([
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
  */
-export let PipeMetadata = class extends InjectableMetadata {
+export let PipeMetadata = class PipeMetadata extends InjectableMetadata {
     constructor({ name, pure }) {
         super();
         this.name = name;
@@ -708,7 +708,7 @@ PipeMetadata = __decorate([
  * bootstrap(App);
  * ```
  */
-export let InputMetadata = class {
+export let InputMetadata = class InputMetadata {
     constructor(
         /**
          * Name used when instantiating a component in the template.
@@ -762,7 +762,7 @@ InputMetadata = __decorate([
  * bootstrap(App);
  * ```
  */
-export let OutputMetadata = class {
+export let OutputMetadata = class OutputMetadata {
     constructor(bindingPropertyName) {
         this.bindingPropertyName = bindingPropertyName;
     }
@@ -806,7 +806,7 @@ OutputMetadata = __decorate([
  * bootstrap(App);
  * ```
  */
-export let HostBindingMetadata = class {
+export let HostBindingMetadata = class HostBindingMetadata {
     constructor(hostPropertyName) {
         this.hostPropertyName = hostPropertyName;
     }
@@ -849,7 +849,7 @@ HostBindingMetadata = __decorate([
  * bootstrap(App);
  * ```
  */
-export let HostListenerMetadata = class {
+export let HostListenerMetadata = class HostListenerMetadata {
     constructor(eventName, args) {
         this.eventName = eventName;
         this.args = args;

@@ -106,7 +106,7 @@ export class JSONPConnection_ extends JSONPConnection {
  */
 export class JSONPBackend extends ConnectionBackend {
 }
-export let JSONPBackend_ = class extends JSONPBackend {
+export let JSONPBackend_ = class JSONPBackend_ extends JSONPBackend {
     constructor(_browserJSONP, _baseResponseOptions) {
         super();
         this._browserJSONP = _browserJSONP;

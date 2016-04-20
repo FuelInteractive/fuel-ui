@@ -14,10 +14,13 @@ var webserver = require('gulp-webserver');
 var Builder = require('systemjs-builder');
 var runSequence = require('run-sequence');
 var server = require('gulp-server-livereload');
+var pkg = require('./package.json');
+var name = pkg.name;
+var path = require('path');
 
 var paths = {
     source: 'src',
-    dest: 'bin',
+    dest: 'dist',
     bundle: 'bundles'
 };
 
@@ -57,8 +60,8 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     
     var sourceFiles = [
         paths.source + '/**/*.ts',
-        '!./bin/**/*.*',
-        './typings/tsd.d.ts',
+        '!./dist/**/*.*',
+        './typings/browser.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
     ];
@@ -68,6 +71,12 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         .pipe(inlineNg2Template(inlineTemplateConfig))
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject));
+        
+    //copy NoUiSlider to dist for demo
+    var noUiSlider = gulp
+        .src('./src/**/NoUiSlider.js')
+        .pipe(rename({dirname: 'components/Slider'}))
+        .pipe(gulp.dest(paths.dest));
 
     return merge(
         [
@@ -79,22 +88,50 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         ]);
 });
 
-gulp.task('bundle', ['scripts'], function() {    
-    // optional constructor options
-    // sets the baseURL and loads the configuration file
-    var builder = new Builder('./', './builderConfig.js');
-    
-    return builder
-        //.buildStatic(paths.dest+'/fuel-ui.js', 'fuel-ui.js')
-        .bundle(paths.dest+'/fuel-ui.js', paths.bundle+'/fuel-ui.js')
+gulp.task('bundle', function(){
+    runSequence(
+        'bundleScripts',
+        'bundleSass'
+    );
+})
+
+gulp.task('bundleScripts', ['scripts'], function() { 
+    var builder = new Builder();
+    var config = {
+        baseURL: '..',
+        transpiler: 'typescript',
+        typescriptOptions: {
+            module: 'cjs'
+        },
+        map: {
+            typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
+            angular2: path.resolve('node_modules/angular2'),
+            rxjs: path.resolve('node_modules/rxjs')
+        },
+        paths: {
+            '*': '*.js'
+        },
+        meta: {
+            'fuel-ui/node_modules/angular2/*': { build: false },
+            'fuel-ui/node_modules/rxjs/*': { build: false }
+        }
+    };
+
+    builder.config(config);
+
+    return builder.bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
-            console.log('bundle complete');
+            console.log('Build complete.');
         })
         .catch(function(err) {
-            console.log('Build error');
-            console.log(err);
+            console.log('Error', err);
         });
 });
+
+gulp.task('bundleSass', ['sass'], function(){
+    return gulp.src(paths.dest + '/styles/fuel-ui.css')
+        .pipe(gulp.dest(paths.bundle));
+})
 
 gulp.task('views', ['cleanViews'], function () {
     return gulp.src(paths.source + '/**/*.html')
@@ -119,7 +156,7 @@ gulp.task('serve', function(){
 				enable: true,
 				filter: function(filePath, cb) {
 					cb( 
-						/bin\/[^\/]*\.js$/.test(filePath) &&
+						/dist\/[^\/]*\.js$/.test(filePath) &&
 						!(/node_modules/.test(filePath)) &&  
 						!(/.*ts$/.test(filePath)) && 
 						!(/gulpfile.js$/.test(filePath))
