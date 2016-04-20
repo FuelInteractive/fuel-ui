@@ -2513,6 +2513,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
       this.direction = "ltr";
       this.behavior = "tap";
       this.pips = 5;
+      this.pipDensity = 5;
       this.step = 10;
       this.decimals = 0;
       this.minValue = 0;
@@ -2545,7 +2546,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
         pips: {
           mode: 'count',
           values: this.pips,
-          density: 4
+          density: this.pipDensity
         },
         format: {
           to: function(value) {
@@ -2582,6 +2583,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
     __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "direction", void 0);
     __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "behavior", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "pips", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "pipDensity", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "step", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "decimals", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "minValue", void 0);
