@@ -18,7 +18,7 @@ export class Slider implements AfterViewInit, OnChanges {
     @Input() direction: string = "ltr";
     @Input() behavior: string = "tap";
     @Input() pips: number = 5;
-    @Input() pipDensity: number = 4;
+    @Input() pipDensity: number = 5;
     @Input() step: number = 10;
     @Input() decimals: number = 0;
     @Input() minValue: number = 0;
