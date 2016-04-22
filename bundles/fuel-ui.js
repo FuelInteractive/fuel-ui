@@ -2565,7 +2565,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/NoUiSlider", [], false, f
   return _retrieveGlobal();
 });
 
-System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core", "./NoUiSlider.js"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core", "./NoUiSlider"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2588,7 +2588,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('angular2/core');
-  $__require('./NoUiSlider.js');
+  $__require('./NoUiSlider');
   var Slider = (function() {
     function Slider(element) {
       this.element = element;
