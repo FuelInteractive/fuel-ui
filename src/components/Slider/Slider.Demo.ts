@@ -1,6 +1,9 @@
 import {Component, AfterViewInit} from 'angular2/core';
 import {SLIDER_COMPONENT_PROVIDERS} from './Slider';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
   template: `
@@ -81,6 +84,8 @@ import {Slider} from 'fuel-ui/fuel-ui';
 <p>Slider is a custom element to programmatically create range sliders</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;!--horizontal--&gt;
@@ -106,6 +111,8 @@ import {Slider} from 'fuel-ui/fuel-ui';
 &lt;/slider&gt;
 </code>
 </pre>
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class SliderExample{
@@ -116,112 +123,20 @@ export class SliderExample{
 }
 </code>
 </pre>
-    <h3>Attributes</h3>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>background</td>
-                <td>string</td>
-                <td>"#E24932"</td>
-                <td>Background color of the area of the slider that counts toward the value</td>
-            </tr>
-            <tr>
-                <td>behavior</td>
-                <td>string</td>
-                <td>"tap"</td>
-                <td>The way a user can interact with the slider. Can use "tap" or "fixed". "tap" allows for tapping and dragging. "fixed" disables the slider without greying it out.</td>
-            </tr>
-            <tr>
-                <td>decimals</td>
-                <td>number</td>
-                <td>0</td>
-                <td>Number of decimals on the value(s) and pips</td>
-            </tr>
-            <tr>
-                <td>direction</td>
-                <td>string</td>
-                <td>"ltr"</td>
-                <td>The direction of the values on the slider, can be "ltr" for left to right or "rtl" for right to left</td>
-            </tr>
-            <tr>
-                <td>height</td>
-                <td>string</td>
-                <td>null or "200px"</td>
-                <td>Height of the slider element. Is <b>REQUIRED</b> when orientation is set to "vertical". Defaults to "200px" when using vertical slider</td>
-            </tr>
-            <tr>
-                <td>margin</td>
-                <td>number</td>
-                <td>10</td>
-                <td>The least amount of distance between the first and second values</td>
-            </tr>
-            <tr>
-                <td>maxValue</td>
-                <td>number</td>
-                <td>100</td>
-                <td>The maximum value allowed on the entire slider</td>
-            </tr>
-            <tr>
-                <td>minValue</td>
-                <td>number</td>
-                <td>rangeStart</td>
-                <td>The minimum value allowed on the entire slider</td>
-            </tr>
-            <tr>
-                <td>orientation</td>
-                <td>string</td>
-                <td>"horizontal"</td>
-                <td>The orientation of the slider, can be "horizontal" or "vertical"</td>
-            </tr>
-            <tr>
-                <td>pipDensity</td>
-                <td>number</td>
-                <td>5</td>
-                <td>The number to scale the amount of pips or lines on the legend. So every X amount will cause a pip to display on the legend.</td>
-            </tr>
-            <tr>
-                <td>pips</td>
-                <td>number</td>
-                <td>5</td>
-                <td>The number of numbers on the legend, <i>including the min and max numbers</i>. They are spread out evenly, so in the case of 5 pips: 0% (min), 25%, 50%, 75%, and 100% (max) numbers are on the legend. 2 pips would mean only the min and the max are showing. The pipDensity determines the amount of lines on the legend.</td>
-            </tr>
-            <tr>
-                <td>secondValue</td>
-                <td>number</td>
-                <td>null</td>
-                <td>The value of the second number of the slider. When set to null the second handle will not display.</td>
-            </tr>
-            <tr>
-                <td>step</td>
-                <td>number</td>
-                <td>10</td>
-                <td>Slider increment on dragging</td>
-            </tr>
-            <tr>
-                <td>value</td>
-                <td>number</td>
-                <td>0</td>
-                <td>The value of the first number of the slider</td>
-            </tr>
-            <tr>
-                <td>width</td>
-                <td>string</td>
-                <td>null</td>
-                <td>Width of the slider element</td>
-            </tr>
-        </tbody>
-    </table>
+</tab>
+</tabset>
+
+<h3>Attributes</h3>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
+
 </div>
 `,
-    directives: [SLIDER_COMPONENT_PROVIDERS, CodeHighlighter]
+    directives: [SLIDER_COMPONENT_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 
 export class SliderDemo{
@@ -230,6 +145,26 @@ export class SliderDemo{
     secondDoubleSliderValue: number = 80;
     minValue: number = 0;
     maxValue: number = 100;
+    
+    attributes:Attribute[] = [
+        new Attribute('background', 'string', '#E24932', 'Background color of the area of the slider that counts toward the value'),
+        new Attribute('behavior', 'string', 'tap', 'The way a user can interact with the slider. Can use "tap" or "fixed". "tap" allows for tapping and dragging. "fixed" disables the slider without greying it out.'),
+        new Attribute('decimals', 'number', '0', 'Number of decimals on the value(s) and pips'),
+        new Attribute('direction', 'string', 'ltr', 'The direction of the values on the slider, can be "ltr" for left to right or "rtl" for right to left'),
+        new Attribute('height', 'string', 'null or 200px', 'Height of the slider element. Is <b>REQUIRED</b> when orientation is set to "vertical". Defaults to "200px" when using vertical slider'),
+        new Attribute('margin', 'number', '10', 'The least amount of distance between the first and second values'),
+        new Attribute('maxValue', 'number', '100', 'The maximum value allowed on the entire slider'),
+        new Attribute('minValue', 'number', 'rangeStart', 'The minimum value allowed on the entire slider'),
+        new Attribute('orientation', 'string', 'horizontal', 'The orientation of the slider, can be "horizontal" or "vertical"'),
+        new Attribute('pipDensity', 'number', '5', 'The number to scale the amount of pips or lines on the legend. So every X amount will cause a pip to display on the legend.'),
+        new Attribute('pips', 'number', '5', 'The number of numbers on the legend, <i>including the min and max numbers</i>. They are spread out evenly, so in the case of 5 pips: 0% (min), 25%, 50%, 75%, and 100% (max) numbers are on the legend. 2 pips would mean only the min and the max are showing. The pipDensity determines the amount of lines on the legend.'),
+        new Attribute('secondValue', 'number', 'null', 'The value of the second number of the slider. When set to null the second handle will not display.'),
+        new Attribute('step', 'number', '1', 'Slider increment on dragging'),
+        new Attribute('value', 'number', '0', 'The value of the first number of the slider'),
+        new Attribute('width', 'string', 'null', 'Width of the slider element')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var SLIDER_DEMO_PROVIDERS = [

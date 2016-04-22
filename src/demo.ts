@@ -1,11 +1,11 @@
-import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy} from "angular2/core";
+import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "angular2/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
 import {bootstrap} from "angular2/platform/browser";
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-import {DateRange, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS} from "./fuel-ui";
+import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo} from './fuel-ui-demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -14,7 +14,9 @@ import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDe
             <h2 class="display-3">Fuel-UI</h2>
             <p class="lead">Fuel-UI is a collection of native <a href="http://angular.io" target="_blank">Angular 2</a> components, directives, and pipes for <a href="http://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap 4</a>.</p>
             
-            <a href="https://github.com/FuelInteractive/fuel-ui/releases" target="_blank" class="btn btn-fuel">Download <i class="fa fa-download"></i></a> <a href="https://github.com/FuelInteractive/fuel-ui" target="_blank" class="btn btn-fuel">View on GitHub <i class="fa fa-external-link"></i></a>
+            <a href="https://github.com/FuelInteractive/fuel-ui/releases" target="_blank" class="btn btn-fuel">Download <i class="fa fa-download"></i></a> 
+            <a href="https://github.com/FuelInteractive/fuel-ui" target="_blank" class="btn btn-fuel">View on GitHub <i class="fa fa-external-link"></i></a> 
+            <a href="https://www.npmjs.com/package/fuel-ui" target="_blank" class="btn btn-fuel">View npm Package <i class="fa fa-external-link"></i></a>
         </div>
     </div>
     
@@ -24,8 +26,57 @@ export class DemoHome {
     
 }
 
+@Component({
+    template: `
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-block">
+            <h2 class="card-title">Installation</h2>
+            <p class="card-text">Fork our Quickstart! <a href="https://github.com/coryshaw1/ng2-play/" target="_blank">https://github.com/coryshaw1/ng2-play/</a></p>
+        </div>
+    </div>
+</div>
+
+<p>If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:</p>
+
+<p><code>npm install fuel-ui font-awesome --save</code></p>
+
+<p>Add this line to your dependencies in your <code>package.json</code></p>
+            
+<pre>
+<code class="language-javascript" code-highlight>
+ "dependencies": {
+    ...
+    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2"
+}
+</code>
+</pre>
+            
+<p>And finally, add the proper script tags to your <code>index.html</code></p>
+            
+<pre>
+<code class="language-markup" code-highlight>
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/font-awesome/css/font-awesome.min.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.css&quot; /&gt;
+&lt;/head&gt;
+
+...
+
+&lt;!-- All your SystemJS, Angular2, Rx, etc. scripts first! --&gt;
+&lt;script src=&quot;node_modules/fuel-ui/bundles/fuel-ui.js&quot;&gt;&lt;/script&gt;
+</code>
+</pre>`,
+directives: [CodeHighlighter]
+})
+export class InstallationComponent {
+    
+}
+
 @RouteConfig([
   {path:'/', name: 'DemoHome', component: DemoHome, useAsDefault: true},
+  {path:'/installation', name: 'InstallationComponent', component: InstallationComponent},
   {path:'/component/alert', name: 'AlertDemo', component: AlertDemo},
   {path:'/component/carousel', name: 'CarouselDemo', component: CarouselDemo},
   {path:'/component/collapse', name: 'CollapseDemo', component: CollapseDemo},
@@ -37,6 +88,7 @@ export class DemoHome {
   {path:'/component/pagination', name: 'PaginationDemo', component: PaginationDemo},
   {path:'/component/progress', name: 'ProgressDemo', component: ProgressDemo},
   {path:'/component/slider', name: 'SliderDemo', component: SliderDemo},
+  {path:'/component/tab', name: 'TabDemo', component: TabDemo},
   {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
@@ -58,6 +110,7 @@ export class DemoHome {
                         <span>Fuel-UI</span>
                     </a>
                 </li>
+                <li><a [routerLink]="['InstallationComponent']">Installation</a></li>
                 <li class="sidebar-title">Components</li>
                 <li><a [routerLink]="['AlertDemo']">Alert</a></li>
                 <li><a [routerLink]="['CarouselDemo']">Carousel</a></li>
@@ -70,6 +123,7 @@ export class DemoHome {
                 <li><a [routerLink]="['PaginationDemo']">Pagination</a></li>
                 <li><a [routerLink]="['ProgressDemo']">Progress</a></li>
                 <li><a [routerLink]="['SliderDemo']">Slider</a></li>
+                <li><a [routerLink]="['TabDemo']">Tabs</a></li>
                 <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
@@ -104,6 +158,9 @@ export class DemoHome {
 export class DemoComponent {
     
 }
+
+enableProdMode();
+
 bootstrap(DemoComponent, [
     ROUTER_PROVIDERS,
     FORM_PROVIDERS,

@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {COLLAPSE_PROVIDERS} from './Collapse';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -32,6 +36,8 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 <p>Collapse allows you to toggle content on the page by click</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;collapse buttonText=&quot;Collapse Button&quot;&gt;
@@ -43,31 +49,26 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 &lt;/collapse&gt;
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>buttonText</td>
-            <td>string</td>
-            <td>null</td>
-            <td>Text to display on button that shows/hides content</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [COLLAPSE_PROVIDERS, CodeHighlighter]
+        directives: [COLLAPSE_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class CollapseDemo { 
+    attributes:any[] = [
+        new Attribute('buttonText', 'string', 'null', 'Text to display on button that shows/hides content')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var COLLAPSE_DEMO_PROVIDERS = [

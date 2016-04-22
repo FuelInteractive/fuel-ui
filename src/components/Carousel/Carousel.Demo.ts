@@ -1,6 +1,8 @@
 import {Component} from 'angular2/core';
 import {CAROUSEL_PROVIDERS} from './Carousel';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -40,8 +42,8 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 <p>Carousel is a custom element to display a slideshow of cycling elements</p>
 
 <h3>Usage</h3>
-
-<h4>Images Only</h4>
+<tabset>
+<tab heading="Images Only">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;carousel&gt;
@@ -51,8 +53,8 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 &lt;/carousel&gt;
 </code>
 </pre>
-
-<h4>Images With Captions</h4>
+</tab>
+<tab heading="Images With Captions">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;carousel&gt;
@@ -73,8 +75,10 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 &lt;/carousel&gt;
 </code>
 </pre>
+</tab>
+</tabset>
 </div>`,
-        directives: [CAROUSEL_PROVIDERS, CodeHighlighter]
+        directives: [CAROUSEL_PROVIDERS, CodeHighlighter, TAB_PROVIDERS]
 })
 export class CarouselDemo {
     carouselImages: string[] = [

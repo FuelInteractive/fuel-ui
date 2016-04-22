@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {PAGINATION_PROVIDERS} from './Pagination';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -55,6 +59,8 @@ import {Pagination} from 'fuel-ui/fuel-ui';
 <p>Pagination is a custom element to show an interactive list of page numbers to use for paging</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;pagination
@@ -65,69 +71,40 @@ import {Pagination} from 'fuel-ui/fuel-ui';
 &lt;/pagination&gt;
 </code>
 </pre>
-
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class PaginationDemo {
+export class PaginationExample {
+    currentPage: number = 1;
+    
     pageChange(page: number): void {
         console.log('New Page: ' + page);
     }
 }
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>currentPage</td>
-            <td>number</td>
-            <td>1</td>
-            <td>Currently active page</td>
-        </tr>
-        <tr>
-            <td>pagesAtOnce</td>
-            <td>number</td>
-            <td>5</td>
-            <td>The max number of pages to be displayed at once</td>
-        </tr>
-        <tr>
-            <td>totalPages</td>
-            <td>number</td>
-            <td>10</td>
-            <td>Total number of pages</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 <h3>Events</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Event Object</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>currentPageChange</td>
-            <td>$event = newCurrentPage: number</td>
-            <td>New active page number</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="eventsColumns"
+    [data]="events"
+    [sort]="eventsSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [PAGINATION_PROVIDERS, CodeHighlighter]
+        directives: [PAGINATION_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class PaginationDemo {
     totalPages: number = 10;
@@ -137,6 +114,19 @@ export class PaginationDemo {
     pageChange(page: number): void {
         this.currentPage = page;
     }
+    
+    attributes:Attribute[] = [
+        new Attribute('currentPage', 'number', '1', 'Currently active page'),
+        new Attribute('pagesAtOnce', 'number', '5', 'The max number of pages to be displayed at once'),
+        new Attribute('totalPages', 'number', '10', 'Total number of pages')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
+    events:Event[] = [
+        new Event('currentPageChange', '$event = newCurrentPage: number', 'New active page number')
+    ];
+    eventsColumns:TableSortableColumn[] = EventColumns;
+    eventsSort:TableSortableSorting = EventsDefaultSort;
 }
 
 export var PAGINATION_DEMO_PROVIDERS = [

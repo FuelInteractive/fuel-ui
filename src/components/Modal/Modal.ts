@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
-import {AnimationListener} from "../../directives/Animation/AnimationListener";
+import {Animation} from "../../directives/Animation/Animation";
 
 @Component({
 	selector: 'modal',
@@ -9,7 +9,7 @@ import {AnimationListener} from "../../directives/Animation/AnimationListener";
 	},
 	styleUrls: ['components/Modal/Modal.css'],
 	templateUrl: 'components/Modal/Modal.html',
-	directives: [CORE_DIRECTIVES, AnimationListener]
+	directives: [CORE_DIRECTIVES, Animation]
 })
 export class Modal {
 	private _el:HTMLElement;

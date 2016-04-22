@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from "angular2/common";
 import {MAPTOITERABLE_PROVIDERS} from './MapToIterable';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
   template: `
@@ -48,6 +49,19 @@ import {MapToIterablePipe} from 'fuel-ui/fuel-ui';
 </p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
+<pre>
+<code class="language-markup" code-highlight>
+&lt;ul *ngFor=&quot;#object of data&quot;&gt;
+    &lt;li *ngFor=&quot;#keyValuePair of object | mapToIterable&quot;&gt;
+        {<pre>{</pre>keyValuePair.key}}: {<pre>{</pre>keyValuePair.val}}
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class MapToIterableExample {
@@ -68,39 +82,11 @@ export class MapToIterableExample {
 }
 </code>
 </pre>
-
-<pre>
-<code class="language-html" code-highlight>
-&lt;ul *ngFor=&quot;#object of data&quot;&gt;
-    &lt;li *ngFor=&quot;#keyValuePair of object | mapToIterable&quot;&gt;
-        {<pre>{</pre>keyValuePair.key}}: {<pre>{</pre>keyValuePair.val}}
-    &lt;/li&gt;
-&lt;/ul&gt;
-</code>
-</pre>
-
-<h3>Parameters</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>type</td>
-            <td>string</td>
-            <td>text</td>
-            <td>The type of data you want the input to be output as</td>
-        </tr>
-    </tbody>
-</table>
+</tab>
+</tabset>
 
 </div>`,
-    directives: [CORE_DIRECTIVES, CodeHighlighter],
+    directives: [CORE_DIRECTIVES, CodeHighlighter, TAB_PROVIDERS],
     pipes: [MAPTOITERABLE_PROVIDERS]
 })
 export class MapToIterableDemo {

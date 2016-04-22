@@ -35,7 +35,7 @@ This is the NoUiSlider (from Refreshless.com), wrapped in an Angular2 component
   * `[width]` _- string - (Default: `null`)_ -
     Width of the slider element
 
-### TableSortable Example
+### Slider Example
 ```javascript
 sliderValue: number = 50;
 secondSliderValue: number = 250;
