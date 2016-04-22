@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/nouislider/nouislider.d.ts" />
 import { AfterViewInit, ElementRef, EventEmitter, OnChanges } from "angular2/core";
-import "./NoUiSlider.js";
+import "./NoUiSlider";
 export declare class Slider implements AfterViewInit, OnChanges {
     element: ElementRef;
     background: string;
