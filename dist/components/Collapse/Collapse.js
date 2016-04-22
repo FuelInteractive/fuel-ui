@@ -23,7 +23,7 @@ var Collapse = (function () {
     Collapse = __decorate([
         core_1.Component({
             selector: "collapse",
-            template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"collapse fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
+            template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], Collapse);

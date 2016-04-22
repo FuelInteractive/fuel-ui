@@ -47,7 +47,7 @@ var TableSortable = (function () {
     TableSortable = __decorate([
         core_1.Component({
             selector: 'table-sortable',
-            template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n          <td *ngFor=\"#column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
+            template: "\n    <table class=\"table table-bordered table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n          <td *ngFor=\"#column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
             directives: [common_1.CORE_DIRECTIVES],
             pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
         }), 

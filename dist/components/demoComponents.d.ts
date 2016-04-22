@@ -1,5 +1,7 @@
+import { CarouselDemo } from "./Carousel/Carousel.Demo";
 import { CollapseDemo } from "./Collapse/Collapse.Demo";
-export declare var FUELUI_DEMO_COMPONENT_PROVIDERS: typeof CollapseDemo[][];
+import { TabDemo } from "./Tab/Tab.Demo";
+export declare var FUELUI_DEMO_COMPONENT_PROVIDERS: (typeof CarouselDemo[] | typeof CollapseDemo[] | typeof TabDemo[])[];
 export * from "./Alert/Alert.Demo";
 export * from "./Carousel/Carousel.Demo";
 export * from "./Collapse/Collapse.Demo";
@@ -12,3 +14,4 @@ export * from "./Pagination/Pagination.Demo";
 export * from "./Progress/Progress.Demo";
 export * from "./TableSortable/TableSortable.Demo";
 export * from "./Slider/Slider.Demo";
+export * from "./Tab/Tab.Demo";

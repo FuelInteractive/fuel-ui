@@ -5,5 +5,6 @@ function __export(m) {
 __export(require("./components/demoComponents"));
 __export(require("./directives/demoDirectives"));
 __export(require("./pipes/demoPipes"));
+__export(require("./utilities/demoUtilities"));
 
 //# sourceMappingURL=fuel-ui-demo.js.map

@@ -14,6 +14,7 @@ var Pagination_Demo_1 = require("./Pagination/Pagination.Demo");
 var Progress_Demo_1 = require("./Progress/Progress.Demo");
 var TableSortable_Demo_1 = require("./TableSortable/TableSortable.Demo");
 var Slider_Demo_1 = require("./Slider/Slider.Demo");
+var Tab_Demo_1 = require("./Tab/Tab.Demo");
 exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Alert_Demo_1.ALERT_DEMO_PROVIDERS,
     Carousel_Demo_1.CAROUSEL_DEMO_PROVIDERS,
@@ -26,7 +27,8 @@ exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Pagination_Demo_1.PAGINATION_DEMO_PROVIDERS,
     Progress_Demo_1.PROGRESS_DEMO_PROVIDERS,
     TableSortable_Demo_1.TABLESORTABLE_DEMO_PROVIDERS,
-    Slider_Demo_1.SLIDER_DEMO_PROVIDERS
+    Slider_Demo_1.SLIDER_DEMO_PROVIDERS,
+    Tab_Demo_1.TAB_DEMO_PROVIDERS
 ];
 __export(require("./Alert/Alert.Demo"));
 __export(require("./Carousel/Carousel.Demo"));
@@ -40,5 +42,6 @@ __export(require("./Pagination/Pagination.Demo"));
 __export(require("./Progress/Progress.Demo"));
 __export(require("./TableSortable/TableSortable.Demo"));
 __export(require("./Slider/Slider.Demo"));
+__export(require("./Tab/Tab.Demo"));
 
 //# sourceMappingURL=demoComponents.js.map
