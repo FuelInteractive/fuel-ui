@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped table-sortable">
+<table class="table table-bordered table-hover table-striped table-sortable">
   <thead>
     <tr>
       <th *ngFor="#column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">

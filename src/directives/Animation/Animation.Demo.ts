@@ -1,7 +1,10 @@
 import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from "angular2/common";
 import {Animation} from './Animation';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -41,6 +44,8 @@ import {Animation} from 'fuel-ui/fuel-ui';
 <p>Animation helper is a directive that adds events to bind to on elements that are animated. It gives information about the animation that is happening and an ability to start and stop the animation. Can be used to combine animations synchronously.</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;div class=&quot;some-animation-class&quot;
@@ -51,7 +56,8 @@ import {Animation} from 'fuel-ui/fuel-ui';
 &lt;button class=&quot;btn btn-primary&quot; (click)=&quot;start()&quot;&gt;Play&lt;/button&gt;
 </code>
 </pre>
-
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class AnimationExample {
@@ -73,52 +79,27 @@ export class AnimationExample {
 }
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>play</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td>Start the animation</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 <h3>Events</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Event Object</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>animationstart</td>
-            <td>Animation Object</td>
-            <td>Information about the animation when it starts</td>
-        </tr>
-        <tr>
-            <td>animationend</td>
-            <td>Animation Object</td>
-            <td>Information about the animation when it ends</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="eventsColumns"
+    [data]="events"
+    [sort]="eventsSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [Animation, CORE_DIRECTIVES, CodeHighlighter]
+        directives: [Animation, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class AnimationDemo {
     play:boolean = false;
@@ -136,6 +117,18 @@ export class AnimationDemo {
         this.play = false;
         this.animationLog.push($event);
     }
+    
+    attributes:Attribute[] = [
+        new Attribute('play', 'boolean', 'false', 'Start the animation')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
+    events:Event[] = [
+        new Event('animationstart', 'Animation Object', 'Information about the animation when it starts'),
+        new Event('animationend', 'Animation Object', 'Information about the animation when it ends')
+    ];
+    eventsColumns:TableSortableColumn[] = EventColumns;
+    eventsSort:TableSortableSorting = EventsDefaultSort;
 }
 
 export var ANIMATION_DEMO_PROVIDERS = [

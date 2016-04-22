@@ -1,5 +1,7 @@
 import {Component} from 'angular2/core';
 import {CodeHighlighter} from './CodeHighlighter';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -31,19 +33,21 @@ import {CodeHighlighter} from 'fuel-ui/fuel-ui';
 <p>CodeHighlighter is applied to a code element with [code-highlight] directive. The <code>&lt;code&gt;</code> should have a style class having "language-" prefix to specify the language to highlight. See <a href="http://prismjs.com/#languages-list" target="_blank">Prismjs docs</a> for the list of available languages. An example block with css code would be as follows.</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-<pre>\n
-    &lt;code class="language-css" code-highlight&gt;
-        #titanic { 
-            float: none;
-        }
-    &lt;/code&gt;
-</pre>
+&lt;code class="language-css" code-highlight&gt;
+    #titanic { 
+        float: none;
+    }
+&lt;/code&gt;
 </code>
 </pre>
+</tab>
+</tabset>
 </div>`,
-        directives: [CodeHighlighter]
+        directives: [CodeHighlighter, TAB_PROVIDERS]
 })
 export class CodeHighlighterDemo {
     

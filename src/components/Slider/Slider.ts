@@ -19,7 +19,7 @@ export class Slider implements AfterViewInit, OnChanges {
     @Input() behavior: string = "tap";
     @Input() pips: number = 5;
     @Input() pipDensity: number = 5;
-    @Input() step: number = 10;
+    @Input() step: number = 1;
     @Input() decimals: number = 0;
     @Input() minValue: number = 0;
     @Input() maxValue: number = 100;

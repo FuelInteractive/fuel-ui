@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {DatePicker} from './DatePicker';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -36,6 +40,8 @@ import {DatePicker} from 'fuel-ui/fuel-ui';
 <p>DatePicker is a custom element to select a date on a calendar. It supports filtering of dates so that you can disable dates programmatically. Also supports min and max dates</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;date-picker
@@ -47,7 +53,8 @@ import {DatePicker} from 'fuel-ui/fuel-ui';
 &lt;/date-picker&gt;
 </code>
 </pre>
-
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class DatePickerExample { 
@@ -64,53 +71,19 @@ export class DatePickerExample {
 }
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>string</td>
-            <td>null</td>
-            <td>Placeholder to display before a date is selected</td>
-        </tr>
-        <tr>
-            <td>minDate</td>
-            <td>string|Date</td>
-            <td>new Date(1900,0,1)</td>
-            <td>Minimum selectable date</td>
-        </tr>
-        <tr>
-            <td>maxDate</td>
-            <td>string|Date</td>
-            <td>new Date(2200,0,1)</td>
-            <td>Maximum selectable date</td>
-        </tr>
-        <tr>
-            <td>dateFilter</td>
-            <td>function(date): boolean</td>
-            <td>null</td>
-            <td>Filter to disable dates. A return of <i>false</i> will disable the day</td>
-        </tr>
-        <tr>
-            <td>value</td>
-            <td>Date</td>
-            <td>null</td>
-            <td>Two-way binding of the selected date</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [DatePicker, CodeHighlighter]
+        directives: [DatePicker, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DatePickerDemo { 
     datePickerValue: Date;
@@ -121,6 +94,16 @@ export class DatePickerDemo {
         
         return true;
     }
+    
+    attributes:any[] = [
+        new Attribute('label', 'string', 'null', 'Placeholder and label to display for the date input'),
+        new Attribute('minDate', 'string|Date', 'new Date(1900,0,1)', 'Minimum selectable date'),
+        new Attribute('maxDate', 'string|Date', 'new Date(2200,0,1)', 'Maximum selectable date'),
+        new Attribute('dateFilter', 'function(date): boolean', 'null', 'Filter to disable dates. A return of <i>false</i> will disable the day'),
+        new Attribute('value', 'Date', 'null', 'Two-way binding of the selected DateRange')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var DATEPICKER_DEMO_PROVIDERS = [

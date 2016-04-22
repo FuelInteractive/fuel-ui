@@ -826,7 +826,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerProviders",
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", "angular2/common", "../../directives/Animation/AnimationListener"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", "angular2/common", "../../directives/Animation/Animation"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -850,7 +850,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
   };
   var core_1 = $__require('angular2/core');
   var common_1 = $__require('angular2/common');
-  var AnimationListener_1 = $__require('../../directives/Animation/AnimationListener');
+  var Animation_1 = $__require('../../directives/Animation/Animation');
   var Modal = (function() {
     function Modal(el) {
       this.displayed = false;
@@ -900,7 +900,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
       host: {'(click)': 'clickElement($event)'},
       styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
       template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, AnimationListener_1.AnimationListener]
+      directives: [common_1.CORE_DIRECTIVES, Animation_1.Animation]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
     return Modal;
   }());
@@ -1225,12 +1225,98 @@ System.registerDynamic("fuel-ui/dist/components/Collapse/Collapse", ["angular2/c
     __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "buttonText", void 0);
     Collapse = __decorate([core_1.Component({
       selector: "collapse",
-      template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"collapse fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
+      template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
     }), __metadata('design:paramtypes', [])], Collapse);
     return Collapse;
   }());
   exports.Collapse = Collapse;
   exports.COLLAPSE_PROVIDERS = [Collapse];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./TabSet"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('angular2/core');
+  var TabSet_1 = $__require('./TabSet');
+  var Tab = (function() {
+    function Tab(tabset) {
+      this.activeChange = new core_1.EventEmitter(false);
+      this.select = new core_1.EventEmitter(false);
+      this.deselect = new core_1.EventEmitter(false);
+      this.remove = new core_1.EventEmitter(false);
+      this.addClass = true;
+      this.tabset = tabset;
+      this.tabset.addTab(this);
+    }
+    Object.defineProperty(Tab.prototype, "active", {
+      get: function() {
+        return this._active;
+      },
+      set: function(active) {
+        var _this = this;
+        if (this.disabled && active || !active) {
+          if (this._active && this._active != active) {
+            this.deselect.next(this);
+          }
+          if (!active) {
+            this._active = active;
+          }
+          this.activeChange.next(this._active);
+          return;
+        }
+        if (this._active != active) {
+          this.select.next(this);
+        }
+        this._active = active;
+        this.activeChange.next(this._active);
+        this.tabset.tabs.forEach(function(tab) {
+          if (tab !== _this) {
+            tab.active = false;
+            tab.activeChange.next(false);
+          }
+        });
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Tab.prototype.ngOnDestroy = function() {
+      this.remove.next(this);
+      this.tabset.removeTab(this);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Tab.prototype, "heading", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "disabled", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "removable", void 0);
+    __decorate([core_1.HostBinding('class.active'), core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "active", null);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "activeChange", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "select", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "deselect", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "remove", void 0);
+    __decorate([core_1.HostBinding('class.tab-pane'), __metadata('design:type', Boolean)], Tab.prototype, "addClass", void 0);
+    Tab = __decorate([core_1.Directive({selector: 'tab, [tab]'}), __metadata('design:paramtypes', [TabSet_1.TabSet])], Tab);
+    return Tab;
+  }());
+  exports.Tab = Tab;
+  exports.TAB_PROVIDERS = [Tab, TabSet_1.TabSet];
   return module.exports;
 });
 
@@ -1283,7 +1369,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
     __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
     TableSortable = __decorate([core_1.Component({
       selector: 'table-sortable',
-      template: "\n    <table class=\"table table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n          <td *ngFor=\"#column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
+      template: "\n    <table class=\"table table-bordered table-hover table-striped table-sortable\">\n      <thead>\n        <tr>\n          <th *ngFor=\"#column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n            {{column.display}}\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"#object of data | orderBy : convertSorting()\">\n          <td *ngFor=\"#column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
       directives: [common_1.CORE_DIRECTIVES],
       pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
     }), __metadata('design:paramtypes', [])], TableSortable);
@@ -2514,7 +2600,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
       this.behavior = "tap";
       this.pips = 5;
       this.pipDensity = 5;
-      this.step = 10;
+      this.step = 1;
       this.decimals = 0;
       this.minValue = 0;
       this.maxValue = 100;
@@ -2604,6 +2690,127 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
   return module.exports;
 });
 
+System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('angular2/core');
+  var common_1 = $__require('angular2/common');
+  var TabSet = (function() {
+    function TabSet() {
+      this.tabs = [];
+      this.classMap = {};
+    }
+    Object.defineProperty(TabSet.prototype, "vertical", {
+      get: function() {
+        return this._vertical;
+      },
+      set: function(value) {
+        this._vertical = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(TabSet.prototype, "type", {
+      get: function() {
+        return this._type;
+      },
+      set: function(value) {
+        this._type = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    TabSet.prototype.ngOnInit = function() {
+      this.type = this.type !== 'undefined' ? this.type : 'tabs';
+    };
+    TabSet.prototype.ngOnDestroy = function() {
+      this.isDestroyed = true;
+    };
+    TabSet.prototype.addTab = function(tab) {
+      this.tabs.push(tab);
+      tab.active = this.tabs.length === 1 && tab.active !== false;
+    };
+    TabSet.prototype.removeTab = function(tab) {
+      var index = this.tabs.indexOf(tab);
+      if (index === -1 || this.isDestroyed) {
+        return;
+      }
+      if (tab.active && this.hasAvailableTabs(index)) {
+        var newActiveIndex = this.getClosestTabIndex(index);
+        this.tabs[newActiveIndex].active = true;
+      }
+      tab.remove.next(tab);
+      this.tabs.splice(index, 1);
+    };
+    TabSet.prototype.getClosestTabIndex = function(index) {
+      var tabsLength = this.tabs.length;
+      if (!tabsLength) {
+        return -1;
+      }
+      for (var step = 1; step <= tabsLength; step += 1) {
+        var prevIndex = index - step;
+        var nextIndex = index + step;
+        if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
+          return prevIndex;
+        }
+        if (this.tabs[nextIndex] && !this.tabs[nextIndex].disabled) {
+          return nextIndex;
+        }
+      }
+      return -1;
+    };
+    TabSet.prototype.hasAvailableTabs = function(index) {
+      var tabsLength = this.tabs.length;
+      if (!tabsLength) {
+        return false;
+      }
+      for (var i = 0; i < tabsLength; i += 1) {
+        if (!this.tabs[i].disabled && i !== index) {
+          return true;
+        }
+      }
+      return false;
+    };
+    TabSet.prototype.setClassMap = function() {
+      this.classMap = (_a = {'nav-stacked': this.vertical}, _a['nav-' + (this.type || 'tabs')] = true, _a);
+      var _a;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TabSet.prototype, "vertical", null);
+    __decorate([core_1.Input(), __metadata('design:type', String)], TabSet.prototype, "type", null);
+    TabSet = __decorate([core_1.Component({
+      selector: 'tabset',
+      directives: [common_1.NgClass],
+      template: "\n    <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n        <li *ngFor=\"#tab of tabs\" class=\"nav-item\"\n          [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\">\n          <a href class=\"nav-link\"\n            [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\"\n            (click)=\"tab.active = true\">\n            <span [innerHtml]=\"tab.heading\"></span>\n            <span *ngIf=\"tab.removable\" (click)=\"$event.preventDefault(); removeTab(tab);\">\n              <i class=\"fa fa-remove\"></i>\n            </span>\n          </a>\n        </li>\n    </ul>\n    <div class=\"tab-content\">\n      <ng-content></ng-content>\n    </div>\n  "
+    }), __metadata('design:paramtypes', [])], TabSet);
+    return TabSet;
+  }());
+  exports.TabSet = TabSet;
+  return module.exports;
+});
+
 System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableColumn", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -2639,7 +2846,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Collapse/Collapse", "./TableSortable/TableSortable", "./Slider/Slider", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Collapse/Collapse", "./Tab/Tab", "./TableSortable/TableSortable", "./Slider/Slider", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2658,9 +2865,10 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "
   var InfiniteScroller_1 = $__require('./InfiniteScroller/InfiniteScroller');
   var Dropdown_1 = $__require('./Dropdown/Dropdown');
   var Collapse_1 = $__require('./Collapse/Collapse');
+  var Tab_1 = $__require('./Tab/Tab');
   var TableSortable_1 = $__require('./TableSortable/TableSortable');
   var Slider_1 = $__require('./Slider/Slider');
-  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, Collapse_1.COLLAPSE_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS];
+  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, Collapse_1.COLLAPSE_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS];
   __export($__require('./Alert/Alert'));
   __export($__require('./Carousel/Carousel'));
   __export($__require('./DatePicker/DatePickerProviders'));
@@ -2669,66 +2877,12 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "
   __export($__require('./InfiniteScroller/InfiniteScroller'));
   __export($__require('./Dropdown/Dropdown'));
   __export($__require('./Collapse/Collapse'));
+  __export($__require('./Tab/Tab'));
+  __export($__require('./Tab/TabSet'));
   __export($__require('./TableSortable/TableSortable'));
   __export($__require('./TableSortable/TableSortableColumn'));
   __export($__require('./TableSortable/TableSortableSorting'));
   __export($__require('./Slider/Slider'));
-  return module.exports;
-});
-
-System.registerDynamic("fuel-ui/dist/directives/Animation/AnimationListener", ["angular2/core"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('angular2/core');
-  var AnimationListener = (function() {
-    function AnimationListener() {
-      this.animationStart = new core_1.EventEmitter();
-      this.animationEnd = new core_1.EventEmitter();
-    }
-    AnimationListener.prototype.animationStarted = function($event) {
-      this.animationStart.next($event);
-    };
-    AnimationListener.prototype.animationEnded = function($event) {
-      this.animationEnd.next($event);
-    };
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationStart", void 0);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AnimationListener.prototype, "animationEnd", void 0);
-    AnimationListener = __decorate([core_1.Directive({
-      selector: '[.animated]',
-      host: {
-        '(animationstart)': 'animationStarted($event)',
-        '(webkitAnimationStart)': 'animationStarted($event)',
-        '(oanimationstart)': 'animationStarted($event)',
-        '(MSAnimationStart)': 'animationStarted($event)',
-        '(animationend)': 'animationEnded($event)',
-        '(webkitAnimationEnd)': 'animationEnded($event)',
-        '(oanimationend)': 'animationEnded($event)',
-        '(MSAnimationEnd)': 'animationEnded($event)'
-      }
-    }), __metadata('design:paramtypes', [])], AnimationListener);
-    return AnimationListener;
-  }());
-  exports.AnimationListener = AnimationListener;
-  exports.ANIMATION_LISTENER_PROVIDERS = [AnimationListener];
   return module.exports;
 });
 
@@ -2958,7 +3112,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/AnimationListener", "./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2969,12 +3123,10 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Anima
       if (!exports.hasOwnProperty(p))
         exports[p] = m[p];
   }
-  var AnimationListener_1 = $__require('./Animation/AnimationListener');
   var Animation_1 = $__require('./Animation/Animation');
   var Tooltip_1 = $__require('./Tooltip/Tooltip');
   var CodeHighlighter_1 = $__require('./CodeHighlighter/CodeHighlighter');
-  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, AnimationListener_1.AnimationListener, CodeHighlighter_1.CodeHighlighter];
-  __export($__require('./Animation/AnimationListener'));
+  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter];
   __export($__require('./Animation/Animation'));
   __export($__require('./Tooltip/Tooltip'));
   __export($__require('./CodeHighlighter/CodeHighlighter'));

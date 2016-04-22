@@ -2,6 +2,9 @@ import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from "angular2/common";
 import {RANGE_PROVIDERS} from './Range';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
   template: `
@@ -51,6 +54,15 @@ import {RangePipe} from 'fuel-ui/fuel-ui';
 <p>Range is a pipe that simply takes in 3 arguments, a <code>start</code> number, <code>end</code> number, and <code>step</code> number.</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
+<pre>
+<code class="language-javascript" code-highlight>
+*ngFor="#number of numbers | range : start : end : step"
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class RangeExample {
@@ -61,47 +73,19 @@ export class RangeExample {
 }
 </code>
 </pre>
-
-<pre>
-<code class="language-javascript" code-highlight>
-*ngFor="#number of numbers | range : start : end : step"
-</code>
-</pre>
+</tab>
+</tabset>
 
 <h3>Parameters</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>start</td>
-            <td>number</td>
-            <td>0</td>
-            <td>The starting number of the array</td>
-        </tr>
-        <tr>
-            <td>end</td>
-            <td>number</td>
-            <td>4</td>
-            <td>The largest possible number of the array</td>
-        </tr>
-        <tr>
-            <td>step</td>
-            <td>number</td>
-            <td>1</td>
-            <td>The amount of step between each number within the array</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="parametersColumns"
+    [data]="parameters"
+    [sort]="parametersSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-    directives: [CORE_DIRECTIVES, CodeHighlighter],
+    directives: [CORE_DIRECTIVES, CodeHighlighter, TableSortable, TAB_PROVIDERS],
     pipes: [RANGE_PROVIDERS]
 })
 export class RangeDemo {
@@ -109,6 +93,14 @@ export class RangeDemo {
     startNumber:number = 0;
     endNumber:number = 5;
     stepNumber:number = 1;
+    
+    parameters:Attribute[] = [
+        new Attribute('start', 'number', '0', 'The starting number of the array'),
+        new Attribute('end', 'number', '4', 'The largest possible number of the array'),
+        new Attribute('step', 'number', '1', 'The amount of step between each number within the array')
+    ];
+    parametersColumns:TableSortableColumn[] = AttributeColumns;
+    parametersSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var RANGE_DEMO_PROVIDERS = [
