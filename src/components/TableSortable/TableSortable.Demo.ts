@@ -1,6 +1,9 @@
 import {Component} from 'angular2/core';
 import {TABLESORTABLE_PROVIDERS, TableSortableColumn, TableSortableSorting} from './TableSortable';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -35,6 +38,8 @@ import {TableSortable, TableSortableColumn, TableSortableSorting} from 'fuel-ui/
 <p>TableSortable is a custom element to display any arbitrary data in a sortable table</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;table-sortable
@@ -45,7 +50,8 @@ import {TableSortable, TableSortableColumn, TableSortableSorting} from 'fuel-ui/
 &lt;/table-sortable&gt;
 </code>
 </pre>
-
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class TableSortableExample {
@@ -82,41 +88,19 @@ export class TableSortableExample {
 }
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>columns</td>
-            <td>TableSortableColumn[]</td>
-            <td>null</td>
-            <td>Array of all columns to be displayed and how to format them for ordering</td>
-        </tr>
-        <tr>
-            <td>data</td>
-            <td>any[]</td>
-            <td>null</td>
-            <td>Any arbitrary array of objects</td>
-        </tr>
-        <tr>
-            <td>sort</td>
-            <td>TableSortableSorting</td>
-            <td>null</td>
-            <td>Which column to sort on and which direction (ascending or descending)</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [TABLESORTABLE_PROVIDERS, CodeHighlighter]
+        directives: [TABLESORTABLE_PROVIDERS, CodeHighlighter, TAB_PROVIDERS]
 })
 export class TableSortableDemo {
     rows: any[] = [
@@ -149,6 +133,14 @@ export class TableSortableDemo {
     column: 'Name', //to match the variable of one of the columns
     descending: false
   };
+  
+  attributes:Attribute[] = [
+    new Attribute('columns', 'TableSortableColumn[]', 'null', 'Array of all columns to be displayed and how to format them for ordering'),
+    new Attribute('data', 'any[]', 'null', 'Any arbitrary array of objects'),
+    new Attribute('sort', 'TableSortableSorting', 'null', 'Which column to sort on and which direction (ascending or descending)')
+  ];
+  attributesColumns:TableSortableColumn[] = AttributeColumns;
+  attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var TABLESORTABLE_DEMO_PROVIDERS = [

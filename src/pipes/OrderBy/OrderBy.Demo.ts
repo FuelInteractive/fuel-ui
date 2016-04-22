@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from "angular2/common";
 import {ORDERBY_PROVIDERS} from './OrderBy';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 export class Person {
   constructor(public firstName: string, public lastName: string, public age: number) {}
@@ -158,6 +159,16 @@ OrderBy pipe also allows for data to be pushed dynamically and sorted.</p>
 
 <h3>Usage</h3>
 <h4>One Dimensional Arrays</h4>
+<tabset>
+<tab heading="HTML">
+<pre>
+<code class="language-javascript" code-highlight>
+*ngFor="#f of fruit | orderBy : '+'"
+*ngFor="#f of fruit | orderBy : ['+']"
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class OrderByExample {
@@ -165,20 +176,19 @@ export class OrderByExample {
 }
 </code>
 </pre>
-
-<pre>
-<code class="language-javascript" code-highlight>
-*ngFor="#f of fruit | orderBy : '+'"
-</code>
-</pre>
-
-<pre>
-<code class="language-javascript" code-highlight>
-*ngFor="#f of fruit | orderBy : ['+']"
-</code>
-</pre>
+</tab>
+</tabset>
 
 <h4>Multi-Dimensional Arrays</h4>
+<tabset>
+<tab heading="HTML">
+<pre>
+<code class="language-javascript" code-highlight>
+*ngFor="#person of people | orderBy : ['-age', 'firstName']"
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class Person {
@@ -198,15 +208,11 @@ export class OrderByExample {
 }
 </code>
 </pre>
-
-<pre>
-<code class="language-javascript" code-highlight>
-*ngFor="#person of people | orderBy : ['-age', 'firstName']"
-</code>
-</pre>
+</tab>
+</tabset>
 
 </div>`,
-        directives: [CORE_DIRECTIVES, CodeHighlighter],
+        directives: [CORE_DIRECTIVES, CodeHighlighter, TAB_PROVIDERS],
         pipes: [ORDERBY_PROVIDERS]
 })
 export class OrderByDemo {

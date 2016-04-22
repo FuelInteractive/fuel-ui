@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {ALERT_PROVIDERS} from './Alert';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -32,6 +36,8 @@ import {Alert} from 'fuel-ui/fuel-ui';
 <p>Alert is a custom element to programmatically display feedback messages typically for user actions</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;alert [(displayed)]=&quot;showAlert&quot; type=&quot;success&quot; [closeButton]=&quot;false&quot;&gt;
@@ -39,41 +45,28 @@ import {Alert} from 'fuel-ui/fuel-ui';
 &lt;/alert&gt;
 </code>
 </pre>
+</tab>
+<tab heading="TypeScript">
+<pre>
+<code class="language-javascript" code-highlight>
+export class AlertExample {
+    showAlert: boolean = false;
+}
+</code>
+</pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>displayed</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td>Two-way binding to display the alert</td>
-        </tr>
-        <tr>
-            <td>closeButton</td>
-            <td>boolean</td>
-            <td>true</td>
-            <td>Option to display the 'X' in the right hand corner to close the alert</td>
-        </tr>
-        <tr>
-            <td>type</td>
-            <td>string</td>
-            <td>success</td>
-            <td>The type of alert to display. Default types include success, info, warning, and danger. <a href="http://v4-alpha.getbootstrap.com/components/alerts/#link-color" target="_blank">More info here...</a></td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [ALERT_PROVIDERS, CodeHighlighter]
+        directives: [ALERT_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class AlertDemo {
     showAlert: boolean = false;
@@ -95,6 +88,14 @@ export class AlertDemo {
     test(): void{
         console.log("changed");
     }
+    
+    attributes:any[] = [
+        new Attribute('displayed', 'boolean', 'false', 'Two-way binding to display the alert'),
+        new Attribute('closeButton', 'boolean', 'true', "Option to display the 'X' in the right hand corner to close the alert"),
+        new Attribute('type', 'string', 'success', 'The type of alert to display. Default types include success, info, warning, and danger. <a href="http://v4-alpha.getbootstrap.com/components/alerts/#link-color" target="_blank">More info here...</a>'),
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var ALERT_DEMO_PROVIDERS = [

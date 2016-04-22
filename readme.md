@@ -59,10 +59,12 @@ And finally, add the proper script tags to your `index.html`
 - [Progressbar](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Progress#readme)
 - [Slider](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Slider#readme)
 - [TableSortable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TableSortable#readme)
+- [Tabs](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Tab#readme)
 
 ##Directives
-- [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
 - [Animation (helper)](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Animation#readme)
+- [CodeHighlighter](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/CodeHighlighter#readme)
+- [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
 
 ##Pipes
 - [Format](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/Format#readme)

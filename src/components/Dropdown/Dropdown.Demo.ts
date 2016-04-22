@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {DROPDOWN_COMPONENT_PROVIDERS} from './Dropdown';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -30,6 +34,8 @@ import {Dropdown} from 'fuel-ui/fuel-ui';
 <p>Dropdown is a custom element to programmatically create dropdowns</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;dropdown label=&quot;test dropdown label&quot;&gt;
@@ -39,31 +45,26 @@ import {Dropdown} from 'fuel-ui/fuel-ui';
 &lt;/dropdown&gt;
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>string</td>
-            <td>null</td>
-            <td>Dropdown button text</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [DROPDOWN_COMPONENT_PROVIDERS, CodeHighlighter]
+        directives: [DROPDOWN_COMPONENT_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DropdownDemo {
+    attributes:any[] = [
+        new Attribute('label', 'string', 'null', 'Dropdown button text')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var DROPDOWN_DEMO_PROVIDERS = [

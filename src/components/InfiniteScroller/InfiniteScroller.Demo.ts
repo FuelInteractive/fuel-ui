@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {INFINITE_SCROLLER_PROVIDERS} from './InfiniteScroller';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -43,6 +47,8 @@ import {INFINITE_SCROLLER_PROVIDERS} from 'fuel-ui/fuel-ui';
 <p>The Infinite Scroller component allows for asynchronous ability to show items as a user scrolls. Use the <code>next</code> and <code>prev</code> events to know when to start adding items to show or removing items for performance reasons.</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;infinite-scroller 
@@ -61,7 +67,8 @@ import {INFINITE_SCROLLER_PROVIDERS} from 'fuel-ui/fuel-ui';
 &lt;/infinite-scroller&gt;
 </code>
 </pre>
-
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class InfiniteScrollerDemo {
@@ -97,64 +104,27 @@ export class InfiniteScrollerDemo {
 }
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>height</td>
-            <td>string</td>
-            <td>auto</td>
-            <td>Height of element. Examples: 300px, 10%, auto, etc.</td>
-        </tr>
-        <tr>
-            <td>distance</td>
-            <td>number</td>
-            <td>100</td>
-            <td>How far up and down the user can scroll for more scroll items</td>
-        </tr>
-        <tr>
-            <td>hideScrollbar</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td>Hide the scrollbar of the InfiniteScroller</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 <h3>Events</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Event Object</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>next</td>
-            <td>null</td>
-            <td>When a scroll item is passed when scrolling down</td>
-        </tr>
-        <tr>
-            <td>prev</td>
-            <td>null</td>
-            <td>When a scroll item is passed when scrolling up</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="eventsColumns"
+    [data]="events"
+    [sort]="eventsSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [INFINITE_SCROLLER_PROVIDERS, CodeHighlighter]
+        directives: [INFINITE_SCROLLER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class InfiniteScrollerDemo {
     infiniteScrollItems: string[] = [];
@@ -186,6 +156,20 @@ export class InfiniteScrollerDemo {
         this.infiniteScrollMax++;
         this.infiniteScrollItems.push(newItem);
     }
+    
+    attributes:Attribute[] = [
+        new Attribute('height', 'string', 'auto', "Height of element. Examples: '300px', '10%', 'auto', etc."),
+        new Attribute('distance', 'number', '100', 'How far up and down the user can scroll for more scroll items'),
+        new Attribute('hideScrollbar', 'boolean', 'false', 'Hide the scrollbar of the InfiniteScroller')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
+    events:Event[] = [
+        new Event('next', 'null', 'When a scroll item is passed when scrolling down'),
+        new Event('prev', 'null', 'When a scroll item is passed when scrolling up'),
+    ];
+    eventsColumns:TableSortableColumn[] = EventColumns;
+    eventsSort:TableSortableSorting = EventsDefaultSort;
 }
 
 export var INFINITESCROLLER_DEMO_PROVIDERS = [

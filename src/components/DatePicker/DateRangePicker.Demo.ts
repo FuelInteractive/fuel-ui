@@ -2,6 +2,10 @@ import {Component} from 'angular2/core';
 import {DateRange} from '../../utilities/DateUtils';
 import {DateRangePicker} from './DateRangePicker';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -42,6 +46,8 @@ import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
 <p>DateRangePicker is a custom element to select a date range on a calendar. It supports filtering of dates so that you can disable dates programmatically. Also supports min and max dates</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;date-range-picker
@@ -54,7 +60,8 @@ import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
 &lt;/date-range-picker&gt;
 </code>
 </pre>
-
+</tab>
+<tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
 export class DateRangePickerExample { 
@@ -75,71 +82,19 @@ export class DateRangePickerExample {
 }
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>startLabel</td>
-            <td>string</td>
-            <td>null</td>
-            <td>Placeholder and label to display for the start date input</td>
-        </tr>
-        <tr>
-            <td>endLabel</td>
-            <td>string</td>
-            <td>null</td>
-            <td>Placeholder and label to display for the end date input</td>
-        </tr>
-        <tr>
-            <td>minDate</td>
-            <td>string|Date</td>
-            <td>new Date(1900,0,1)</td>
-            <td>Minimum selectable date</td>
-        </tr>
-        <tr>
-            <td>maxDate</td>
-            <td>string|Date</td>
-            <td>new Date(2200,0,1)</td>
-            <td>Maximum selectable date</td>
-        </tr>
-        <tr>
-            <td>dateFilter</td>
-            <td>function(date): boolean</td>
-            <td>null</td>
-            <td>Filter to disable dates. A return of <i>false</i> will disable the day</td>
-        </tr>
-        <tr>
-            <td>value</td>
-            <td>DateRange</td>
-            <td>null</td>
-            <td>Two-way binding of the selected DateRange</td>
-        </tr>
-        <tr>
-            <td>startDate</td>
-            <td>Date</td>
-            <td>null</td>
-            <td>Two-way binding of the selected start date</td>
-        </tr>
-        <tr>
-            <td>endDate</td>
-            <td>Date</td>
-            <td>null</td>
-            <td>Two-way binding of the selected end date</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [DateRangePicker, CodeHighlighter]
+        directives: [DateRangePicker, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange;
@@ -154,6 +109,19 @@ export class DateRangePickerDemo {
         
         return true;
     }
+    
+    attributes:any[] = [
+        new Attribute('startLabel', 'string', 'null', 'Placeholder and label to display for the start date input'),
+        new Attribute('endLabel', 'string', 'null', 'Placeholder and label to display for the end date input'),
+        new Attribute('minDate', 'string|Date', 'new Date(1900,0,1)', 'Minimum selectable date'),
+        new Attribute('maxDate', 'string|Date', 'new Date(2200,0,1)', 'Maximum selectable date'),
+        new Attribute('dateFilter', 'function(date): boolean', 'null', 'Filter to disable dates. A return of <i>false</i> will disable the day'),
+        new Attribute('value', 'DateRange', 'null', 'Two-way binding of the selected DateRange'),
+        new Attribute('startDate', 'Date', 'null', 'Two-way binding of the selected start date'),
+        new Attribute('endDate', 'Date', 'null', 'Two-way binding of the selected end date')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var DATERANGEPICKER_DEMO_PROVIDERS = [

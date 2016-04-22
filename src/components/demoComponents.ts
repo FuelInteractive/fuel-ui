@@ -10,6 +10,7 @@ import {PAGINATION_DEMO_PROVIDERS, PaginationDemo} from "./Pagination/Pagination
 import {PROGRESS_DEMO_PROVIDERS, ProgressDemo} from "./Progress/Progress.Demo";
 import {TABLESORTABLE_DEMO_PROVIDERS, TableSortableDemo} from "./TableSortable/TableSortable.Demo";
 import {SLIDER_DEMO_PROVIDERS, SliderDemo} from "./Slider/Slider.Demo";
+import {TAB_DEMO_PROVIDERS, TabDemo} from "./Tab/Tab.Demo";
 
 export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
 	ALERT_DEMO_PROVIDERS,
@@ -23,7 +24,8 @@ export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     PAGINATION_DEMO_PROVIDERS,
     PROGRESS_DEMO_PROVIDERS,
     TABLESORTABLE_DEMO_PROVIDERS,
-    SLIDER_DEMO_PROVIDERS
+    SLIDER_DEMO_PROVIDERS,
+    TAB_DEMO_PROVIDERS
 ];
 
 export * from "./Alert/Alert.Demo";
@@ -38,3 +40,4 @@ export * from "./Pagination/Pagination.Demo";
 export * from "./Progress/Progress.Demo";
 export * from "./TableSortable/TableSortable.Demo";
 export * from "./Slider/Slider.Demo";
+export * from "./Tab/Tab.Demo";

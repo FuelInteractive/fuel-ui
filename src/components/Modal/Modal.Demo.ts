@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {MODAL_PROVIDERS} from './Modal';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -15,8 +19,8 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 <button class="btn btn-primary" (click)="modal.showModal()">Toggle Modal</button>
 <modal #modal
     modalTitle="Modal Title"
-    closeButton="true"
-    closeOnUnfocus="true">
+    [closeButton]="true"
+    [closeOnUnfocus]="true">
     <div class="modal-body">
         <ul>
             <li>Testing 1</li>
@@ -43,13 +47,15 @@ import {Modal} from 'fuel-ui/fuel-ui';
 <p>Modal is a custom element to create a popup</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;button class=&quot;btn btn-primary&quot; (click)=&quot;modal.showModal()&quot;&gt;Toggle Modal&lt;/button&gt;
 &lt;modal #modal
     modalTitle=&quot;Modal Title&quot;
-    closeButton=&quot;true&quot;
-    closeOnUnfocus=&quot;true&quot;&gt;
+    [closeButton]=&quot;true&quot;
+    [closeOnUnfocus]=&quot;true&quot;&gt;
     &lt;div class=&quot;modal-body&quot;&gt;
         &lt;ul&gt;
             &lt;li&gt;Any&lt;/li&gt;
@@ -65,44 +71,30 @@ import {Modal} from 'fuel-ui/fuel-ui';
 &lt;/modal&gt;
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>closeOnUnfocus</td>
-            <td>boolean</td>
-            <td>true</td>
-            <td>Closes the opened modal when the user clicks off of it</td>
-        </tr>
-        <tr>
-            <td>closeButton</td>
-            <td>boolean</td>
-            <td>true</td>
-            <td>Option to display an 'X' close button in the corner of the modal</td>
-        </tr>
-        <tr>
-            <td>modalTitle</td>
-            <td>string</td>
-            <td>null</td>
-            <td>Text to display in modal header</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-        directives: [MODAL_PROVIDERS, CodeHighlighter]
+        directives: [MODAL_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class ModalDemo {
     closeText: string = "Cancel";
+    
+    attributes:any[] = [
+        new Attribute('closeOnUnfocus', 'boolean', 'true', 'Closes the opened modal when the user clicks off of it'),
+        new Attribute('closeButton', 'boolean', 'true', "Option to display an 'X' close button in the corner of the modal"),
+        new Attribute('modalTitle', 'string', 'null', 'Text to display in modal header')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var MODAL_DEMO_PROVIDERS = [

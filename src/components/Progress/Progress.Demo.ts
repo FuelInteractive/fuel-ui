@@ -1,5 +1,9 @@
 import {Component} from 'angular2/core';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+
 @Component({
   template: `
 <div class="row">
@@ -28,6 +32,8 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 <p>Progress is an HTML5 Bootstrap element that displays a graphical progress bar</p>
 
 <h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
 &lt;progress 
@@ -38,38 +44,29 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 &lt;/progress&gt;
 </code>
 </pre>
+</tab>
+</tabset>
 
 <h3>Attributes</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>value</td>
-            <td>number</td>
-            <td>0</td>
-            <td>Percentage of progress bar that is filled</td>
-        </tr>
-        <tr>
-            <td>max</td>
-            <td>number</td>
-            <td>1</td>
-            <td>The number to fill the progress bar completely</td>
-        </tr>
-    </tbody>
-</table>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 
 </div>`,
-directives: [CodeHighlighter]
+directives: [CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class ProgressDemo {
     progress: number = 25;
+    
+    attributes:Attribute[] = [
+        new Attribute('value', 'number', '0', 'Percentage of progress bar that is filled'),
+        new Attribute('max', 'number', '1', 'The number to fill the progress bar completely')
+    ];
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var PROGRESS_DEMO_PROVIDERS = [
