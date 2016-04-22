@@ -2,7 +2,7 @@
 
 import {Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, OnChanges} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
-import "./NoUiSlider.js";
+import "./NoUiSlider";
 import {noUiSlider} from "nouislider";
 
 @Component({
