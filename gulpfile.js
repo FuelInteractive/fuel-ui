@@ -14,6 +14,8 @@ var webserver = require('gulp-webserver');
 var Builder = require('systemjs-builder');
 var runSequence = require('run-sequence');
 var server = require('gulp-server-livereload');
+var minCss = require('gulp-minify-css');
+var rename = require('gulp-rename');
 var pkg = require('./package.json');
 var name = pkg.name;
 var path = require('path');
@@ -122,6 +124,13 @@ gulp.task('bundleScripts', ['scripts'], function() {
     return builder.bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('Build complete.');
+            return builder.bundle(name+'/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
+                .then(function() {
+                    console.log('Minified build complete.');
+                })
+                .catch(function(err) {
+                    console.log('Minification error', err);
+                });
         })
         .catch(function(err) {
             console.log('Error', err);
@@ -129,7 +138,10 @@ gulp.task('bundleScripts', ['scripts'], function() {
 });
 
 gulp.task('bundleSass', ['sass'], function(){
-    return gulp.src(paths.dest + '/styles/fuel-ui.css')
+    gulp.src(paths.dest + '/styles/fuel-ui.css')
+        .pipe(gulp.dest(paths.bundle))
+        .pipe(minCss())
+        .pipe(rename({ extname: '.min.css' }))
         .pipe(gulp.dest(paths.bundle));
 })
 
