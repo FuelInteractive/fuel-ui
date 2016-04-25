@@ -30,7 +30,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
     <hr />
     <tabset>
         <tab *ngFor="#theTab of tabs"
-            [heading]="theTab.title"
+            [heading]="theTab.heading"
             [(active)]="theTab.active"
             [disabled]="theTab.disabled"
             [removable]="theTab.removable"
@@ -68,7 +68,7 @@ import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
 <code class="language-markup" code-highlight>
 &lt;tabset&gt;
     &lt;tab *ngFor=&quot;#theTab of tabs&quot;
-        [heading]=&quot;theTab.title&quot;
+        [heading]=&quot;theTab.heading&quot;
         [(active)]=&quot;theTab.active&quot;
         [disabled]=&quot;theTab.disabled&quot;
         [removable]=&quot;theTab.removable&quot;
@@ -91,10 +91,10 @@ import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
 <code class="language-javascript" code-highlight>
 export class TabExample {
     tabs:any[] = [
-        {title: 'Title 1', content: 'Content 1', active: true},
-        {title: 'Title 2', content: 'Content 2'},
-        {title: 'Title 3', content: 'Content 3'},
-        {title: 'Title 4', content: 'Content 4', removable: true}
+        {heading: 'Title 1', content: 'Content 1', active: true},
+        {heading: 'Title 2', content: 'Content 2'},
+        {heading: 'Title 3', content: 'Content 3'},
+        {heading: 'Title 4', content: 'Content 4', removable: true}
     ];
     
     deselectLog(tab: Tab):void {
@@ -143,14 +143,14 @@ export class TabExample {
 })
 export class TabDemo {
     tabs:any[] = [
-        {title: 'Title 1', content: 'Content 1', active: true},
-        {title: 'Title 2', content: 'Content 2'},
-        {title: 'Title 3', content: 'Content 3'},
-        {title: 'Title 4', content: 'Content 4', removable: true}
+        {heading: 'Title 1', content: 'Content 1', active: true},
+        {heading: 'Title 2', content: 'Content 2'},
+        {heading: 'Title 3', content: 'Content 3'},
+        {heading: 'Title 4', content: 'Content 4', removable: true}
     ];
     
     addTab(){
-        this.tabs.push({title: 'Removable Tab', content: "I'm removable", removable: true})
+        this.tabs.push({heading: 'Removable Tab', content: "I'm removable", removable: true})
     }
     
     setActiveTab(index:number):void {
