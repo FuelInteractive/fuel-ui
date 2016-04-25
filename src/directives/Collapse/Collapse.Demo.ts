@@ -11,18 +11,27 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     <div class="col-md-12">
         <div class="card card-block">
             <h2 class="card-title">Collapse</h2>
-            <p class="card-text">Collapse is a custom component to display and hide content on click</p>
+            <p class="card-text">Collapse is a custom directive to display and hide content on click</p>
         </div>
     </div>
 </div>
 
-<collapse buttonText="Collapse Button">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry 
-    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard 
-    dolor brunch. Food truck quinoa nesciunt laborum eiusmod. 
-    Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin 
-    coffee nulla assumenda shoreditch et.
-</collapse>
+<button class="btn btn-primary" (click)="collapsed = !collapsed">Toggle Collapse</button>
+<style>
+    #collapse-demo-box {
+        border: 1px solid black; 
+        padding: 0 25px;
+    }
+</style>
+<div id="collapse-demo-box" [collapse]="collapsed" [duration]="duration">
+    <h2>All of your content</h2>
+    <ul>
+        <li>That you wish</li>
+        <li>to be able</li>
+        <li>to collapse</li>
+    </ul>
+    <p>At any time!</p>
+</div>
 
 <div class="source">
 <h3>Import</h3>
@@ -33,20 +42,32 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 </pre>
 
 <h3>Getting Started</h3>
-<p>Collapse allows you to toggle content on the page by click</p>
+<p>Collapse allows you to toggle content on the page with a nice sliding animation</p>
 
 <h3>Usage</h3>
 <tabset>
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;collapse buttonText=&quot;Collapse Button&quot;&gt;
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry 
-    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard 
-    dolor brunch. Food truck quinoa nesciunt laborum eiusmod. 
-    Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin 
-    coffee nulla assumenda shoreditch et.
-&lt;/collapse&gt;
+&lt;div [collapse]=&quot;collapsed&quot; [duration]=&quot;duration&quot;&gt;
+    &lt;h2&gt;All of your content&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;That you wish&lt;/li&gt;
+        &lt;li&gt;to be able&lt;/li&gt;
+        &lt;li&gt;to collapse&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;At any time!&lt;/p&gt;
+&lt;/div&gt;
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
+<pre>
+<code class="language-javascript" code-highlight>
+export class CollapseExample { 
+    collapsed: boolean = false;
+    duration: number = 500;
+}
 </code>
 </pre>
 </tab>
@@ -64,8 +85,12 @@ import {Collapse} from 'fuel-ui/fuel-ui';
         directives: [COLLAPSE_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class CollapseDemo { 
+    collapsed: boolean = false;
+    duration: number = 500;
+  
     attributes:any[] = [
-        new Attribute('buttonText', 'string', 'null', 'Text to display on button that shows/hides content')
+        new Attribute('collapse', 'boolean', 'false', 'Boolean whether the content is shown or hidden'),
+        new Attribute('duration', 'number', '500', 'Number of milliseconds for how long the open/close animation takes')
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
