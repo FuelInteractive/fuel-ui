@@ -1,6 +1,5 @@
 import {ALERT_DEMO_PROVIDERS, AlertDemo} from "./Alert/Alert.Demo";
 import {CAROUSEL_DEMO_PROVIDERS, CarouselDemo} from "./Carousel/Carousel.Demo";
-import {COLLAPSE_DEMO_PROVIDERS, CollapseDemo} from "./Collapse/Collapse.Demo";
 import {DATEPICKER_DEMO_PROVIDERS, DatePickerDemo} from "./DatePicker/DatePicker.Demo";
 import {DATERANGEPICKER_DEMO_PROVIDERS, DateRangePickerDemo} from "./DatePicker/DateRangePicker.Demo";
 import {DROPDOWN_DEMO_PROVIDERS, DropdownDemo} from "./Dropdown/Dropdown.Demo";
@@ -11,11 +10,11 @@ import {PROGRESS_DEMO_PROVIDERS, ProgressDemo} from "./Progress/Progress.Demo";
 import {TABLESORTABLE_DEMO_PROVIDERS, TableSortableDemo} from "./TableSortable/TableSortable.Demo";
 import {SLIDER_DEMO_PROVIDERS, SliderDemo} from "./Slider/Slider.Demo";
 import {TAB_DEMO_PROVIDERS, TabDemo} from "./Tab/Tab.Demo";
+import {TAG_DEMO_PROVIDERS, TagDemo} from "./Tag/Tag.Demo";
 
 export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
 	ALERT_DEMO_PROVIDERS,
     CAROUSEL_DEMO_PROVIDERS,
-    COLLAPSE_DEMO_PROVIDERS,
     DATEPICKER_DEMO_PROVIDERS,
     DATERANGEPICKER_DEMO_PROVIDERS,
     DROPDOWN_DEMO_PROVIDERS,
@@ -25,12 +24,12 @@ export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     PROGRESS_DEMO_PROVIDERS,
     TABLESORTABLE_DEMO_PROVIDERS,
     SLIDER_DEMO_PROVIDERS,
-    TAB_DEMO_PROVIDERS
+    TAB_DEMO_PROVIDERS,
+    TAG_DEMO_PROVIDERS
 ];
 
 export * from "./Alert/Alert.Demo";
 export * from "./Carousel/Carousel.Demo";
-export * from "./Collapse/Collapse.Demo";
 export * from "./DatePicker/DatePicker.Demo";
 export * from "./DatePicker/DateRangePicker.Demo";
 export * from "./Dropdown/Dropdown.Demo";
@@ -41,3 +40,4 @@ export * from "./Progress/Progress.Demo";
 export * from "./TableSortable/TableSortable.Demo";
 export * from "./Slider/Slider.Demo";
 export * from "./Tab/Tab.Demo";
+export * from "./Tag/Tag.Demo";

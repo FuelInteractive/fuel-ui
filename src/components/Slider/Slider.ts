@@ -28,25 +28,25 @@ export class Slider implements AfterViewInit, OnChanges {
     @Input() secondValue: number = null;
     @Output() valueChange = new EventEmitter<any>();
     @Output() secondValueChange = new EventEmitter<any>();
-    sliderElement: any;
-    slider: any;
+    private _sliderElement: any;
+    private _slider: any;
     
-    constructor(public element: ElementRef) {}
+    constructor(private _element: ElementRef) {}
     
     ngAfterViewInit(){
-        this.sliderElement = this.element.nativeElement.children[0];
+        this._sliderElement = this._element.nativeElement.children[0];
         
         if(this.orientation == 'vertical')
-            this.sliderElement.style.height = this.height.length > 0 
+            this._sliderElement.style.height = this.height.length > 0 
                 ? this.height
                 : "200px";
             
         if(this.orientation == 'horizontal')
-            this.sliderElement.style.width = this.width.length > 0 
+            this._sliderElement.style.width = this.width.length > 0 
                 ? this.width
                 : null; //full width
         
-        this.slider = noUiSlider.create(this.sliderElement, {
+        this._slider = noUiSlider.create(this._sliderElement, {
             start: this.secondValue != null ? [this.value, this.secondValue] : this.value, // Handle start position
             step: parseInt(this.step.toString()), // Slider increment
             margin: this.margin, // Handles must be more than '10' apart
@@ -73,8 +73,8 @@ export class Slider implements AfterViewInit, OnChanges {
             }
         });
         
-        if(!(<HTMLInputElement>this.element.nativeElement).disabled){
-            var noUI:HTMLCollection = this.element.nativeElement.getElementsByClassName('noUi-connect');
+        if(!(<HTMLInputElement>this._element.nativeElement).disabled){
+            var noUI:HTMLCollection = this._element.nativeElement.getElementsByClassName('noUi-connect');
             
             //convert HTMLCollection to array to loop
             [].slice.call(noUI).forEach((el:HTMLElement) => {
@@ -82,7 +82,7 @@ export class Slider implements AfterViewInit, OnChanges {
             });
         }
         
-        this.sliderElement.noUiSlider.on('slide', (val: number[]) => {
+        this._sliderElement.noUiSlider.on('slide', (val: number[]) => {
             this.value = val[0];
             this.secondValue = val.length > 1 ? val[1] : null;
             this.valueChange.next(val[0]);
@@ -91,11 +91,11 @@ export class Slider implements AfterViewInit, OnChanges {
     }
     
     ngOnChanges(changes:any):void{
-        if(this.sliderElement && typeof changes.value !== 'undefined')
-            this.sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
+        if(this._sliderElement && typeof changes.value !== 'undefined')
+            this._sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
             
-        if(this.sliderElement && typeof changes.secondValue !== 'undefined')
-            this.sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
+        if(this._sliderElement && typeof changes.secondValue !== 'undefined')
+            this._sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
     }
 }
 
