@@ -1,4 +1,4 @@
-#Fuel-UI
+#Fuel-UI [![npm version](https://badge.fury.io/js/fuel-ui.svg)](https://badge.fury.io/js/fuel-ui) [![npm downloads](https://img.shields.io/npm/dm/fuel-ui.svg)](https://npmjs.org/fuel-ui) [![Dependency Status](https://david-dm.org/fuelinteractive/fuel-ui.svg)](https://david-dm.org/fuelinteractive/fuel-ui) [![devDependency Status](https://david-dm.org/fuelinteractive/fuel-ui/dev-status.svg)](https://david-dm.org/fuelinteractive/fuel-ui#info=devDependencies)
 
 A set of UI components for use with Angular 2 and Bootstrap 4.
 
