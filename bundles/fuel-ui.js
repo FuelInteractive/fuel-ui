@@ -1192,48 +1192,6 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Collapse/Collapse", ["angular2/core"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('angular2/core');
-  var Collapse = (function() {
-    function Collapse() {
-      this.showCollapse = false;
-    }
-    Collapse.prototype.toggleCollapse = function() {
-      this.showCollapse = !this.showCollapse;
-    };
-    __decorate([core_1.Input(), __metadata('design:type', String)], Collapse.prototype, "buttonText", void 0);
-    Collapse = __decorate([core_1.Component({
-      selector: "collapse",
-      template: "\n      <p>\n        <button class=\"btn btn-primary\" type=\"button\" aria-expanded=\"false\" (click)=\"toggleCollapse()\">\n          {{buttonText}}\n        </button>\n      </p>\n\n      <div class=\"fuel-ui-collapse\" *ngIf=\"showCollapse\">\n        <div class=\"card card-block\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
-    }), __metadata('design:paramtypes', [])], Collapse);
-    return Collapse;
-  }());
-  exports.Collapse = Collapse;
-  exports.COLLAPSE_PROVIDERS = [Collapse];
-  return module.exports;
-});
-
 System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./TabSet"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -1300,7 +1258,6 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./T
       configurable: true
     });
     Tab.prototype.ngOnDestroy = function() {
-      this.remove.next(this);
       this.tabset.removeTab(this);
     };
     __decorate([core_1.Input(), __metadata('design:type', String)], Tab.prototype, "heading", void 0);
@@ -1317,6 +1274,102 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./T
   }());
   exports.Tab = Tab;
   exports.TAB_PROVIDERS = [Tab, TabSet_1.TabSet];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./TagSet"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('angular2/core');
+  var TagSet_1 = $__require('./TagSet');
+  var Tag = (function() {
+    function Tag(tagset) {
+      this.removable = false;
+      this.remove = new core_1.EventEmitter(false);
+      this.classMap = {};
+      this.tagset = tagset;
+      this.tagset.addTag(this);
+    }
+    Object.defineProperty(Tag.prototype, "pill", {
+      get: function() {
+        return this._pill;
+      },
+      set: function(value) {
+        this._pill = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(Tag.prototype, "color", {
+      get: function() {
+        return this._color;
+      },
+      set: function(value) {
+        this._color = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(Tag.prototype, "disabled", {
+      get: function() {
+        return this._disabled;
+      },
+      set: function(value) {
+        this._disabled = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Tag.prototype.ngOnInit = function() {
+      this.color = this.color !== 'undefined' ? this.color : 'default';
+    };
+    Tag.prototype.ngOnDestroy = function() {
+      this.tagset.removeTag(this);
+    };
+    Tag.prototype.setClassMap = function() {
+      this.classMap = (_a = {
+        'disabled': this.disabled,
+        'label-pill': this.pill
+      }, _a['label-' + ((this.color && this.color.toLowerCase()) || 'default')] = true, _a);
+      var _a;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Tag.prototype, "title", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object)], Tag.prototype, "value", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "removable", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "pill", null);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Tag.prototype, "color", null);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "disabled", null);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tag.prototype, "remove", void 0);
+    Tag = __decorate([core_1.Directive({selector: 'tag, [tag]'}), __metadata('design:paramtypes', [TagSet_1.TagSet])], Tag);
+    return Tag;
+  }());
+  exports.Tag = Tag;
+  exports.TAG_PROVIDERS = [Tag, TagSet_1.TagSet];
   return module.exports;
 });
 
@@ -2590,8 +2643,8 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
   var core_1 = $__require('angular2/core');
   $__require('./NoUiSlider');
   var Slider = (function() {
-    function Slider(element) {
-      this.element = element;
+    function Slider(_element) {
+      this._element = _element;
       this.background = "#E24932";
       this.height = "";
       this.width = "";
@@ -2612,12 +2665,12 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
     }
     Slider.prototype.ngAfterViewInit = function() {
       var _this = this;
-      this.sliderElement = this.element.nativeElement.children[0];
+      this._sliderElement = this._element.nativeElement.children[0];
       if (this.orientation == 'vertical')
-        this.sliderElement.style.height = this.height.length > 0 ? this.height : "200px";
+        this._sliderElement.style.height = this.height.length > 0 ? this.height : "200px";
       if (this.orientation == 'horizontal')
-        this.sliderElement.style.width = this.width.length > 0 ? this.width : null;
-      this.slider = noUiSlider.create(this.sliderElement, {
+        this._sliderElement.style.width = this.width.length > 0 ? this.width : null;
+      this._slider = noUiSlider.create(this._sliderElement, {
         start: this.secondValue != null ? [this.value, this.secondValue] : this.value,
         step: parseInt(this.step.toString()),
         margin: this.margin,
@@ -2643,13 +2696,13 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
           }
         }
       });
-      if (!this.element.nativeElement.disabled) {
-        var noUI = this.element.nativeElement.getElementsByClassName('noUi-connect');
+      if (!this._element.nativeElement.disabled) {
+        var noUI = this._element.nativeElement.getElementsByClassName('noUi-connect');
         [].slice.call(noUI).forEach(function(el) {
           el.style.background = _this.background;
         });
       }
-      this.sliderElement.noUiSlider.on('slide', function(val) {
+      this._sliderElement.noUiSlider.on('slide', function(val) {
         _this.value = val[0];
         _this.secondValue = val.length > 1 ? val[1] : null;
         _this.valueChange.next(val[0]);
@@ -2657,10 +2710,10 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
       });
     };
     Slider.prototype.ngOnChanges = function(changes) {
-      if (this.sliderElement && typeof changes.value !== 'undefined')
-        this.sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
-      if (this.sliderElement && typeof changes.secondValue !== 'undefined')
-        this.sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
+      if (this._sliderElement && typeof changes.value !== 'undefined')
+        this._sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
+      if (this._sliderElement && typeof changes.secondValue !== 'undefined')
+        this._sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
     };
     __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "background", void 0);
     __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "height", void 0);
@@ -2846,7 +2899,61 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Collapse/Collapse", "./Tab/Tab", "./TableSortable/TableSortable", "./Slider/Slider", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('angular2/core');
+  var common_1 = $__require('angular2/common');
+  var TagSet = (function() {
+    function TagSet() {
+      this.tags = [];
+    }
+    TagSet.prototype.ngOnDestroy = function() {
+      this.isDestroyed = true;
+    };
+    TagSet.prototype.addTag = function(tag) {
+      this.tags.push(tag);
+    };
+    TagSet.prototype.removeTag = function(tag) {
+      var index = this.tags.indexOf(tag);
+      if (index === -1 || this.isDestroyed || tag.disabled) {
+        return;
+      }
+      tag.remove.next(tag);
+      this.tags.splice(index, 1);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TagSet.prototype, "tags", void 0);
+    TagSet = __decorate([core_1.Component({
+      selector: 'tagset',
+      directives: [common_1.NgClass],
+      template: "\n    <span *ngFor=\"#tag of tags\" class=\"label fuel-ui-label\" [ngClass]=\"tag.classMap\">\n        <span [innerHtml]=\"tag.title\"></span>\n        <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n            <i class=\"fa fa-remove\"></i>\n        </span>\n    </span>\n  "
+    }), __metadata('design:paramtypes', [])], TagSet);
+    return TagSet;
+  }());
+  exports.TagSet = TagSet;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tag/Tag", "./TableSortable/TableSortable", "./Slider/Slider", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/TagSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2864,11 +2971,11 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "
   var Pagination_1 = $__require('./Pagination/Pagination');
   var InfiniteScroller_1 = $__require('./InfiniteScroller/InfiniteScroller');
   var Dropdown_1 = $__require('./Dropdown/Dropdown');
-  var Collapse_1 = $__require('./Collapse/Collapse');
   var Tab_1 = $__require('./Tab/Tab');
+  var Tag_1 = $__require('./Tag/Tag');
   var TableSortable_1 = $__require('./TableSortable/TableSortable');
   var Slider_1 = $__require('./Slider/Slider');
-  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, Collapse_1.COLLAPSE_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS];
+  exports.FUELUI_COMPONENT_PROVIDERS = [Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS, Tag_1.TAG_PROVIDERS];
   __export($__require('./Alert/Alert'));
   __export($__require('./Carousel/Carousel'));
   __export($__require('./DatePicker/DatePickerProviders'));
@@ -2876,12 +2983,13 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Alert/Alert", "
   __export($__require('./Pagination/Pagination'));
   __export($__require('./InfiniteScroller/InfiniteScroller'));
   __export($__require('./Dropdown/Dropdown'));
-  __export($__require('./Collapse/Collapse'));
   __export($__require('./Tab/Tab'));
   __export($__require('./Tab/TabSet'));
   __export($__require('./TableSortable/TableSortable'));
   __export($__require('./TableSortable/TableSortableColumn'));
   __export($__require('./TableSortable/TableSortableSorting'));
+  __export($__require('./Tag/Tag'));
+  __export($__require('./Tag/TagSet'));
   __export($__require('./Slider/Slider'));
   return module.exports;
 });
@@ -3112,7 +3220,103 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["angular2/core", "angular2/src/animate/animation_builder"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('angular2/core');
+  var animation_builder_1 = $__require('angular2/src/animate/animation_builder');
+  var Collapse = (function() {
+    function Collapse(animationBuilder, element) {
+      this.element = element;
+      this.duration = 500;
+      this.collapse = false;
+      this._animation = animationBuilder.css();
+    }
+    Object.defineProperty(Collapse.prototype, "_elementHeight", {
+      get: function() {
+        var el = this.element.nativeElement;
+        var height = el.offsetHeight;
+        var style = getComputedStyle(el);
+        return height += parseInt(style.marginTop) + parseInt(style.marginBottom);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(Collapse.prototype, "_baseSequence", {
+      get: function() {
+        return this._animation.setDuration(this.duration).removeClass('fuel-ui-collapse').removeClass('in').addAnimationClass('fuel-ui-collapsing');
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Collapse.prototype.ngOnChanges = function(changes) {
+      if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
+        return;
+      return this.collapse ? this.hide() : this.show();
+    };
+    Collapse.prototype.hide = function() {
+      this._baseSequence.setFromStyles({
+        height: this.element.nativeElement.scrollHeight + 'px',
+        overflow: 'hidden'
+      }).setToStyles({
+        height: '0',
+        paddingTop: '0',
+        paddingBottom: '0'
+      });
+      var a = this._animation.start(this.element.nativeElement);
+      a.onComplete(function() {
+        a.removeClasses(['in']);
+        a.addClasses(['fuel-ui-collapse']);
+      });
+    };
+    Collapse.prototype.show = function() {
+      var _this = this;
+      this._animation.setDuration(0).addClass('in').setFromStyles({overflow: 'hidden'}).setToStyles({
+        paddingTop: '',
+        paddingBottom: ''
+      }).start(this.element.nativeElement).onComplete(function() {
+        var a = _this._baseSequence.setFromStyles({height: '0'}).setToStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).start(_this.element.nativeElement);
+        a.onComplete(function() {
+          return a.addClasses(['fuel-ui-collapse', 'in']);
+        });
+      });
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Collapse.prototype, "duration", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Collapse.prototype, "collapse", void 0);
+    Collapse = __decorate([core_1.Directive({
+      selector: '[collapse]',
+      host: {
+        '[attr.aria-expanded]': '!collapse',
+        '[attr.aria-hidden]': 'collapse'
+      }
+    }), __metadata('design:paramtypes', [animation_builder_1.AnimationBuilder, core_1.ElementRef])], Collapse);
+    return Collapse;
+  }());
+  exports.Collapse = Collapse;
+  exports.COLLAPSE_PROVIDERS = [Collapse];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter", "./Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3126,10 +3330,12 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Anima
   var Animation_1 = $__require('./Animation/Animation');
   var Tooltip_1 = $__require('./Tooltip/Tooltip');
   var CodeHighlighter_1 = $__require('./CodeHighlighter/CodeHighlighter');
-  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter];
+  var Collapse_1 = $__require('./Collapse/Collapse');
+  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter, Collapse_1.Collapse];
   __export($__require('./Animation/Animation'));
   __export($__require('./Tooltip/Tooltip'));
   __export($__require('./CodeHighlighter/CodeHighlighter'));
+  __export($__require('./Collapse/Collapse'));
   return module.exports;
 });
 

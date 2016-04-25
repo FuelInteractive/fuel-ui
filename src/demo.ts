@@ -5,7 +5,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, Hash
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo} from './fuel-ui-demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -59,13 +59,13 @@ export class DemoHome {
 &lt;head&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/font-awesome/css/font-awesome.min.css&quot; /&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.min.css&quot; /&gt;
 &lt;/head&gt;
 
 ...
 
 &lt;!-- All your SystemJS, Angular2, Rx, etc. scripts first! --&gt;
-&lt;script src=&quot;node_modules/fuel-ui/bundles/fuel-ui.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;node_modules/fuel-ui/bundles/fuel-ui.min.js&quot;&gt;&lt;/script&gt;
 </code>
 </pre>`,
 directives: [CodeHighlighter]
@@ -79,7 +79,6 @@ export class InstallationComponent {
   {path:'/installation', name: 'InstallationComponent', component: InstallationComponent},
   {path:'/component/alert', name: 'AlertDemo', component: AlertDemo},
   {path:'/component/carousel', name: 'CarouselDemo', component: CarouselDemo},
-  {path:'/component/collapse', name: 'CollapseDemo', component: CollapseDemo},
   {path:'/component/datepicker', name: 'DatePickerDemo', component: DatePickerDemo},
   {path:'/component/daterangepicker', name: 'DateRangePickerDemo', component: DateRangePickerDemo},
   {path:'/component/dropdown', name: 'DropdownDemo', component: DropdownDemo},
@@ -90,8 +89,10 @@ export class InstallationComponent {
   {path:'/component/slider', name: 'SliderDemo', component: SliderDemo},
   {path:'/component/tab', name: 'TabDemo', component: TabDemo},
   {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
+  {path:'/component/tag', name: 'TagDemo', component: TagDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
+  {path:'/directive/collapse', name: 'CollapseDemo', component: CollapseDemo},
   {path:'/directive/tooltip', name: 'TooltipDemo', component: TooltipDemo},
   {path:'/pipe/format', name: 'FormatDemo', component: FormatDemo},
   {path:'/pipe/maptoiterable', name: 'MapToIterableDemo', component: MapToIterableDemo},
@@ -114,7 +115,6 @@ export class InstallationComponent {
                 <li class="sidebar-title">Components</li>
                 <li><a [routerLink]="['AlertDemo']">Alert</a></li>
                 <li><a [routerLink]="['CarouselDemo']">Carousel</a></li>
-                <li><a [routerLink]="['CollapseDemo']">Collapse</a></li>
                 <li><a [routerLink]="['DatePickerDemo']">DatePicker</a></li>
                 <li><a [routerLink]="['DateRangePickerDemo']">DateRangePicker</a></li>
                 <li><a [routerLink]="['DropdownDemo']">Dropdown</a></li>
@@ -125,9 +125,11 @@ export class InstallationComponent {
                 <li><a [routerLink]="['SliderDemo']">Slider</a></li>
                 <li><a [routerLink]="['TabDemo']">Tabs</a></li>
                 <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
+                <li><a [routerLink]="['TagDemo']">Tags</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
                 <li><a [routerLink]="['CodeHighlighterDemo']">Code Highlighter</a></li>
+                <li><a [routerLink]="['CollapseDemo']">Collapse</a></li>
                 <li><a [routerLink]="['TooltipDemo']">Tooltip</a></li>
                 <li class="sidebar-title">Pipes</li>
                 <li><a [routerLink]="['FormatDemo']">Format</a></li>

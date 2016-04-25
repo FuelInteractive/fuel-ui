@@ -62,7 +62,6 @@ export class Tab implements OnDestroy {
   }
 
   public ngOnDestroy():void {
-    this.remove.next(this);
     this.tabset.removeTab(this);
   }
 }
