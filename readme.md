@@ -38,19 +38,18 @@ And finally, add the proper script tags to your `index.html`
 <head>
   <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="node_modules/fuel-ui/bundles/fuel-ui.css" />
+  <link rel="stylesheet" href="node_modules/fuel-ui/bundles/fuel-ui.min.css" />
 </head>
 
 ...
 
 <!-- All your SystemJS, Angular2, Rx, etc. scripts first! -->
-<script src="node_modules/fuel-ui/bundles/fuel-ui.js"></script>
+<script src="node_modules/fuel-ui/bundles/fuel-ui.min.js"></script>
 ```
 
 ##Components
 - [Alert](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Alert#readme)
 - Carousel (documentation in progress)
-- [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Collapse#readme)
 - [DatePicker](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/DatePicker#readme)
 - [Dropdown](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Dropdown#readme)
 - [InfiniteScroller](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/InfiniteScroller#readme)
@@ -60,10 +59,12 @@ And finally, add the proper script tags to your `index.html`
 - [Slider](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Slider#readme)
 - [TableSortable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TableSortable#readme)
 - [Tabs](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Tab#readme)
+- [Tags](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Tag#readme)
 
 ##Directives
 - [Animation (helper)](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Animation#readme)
 - [CodeHighlighter](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/CodeHighlighter#readme)
+- [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Collapse#readme)
 - [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
 
 ##Pipes
