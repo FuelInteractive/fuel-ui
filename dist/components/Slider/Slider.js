@@ -12,8 +12,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("angular2/core");
 require("./NoUiSlider");
 var Slider = (function () {
-    function Slider(element) {
-        this.element = element;
+    function Slider(_element) {
+        this._element = _element;
         this.background = "#E24932";
         this.height = "";
         this.width = "";
@@ -34,16 +34,16 @@ var Slider = (function () {
     }
     Slider.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.sliderElement = this.element.nativeElement.children[0];
+        this._sliderElement = this._element.nativeElement.children[0];
         if (this.orientation == 'vertical')
-            this.sliderElement.style.height = this.height.length > 0
+            this._sliderElement.style.height = this.height.length > 0
                 ? this.height
                 : "200px";
         if (this.orientation == 'horizontal')
-            this.sliderElement.style.width = this.width.length > 0
+            this._sliderElement.style.width = this.width.length > 0
                 ? this.width
                 : null; //full width
-        this.slider = noUiSlider.create(this.sliderElement, {
+        this._slider = noUiSlider.create(this._sliderElement, {
             start: this.secondValue != null ? [this.value, this.secondValue] : this.value,
             step: parseInt(this.step.toString()),
             margin: this.margin,
@@ -69,14 +69,14 @@ var Slider = (function () {
                 }
             }
         });
-        if (!this.element.nativeElement.disabled) {
-            var noUI = this.element.nativeElement.getElementsByClassName('noUi-connect');
+        if (!this._element.nativeElement.disabled) {
+            var noUI = this._element.nativeElement.getElementsByClassName('noUi-connect');
             //convert HTMLCollection to array to loop
             [].slice.call(noUI).forEach(function (el) {
                 el.style.background = _this.background;
             });
         }
-        this.sliderElement.noUiSlider.on('slide', function (val) {
+        this._sliderElement.noUiSlider.on('slide', function (val) {
             _this.value = val[0];
             _this.secondValue = val.length > 1 ? val[1] : null;
             _this.valueChange.next(val[0]);
@@ -84,10 +84,10 @@ var Slider = (function () {
         });
     };
     Slider.prototype.ngOnChanges = function (changes) {
-        if (this.sliderElement && typeof changes.value !== 'undefined')
-            this.sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
-        if (this.sliderElement && typeof changes.secondValue !== 'undefined')
-            this.sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
+        if (this._sliderElement && typeof changes.value !== 'undefined')
+            this._sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
+        if (this._sliderElement && typeof changes.secondValue !== 'undefined')
+            this._sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
     };
     __decorate([
         core_1.Input(), 

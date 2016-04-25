@@ -2,7 +2,7 @@
 import { AfterViewInit, ElementRef, EventEmitter, OnChanges } from "angular2/core";
 import "./NoUiSlider";
 export declare class Slider implements AfterViewInit, OnChanges {
-    element: ElementRef;
+    private _element;
     background: string;
     height: string;
     width: string;
@@ -20,9 +20,9 @@ export declare class Slider implements AfterViewInit, OnChanges {
     secondValue: number;
     valueChange: EventEmitter<any>;
     secondValueChange: EventEmitter<any>;
-    sliderElement: any;
-    slider: any;
-    constructor(element: ElementRef);
+    private _sliderElement;
+    private _slider;
+    constructor(_element: ElementRef);
     ngAfterViewInit(): void;
     ngOnChanges(changes: any): void;
 }

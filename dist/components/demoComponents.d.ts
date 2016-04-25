@@ -1,10 +1,10 @@
 import { CarouselDemo } from "./Carousel/Carousel.Demo";
-import { CollapseDemo } from "./Collapse/Collapse.Demo";
+import { DropdownDemo } from "./Dropdown/Dropdown.Demo";
 import { TabDemo } from "./Tab/Tab.Demo";
-export declare var FUELUI_DEMO_COMPONENT_PROVIDERS: (typeof CarouselDemo[] | typeof CollapseDemo[] | typeof TabDemo[])[];
+import { TagDemo } from "./Tag/Tag.Demo";
+export declare var FUELUI_DEMO_COMPONENT_PROVIDERS: (typeof CarouselDemo[] | typeof DropdownDemo[] | typeof TabDemo[] | typeof TagDemo[])[];
 export * from "./Alert/Alert.Demo";
 export * from "./Carousel/Carousel.Demo";
-export * from "./Collapse/Collapse.Demo";
 export * from "./DatePicker/DatePicker.Demo";
 export * from "./DatePicker/DateRangePicker.Demo";
 export * from "./Dropdown/Dropdown.Demo";
@@ -15,3 +15,4 @@ export * from "./Progress/Progress.Demo";
 export * from "./TableSortable/TableSortable.Demo";
 export * from "./Slider/Slider.Demo";
 export * from "./Tab/Tab.Demo";
+export * from "./Tag/Tag.Demo";

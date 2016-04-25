@@ -55,7 +55,6 @@ var Tab = (function () {
         configurable: true
     });
     Tab.prototype.ngOnDestroy = function () {
-        this.remove.next(this);
         this.tabset.removeTab(this);
     };
     __decorate([
