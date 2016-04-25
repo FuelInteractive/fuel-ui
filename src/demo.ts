@@ -59,13 +59,13 @@ export class DemoHome {
 &lt;head&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/font-awesome/css/font-awesome.min.css&quot; /&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.min.css&quot; /&gt;
 &lt;/head&gt;
 
 ...
 
 &lt;!-- All your SystemJS, Angular2, Rx, etc. scripts first! --&gt;
-&lt;script src=&quot;node_modules/fuel-ui/bundles/fuel-ui.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;node_modules/fuel-ui/bundles/fuel-ui.min.js&quot;&gt;&lt;/script&gt;
 </code>
 </pre>`,
 directives: [CodeHighlighter]
