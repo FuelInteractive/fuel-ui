@@ -58,7 +58,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
     </form>
     <p>
         <button type="button" class="btn btn-primary btn-sm" [disabled]="tags.length <= 1" (click)="tags[1].disabled = !tags[1].disabled">Enable/Disable second tag</button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tags.length == 0" (click)="tags = []">Clear tags</button>
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="tags.length == 0" (click)="clearTags()">Clear tags</button>
     </p>
     <div (click)="$event.preventDefault()">
         <h3>
@@ -171,6 +171,10 @@ export class TagDemo {
         {title: 'Danger', color: 'danger', pill: false, removable: true, value: {some: 'great', value: true}},
         {title: 'Warning', color: 'warning', pill: false, removable: true, value: true}
     ];
+    
+    clearTags(): void {
+        this.tags = [];
+    }
     
     addTag(){
         this.valueError  = false;

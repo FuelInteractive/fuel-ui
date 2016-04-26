@@ -23,17 +23,10 @@ gulp
 If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:
 
 ```
-npm install fuel-ui font-awesome --save
+npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
 ```
-Add this line to your dependencies in your `package.json`
 
-```
-"dependencies": {
-  ...
-    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2"
-}
-```
-And finally, add the proper script tags to your `index.html`
+Then simply add the proper script tags to your `index.html`
 ```html
 <head>
   <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />

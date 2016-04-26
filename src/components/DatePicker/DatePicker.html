@@ -46,8 +46,8 @@
                 (next)="addNextMonth()"
                 (prev)="addPrevMonth()"
                 distance="100"
-                height="{{calendarHeight}}"
-                hideScrollbar="true">
+                [height]="calendarHeight"
+                [hideScrollbar]="true">
                 <date-picker-calendar scroll-item
                     *ngFor="#month of calendarMonths #i=index" 
                     [id]="i"
