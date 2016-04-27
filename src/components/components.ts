@@ -13,6 +13,7 @@ import {TABLESORTABLE_PROVIDERS, TableSortable} from "./TableSortable/TableSorta
 import {TableSortableColumn} from "./TableSortable/TableSortableColumn";
 import {TableSortableSorting} from "./TableSortable/TableSortableSorting";
 import {SLIDER_COMPONENT_PROVIDERS, Slider} from "./Slider/Slider";
+import {TIMEPICKER_PROVIDERS, TimePicker} from "./TimePicker/TimePicker";
 
 export var FUELUI_COMPONENT_PROVIDERS = [
 	ALERT_PROVIDERS,
@@ -25,7 +26,8 @@ export var FUELUI_COMPONENT_PROVIDERS = [
     TABLESORTABLE_PROVIDERS,
     SLIDER_COMPONENT_PROVIDERS,
 	TAB_PROVIDERS,
-	TAG_PROVIDERS
+	TAG_PROVIDERS,
+	TIMEPICKER_PROVIDERS
 ];
 
 export * from "./Alert/Alert";
@@ -43,3 +45,4 @@ export * from "./TableSortable/TableSortableSorting";
 export * from "./Tag/Tag";
 export * from "./Tag/TagSet";
 export * from "./Slider/Slider";
+export * from "./TimePicker/TimePicker";

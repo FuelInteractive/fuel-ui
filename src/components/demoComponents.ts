@@ -11,6 +11,7 @@ import {TABLESORTABLE_DEMO_PROVIDERS, TableSortableDemo} from "./TableSortable/T
 import {SLIDER_DEMO_PROVIDERS, SliderDemo} from "./Slider/Slider.Demo";
 import {TAB_DEMO_PROVIDERS, TabDemo} from "./Tab/Tab.Demo";
 import {TAG_DEMO_PROVIDERS, TagDemo} from "./Tag/Tag.Demo";
+import {TIMEPICKER_DEMO_PROVIDERS, TimePickerDemo} from "./TimePicker/TimePicker.Demo";
 
 export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
 	ALERT_DEMO_PROVIDERS,
@@ -25,7 +26,8 @@ export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     TABLESORTABLE_DEMO_PROVIDERS,
     SLIDER_DEMO_PROVIDERS,
     TAB_DEMO_PROVIDERS,
-    TAG_DEMO_PROVIDERS
+    TAG_DEMO_PROVIDERS,
+    TIMEPICKER_DEMO_PROVIDERS
 ];
 
 export * from "./Alert/Alert.Demo";
@@ -41,3 +43,4 @@ export * from "./TableSortable/TableSortable.Demo";
 export * from "./Slider/Slider.Demo";
 export * from "./Tab/Tab.Demo";
 export * from "./Tag/Tag.Demo";
+export * from "./TimePicker/TimePicker.Demo";

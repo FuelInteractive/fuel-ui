@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy} from "angular2/core";
+import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef} from "angular2/core";
 import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {DatePickerCalendar} from "./DatePickerCalendar";
@@ -11,9 +11,9 @@ import {DateRange} from "../../utilities/DateUtils";
     styleUrls: ["components/DatePicker/DatePicker.css"],
     templateUrl: "components/DatePicker/DatePicker.html",
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePicker implements OnInit, AfterViewInit {
+export class DatePicker implements OnInit {
     @Input() label: string;
     
     _minDate: Date = new Date(1900,0,1);
@@ -59,7 +59,6 @@ export class DatePicker implements OnInit, AfterViewInit {
 		this._selectedDate = new Date(value);
 	}
     
-	modal: HTMLElement;    
     calendarDisplayed: boolean = false;
     calendarX: number = 1;
 	calendarY: number = 1;
@@ -69,8 +68,10 @@ export class DatePicker implements OnInit, AfterViewInit {
     
     _preGenMonths = 2;
  
-    constructor(modal: ElementRef) {
-        this.modal = modal.nativeElement;
+    changeDetector: ChangeDetectorRef;
+    
+    constructor(changeDetector: ChangeDetectorRef) {
+        this.changeDetector = changeDetector;
     }
     
     ngOnInit(): void {
@@ -106,19 +107,19 @@ export class DatePicker implements OnInit, AfterViewInit {
         }, 1);
     }
     
-    ngAfterViewInit(): void {
-        this.modal.addEventListener('click', (e) => {
-			if(e.srcElement.className.indexOf('modal') != -1)
-				this.hideCalendar();
-		});
-    }    
-    
     handleDateInput(value: any): Date {
 		if(value instanceof Date && !isNaN(value.valueOf()))
 			return value;
 		else
 			return new Date(<string>value);
 	}
+    
+    toggleCalendar(event: MouseEvent): void {
+        if(!this.calendarDisplayed)
+            this.showCalendar(event);
+        else
+            this.hideCalendar();
+    }
     
     showCalendar(event: MouseEvent): void {
 		if(event != null) {
@@ -132,11 +133,14 @@ export class DatePicker implements OnInit, AfterViewInit {
 		}			
 		
 		this.ngOnInit();
-		this.calendarDisplayed = true;
+        
+        this.calendarDisplayed = true;
+        this.changeDetector.markForCheck();
 	}
     
     hideCalendar(): void {
-		this.calendarDisplayed = false;
+        this.calendarDisplayed = false;
+        this.changeDetector.markForCheck();
 	}
     
     get canPrevMonth(): boolean {
@@ -187,6 +191,7 @@ export class DatePicker implements OnInit, AfterViewInit {
         var lastMonth = this.calendarMonths[this.calendarMonths.length-1];
         var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth()+1);
         this.calendarMonths.push(nextMonth);
+        this.changeDetector.markForCheck();
     }
     
     addPrevMonth(): void {
@@ -196,6 +201,7 @@ export class DatePicker implements OnInit, AfterViewInit {
         var firstMonth = this.calendarMonths[0];
         var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth()-1);
         this.calendarMonths.unshift(prevMonth);
+        this.changeDetector.markForCheck();
     }
 }
 

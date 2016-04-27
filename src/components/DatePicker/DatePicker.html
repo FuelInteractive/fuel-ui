@@ -1,4 +1,4 @@
-<div class="input-group" (click)="showCalendar($event)">
+<div class="input-group" (click)="toggleCalendar($event)">
 	<input type="text" class="form-control"
     [(ngModel)]="inputDate" #dateField readonly
         placeholder="{{label}}" />
@@ -54,8 +54,7 @@
                     [minDate]="minDate" [maxDate]="maxDate"
                     [dateFilter]="dateFilter"
                     [currentMonth]="month" 
-                    [(selectedDate)]="selectedDate" 
-                    (selectedDate)="hideCalendar()">
+                    [(selectedDate)]="selectedDate">
                     {{i}}
                 </date-picker-calendar>
             </infinite-scroller>

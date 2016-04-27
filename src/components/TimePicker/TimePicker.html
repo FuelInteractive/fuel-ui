@@ -1,0 +1,61 @@
+<table class="fuel-ui-timepicker" [class.has-error]="invalidTime()">
+    <tbody>
+        <tr class="text-center" *ngIf="showSpinners">
+            <td class="fuel-ui-increment hours">
+                <a (click)="incrementHours()" [class.disabled]="noIncrementHours()" class="btn btn-link" [attr.disabled]="noIncrementHours()">
+                    <span class="fa fa-chevron-up"></span>
+                </a>
+            </td>
+            <td>&nbsp;</td>
+            <td class="fuel-ui-increment minutes">
+                <a (click)="incrementMinutes()" [class.disabled]="noIncrementMinutes()" class="btn btn-link" [attr.disabled]="noIncrementMinutes()">
+                    <span class="fa fa-chevron-up"></span>
+                </a>
+            </td>
+            <td *ngIf="showSeconds">&nbsp;</td>
+            <td *ngIf="showSeconds" class="fuel-ui-increment seconds">
+                <a (click)="incrementSeconds()" [class.disabled]="noIncrementSeconds()" class="btn btn-link" [attr.disabled]="noIncrementSeconds()">
+                    <span class="fa fa-chevron-up"></span>
+                </a>
+            </td>
+            <td *ngIf="showMeridian">&nbsp;</td>
+            <td *ngIf="showMeridian">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="form-group fuel-ui-time hours" [class.has-error]="invalidHours">
+                <input type="text" placeholder="HH" [(ngModel)]="hours" (blur)="updateHours()" class="form-control text-center" [readonly]="readonlyInput" maxlength="2" [disabled]="noIncrementHours()">
+            </td>
+            <td class="fuel-ui-separator">:</td>
+            <td class="form-group fuel-ui-time minutes" [class.has-error]="invalidMinutes">
+                <input type="text" placeholder="MM" [(ngModel)]="minutes" (blur)="updateMinutes()" class="form-control text-center" [readonly]="readonlyInput" maxlength="2" [disabled]="noIncrementMinutes()">
+            </td>
+            <td *ngIf="showSeconds" class="fuel-ui-separator">:</td>
+            <td class="form-group fuel-ui-time seconds" [class.has-error]="invalidSeconds" *ngIf="showSeconds">
+                <input type="text" placeholder="SS" [(ngModel)]="seconds" (blur)="updateSeconds()" class="form-control text-center" [readonly]="readonlyInput" maxlength="2" [disabled]="noIncrementSeconds()">
+            </td>
+            <td *ngIf="showMeridian">&nbsp;</td>
+            <td *ngIf="showMeridian" class="fuel-ui-time am-pm"><button type="button" [class.disabled]="noToggleMeridian()" class="btn btn-primary text-center" (click)="toggleMeridian()">{{meridian}}</button></td>
+        </tr>
+        <tr class="text-center" *ngIf="showSpinners">
+            <td class="fuel-ui-decrement hours">
+                <a (click)="decrementHours()" [class.disabled]="noDecrementHours()" class="btn btn-link" [attr.disabled]="noDecrementHours()">
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+            </td>
+            <td>&nbsp;</td>
+            <td class="fuel-ui-decrement minutes">
+                <a (click)="decrementMinutes()" [class.disabled]="noDecrementMinutes()" class="btn btn-link" [attr.disabled]="noDecrementMinutes()">
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+            </td>
+            <td *ngIf="showSeconds">&nbsp;</td>
+            <td *ngIf="showSeconds" class="fuel-ui-decrement seconds">
+                <a (click)="decrementSeconds()" [class.disabled]="noDecrementSeconds()" class="btn btn-link" [attr.disabled]="noDecrementSeconds()">
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+            </td>
+            <td *ngIf="showMeridian">&nbsp;</td>
+            <td *ngIf="showMeridian">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
