@@ -470,7 +470,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     DatePicker = __decorate([core_1.Component({
       selector: "date-picker",
       styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%;\n            font-size: 1.25rem; } }\n\n      table {\n        font-size: .75rem; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          table {\n            font-size: 1.25rem; } }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header th, header td {\n              font-size: 2.5rem; } }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header button {\n              font-size: 2.5rem;\n              margin-top: .5rem; } }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header .date-range span {\n              font-size: 2.5rem; } }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header .input-group-addon {\n              font-size: 1.5rem; } }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            header input {\n              font-size: 2.5rem; } }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
-      template: "\n      <div class=\"input-group\" (click)=\"showCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n          [(ngModel)]=\"inputDate\" #dateField readonly\n              placeholder=\"{{label}}\" />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"#month of calendarMonths #i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+      template: "\n      <div class=\"input-group\" (click)=\"showCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n          [(ngModel)]=\"inputDate\" #dateField readonly\n              placeholder=\"{{label}}\" />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      [height]=\"calendarHeight\"\n                      [hideScrollbar]=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"#month of calendarMonths #i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
       directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
       changeDetection: core_1.ChangeDetectionStrategy.OnPush
     }), __metadata('design:paramtypes', [core_2.ElementRef])], DatePicker);
@@ -1349,6 +1349,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./T
       this.color = this.color !== 'undefined' ? this.color : 'default';
     };
     Tag.prototype.ngOnDestroy = function() {
+      this.remove.next(this);
       this.tagset.removeTag(this);
     };
     Tag.prototype.setClassMap = function() {
@@ -3207,12 +3208,14 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   };
   var core_1 = $__require('angular2/core');
   var CodeHighlighter = (function() {
-    function CodeHighlighter(el) {
-      this.el = el;
-      if (this.el && this.el.nativeElement) {
-        Prism.highlightElement(this.el.nativeElement);
-      }
+    function CodeHighlighter(_el) {
+      this._el = _el;
     }
+    CodeHighlighter.prototype.ngAfterViewInit = function() {
+      if (this._el && this._el.nativeElement) {
+        Prism.highlightElement(this._el.nativeElement);
+      }
+    };
     CodeHighlighter = __decorate([core_1.Directive({selector: '[code-highlight]'}), __metadata('design:paramtypes', [core_1.ElementRef])], CodeHighlighter);
     return CodeHighlighter;
   }());
@@ -3372,7 +3375,7 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
     FormatPipe.prototype.transform = function(input, args) {
       var format = '';
       var parsedFloat = 0;
-      var pipeArgs = args[0].split(':');
+      var pipeArgs = args.split(':');
       for (var i = 0; i < pipeArgs.length; i++) {
         pipeArgs[i] = pipeArgs[i].trim(' ');
       }
@@ -3385,11 +3388,11 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
         case 'number':
           parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
           format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-          return this.decimalPipe.transform(parsedFloat, [format]);
+          return this.decimalPipe.transform(parsedFloat, format);
         case 'percentage':
           parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
           format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-          return this.decimalPipe.transform(parsedFloat, [format]) + '%';
+          return this.decimalPipe.transform(parsedFloat, format) + '%';
         case 'date':
         case 'datetime':
           var date = !isNaN(parseInt(input)) ? parseInt(input) : new Date(input);
@@ -3400,7 +3403,7 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
               format += pipeArgs[i];
             }
           }
-          return this.datePipe.transform(date, [format]);
+          return this.datePipe.transform(date, format);
         default:
           return input;
       }
@@ -3502,9 +3505,10 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], 
       }
       return 0;
     };
-    OrderByPipe.prototype.transform = function(input, _a) {
-      var _b = _a[0],
-          config = _b === void 0 ? '+' : _b;
+    OrderByPipe.prototype.transform = function(input, config) {
+      if (config === void 0) {
+        config = '+';
+      }
       this.value = input.slice();
       var value = this.value;
       if (!Array.isArray(value))
@@ -3569,14 +3573,17 @@ System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], true
   var core_1 = $__require('angular2/core');
   var RangePipe = (function() {
     function RangePipe() {}
-    RangePipe.prototype.transform = function(value, config) {
-      if (config === void 0) {
-        config = [0, 4, 1];
+    RangePipe.prototype.transform = function(value, min, max, step) {
+      if (min === void 0) {
+        min = 0;
+      }
+      if (max === void 0) {
+        max = 4;
+      }
+      if (step === void 0) {
+        step = 1;
       }
       var newValue = [];
-      var min = !isNaN(parseInt(config[0])) ? parseInt(config[0]) : 0;
-      var max = !isNaN(parseInt(config[1])) ? parseInt(config[1]) : 4;
-      var step = !isNaN(parseInt(config[2])) ? parseInt(config[2]) : 1;
       for (var i = min; i <= max; i += step)
         newValue.push(i);
       return newValue;

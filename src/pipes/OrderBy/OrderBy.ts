@@ -28,7 +28,7 @@ export class OrderByPipe implements PipeTransform {
 		return 0; //equal each other
 	}
 
-    transform(input:any, [config = '+']): any{
+    transform(input:any, config:string = '+'): any{
 
     	//make a copy of the input's reference
     	this.value = [...input];

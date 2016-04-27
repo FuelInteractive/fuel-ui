@@ -1,7 +1,8 @@
 import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "angular2/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
 import {bootstrap} from "angular2/platform/browser";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {LocationStrategy, HashLocationStrategy} from "angular2/platform/common";
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
@@ -39,20 +40,9 @@ export class DemoHome {
 
 <p>If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:</p>
 
-<p><code>npm install fuel-ui font-awesome --save</code></p>
-
-<p>Add this line to your dependencies in your <code>package.json</code></p>
+<p><code>npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save</code></p>
             
-<pre>
-<code class="language-javascript" code-highlight>
- "dependencies": {
-    ...
-    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2"
-}
-</code>
-</pre>
-            
-<p>And finally, add the proper script tags to your <code>index.html</code></p>
+<p>Then simply add the proper script tags to your <code>index.html</code></p>
             
 <pre>
 <code class="language-markup" code-highlight>
@@ -161,7 +151,7 @@ export class DemoComponent {
     
 }
 
-enableProdMode();
+// enableProdMode();
 
 bootstrap(DemoComponent, [
     ROUTER_PROVIDERS,

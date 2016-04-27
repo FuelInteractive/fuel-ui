@@ -25,11 +25,11 @@
   },
   "devDependencies": {
     "bourbon": "^4.2.6",
-    "del": "^1.2.1",
+    "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-cache-bust": "^1.0.1",
     "gulp-concat": "^2.6.0",
-    "gulp-inline-ng2-template": "0.0.7",
+    "gulp-inline-ng2-template": "^1.1.4",
     "gulp-minify-css": "^1.2.4",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
@@ -37,29 +37,31 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-typescript": "^2.8.0",
     "gulp-webserver": "^0.9.1",
-    "merge2": "^0.3.6",
+    "merge2": "^1.0.2",
     "path": "^0.12.7",
     "prismjs": "^1.4.1",
     "run-sequence": "^1.1.5",
     "systemjs-builder": "^0.15.15",
     "typescript": "^1.8.9",
-    "typings": "^0.7.12",
+    "typings": "^0.8.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-paths": "^1.0.0",
+    "vinyl-paths": "^2.1.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "peerDependencies": {
-    "angular2": "^2.0.0-beta.15"
+    "angular2": "2.0.0-beta.16",
+    "bootstrap": "^4.0.0-alpha.2",
+    "font-awesome": "^4.6.1"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.15",
-    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
+    "angular2": "2.0.0-beta.16",
+    "bootstrap": "^4.0.0-alpha.2",
     "core-js": "^2.2.1",
     "es6-shim": "^0.35.0",
-    "font-awesome": "4.4.0",
+    "font-awesome": "^4.6.1",
     "reflect-metadata": "^0.1.2",
     "rxjs": "^5.0.0-beta.2",
     "systemjs": "^0.19.25",
-    "zone.js": "^0.6.9"
+    "zone.js": "^0.6.12"
   }
 }

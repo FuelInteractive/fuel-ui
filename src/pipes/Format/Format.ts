@@ -12,10 +12,10 @@ export class FormatPipe implements PipeTransform  {
   
   constructor(){}
   
-  transform(input:string, args:any[]): any {
+  transform(input:string, args:any): any {
     var format = '';
     var parsedFloat = 0;
-    var pipeArgs = args[0].split(':');
+    var pipeArgs = args.split(':');
     for(var i = 0; i < pipeArgs.length; i++){
       pipeArgs[i] = pipeArgs[i].trim(' ');
     }
@@ -31,11 +31,11 @@ export class FormatPipe implements PipeTransform  {
       case 'number':
         parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
         format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-        return this.decimalPipe.transform(parsedFloat, [format]);
+        return this.decimalPipe.transform(parsedFloat, format);
       case 'percentage':
         parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
         format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-        return this.decimalPipe.transform(parsedFloat, [format]) + '%';
+        return this.decimalPipe.transform(parsedFloat, format) + '%';
       case 'date':
       case 'datetime':
         var date = !isNaN(parseInt(input)) ? parseInt(input) : new Date(input);
@@ -47,7 +47,7 @@ export class FormatPipe implements PipeTransform  {
                 format += pipeArgs[i];
             }
         }
-        return this.datePipe.transform(date, [format]);
+        return this.datePipe.transform(date, format);
       default:
         return input;
     }

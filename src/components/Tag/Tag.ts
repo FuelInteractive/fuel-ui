@@ -48,6 +48,7 @@ export class Tag implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy():void {
+    this.remove.next(this);
     this.tagset.removeTag(this);
   }
 
