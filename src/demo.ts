@@ -6,7 +6,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo} from './fuel-ui-demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -80,6 +80,7 @@ export class InstallationComponent {
   {path:'/component/tab', name: 'TabDemo', component: TabDemo},
   {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
   {path:'/component/tag', name: 'TagDemo', component: TagDemo},
+  {path:'/component/timepicker', name: 'TimePickerDemo', component: TimePickerDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
   {path:'/directive/collapse', name: 'CollapseDemo', component: CollapseDemo},
@@ -116,6 +117,7 @@ export class InstallationComponent {
                 <li><a [routerLink]="['TabDemo']">Tabs</a></li>
                 <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
                 <li><a [routerLink]="['TagDemo']">Tags</a></li>
+                <li><a [routerLink]="['TimePickerDemo']">TimePicker</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
                 <li><a [routerLink]="['CodeHighlighterDemo']">Code Highlighter</a></li>
