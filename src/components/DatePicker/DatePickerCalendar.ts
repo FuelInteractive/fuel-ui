@@ -39,18 +39,6 @@ export class DatePickerCalendar implements OnInit {
 		var compareDate = 
 			new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
         
-        /*if(this.dateTarget != null && this.dateTarget
-            && typeof this.startDate != undefined && this.startDate != null
-            && compareDate < this.startDate) {
-            return false;
-        }      
-        
-        if(this.dateTarget != null && !this.dateTarget
-            && typeof this.endDate != undefined && this.endDate != null
-            && compareDate > this.endDate) {
-            return false;
-        }*/
-        
         if(typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
 			return false;
             

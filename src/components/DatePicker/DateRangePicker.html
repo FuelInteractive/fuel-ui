@@ -6,7 +6,7 @@
 <div class="form-group">
     <label for="startDate">{{startLabel}}</label>
     <div class="input-group" 
-        (click)="showCalendar($event)"
+        (click)="toggleCalendar($event)"
         (click)="focusStartDate()">
         <input type="text" class="form-control" name="startDate"
             [(ngModel)]="inputStartDate" #dateField1 
@@ -20,7 +20,7 @@
 <div class="form-group">
     <label for="endDate">{{endLabel}}</label>
     <div class="input-group" 
-        (click)="showCalendar($event)"
+        (click)="toggleCalendar($event)"
         (click)="focusEndDate()">
         <input type="text" class="form-control" name="endDate"
             [(ngModel)]="inputEndDate" #dateField2 
