@@ -54,10 +54,10 @@ export let MessageBasedRenderer = class MessageBasedRenderer {
         this._renderStore.store(renderer, rendererId);
     }
     _selectRootElement(renderer, selector, elId) {
-        this._renderStore.store(renderer.selectRootElement(selector), elId);
+        this._renderStore.store(renderer.selectRootElement(selector, null), elId);
     }
     _createElement(renderer, parentElement, name, elId) {
-        this._renderStore.store(renderer.createElement(parentElement, name), elId);
+        this._renderStore.store(renderer.createElement(parentElement, name, null), elId);
     }
     _createViewRoot(renderer, hostElement, elId) {
         var viewRoot = renderer.createViewRoot(hostElement);
@@ -66,10 +66,10 @@ export let MessageBasedRenderer = class MessageBasedRenderer {
         }
     }
     _createTemplateAnchor(renderer, parentElement, elId) {
-        this._renderStore.store(renderer.createTemplateAnchor(parentElement), elId);
+        this._renderStore.store(renderer.createTemplateAnchor(parentElement, null), elId);
     }
     _createText(renderer, parentElement, value, elId) {
-        this._renderStore.store(renderer.createText(parentElement, value), elId);
+        this._renderStore.store(renderer.createText(parentElement, value, null), elId);
     }
     _projectNodes(renderer, parentElement, nodes) {
         renderer.projectNodes(parentElement, nodes);

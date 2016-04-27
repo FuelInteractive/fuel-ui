@@ -15,6 +15,7 @@ var TableSortable_Demo_1 = require("./TableSortable/TableSortable.Demo");
 var Slider_Demo_1 = require("./Slider/Slider.Demo");
 var Tab_Demo_1 = require("./Tab/Tab.Demo");
 var Tag_Demo_1 = require("./Tag/Tag.Demo");
+var TimePicker_Demo_1 = require("./TimePicker/TimePicker.Demo");
 exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Alert_Demo_1.ALERT_DEMO_PROVIDERS,
     Carousel_Demo_1.CAROUSEL_DEMO_PROVIDERS,
@@ -28,7 +29,8 @@ exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     TableSortable_Demo_1.TABLESORTABLE_DEMO_PROVIDERS,
     Slider_Demo_1.SLIDER_DEMO_PROVIDERS,
     Tab_Demo_1.TAB_DEMO_PROVIDERS,
-    Tag_Demo_1.TAG_DEMO_PROVIDERS
+    Tag_Demo_1.TAG_DEMO_PROVIDERS,
+    TimePicker_Demo_1.TIMEPICKER_DEMO_PROVIDERS
 ];
 __export(require("./Alert/Alert.Demo"));
 __export(require("./Carousel/Carousel.Demo"));
@@ -43,5 +45,6 @@ __export(require("./TableSortable/TableSortable.Demo"));
 __export(require("./Slider/Slider.Demo"));
 __export(require("./Tab/Tab.Demo"));
 __export(require("./Tag/Tag.Demo"));
+__export(require("./TimePicker/TimePicker.Demo"));
 
 //# sourceMappingURL=demoComponents.js.map

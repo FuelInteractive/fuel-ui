@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { Inject, Injectable } from 'angular2/src/core/di';
 import { AnimationBuilder } from 'angular2/src/animate/animation_builder';
-import { isPresent, isBlank, Json, RegExpWrapper, CONST_EXPR, stringify, StringWrapper, isArray } from 'angular2/src/facade/lang';
+import { isPresent, isBlank, Json, RegExpWrapper, CONST_EXPR, stringify, StringWrapper, isArray, isString } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { DomSharedStylesHost } from './shared_styles_host';
 import { EventManager } from './events/event_manager';
@@ -67,18 +67,21 @@ export class DomRenderer {
             this._hostAttr = null;
         }
     }
-    renderComponent(componentProto) {
-        return this._rootRenderer.renderComponent(componentProto);
-    }
-    selectRootElement(selector) {
-        var el = DOM.querySelector(this._rootRenderer.document, selector);
-        if (isBlank(el)) {
-            throw new BaseException(`The selector "${selector}" did not match any elements`);
+    selectRootElement(selectorOrNode, debugInfo) {
+        var el;
+        if (isString(selectorOrNode)) {
+            el = DOM.querySelector(this._rootRenderer.document, selectorOrNode);
+            if (isBlank(el)) {
+                throw new BaseException(`The selector "${selectorOrNode}" did not match any elements`);
+            }
+        }
+        else {
+            el = selectorOrNode;
         }
         DOM.clearNodes(el);
         return el;
     }
-    createElement(parent, name) {
+    createElement(parent, name, debugInfo) {
         var nsAndName = splitNamespace(name);
         var el = isPresent(nsAndName[0]) ?
             DOM.createElementNS(NAMESPACE_URIS[nsAndName[0]], nsAndName[1]) :
@@ -108,14 +111,14 @@ export class DomRenderer {
         }
         return nodesParent;
     }
-    createTemplateAnchor(parentElement) {
+    createTemplateAnchor(parentElement, debugInfo) {
         var comment = DOM.createComment(TEMPLATE_COMMENT_TEXT);
         if (isPresent(parentElement)) {
             DOM.appendChild(parentElement, comment);
         }
         return comment;
     }
-    createText(parentElement, value) {
+    createText(parentElement, value, debugInfo) {
         var node = DOM.createTextNode(value);
         if (isPresent(parentElement)) {
             DOM.appendChild(parentElement, node);
@@ -189,7 +192,6 @@ export class DomRenderer {
             this.setElementAttribute(renderElement, propertyName, propertyValue);
         }
     }
-    setElementDebugInfo(renderElement, info) { }
     setElementClass(renderElement, className, isAdd) {
         if (isAdd) {
             DOM.addClass(renderElement, className);

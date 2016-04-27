@@ -31,7 +31,7 @@ export let NumberValueAccessor = class NumberValueAccessor {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', value);
     }
     registerOnChange(fn) {
-        this.onChange = (value) => { fn(NumberWrapper.parseFloat(value)); };
+        this.onChange = (value) => { fn(value == '' ? null : NumberWrapper.parseFloat(value)); };
     }
     registerOnTouched(fn) { this.onTouched = fn; }
 };

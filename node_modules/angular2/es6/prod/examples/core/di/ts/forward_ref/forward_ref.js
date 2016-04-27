@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Inject, Injector, forwardRef, resolveForwardRef } from 'angular2/core';
+import { Inject, ReflectiveInjector, forwardRef, resolveForwardRef } from 'angular2/core';
 // #docregion forward_ref_fn
 var ref = forwardRef(() => Lock);
 // #enddocregion
@@ -27,7 +27,7 @@ Door = __decorate([
 // Only at this point Lock is defined.
 class Lock {
 }
-var injector = Injector.resolveAndCreate([Door, Lock]);
+var injector = ReflectiveInjector.resolveAndCreate([Door, Lock]);
 var door = injector.get(Door);
 expect(door instanceof Door).toBe(true);
 expect(door.lock instanceof Lock).toBe(true);

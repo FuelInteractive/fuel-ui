@@ -6,5 +6,5 @@ import { PipeTransform } from 'angular2/core';
  * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
  */
 export declare class JsonPipe implements PipeTransform {
-    transform(value: any, args?: any[]): string;
+    transform(value: any): string;
 }

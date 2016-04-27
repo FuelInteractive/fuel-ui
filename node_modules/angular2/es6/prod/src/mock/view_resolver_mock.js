@@ -12,7 +12,7 @@ import { Map, ListWrapper } from 'angular2/src/facade/collection';
 import { isPresent, stringify, isBlank } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { ViewMetadata } from '../core/metadata';
-import { ViewResolver } from 'angular2/src/core/linker/view_resolver';
+import { ViewResolver } from 'angular2/src/compiler/view_resolver';
 export let MockViewResolver = class MockViewResolver extends ViewResolver {
     constructor() {
         super();

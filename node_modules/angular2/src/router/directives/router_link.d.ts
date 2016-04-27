@@ -1,5 +1,5 @@
+import { Location } from 'angular2/platform/common';
 import { Router } from '../router';
-import { Location } from '../location/location';
 /**
  * The RouterLink directive lets you link to specific parts of your app.
  *

@@ -31,7 +31,7 @@ const KEYBOARD_EVENT_PROPERTIES = [
 ];
 const TRANSITION_EVENT_PROPERTIES = ['propertyName', 'elapsedTime', 'pseudoElement'];
 const EVENT_PROPERTIES = ['type', 'bubbles', 'cancelable'];
-const NODES_WITH_VALUE = new Set(["input", "select", "option", "button", "li", "meter", "progress", "param"]);
+const NODES_WITH_VALUE = new Set(["input", "select", "option", "button", "li", "meter", "progress", "param", "textarea"]);
 export function serializeGenericEvent(e) {
     return serializeEvent(e, EVENT_PROPERTIES);
 }

@@ -2,27 +2,27 @@ import { ViewEncapsulation } from 'angular2/src/core/metadata/view';
 import { Injector } from 'angular2/src/core/di';
 export declare class RenderComponentType {
     id: string;
+    templateUrl: string;
+    slotCount: number;
     encapsulation: ViewEncapsulation;
     styles: Array<string | any[]>;
-    constructor(id: string, encapsulation: ViewEncapsulation, styles: Array<string | any[]>);
+    constructor(id: string, templateUrl: string, slotCount: number, encapsulation: ViewEncapsulation, styles: Array<string | any[]>);
 }
-export declare class RenderDebugInfo {
+export declare abstract class RenderDebugInfo {
     injector: Injector;
     component: any;
     providerTokens: any[];
-    locals: Map<string, any>;
-    constructor(injector: Injector, component: any, providerTokens: any[], locals: Map<string, any>);
+    locals: {
+        [key: string]: string;
+    };
+    source: string;
 }
-export interface ParentRenderer {
-    renderComponent(componentType: RenderComponentType): Renderer;
-}
-export declare abstract class Renderer implements ParentRenderer {
-    abstract renderComponent(componentType: RenderComponentType): Renderer;
-    abstract selectRootElement(selector: string): any;
-    abstract createElement(parentElement: any, name: string): any;
+export declare abstract class Renderer {
+    abstract selectRootElement(selectorOrNode: string | any, debugInfo: RenderDebugInfo): any;
+    abstract createElement(parentElement: any, name: string, debugInfo: RenderDebugInfo): any;
     abstract createViewRoot(hostElement: any): any;
-    abstract createTemplateAnchor(parentElement: any): any;
-    abstract createText(parentElement: any, value: string): any;
+    abstract createTemplateAnchor(parentElement: any, debugInfo: RenderDebugInfo): any;
+    abstract createText(parentElement: any, value: string, debugInfo: RenderDebugInfo): any;
     abstract projectNodes(parentElement: any, nodes: any[]): void;
     abstract attachViewAfter(node: any, viewRootNodes: any[]): void;
     abstract detachView(viewRootNodes: any[]): void;
@@ -32,11 +32,9 @@ export declare abstract class Renderer implements ParentRenderer {
     abstract setElementProperty(renderElement: any, propertyName: string, propertyValue: any): void;
     abstract setElementAttribute(renderElement: any, attributeName: string, attributeValue: string): void;
     /**
-     * Used only in debug mode to serialize property changes to comment nodes,
-     * such as <template> placeholders.
+     * Used only in debug mode to serialize property changes to dom nodes as attributes.
      */
     abstract setBindingDebugInfo(renderElement: any, propertyName: string, propertyValue: string): void;
-    abstract setElementDebugInfo(renderElement: any, info: RenderDebugInfo): any;
     abstract setElementClass(renderElement: any, className: string, isAdd: boolean): any;
     abstract setElementStyle(renderElement: any, styleName: string, styleValue: string): any;
     abstract invokeElementMethod(renderElement: any, methodName: string, args: any[]): any;
@@ -54,6 +52,6 @@ export declare abstract class Renderer implements ParentRenderer {
  *
  * The default Renderer implementation is `DomRenderer`. Also available is `WebWorkerRenderer`.
  */
-export declare abstract class RootRenderer implements ParentRenderer {
+export declare abstract class RootRenderer {
     abstract renderComponent(componentType: RenderComponentType): Renderer;
 }

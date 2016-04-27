@@ -1,10 +1,10 @@
-import { ComponentRef, Injector, ViewMetadata, ElementRef } from 'angular2/core';
+import { ComponentRef, Injector, ViewMetadata, ElementRef, ChangeDetectorRef } from 'angular2/core';
 import { Type } from 'angular2/src/facade/lang';
 import { DebugElement } from 'angular2/src/core/debug/debug_node';
 /**
  * Fixture for debugging and testing a component.
  */
-export declare abstract class ComponentFixture {
+export declare class ComponentFixture {
     /**
      * The DebugElement associated with the root element of this component.
      */
@@ -22,17 +22,22 @@ export declare abstract class ComponentFixture {
      */
     elementRef: ElementRef;
     /**
+     * The ComponentRef for the component
+     */
+    componentRef: ComponentRef;
+    /**
+     * The ChangeDetectorRef for the component
+     */
+    changeDetectorRef: ChangeDetectorRef;
+    constructor(componentRef: ComponentRef);
+    /**
      * Trigger a change detection cycle for the component.
      */
-    abstract detectChanges(): void;
+    detectChanges(checkNoChanges?: boolean): void;
+    checkNoChanges(): void;
     /**
      * Trigger component destruction.
      */
-    abstract destroy(): void;
-}
-export declare class ComponentFixture_ extends ComponentFixture {
-    constructor(componentRef: ComponentRef);
-    detectChanges(): void;
     destroy(): void;
 }
 /**
@@ -116,4 +121,5 @@ export declare class TestComponentBuilder {
      * @return {Promise<ComponentFixture>}
      */
     createAsync(rootComponentType: Type): Promise<ComponentFixture>;
+    createFakeAsync(rootComponentType: Type): ComponentFixture;
 }

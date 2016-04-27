@@ -68,7 +68,9 @@ export class NgZoneImpl {
         }
     }
     static isInAngularZone() { return Zone.current.get('isAngularZone') === true; }
-    runInner(fn) { return this.inner.runGuarded(fn); }
+    runInner(fn) { return this.inner.run(fn); }
+    ;
+    runInnerGuarded(fn) { return this.inner.runGuarded(fn); }
     ;
     runOuter(fn) { return this.outer.run(fn); }
     ;

@@ -2,66 +2,66 @@ import { InjectMetadata, OptionalMetadata, InjectableMetadata, SelfMetadata, Hos
 /**
  * Factory for creating {@link InjectMetadata}.
  */
-export interface InjectFactory {
+export interface InjectMetadataFactory {
     (token: any): any;
     new (token: any): InjectMetadata;
 }
 /**
  * Factory for creating {@link OptionalMetadata}.
  */
-export interface OptionalFactory {
+export interface OptionalMetadataFactory {
     (): any;
     new (): OptionalMetadata;
 }
 /**
  * Factory for creating {@link InjectableMetadata}.
  */
-export interface InjectableFactory {
+export interface InjectableMetadataFactory {
     (): any;
     new (): InjectableMetadata;
 }
 /**
  * Factory for creating {@link SelfMetadata}.
  */
-export interface SelfFactory {
+export interface SelfMetadataFactory {
     (): any;
     new (): SelfMetadata;
 }
 /**
  * Factory for creating {@link HostMetadata}.
  */
-export interface HostFactory {
+export interface HostMetadataFactory {
     (): any;
     new (): HostMetadata;
 }
 /**
  * Factory for creating {@link SkipSelfMetadata}.
  */
-export interface SkipSelfFactory {
+export interface SkipSelfMetadataFactory {
     (): any;
     new (): SkipSelfMetadata;
 }
 /**
  * Factory for creating {@link InjectMetadata}.
  */
-export declare var Inject: InjectFactory;
+export declare var Inject: InjectMetadataFactory;
 /**
  * Factory for creating {@link OptionalMetadata}.
  */
-export declare var Optional: OptionalFactory;
+export declare var Optional: OptionalMetadataFactory;
 /**
  * Factory for creating {@link InjectableMetadata}.
  */
-export declare var Injectable: InjectableFactory;
+export declare var Injectable: InjectableMetadataFactory;
 /**
  * Factory for creating {@link SelfMetadata}.
  */
-export declare var Self: SelfFactory;
+export declare var Self: SelfMetadataFactory;
 /**
  * Factory for creating {@link HostMetadata}.
  */
-export declare var Host: HostFactory;
+export declare var Host: HostMetadataFactory;
 /**
  * Factory for creating {@link SkipSelfMetadata}.
  */
-export declare var SkipSelf: SkipSelfFactory;
+export declare var SkipSelf: SkipSelfMetadataFactory;

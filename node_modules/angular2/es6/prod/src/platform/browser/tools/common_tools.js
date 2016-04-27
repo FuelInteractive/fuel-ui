@@ -2,6 +2,12 @@ import { ApplicationRef } from 'angular2/src/core/application_ref';
 import { isPresent, NumberWrapper } from 'angular2/src/facade/lang';
 import { window } from 'angular2/src/facade/browser';
 import { DOM } from 'angular2/src/platform/dom/dom_adapter';
+export class ChangeDetectionPerfRecord {
+    constructor(msPerTick, numTicks) {
+        this.msPerTick = msPerTick;
+        this.numTicks = numTicks;
+    }
+}
 /**
  * Entry point for all Angular debug tools. This object corresponds to the `ng`
  * global variable accessible in the dev console.
@@ -60,5 +66,6 @@ export class AngularProfiler {
         var msPerTick = (end - start) / numTicks;
         window.console.log(`ran ${numTicks} change detection cycles`);
         window.console.log(`${NumberWrapper.toFixed(msPerTick, 2)} ms per check`);
+        return new ChangeDetectionPerfRecord(msPerTick, numTicks);
     }
 }

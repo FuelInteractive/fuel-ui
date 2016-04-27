@@ -1,20 +1,24 @@
-import { CompileTemplateMetadata } from './directive_metadata';
-import { SourceModule, SourceExpression } from './source_module';
-import { XHR } from 'angular2/src/compiler/xhr';
+import { CompileIdentifierMetadata, CompileDirectiveMetadata } from './compile_metadata';
+import * as o from './output/output_ast';
 import { UrlResolver } from 'angular2/src/compiler/url_resolver';
+export declare class StylesCompileDependency {
+    sourceUrl: string;
+    isShimmed: boolean;
+    valuePlaceholder: CompileIdentifierMetadata;
+    constructor(sourceUrl: string, isShimmed: boolean, valuePlaceholder: CompileIdentifierMetadata);
+}
+export declare class StylesCompileResult {
+    statements: o.Statement[];
+    stylesVar: string;
+    dependencies: StylesCompileDependency[];
+    constructor(statements: o.Statement[], stylesVar: string, dependencies: StylesCompileDependency[]);
+}
 export declare class StyleCompiler {
-    private _xhr;
     private _urlResolver;
-    private _styleCache;
     private _shadowCss;
-    constructor(_xhr: XHR, _urlResolver: UrlResolver);
-    compileComponentRuntime(template: CompileTemplateMetadata): Promise<Array<string | any[]>>;
-    compileComponentCodeGen(template: CompileTemplateMetadata): SourceExpression;
-    compileStylesheetCodeGen(stylesheetUrl: string, cssText: string): SourceModule[];
-    clearCache(): void;
-    private _loadStyles(plainStyles, absUrls, encapsulate);
-    private _styleCodeGen(plainStyles, absUrls, shim);
-    private _styleModule(stylesheetUrl, shim, expression);
+    constructor(_urlResolver: UrlResolver);
+    compileComponent(comp: CompileDirectiveMetadata): StylesCompileResult;
+    compileStylesheet(stylesheetUrl: string, cssText: string, isShimmed: boolean): StylesCompileResult;
+    private _compileStyles(stylesVar, plainStyles, absUrls, shim);
     private _shimIfNeeded(style, shim);
-    private _createModuleUrl(stylesheetUrl, shim);
 }

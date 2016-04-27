@@ -1,6 +1,6 @@
 import { global } from 'angular2/src/facade/lang';
 import { FunctionWithParamTokens, getTestInjector } from './test_injector';
-export { inject, injectAsync } from './test_injector';
+export { inject, async, injectAsync } from './test_injector';
 export { expect } from './matchers';
 var _global = (typeof window === 'undefined' ? global : window);
 /**
@@ -82,6 +82,12 @@ export function beforeEachProviders(fn) {
         }
     });
 }
+function runInAsyncTestZone(fnToExecute, finishCallback, failCallback, testName = '') {
+    var AsyncTestZoneSpec = Zone['AsyncTestZoneSpec'];
+    var testZoneSpec = new AsyncTestZoneSpec(finishCallback, failCallback, testName);
+    var testZone = Zone.current.fork(testZoneSpec);
+    return testZone.run(fnToExecute);
+}
 function _isPromiseLike(input) {
     return input && !!(input.then);
 }
@@ -90,28 +96,11 @@ function _it(jsmFn, name, testFn, testTimeOut) {
     if (testFn instanceof FunctionWithParamTokens) {
         let testFnT = testFn;
         jsmFn(name, (done) => {
-            var returnedTestValue;
-            try {
-                returnedTestValue = testInjector.execute(testFnT);
-            }
-            catch (err) {
-                done.fail(err);
-                return;
-            }
             if (testFnT.isAsync) {
-                if (_isPromiseLike(returnedTestValue)) {
-                    returnedTestValue.then(() => { done(); }, (err) => { done.fail(err); });
-                }
-                else {
-                    done.fail('Error: injectAsync was expected to return a promise, but the ' +
-                        ' returned value was: ' + returnedTestValue);
-                }
+                runInAsyncTestZone(() => testInjector.execute(testFnT), done, done.fail, name);
             }
             else {
-                if (!(returnedTestValue === undefined)) {
-                    done.fail('Error: inject returned a value. Did you mean to use injectAsync? Returned ' +
-                        'value was: ' + returnedTestValue);
-                }
+                testInjector.execute(testFnT);
                 done();
             }
         }, timeOut);
@@ -125,8 +114,6 @@ function _it(jsmFn, name, testFn, testTimeOut) {
  * Wrapper around Jasmine beforeEach function.
  *
  * beforeEach may be used with the `inject` function to fetch dependencies.
- * The test will automatically wait for any asynchronous calls inside the
- * injected test function to complete.
  *
  * See http://jasmine.github.io/ for more details.
  *
@@ -140,28 +127,11 @@ export function beforeEach(fn) {
         // }));`
         let fnT = fn;
         jsmBeforeEach((done) => {
-            var returnedTestValue;
-            try {
-                returnedTestValue = testInjector.execute(fnT);
-            }
-            catch (err) {
-                done.fail(err);
-                return;
-            }
             if (fnT.isAsync) {
-                if (_isPromiseLike(returnedTestValue)) {
-                    returnedTestValue.then(() => { done(); }, (err) => { done.fail(err); });
-                }
-                else {
-                    done.fail('Error: injectAsync was expected to return a promise, but the ' +
-                        ' returned value was: ' + returnedTestValue);
-                }
+                runInAsyncTestZone(() => testInjector.execute(fnT), done, done.fail, 'beforeEach');
             }
             else {
-                if (!(returnedTestValue === undefined)) {
-                    done.fail('Error: inject returned a value. Did you mean to use injectAsync? Returned ' +
-                        'value was: ' + returnedTestValue);
-                }
+                testInjector.execute(fnT);
                 done();
             }
         });
@@ -179,10 +149,8 @@ export function beforeEach(fn) {
 /**
  * Define a single test case with the given test name and execution function.
  *
- * The test function can be either a synchronous function, an asynchronous function
- * that takes a completion callback, or an injected function created via {@link inject}
- * or {@link injectAsync}. The test will automatically wait for any asynchronous calls
- * inside the injected test function to complete.
+ * The test function can be either a synchronous function, the result of {@link async},
+ * or an injected function created via {@link inject}.
  *
  * Wrapper around Jasmine it function. See http://jasmine.github.io/ for more details.
  *

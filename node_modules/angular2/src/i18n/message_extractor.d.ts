@@ -1,6 +1,6 @@
 import { HtmlParser } from 'angular2/src/compiler/html_parser';
 import { ParseError } from 'angular2/src/compiler/parse_util';
-import { Parser } from 'angular2/src/core/change_detection/parser/parser';
+import { Parser } from 'angular2/src/compiler/expression_parser/parser';
 import { Message } from './message';
 /**
  * All messages extracted from a template.

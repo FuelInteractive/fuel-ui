@@ -1,13 +1,14 @@
-import { ResolvedProvider } from 'angular2/src/core/di';
+import { Injector } from 'angular2/src/core/di/injector';
 import { AppElement } from './element';
-import { ElementRef, ElementRef_ } from './element_ref';
+import { ElementRef } from './element_ref';
 import { TemplateRef } from './template_ref';
-import { EmbeddedViewRef, HostViewRef, HostViewFactoryRef, ViewRef } from './view_ref';
+import { EmbeddedViewRef, ViewRef } from './view_ref';
+import { ComponentFactory, ComponentRef } from './component_factory';
 /**
  * Represents a container where one or more Views can be attached.
  *
  * The container can contain two kinds of Views. Host Views, created by instantiating a
- * {@link Component} via {@link #createHostView}, and Embedded Views, created by instantiating an
+ * {@link Component} via {@link #createComponent}, and Embedded Views, created by instantiating an
  * {@link TemplateRef Embedded Template} via {@link #createEmbeddedView}.
  *
  * The location of the View Container within the containing View is specified by the Anchor
@@ -18,10 +19,7 @@ import { EmbeddedViewRef, HostViewRef, HostViewFactoryRef, ViewRef } from './vie
  * the Rendered View.
  *
  * To access a `ViewContainerRef` of an Element, you can either place a {@link Directive} injected
- * with `ViewContainerRef` on the Element, or you obtain it via
- * {@link AppViewManager#getViewContainer}.
- *
- * <!-- TODO(i): we are also considering ElementRef#viewContainer api -->
+ * with `ViewContainerRef` on the Element, or you obtain it via a {@link ViewChild} query.
  */
 export declare abstract class ViewContainerRef {
     /**
@@ -29,10 +27,12 @@ export declare abstract class ViewContainerRef {
      * <!-- TODO: rename to anchorElement -->
      */
     element: ElementRef;
+    injector: Injector;
+    parentInjector: Injector;
     /**
      * Destroys all Views in this container.
      */
-    clear(): void;
+    abstract clear(): void;
     /**
      * Returns the {@link ViewRef} for the View located in this container at the specified index.
      */
@@ -54,17 +54,16 @@ export declare abstract class ViewContainerRef {
      * Instantiates a single {@link Component} and inserts its Host View into this container at the
      * specified `index`.
      *
-     * The component is instantiated using its {@link ProtoViewRef `protoView`} which can be
-     * obtained via {@link Compiler#compileInHost}.
+     * The component is instantiated using its {@link ComponentFactory} which can be
+     * obtained via {@link ComponentResolver#resolveComponent}.
      *
      * If `index` is not specified, the new View will be inserted as the last View in the container.
      *
-     * You can optionally specify `dynamicallyCreatedProviders`, which configure the {@link Injector}
-     * that will be created for the Host View.
+     * You can optionally specify the {@link Injector} that will be used as parent for the Component.
      *
-     * Returns the {@link HostViewRef} of the Host View created for the newly instantiated Component.
+     * Returns the {@link ComponentRef} of the Host View created for the newly instantiated Component.
      */
-    abstract createHostView(hostViewFactoryRef: HostViewFactoryRef, index?: number, dynamicallyCreatedProviders?: ResolvedProvider[], projectableNodes?: any[][]): HostViewRef;
+    abstract createComponent(componentFactory: ComponentFactory, index?: number, injector?: Injector, projectableNodes?: any[][]): ComponentRef;
     /**
      * Inserts a View identified by a {@link ViewRef} into the container at the specified `index`.
      *
@@ -72,7 +71,7 @@ export declare abstract class ViewContainerRef {
      *
      * Returns the inserted {@link ViewRef}.
      */
-    abstract insert(viewRef: EmbeddedViewRef, index?: number): EmbeddedViewRef;
+    abstract insert(viewRef: ViewRef, index?: number): ViewRef;
     /**
      * Returns the index of the View, specified via {@link ViewRef}, within the current container or
      * `-1` if this container doesn't contain the View.
@@ -89,18 +88,21 @@ export declare abstract class ViewContainerRef {
      *
      * If the `index` param is omitted, the last {@link ViewRef} is detached.
      */
-    abstract detach(index?: number): EmbeddedViewRef;
+    abstract detach(index?: number): ViewRef;
 }
-export declare class ViewContainerRef_ extends ViewContainerRef {
+export declare class ViewContainerRef_ implements ViewContainerRef {
     private _element;
     constructor(_element: AppElement);
     get(index: number): EmbeddedViewRef;
     length: number;
-    element: ElementRef_;
+    element: ElementRef;
+    injector: Injector;
+    parentInjector: Injector;
     createEmbeddedView(templateRef: TemplateRef, index?: number): EmbeddedViewRef;
-    createHostView(hostViewFactoryRef: HostViewFactoryRef, index?: number, dynamicallyCreatedProviders?: ResolvedProvider[], projectableNodes?: any[][]): HostViewRef;
-    insert(viewRef: ViewRef, index?: number): EmbeddedViewRef;
+    createComponent(componentFactory: ComponentFactory, index?: number, injector?: Injector, projectableNodes?: any[][]): ComponentRef;
+    insert(viewRef: ViewRef, index?: number): ViewRef;
     indexOf(viewRef: ViewRef): number;
     remove(index?: number): void;
-    detach(index?: number): EmbeddedViewRef;
+    detach(index?: number): ViewRef;
+    clear(): void;
 }

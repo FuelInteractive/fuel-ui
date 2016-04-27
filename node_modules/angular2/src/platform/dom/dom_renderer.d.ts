@@ -21,12 +21,11 @@ export declare class DomRenderer implements Renderer {
     private _hostAttr;
     private _styles;
     constructor(_rootRenderer: DomRootRenderer, componentProto: RenderComponentType);
-    renderComponent(componentProto: RenderComponentType): Renderer;
-    selectRootElement(selector: string): Element;
-    createElement(parent: Element, name: string): Node;
+    selectRootElement(selectorOrNode: string | any, debugInfo: RenderDebugInfo): Element;
+    createElement(parent: Element, name: string, debugInfo: RenderDebugInfo): Node;
     createViewRoot(hostElement: any): any;
-    createTemplateAnchor(parentElement: any): any;
-    createText(parentElement: any, value: string): any;
+    createTemplateAnchor(parentElement: any, debugInfo: RenderDebugInfo): any;
+    createText(parentElement: any, value: string, debugInfo: RenderDebugInfo): any;
     projectNodes(parentElement: any, nodes: any[]): void;
     attachViewAfter(node: any, viewRootNodes: any[]): void;
     detachView(viewRootNodes: any[]): void;
@@ -36,7 +35,6 @@ export declare class DomRenderer implements Renderer {
     setElementProperty(renderElement: any, propertyName: string, propertyValue: any): void;
     setElementAttribute(renderElement: any, attributeName: string, attributeValue: string): void;
     setBindingDebugInfo(renderElement: any, propertyName: string, propertyValue: string): void;
-    setElementDebugInfo(renderElement: any, info: RenderDebugInfo): void;
     setElementClass(renderElement: any, className: string, isAdd: boolean): void;
     setElementStyle(renderElement: any, styleName: string, styleValue: string): void;
     invokeElementMethod(renderElement: any, methodName: string, args: any[]): void;

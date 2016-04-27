@@ -1,9 +1,10 @@
 import { ParseError } from 'angular2/src/compiler/parse_util';
 import { HtmlElementAst, HtmlTextAst, HtmlCommentAst, htmlVisitAll } from 'angular2/src/compiler/html_ast';
-import { isPresent, isBlank } from 'angular2/src/facade/lang';
+import { isPresent, isBlank, StringWrapper } from 'angular2/src/facade/lang';
 import { Message } from './message';
 export const I18N_ATTR = "i18n";
 export const I18N_ATTR_PREFIX = "i18n-";
+var CUSTOM_PH_EXP = /\/\/[\s\S]*i18n[\s\S]*\([\s\S]*ph[\s\S]*=[\s\S]*"([\s\S]*?)"[\s\S]*\)/g;
 /**
  * An i18n error.
  */
@@ -95,12 +96,15 @@ export function messageFromAttribute(parser, p, attr) {
 export function removeInterpolation(value, source, parser) {
     try {
         let parsed = parser.splitInterpolation(value, source.toString());
+        let usedNames = new Map();
         if (isPresent(parsed)) {
             let res = "";
             for (let i = 0; i < parsed.strings.length; ++i) {
                 res += parsed.strings[i];
                 if (i != parsed.strings.length - 1) {
-                    res += `<ph name="${i}"/>`;
+                    let customPhName = getPhNameFromBinding(parsed.expressions[i], i);
+                    customPhName = dedupePhName(usedNames, customPhName);
+                    res += `<ph name="${customPhName}"/>`;
                 }
             }
             return res;
@@ -111,6 +115,21 @@ export function removeInterpolation(value, source, parser) {
     }
     catch (e) {
         return value;
+    }
+}
+export function getPhNameFromBinding(input, index) {
+    let customPhMatch = StringWrapper.split(input, CUSTOM_PH_EXP);
+    return customPhMatch.length > 1 ? customPhMatch[1] : `${index}`;
+}
+export function dedupePhName(usedNames, name) {
+    let duplicateNameCount = usedNames.get(name);
+    if (isPresent(duplicateNameCount)) {
+        usedNames.set(name, duplicateNameCount + 1);
+        return `${name}_${duplicateNameCount}`;
+    }
+    else {
+        usedNames.set(name, 1);
+        return name;
     }
 }
 export function stringifyNodes(nodes, parser) {
@@ -139,6 +158,8 @@ class _StringifyVisitor {
         }
     }
     visitComment(ast, context) { return ""; }
+    visitExpansion(ast, context) { return null; }
+    visitExpansionCase(ast, context) { return null; }
     _join(strs, str) {
         return strs.filter(s => s.length > 0).join(str);
     }

@@ -21,13 +21,12 @@ export declare class WebWorkerRenderer implements Renderer, RenderStoreObject {
     private _rootRenderer;
     private _componentType;
     constructor(_rootRenderer: WebWorkerRootRenderer, _componentType: RenderComponentType);
-    renderComponent(componentType: RenderComponentType): Renderer;
     private _runOnService(fnName, fnArgs);
-    selectRootElement(selector: string): any;
-    createElement(parentElement: any, name: string): any;
+    selectRootElement(selectorOrNode: string, debugInfo: RenderDebugInfo): any;
+    createElement(parentElement: any, name: string, debugInfo: RenderDebugInfo): any;
     createViewRoot(hostElement: any): any;
-    createTemplateAnchor(parentElement: any): any;
-    createText(parentElement: any, value: string): any;
+    createTemplateAnchor(parentElement: any, debugInfo: RenderDebugInfo): any;
+    createText(parentElement: any, value: string, debugInfo: RenderDebugInfo): any;
     projectNodes(parentElement: any, nodes: any[]): void;
     attachViewAfter(node: any, viewRootNodes: any[]): void;
     detachView(viewRootNodes: any[]): void;
@@ -35,7 +34,6 @@ export declare class WebWorkerRenderer implements Renderer, RenderStoreObject {
     setElementProperty(renderElement: any, propertyName: string, propertyValue: any): void;
     setElementAttribute(renderElement: any, attributeName: string, attributeValue: string): void;
     setBindingDebugInfo(renderElement: any, propertyName: string, propertyValue: string): void;
-    setElementDebugInfo(renderElement: any, info: RenderDebugInfo): void;
     setElementClass(renderElement: any, className: string, isAdd: boolean): void;
     setElementStyle(renderElement: any, styleName: string, styleValue: string): void;
     invokeElementMethod(renderElement: any, methodName: string, args: any[]): void;

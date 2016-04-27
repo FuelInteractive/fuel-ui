@@ -23,6 +23,7 @@ export class Response {
     constructor(responseOptions) {
         this._body = responseOptions.body;
         this.status = responseOptions.status;
+        this.ok = (this.status >= 200 && this.status <= 299);
         this.statusText = responseOptions.statusText;
         this.headers = responseOptions.headers;
         this.type = responseOptions.type;

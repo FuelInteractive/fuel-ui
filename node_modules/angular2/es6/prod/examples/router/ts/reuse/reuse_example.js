@@ -9,7 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, provide } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
-import { RouteConfig, ROUTER_DIRECTIVES, APP_BASE_HREF, RouteParams } from 'angular2/router';
+import { RouteConfig, ROUTER_DIRECTIVES, RouteParams } from 'angular2/router';
+import { APP_BASE_HREF } from 'angular2/platform/common';
 // #docregion reuseCmp
 let MyCmp = class MyCmp {
     constructor(params) {

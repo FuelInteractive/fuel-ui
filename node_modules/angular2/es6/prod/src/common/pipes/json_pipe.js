@@ -16,7 +16,7 @@ import { Injectable, Pipe } from 'angular2/core';
  * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
  */
 export let JsonPipe = class JsonPipe {
-    transform(value, args = null) { return Json.stringify(value); }
+    transform(value) { return Json.stringify(value); }
 };
 JsonPipe = __decorate([
     CONST(),

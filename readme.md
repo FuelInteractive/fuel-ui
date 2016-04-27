@@ -1,4 +1,4 @@
-#Fuel-UI
+#Fuel-UI [![npm version](https://badge.fury.io/js/fuel-ui.svg)](https://badge.fury.io/js/fuel-ui) [![npm downloads](https://img.shields.io/npm/dm/fuel-ui.svg)](https://npmjs.org/fuel-ui) [![Dependency Status](https://david-dm.org/fuelinteractive/fuel-ui.svg)](https://david-dm.org/fuelinteractive/fuel-ui) [![devDependency Status](https://david-dm.org/fuelinteractive/fuel-ui/dev-status.svg)](https://david-dm.org/fuelinteractive/fuel-ui#info=devDependencies)
 
 A set of UI components for use with Angular 2 and Bootstrap 4.
 
@@ -23,17 +23,10 @@ gulp
 If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:
 
 ```
-npm install fuel-ui font-awesome --save
+npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
 ```
-Add this line to your dependencies in your `package.json`
 
-```
-"dependencies": {
-  ...
-    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2"
-}
-```
-And finally, add the proper script tags to your `index.html`
+Then simply add the proper script tags to your `index.html`
 ```html
 <head>
   <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />

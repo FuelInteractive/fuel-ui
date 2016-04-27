@@ -24,6 +24,7 @@ export interface IRootScopeService {
     $new(isolate?: boolean): IScope;
     $id: string;
     $watch(expr: any, fn?: (a1?: any, a2?: any) => void): Function;
+    $destroy(): any;
     $apply(): any;
     $apply(exp: string): any;
     $apply(exp: Function): any;

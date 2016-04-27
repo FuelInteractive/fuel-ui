@@ -16,12 +16,11 @@ var core_1 = require("angular2/core");
 var RangePipe = (function () {
     function RangePipe() {
     }
-    RangePipe.prototype.transform = function (value, config) {
-        if (config === void 0) { config = [0, 4, 1]; }
+    RangePipe.prototype.transform = function (value, min, max, step) {
+        if (min === void 0) { min = 0; }
+        if (max === void 0) { max = 4; }
+        if (step === void 0) { step = 1; }
         var newValue = [];
-        var min = !isNaN(parseInt(config[0])) ? parseInt(config[0]) : 0;
-        var max = !isNaN(parseInt(config[1])) ? parseInt(config[1]) : 4;
-        var step = !isNaN(parseInt(config[2])) ? parseInt(config[2]) : 1;
         for (var i = min; i <= max; i += step)
             newValue.push(i);
         return newValue;

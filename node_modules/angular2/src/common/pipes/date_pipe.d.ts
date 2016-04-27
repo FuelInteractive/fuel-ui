@@ -66,6 +66,6 @@ import { PipeTransform } from 'angular2/core';
  * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
  */
 export declare class DatePipe implements PipeTransform {
-    transform(value: any, args: any[]): string;
+    transform(value: any, pattern?: string): string;
     supports(obj: any): boolean;
 }

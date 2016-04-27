@@ -25,7 +25,7 @@ import { PipeTransform } from 'angular2/core';
  * brackets etc.
  */
 export declare class ReplacePipe implements PipeTransform {
-    transform(value: any, args: any[]): any;
+    transform(value: any, pattern: string | RegExp, replacement: Function | string): any;
     private _supportedInput(input);
     private _supportedPattern(pattern);
     private _supportedReplacement(replacement);

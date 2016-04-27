@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from 'angular2/src/core/di';
 import { StringWrapper, RegExpWrapper, CONST_EXPR, isPresent } from 'angular2/src/facade/lang';
-import { HtmlAttrAst, HtmlElementAst } from './html_ast';
+import { HtmlAttrAst, HtmlElementAst, HtmlExpansionAst } from './html_ast';
 import { HtmlParser, HtmlParseTreeResult } from './html_parser';
 import { dashCaseToCamelCase } from './util';
 var LONG_SYNTAX_REGEXP = /^(?:on-(.*)|bindon-(.*)|bind-(.*)|var-(.*))$/ig;
@@ -68,6 +68,11 @@ export class LegacyHtmlAstTransformer {
         return ast;
     }
     visitText(ast, context) { return ast; }
+    visitExpansion(ast, context) {
+        let cases = ast.cases.map(c => c.visit(this, null));
+        return new HtmlExpansionAst(ast.switchValue, ast.type, cases, ast.sourceSpan, ast.switchValueSourceSpan);
+    }
+    visitExpansionCase(ast, context) { return ast; }
     _rewriteLongSyntax(ast) {
         let m = RegExpWrapper.firstMatch(LONG_SYNTAX_REGEXP, ast.name);
         let attrName = ast.name;
@@ -174,9 +179,9 @@ export class LegacyHtmlAstTransformer {
     }
 }
 export let LegacyHtmlParser = class LegacyHtmlParser extends HtmlParser {
-    parse(sourceContent, sourceUrl) {
+    parse(sourceContent, sourceUrl, parseExpansionForms = false) {
         let transformer = new LegacyHtmlAstTransformer();
-        let htmlParseTreeResult = super.parse(sourceContent, sourceUrl);
+        let htmlParseTreeResult = super.parse(sourceContent, sourceUrl, parseExpansionForms);
         let rootNodes = htmlParseTreeResult.rootNodes.map(node => node.visit(transformer, null));
         return transformer.rewrittenAst.length > 0 ?
             new HtmlParseTreeResult(rootNodes, htmlParseTreeResult.errors) :

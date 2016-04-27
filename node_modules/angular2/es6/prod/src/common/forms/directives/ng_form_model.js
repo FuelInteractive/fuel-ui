@@ -10,8 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { CONST_EXPR } from 'angular2/src/facade/lang';
+import { CONST_EXPR, isBlank } from 'angular2/src/facade/lang';
 import { ListWrapper, StringMapWrapper } from 'angular2/src/facade/collection';
+import { BaseException } from 'angular2/src/facade/exceptions';
 import { ObservableWrapper, EventEmitter } from 'angular2/src/facade/async';
 import { Directive, forwardRef, Provider, Inject, Optional, Self } from 'angular2/core';
 import { ControlContainer } from './control_container';
@@ -100,6 +101,7 @@ export let NgFormModel = class NgFormModel extends ControlContainer {
         this.ngSubmit = new EventEmitter();
     }
     ngOnChanges(changes) {
+        this._checkFormPresent();
         if (StringMapWrapper.contains(changes, "form")) {
             var sync = composeValidators(this._validators);
             this.form.validator = Validators.compose([this.form.validator, sync]);
@@ -143,6 +145,11 @@ export let NgFormModel = class NgFormModel extends ControlContainer {
             var ctrl = this.form.find(dir.path);
             dir.valueAccessor.writeValue(ctrl.value);
         });
+    }
+    _checkFormPresent() {
+        if (isBlank(this.form)) {
+            throw new BaseException(`ngFormModel expects a form. Please pass one in. Example: <form [ngFormModel]="myCoolForm">`);
+        }
     }
 };
 NgFormModel = __decorate([

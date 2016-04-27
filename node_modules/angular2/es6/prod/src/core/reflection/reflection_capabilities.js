@@ -143,5 +143,5 @@ export class ReflectionCapabilities {
         return new Function('o', 'args', functionBody);
     }
     // There is not a concept of import uri in Js, but this is useful in developing Dart applications.
-    importUri(type) { return './'; }
+    importUri(type) { return `./${stringify(type)}`; }
 }

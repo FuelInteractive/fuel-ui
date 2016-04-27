@@ -31,7 +31,7 @@ export declare class NumberPipe {
  * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
  */
 export declare class DecimalPipe extends NumberPipe implements PipeTransform {
-    transform(value: any, args: any[]): string;
+    transform(value: any, digits?: string): string;
 }
 /**
  * WARNING: this pipe uses the Internationalization API.
@@ -50,7 +50,7 @@ export declare class DecimalPipe extends NumberPipe implements PipeTransform {
  * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
  */
 export declare class PercentPipe extends NumberPipe implements PipeTransform {
-    transform(value: any, args: any[]): string;
+    transform(value: any, digits?: string): string;
 }
 /**
  * WARNING: this pipe uses the Internationalization API.
@@ -73,5 +73,5 @@ export declare class PercentPipe extends NumberPipe implements PipeTransform {
  * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
  */
 export declare class CurrencyPipe extends NumberPipe implements PipeTransform {
-    transform(value: any, args: any[]): string;
+    transform(value: any, currencyCode?: string, symbolDisplay?: boolean, digits?: string): string;
 }

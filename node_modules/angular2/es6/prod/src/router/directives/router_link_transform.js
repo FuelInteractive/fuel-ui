@@ -8,10 +8,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { ElementAst, BoundDirectivePropertyAst, DirectiveAst } from 'angular2/compiler';
-import { AstTransformer, LiteralArray, LiteralPrimitive } from 'angular2/src/core/change_detection/parser/ast';
+import { AstTransformer, LiteralArray, LiteralPrimitive } from 'angular2/src/compiler/expression_parser/ast';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { Injectable } from 'angular2/core';
-import { Parser } from 'angular2/src/core/change_detection/parser/parser';
+import { Parser } from 'angular2/src/compiler/expression_parser/parser';
 /**
  * e.g., './User', 'Modal' in ./User[Modal(param: value)]
  */
@@ -139,12 +139,12 @@ class RouterLinkAstTransformer extends AstTransformer {
         super();
         this.parser = parser;
     }
-    visitQuote(ast) {
+    visitQuote(ast, context) {
         if (ast.prefix == "route") {
             return parseRouterLinkExpression(this.parser, ast.uninterpretedExpression);
         }
         else {
-            return super.visitQuote(ast);
+            return super.visitQuote(ast, context);
         }
     }
 }
@@ -165,7 +165,7 @@ export let RouterLinkTransform = class RouterLinkTransform {
         let updatedChildren = ast.children.map(c => c.visit(this, context));
         let updatedInputs = ast.inputs.map(c => c.visit(this, context));
         let updatedDirectives = ast.directives.map(c => c.visit(this, context));
-        return new ElementAst(ast.name, ast.attrs, updatedInputs, ast.outputs, ast.exportAsVars, updatedDirectives, updatedChildren, ast.ngContentIndex, ast.sourceSpan);
+        return new ElementAst(ast.name, ast.attrs, updatedInputs, ast.outputs, ast.exportAsVars, updatedDirectives, ast.providers, ast.hasViewContainer, updatedChildren, ast.ngContentIndex, ast.sourceSpan);
     }
     visitVariable(ast, context) { return ast; }
     visitEvent(ast, context) { return ast; }

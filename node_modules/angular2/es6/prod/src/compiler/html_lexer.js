@@ -18,7 +18,12 @@ export var HtmlTokenType;
     HtmlTokenType[HtmlTokenType["ATTR_NAME"] = 11] = "ATTR_NAME";
     HtmlTokenType[HtmlTokenType["ATTR_VALUE"] = 12] = "ATTR_VALUE";
     HtmlTokenType[HtmlTokenType["DOC_TYPE"] = 13] = "DOC_TYPE";
-    HtmlTokenType[HtmlTokenType["EOF"] = 14] = "EOF";
+    HtmlTokenType[HtmlTokenType["EXPANSION_FORM_START"] = 14] = "EXPANSION_FORM_START";
+    HtmlTokenType[HtmlTokenType["EXPANSION_CASE_VALUE"] = 15] = "EXPANSION_CASE_VALUE";
+    HtmlTokenType[HtmlTokenType["EXPANSION_CASE_EXP_START"] = 16] = "EXPANSION_CASE_EXP_START";
+    HtmlTokenType[HtmlTokenType["EXPANSION_CASE_EXP_END"] = 17] = "EXPANSION_CASE_EXP_END";
+    HtmlTokenType[HtmlTokenType["EXPANSION_FORM_END"] = 18] = "EXPANSION_FORM_END";
+    HtmlTokenType[HtmlTokenType["EOF"] = 19] = "EOF";
 })(HtmlTokenType || (HtmlTokenType = {}));
 export class HtmlToken {
     constructor(type, parts, sourceSpan) {
@@ -39,8 +44,9 @@ export class HtmlTokenizeResult {
         this.errors = errors;
     }
 }
-export function tokenizeHtml(sourceContent, sourceUrl) {
-    return new _HtmlTokenizer(new ParseSourceFile(sourceContent, sourceUrl)).tokenize();
+export function tokenizeHtml(sourceContent, sourceUrl, tokenizeExpansionForms = false) {
+    return new _HtmlTokenizer(new ParseSourceFile(sourceContent, sourceUrl), tokenizeExpansionForms)
+        .tokenize();
 }
 const $EOF = 0;
 const $TAB = 9;
@@ -66,6 +72,9 @@ const $GT = 62;
 const $QUESTION = 63;
 const $LBRACKET = 91;
 const $RBRACKET = 93;
+const $LBRACE = 123;
+const $RBRACE = 125;
+const $COMMA = 44;
 const $A = 65;
 const $F = 70;
 const $X = 88;
@@ -90,13 +99,16 @@ class ControlFlowError {
 }
 // See http://www.w3.org/TR/html51/syntax.html#writing
 class _HtmlTokenizer {
-    constructor(file) {
+    constructor(file, tokenizeExpansionForms) {
         this.file = file;
+        this.tokenizeExpansionForms = tokenizeExpansionForms;
         // Note: this is always lowercase!
         this.peek = -1;
+        this.nextPeek = -1;
         this.index = -1;
         this.line = 0;
         this.column = -1;
+        this.expansionCaseStack = [];
         this.tokens = [];
         this.errors = [];
         this.input = file.content;
@@ -132,6 +144,20 @@ class _HtmlTokenizer {
                     else {
                         this._consumeTagOpen(start);
                     }
+                }
+                else if (isSpecialFormStart(this.peek, this.nextPeek) && this.tokenizeExpansionForms) {
+                    this._consumeExpansionFormStart();
+                }
+                else if (this.peek === $EQ && this.tokenizeExpansionForms) {
+                    this._consumeExpansionCaseStart();
+                }
+                else if (this.peek === $RBRACE && this.isInExpansionCase() &&
+                    this.tokenizeExpansionForms) {
+                    this._consumeExpansionCaseEnd();
+                }
+                else if (this.peek === $RBRACE && this.isInExpansionForm() &&
+                    this.tokenizeExpansionForms) {
+                    this._consumeExpansionFormEnd();
                 }
                 else {
                     this._consumeText();
@@ -198,6 +224,8 @@ class _HtmlTokenizer {
         }
         this.index++;
         this.peek = this.index >= this.length ? $EOF : StringWrapper.charCodeAt(this.input, this.index);
+        this.nextPeek =
+            this.index + 1 >= this.length ? $EOF : StringWrapper.charCodeAt(this.input, this.index + 1);
     }
     _attemptCharCode(charCode) {
         if (this.peek === charCode) {
@@ -467,17 +495,96 @@ class _HtmlTokenizer {
         this._requireCharCode($GT);
         this._endToken(prefixAndName);
     }
+    _consumeExpansionFormStart() {
+        this._beginToken(HtmlTokenType.EXPANSION_FORM_START, this._getLocation());
+        this._requireCharCode($LBRACE);
+        this._endToken([]);
+        this._beginToken(HtmlTokenType.RAW_TEXT, this._getLocation());
+        let condition = this._readUntil($COMMA);
+        this._endToken([condition], this._getLocation());
+        this._requireCharCode($COMMA);
+        this._attemptCharCodeUntilFn(isNotWhitespace);
+        this._beginToken(HtmlTokenType.RAW_TEXT, this._getLocation());
+        let type = this._readUntil($COMMA);
+        this._endToken([type], this._getLocation());
+        this._requireCharCode($COMMA);
+        this._attemptCharCodeUntilFn(isNotWhitespace);
+        this.expansionCaseStack.push(HtmlTokenType.EXPANSION_FORM_START);
+    }
+    _consumeExpansionCaseStart() {
+        this._requireCharCode($EQ);
+        this._beginToken(HtmlTokenType.EXPANSION_CASE_VALUE, this._getLocation());
+        let value = this._readUntil($LBRACE).trim();
+        this._endToken([value], this._getLocation());
+        this._attemptCharCodeUntilFn(isNotWhitespace);
+        this._beginToken(HtmlTokenType.EXPANSION_CASE_EXP_START, this._getLocation());
+        this._requireCharCode($LBRACE);
+        this._endToken([], this._getLocation());
+        this._attemptCharCodeUntilFn(isNotWhitespace);
+        this.expansionCaseStack.push(HtmlTokenType.EXPANSION_CASE_EXP_START);
+    }
+    _consumeExpansionCaseEnd() {
+        this._beginToken(HtmlTokenType.EXPANSION_CASE_EXP_END, this._getLocation());
+        this._requireCharCode($RBRACE);
+        this._endToken([], this._getLocation());
+        this._attemptCharCodeUntilFn(isNotWhitespace);
+        this.expansionCaseStack.pop();
+    }
+    _consumeExpansionFormEnd() {
+        this._beginToken(HtmlTokenType.EXPANSION_FORM_END, this._getLocation());
+        this._requireCharCode($RBRACE);
+        this._endToken([]);
+        this.expansionCaseStack.pop();
+    }
     _consumeText() {
         var start = this._getLocation();
         this._beginToken(HtmlTokenType.TEXT, start);
-        var parts = [this._readChar(true)];
-        while (!isTextEnd(this.peek)) {
+        var parts = [];
+        let interpolation = false;
+        if (this.peek === $LBRACE && this.nextPeek === $LBRACE) {
             parts.push(this._readChar(true));
+            parts.push(this._readChar(true));
+            interpolation = true;
+        }
+        else {
+            parts.push(this._readChar(true));
+        }
+        while (!this.isTextEnd(interpolation)) {
+            if (this.peek === $LBRACE && this.nextPeek === $LBRACE) {
+                parts.push(this._readChar(true));
+                parts.push(this._readChar(true));
+                interpolation = true;
+            }
+            else if (this.peek === $RBRACE && this.nextPeek === $RBRACE && interpolation) {
+                parts.push(this._readChar(true));
+                parts.push(this._readChar(true));
+                interpolation = false;
+            }
+            else {
+                parts.push(this._readChar(true));
+            }
         }
         this._endToken([this._processCarriageReturns(parts.join(''))]);
     }
+    isTextEnd(interpolation) {
+        if (this.peek === $LT || this.peek === $EOF)
+            return true;
+        if (this.tokenizeExpansionForms) {
+            if (isSpecialFormStart(this.peek, this.nextPeek))
+                return true;
+            if (this.peek === $RBRACE && !interpolation &&
+                (this.isInExpansionCase() || this.isInExpansionForm()))
+                return true;
+        }
+        return false;
+    }
     _savePosition() {
         return [this.peek, this.index, this.column, this.line, this.tokens.length];
+    }
+    _readUntil(char) {
+        let start = this.index;
+        this._attemptUntilChar(char);
+        return this.input.substring(start, this.index);
     }
     _restorePosition(position) {
         this.peek = position[0];
@@ -489,6 +596,16 @@ class _HtmlTokenizer {
             // remove any extra tokens
             this.tokens = ListWrapper.slice(this.tokens, 0, nbTokens);
         }
+    }
+    isInExpansionCase() {
+        return this.expansionCaseStack.length > 0 &&
+            this.expansionCaseStack[this.expansionCaseStack.length - 1] ===
+                HtmlTokenType.EXPANSION_CASE_EXP_START;
+    }
+    isInExpansionForm() {
+        return this.expansionCaseStack.length > 0 &&
+            this.expansionCaseStack[this.expansionCaseStack.length - 1] ===
+                HtmlTokenType.EXPANSION_FORM_START;
     }
 }
 function isNotWhitespace(code) {
@@ -510,8 +627,8 @@ function isDigitEntityEnd(code) {
 function isNamedEntityEnd(code) {
     return code == $SEMICOLON || code == $EOF || !isAsciiLetter(code);
 }
-function isTextEnd(code) {
-    return code === $LT || code === $EOF;
+function isSpecialFormStart(peek, nextPeek) {
+    return peek === $LBRACE && nextPeek != $LBRACE;
 }
 function isAsciiLetter(code) {
     return code >= $a && code <= $z || code >= $A && code <= $Z;

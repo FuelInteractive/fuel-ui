@@ -42,8 +42,7 @@ import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception'
  */
 let I18nSelectPipe_1;
 export let I18nSelectPipe = I18nSelectPipe_1 = class I18nSelectPipe {
-    transform(value, args = null) {
-        var mapping = (args[0]);
+    transform(value, mapping) {
         if (!isStringMap(mapping)) {
             throw new InvalidPipeArgumentException(I18nSelectPipe_1, mapping);
         }

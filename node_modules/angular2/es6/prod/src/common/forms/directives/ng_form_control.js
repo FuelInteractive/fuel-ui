@@ -48,7 +48,7 @@ const formControlBinding = CONST_EXPR(new Provider(NgControl, { useExisting: for
  * }
  *  ```
  *
- * ###ngModel
+ * ### ngModel
  *
  * We can also use `ngModel` to bind a domain model to the form.
  *

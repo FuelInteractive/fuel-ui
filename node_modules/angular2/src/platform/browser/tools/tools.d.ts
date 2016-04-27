@@ -1,4 +1,4 @@
-import { ComponentRef } from 'angular2/src/core/linker/dynamic_component_loader';
+import { ComponentRef } from 'angular2/src/core/linker/component_factory';
 /**
  * Enabled Angular 2 debug tools that are accessible via your browser's
  * developer console.

@@ -4,7 +4,7 @@ import { DoCheck, ChangeDetectorRef, IterableDiffers, ViewContainerRef, Template
  * each instantiated template inherits from the outer context with the given loop variable set
  * to the current item from the iterable.
  *
- * # Local Variables
+ * ### Local Variables
  *
  * `NgFor` provides several exported values that can be aliased to local variables:
  *
@@ -16,7 +16,7 @@ import { DoCheck, ChangeDetectorRef, IterableDiffers, ViewContainerRef, Template
  * * `even` will be set to a boolean value indicating whether this item has an even index.
  * * `odd` will be set to a boolean value indicating whether this item has an odd index.
  *
- * # Change Propagation
+ * ### Change Propagation
  *
  * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
  *
@@ -39,7 +39,7 @@ import { DoCheck, ChangeDetectorRef, IterableDiffers, ViewContainerRef, Template
  * elements were deleted and all new elements inserted). This is an expensive operation and should
  * be avoided if possible.
  *
- * # Syntax
+ * ### Syntax
  *
  * - `<li *ngFor="#item of items; #i = index">...</li>`
  * - `<li template="ngFor #item of items; #i = index">...</li>`

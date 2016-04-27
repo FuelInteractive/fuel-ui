@@ -31,5 +31,7 @@ import { PipeTransform } from 'angular2/core';
  *
  */
 export declare class I18nPluralPipe implements PipeTransform {
-    transform(value: number, args?: any[]): string;
+    transform(value: number, pluralMap: {
+        [count: string]: string;
+    }): string;
 }

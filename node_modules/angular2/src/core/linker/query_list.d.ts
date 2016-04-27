@@ -24,6 +24,7 @@ import { Observable } from 'angular2/src/facade/async';
  * ```
  */
 export declare class QueryList<T> {
+    private _dirty;
     private _results;
     private _emitter;
     changes: Observable<any>;
@@ -51,4 +52,8 @@ export declare class QueryList<T> {
      */
     toArray(): T[];
     toString(): string;
+    /** internal */
+    setDirty(): void;
+    /** internal */
+    dirty: boolean;
 }

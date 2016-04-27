@@ -84,7 +84,7 @@ export let KeyEventsPlugin = KeyEventsPlugin_1 = class KeyEventsPlugin extends E
     static eventCallback(element, fullKey, handler, zone) {
         return (event) => {
             if (StringWrapper.equals(KeyEventsPlugin_1.getEventFullKey(event), fullKey)) {
-                zone.run(() => handler(event));
+                zone.runGuarded(() => handler(event));
             }
         };
     }

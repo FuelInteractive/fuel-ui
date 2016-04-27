@@ -2,6 +2,7 @@ import { HtmlElementAst } from 'angular2/src/compiler/html_ast';
 import { isPresent } from 'angular2/src/facade/lang';
 import { StringMapWrapper } from 'angular2/src/facade/collection';
 import { id } from './message';
+import { expandNodes } from './expander';
 import { I18nError, I18N_ATTR_PREFIX, partition, messageFromAttribute } from './shared';
 /**
  * All messages extracted from a template.
@@ -99,12 +100,12 @@ export class MessageExtractor {
     extract(template, sourceUrl) {
         this.messages = [];
         this.errors = [];
-        let res = this._htmlParser.parse(template, sourceUrl);
+        let res = this._htmlParser.parse(template, sourceUrl, true);
         if (res.errors.length > 0) {
             return new ExtractionResult([], res.errors);
         }
         else {
-            this._recurse(res.rootNodes);
+            this._recurse(expandNodes(res.rootNodes).nodes);
             return new ExtractionResult(this.messages, this.errors);
         }
     }

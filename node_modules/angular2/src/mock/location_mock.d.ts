@@ -1,4 +1,4 @@
-import { Location } from 'angular2/src/router/location/location';
+import { Location } from 'angular2/platform/common';
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
  */

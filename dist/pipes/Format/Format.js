@@ -19,7 +19,7 @@ var FormatPipe = (function () {
     FormatPipe.prototype.transform = function (input, args) {
         var format = '';
         var parsedFloat = 0;
-        var pipeArgs = args[0].split(':');
+        var pipeArgs = args.split(':');
         for (var i = 0; i < pipeArgs.length; i++) {
             pipeArgs[i] = pipeArgs[i].trim(' ');
         }
@@ -33,11 +33,11 @@ var FormatPipe = (function () {
             case 'number':
                 parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
                 format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-                return this.decimalPipe.transform(parsedFloat, [format]);
+                return this.decimalPipe.transform(parsedFloat, format);
             case 'percentage':
                 parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
                 format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-                return this.decimalPipe.transform(parsedFloat, [format]) + '%';
+                return this.decimalPipe.transform(parsedFloat, format) + '%';
             case 'date':
             case 'datetime':
                 var date = !isNaN(parseInt(input)) ? parseInt(input) : new Date(input);
@@ -48,7 +48,7 @@ var FormatPipe = (function () {
                         format += pipeArgs[i];
                     }
                 }
-                return this.datePipe.transform(date, [format]);
+                return this.datePipe.transform(date, format);
             default:
                 return input;
         }

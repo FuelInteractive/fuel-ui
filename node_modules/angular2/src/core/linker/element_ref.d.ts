@@ -1,15 +1,10 @@
-import { AppElement } from './element';
 /**
- * Represents a location in a View that has an injection, change-detection and render context
- * associated with it.
- *
- * An `ElementRef` is created for each element in the Template that contains a Directive, Component
- * or data-binding.
+ * A wrapper around a native element inside of a View.
  *
  * An `ElementRef` is backed by a render-specific element. In the browser, this is usually a DOM
  * element.
  */
-export declare abstract class ElementRef {
+export declare class ElementRef {
     /**
      * The underlying native element or `null` if direct access to native elements is not supported
      * (e.g. when the application runs in a web worker).
@@ -30,10 +25,5 @@ export declare abstract class ElementRef {
      * </div>
      */
     nativeElement: any;
-}
-export declare class ElementRef_ implements ElementRef {
-    private _appElement;
-    constructor(_appElement: AppElement);
-    internalElement: AppElement;
-    nativeElement: any;
+    constructor(nativeElement: any);
 }

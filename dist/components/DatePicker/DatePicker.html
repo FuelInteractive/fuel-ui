@@ -1,4 +1,4 @@
-<div class="input-group" (click)="showCalendar($event)">
+<div class="input-group" (click)="toggleCalendar($event)">
 	<input type="text" class="form-control"
     [(ngModel)]="inputDate" #dateField readonly
         placeholder="{{label}}" />
@@ -46,16 +46,15 @@
                 (next)="addNextMonth()"
                 (prev)="addPrevMonth()"
                 distance="100"
-                height="{{calendarHeight}}"
-                hideScrollbar="true">
+                [height]="calendarHeight"
+                [hideScrollbar]="true">
                 <date-picker-calendar scroll-item
                     *ngFor="#month of calendarMonths #i=index" 
                     [id]="i"
                     [minDate]="minDate" [maxDate]="maxDate"
                     [dateFilter]="dateFilter"
                     [currentMonth]="month" 
-                    [(selectedDate)]="selectedDate" 
-                    (selectedDate)="hideCalendar()">
+                    [(selectedDate)]="selectedDate">
                     {{i}}
                 </date-picker-calendar>
             </infinite-scroller>

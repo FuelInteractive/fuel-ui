@@ -1,24 +1,13 @@
 import { unimplemented } from 'angular2/src/facade/exceptions';
-export class ViewRef {
+import { ChangeDetectorRef } from '../change_detection/change_detector_ref';
+import { ChangeDetectionStrategy } from 'angular2/src/core/change_detection/constants';
+export class ViewRef extends ChangeDetectorRef {
     /**
      * @internal
      */
     get changeDetectorRef() { return unimplemented(); }
     ;
     get destroyed() { return unimplemented(); }
-}
-/**
- * Represents a View containing a single Element that is the Host Element of a {@link Component}
- * instance.
- *
- * A Host View is created for every dynamically created Component that was compiled on its own (as
- * opposed to as a part of another Component's Template) via {@link Compiler#compileInHost} or one
- * of the higher-level APIs: {@link AppViewManager#createRootHostView},
- * {@link AppViewManager#createHostViewInContainer}, {@link ViewContainerRef#createHostView}.
- */
-export class HostViewRef extends ViewRef {
-    get rootNodes() { return unimplemented(); }
-    ;
 }
 /**
  * Represents an Angular View.
@@ -86,17 +75,19 @@ export class ViewRef_ {
     /**
      * Return `ChangeDetectorRef`
      */
-    get changeDetectorRef() { return this._view.changeDetector.ref; }
+    get changeDetectorRef() { return this; }
     get rootNodes() { return this._view.flatRootNodes; }
     setLocal(variableName, value) { this._view.setLocal(variableName, value); }
     hasLocal(variableName) { return this._view.hasLocal(variableName); }
     get destroyed() { return this._view.destroyed; }
-}
-export class HostViewFactoryRef {
-}
-export class HostViewFactoryRef_ {
-    constructor(_hostViewFactory) {
-        this._hostViewFactory = _hostViewFactory;
+    markForCheck() { this._view.markPathToRootAsCheckOnce(); }
+    detach() { this._view.cdMode = ChangeDetectionStrategy.Detached; }
+    detectChanges() { this._view.detectChanges(false); }
+    checkNoChanges() { this._view.detectChanges(true); }
+    reattach() {
+        this._view.cdMode = ChangeDetectionStrategy.CheckAlways;
+        this.markForCheck();
     }
-    get internalHostViewFactory() { return this._hostViewFactory; }
+    onDestroy(callback) { this._view.disposables.push(callback); }
+    destroy() { this._view.destroy(); }
 }

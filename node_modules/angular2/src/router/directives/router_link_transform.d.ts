@@ -1,6 +1,6 @@
 import { TemplateAstVisitor, ElementAst, BoundDirectivePropertyAst, DirectiveAst } from 'angular2/compiler';
-import { AST } from 'angular2/src/core/change_detection/parser/ast';
-import { Parser } from 'angular2/src/core/change_detection/parser/parser';
+import { AST } from 'angular2/src/compiler/expression_parser/ast';
+import { Parser } from 'angular2/src/compiler/expression_parser/parser';
 export declare function parseRouterLinkExpression(parser: Parser, exp: string): AST;
 /**
  * A compiler plugin that implements the router link DSL.

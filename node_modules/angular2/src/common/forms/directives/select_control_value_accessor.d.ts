@@ -2,6 +2,12 @@ import { Renderer, ElementRef, OnDestroy } from 'angular2/core';
 import { ControlValueAccessor } from './control_value_accessor';
 /**
  * The accessor for writing a value and listening to changes on a select element.
+ *
+ * Note: We have to listen to the 'change' event because 'input' events aren't fired
+ * for selects in Firefox and IE:
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1024350
+ * https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/4660045/
+ *
  */
 export declare class SelectControlValueAccessor implements ControlValueAccessor {
     private _renderer;

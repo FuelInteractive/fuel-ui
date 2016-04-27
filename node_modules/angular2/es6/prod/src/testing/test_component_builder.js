@@ -7,33 +7,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { DirectiveResolver, DynamicComponentLoader, Injector, Injectable, ViewResolver } from 'angular2/core';
+import { DynamicComponentLoader, Injector, Injectable } from 'angular2/core';
+import { DirectiveResolver, ViewResolver } from 'angular2/compiler';
 import { isPresent } from 'angular2/src/facade/lang';
+import { PromiseWrapper } from 'angular2/src/facade/async';
 import { MapWrapper } from 'angular2/src/facade/collection';
 import { el } from './utils';
 import { DOCUMENT } from 'angular2/src/platform/dom/dom_tokens';
 import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 import { getDebugNode } from 'angular2/src/core/debug/debug_node';
+import { tick } from './fake_async';
 /**
  * Fixture for debugging and testing a component.
  */
 export class ComponentFixture {
-}
-export class ComponentFixture_ extends ComponentFixture {
     constructor(componentRef) {
-        super();
-        this._componentParentView = componentRef.hostView.internalView;
-        this.elementRef = this._componentParentView.appElements[0].ref;
-        this.debugElement = getDebugNode(this._componentParentView.rootNodesOrAppElements[0].nativeElement);
-        this.componentInstance = this.debugElement.componentInstance;
-        this.nativeElement = this.debugElement.nativeElement;
-        this._componentRef = componentRef;
+        this.changeDetectorRef = componentRef.changeDetectorRef;
+        this.elementRef = componentRef.location;
+        this.debugElement = getDebugNode(this.elementRef.nativeElement);
+        this.componentInstance = componentRef.instance;
+        this.nativeElement = this.elementRef.nativeElement;
+        this.componentRef = componentRef;
     }
-    detectChanges() {
-        this._componentParentView.changeDetector.detectChanges();
-        this._componentParentView.changeDetector.checkNoChanges();
+    /**
+     * Trigger a change detection cycle for the component.
+     */
+    detectChanges(checkNoChanges = true) {
+        this.changeDetectorRef.detectChanges();
+        if (checkNoChanges) {
+            this.checkNoChanges();
+        }
     }
-    destroy() { this._componentRef.dispose(); }
+    checkNoChanges() { this.changeDetectorRef.checkNoChanges(); }
+    /**
+     * Trigger component destruction.
+     */
+    destroy() { this.componentRef.destroy(); }
 }
 var _nextRootElementId = 0;
 /**
@@ -60,6 +69,8 @@ export let TestComponentBuilder = TestComponentBuilder_1 = class TestComponentBu
         clone._viewOverrides = MapWrapper.clone(this._viewOverrides);
         clone._directiveOverrides = MapWrapper.clone(this._directiveOverrides);
         clone._templateOverrides = MapWrapper.clone(this._templateOverrides);
+        clone._bindingsOverrides = MapWrapper.clone(this._bindingsOverrides);
+        clone._viewBindingsOverrides = MapWrapper.clone(this._viewBindingsOverrides);
         return clone;
     }
     /**
@@ -186,7 +197,17 @@ export let TestComponentBuilder = TestComponentBuilder_1 = class TestComponentBu
         DOM.appendChild(doc.body, rootEl);
         var promise = this._injector.get(DynamicComponentLoader)
             .loadAsRoot(rootComponentType, `#${rootElId}`, this._injector);
-        return promise.then((componentRef) => { return new ComponentFixture_(componentRef); });
+        return promise.then((componentRef) => { return new ComponentFixture(componentRef); });
+    }
+    createFakeAsync(rootComponentType) {
+        var result;
+        var error;
+        PromiseWrapper.then(this.createAsync(rootComponentType), (_result) => { result = _result; }, (_error) => { error = _error; });
+        tick();
+        if (isPresent(error)) {
+            throw error;
+        }
+        return result;
     }
 };
 TestComponentBuilder = TestComponentBuilder_1 = __decorate([

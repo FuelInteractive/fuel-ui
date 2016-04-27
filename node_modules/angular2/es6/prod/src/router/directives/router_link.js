@@ -8,9 +8,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Directive } from 'angular2/core';
+import { Location } from 'angular2/platform/common';
 import { isString } from 'angular2/src/facade/lang';
 import { Router } from '../router';
-import { Location } from '../location/location';
 /**
  * The RouterLink directive lets you link to specific parts of your app.
  *

@@ -5,6 +5,7 @@ export declare class TagDemo {
     valueError: boolean;
     tempTag: any;
     tags: any[];
+    clearTags(): void;
     addTag(): void;
     removeLog(tag: Tag): void;
     tagAttributes: Attribute[];

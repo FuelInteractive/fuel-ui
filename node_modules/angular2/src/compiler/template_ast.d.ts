@@ -1,5 +1,5 @@
-import { AST } from 'angular2/src/core/change_detection/change_detection';
-import { CompileDirectiveMetadata } from './directive_metadata';
+import { AST } from './expression_parser/ast';
+import { CompileDirectiveMetadata, CompileTokenMetadata, CompileProviderMetadata } from './compile_metadata';
 import { ParseSourceSpan } from './parse_util';
 /**
  * An Abstract Syntax Tree node representing part of a parsed Angular template.
@@ -88,10 +88,12 @@ export declare class ElementAst implements TemplateAst {
     outputs: BoundEventAst[];
     exportAsVars: VariableAst[];
     directives: DirectiveAst[];
+    providers: ProviderAst[];
+    hasViewContainer: boolean;
     children: TemplateAst[];
     ngContentIndex: number;
     sourceSpan: ParseSourceSpan;
-    constructor(name: string, attrs: AttrAst[], inputs: BoundElementPropertyAst[], outputs: BoundEventAst[], exportAsVars: VariableAst[], directives: DirectiveAst[], children: TemplateAst[], ngContentIndex: number, sourceSpan: ParseSourceSpan);
+    constructor(name: string, attrs: AttrAst[], inputs: BoundElementPropertyAst[], outputs: BoundEventAst[], exportAsVars: VariableAst[], directives: DirectiveAst[], providers: ProviderAst[], hasViewContainer: boolean, children: TemplateAst[], ngContentIndex: number, sourceSpan: ParseSourceSpan);
     visit(visitor: TemplateAstVisitor, context: any): any;
     /**
      * Whether the element has any active bindings (inputs, outputs, vars, or directives).
@@ -110,10 +112,12 @@ export declare class EmbeddedTemplateAst implements TemplateAst {
     outputs: BoundEventAst[];
     vars: VariableAst[];
     directives: DirectiveAst[];
+    providers: ProviderAst[];
+    hasViewContainer: boolean;
     children: TemplateAst[];
     ngContentIndex: number;
     sourceSpan: ParseSourceSpan;
-    constructor(attrs: AttrAst[], outputs: BoundEventAst[], vars: VariableAst[], directives: DirectiveAst[], children: TemplateAst[], ngContentIndex: number, sourceSpan: ParseSourceSpan);
+    constructor(attrs: AttrAst[], outputs: BoundEventAst[], vars: VariableAst[], directives: DirectiveAst[], providers: ProviderAst[], hasViewContainer: boolean, children: TemplateAst[], ngContentIndex: number, sourceSpan: ParseSourceSpan);
     visit(visitor: TemplateAstVisitor, context: any): any;
 }
 /**
@@ -139,6 +143,26 @@ export declare class DirectiveAst implements TemplateAst {
     sourceSpan: ParseSourceSpan;
     constructor(directive: CompileDirectiveMetadata, inputs: BoundDirectivePropertyAst[], hostProperties: BoundElementPropertyAst[], hostEvents: BoundEventAst[], exportAsVars: VariableAst[], sourceSpan: ParseSourceSpan);
     visit(visitor: TemplateAstVisitor, context: any): any;
+}
+/**
+ * A provider declared on an element
+ */
+export declare class ProviderAst implements TemplateAst {
+    token: CompileTokenMetadata;
+    multiProvider: boolean;
+    eager: boolean;
+    providers: CompileProviderMetadata[];
+    providerType: ProviderAstType;
+    sourceSpan: ParseSourceSpan;
+    constructor(token: CompileTokenMetadata, multiProvider: boolean, eager: boolean, providers: CompileProviderMetadata[], providerType: ProviderAstType, sourceSpan: ParseSourceSpan);
+    visit(visitor: TemplateAstVisitor, context: any): any;
+}
+export declare enum ProviderAstType {
+    PublicService = 0,
+    PrivateService = 1,
+    Component = 2,
+    Directive = 3,
+    Builtin = 4,
 }
 /**
  * Position where content is to be projected (instance of `<ng-content>` in a template).

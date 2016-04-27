@@ -51,6 +51,6 @@ import { PipeTransform } from 'angular2/core';
  * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
  */
 export declare class SlicePipe implements PipeTransform {
-    transform(value: any, args?: any[]): any;
+    transform(value: any, start: number, end?: number): any;
     private supports(obj);
 }

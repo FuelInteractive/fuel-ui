@@ -10,12 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var CodeHighlighter = (function () {
-    function CodeHighlighter(el) {
-        this.el = el;
-        if (this.el && this.el.nativeElement) {
-            Prism.highlightElement(this.el.nativeElement);
-        }
+    function CodeHighlighter(_el) {
+        this._el = _el;
     }
+    CodeHighlighter.prototype.ngAfterViewInit = function () {
+        if (this._el && this._el.nativeElement) {
+            Prism.highlightElement(this._el.nativeElement);
+        }
+    };
     CodeHighlighter = __decorate([
         core_1.Directive({
             selector: '[code-highlight]'

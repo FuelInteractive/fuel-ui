@@ -11,5 +11,5 @@ export declare class HtmlParseTreeResult {
     constructor(rootNodes: HtmlAst[], errors: ParseError[]);
 }
 export declare class HtmlParser {
-    parse(sourceContent: string, sourceUrl: string): HtmlParseTreeResult;
+    parse(sourceContent: string, sourceUrl: string, parseExpansionForms?: boolean): HtmlParseTreeResult;
 }

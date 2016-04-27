@@ -1,61 +1,14 @@
-import { global } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
-import { ListWrapper } from 'angular2/src/facade/collection';
-var _scheduler;
-var _microtasks = [];
-var _pendingPeriodicTimers = [];
-var _pendingTimers = [];
-class FakeAsyncZoneSpec {
-    constructor() {
-        this.name = 'fakeAsync';
-        this.properties = { 'inFakeAsyncZone': true };
-    }
-    static assertInZone() {
-        if (!Zone.current.get('inFakeAsyncZone')) {
-            throw new Error('The code should be running in the fakeAsync zone to call this function');
-        }
-    }
-    onScheduleTask(delegate, current, target, task) {
-        switch (task.type) {
-            case 'microTask':
-                _microtasks.push(task.invoke);
-                break;
-            case 'macroTask':
-                switch (task.source) {
-                    case 'setTimeout':
-                        task.data['handleId'] = _setTimeout(task.invoke, task.data['delay'], task.data['args']);
-                        break;
-                    case 'setInterval':
-                        task.data['handleId'] =
-                            _setInterval(task.invoke, task.data['delay'], task.data['args']);
-                        break;
-                    default:
-                        task = delegate.scheduleTask(target, task);
-                }
-                break;
-            case 'eventTask':
-                task = delegate.scheduleTask(target, task);
-                break;
-        }
-        return task;
-    }
-    onCancelTask(delegate, current, target, task) {
-        switch (task.source) {
-            case 'setTimeout':
-                return _clearTimeout(task.data['handleId']);
-            case 'setInterval':
-                return _clearInterval(task.data['handleId']);
-            default:
-                return delegate.scheduleTask(target, task);
-        }
-    }
-}
+import { getTestInjector, FunctionWithParamTokens } from './test_injector';
+let _FakeAsyncTestZoneSpecType = Zone['FakeAsyncTestZoneSpec'];
 /**
  * Wraps a function to be executed in the fakeAsync zone:
  * - microtasks are manually executed by calling `flushMicrotasks()`,
  * - timers are synchronous, `tick()` simulates the asynchronous passage of time.
  *
  * If there are any pending timers at the end of the function, an exception will be thrown.
+ *
+ * Can be used to wrap inject() calls.
  *
  * ## Example
  *
@@ -65,44 +18,52 @@ class FakeAsyncZoneSpec {
  * @returns {Function} The function wrapped to be executed in the fakeAsync zone
  */
 export function fakeAsync(fn) {
-    if (Zone.current.get('inFakeAsyncZone')) {
-        throw new Error('fakeAsync() calls can not be nested');
+    if (Zone.current.get('FakeAsyncTestZoneSpec') != null) {
+        throw new BaseException('fakeAsync() calls can not be nested');
     }
-    var fakeAsyncZone = Zone.current.fork(new FakeAsyncZoneSpec());
+    let fakeAsyncTestZoneSpec = new _FakeAsyncTestZoneSpecType();
+    let fakeAsyncZone = Zone.current.fork(fakeAsyncTestZoneSpec);
+    let innerTestFn = null;
+    if (fn instanceof FunctionWithParamTokens) {
+        if (fn.isAsync) {
+            throw new BaseException('Cannot wrap async test with fakeAsync');
+        }
+        innerTestFn = () => { getTestInjector().execute(fn); };
+    }
+    else {
+        innerTestFn = fn;
+    }
     return function (...args) {
-        // TODO(tbosch): This class should already be part of the jasmine typings but it is not...
-        _scheduler = new jasmine.DelayedFunctionScheduler();
-        clearPendingTimers();
         let res = fakeAsyncZone.run(() => {
-            let res = fn(...args);
+            let res = innerTestFn(...args);
             flushMicrotasks();
             return res;
         });
-        if (_pendingPeriodicTimers.length > 0) {
-            throw new BaseException(`${_pendingPeriodicTimers.length} periodic timer(s) still in the queue.`);
+        if (fakeAsyncTestZoneSpec.pendingPeriodicTimers.length > 0) {
+            throw new BaseException(`${fakeAsyncTestZoneSpec.pendingPeriodicTimers.length} ` +
+                `periodic timer(s) still in the queue.`);
         }
-        if (_pendingTimers.length > 0) {
-            throw new BaseException(`${_pendingTimers.length} timer(s) still in the queue.`);
+        if (fakeAsyncTestZoneSpec.pendingTimers.length > 0) {
+            throw new BaseException(`${fakeAsyncTestZoneSpec.pendingTimers.length} timer(s) still in the queue.`);
         }
-        _scheduler = null;
-        ListWrapper.clear(_microtasks);
         return res;
     };
 }
+function _getFakeAsyncZoneSpec() {
+    let zoneSpec = Zone.current.get('FakeAsyncTestZoneSpec');
+    if (zoneSpec == null) {
+        throw new Error('The code should be running in the fakeAsync zone to call this function');
+    }
+    return zoneSpec;
+}
 /**
  * Clear the queue of pending timers and microtasks.
+ * Tests no longer need to call this explicitly.
  *
- * Useful for cleaning up after an asynchronous test passes.
- *
- * ## Example
- *
- * {@example testing/ts/fake_async.ts region='pending'}
+ * @deprecated
  */
 export function clearPendingTimers() {
-    // TODO we should fix tick to dequeue the failed timer instead of relying on clearPendingTimers
-    ListWrapper.clear(_microtasks);
-    ListWrapper.clear(_pendingPeriodicTimers);
-    ListWrapper.clear(_pendingTimers);
+    // Do nothing.
 }
 /**
  * Simulates the asynchronous passage of time for the timers in the fakeAsync zone.
@@ -117,47 +78,11 @@ export function clearPendingTimers() {
  * @param {number} millis Number of millisecond, defaults to 0
  */
 export function tick(millis = 0) {
-    FakeAsyncZoneSpec.assertInZone();
-    flushMicrotasks();
-    _scheduler.tick(millis);
+    _getFakeAsyncZoneSpec().tick(millis);
 }
 /**
  * Flush any pending microtasks.
  */
 export function flushMicrotasks() {
-    FakeAsyncZoneSpec.assertInZone();
-    while (_microtasks.length > 0) {
-        var microtask = ListWrapper.removeAt(_microtasks, 0);
-        microtask();
-    }
-}
-function _setTimeout(fn, delay, args) {
-    var cb = _fnAndFlush(fn);
-    var id = _scheduler.scheduleFunction(cb, delay, args);
-    _pendingTimers.push(id);
-    _scheduler.scheduleFunction(_dequeueTimer(id), delay);
-    return id;
-}
-function _clearTimeout(id) {
-    _dequeueTimer(id);
-    return _scheduler.removeFunctionWithId(id);
-}
-function _setInterval(fn, interval, ...args) {
-    var cb = _fnAndFlush(fn);
-    var id = _scheduler.scheduleFunction(cb, interval, args, true);
-    _pendingPeriodicTimers.push(id);
-    return id;
-}
-function _clearInterval(id) {
-    ListWrapper.remove(_pendingPeriodicTimers, id);
-    return _scheduler.removeFunctionWithId(id);
-}
-function _fnAndFlush(fn) {
-    return (...args) => {
-        fn.apply(global, args);
-        flushMicrotasks();
-    };
-}
-function _dequeueTimer(id) {
-    return function () { ListWrapper.remove(_pendingTimers, id); };
+    _getFakeAsyncZoneSpec().flushMicrotasks();
 }

@@ -14,9 +14,9 @@ import { PromiseWrapper, EventEmitter, ObservableWrapper } from 'angular2/src/fa
 import { Map, StringMapWrapper } from 'angular2/src/facade/collection';
 import { isBlank, isPresent, Type } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
+import { Location } from 'angular2/platform/common';
 import { Inject, Injectable } from 'angular2/core';
 import { RouteRegistry, ROUTER_PRIMARY_COMPONENT } from './route_registry';
-import { Location } from './location/location';
 import { getCanActivateHook } from './lifecycle/route_lifecycle_reflector';
 let _resolveToTrue = PromiseWrapper.resolve(true);
 let _resolveToFalse = PromiseWrapper.resolve(false);

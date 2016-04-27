@@ -1,38 +1,49 @@
 import { NgZone } from 'angular2/src/core/zone/ng_zone';
 import { Type } from 'angular2/src/facade/lang';
-import { Provider, Injector } from 'angular2/src/core/di';
-import { ComponentRef } from 'angular2/src/core/linker/dynamic_component_loader';
+import { Injector } from 'angular2/src/core/di';
+import { ComponentRef } from 'angular2/src/core/linker/component_factory';
 import { ChangeDetectorRef } from 'angular2/src/core/change_detection/change_detector_ref';
+import { ComponentFactory } from 'angular2/src/core/linker/component_factory';
 /**
  * Create an Angular zone.
  */
 export declare function createNgZone(): NgZone;
 /**
- * Initialize the Angular 'platform' on the page.
- *
- * See {@link PlatformRef} for details on the Angular platform.
- *
- * It is also possible to specify providers to be made in the new platform. These providers
- * will be shared between all applications on the page. For example, an abstraction for
- * the browser cookie jar should be bound at the platform level, because there is only one
- * cookie jar regardless of how many applications on the page will be accessing it.
- *
- * The platform function can be called multiple times as long as the same list of providers
- * is passed into each call. If the platform function is called with a different set of
- * provides, Angular will throw an exception.
+ * Creates a platform.
+ * Platforms have to be eagerly created via this function.
  */
-export declare function platform(providers?: Array<Type | Provider | any[]>): PlatformRef;
+export declare function createPlatform(injector: Injector): PlatformRef;
+/**
+ * Checks that there currently is a platform
+ * which contains the given token as a provider.
+ */
+export declare function assertPlatform(requiredToken: any): PlatformRef;
 /**
  * Dispose the existing platform.
  */
 export declare function disposePlatform(): void;
+/**
+ * Returns the current platform.
+ */
+export declare function getPlatform(): PlatformRef;
+/**
+ * Shortcut for ApplicationRef.bootstrap.
+ * Requires a platform the be created first.
+ */
+export declare function coreBootstrap(injector: Injector, componentFactory: ComponentFactory): ComponentRef;
+/**
+ * Resolves the componentFactory for the given component,
+ * waits for asynchronous initializers and bootstraps the component.
+ * Requires a platform the be created first.
+ */
+export declare function coreLoadAndBootstrap(injector: Injector, componentType: Type): Promise<ComponentRef>;
 /**
  * The Angular platform is the entry point for Angular on a web page. Each page
  * has exactly one platform, and services (such as reflection) which are common
  * to every Angular application running on the page are bound in its scope.
  *
  * A page's platform is initialized implicitly when {@link bootstrap}() is called, or
- * explicitly by calling {@link platform}().
+ * explicitly by calling {@link createPlatform}().
  */
 export declare abstract class PlatformRef {
     /**
@@ -45,56 +56,19 @@ export declare abstract class PlatformRef {
      */
     injector: Injector;
     /**
-     * Instantiate a new Angular application on the page.
-     *
-     * ### What is an application?
-     *
-     * Each Angular application has its own zone, change detection, compiler,
-     * renderer, and other framework components. An application hosts one or more
-     * root components, which can be initialized via `ApplicationRef.bootstrap()`.
-     *
-     * ### Application Providers
-     *
-     * Angular applications require numerous providers to be properly instantiated.
-     * When using `application()` to create a new app on the page, these providers
-     * must be provided. Fortunately, there are helper functions to configure
-     * typical providers, as shown in the example below.
-     *
-     * ### Example
-     *
-     * {@example core/ts/platform/platform.ts region='longform'}
-     * ### See Also
-     *
-     * See the {@link bootstrap} documentation for more details.
-     */
-    abstract application(providers: Array<Type | Provider | any[]>): ApplicationRef;
-    /**
-     * Instantiate a new Angular application on the page, using providers which
-     * are only available asynchronously. One such use case is to initialize an
-     * application running in a web worker.
-     *
-     * ### Usage
-     *
-     * `bindingFn` is a function that will be called in the new application's zone.
-     * It should return a `Promise` to a list of providers to be used for the
-     * new application. Once this promise resolves, the application will be
-     * constructed in the same manner as a normal `application()`.
-     */
-    abstract asyncApplication(bindingFn: (zone: NgZone) => Promise<Array<Type | Provider | any[]>>, providers?: Array<Type | Provider | any[]>): Promise<ApplicationRef>;
-    /**
      * Destroy the Angular platform and all Angular applications on the page.
      */
     abstract dispose(): void;
+    disposed: boolean;
 }
 export declare class PlatformRef_ extends PlatformRef {
     private _injector;
-    private _dispose;
-    constructor(_injector: Injector, _dispose: () => void);
+    private _disposed;
+    constructor(_injector: Injector);
     registerDisposeListener(dispose: () => void): void;
     injector: Injector;
-    application(providers: Array<Type | Provider | any[]>): ApplicationRef;
-    asyncApplication(bindingFn: (zone: NgZone) => Promise<Array<Type | Provider | any[]>>, additionalProviders?: Array<Type | Provider | any[]>): Promise<ApplicationRef>;
-    private _initApp(zone, providers);
+    disposed: boolean;
+    addApplication(appRef: ApplicationRef): void;
     dispose(): void;
 }
 /**
@@ -113,6 +87,16 @@ export declare abstract class ApplicationRef {
      */
     abstract registerDisposeListener(dispose: () => void): void;
     /**
+     * Returns a promise that resolves when all asynchronous application initializers
+     * are done.
+     */
+    abstract waitForAsyncInitializers(): Promise<any>;
+    /**
+     * Runs the given callback in the zone and returns the result of the callback.
+     * Exceptions will be forwarded to the ExceptionHandler and rethrown.
+     */
+    abstract run(callback: Function): any;
+    /**
      * Bootstrap a new component at the root level of the application.
      *
      * ### Bootstrap process
@@ -121,16 +105,10 @@ export declare abstract class ApplicationRef {
      * specified application component onto DOM elements identified by the [componentType]'s
      * selector and kicks off automatic change detection to finish initializing the component.
      *
-     * ### Optional Providers
-     *
-     * Providers for the given component can optionally be overridden via the `providers`
-     * parameter. These providers will only apply for the root component being added and any
-     * child components under it.
-     *
      * ### Example
      * {@example core/ts/platform/platform.ts region='longform'}
      */
-    abstract bootstrap(componentType: Type, providers?: Array<Type | Provider | any[]>): Promise<ComponentRef>;
+    abstract bootstrap(componentFactory: ComponentFactory): ComponentRef;
     /**
      * Retrieve the application {@link Injector}.
      */
@@ -163,12 +141,17 @@ export declare class ApplicationRef_ extends ApplicationRef {
     private _platform;
     private _zone;
     private _injector;
+    private _exceptionHandler;
+    private _asyncInitDonePromise;
+    private _asyncInitDone;
     constructor(_platform: PlatformRef_, _zone: NgZone, _injector: Injector);
     registerBootstrapListener(listener: (ref: ComponentRef) => void): void;
     registerDisposeListener(dispose: () => void): void;
     registerChangeDetector(changeDetector: ChangeDetectorRef): void;
     unregisterChangeDetector(changeDetector: ChangeDetectorRef): void;
-    bootstrap(componentType: Type, providers?: Array<Type | Provider | any[]>): Promise<ComponentRef>;
+    waitForAsyncInitializers(): Promise<any>;
+    run(callback: Function): any;
+    bootstrap(componentFactory: ComponentFactory): ComponentRef;
     injector: Injector;
     zone: NgZone;
     tick(): void;

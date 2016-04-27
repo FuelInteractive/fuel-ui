@@ -1,4 +1,5 @@
-import { EventEmitter, ElementRef } from "angular2/core";
+import { ChangeDetectorRef } from "angular2/core";
+import { EventEmitter } from "angular2/core";
 import { DateRange } from "../../utilities/DateUtils";
 import { DatePicker } from "./DatePicker";
 import { InfiniteScroller } from "../InfiniteScroller/InfiniteScroller";
@@ -24,7 +25,7 @@ export declare class DateRangePicker extends DatePicker {
     inputStartDate: string;
     private _inputEndDate;
     inputEndDate: string;
-    constructor(modal: ElementRef);
+    constructor(changeDetector: ChangeDetectorRef);
     handleRangeInput(value: any): DateRange;
     focusStartDate(): void;
     focusEndDate(): void;

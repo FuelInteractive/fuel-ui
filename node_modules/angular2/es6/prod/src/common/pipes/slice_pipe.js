@@ -8,7 +8,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { isBlank, isString, isArray, StringWrapper } from 'angular2/src/facade/lang';
-import { BaseException } from 'angular2/src/facade/exceptions';
 import { ListWrapper } from 'angular2/src/facade/collection';
 import { Injectable, Pipe } from 'angular2/core';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
@@ -65,17 +64,12 @@ import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception'
  */
 let SlicePipe_1;
 export let SlicePipe = SlicePipe_1 = class SlicePipe {
-    transform(value, args = null) {
-        if (isBlank(args) || args.length == 0) {
-            throw new BaseException('Slice pipe requires one argument');
-        }
+    transform(value, start, end = null) {
         if (!this.supports(value)) {
             throw new InvalidPipeArgumentException(SlicePipe_1, value);
         }
         if (isBlank(value))
             return value;
-        var start = args[0];
-        var end = args.length > 1 ? args[1] : null;
         if (isString(value)) {
             return StringWrapper.slice(value, start, end);
         }

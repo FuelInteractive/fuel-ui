@@ -4,6 +4,6 @@ export declare class FormatPipe implements PipeTransform {
     datePipe: DatePipe;
     decimalPipe: DecimalPipe;
     constructor();
-    transform(input: string, args: any[]): any;
+    transform(input: string, args: any): any;
 }
 export declare var FORMAT_PROVIDERS: typeof FormatPipe[];

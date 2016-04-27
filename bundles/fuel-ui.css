@@ -275,6 +275,15 @@
     background: #818a91;
     color: darkgray; }
 
+.fuel-ui-timepicker.has-error {
+  border: 1px red solid; }
+
+.fuel-ui-timepicker .fuel-ui-time.has-error input {
+  border: 1px red solid; }
+
+.fuel-ui-timepicker .fuel-ui-time input {
+  width: 50px; }
+
 .table-sortable > thead > tr > th {
   cursor: pointer;
   position: relative;

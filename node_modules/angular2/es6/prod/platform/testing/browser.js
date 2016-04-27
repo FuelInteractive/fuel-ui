@@ -7,7 +7,7 @@ import { CONST_EXPR } from 'angular2/src/facade/lang';
  */
 export { CACHED_TEMPLATE_PROVIDER } from 'angular2/platform/browser';
 /**
- * Default patform providers for testing.
+ * Default platform providers for testing.
  */
 export const TEST_BROWSER_PLATFORM_PROVIDERS = CONST_EXPR([TEST_BROWSER_STATIC_PLATFORM_PROVIDERS]);
 /**

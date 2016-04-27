@@ -6,6 +6,30 @@ export class HtmlTextAst {
     }
     visit(visitor, context) { return visitor.visitText(this, context); }
 }
+export class HtmlExpansionAst {
+    constructor(switchValue, type, cases, sourceSpan, switchValueSourceSpan) {
+        this.switchValue = switchValue;
+        this.type = type;
+        this.cases = cases;
+        this.sourceSpan = sourceSpan;
+        this.switchValueSourceSpan = switchValueSourceSpan;
+    }
+    visit(visitor, context) {
+        return visitor.visitExpansion(this, context);
+    }
+}
+export class HtmlExpansionCaseAst {
+    constructor(value, expression, sourceSpan, valueSourceSpan, expSourceSpan) {
+        this.value = value;
+        this.expression = expression;
+        this.sourceSpan = sourceSpan;
+        this.valueSourceSpan = valueSourceSpan;
+        this.expSourceSpan = expSourceSpan;
+    }
+    visit(visitor, context) {
+        return visitor.visitExpansionCase(this, context);
+    }
+}
 export class HtmlAttrAst {
     constructor(name, value, sourceSpan) {
         this.name = name;

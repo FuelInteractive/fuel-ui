@@ -29,5 +29,7 @@ import { PipeTransform } from 'angular2/core';
  *  ```
  */
 export declare class I18nSelectPipe implements PipeTransform {
-    transform(value: string, args?: any[]): string;
+    transform(value: string, mapping: {
+        [key: string]: string;
+    }): string;
 }

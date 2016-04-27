@@ -1,4 +1,4 @@
-import { LocationStrategy } from 'angular2/src/router/location/location_strategy';
+import { LocationStrategy } from 'angular2/platform/common';
 /**
  * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
  * location events.

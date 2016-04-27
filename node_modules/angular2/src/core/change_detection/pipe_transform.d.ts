@@ -17,11 +17,7 @@
  *
  * @Pipe({name: 'repeat'})
  * export class RepeatPipe implements PipeTransform {
- *   transform(value: any, args: any[] = []) {
- *     if (args.length == 0) {
- *       throw new Error('repeat pipe requires one argument');
- *     }
- *     let times: number = args[0];
+ *   transform(value: any, times: number) {
  *     return value.repeat(times);
  *   }
  * }
@@ -31,5 +27,5 @@
  *
  */
 export interface PipeTransform {
-    transform(value: any, args: any[]): any;
+    transform(value: any, ...args: any[]): any;
 }

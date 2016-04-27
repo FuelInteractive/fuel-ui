@@ -1,4 +1,4 @@
-import { BrowserPlatformLocation } from 'angular2/src/router/location/browser_platform_location';
+import { BrowserPlatformLocation } from 'angular2/src/platform/browser/location/browser_platform_location';
 import { ServiceMessageBrokerFactory } from 'angular2/src/web_workers/shared/service_message_broker';
 import { Serializer } from 'angular2/src/web_workers/shared/serializer';
 import { MessageBus } from 'angular2/src/web_workers/shared/message_bus';

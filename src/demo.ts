@@ -1,11 +1,12 @@
 import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "angular2/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
 import {bootstrap} from "angular2/platform/browser";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {LocationStrategy, HashLocationStrategy} from "angular2/platform/common";
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo} from './fuel-ui-demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo} from './fuel-ui-demo';
 
 @Component({
     template: `
@@ -39,20 +40,9 @@ export class DemoHome {
 
 <p>If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:</p>
 
-<p><code>npm install fuel-ui font-awesome --save</code></p>
-
-<p>Add this line to your dependencies in your <code>package.json</code></p>
+<p><code>npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save</code></p>
             
-<pre>
-<code class="language-javascript" code-highlight>
- "dependencies": {
-    ...
-    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2"
-}
-</code>
-</pre>
-            
-<p>And finally, add the proper script tags to your <code>index.html</code></p>
+<p>Then simply add the proper script tags to your <code>index.html</code></p>
             
 <pre>
 <code class="language-markup" code-highlight>
@@ -90,6 +80,7 @@ export class InstallationComponent {
   {path:'/component/tab', name: 'TabDemo', component: TabDemo},
   {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
   {path:'/component/tag', name: 'TagDemo', component: TagDemo},
+  {path:'/component/timepicker', name: 'TimePickerDemo', component: TimePickerDemo},
   {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
   {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
   {path:'/directive/collapse', name: 'CollapseDemo', component: CollapseDemo},
@@ -126,6 +117,7 @@ export class InstallationComponent {
                 <li><a [routerLink]="['TabDemo']">Tabs</a></li>
                 <li><a [routerLink]="['TableSortableDemo']">TableSortable</a></li>
                 <li><a [routerLink]="['TagDemo']">Tags</a></li>
+                <li><a [routerLink]="['TimePickerDemo']">TimePicker</a></li>
                 <li class="sidebar-title">Directives</li>
                 <li><a [routerLink]="['AnimationDemo']">Animation</a></li>
                 <li><a [routerLink]="['CodeHighlighterDemo']">Code Highlighter</a></li>
@@ -161,7 +153,7 @@ export class DemoComponent {
     
 }
 
-enableProdMode();
+// enableProdMode();
 
 bootstrap(DemoComponent, [
     ROUTER_PROVIDERS,

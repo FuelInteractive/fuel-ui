@@ -1,5 +1,5 @@
-import { PlatformLocation, UrlChangeListener } from 'angular2/src/router/location/platform_location';
 import { ClientMessageBrokerFactory } from 'angular2/src/web_workers/shared/client_message_broker';
+import { PlatformLocation, UrlChangeListener } from 'angular2/platform/common';
 import { Serializer } from 'angular2/src/web_workers/shared/serializer';
 import { MessageBus } from 'angular2/src/web_workers/shared/message_bus';
 export declare class WebWorkerPlatformLocation extends PlatformLocation {

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { isDate, isNumber, isPresent, DateWrapper, CONST, isBlank } from 'angular2/src/facade/lang';
+import { isDate, isNumber, DateWrapper, CONST, isBlank } from 'angular2/src/facade/lang';
 import { DateFormatter } from 'angular2/src/facade/intl';
 import { Pipe, Injectable } from 'angular2/core';
 import { StringMapWrapper } from 'angular2/src/facade/collection';
@@ -82,13 +82,12 @@ var defaultLocale = 'en-US';
  */
 let DatePipe_1;
 export let DatePipe = DatePipe_1 = class DatePipe {
-    transform(value, args) {
+    transform(value, pattern = 'mediumDate') {
         if (isBlank(value))
             return null;
         if (!this.supports(value)) {
             throw new InvalidPipeArgumentException(DatePipe_1, value);
         }
-        var pattern = isPresent(args) && args.length > 0 ? args[0] : 'mediumDate';
         if (isNumber(value)) {
             value = DateWrapper.fromMillis(value);
         }

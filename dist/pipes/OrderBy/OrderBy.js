@@ -36,8 +36,8 @@ var OrderByPipe = (function () {
         }
         return 0; //equal each other
     };
-    OrderByPipe.prototype.transform = function (input, _a) {
-        var _b = _a[0], config = _b === void 0 ? '+' : _b;
+    OrderByPipe.prototype.transform = function (input, config) {
+        if (config === void 0) { config = '+'; }
         //make a copy of the input's reference
         this.value = input.slice();
         var value = this.value;

@@ -19,7 +19,7 @@ import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception'
  */
 let UpperCasePipe_1;
 export let UpperCasePipe = UpperCasePipe_1 = class UpperCasePipe {
-    transform(value, args = null) {
+    transform(value) {
         if (isBlank(value))
             return value;
         if (!isString(value)) {

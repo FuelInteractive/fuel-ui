@@ -22,5 +22,6 @@ export declare class NgZoneImpl {
         onError: (error: NgZoneError) => void;
     });
     runInner(fn: () => any): any;
+    runInnerGuarded(fn: () => any): any;
     runOuter(fn: () => any): any;
 }

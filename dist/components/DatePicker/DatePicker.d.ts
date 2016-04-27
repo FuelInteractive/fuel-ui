@@ -1,7 +1,7 @@
-import { OnInit, AfterViewInit } from "angular2/core";
-import { EventEmitter, ElementRef } from "angular2/core";
+import { OnInit, ChangeDetectorRef } from "angular2/core";
+import { EventEmitter } from "angular2/core";
 import { InfiniteScroller } from "../InfiniteScroller/InfiniteScroller";
-export declare class DatePicker implements OnInit, AfterViewInit {
+export declare class DatePicker implements OnInit {
     label: string;
     _minDate: Date;
     _maxDate: Date;
@@ -15,17 +15,17 @@ export declare class DatePicker implements OnInit, AfterViewInit {
     selectedDate: Date;
     private _inputDate;
     inputDate: string;
-    modal: HTMLElement;
     calendarDisplayed: boolean;
     calendarX: number;
     calendarY: number;
     calendarHeight: string;
     calendarMonths: Date[];
     _preGenMonths: number;
-    constructor(modal: ElementRef);
+    changeDetector: ChangeDetectorRef;
+    constructor(changeDetector: ChangeDetectorRef);
     ngOnInit(): void;
-    ngAfterViewInit(): void;
     handleDateInput(value: any): Date;
+    toggleCalendar(event: MouseEvent): void;
     showCalendar(event: MouseEvent): void;
     hideCalendar(): void;
     canPrevMonth: boolean;

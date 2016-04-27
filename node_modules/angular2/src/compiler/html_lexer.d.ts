@@ -14,7 +14,12 @@ export declare enum HtmlTokenType {
     ATTR_NAME = 11,
     ATTR_VALUE = 12,
     DOC_TYPE = 13,
-    EOF = 14,
+    EXPANSION_FORM_START = 14,
+    EXPANSION_CASE_VALUE = 15,
+    EXPANSION_CASE_EXP_START = 16,
+    EXPANSION_CASE_EXP_END = 17,
+    EXPANSION_FORM_END = 18,
+    EOF = 19,
 }
 export declare class HtmlToken {
     type: HtmlTokenType;
@@ -31,4 +36,4 @@ export declare class HtmlTokenizeResult {
     errors: HtmlTokenError[];
     constructor(tokens: HtmlToken[], errors: HtmlTokenError[]);
 }
-export declare function tokenizeHtml(sourceContent: string, sourceUrl: string): HtmlTokenizeResult;
+export declare function tokenizeHtml(sourceContent: string, sourceUrl: string, tokenizeExpansionForms?: boolean): HtmlTokenizeResult;

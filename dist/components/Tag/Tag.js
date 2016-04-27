@@ -52,6 +52,7 @@ var Tag = (function () {
         this.color = this.color !== 'undefined' ? this.color : 'default';
     };
     Tag.prototype.ngOnDestroy = function () {
+        this.remove.next(this);
         this.tagset.removeTag(this);
     };
     Tag.prototype.setClassMap = function () {
