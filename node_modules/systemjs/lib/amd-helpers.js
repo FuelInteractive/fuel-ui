@@ -196,8 +196,12 @@ hookConstructor(function(constructor) {
         var curMeta = load && load.metadata;
         var entry = register.entry;
 
-        if (curMeta)
-          curMeta.format = 'amd';
+        if (curMeta) {
+          if (!curMeta.format || curMeta.format == 'detect')
+            curMeta.format = 'amd';
+          else if (!entry.name && curMeta.format != 'amd')
+            throw new Error('AMD define called while executing ' + curMeta.format + ' module ' + load.name);
+        }
 
         // anonymous define
         if (!entry.name) {
