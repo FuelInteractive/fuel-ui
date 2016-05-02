@@ -19,7 +19,7 @@ removeLog(tag: Tag):void {
 
 ```html
 <tagset>
-    <tag *ngFor="#theTag of tags"
+    <tag *ngFor="let theTag of tags"
         [color]="theTag.color"
         [pill]="theTag.pill"
         [removable]="theTag.removable"

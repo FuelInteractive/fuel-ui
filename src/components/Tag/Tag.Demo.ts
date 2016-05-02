@@ -63,7 +63,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
     <div (click)="$event.preventDefault()">
         <h3>
             <tagset>
-                <tag *ngFor="#theTag of tags"
+                <tag *ngFor="let theTag of tags"
                     [color]="theTag.color"
                     [pill]="theTag.pill"
                     [disabled]="theTag.disabled"
@@ -76,7 +76,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
         </h3>
         
         <h4>Tags</h4>
-        <div *ngFor="#theTag of tags">
+        <div *ngFor="let theTag of tags">
             {{theTag | json}}
         </div>
     </div>

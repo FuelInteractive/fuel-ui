@@ -6,8 +6,8 @@
                     <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>
                 </td>
             </tr> 
-			<tr *ngFor="#week of weeks">
-				<td *ngFor="#day of week"
+			<tr *ngFor="let week of weeks">
+				<td *ngFor="let day of week"
 					[class.selectable]="checkSelectable(day)" 
 					[class.disabled]="!checkSelectable(day)"
 					[class.selected]="checkSelectedDate(day)" 

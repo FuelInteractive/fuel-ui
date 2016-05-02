@@ -1,8 +1,8 @@
 /*
  * Example use
- *		Basic Array of single type: *ngFor="#todo of todoService.todos | orderBy : '-'"
- *		Multidimensional Array Sort on single column: *ngFor="#todo of todoService.todos | orderBy : ['-status']"
- *		Multidimensional Array Sort on multiple columns: *ngFor="#todo of todoService.todos | orderBy : ['status', '-title']"
+ *		Basic Array of single type: *ngFor="let todo of todoService.todos | orderBy : '-'"
+ *		Multidimensional Array Sort on single column: *ngFor="let todo of todoService.todos | orderBy : ['-status']"
+ *		Multidimensional Array Sort on multiple columns: *ngFor="let todo of todoService.todos | orderBy : ['status', '-title']"
  */
 
 import {Pipe, PipeTransform} from 'angular2/core';
@@ -13,6 +13,9 @@ export class OrderByPipe implements PipeTransform {
 	value:string[] =[];
 
 	static _orderByComparator(a:any, b:any):number{
+        
+        if(a === null || typeof a === 'undefined') a = 0;
+        if(b === null || typeof b === 'undefined') b = 0;
 
 		if((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))){
 			//Isn't a number so lowercase the string to properly compare

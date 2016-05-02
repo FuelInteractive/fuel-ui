@@ -24,7 +24,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             height="300px"
             distance="120"
             hideScrollbar="true">
-            <div *ngFor="#item of infiniteScrollItems" 
+            <div *ngFor="let item of infiniteScrollItems" 
                 class="card p-a scroll-item" style="background-color: #FFF">
                 <div class="card-block">
                     <h4 class="card-title">Some Item</h4>

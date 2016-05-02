@@ -18,6 +18,6 @@ emptyArray: Array<number> = [];
 
 ```html
 <select>
-    <option *ngFor="#n of emptyArray | range : 1 : 10 : 2" [value]="n"></option>
+    <option *ngFor="let n of emptyArray | range : 1 : 10 : 2" [value]="n"></option>
 </select>
 ```
