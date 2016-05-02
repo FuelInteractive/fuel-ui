@@ -89,7 +89,7 @@ export class CollapseDemo {
     duration: number = 500;
   
     attributes:any[] = [
-        new Attribute('collapse', 'boolean', 'false', 'Boolean whether the content is shown or hidden'),
+        new Attribute('collapse', 'boolean', 'true', 'Boolean whether the content is shown or hidden'),
         new Attribute('duration', 'number', '500', 'Number of milliseconds for how long the open/close animation takes')
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
