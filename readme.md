@@ -41,6 +41,7 @@ Then simply add the proper script tags to your `index.html`
 ```
 
 ##Components
+- [Accordion](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Accordion#readme)
 - [Alert](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Alert#readme)
 - Carousel (documentation in progress)
 - [DatePicker](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/DatePicker#readme)

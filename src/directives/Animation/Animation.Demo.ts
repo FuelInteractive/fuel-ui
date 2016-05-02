@@ -26,7 +26,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     <div>Playing: {{play}}</div><br/>
     <div>
         <h3>Animation Log</h3>
-        <div *ngFor="#event of animationLog">
+        <div *ngFor="let event of animationLog">
             ({{event.timeStamp | date : 'mediumTime'}}) {{event.animationName}}: {{event.type}}
         </div>
     </div>

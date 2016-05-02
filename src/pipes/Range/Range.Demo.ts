@@ -18,7 +18,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 </div>
 
 <p>
-    <code>*ngFor="#number of numbers | range : {{startNumber}} : {{endNumber}} : {{stepNumber}}"</code><br/>
+    <code>*ngFor="let number of numbers | range : {{startNumber}} : {{endNumber}} : {{stepNumber}}"</code><br/>
 </p>
 
 <p>Output: {{number | range : startNumber : endNumber : stepNumber | json}}</p>
@@ -58,7 +58,7 @@ import {RangePipe} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-javascript" code-highlight>
-*ngFor="#number of numbers | range : start : end : step"
+*ngFor="let number of numbers | range : start : end : step"
 </code>
 </pre>
 </tab>

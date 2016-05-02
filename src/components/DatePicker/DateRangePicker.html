@@ -77,7 +77,7 @@
                 height="{{calendarHeight}}"
                 hideScrollbar="true">
                 <date-picker-calendar scroll-item
-                    *ngFor="#month of calendarMonths #i=index" 
+                    *ngFor="let month of calendarMonths; let i=index" 
                     [id]="i"
                     [minDate]="minDate" [maxDate]="maxDate"
                     [dateFilter]="dateFilter"

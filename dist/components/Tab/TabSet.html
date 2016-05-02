@@ -1,0 +1,15 @@
+<ul class="nav" [ngClass]="classMap" (click)="$event.preventDefault()">
+    <li *ngFor="let tab of tabs" class="nav-item"
+        [class.active]="tab.active" [class.disabled]="tab.disabled">
+        <a href class="nav-link" [class.active]="tab.active" 
+            [class.disabled]="tab.disabled" (click)="tab.active = true">
+            <span [innerHtml]="tab.heading"></span>
+            <span *ngIf="tab.removable" (click)="$event.preventDefault(); removeTab(tab);">
+                <i class="fa fa-remove"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<div class="tab-content">
+    <ng-content></ng-content>
+</div>

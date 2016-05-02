@@ -18,7 +18,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <div class="row" style="margin-left:9px;margin-top:45px;">
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-bottom: 60px">
                 <slider background="#E24932" step="5" pips="6" pipDensity="5"
                     [minValue]="minValue" [maxValue]="maxValue" [(value)]="singleSliderValue">
                 </slider>
@@ -43,19 +43,19 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     </div>
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding-bottom: 50px">
                 <slider background="#E24932" step="5" pips="6" pipDensity="5"
                     [minValue]="minValue" [maxValue]="maxValue" [(value)]="doubleSliderValue" [(secondValue)]="secondDoubleSliderValue"
                     orientation="vertical" height="200px">
                 </slider>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom:50px;">
                 <slider background="#E24932" step="5" pips="6" pipDensity="5"
                     [minValue]="minValue" [maxValue]="maxValue" [(value)]="doubleSliderValue" [(secondValue)]="secondDoubleSliderValue">
                 </slider>
             </div>
         </div>
-        <div class="row" style="margin-top:50px;">
+        <div class="row">
             <form>
                 <div class="form-group row">
                     <label for="doubleSliderValue" class="col-sm-4 form-control-label">Slider Value</label>

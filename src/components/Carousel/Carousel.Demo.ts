@@ -16,11 +16,11 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 <div class="row">
     <carousel class="col-md-6">
-        <img *ngFor="#image of carouselImages" src="{{image}}" class="carousel-item" />
+        <img *ngFor="let image of carouselImages" src="{{image}}" class="carousel-item" />
     </carousel>
     
     <carousel class="col-md-6">
-        <div *ngFor="#image of carouselImages" class="carousel-item">
+        <div *ngFor="let image of carouselImages" class="carousel-item">
             <img src="{{image}}" />
             <div class="carousel-caption">
                 <h3>Some Title</h3>

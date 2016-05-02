@@ -37,11 +37,34 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                     <input class="form-control" [(ngModel)]="currentPage" min="1" [max]="totalPages" type="number" name="currentPage">
                 </div>
             </div>
+            <div class="row">
+                <div class="checkbox col-md-3">
+                    <label for="showSteps" class="form-control-label">
+                        <input [(ngModel)]="showSteps" type="checkbox" /> 
+                        Show Next/Previous
+                    </label>
+                </div>
+                <div class="checkbox col-md-3">
+                    <label for="showEnds" class="form-control-label">
+                        <input [(ngModel)]="showEnds" type="checkbox" /> 
+                        Show First/Last
+                    </label>
+                </div>
+                <div class="checkbox col-md-3">
+                    <label for="showSelect" class="form-control-label">
+                        <input [(ngModel)]="showSelect" type="checkbox" /> 
+                        Show Jump To
+                    </label>
+                </div>
+            </div>
         </form>
         <pagination
             [(currentPage)]="currentPage"
             [totalPages]="totalPages"
             [pagesAtOnce]="pagesAtOnce"
+            [showSelect]="showSelect"
+            [showEnds]="showEnds"
+            [showSteps]="showSteps"
             (currentPageChange)="pageChange($event)">
         </pagination>
     </div>
@@ -67,6 +90,9 @@ import {Pagination} from 'fuel-ui/fuel-ui';
     [(currentPage)]=&quot;currentPage&quot;
     totalPages=&quot;10&quot;
     pagesAtOnce=&quot;1&quot;
+    [showSelect]=&quot;true&quot;
+    [showEnds]=&quot;true&quot;
+    [showSteps]=&quot;false&quot;
     (currentPageChange)=&quot;pageChange($event)&quot;&gt;
 &lt;/pagination&gt;
 </code>
@@ -110,6 +136,9 @@ export class PaginationDemo {
     totalPages: number = 10;
     pagesAtOnce: number = 5;
     currentPage: number = 1;
+    showSteps: boolean = true;
+    showEnds: boolean = true;
+    showSelect: boolean = true;
     
     pageChange(page: number): void {
         this.currentPage = page;
@@ -118,7 +147,10 @@ export class PaginationDemo {
     attributes:Attribute[] = [
         new Attribute('currentPage', 'number', '1', 'Currently active page'),
         new Attribute('pagesAtOnce', 'number', '5', 'The max number of pages to be displayed at once'),
-        new Attribute('totalPages', 'number', '10', 'Total number of pages')
+        new Attribute('totalPages', 'number', '10', 'Total number of pages'),
+        new Attribute('showSelect', 'boolean', 'true', 'Show jump to select to choose page number from select box'),
+        new Attribute('showEnds', 'boolean', 'true', 'Show first/last buttons to jump to the first or last page'),
+        new Attribute('showSteps', 'boolean', 'true', 'Show arrows on ends of page numbers to step through pages')
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;

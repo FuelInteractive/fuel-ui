@@ -22,8 +22,8 @@ data: any[] = [
 ```
 
 ```html
-<ul *ngFor="#object of data">
-    <li *ngFor="#keyValuePair of object | mapToIterable">
+<ul *ngFor="let object of data">
+    <li *ngFor="let keyValuePair of object | mapToIterable">
         {{keyValuePair.key}}: {{keyValuePair.val}}
     </li>
 </ul>

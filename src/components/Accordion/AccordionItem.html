@@ -1,0 +1,8 @@
+<div (click)="toggleOpen($event)">
+    <span *ngIf="heading" class="fuel-ui-clickable" [ngClass]="{'text-muted': disabled}">{{heading}}</span>
+    <ng-content select="accordion-heading"></ng-content>
+    <ng-content select="[accordion-heading]"></ng-content>
+</div>
+<div class="fuel-ui-collapse" [collapse]="!open" [duration]="accordion.duration">
+    <ng-content></ng-content>
+</div>

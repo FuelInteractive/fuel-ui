@@ -1,14 +1,16 @@
-<table class="table table-bordered table-hover table-striped table-sortable">
-  <thead>
-    <tr>
-      <th *ngFor="#column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">
-        {{column.display}}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="#object of data | orderBy : convertSorting()">
-      <td *ngFor="#column of columns" [innerHtml]="object[column.variable] | format : column.filter"></td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-striped table-sortable">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">
+          {{column.display}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let object of data | orderBy : convertSorting()">
+        <td *ngFor="let column of columns" [innerHtml]="object[column.variable] | format : column.filter"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

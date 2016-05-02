@@ -1,4 +1,4 @@
-import {Directive, Input, OnChanges, ElementRef} from "angular2/core";
+import {Directive, Input, OnInit, OnChanges, ElementRef} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AnimationBuilder} from 'angular2/src/animate/animation_builder';
 import {CssAnimationBuilder} from 'angular2/src/animate/css_animation_builder';
@@ -10,29 +10,30 @@ import {CssAnimationBuilder} from 'angular2/src/animate/css_animation_builder';
         '[attr.aria-hidden]': 'collapse'
     }
 })
-export class Collapse implements OnChanges{
+export class Collapse implements OnInit, OnChanges{
     @Input() duration: number = 500;
-    @Input() collapse: boolean = false;
+    @Input() collapse: boolean = true;
     private _animation: CssAnimationBuilder;
 
     constructor(animationBuilder:AnimationBuilder, public element:ElementRef) {
         this._animation = animationBuilder.css();
     }
         
-    private get _elementHeight(): number {
-        let el = this.element.nativeElement;
-        let height = el.offsetHeight;
-        let style = getComputedStyle(el);
-        
-        return height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-    }
-    
     private get _baseSequence(): CssAnimationBuilder {
         return this._animation
                     .setDuration(this.duration)
                     .removeClass('fuel-ui-collapse')
                     .removeClass('in')
                     .addAnimationClass('fuel-ui-collapsing')
+    }
+    
+    ngOnInit(): void {
+        if(!this.collapse) {
+            this._animation
+                .setDuration(0)
+                .addClass('in')
+                .start(this.element.nativeElement);
+        }
     }
 
     ngOnChanges(changes: any) {
@@ -41,6 +42,10 @@ export class Collapse implements OnChanges{
     }
     
     hide(): void {
+        
+        //Webkit fix
+        this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
+        
         this._baseSequence
             .setFromStyles({
                 height: this.element.nativeElement.scrollHeight + 'px',
@@ -52,8 +57,11 @@ export class Collapse implements OnChanges{
                 paddingBottom: '0'
             });
         
-        let a = this._animation.start(this.element.nativeElement);
+        let a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
         a.onComplete(() => {
+            //Check if user toggled collapse mid-animation
+            if(!this.collapse) return;
+            
             a.removeClasses(['in']);
             a.addClasses(['fuel-ui-collapse']);
         });
@@ -81,7 +89,25 @@ export class Collapse implements OnChanges{
                         })
                         .start(this.element.nativeElement);
             
-            a.onComplete(() =>  a.addClasses(['fuel-ui-collapse', 'in']) );
+            a.onComplete(() =>  {
+                a.addClasses(['fuel-ui-collapse', 'in']);
+                
+                //Set height to auto for expanding with dynamic content
+                this._animation
+                    .setDuration(0)
+                    .setFromStyles({
+                        height: this.element.nativeElement.scrollHeight + 'px'
+                    })
+                    .setToStyles({
+                        height: 'auto'
+                    })
+                    .start(this.element.nativeElement)
+                    .onComplete(() => {
+                        //Check if user toggled collapse mid-animation
+                        if(this.collapse)
+                            a.addClasses(['fuel-ui-collapse']);
+                    });
+            });
         });
     }
     
