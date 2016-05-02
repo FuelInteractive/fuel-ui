@@ -252,13 +252,6 @@ body {
 	background: blue;
 }
 
-/* Mobile Only Styles */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 768px){
-    #sidebar-wrapper {}
-}
-
 /* Desktop Styles */
 @media screen and (min-width: 1024px){
     #wrapper {
