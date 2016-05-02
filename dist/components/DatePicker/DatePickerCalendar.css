@@ -21,8 +21,8 @@ th, td {
   position: relative; }
   @media (max-width: 480px), screen and (max-device-width: 480px) {
     th, td {
-      padding: 1rem;
-      font-size: 2.5rem; } }
+      padding: .5rem;
+      font-size: 1rem; } }
 
 td.selectable {
   cursor: pointer !important;

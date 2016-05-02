@@ -41,7 +41,7 @@ import { DoCheck, ChangeDetectorRef, IterableDiffers, ViewContainerRef, Template
  *
  * ### Syntax
  *
- * - `<li *ngFor="#item of items; #i = index">...</li>`
+ * - `<li *ngFor="let item of items; #i = index">...</li>`
  * - `<li template="ngFor #item of items; #i = index">...</li>`
  * - `<template ngFor #item [ngForOf]="items" #i="index"><li>...</li></template>`
  *

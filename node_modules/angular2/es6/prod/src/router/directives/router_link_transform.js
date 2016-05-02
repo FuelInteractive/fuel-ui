@@ -165,8 +165,9 @@ export let RouterLinkTransform = class RouterLinkTransform {
         let updatedChildren = ast.children.map(c => c.visit(this, context));
         let updatedInputs = ast.inputs.map(c => c.visit(this, context));
         let updatedDirectives = ast.directives.map(c => c.visit(this, context));
-        return new ElementAst(ast.name, ast.attrs, updatedInputs, ast.outputs, ast.exportAsVars, updatedDirectives, ast.providers, ast.hasViewContainer, updatedChildren, ast.ngContentIndex, ast.sourceSpan);
+        return new ElementAst(ast.name, ast.attrs, updatedInputs, ast.outputs, ast.references, updatedDirectives, ast.providers, ast.hasViewContainer, updatedChildren, ast.ngContentIndex, ast.sourceSpan);
     }
+    visitReference(ast, context) { return ast; }
     visitVariable(ast, context) { return ast; }
     visitEvent(ast, context) { return ast; }
     visitElementProperty(ast, context) { return ast; }
@@ -175,7 +176,7 @@ export let RouterLinkTransform = class RouterLinkTransform {
     visitText(ast, context) { return ast; }
     visitDirective(ast, context) {
         let updatedInputs = ast.inputs.map(c => c.visit(this, context));
-        return new DirectiveAst(ast.directive, updatedInputs, ast.hostProperties, ast.hostEvents, ast.exportAsVars, ast.sourceSpan);
+        return new DirectiveAst(ast.directive, updatedInputs, ast.hostProperties, ast.hostEvents, ast.sourceSpan);
     }
     visitDirectiveProperty(ast, context) {
         let transformedValue = ast.value.visit(this.astTransformer);

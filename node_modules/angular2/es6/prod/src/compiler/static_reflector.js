@@ -1,4 +1,4 @@
-import { ListWrapper, StringMapWrapper } from 'angular2/src/facade/collection';
+import { StringMapWrapper } from 'angular2/src/facade/collection';
 import { isArray, isPresent, isPrimitive } from 'angular2/src/facade/lang';
 import { AttributeMetadata, DirectiveMetadata, ComponentMetadata, ContentChildrenMetadata, ContentChildMetadata, InputMetadata, HostBindingMetadata, HostListenerMetadata, OutputMetadata, PipeMetadata, ViewMetadata, ViewChildMetadata, ViewChildrenMetadata, ViewQueryMetadata, QueryMetadata } from 'angular2/src/core/metadata';
 /**
@@ -29,10 +29,10 @@ export class StaticReflector {
     }
     importUri(typeOrFunc) { return typeOrFunc.moduleId; }
     /**
-     * getStatictype produces a Type whose metadata is known but whose implementation is not loaded.
+     * getStaticType produces a Type whose metadata is known but whose implementation is not loaded.
      * All types passed to the StaticResolver should be pseudo-types returned by this method.
      *
-     * @param moduleId the module identifier as would be passed to an import statement.
+     * @param moduleId the module identifier as an absolute path.
      * @param name the name of the type.
      */
     getStaticType(moduleId, name) {
@@ -94,7 +94,7 @@ export class StaticReflector {
         return parameters;
     }
     initializeConversionMap() {
-        let core_metadata = 'angular2/src/core/metadata';
+        let core_metadata = this.host.resolveModule('angular2/src/core/metadata');
         let conversionMap = this.conversionMap;
         conversionMap.set(this.getStaticType(core_metadata, 'Directive'), (moduleContext, expression) => {
             let p0 = this.getDecoratorParameter(moduleContext, expression, 0);
@@ -206,7 +206,7 @@ export class StaticReflector {
         if (isMetadataSymbolicCallExpression(expression)) {
             let target = expression['expression'];
             if (isMetadataSymbolicReferenceExpression(target)) {
-                let moduleId = this.normalizeModuleName(moduleContext, target['module']);
+                let moduleId = this.host.resolveModule(target['module'], moduleContext);
                 return this.getStaticType(moduleId, target['name']);
             }
         }
@@ -344,7 +344,7 @@ export class StaticReflector {
                                 return selectTarget[member];
                             return null;
                         case "reference":
-                            let referenceModuleName = _this.normalizeModuleName(moduleContext, expression['module']);
+                            let referenceModuleName = _this.host.resolveModule(expression['module'], moduleContext);
                             let referenceModule = _this.getModuleMetadata(referenceModuleName);
                             let referenceValue = referenceModule['metadata'][expression['name']];
                             if (isClassMetadata(referenceValue)) {
@@ -365,6 +365,9 @@ export class StaticReflector {
         }
         return simplify(value);
     }
+    /**
+     * @param module an absolute path to a module file.
+     */
     getModuleMetadata(module) {
         let moduleMetadata = this.metadataCache.get(module);
         if (!isPresent(moduleMetadata)) {
@@ -384,12 +387,6 @@ export class StaticReflector {
         }
         return result;
     }
-    normalizeModuleName(from, to) {
-        if (to.startsWith('.')) {
-            return pathTo(from, to);
-        }
-        return to;
-    }
 }
 function isMetadataSymbolicCallExpression(expression) {
     return !isPrimitive(expression) && !isArray(expression) && expression['__symbolic'] == 'call';
@@ -400,35 +397,4 @@ function isMetadataSymbolicReferenceExpression(expression) {
 }
 function isClassMetadata(expression) {
     return !isPrimitive(expression) && !isArray(expression) && expression['__symbolic'] == 'class';
-}
-function splitPath(path) {
-    return path.split(/\/|\\/g);
-}
-function resolvePath(pathParts) {
-    let result = [];
-    ListWrapper.forEachWithIndex(pathParts, (part, index) => {
-        switch (part) {
-            case '':
-            case '.':
-                if (index > 0)
-                    return;
-                break;
-            case '..':
-                if (index > 0 && result.length != 0)
-                    result.pop();
-                return;
-        }
-        result.push(part);
-    });
-    return result.join('/');
-}
-function pathTo(from, to) {
-    let result = to;
-    if (to.startsWith('.')) {
-        let fromParts = splitPath(from);
-        fromParts.pop(); // remove the file name.
-        let toParts = splitPath(to);
-        result = resolvePath(fromParts.concat(toParts));
-    }
-    return result;
 }

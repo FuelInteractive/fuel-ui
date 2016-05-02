@@ -1,4 +1,4 @@
-import { VariableAst, AttrAst, DirectiveAst, ProviderAst } from './template_ast';
+import { ReferenceAst, AttrAst, DirectiveAst, ProviderAst } from './template_ast';
 import { CompileDirectiveMetadata } from './compile_metadata';
 import { ParseSourceSpan, ParseError } from './parse_util';
 export declare class ProviderError extends ParseError {
@@ -22,7 +22,7 @@ export declare class ProviderElementContext {
     private _allProviders;
     private _attrs;
     private _hasViewContainer;
-    constructor(_viewContext: ProviderViewContext, _parent: ProviderElementContext, _isViewRoot: boolean, _directiveAsts: DirectiveAst[], attrs: AttrAst[], vars: VariableAst[], _sourceSpan: ParseSourceSpan);
+    constructor(_viewContext: ProviderViewContext, _parent: ProviderElementContext, _isViewRoot: boolean, _directiveAsts: DirectiveAst[], attrs: AttrAst[], refs: ReferenceAst[], _sourceSpan: ParseSourceSpan);
     afterElement(): void;
     transformProviders: ProviderAst[];
     transformedDirectiveAsts: DirectiveAst[];

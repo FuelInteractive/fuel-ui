@@ -1,3 +1,5 @@
+import { AccordionItem } from "./Accordion/AccordionItem";
+import { Accordion } from "./Accordion/Accordion";
 import { Alert } from "./Alert/Alert";
 import { Carousel, CarouselItem } from "./Carousel/Carousel";
 import { DatePickerCalendar, DatePicker } from "./DatePicker/DatePickerProviders";
@@ -12,7 +14,9 @@ import { TagSet } from "./Tag/TagSet";
 import { TableSortable } from "./TableSortable/TableSortable";
 import { Slider } from "./Slider/Slider";
 import { TimePicker } from "./TimePicker/TimePicker";
-export declare var FUELUI_COMPONENT_PROVIDERS: (typeof Alert[] | (typeof Carousel | typeof CarouselItem)[] | (typeof DatePickerCalendar | typeof DatePicker)[] | typeof Modal[] | typeof Pagination[] | (typeof InfiniteScroller | typeof ScrollItem)[] | typeof Dropdown[] | typeof TableSortable[] | typeof Slider[] | (typeof Tab | typeof TabSet)[] | (typeof Tag | typeof TagSet)[] | typeof TimePicker[])[];
+export declare var FUELUI_COMPONENT_PROVIDERS: ((typeof Accordion | typeof AccordionItem)[] | typeof Alert[] | (typeof Carousel | typeof CarouselItem)[] | (typeof DatePickerCalendar | typeof DatePicker)[] | typeof Modal[] | typeof Pagination[] | (typeof InfiniteScroller | typeof ScrollItem)[] | typeof Dropdown[] | typeof TableSortable[] | typeof Slider[] | (typeof Tab | typeof TabSet)[] | (typeof Tag | typeof TagSet)[] | typeof TimePicker[])[];
+export * from "./Accordion/Accordion";
+export * from "./Accordion/AccordionItem";
 export * from "./Alert/Alert";
 export * from "./Carousel/Carousel";
 export * from "./DatePicker/DatePickerProviders";

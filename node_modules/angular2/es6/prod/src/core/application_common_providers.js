@@ -4,10 +4,8 @@ import { APP_ID_RANDOM_PROVIDER } from './application_tokens';
 import { APPLICATION_CORE_PROVIDERS } from './application_ref';
 import { IterableDiffers, defaultIterableDiffers, KeyValueDiffers, defaultKeyValueDiffers } from './change_detection/change_detection';
 import { ViewUtils } from "./linker/view_utils";
-import { ComponentResolver } from './linker/component_resolver';
-import { ReflectorComponentResolver } from "./linker/component_resolver";
-import { DynamicComponentLoader } from './linker/dynamic_component_loader';
-import { DynamicComponentLoader_ } from "./linker/dynamic_component_loader";
+import { ComponentResolver, ReflectorComponentResolver } from './linker/component_resolver';
+import { DynamicComponentLoader, DynamicComponentLoader_ } from './linker/dynamic_component_loader';
 var __unused; // avoid unused import when Type union types are erased
 /**
  * A default set of providers which should be included in any Angular

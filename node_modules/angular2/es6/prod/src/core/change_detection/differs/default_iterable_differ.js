@@ -7,10 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { CONST } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { isListLikeIterable, iterateListLike } from 'angular2/src/facade/collection';
-import { isBlank, isPresent, stringify, getMapKey, looseIdentical, isArray } from 'angular2/src/facade/lang';
+import { CONST, isBlank, isPresent, stringify, getMapKey, looseIdentical, isArray } from 'angular2/src/facade/lang';
 export let DefaultIterableDifferFactory = class DefaultIterableDifferFactory {
     supports(obj) { return isListLikeIterable(obj); }
     create(cdRef, trackByFn) {

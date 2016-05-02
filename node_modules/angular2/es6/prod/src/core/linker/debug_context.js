@@ -11,10 +11,10 @@ import { isPresent, isBlank, CONST } from 'angular2/src/facade/lang';
 import { ListWrapper, StringMapWrapper } from 'angular2/src/facade/collection';
 import { ViewType } from './view_type';
 export let StaticNodeDebugInfo = class StaticNodeDebugInfo {
-    constructor(providerTokens, componentToken, varTokens) {
+    constructor(providerTokens, componentToken, refTokens) {
         this.providerTokens = providerTokens;
         this.componentToken = componentToken;
-        this.varTokens = varTokens;
+        this.refTokens = refTokens;
     }
 };
 StaticNodeDebugInfo = __decorate([
@@ -72,16 +72,16 @@ export class DebugContext {
         // the given one. We preserve this for now to not have a breaking
         // change, but should change this later!
         ListWrapper.forEachWithIndex(this._view.staticNodeDebugInfos, (staticNodeInfo, nodeIndex) => {
-            var vars = staticNodeInfo.varTokens;
-            StringMapWrapper.forEach(vars, (varToken, varName) => {
+            var refs = staticNodeInfo.refTokens;
+            StringMapWrapper.forEach(refs, (refToken, refName) => {
                 var varValue;
-                if (isBlank(varToken)) {
+                if (isBlank(refToken)) {
                     varValue = isPresent(this._view.allNodes) ? this._view.allNodes[nodeIndex] : null;
                 }
                 else {
-                    varValue = this._view.injectorGet(varToken, nodeIndex, null);
+                    varValue = this._view.injectorGet(refToken, nodeIndex, null);
                 }
-                varValues[varName] = varValue;
+                varValues[refName] = varValue;
             });
         });
         StringMapWrapper.forEach(this._view.locals, (localValue, localName) => { varValues[localName] = localValue; });

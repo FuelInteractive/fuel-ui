@@ -29,7 +29,7 @@ export class CompileView {
         this.subscriptions = [];
         this.purePipes = new Map();
         this.pipes = [];
-        this.variables = new Map();
+        this.locals = new Map();
         this.literalArrayCount = 0;
         this.literalMapCount = 0;
         this.pipeCount = 0;
@@ -75,7 +75,7 @@ export class CompileView {
         }
         this.viewQueries = viewQueries;
         templateVariableBindings.forEach((entry) => {
-            this.variables.set(entry[1], o.THIS_EXPR.prop('locals').key(o.literal(entry[0])));
+            this.locals.set(entry[1], o.THIS_EXPR.prop('locals').key(o.literal(entry[0])));
         });
         if (!this.declarationElement.isNull()) {
             this.declarationElement.setEmbeddedView(this);
@@ -93,15 +93,15 @@ export class CompileView {
         }
         return pipe.call(this, [input].concat(args));
     }
-    getVariable(name) {
+    getLocal(name) {
         if (name == EventHandlerVars.event.name) {
             return EventHandlerVars.event;
         }
         var currView = this;
-        var result = currView.variables.get(name);
+        var result = currView.locals.get(name);
         while (isBlank(result) && isPresent(currView.declarationElement.view)) {
             currView = currView.declarationElement.view;
-            result = currView.variables.get(name);
+            result = currView.locals.get(name);
         }
         if (isPresent(result)) {
             return getPropertyInView(result, this, currView);

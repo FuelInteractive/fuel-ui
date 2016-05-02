@@ -8,9 +8,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from 'angular2/src/core/di';
-import { print } from 'angular2/src/facade/lang';
+import { print, warn } from 'angular2/src/facade/lang';
+// Note: Need to rename warn as in Dart
+// class members and imports can't use the same name.
+let _warnImpl = warn;
 export let Console = class Console {
     log(message) { print(message); }
+    // Note: for reporting errors use `DOM.logError()` as it is platform specific
+    warn(message) { _warnImpl(message); }
 };
 Console = __decorate([
     Injectable(), 

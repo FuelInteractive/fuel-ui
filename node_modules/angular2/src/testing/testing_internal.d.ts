@@ -1,21 +1,12 @@
-import { FunctionWithParamTokens } from './test_injector';
+export { AsyncTestCompleter } from './async_test_completer';
 export { inject } from './test_injector';
 export { expect, NgMatchers } from './matchers';
 export declare var proxy: ClassDecorator;
 export declare var afterEach: Function;
-export declare type SyncTestFn = () => void;
-/**
- * Injectable completer that allows signaling completion of an asynchronous test. Used internally.
- */
-export declare class AsyncTestCompleter {
-    private _done;
-    constructor(_done: Function);
-    done(): void;
-}
 export declare function describe(...args: any[]): void;
 export declare function ddescribe(...args: any[]): void;
 export declare function xdescribe(...args: any[]): void;
-export declare function beforeEach(fn: FunctionWithParamTokens | SyncTestFn): void;
+export declare function beforeEach(fn: Function): void;
 /**
  * Allows overriding default providers defined in test_injector.js.
  *

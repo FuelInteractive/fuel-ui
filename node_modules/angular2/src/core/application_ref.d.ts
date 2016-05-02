@@ -1,9 +1,8 @@
 import { NgZone } from 'angular2/src/core/zone/ng_zone';
 import { Type } from 'angular2/src/facade/lang';
 import { Injector } from 'angular2/src/core/di';
-import { ComponentRef } from 'angular2/src/core/linker/component_factory';
+import { ComponentRef, ComponentFactory } from 'angular2/src/core/linker/component_factory';
 import { ChangeDetectorRef } from 'angular2/src/core/change_detection/change_detector_ref';
-import { ComponentFactory } from 'angular2/src/core/linker/component_factory';
 /**
  * Create an Angular zone.
  */

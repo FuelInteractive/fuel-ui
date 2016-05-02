@@ -32,7 +32,6 @@ import { getUrlScheme } from 'angular2/src/compiler/url_resolver';
 import { Provider } from 'angular2/src/core/di/provider';
 import { constructDependencies } from 'angular2/src/core/di/reflective_provider';
 import { SelfMetadata, HostMetadata, SkipSelfMetadata } from 'angular2/src/core/di/metadata';
-import { AttributeMetadata } from 'angular2/src/core/metadata/di';
 import { ReflectorReader } from 'angular2/src/core/reflection/reflector_reader';
 export let RuntimeMetadataResolver = class RuntimeMetadataResolver {
     constructor(_directiveResolver, _pipeResolver, _viewResolver, _platformDirectives, _platformPipes, _reflector) {
@@ -187,7 +186,7 @@ export let RuntimeMetadataResolver = class RuntimeMetadataResolver {
         }
         return deps.map((dep) => {
             var compileToken;
-            var p = dep.properties.find(p => p instanceof AttributeMetadata);
+            var p = dep.properties.find(p => p instanceof dimd.AttributeMetadata);
             var isAttribute = false;
             if (isPresent(p)) {
                 compileToken = this.getTokenMetadata(p.attributeName);

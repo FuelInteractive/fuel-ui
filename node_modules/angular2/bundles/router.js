@@ -184,7 +184,10 @@ System.register("angular2/src/router/directives/router_link_transform", ["angula
       var updatedDirectives = ast.directives.map(function(c) {
         return c.visit(_this, context);
       });
-      return new compiler_1.ElementAst(ast.name, ast.attrs, updatedInputs, ast.outputs, ast.exportAsVars, updatedDirectives, ast.providers, ast.hasViewContainer, updatedChildren, ast.ngContentIndex, ast.sourceSpan);
+      return new compiler_1.ElementAst(ast.name, ast.attrs, updatedInputs, ast.outputs, ast.references, updatedDirectives, ast.providers, ast.hasViewContainer, updatedChildren, ast.ngContentIndex, ast.sourceSpan);
+    };
+    RouterLinkTransform.prototype.visitReference = function(ast, context) {
+      return ast;
     };
     RouterLinkTransform.prototype.visitVariable = function(ast, context) {
       return ast;
@@ -209,7 +212,7 @@ System.register("angular2/src/router/directives/router_link_transform", ["angula
       var updatedInputs = ast.inputs.map(function(c) {
         return c.visit(_this, context);
       });
-      return new compiler_1.DirectiveAst(ast.directive, updatedInputs, ast.hostProperties, ast.hostEvents, ast.exportAsVars, ast.sourceSpan);
+      return new compiler_1.DirectiveAst(ast.directive, updatedInputs, ast.hostProperties, ast.hostEvents, ast.sourceSpan);
     };
     RouterLinkTransform.prototype.visitDirectiveProperty = function(ast, context) {
       var transformedValue = ast.value.visit(this.astTransformer);

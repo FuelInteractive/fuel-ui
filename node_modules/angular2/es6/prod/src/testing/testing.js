@@ -1,5 +1,5 @@
-import { global } from 'angular2/src/facade/lang';
-import { FunctionWithParamTokens, getTestInjector } from './test_injector';
+import { global, isPromise } from 'angular2/src/facade/lang';
+import { getTestInjector } from './test_injector';
 export { inject, async, injectAsync } from './test_injector';
 export { expect } from './matchers';
 var _global = (typeof window === 'undefined' ? global : window);
@@ -82,33 +82,28 @@ export function beforeEachProviders(fn) {
         }
     });
 }
-function runInAsyncTestZone(fnToExecute, finishCallback, failCallback, testName = '') {
-    var AsyncTestZoneSpec = Zone['AsyncTestZoneSpec'];
-    var testZoneSpec = new AsyncTestZoneSpec(finishCallback, failCallback, testName);
-    var testZone = Zone.current.fork(testZoneSpec);
-    return testZone.run(fnToExecute);
-}
-function _isPromiseLike(input) {
-    return input && !!(input.then);
-}
-function _it(jsmFn, name, testFn, testTimeOut) {
-    var timeOut = testTimeOut;
-    if (testFn instanceof FunctionWithParamTokens) {
-        let testFnT = testFn;
-        jsmFn(name, (done) => {
-            if (testFnT.isAsync) {
-                runInAsyncTestZone(() => testInjector.execute(testFnT), done, done.fail, name);
+function _wrapTestFn(fn) {
+    // Wraps a test or beforeEach function to handle synchronous and asynchronous execution.
+    return (done) => {
+        if (fn.length === 0) {
+            let retVal = fn();
+            if (isPromise(retVal)) {
+                // Asynchronous test function - wait for completion.
+                retVal.then(done, done.fail);
             }
             else {
-                testInjector.execute(testFnT);
+                // Synchronous test function - complete immediately.
                 done();
             }
-        }, timeOut);
-    }
-    else {
-        // The test case doesn't use inject(). ie `it('test', (done) => { ... }));`
-        jsmFn(name, testFn, timeOut);
-    }
+        }
+        else {
+            // Asynchronous test function that takes "done" as parameter.
+            fn(done);
+        }
+    };
+}
+function _it(jsmFn, name, testFn, testTimeOut) {
+    jsmFn(name, _wrapTestFn(testFn), testTimeOut);
 }
 /**
  * Wrapper around Jasmine beforeEach function.
@@ -122,29 +117,7 @@ function _it(jsmFn, name, testFn, testTimeOut) {
  * {@example testing/ts/testing.ts region='beforeEach'}
  */
 export function beforeEach(fn) {
-    if (fn instanceof FunctionWithParamTokens) {
-        // The test case uses inject(). ie `beforeEach(inject([ClassA], (a) => { ...
-        // }));`
-        let fnT = fn;
-        jsmBeforeEach((done) => {
-            if (fnT.isAsync) {
-                runInAsyncTestZone(() => testInjector.execute(fnT), done, done.fail, 'beforeEach');
-            }
-            else {
-                testInjector.execute(fnT);
-                done();
-            }
-        });
-    }
-    else {
-        // The test case doesn't use inject(). ie `beforeEach((done) => { ... }));`
-        if (fn.length === 0) {
-            jsmBeforeEach(() => { fn(); });
-        }
-        else {
-            jsmBeforeEach((done) => { fn(done); });
-        }
-    }
+    jsmBeforeEach(_wrapTestFn(fn));
 }
 /**
  * Define a single test case with the given test name and execution function.

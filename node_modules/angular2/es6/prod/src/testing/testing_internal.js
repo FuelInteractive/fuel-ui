@@ -1,22 +1,15 @@
 import { StringMapWrapper } from 'angular2/src/facade/collection';
-import { global, isFunction, Math } from 'angular2/src/facade/lang';
+import { global, isPromise, Math } from 'angular2/src/facade/lang';
 import { provide } from 'angular2/core';
-import { getTestInjector, FunctionWithParamTokens } from './test_injector';
+import { AsyncTestCompleter } from './async_test_completer';
+import { getTestInjector } from './test_injector';
 import { browserDetection } from './utils';
+export { AsyncTestCompleter } from './async_test_completer';
 export { inject } from './test_injector';
 export { expect } from './matchers';
 export var proxy = (t) => t;
 var _global = (typeof window === 'undefined' ? global : window);
 export var afterEach = _global.afterEach;
-/**
- * Injectable completer that allows signaling completion of an asynchronous test. Used internally.
- */
-export class AsyncTestCompleter {
-    constructor(_done) {
-        this._done = _done;
-    }
-    done() { this._done(); }
-}
 var jsmBeforeEach = _global.beforeEach;
 var jsmDescribe = _global.describe;
 var jsmDDescribe = _global.fdescribe;
@@ -43,10 +36,7 @@ class BeforeEachRunner {
     run() {
         if (this._parent)
             this._parent.run();
-        this._fns.forEach((fn) => {
-            return isFunction(fn) ? fn() :
-                (testInjector.execute(fn));
-        });
+        this._fns.forEach((fn) => { fn(); });
     }
 }
 // Reset the test providers before each test
@@ -107,49 +97,35 @@ export function beforeEachBindings(fn) {
 function _it(jsmFn, name, testFn, testTimeOut) {
     var runner = runnerStack[runnerStack.length - 1];
     var timeOut = Math.max(globalTimeOut, testTimeOut);
-    if (testFn instanceof FunctionWithParamTokens) {
-        // The test case uses inject(). ie `it('test', inject([AsyncTestCompleter], (async) => { ...
-        // }));`
-        let testFnT = testFn;
-        if (testFn.hasToken(AsyncTestCompleter)) {
-            jsmFn(name, (done) => {
-                var completerProvider = provide(AsyncTestCompleter, {
-                    useFactory: () => {
-                        // Mark the test as async when an AsyncTestCompleter is injected in an it()
-                        if (!inIt)
-                            throw new Error('AsyncTestCompleter can only be injected in an "it()"');
-                        return new AsyncTestCompleter(done);
-                    }
-                });
-                testInjector.addProviders([completerProvider]);
-                runner.run();
-                inIt = true;
-                testInjector.execute(testFnT);
-                inIt = false;
-            }, timeOut);
+    jsmFn(name, (done) => {
+        var completerProvider = provide(AsyncTestCompleter, {
+            useFactory: () => {
+                // Mark the test as async when an AsyncTestCompleter is injected in an it()
+                if (!inIt)
+                    throw new Error('AsyncTestCompleter can only be injected in an "it()"');
+                return new AsyncTestCompleter();
+            }
+        });
+        testInjector.addProviders([completerProvider]);
+        runner.run();
+        inIt = true;
+        if (testFn.length == 0) {
+            let retVal = testFn();
+            if (isPromise(retVal)) {
+                // Asynchronous test function that returns a Promise - wait for completion.
+                retVal.then(done, done.fail);
+            }
+            else {
+                // Synchronous test function - complete immediately.
+                done();
+            }
         }
         else {
-            jsmFn(name, () => {
-                runner.run();
-                testInjector.execute(testFnT);
-            }, timeOut);
+            // Asynchronous test function that takes in 'done' parameter.
+            testFn(done);
         }
-    }
-    else {
-        // The test case doesn't use inject(). ie `it('test', (done) => { ... }));`
-        if (testFn.length === 0) {
-            jsmFn(name, () => {
-                runner.run();
-                testFn();
-            }, timeOut);
-        }
-        else {
-            jsmFn(name, (done) => {
-                runner.run();
-                testFn(done);
-            }, timeOut);
-        }
-    }
+        inIt = false;
+    }, timeOut);
 }
 export function it(name, fn, timeOut = null) {
     return _it(jsmIt, name, fn, timeOut);

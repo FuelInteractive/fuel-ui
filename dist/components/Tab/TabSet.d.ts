@@ -6,7 +6,7 @@ export declare class TabSet implements OnInit, OnDestroy {
     type: string;
     protected _type: string;
     tabs: Array<Tab>;
-    private isDestroyed;
+    private destroyed;
     private classMap;
     ngOnInit(): void;
     ngOnDestroy(): void;

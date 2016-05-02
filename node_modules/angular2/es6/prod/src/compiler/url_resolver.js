@@ -10,10 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Injectable, Inject } from 'angular2/src/core/di';
+import { Provider, Injectable, Inject } from 'angular2/src/core/di';
 import { StringWrapper, isPresent, isBlank, RegExpWrapper } from 'angular2/src/facade/lang';
 import { PACKAGE_ROOT_URL } from 'angular2/src/core/application_tokens';
-import { Provider } from 'angular2/src/core/di';
 const _ASSET_SCHEME = 'asset:';
 /**
  * Create a {@link UrlResolver} with no package prefix.

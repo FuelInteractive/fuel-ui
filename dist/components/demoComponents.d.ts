@@ -1,9 +1,11 @@
+import { AccordionDemo } from "./Accordion/Accordion.Demo";
 import { CarouselDemo } from "./Carousel/Carousel.Demo";
 import { DropdownDemo } from "./Dropdown/Dropdown.Demo";
 import { TabDemo } from "./Tab/Tab.Demo";
 import { TagDemo } from "./Tag/Tag.Demo";
 import { TimePickerDemo } from "./TimePicker/TimePicker.Demo";
-export declare var FUELUI_DEMO_COMPONENT_PROVIDERS: (typeof CarouselDemo[] | typeof DropdownDemo[] | typeof TabDemo[] | typeof TagDemo[] | typeof TimePickerDemo[])[];
+export declare var FUELUI_DEMO_COMPONENT_PROVIDERS: (typeof AccordionDemo[] | typeof CarouselDemo[] | typeof DropdownDemo[] | typeof TabDemo[] | typeof TagDemo[] | typeof TimePickerDemo[])[];
+export * from "./Accordion/Accordion.Demo";
 export * from "./Alert/Alert.Demo";
 export * from "./Carousel/Carousel.Demo";
 export * from "./DatePicker/DatePicker.Demo";

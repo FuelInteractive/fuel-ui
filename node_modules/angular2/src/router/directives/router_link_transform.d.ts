@@ -11,6 +11,7 @@ export declare class RouterLinkTransform implements TemplateAstVisitor {
     visitNgContent(ast: any, context: any): any;
     visitEmbeddedTemplate(ast: any, context: any): any;
     visitElement(ast: ElementAst, context: any): any;
+    visitReference(ast: any, context: any): any;
     visitVariable(ast: any, context: any): any;
     visitEvent(ast: any, context: any): any;
     visitElementProperty(ast: any, context: any): any;

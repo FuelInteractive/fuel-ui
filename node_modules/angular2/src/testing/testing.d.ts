@@ -1,4 +1,3 @@
-import { FunctionWithParamTokens } from './test_injector';
 export { inject, async, injectAsync } from './test_injector';
 export { expect, NgMatchers } from './matchers';
 /**
@@ -49,19 +48,6 @@ export declare var fdescribe: Function;
  */
 export declare var xdescribe: Function;
 /**
- * Signature for a synchronous test function (no arguments).
- */
-export declare type SyncTestFn = () => void;
-/**
- * Signature for an asynchronous test function which takes a
- * `done` callback.
- */
-export declare type AsyncTestFn = (done: () => void) => void;
-/**
- * Signature for any simple testing function.
- */
-export declare type AnyTestFn = SyncTestFn | AsyncTestFn | Function;
-/**
  * Allows overriding default providers of the test injector,
  * which are defined in test_injector.js.
  *
@@ -83,7 +69,7 @@ export declare function beforeEachProviders(fn: any): void;
  *
  * {@example testing/ts/testing.ts region='beforeEach'}
  */
-export declare function beforeEach(fn: FunctionWithParamTokens | AnyTestFn): void;
+export declare function beforeEach(fn: Function): void;
 /**
  * Define a single test case with the given test name and execution function.
  *
@@ -96,7 +82,7 @@ export declare function beforeEach(fn: FunctionWithParamTokens | AnyTestFn): voi
  *
  * {@example testing/ts/testing.ts region='describeIt'}
  */
-export declare function it(name: string, fn: FunctionWithParamTokens | AnyTestFn, timeOut?: number): void;
+export declare function it(name: string, fn: Function, timeOut?: number): void;
 /**
  * Like {@link it}, but instructs the test runner to exclude this test
  * entirely. Useful for debugging or for excluding broken tests until
@@ -108,11 +94,11 @@ export declare function it(name: string, fn: FunctionWithParamTokens | AnyTestFn
  *
  * {@example testing/ts/testing.ts region='xit'}
  */
-export declare function xit(name: string, fn: FunctionWithParamTokens | AnyTestFn, timeOut?: number): void;
+export declare function xit(name: string, fn: Function, timeOut?: number): void;
 /**
  * See {@link fit}.
  */
-export declare function iit(name: string, fn: FunctionWithParamTokens | AnyTestFn, timeOut?: number): void;
+export declare function iit(name: string, fn: Function, timeOut?: number): void;
 /**
  * Like {@link it}, but instructs the test runner to only run this test.
  * Useful for debugging.
@@ -123,4 +109,4 @@ export declare function iit(name: string, fn: FunctionWithParamTokens | AnyTestF
  *
  * {@example testing/ts/testing.ts region='fit'}
  */
-export declare function fit(name: string, fn: FunctionWithParamTokens | AnyTestFn, timeOut?: number): void;
+export declare function fit(name: string, fn: Function, timeOut?: number): void;

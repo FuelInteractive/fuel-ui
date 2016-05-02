@@ -10,7 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Injectable } from 'angular2/src/core/di';
 import { CompileElement } from './compile_element';
 import { CompileView } from './compile_view';
-import { buildView } from './view_builder';
+import { buildView, finishView } from './view_builder';
+import { bindView } from './view_binder';
 import { CompilerConfig } from '../config';
 export class ViewCompileResult {
     constructor(statements, viewFactoryVar, dependencies) {
@@ -27,7 +28,11 @@ export let ViewCompiler = class ViewCompiler {
         var statements = [];
         var dependencies = [];
         var view = new CompileView(component, this._genConfig, pipes, styles, 0, CompileElement.createNull(), []);
-        buildView(view, template, dependencies, statements);
+        buildView(view, template, dependencies);
+        // Need to separate binding from creation to be able to refer to
+        // variables that have been declared after usage.
+        bindView(view, template);
+        finishView(view, statements);
         return new ViewCompileResult(statements, view.viewFactory.name, dependencies);
     }
 };

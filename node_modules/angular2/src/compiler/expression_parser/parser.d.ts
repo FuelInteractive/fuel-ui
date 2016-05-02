@@ -5,6 +5,11 @@ export declare class SplitInterpolation {
     expressions: string[];
     constructor(strings: string[], expressions: string[]);
 }
+export declare class TemplateBindingParseResult {
+    templateBindings: TemplateBinding[];
+    warnings: string[];
+    constructor(templateBindings: TemplateBinding[], warnings: string[]);
+}
 export declare class Parser {
     /** @internal */ _lexer: Lexer;
     constructor(/** @internal */ _lexer: Lexer);
@@ -13,7 +18,7 @@ export declare class Parser {
     parseSimpleBinding(input: string, location: string): ASTWithSource;
     private _parseBindingAst(input, location);
     private _parseQuote(input, location);
-    parseTemplateBindings(input: string, location: any): TemplateBinding[];
+    parseTemplateBindings(input: string, location: any): TemplateBindingParseResult;
     parseInterpolation(input: string, location: any): ASTWithSource;
     splitInterpolation(input: string, location: string): SplitInterpolation;
     wrapLiteralPrimitive(input: string, location: any): ASTWithSource;
@@ -34,8 +39,9 @@ export declare class _ParseAST {
     inputIndex: number;
     advance(): void;
     optionalCharacter(code: number): boolean;
-    optionalKeywordVar(): boolean;
-    peekKeywordVar(): boolean;
+    peekKeywordLet(): boolean;
+    peekDeprecatedKeywordVar(): boolean;
+    peekDeprecatedOperatorHash(): boolean;
     expectCharacter(code: number): void;
     optionalOperator(op: string): boolean;
     expectOperator(operator: string): void;
@@ -63,6 +69,6 @@ export declare class _ParseAST {
      * An identifier, a keyword, a string with an optional `-` inbetween.
      */
     expectTemplateBindingKey(): string;
-    parseTemplateBindings(): any[];
+    parseTemplateBindings(): TemplateBindingParseResult;
     error(message: string, index?: number): void;
 }

@@ -22,7 +22,8 @@ export declare class Token {
     isOperator(operater: string): boolean;
     isIdentifier(): boolean;
     isKeyword(): boolean;
-    isKeywordVar(): boolean;
+    isKeywordDeprecatedVar(): boolean;
+    isKeywordLet(): boolean;
     isKeywordNull(): boolean;
     isKeywordUndefined(): boolean;
     isKeywordTrue(): boolean;

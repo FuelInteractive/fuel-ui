@@ -8,12 +8,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { MessageBus } from "angular2/src/web_workers/shared/message_bus";
-import { print, isPresent, DateWrapper, stringify } from "angular2/src/facade/lang";
+import { print, isPresent, DateWrapper, stringify, StringWrapper } from "angular2/src/facade/lang";
 import { PromiseWrapper, ObservableWrapper } from "angular2/src/facade/async";
 import { StringMapWrapper } from "angular2/src/facade/collection";
 import { Serializer } from "angular2/src/web_workers/shared/serializer";
 import { Injectable } from "angular2/src/core/di";
-import { StringWrapper } from "angular2/src/facade/lang";
 export { Type } from "angular2/src/facade/lang";
 export class ClientMessageBrokerFactory {
 }

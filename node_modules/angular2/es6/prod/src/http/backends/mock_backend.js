@@ -13,7 +13,7 @@ import { ReadyState } from '../enums';
 import { isPresent } from 'angular2/src/facade/lang';
 import { BaseException } from 'angular2/src/facade/exceptions';
 import { Subject } from 'rxjs/Subject';
-import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { take } from 'rxjs/operator/take';
 /**
  *

@@ -11,9 +11,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { forwardRef, Provider, Attribute, Directive } from 'angular2/core';
-import { CONST_EXPR } from 'angular2/src/facade/lang';
+import { CONST_EXPR, NumberWrapper } from 'angular2/src/facade/lang';
 import { Validators, NG_VALIDATORS } from '../validators';
-import { NumberWrapper } from "angular2/src/facade/lang";
 const REQUIRED = Validators.required;
 const REQUIRED_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, { useValue: REQUIRED, multi: true }));
 /**

@@ -1,6 +1,6 @@
 import * as o from '../output/output_ast';
 import { CompileView } from './compile_view';
-import { TemplateAst, ProviderAst } from '../template_ast';
+import { TemplateAst, ProviderAst, ReferenceAst } from '../template_ast';
 import { CompileDirectiveMetadata, CompileTokenMetadata } from '../compile_metadata';
 export declare class CompileNode {
     parent: CompileElement;
@@ -18,9 +18,6 @@ export declare class CompileElement extends CompileNode {
     private _resolvedProvidersArray;
     hasViewContainer: boolean;
     hasEmbeddedView: boolean;
-    variableTokens: {
-        [key: string]: CompileTokenMetadata;
-    };
     static createNull(): CompileElement;
     private _compViewExpr;
     appElement: o.ReadPropExpr;
@@ -34,9 +31,10 @@ export declare class CompileElement extends CompileNode {
     contentNodesByNgContentIndex: Array<o.Expression>[];
     embeddedView: CompileView;
     directiveInstances: o.Expression[];
-    constructor(parent: CompileElement, view: CompileView, nodeIndex: number, renderNode: o.Expression, sourceAst: TemplateAst, component: CompileDirectiveMetadata, _directives: CompileDirectiveMetadata[], _resolvedProvidersArray: ProviderAst[], hasViewContainer: boolean, hasEmbeddedView: boolean, variableTokens: {
+    referenceTokens: {
         [key: string]: CompileTokenMetadata;
-    });
+    };
+    constructor(parent: CompileElement, view: CompileView, nodeIndex: number, renderNode: o.Expression, sourceAst: TemplateAst, component: CompileDirectiveMetadata, _directives: CompileDirectiveMetadata[], _resolvedProvidersArray: ProviderAst[], hasViewContainer: boolean, hasEmbeddedView: boolean, references: ReferenceAst[]);
     private _createAppElement();
     setComponentView(compViewExpr: o.Expression): void;
     setEmbeddedView(embeddedView: CompileView): void;
@@ -45,7 +43,6 @@ export declare class CompileElement extends CompileNode {
     addContentNode(ngContentIndex: number, nodeExpr: o.Expression): void;
     getComponent(): o.Expression;
     getProviderTokens(): o.Expression[];
-    getDeclaredVariablesNames(): string[];
     private _getQueriesFor(token);
     private _addQuery(queryMeta, directiveInstance);
     private _getLocalDependency(requestingProviderType, dep);

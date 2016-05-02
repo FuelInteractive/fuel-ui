@@ -39,7 +39,7 @@ var TabSet = (function () {
         this.type = this.type !== 'undefined' ? this.type : 'tabs';
     };
     TabSet.prototype.ngOnDestroy = function () {
-        this.isDestroyed = true;
+        this.destroyed = true;
     };
     TabSet.prototype.addTab = function (tab) {
         this.tabs.push(tab);
@@ -47,7 +47,7 @@ var TabSet = (function () {
     };
     TabSet.prototype.removeTab = function (tab) {
         var index = this.tabs.indexOf(tab);
-        if (index === -1 || this.isDestroyed) {
+        if (index === -1 || this.destroyed) {
             return;
         }
         if (tab.active && this.hasAvailableTabs(index)) {
@@ -107,7 +107,7 @@ var TabSet = (function () {
         core_1.Component({
             selector: 'tabset',
             directives: [common_1.NgClass],
-            template: "\n    <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n        <li *ngFor=\"#tab of tabs\" class=\"nav-item\"\n          [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\">\n          <a href class=\"nav-link\"\n            [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\"\n            (click)=\"tab.active = true\">\n            <span [innerHtml]=\"tab.heading\"></span>\n            <span *ngIf=\"tab.removable\" (click)=\"$event.preventDefault(); removeTab(tab);\">\n              <i class=\"fa fa-remove\"></i>\n            </span>\n          </a>\n        </li>\n    </ul>\n    <div class=\"tab-content\">\n      <ng-content></ng-content>\n    </div>\n  "
+            template: "\n      <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n          <li *ngFor=\"let tab of tabs\" class=\"nav-item\"\n              [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\">\n              <a href class=\"nav-link\" [class.active]=\"tab.active\" \n                  [class.disabled]=\"tab.disabled\" (click)=\"tab.active = true\">\n                  <span [innerHtml]=\"tab.heading\"></span>\n                  <span *ngIf=\"tab.removable\" (click)=\"$event.preventDefault(); removeTab(tab);\">\n                      <i class=\"fa fa-remove\"></i>\n                  </span>\n              </a>\n          </li>\n      </ul>\n      <div class=\"tab-content\">\n          <ng-content></ng-content>\n      </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], TabSet);

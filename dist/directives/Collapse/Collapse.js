@@ -14,19 +14,9 @@ var Collapse = (function () {
     function Collapse(animationBuilder, element) {
         this.element = element;
         this.duration = 500;
-        this.collapse = false;
+        this.collapse = true;
         this._animation = animationBuilder.css();
     }
-    Object.defineProperty(Collapse.prototype, "_elementHeight", {
-        get: function () {
-            var el = this.element.nativeElement;
-            var height = el.offsetHeight;
-            var style = getComputedStyle(el);
-            return height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Collapse.prototype, "_baseSequence", {
         get: function () {
             return this._animation
@@ -38,12 +28,23 @@ var Collapse = (function () {
         enumerable: true,
         configurable: true
     });
+    Collapse.prototype.ngOnInit = function () {
+        if (!this.collapse) {
+            this._animation
+                .setDuration(0)
+                .addClass('in')
+                .start(this.element.nativeElement);
+        }
+    };
     Collapse.prototype.ngOnChanges = function (changes) {
         if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
             return;
         return this.collapse ? this.hide() : this.show();
     };
     Collapse.prototype.hide = function () {
+        var _this = this;
+        //Webkit fix
+        this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
         this._baseSequence
             .setFromStyles({
             height: this.element.nativeElement.scrollHeight + 'px',
@@ -54,8 +55,11 @@ var Collapse = (function () {
             paddingTop: '0',
             paddingBottom: '0'
         });
-        var a = this._animation.start(this.element.nativeElement);
+        var a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
         a.onComplete(function () {
+            //Check if user toggled collapse mid-animation
+            if (!_this.collapse)
+                return;
             a.removeClasses(['in']);
             a.addClasses(['fuel-ui-collapse']);
         });
@@ -82,7 +86,24 @@ var Collapse = (function () {
                 height: _this.element.nativeElement.scrollHeight + 'px'
             })
                 .start(_this.element.nativeElement);
-            a.onComplete(function () { return a.addClasses(['fuel-ui-collapse', 'in']); });
+            a.onComplete(function () {
+                a.addClasses(['fuel-ui-collapse', 'in']);
+                //Set height to auto for expanding with dynamic content
+                _this._animation
+                    .setDuration(0)
+                    .setFromStyles({
+                    height: _this.element.nativeElement.scrollHeight + 'px'
+                })
+                    .setToStyles({
+                    height: 'auto'
+                })
+                    .start(_this.element.nativeElement)
+                    .onComplete(function () {
+                    //Check if user toggled collapse mid-animation
+                    if (_this.collapse)
+                        a.addClasses(['fuel-ui-collapse']);
+                });
+            });
         });
     };
     __decorate([

@@ -40,7 +40,7 @@ export declare class CompileView implements NameResolver {
     componentView: CompileView;
     purePipes: Map<string, CompilePipe>;
     pipes: CompilePipe[];
-    variables: Map<string, o.Expression>;
+    locals: Map<string, o.Expression>;
     className: string;
     classType: o.Type;
     viewFactory: o.ReadVarExpr;
@@ -49,7 +49,7 @@ export declare class CompileView implements NameResolver {
     pipeCount: number;
     constructor(component: CompileDirectiveMetadata, genConfig: CompilerConfig, pipeMetas: CompilePipeMetadata[], styles: o.Expression, viewIndex: number, declarationElement: CompileElement, templateVariableBindings: string[][]);
     callPipe(name: string, input: o.Expression, args: o.Expression[]): o.Expression;
-    getVariable(name: string): o.Expression;
+    getLocal(name: string): o.Expression;
     createLiteralArray(values: o.Expression[]): o.Expression;
     createLiteralMap(entries: Array<Array<string | o.Expression>>): o.Expression;
     afterNodes(): void;

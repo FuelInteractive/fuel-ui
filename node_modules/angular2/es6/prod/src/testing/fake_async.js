@@ -1,5 +1,4 @@
 import { BaseException } from 'angular2/src/facade/exceptions';
-import { getTestInjector, FunctionWithParamTokens } from './test_injector';
 let _FakeAsyncTestZoneSpecType = Zone['FakeAsyncTestZoneSpec'];
 /**
  * Wraps a function to be executed in the fakeAsync zone:
@@ -23,19 +22,9 @@ export function fakeAsync(fn) {
     }
     let fakeAsyncTestZoneSpec = new _FakeAsyncTestZoneSpecType();
     let fakeAsyncZone = Zone.current.fork(fakeAsyncTestZoneSpec);
-    let innerTestFn = null;
-    if (fn instanceof FunctionWithParamTokens) {
-        if (fn.isAsync) {
-            throw new BaseException('Cannot wrap async test with fakeAsync');
-        }
-        innerTestFn = () => { getTestInjector().execute(fn); };
-    }
-    else {
-        innerTestFn = fn;
-    }
     return function (...args) {
         let res = fakeAsyncZone.run(() => {
-            let res = innerTestFn(...args);
+            let res = fn(...args);
             flushMicrotasks();
             return res;
         });

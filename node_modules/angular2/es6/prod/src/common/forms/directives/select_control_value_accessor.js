@@ -85,7 +85,7 @@ SelectControlValueAccessor = __decorate([
  *
  * ```
  * <select ngControl="city">
- *   <option *ngFor="#c of cities" [value]="c"></option>
+ *   <option *ngFor="let c of cities" [value]="c"></option>
  * </select>
  * ```
  */

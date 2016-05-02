@@ -19,7 +19,7 @@ var CollapseDemo = (function () {
         this.collapsed = false;
         this.duration = 500;
         this.attributes = [
-            new demoUtilities_1.Attribute('collapse', 'boolean', 'false', 'Boolean whether the content is shown or hidden'),
+            new demoUtilities_1.Attribute('collapse', 'boolean', 'true', 'Boolean whether the content is shown or hidden'),
             new demoUtilities_1.Attribute('duration', 'number', '500', 'Number of milliseconds for how long the open/close animation takes')
         ];
         this.attributesColumns = demoUtilities_1.AttributeColumns;

@@ -3,6 +3,9 @@ export declare class Pagination implements OnChanges {
     currentPage: number;
     pagesAtOnce: number;
     totalPages: number;
+    showSteps: boolean;
+    showEnds: boolean;
+    showSelect: boolean;
     currentPageChange: EventEmitter<any>;
     pagesBlank: Array<number>;
     startingIndex: number;

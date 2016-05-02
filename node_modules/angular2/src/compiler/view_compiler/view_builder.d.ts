@@ -7,4 +7,5 @@ export declare class ViewCompileDependency {
     factoryPlaceholder: CompileIdentifierMetadata;
     constructor(comp: CompileDirectiveMetadata, factoryPlaceholder: CompileIdentifierMetadata);
 }
-export declare function buildView(view: CompileView, template: TemplateAst[], targetDependencies: ViewCompileDependency[], targetStatements: o.Statement[]): number;
+export declare function buildView(view: CompileView, template: TemplateAst[], targetDependencies: ViewCompileDependency[]): number;
+export declare function finishView(view: CompileView, targetStatements: o.Statement[]): void;

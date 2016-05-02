@@ -2,7 +2,7 @@ import { Request } from '../static_request';
 import { Response } from '../static_response';
 import { ReadyState } from '../enums';
 import { Connection, ConnectionBackend } from '../interfaces';
-import { ReplaySubject } from 'rxjs/subject/ReplaySubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 /**
  *
  * Mock Connection to represent a {@link Connection} for tests.

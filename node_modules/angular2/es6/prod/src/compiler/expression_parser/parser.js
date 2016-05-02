@@ -27,6 +27,12 @@ export class SplitInterpolation {
         this.expressions = expressions;
     }
 }
+export class TemplateBindingParseResult {
+    constructor(templateBindings, warnings) {
+        this.templateBindings = templateBindings;
+        this.warnings = warnings;
+    }
+}
 export let Parser = class Parser {
     constructor(/** @internal */ _lexer) {
         this._lexer = _lexer;
@@ -176,16 +182,9 @@ export class _ParseAST {
             return false;
         }
     }
-    optionalKeywordVar() {
-        if (this.peekKeywordVar()) {
-            this.advance();
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    peekKeywordVar() { return this.next.isKeywordVar() || this.next.isOperator('#'); }
+    peekKeywordLet() { return this.next.isKeywordLet(); }
+    peekDeprecatedKeywordVar() { return this.next.isKeywordDeprecatedVar(); }
+    peekDeprecatedOperatorHash() { return this.next.isOperator('#'); }
     expectCharacter(code) {
         if (this.optionalCharacter(code))
             return;
@@ -562,8 +561,20 @@ export class _ParseAST {
     parseTemplateBindings() {
         var bindings = [];
         var prefix = null;
+        var warnings = [];
         while (this.index < this.tokens.length) {
-            var keyIsVar = this.optionalKeywordVar();
+            var keyIsVar = this.peekKeywordLet();
+            if (!keyIsVar && this.peekDeprecatedKeywordVar()) {
+                keyIsVar = true;
+                warnings.push(`"var" inside of expressions is deprecated. Use "let" instead!`);
+            }
+            if (!keyIsVar && this.peekDeprecatedOperatorHash()) {
+                keyIsVar = true;
+                warnings.push(`"#" inside of expressions is deprecated. Use "let" instead!`);
+            }
+            if (keyIsVar) {
+                this.advance();
+            }
             var key = this.expectTemplateBindingKey();
             if (!keyIsVar) {
                 if (prefix == null) {
@@ -584,7 +595,8 @@ export class _ParseAST {
                     name = '\$implicit';
                 }
             }
-            else if (this.next !== EOF && !this.peekKeywordVar()) {
+            else if (this.next !== EOF && !this.peekKeywordLet() && !this.peekDeprecatedKeywordVar() &&
+                !this.peekDeprecatedOperatorHash()) {
                 var start = this.inputIndex;
                 var ast = this.parsePipe();
                 var source = this.input.substring(start, this.inputIndex);
@@ -595,7 +607,7 @@ export class _ParseAST {
                 this.optionalCharacter($COMMA);
             }
         }
-        return bindings;
+        return new TemplateBindingParseResult(bindings, warnings);
     }
     error(message, index = null) {
         if (isBlank(index))

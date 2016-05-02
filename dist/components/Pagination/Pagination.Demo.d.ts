@@ -4,6 +4,9 @@ export declare class PaginationDemo {
     totalPages: number;
     pagesAtOnce: number;
     currentPage: number;
+    showSteps: boolean;
+    showEnds: boolean;
+    showSelect: boolean;
     pageChange(page: number): void;
     attributes: Attribute[];
     attributesColumns: TableSortableColumn[];

@@ -25,7 +25,7 @@ export class ProviderViewContext {
     }
 }
 export class ProviderElementContext {
-    constructor(_viewContext, _parent, _isViewRoot, _directiveAsts, attrs, vars, _sourceSpan) {
+    constructor(_viewContext, _parent, _isViewRoot, _directiveAsts, attrs, refs, _sourceSpan) {
         this._viewContext = _viewContext;
         this._parent = _parent;
         this._isViewRoot = _isViewRoot;
@@ -42,9 +42,8 @@ export class ProviderElementContext {
         this._contentQueries = _getContentQueries(directivesMeta);
         var queriedTokens = new CompileTokenMap();
         this._allProviders.values().forEach((provider) => { this._addQueryReadsTo(provider.token, queriedTokens); });
-        vars.forEach((varAst) => {
-            var varToken = new CompileTokenMetadata({ value: varAst.name });
-            this._addQueryReadsTo(varToken, queriedTokens);
+        refs.forEach((refAst) => {
+            this._addQueryReadsTo(new CompileTokenMetadata({ value: refAst.name }), queriedTokens);
         });
         if (isPresent(queriedTokens.get(identifierToken(Identifiers.ViewContainerRef)))) {
             this._hasViewContainer = true;

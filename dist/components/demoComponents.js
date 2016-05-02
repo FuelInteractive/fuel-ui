@@ -2,6 +2,7 @@
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
+var Accordion_Demo_1 = require("./Accordion/Accordion.Demo");
 var Alert_Demo_1 = require("./Alert/Alert.Demo");
 var Carousel_Demo_1 = require("./Carousel/Carousel.Demo");
 var DatePicker_Demo_1 = require("./DatePicker/DatePicker.Demo");
@@ -17,6 +18,7 @@ var Tab_Demo_1 = require("./Tab/Tab.Demo");
 var Tag_Demo_1 = require("./Tag/Tag.Demo");
 var TimePicker_Demo_1 = require("./TimePicker/TimePicker.Demo");
 exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
+    Accordion_Demo_1.ACCORDION_DEMO_PROVIDERS,
     Alert_Demo_1.ALERT_DEMO_PROVIDERS,
     Carousel_Demo_1.CAROUSEL_DEMO_PROVIDERS,
     DatePicker_Demo_1.DATEPICKER_DEMO_PROVIDERS,
@@ -32,6 +34,7 @@ exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Tag_Demo_1.TAG_DEMO_PROVIDERS,
     TimePicker_Demo_1.TIMEPICKER_DEMO_PROVIDERS
 ];
+__export(require("./Accordion/Accordion.Demo"));
 __export(require("./Alert/Alert.Demo"));
 __export(require("./Carousel/Carousel.Demo"));
 __export(require("./DatePicker/DatePicker.Demo"));

@@ -33,14 +33,10 @@
       height: 90%;
       position: fixed;
       top: 5%;
-      left: 5%;
-      font-size: 1.25rem; } }
+      left: 5%; } }
 
 table {
   font-size: .75rem; }
-  @media (max-width: 480px), screen and (max-device-width: 480px) {
-    table {
-      font-size: 1.25rem; } }
 
 .input-group {
   z-index: 110; }
@@ -64,19 +60,12 @@ header {
     border-top: none !important; }
   header th, header td {
     text-align: center; }
-    @media (max-width: 480px), screen and (max-device-width: 480px) {
-      header th, header td {
-        font-size: 2.5rem; } }
   header button {
     border: none;
     border-radius: 0;
     color: #0275d8;
     background-color: #fff;
     width: 15%; }
-    @media (max-width: 480px), screen and (max-device-width: 480px) {
-      header button {
-        font-size: 2.5rem;
-        margin-top: .5rem; } }
   header button:active {
     background-color: #eceeef; }
   header .button-disable {
@@ -88,23 +77,14 @@ header {
     background-color: #eceeef;
     border-left: none;
     border-right: none; }
-    @media (max-width: 480px), screen and (max-device-width: 480px) {
-      header .date-range span {
-        font-size: 2.5rem; } }
   header .input-group-addon {
     border: none;
     background-color: #fff !important; }
-    @media (max-width: 480px), screen and (max-device-width: 480px) {
-      header .input-group-addon {
-        font-size: 1.5rem; } }
   header input {
     border: none;
     display: inline-block;
     margin: 1px auto 0 auto;
     cursor: pointer; }
-    @media (max-width: 480px), screen and (max-device-width: 480px) {
-      header input {
-        font-size: 2.5rem; } }
   header input:read-only {
     background-color: #fff; }
   header input.target {

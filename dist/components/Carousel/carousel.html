@@ -1,6 +1,6 @@
 <div class="carousel slide">
   <ol class="carousel-indicators">
-    <li *ngFor="#image of images"
+    <li *ngFor="let image of images"
       (click)="switchTo(image)" [class.active]="image.isActive && !image.checkIfAnimating()"></li> 
   </ol>
   <div class="carousel-inner" role="listbox">

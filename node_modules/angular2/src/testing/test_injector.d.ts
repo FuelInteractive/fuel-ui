@@ -1,5 +1,6 @@
 import { ReflectiveInjector, Provider } from 'angular2/core';
 import { Type } from 'angular2/src/facade/lang';
+export { async } from './async';
 export declare class TestInjector {
     private _instantiated;
     private _injector;
@@ -9,7 +10,8 @@ export declare class TestInjector {
     applicationProviders: Array<Type | Provider | any[]>;
     addProviders(providers: Array<Type | Provider | any[]>): void;
     createInjector(): ReflectiveInjector;
-    execute(fn: FunctionWithParamTokens): any;
+    get(token: any): any;
+    execute(tokens: any[], fn: Function): any;
 }
 export declare function getTestInjector(): TestInjector;
 /**
@@ -52,15 +54,16 @@ export declare function resetBaseTestProviders(): void;
  *
  * @param {Array} tokens
  * @param {Function} fn
- * @return {FunctionWithParamTokens}
+ * @return {Function}
  */
-export declare function inject(tokens: any[], fn: Function): FunctionWithParamTokens;
+export declare function inject(tokens: any[], fn: Function): Function;
 export declare class InjectSetupWrapper {
     private _providers;
     constructor(_providers: () => any);
-    inject(tokens: any[], fn: Function): FunctionWithParamTokens;
+    private _addProviders();
+    inject(tokens: any[], fn: Function): Function;
     /** @Deprecated {use async(withProviders().inject())} */
-    injectAsync(tokens: any[], fn: Function): FunctionWithParamTokens;
+    injectAsync(tokens: any[], fn: Function): Function;
 }
 export declare function withProviders(providers: () => any): InjectSetupWrapper;
 /**
@@ -81,34 +84,6 @@ export declare function withProviders(providers: () => any): InjectSetupWrapper;
  *
  * @param {Array} tokens
  * @param {Function} fn
- * @return {FunctionWithParamTokens}
+ * @return {Function}
  */
-export declare function injectAsync(tokens: any[], fn: Function): FunctionWithParamTokens;
-/**
- * Wraps a test function in an asynchronous test zone. The test will automatically
- * complete when all asynchronous calls within this zone are done. Can be used
- * to wrap an {@link inject} call.
- *
- * Example:
- *
- * ```
- * it('...', async(inject([AClass], (object) => {
- *   object.doSomething.then(() => {
- *     expect(...);
- *   })
- * });
- * ```
- */
-export declare function async(fn: Function | FunctionWithParamTokens): FunctionWithParamTokens;
-export declare class FunctionWithParamTokens {
-    private _tokens;
-    fn: Function;
-    isAsync: boolean;
-    additionalProviders: () => any;
-    constructor(_tokens: any[], fn: Function, isAsync: boolean, additionalProviders?: () => any);
-    /**
-     * Returns the value of the executed function.
-     */
-    execute(injector: ReflectiveInjector): any;
-    hasToken(token: any): boolean;
-}
+export declare function injectAsync(tokens: any[], fn: Function): Function;

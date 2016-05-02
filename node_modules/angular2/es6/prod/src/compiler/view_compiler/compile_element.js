@@ -20,20 +20,21 @@ export class CompileNode {
     isRootElement() { return this.view != this.parent.view; }
 }
 export class CompileElement extends CompileNode {
-    constructor(parent, view, nodeIndex, renderNode, sourceAst, component, _directives, _resolvedProvidersArray, hasViewContainer, hasEmbeddedView, variableTokens) {
+    constructor(parent, view, nodeIndex, renderNode, sourceAst, component, _directives, _resolvedProvidersArray, hasViewContainer, hasEmbeddedView, references) {
         super(parent, view, nodeIndex, renderNode, sourceAst);
         this.component = component;
         this._directives = _directives;
         this._resolvedProvidersArray = _resolvedProvidersArray;
         this.hasViewContainer = hasViewContainer;
         this.hasEmbeddedView = hasEmbeddedView;
-        this.variableTokens = variableTokens;
         this._compViewExpr = null;
         this._instances = new CompileTokenMap();
         this._queryCount = 0;
         this._queries = new CompileTokenMap();
         this._componentConstructorViewQueryLists = [];
         this.contentNodesByNgContentIndex = null;
+        this.referenceTokens = {};
+        references.forEach(ref => this.referenceTokens[ref.name] = ref.value);
         this.elementRef = o.importExpr(Identifiers.ElementRef).instantiate([this.renderNode]);
         this._instances.add(identifierToken(Identifiers.ElementRef), this.elementRef);
         this.injector = o.THIS_EXPR.callMethod('injector', [o.literal(this.nodeIndex)]);
@@ -44,7 +45,7 @@ export class CompileElement extends CompileNode {
         }
     }
     static createNull() {
-        return new CompileElement(null, null, null, null, null, null, [], [], false, false, {});
+        return new CompileElement(null, null, null, null, null, null, [], [], false, false, []);
     }
     _createAppElement() {
         var fieldName = `_appEl_${this.nodeIndex}`;
@@ -133,8 +134,8 @@ export class CompileElement extends CompileNode {
             var queriesForProvider = this._getQueriesFor(resolvedProvider.token);
             ListWrapper.addAll(queriesWithReads, queriesForProvider.map(query => new _QueryWithRead(query, resolvedProvider.token)));
         });
-        StringMapWrapper.forEach(this.variableTokens, (_, varName) => {
-            var token = this.variableTokens[varName];
+        StringMapWrapper.forEach(this.referenceTokens, (_, varName) => {
+            var token = this.referenceTokens[varName];
             var varValue;
             if (isPresent(token)) {
                 varValue = this._instances.get(token);
@@ -142,7 +143,7 @@ export class CompileElement extends CompileNode {
             else {
                 varValue = this.renderNode;
             }
-            this.view.variables.set(varName, varValue);
+            this.view.locals.set(varName, varValue);
             var varToken = new CompileTokenMetadata({ value: varName });
             ListWrapper.addAll(queriesWithReads, this._getQueriesFor(varToken)
                 .map(query => new _QueryWithRead(query, varToken)));
@@ -154,8 +155,8 @@ export class CompileElement extends CompileNode {
                 value = this._instances.get(queryWithRead.read);
             }
             else {
-                // query for a variable
-                var token = this.variableTokens[queryWithRead.read.value];
+                // query for a reference
+                var token = this.referenceTokens[queryWithRead.read.value];
                 if (isPresent(token)) {
                     value = this._instances.get(token);
                 }
@@ -199,11 +200,6 @@ export class CompileElement extends CompileNode {
     }
     getProviderTokens() {
         return this._resolvedProviders.values().map((resolvedProvider) => createDiTokenExpression(resolvedProvider.token));
-    }
-    getDeclaredVariablesNames() {
-        var res = [];
-        StringMapWrapper.forEach(this.variableTokens, (_, key) => { res.push(key); });
-        return res;
     }
     _getQueriesFor(token) {
         var result = [];
