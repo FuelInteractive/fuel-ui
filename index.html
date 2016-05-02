@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fuel Ui Demos</title>
+    <title>Fuel-UI Demos</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="dist/styles/fuel-ui.css" />
     <link rel="stylesheet" href="dist/demo.css" />
     <link rel="stylesheet" href="node_modules/prismjs/themes/prism-coy.css" />
@@ -9,7 +12,7 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
     
     <script src="node_modules/prismjs/prism.js"></script>
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
     <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script> 
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Intl.~locale.en"></script>
@@ -22,7 +25,6 @@
     <script src="config.js"></script>
     <script>
         System.import("dist/demo").catch(console.log.bind(console));
-        //System.import("dist/test").catch(console.log.bind(console));
     </script>
 </head>
 <body>

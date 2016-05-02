@@ -1,3 +1,4 @@
+import {ACCORDION_DEMO_PROVIDERS, AccordionDemo} from "./Accordion/Accordion.Demo";
 import {ALERT_DEMO_PROVIDERS, AlertDemo} from "./Alert/Alert.Demo";
 import {CAROUSEL_DEMO_PROVIDERS, CarouselDemo} from "./Carousel/Carousel.Demo";
 import {DATEPICKER_DEMO_PROVIDERS, DatePickerDemo} from "./DatePicker/DatePicker.Demo";
@@ -14,6 +15,7 @@ import {TAG_DEMO_PROVIDERS, TagDemo} from "./Tag/Tag.Demo";
 import {TIMEPICKER_DEMO_PROVIDERS, TimePickerDemo} from "./TimePicker/TimePicker.Demo";
 
 export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
+    ACCORDION_DEMO_PROVIDERS,
 	ALERT_DEMO_PROVIDERS,
     CAROUSEL_DEMO_PROVIDERS,
     DATEPICKER_DEMO_PROVIDERS,
@@ -30,6 +32,7 @@ export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     TIMEPICKER_DEMO_PROVIDERS
 ];
 
+export * from "./Accordion/Accordion.Demo";
 export * from "./Alert/Alert.Demo";
 export * from "./Carousel/Carousel.Demo";
 export * from "./DatePicker/DatePicker.Demo";

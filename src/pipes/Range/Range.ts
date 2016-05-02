@@ -1,6 +1,6 @@
 /*
  * Example use
- *		Basic Array of single type: *ngFor="#n of someBlankArray | 0 : 9"
+ *		Basic Array of single type: *ngFor="let n of someBlankArray | 0 : 9"
  */
 
 import {Pipe, PipeTransform} from "angular2/core";

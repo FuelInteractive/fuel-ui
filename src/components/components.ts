@@ -1,3 +1,5 @@
+import {ACCORDION_PROVIDERS, AccordionItem} from "./Accordion/AccordionItem";
+import {Accordion} from "./Accordion/Accordion";
 import {ALERT_PROVIDERS, Alert} from "./Alert/Alert";
 import {CAROUSEL_PROVIDERS, Carousel, CarouselItem} from "./Carousel/Carousel";
 import {DATE_PICKER_PROVIDERS, DatePickerCalendar, DatePicker, DateRangePicker} from "./DatePicker/DatePickerProviders";
@@ -16,6 +18,7 @@ import {SLIDER_COMPONENT_PROVIDERS, Slider} from "./Slider/Slider";
 import {TIMEPICKER_PROVIDERS, TimePicker} from "./TimePicker/TimePicker";
 
 export var FUELUI_COMPONENT_PROVIDERS = [
+	ACCORDION_PROVIDERS,
 	ALERT_PROVIDERS,
 	CAROUSEL_PROVIDERS,
 	DATE_PICKER_PROVIDERS,
@@ -30,6 +33,8 @@ export var FUELUI_COMPONENT_PROVIDERS = [
 	TIMEPICKER_PROVIDERS
 ];
 
+export * from "./Accordion/Accordion";
+export * from "./Accordion/AccordionItem";
 export * from "./Alert/Alert";
 export * from "./Carousel/Carousel";
 export * from "./DatePicker/DatePickerProviders";

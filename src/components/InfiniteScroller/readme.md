@@ -32,7 +32,7 @@ This component also defines styles to allow infinite scrolling within a self con
 	height="300"
 	distance="120"
 	hideScrollbar="true">
-	<div *ngFor="#item of infiniteScrollItems" class="card p-a scroll-item" style="background-color: #FFF">
+	<div *ngFor="let item of infiniteScrollItems" class="card p-a scroll-item" style="background-color: #FFF">
 		<div class="card-block">
 			<h4 class="card-title">Some Item</h4>
 			<p class="card-text">{{item}}</p>

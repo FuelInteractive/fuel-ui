@@ -29,7 +29,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
     </p>
     <hr />
     <tabset>
-        <tab *ngFor="#theTab of tabs"
+        <tab *ngFor="let theTab of tabs"
             [heading]="theTab.heading"
             [(active)]="theTab.active"
             [disabled]="theTab.disabled"

@@ -13,7 +13,7 @@ tabs:any[] = [
 
 ```html
 <tabset>
-    <tab *ngFor="#theTab of tabs"
+    <tab *ngFor="let theTab of tabs"
         [heading]="theTab.title"
         [active]="theTab.active"
         [disabled]="theTab.disabled"

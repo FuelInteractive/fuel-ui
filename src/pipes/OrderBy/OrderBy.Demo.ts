@@ -39,19 +39,19 @@ export class Person {
 <section class="row m-a">
     <div class="col-md-4">
         <h4>Unordered</h4>
-        <code>*ngFor="#f of fruit"</code><br/>
+        <code>*ngFor="let f of fruit"</code><br/>
         <ul>
-            <li *ngFor="#f of fruit">{{f}}</li>
+            <li *ngFor="let f of fruit">{{f}}</li>
         </ul>
     </div>
     <div class="col-md-8">
         <h4>Ordered</h4>
-        <code>*ngFor="#f of fruit | orderBy : '{{fruitOrderByConfig}}'"</code><br/>
-        <code>*ngFor="#f of fruit | orderBy : ['{{fruitOrderByConfig}}']"</code><br/>
+        <code>*ngFor="let f of fruit | orderBy : '{{fruitOrderByConfig}}'"</code><br/>
+        <code>*ngFor="let f of fruit | orderBy : ['{{fruitOrderByConfig}}']"</code><br/>
         <div class="row">
             <div class="col-md-4">
                 <ul>
-                    <li *ngFor="#f of fruit | orderBy : fruitOrderByConfig">{{f}}</li>
+                    <li *ngFor="let f of fruit | orderBy : fruitOrderByConfig">{{f}}</li>
                 </ul>
             </div>
             <div class="col-md-6" style="padding-top: 25px">
@@ -95,18 +95,18 @@ export class Person {
 <section class="row m-a">
     <div class="col-md-4">
         <h4>Unordered</h4>
-        <code>*ngFor="#person of people"</code><br/>
+        <code>*ngFor="let person of people"</code><br/>
         <ul>
-            <li *ngFor="#person of people">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+            <li *ngFor="let person of people">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
         </ul>
     </div>
     <div class="col-md-8">
         <h4>Ordered</h4>
-        <code>*ngFor="#person of people | orderBy : ['{{peopleOrderByConfig[0]}}', '{{peopleOrderByConfig[1]}}']"</code><br/>
+        <code>*ngFor="let person of people | orderBy : ['{{peopleOrderByConfig[0]}}', '{{peopleOrderByConfig[1]}}']"</code><br/>
         <div class="row">
             <div class="col-md-4">
                 <ul>
-                    <li *ngFor="#person of people | orderBy : peopleOrderByConfig">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+                    <li *ngFor="let person of people | orderBy : peopleOrderByConfig">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
                 </ul>
             </div>
             <div class="col-md-6" style="padding-top: 25px">
@@ -163,8 +163,8 @@ OrderBy pipe also allows for data to be pushed dynamically and sorted.</p>
 <tab heading="HTML">
 <pre>
 <code class="language-javascript" code-highlight>
-*ngFor="#f of fruit | orderBy : '+'"
-*ngFor="#f of fruit | orderBy : ['+']"
+*ngFor="let f of fruit | orderBy : '+'"
+*ngFor="let f of fruit | orderBy : ['+']"
 </code>
 </pre>
 </tab>
@@ -184,7 +184,7 @@ export class OrderByExample {
 <tab heading="HTML">
 <pre>
 <code class="language-javascript" code-highlight>
-*ngFor="#person of people | orderBy : ['-age', 'firstName']"
+*ngFor="let person of people | orderBy : ['-age', 'firstName']"
 </code>
 </pre>
 </tab>
