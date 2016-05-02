@@ -434,7 +434,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     };
     DatePicker.prototype.showCalendar = function(event) {
       if (event != null) {
-        var clickedRect = event.srcElement.parentElement.getBoundingClientRect();
+        var clickedRect = event.target ? event.target.parentElement.getBoundingClientRect() : event.srcElement.parentElement.getBoundingClientRect();
         this.calendarX = clickedRect.left;
         if (screen.height - clickedRect.bottom <= 500) {
           this.calendarY = (clickedRect.top);
