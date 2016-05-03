@@ -24,7 +24,8 @@ export class Modal {
 
 	clickElement(e: any){
 		if(this.closeOnUnfocus){
-			if(e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+			if((e.target && (e.target.className == 'modal customFadeIn' || e.target.className == 'modal-dialog')) 
+				|| (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
 				this.showModal(false);
 		}
 	}
@@ -55,7 +56,8 @@ export class Modal {
 
 			if(this.closeOnUnfocus){
 				this._el.childNodes[0].removeEventListener('click', (e: Event) => {
-					if(e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+					if((e.target && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')) 
+						|| (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
 						this.showModal(false);
 				});
 			}

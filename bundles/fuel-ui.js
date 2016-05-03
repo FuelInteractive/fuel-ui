@@ -434,7 +434,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     };
     DatePicker.prototype.showCalendar = function(event) {
       if (event != null) {
-        var clickedRect = event.srcElement.parentElement.getBoundingClientRect();
+        var clickedRect = event.target ? event.target.parentElement.getBoundingClientRect() : event.srcElement.parentElement.getBoundingClientRect();
         this.calendarX = clickedRect.left;
         if (screen.height - clickedRect.bottom <= 500) {
           this.calendarY = (clickedRect.top);
@@ -909,7 +909,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
     }
     Modal.prototype.clickElement = function(e) {
       if (this.closeOnUnfocus) {
-        if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+        if ((e.target && (e.target.className == 'modal customFadeIn' || e.target.className == 'modal-dialog')) || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
           this.showModal(false);
       }
     };
@@ -933,7 +933,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
         body.classList.remove('modal-open');
         if (this.closeOnUnfocus) {
           this._el.childNodes[0].removeEventListener('click', function(e) {
-            if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+            if ((e.target && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')) || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
               _this.showModal(false);
           });
         }
