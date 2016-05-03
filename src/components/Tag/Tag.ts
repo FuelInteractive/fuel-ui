@@ -1,4 +1,4 @@
-import {Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from 'angular2/core';
+import {Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
 import {TagSet} from './TagSet';
 
 @Directive({

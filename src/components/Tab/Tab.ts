@@ -1,4 +1,4 @@
-import {Directive, OnDestroy, Input, Output, HostBinding, EventEmitter} from 'angular2/core';
+import {Directive, OnDestroy, Input, Output, HostBinding, EventEmitter} from '@angular/core';
 import {TabSet} from './TabSet';
 
 @Directive({

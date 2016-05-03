@@ -1,7 +1,7 @@
-import {Directive, Input, OnInit, OnChanges, ElementRef} from "angular2/core";
-import {CORE_DIRECTIVES} from "angular2/common";
-import {AnimationBuilder} from 'angular2/src/animate/animation_builder';
-import {CssAnimationBuilder} from 'angular2/src/animate/css_animation_builder';
+import {Directive, Input, OnInit, OnChanges, ElementRef} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
+import {AnimationBuilder} from '@angular/platform-browser/src/animate/animation_builder';
+import {CssAnimationBuilder} from '@angular/platform-browser/src/animate/css_animation_builder';
 
 @Directive({
     selector: '[collapse]',

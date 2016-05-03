@@ -1,6 +1,6 @@
-import {Component} from 'angular2/core';
-import {Input, Output, EventEmitter, OnInit} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import {Component} from '@angular/core';
+import {Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 
 @Component({
 	selector: 'date-picker-calendar',

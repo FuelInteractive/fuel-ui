@@ -1,4 +1,4 @@
-import {Directive, ElementRef, AfterViewInit} from 'angular2/core';
+import {Directive, ElementRef, AfterViewInit} from '@angular/core';
 import {StringHelper} from '../../utilities/StringUtils';
 
 declare var Prism: any;

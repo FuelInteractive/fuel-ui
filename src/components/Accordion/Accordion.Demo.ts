@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from "angular2/common";
+import {Component} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 import {ACCORDION_PROVIDERS} from '../../components/Accordion/AccordionItem';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';

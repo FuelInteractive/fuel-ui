@@ -1,6 +1,6 @@
-import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef} from "angular2/core";
-import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "angular2/core";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
+import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from '@angular/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {MobileDetection} from "../../utilities/DetectionUtils";

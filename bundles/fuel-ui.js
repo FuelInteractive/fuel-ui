@@ -1,4 +1,4 @@
-System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["angular2/core", "angular2/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -20,8 +20,8 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["angu
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Collapse_1 = $__require('../../directives/Collapse/Collapse');
   var Accordion_1 = $__require('./Accordion');
   var AccordionItem = (function() {
@@ -73,7 +73,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["angu
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -95,8 +95,8 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Alert = (function() {
     function Alert(el) {
       this.displayed = false;
@@ -129,7 +129,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -151,9 +151,9 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/c
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var CarouselItem = (function() {
     function CarouselItem() {
       this.resetStatus();
@@ -302,7 +302,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angular2/core", "angular2/common", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller", "../../utilities/DetectionUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angular/core", "@angular/common", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller", "../../utilities/DetectionUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -324,9 +324,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var DatePickerCalendar_1 = $__require('./DatePickerCalendar');
   var InfiniteScroller_1 = $__require('../InfiniteScroller/InfiniteScroller');
   var DetectionUtils_1 = $__require('../../utilities/DetectionUtils');
@@ -526,7 +526,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -548,9 +548,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var DatePickerCalendar = (function() {
     function DatePickerCalendar() {
       this.selectedDateChange = new core_2.EventEmitter();
@@ -650,7 +650,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["angular2/core", "angular2/common", "../../utilities/DateUtils", "../../utilities/DetectionUtils", "./DatePicker", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@angular/core", "@angular/common", "../../utilities/DateUtils", "../../utilities/DetectionUtils", "./DatePicker", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -681,9 +681,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["a
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var DateUtils_1 = $__require('../../utilities/DateUtils');
   var DetectionUtils_1 = $__require('../../utilities/DetectionUtils');
   var DatePicker_1 = $__require('./DatePicker');
@@ -874,7 +874,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerProviders",
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", "angular2/common", "../../directives/Animation/Animation"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", "@angular/common", "../../directives/Animation/Animation"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -896,8 +896,8 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Animation_1 = $__require('../../directives/Animation/Animation');
   var Modal = (function() {
     function Modal(el) {
@@ -957,7 +957,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angular2/core", "angular2/common", "../../pipes/Range/Range"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["@angular/core", "@angular/common", "../../pipes/Range/Range"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -979,8 +979,8 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Range_1 = $__require('../../pipes/Range/Range');
   var Pagination = (function() {
     function Pagination() {
@@ -1036,7 +1036,7 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angula
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["angular2/core", "../../utilities/ElementUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["@angular/core", "../../utilities/ElementUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1058,7 +1058,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var ElementUtils_1 = $__require('../../utilities/ElementUtils');
   var ScrollItem = (function() {
     function ScrollItem(element) {
@@ -1204,7 +1204,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1226,7 +1226,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/c
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Dropdown = (function() {
     function Dropdown() {
       this.dropdownOpen = false;
@@ -1246,7 +1246,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./TabSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["@angular/core", "./TabSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1268,7 +1268,7 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./T
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var TabSet_1 = $__require('./TabSet');
   var Tab = (function() {
     function Tab(tabset) {
@@ -1331,7 +1331,7 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./T
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./TagSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["@angular/core", "./TagSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1353,7 +1353,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./T
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var TagSet_1 = $__require('./TagSet');
   var Tag = (function() {
     function Tag(tagset) {
@@ -1428,7 +1428,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./T
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["angular2/core", "angular2/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1450,8 +1450,8 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var OrderBy_1 = $__require('../../pipes/OrderBy/OrderBy');
   var Format_1 = $__require('../../pipes/Format/Format');
   var TableSortableSorting_1 = $__require('./TableSortableSorting');
@@ -2673,7 +2673,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/NoUiSlider", [], false, f
   return _retrieveGlobal();
 });
 
-System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core", "./NoUiSlider"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["@angular/core", "./NoUiSlider"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2695,7 +2695,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   $__require('./NoUiSlider');
   var Slider = (function() {
     function Slider(_element) {
@@ -2798,7 +2798,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2820,7 +2820,7 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var TimePicker = (function() {
     function TimePicker() {
       this.hourStep = 1;
@@ -3026,7 +3026,7 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["angula
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3048,7 +3048,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["angular2
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Accordion = (function() {
     function Accordion() {
       this.closeOthers = true;
@@ -3086,7 +3086,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["angular2
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3108,8 +3108,8 @@ System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["angular2/core", "
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var TabSet = (function() {
     function TabSet() {
       this.tabs = [];
@@ -3242,7 +3242,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3264,8 +3264,8 @@ System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var TagSet = (function() {
     function TagSet() {
       this.tags = [];
@@ -3342,7 +3342,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/Accor
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3364,7 +3364,7 @@ System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["angular2
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Animation = (function() {
     function Animation(element) {
       this.onAnimationStart = new core_1.EventEmitter();
@@ -3460,7 +3460,7 @@ System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["angular2
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3482,7 +3482,7 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/cor
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Tooltip = (function() {
     function Tooltip(el) {
       this._el = el.nativeElement;
@@ -3531,7 +3531,7 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/cor
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3553,7 +3553,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var CodeHighlighter = (function() {
     function CodeHighlighter(_el) {
       this._el = _el;
@@ -3570,7 +3570,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["angular2/core", "angular2/src/animate/animation_builder"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/core", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3592,8 +3592,8 @@ System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["angular2/c
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var animation_builder_1 = $__require('angular2/src/animate/animation_builder');
+  var core_1 = $__require('@angular/core');
+  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
   var Collapse = (function() {
     function Collapse(animationBuilder, element) {
       this.element = element;
@@ -3692,7 +3692,7 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Anima
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "angular2/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["@angular/core", "@angular/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3714,8 +3714,8 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var StringUtils_1 = $__require('../../utilities/StringUtils');
   var FormatPipe = (function() {
     function FormatPipe() {
@@ -3766,7 +3766,7 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3788,7 +3788,7 @@ System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angul
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var MapToIterablePipe = (function() {
     function MapToIterablePipe() {}
     MapToIterablePipe.prototype.transform = function(dict, args) {
@@ -3814,7 +3814,7 @@ System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3836,7 +3836,7 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var OrderByPipe = (function() {
     function OrderByPipe() {
       this.value = [];
@@ -3902,7 +3902,7 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3924,7 +3924,7 @@ System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], true
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var RangePipe = (function() {
     function RangePipe() {}
     RangePipe.prototype.transform = function(value, min, max, step) {

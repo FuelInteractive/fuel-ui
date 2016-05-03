@@ -1,5 +1,5 @@
-import {Pipe, PipeTransform} from 'angular2/core';
-import {DatePipe, DecimalPipe} from 'angular2/common';
+import {Pipe, PipeTransform} from '@angular/core';
+import {DatePipe, DecimalPipe} from '@angular/common';
 import {StringHelper} from '../../utilities/StringUtils';
 
 @Pipe({

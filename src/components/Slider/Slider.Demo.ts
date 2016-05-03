@@ -1,4 +1,4 @@
-import {Component, AfterViewInit} from 'angular2/core';
+import {Component, AfterViewInit} from '@angular/core';
 import {SLIDER_COMPONENT_PROVIDERS} from './Slider';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
