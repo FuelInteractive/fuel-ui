@@ -21,7 +21,8 @@ var Modal = (function () {
     }
     Modal.prototype.clickElement = function (e) {
         if (this.closeOnUnfocus) {
-            if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+            if ((e.target && (e.target.className == 'modal customFadeIn' || e.target.className == 'modal-dialog'))
+                || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
                 this.showModal(false);
         }
     };
@@ -47,7 +48,8 @@ var Modal = (function () {
             body.classList.remove('modal-open');
             if (this.closeOnUnfocus) {
                 this._el.childNodes[0].removeEventListener('click', function (e) {
-                    if (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')
+                    if ((e.target && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog'))
+                        || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
                         _this.showModal(false);
                 });
             }

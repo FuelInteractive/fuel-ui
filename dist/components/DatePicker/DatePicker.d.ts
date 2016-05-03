@@ -26,7 +26,7 @@ export declare class DatePicker implements OnInit {
     ngOnInit(): void;
     handleDateInput(value: any): Date;
     toggleCalendar(event: MouseEvent): void;
-    showCalendar(event: MouseEvent): void;
+    showCalendar(event: any): void;
     hideCalendar(): void;
     canPrevMonth: boolean;
     canNextMonth: boolean;
