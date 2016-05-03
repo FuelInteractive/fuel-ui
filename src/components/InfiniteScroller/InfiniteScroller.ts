@@ -10,7 +10,7 @@ import {
 	QueryList,
 	AfterContentInit,
     AfterViewInit
- } from "angular2/core";
+ } from '@angular/core';
  
  import { ElementUtils } from "../../utilities/ElementUtils";
 

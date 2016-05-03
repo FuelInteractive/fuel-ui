@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy, Input, Output} from 'angular2/core';
-import {NgClass} from 'angular2/common';
+import {Component, OnInit, OnDestroy, Input, Output} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {Tab} from './Tab';
 
 @Component({

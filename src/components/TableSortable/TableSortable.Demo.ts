@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {TABLESORTABLE_PROVIDERS, TableSortableColumn, TableSortableSorting} from './TableSortable';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';

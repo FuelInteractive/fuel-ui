@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {MODAL_PROVIDERS} from './Modal';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';

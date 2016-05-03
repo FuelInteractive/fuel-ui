@@ -1,6 +1,6 @@
-import {Component, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef} from "angular2/core";
-import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from "angular2/core";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
+import {Component, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from '@angular/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DateRange} from "../../utilities/DateUtils";
 import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DatePicker} from "./DatePicker";

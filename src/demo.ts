@@ -1,8 +1,8 @@
-import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "angular2/core";
-import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
-import {bootstrap} from "angular2/platform/browser";
-import {LocationStrategy, HashLocationStrategy} from "angular2/platform/common";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
+import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "@angular/core";
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES, LocationStrategy, HashLocationStrategy } from "@angular/common";
+import {bootstrap} from "@angular/platform-browser-dynamic";
+import {Routes} from "@angular/router";
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router-deprecated";
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
