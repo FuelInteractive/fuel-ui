@@ -1,6 +1,9 @@
-System.register("fuel-ui/dist/components/Accordion/AccordionItem", ["angular2/core", "angular2/common", "../../directives/Collapse/Collapse", "./Accordion"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -17,76 +20,65 @@ System.register("fuel-ui/dist/components/Accordion/AccordionItem", ["angular2/co
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      common_1,
-      Collapse_1,
-      Accordion_1;
-  var AccordionItem,
-      ACCORDION_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(Collapse_1_1) {
-      Collapse_1 = Collapse_1_1;
-    }, function(Accordion_1_1) {
-      Accordion_1 = Accordion_1_1;
-    }],
-    execute: function() {
-      AccordionItem = (function() {
-        function AccordionItem(accordion) {
-          this.disabled = false;
-          this._open = false;
-          this.openChange = new core_1.EventEmitter();
-          this.accordion = accordion;
-        }
-        Object.defineProperty(AccordionItem.prototype, "open", {
-          get: function() {
-            return this._open;
-          },
-          set: function(value) {
-            this._open = value;
-            if (value) {
-              this.accordion.closeOtherItems(this);
-            }
-          },
-          enumerable: true,
-          configurable: true
-        });
-        AccordionItem.prototype.ngOnInit = function() {
-          this.accordion.addItem(this);
-        };
-        AccordionItem.prototype.ngOnDestroy = function() {
-          this.accordion.removeItem(this);
-        };
-        AccordionItem.prototype.toggleOpen = function(event) {
-          event.preventDefault();
-          if (!this.disabled) {
-            this.open = !this.open;
-            this.openChange.next(this.open);
-          }
-        };
-        __decorate([core_1.Input(), __metadata('design:type', String)], AccordionItem.prototype, "heading", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "disabled", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", null);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
-        AccordionItem = __decorate([core_1.Component({
-          selector: 'accordion-item, [accordion-item]',
-          directives: [Collapse_1.Collapse, common_1.NgClass],
-          template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [collapse]=\"!open\" [duration]=\"accordion.duration\">\n          <ng-content></ng-content>\n      </div>\n    "
-        }), __metadata('design:paramtypes', [Accordion_1.Accordion])], AccordionItem);
-        return AccordionItem;
-      }());
-      exports_1("AccordionItem", AccordionItem);
-      exports_1("ACCORDION_PROVIDERS", ACCORDION_PROVIDERS = [Accordion_1.Accordion, AccordionItem]);
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var Collapse_1 = $__require('../../directives/Collapse/Collapse');
+  var Accordion_1 = $__require('./Accordion');
+  var AccordionItem = (function() {
+    function AccordionItem(accordion) {
+      this.disabled = false;
+      this._open = false;
+      this.openChange = new core_1.EventEmitter();
+      this.accordion = accordion;
     }
-  };
+    Object.defineProperty(AccordionItem.prototype, "open", {
+      get: function() {
+        return this._open;
+      },
+      set: function(value) {
+        this._open = value;
+        if (value) {
+          this.accordion.closeOtherItems(this);
+        }
+      },
+      enumerable: true,
+      configurable: true
+    });
+    AccordionItem.prototype.ngOnInit = function() {
+      this.accordion.addItem(this);
+    };
+    AccordionItem.prototype.ngOnDestroy = function() {
+      this.accordion.removeItem(this);
+    };
+    AccordionItem.prototype.toggleOpen = function(event) {
+      event.preventDefault();
+      if (!this.disabled) {
+        this.open = !this.open;
+        this.openChange.next(this.open);
+      }
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], AccordionItem.prototype, "heading", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "disabled", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", null);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
+    AccordionItem = __decorate([core_1.Component({
+      selector: 'accordion-item, [accordion-item]',
+      directives: [Collapse_1.Collapse, common_1.NgClass],
+      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [collapse]=\"!open\" [duration]=\"accordion.duration\">\n          <ng-content></ng-content>\n      </div>\n    "
+    }), __metadata('design:paramtypes', [Accordion_1.Accordion])], AccordionItem);
+    return AccordionItem;
+  }());
+  exports.AccordionItem = AccordionItem;
+  exports.ACCORDION_PROVIDERS = [Accordion_1.Accordion, AccordionItem];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/Alert/Alert", ["angular2/core", "angular2/common"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -103,54 +95,46 @@ System.register("fuel-ui/dist/components/Alert/Alert", ["angular2/core", "angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      common_1;
-  var Alert,
-      ALERT_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }],
-    execute: function() {
-      Alert = (function() {
-        function Alert(el) {
-          this.displayed = false;
-          this.closeButton = true;
-          this.type = 'success';
-          this.displayedChange = new core_1.EventEmitter();
-          this._el = el.nativeElement;
-        }
-        Alert.prototype.getElement = function() {
-          return this._el;
-        };
-        Alert.prototype.close = function() {
-          this.displayed = false;
-          this.displayedChange.next(null);
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "displayed", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "closeButton", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Alert.prototype, "type", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], Alert.prototype, "displayedChange", void 0);
-        Alert = __decorate([core_1.Component({
-          selector: 'alert',
-          styles: ["\n      .alertFadeIn {\n        -webkit-animation-name: fadeIn;\n        -moz-animation-name: fadeIn;\n        animation-name: fadeIn;\n        -webkit-animation-duration: 1s;\n        -moz-animation-duration: 1s;\n        animation-duration: 1s;\n        -webkit-animation-timing-function: ease;\n        -moz-animation-timing-function: ease;\n        animation-timing-function: ease; }\n    "],
-          template: "\n      <div\n          *ngIf=\"displayed\"\n          role=\"alert\"\n          class=\"alert alertFadeIn\"\n          [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n          <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&#215;</span>\n              <span class=\"sr-only\">Close</span>\n          </button>\n          <ng-content></ng-content>\n      </div>\n    ",
-          directives: [common_1.CORE_DIRECTIVES]
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], Alert);
-        return Alert;
-        var _a;
-      }());
-      exports_1("Alert", Alert);
-      exports_1("ALERT_PROVIDERS", ALERT_PROVIDERS = [Alert]);
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var Alert = (function() {
+    function Alert(el) {
+      this.displayed = false;
+      this.closeButton = true;
+      this.type = 'success';
+      this.displayedChange = new core_1.EventEmitter();
+      this._el = el.nativeElement;
     }
-  };
+    Alert.prototype.getElement = function() {
+      return this._el;
+    };
+    Alert.prototype.close = function() {
+      this.displayed = false;
+      this.displayedChange.next(null);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "displayed", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "closeButton", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Alert.prototype, "type", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Alert.prototype, "displayedChange", void 0);
+    Alert = __decorate([core_1.Component({
+      selector: 'alert',
+      styles: ["\n      .alertFadeIn {\n        -webkit-animation-name: fadeIn;\n        -moz-animation-name: fadeIn;\n        animation-name: fadeIn;\n        -webkit-animation-duration: 1s;\n        -moz-animation-duration: 1s;\n        animation-duration: 1s;\n        -webkit-animation-timing-function: ease;\n        -moz-animation-timing-function: ease;\n        animation-timing-function: ease; }\n    "],
+      template: "\n      <div\n          *ngIf=\"displayed\"\n          role=\"alert\"\n          class=\"alert alertFadeIn\"\n          [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n          <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&#215;</span>\n              <span class=\"sr-only\">Close</span>\n          </button>\n          <ng-content></ng-content>\n      </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES]
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Alert);
+    return Alert;
+  }());
+  exports.Alert = Alert;
+  exports.ALERT_PROVIDERS = [Alert];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/Carousel/Carousel", ["angular2/core", "angular2/common"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -167,173 +151,163 @@ System.register("fuel-ui/dist/components/Carousel/Carousel", ["angular2/core", "
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      core_2,
-      common_1;
-  var CarouselItem,
-      Carousel,
-      CAROUSEL_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-      core_2 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }],
-    execute: function() {
-      CarouselItem = (function() {
-        function CarouselItem() {
-          this.resetStatus();
-        }
-        CarouselItem.prototype.resetStatus = function() {
-          this.isActive = false;
-          this.exiting = false;
-          this.resetAnimation();
-        };
-        CarouselItem.prototype.resetAnimation = function() {
-          this.left = this.right = this.next = this.prev = false;
-        };
-        CarouselItem.prototype.animationStart = function() {};
-        CarouselItem.prototype.animationEnd = function() {
-          if (this.exiting)
-            this.resetStatus();
-          else
-            this.resetAnimation();
-        };
-        CarouselItem.prototype.moveLeft = function() {
-          if (this.isActive) {
-            this.exiting = true;
-            this.left = true;
-          } else {
-            this.isActive = true;
-            this.prev = true;
-          }
-        };
-        CarouselItem.prototype.moveRight = function() {
-          if (this.isActive) {
-            this.exiting = true;
-            this.right = true;
-          } else {
-            this.isActive = true;
-            this.next = true;
-          }
-        };
-        CarouselItem.prototype.checkIfAnimating = function() {
-          return this.left || this.right || this.next || this.prev;
-        };
-        CarouselItem = __decorate([core_1.Directive({
-          selector: '.carousel-item',
-          host: {
-            '[class.active]': 'isActive',
-            '[class.slide-out-left]': 'left',
-            '[class.slide-out-right]': 'right',
-            '[class.slide-in-right]': 'next',
-            '[class.slide-in-left]': 'prev',
-            '(animationstart)': 'animationStart()',
-            '(webkitAnimationStart)': 'animationStart()',
-            '(oanimationstart)': 'animationStart()',
-            '(MSAnimationStart)': 'animationStart()',
-            '(animationend)': 'animationEnd()',
-            '(webkitAnimationEnd)': 'animationEnd()',
-            '(oanimationend)': 'animationEnd()',
-            '(MSAnimationEnd)': 'animationEnd()'
-          }
-        }), __metadata('design:paramtypes', [])], CarouselItem);
-        return CarouselItem;
-      }());
-      exports_1("CarouselItem", CarouselItem);
-      Carousel = (function() {
-        function Carousel() {
-          this.images = [];
-        }
-        Carousel.prototype.ngAfterContentInit = function() {
-          var _this = this;
-          this.imageQuery.changes.subscribe(function() {
-            return _this.registerImages();
-          });
-          this.registerImages();
-        };
-        Carousel.prototype.registerImages = function() {
-          var _this = this;
-          this.images = [];
-          this.imageQuery.map(function(i) {
-            return _this.images.push(i);
-          });
-          var activeImage = this.getActiveImage();
-          if (this.images.length > 0 && activeImage == null)
-            setTimeout(function() {
-              return _this.images[0].isActive = true;
-            }, 1);
-        };
-        Carousel.prototype.setAllInactive = function() {
-          this.images.map(function(i) {
-            return i.resetStatus();
-          });
-        };
-        Carousel.prototype.switchTo = function(image) {
-          var activeImage = this.getActiveImage();
-          if (this.images.indexOf(image) < this.images.indexOf(activeImage)) {
-            image.moveLeft();
-            activeImage.moveLeft();
-          } else {
-            image.moveRight();
-            activeImage.moveRight();
-          }
-        };
-        Carousel.prototype.nextImage = function() {
-          if (this.checkIfAnimating())
-            return;
-          var activeImage = this.getActiveImage();
-          var index = this.getActiveIndex() + 1;
-          index = index >= this.images.length ? 0 : index;
-          activeImage.moveLeft();
-          this.images[index].moveLeft();
-        };
-        Carousel.prototype.prevImage = function() {
-          if (this.checkIfAnimating())
-            return;
-          var activeImage = this.getActiveImage();
-          var index = this.getActiveIndex() - 1;
-          index = index < 0 ? this.images.length - 1 : index;
-          activeImage.moveRight();
-          this.images[index].moveRight();
-        };
-        Carousel.prototype.checkIfAnimating = function() {
-          return this.images.reduce(function(prev, curr) {
-            return curr.checkIfAnimating() || prev;
-          }, false);
-        };
-        Carousel.prototype.getActiveIndex = function() {
-          var activeImage = this.getActiveImage();
-          if (activeImage == null)
-            return -1;
-          return this.images.indexOf(activeImage);
-        };
-        Carousel.prototype.getActiveImage = function() {
-          return this.images.reduce(function(prev, curr) {
-            return curr.isActive ? curr : prev;
-          }, null);
-        };
-        __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', (typeof(_a = typeof core_2.QueryList !== 'undefined' && core_2.QueryList) === 'function' && _a) || Object)], Carousel.prototype, "imageQuery", void 0);
-        Carousel = __decorate([core_1.Component({
-          selector: 'carousel',
-          styles: ["\n   .carousel-item {\n     width: 100%; }\n\n   .carousel-item.slide-in-left {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: -100%;\n     -webkit-animation-name: slideInLeft;\n     -moz-animation-name: slideInLeft;\n     animation-name: slideInLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-in-right {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: 100%;\n     -webkit-animation-name: slideInRight;\n     -moz-animation-name: slideInRight;\n     animation-name: slideInRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-left {\n     -webkit-animation-name: slideOutLeft;\n     -moz-animation-name: slideOutLeft;\n     animation-name: slideOutLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-right {\n     -webkit-animation-name: slideOutRight;\n     -moz-animation-name: slideOutRight;\n     animation-name: slideOutRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
-          template: "\n   <div class=\"carousel slide\">\n     <ol class=\"carousel-indicators\">\n       <li *ngFor=\"let image of images\"\n         (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\"></li> \n     </ol>\n     <div class=\"carousel-inner\" role=\"listbox\">\n         <ng-content></ng-content>\n     </div>\n     <a class=\"left carousel-control\" role=\"button\" (click)=\"prevImage()\">\n       <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Previous</span>\n     </a>\n     <a class=\"right carousel-control\" role=\"button\" (click)=\"nextImage()\">\n       <span class=\"icon-next\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Next</span>\n     </a>\n   </div>\n    ",
-          directives: [common_1.CORE_DIRECTIVES, CarouselItem],
-          encapsulation: core_1.ViewEncapsulation.None
-        }), __metadata('design:paramtypes', [])], Carousel);
-        return Carousel;
-        var _a;
-      }());
-      exports_1("Carousel", Carousel);
-      exports_1("CAROUSEL_PROVIDERS", CAROUSEL_PROVIDERS = [Carousel, CarouselItem]);
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var CarouselItem = (function() {
+    function CarouselItem() {
+      this.resetStatus();
     }
-  };
+    CarouselItem.prototype.resetStatus = function() {
+      this.isActive = false;
+      this.exiting = false;
+      this.resetAnimation();
+    };
+    CarouselItem.prototype.resetAnimation = function() {
+      this.left = this.right = this.next = this.prev = false;
+    };
+    CarouselItem.prototype.animationStart = function() {};
+    CarouselItem.prototype.animationEnd = function() {
+      if (this.exiting)
+        this.resetStatus();
+      else
+        this.resetAnimation();
+    };
+    CarouselItem.prototype.moveLeft = function() {
+      if (this.isActive) {
+        this.exiting = true;
+        this.left = true;
+      } else {
+        this.isActive = true;
+        this.prev = true;
+      }
+    };
+    CarouselItem.prototype.moveRight = function() {
+      if (this.isActive) {
+        this.exiting = true;
+        this.right = true;
+      } else {
+        this.isActive = true;
+        this.next = true;
+      }
+    };
+    CarouselItem.prototype.checkIfAnimating = function() {
+      return this.left || this.right || this.next || this.prev;
+    };
+    CarouselItem = __decorate([core_1.Directive({
+      selector: '.carousel-item',
+      host: {
+        '[class.active]': 'isActive',
+        '[class.slide-out-left]': 'left',
+        '[class.slide-out-right]': 'right',
+        '[class.slide-in-right]': 'next',
+        '[class.slide-in-left]': 'prev',
+        '(animationstart)': 'animationStart()',
+        '(webkitAnimationStart)': 'animationStart()',
+        '(oanimationstart)': 'animationStart()',
+        '(MSAnimationStart)': 'animationStart()',
+        '(animationend)': 'animationEnd()',
+        '(webkitAnimationEnd)': 'animationEnd()',
+        '(oanimationend)': 'animationEnd()',
+        '(MSAnimationEnd)': 'animationEnd()'
+      }
+    }), __metadata('design:paramtypes', [])], CarouselItem);
+    return CarouselItem;
+  }());
+  exports.CarouselItem = CarouselItem;
+  var Carousel = (function() {
+    function Carousel() {
+      this.images = [];
+    }
+    Carousel.prototype.ngAfterContentInit = function() {
+      var _this = this;
+      this.imageQuery.changes.subscribe(function() {
+        return _this.registerImages();
+      });
+      this.registerImages();
+    };
+    Carousel.prototype.registerImages = function() {
+      var _this = this;
+      this.images = [];
+      this.imageQuery.map(function(i) {
+        return _this.images.push(i);
+      });
+      var activeImage = this.getActiveImage();
+      if (this.images.length > 0 && activeImage == null)
+        setTimeout(function() {
+          return _this.images[0].isActive = true;
+        }, 1);
+    };
+    Carousel.prototype.setAllInactive = function() {
+      this.images.map(function(i) {
+        return i.resetStatus();
+      });
+    };
+    Carousel.prototype.switchTo = function(image) {
+      var activeImage = this.getActiveImage();
+      if (this.images.indexOf(image) < this.images.indexOf(activeImage)) {
+        image.moveLeft();
+        activeImage.moveLeft();
+      } else {
+        image.moveRight();
+        activeImage.moveRight();
+      }
+    };
+    Carousel.prototype.nextImage = function() {
+      if (this.checkIfAnimating())
+        return;
+      var activeImage = this.getActiveImage();
+      var index = this.getActiveIndex() + 1;
+      index = index >= this.images.length ? 0 : index;
+      activeImage.moveLeft();
+      this.images[index].moveLeft();
+    };
+    Carousel.prototype.prevImage = function() {
+      if (this.checkIfAnimating())
+        return;
+      var activeImage = this.getActiveImage();
+      var index = this.getActiveIndex() - 1;
+      index = index < 0 ? this.images.length - 1 : index;
+      activeImage.moveRight();
+      this.images[index].moveRight();
+    };
+    Carousel.prototype.checkIfAnimating = function() {
+      return this.images.reduce(function(prev, curr) {
+        return curr.checkIfAnimating() || prev;
+      }, false);
+    };
+    Carousel.prototype.getActiveIndex = function() {
+      var activeImage = this.getActiveImage();
+      if (activeImage == null)
+        return -1;
+      return this.images.indexOf(activeImage);
+    };
+    Carousel.prototype.getActiveImage = function() {
+      return this.images.reduce(function(prev, curr) {
+        return curr.isActive ? curr : prev;
+      }, null);
+    };
+    __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "imageQuery", void 0);
+    Carousel = __decorate([core_1.Component({
+      selector: 'carousel',
+      styles: ["\n   .carousel-item {\n     width: 100%; }\n\n   .carousel-item.slide-in-left {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: -100%;\n     -webkit-animation-name: slideInLeft;\n     -moz-animation-name: slideInLeft;\n     animation-name: slideInLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-in-right {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: 100%;\n     -webkit-animation-name: slideInRight;\n     -moz-animation-name: slideInRight;\n     animation-name: slideInRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-left {\n     -webkit-animation-name: slideOutLeft;\n     -moz-animation-name: slideOutLeft;\n     animation-name: slideOutLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-right {\n     -webkit-animation-name: slideOutRight;\n     -moz-animation-name: slideOutRight;\n     animation-name: slideOutRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
+      template: "\n   <div class=\"carousel slide\">\n     <ol class=\"carousel-indicators\">\n       <li *ngFor=\"let image of images\"\n         (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\"></li> \n     </ol>\n     <div class=\"carousel-inner\" role=\"listbox\">\n         <ng-content></ng-content>\n     </div>\n     <a class=\"left carousel-control\" role=\"button\" (click)=\"prevImage()\">\n       <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Previous</span>\n     </a>\n     <a class=\"right carousel-control\" role=\"button\" (click)=\"nextImage()\">\n       <span class=\"icon-next\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Next</span>\n     </a>\n   </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, CarouselItem],
+      encapsulation: core_1.ViewEncapsulation.None
+    }), __metadata('design:paramtypes', [])], Carousel);
+    return Carousel;
+  }());
+  exports.Carousel = Carousel;
+  exports.CAROUSEL_PROVIDERS = [Carousel, CarouselItem];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/DatePicker/DatePicker", ["angular2/core", "angular2/common", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller", "../../utilities/DetectionUtils"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angular/core", "@angular/common", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller", "../../utilities/DetectionUtils"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -350,228 +324,214 @@ System.register("fuel-ui/dist/components/DatePicker/DatePicker", ["angular2/core
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      core_2,
-      common_1,
-      DatePickerCalendar_1,
-      InfiniteScroller_1,
-      DetectionUtils_1;
-  var DatePicker;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-      core_2 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(DatePickerCalendar_1_1) {
-      DatePickerCalendar_1 = DatePickerCalendar_1_1;
-    }, function(InfiniteScroller_1_1) {
-      InfiniteScroller_1 = InfiniteScroller_1_1;
-    }, function(DetectionUtils_1_1) {
-      DetectionUtils_1 = DetectionUtils_1_1;
-    }],
-    execute: function() {
-      DatePicker = (function() {
-        function DatePicker(changeDetector) {
-          this._minDate = new Date(1900, 0, 1);
-          this._maxDate = new Date(2200, 0, 1);
-          this.valueChange = new core_2.EventEmitter();
-          this._inputDate = "";
-          this.calendarDisplayed = false;
-          this.calendarX = 1;
-          this.calendarY = 1;
-          this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
-          this.calendarMonths = [];
-          this._preGenMonths = 2;
-          this.changeDetector = changeDetector;
-        }
-        Object.defineProperty(DatePicker.prototype, "minDate", {
-          get: function() {
-            return this._minDate;
-          },
-          set: function(value) {
-            this._minDate = this.handleDateInput(value);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(DatePicker.prototype, "maxDate", {
-          get: function() {
-            return this._maxDate;
-          },
-          set: function(value) {
-            this._maxDate = this.handleDateInput(value);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DatePicker.prototype, "value", {
-          set: function(value) {
-            this._selectedDate = this.handleDateInput(value);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DatePicker.prototype, "selectedDate", {
-          get: function() {
-            return this._selectedDate;
-          },
-          set: function(value) {
-            this._selectedDate = value;
-            this._inputDate = value.toLocaleDateString();
-            this.valueChange.next(this.selectedDate);
-            this.hideCalendar();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(DatePicker.prototype, "inputDate", {
-          get: function() {
-            return this._inputDate;
-          },
-          set: function(value) {
-            this._inputDate = value;
-            this._selectedDate = new Date(value);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        DatePicker.prototype.ngOnInit = function() {
-          var _this = this;
-          var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-          this.calendarMonths = [new Date(currentDate.getFullYear(), currentDate.getMonth() - 1), new Date(currentDate.getFullYear(), currentDate.getMonth())];
-          for (var i = 0; i < this._preGenMonths; i++) {
-            var earliestDate = this.calendarMonths[0];
-            var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-            if (this.canPrevMonth)
-              this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-            if (this.canNextMonth)
-              this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-          }
-          setTimeout(function() {
-            if (_this.calendarScroller == null)
-              return;
-            var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
-              return m.getFullYear() == currentDate.getFullYear() && m.getMonth() == currentDate.getMonth();
-            });
-            _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-            _this.calendarScroller.scrollToIndex(scrollToMonth);
-          }, 1);
-        };
-        DatePicker.prototype.handleDateInput = function(value) {
-          if (value instanceof Date && !isNaN(value.valueOf()))
-            return value;
-          else
-            return new Date(value);
-        };
-        DatePicker.prototype.toggleCalendar = function(event) {
-          if (!this.calendarDisplayed)
-            this.showCalendar(event);
-          else
-            this.hideCalendar();
-        };
-        DatePicker.prototype.showCalendar = function(event) {
-          if (event != null) {
-            var clickedRect = event.target ? event.target.parentElement.getBoundingClientRect() : event.srcElement.parentElement.getBoundingClientRect();
-            this.calendarX = clickedRect.left;
-            if (screen.height - clickedRect.bottom <= 500) {
-              this.calendarY = (clickedRect.top);
-            } else {
-              this.calendarY = 0;
-            }
-          }
-          this.ngOnInit();
-          this.calendarDisplayed = true;
-          this.changeDetector.markForCheck();
-        };
-        DatePicker.prototype.hideCalendar = function() {
-          this.calendarDisplayed = false;
-          this.changeDetector.markForCheck();
-        };
-        Object.defineProperty(DatePicker.prototype, "canPrevMonth", {
-          get: function() {
-            var currentDate = this.calendarMonths[0];
-            var prevDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
-            var compareDate = new Date(this._minDate.getFullYear(), this._minDate.getMonth());
-            return prevDate >= compareDate;
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DatePicker.prototype, "canNextMonth", {
-          get: function() {
-            var currentDate = this.calendarMonths[this.calendarMonths.length - 1];
-            var nextDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
-            var compareDate = new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
-            return nextDate <= compareDate;
-          },
-          enumerable: true,
-          configurable: true
-        });
-        DatePicker.prototype.disablePrev = function() {
-          return this.calendarScroller ? this.calendarScroller.isTop() : false;
-        };
-        DatePicker.prototype.disableNext = function() {
-          return this.calendarScroller ? this.calendarScroller.isBottom() : false;
-        };
-        DatePicker.prototype.scrollPrevMonth = function() {
-          var _this = this;
-          if (this.calendarScroller.topIndex == 0)
-            this.addPrevMonth();
-          setTimeout(function() {
-            _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex - 1);
-          }, 10);
-        };
-        DatePicker.prototype.scrollNextMonth = function() {
-          var _this = this;
-          setTimeout(function() {
-            _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex + 1);
-          }, 10);
-        };
-        DatePicker.prototype.addNextMonth = function() {
-          if (!this.canNextMonth)
-            return;
-          var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
-          var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
-          this.calendarMonths.push(nextMonth);
-          this.changeDetector.markForCheck();
-        };
-        DatePicker.prototype.addPrevMonth = function() {
-          if (!this.canPrevMonth)
-            return;
-          var firstMonth = this.calendarMonths[0];
-          var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
-          this.calendarMonths.unshift(prevMonth);
-          this.changeDetector.markForCheck();
-        };
-        __decorate([core_2.Input(), __metadata('design:type', String)], DatePicker.prototype, "label", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "minDate", null);
-        __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "maxDate", null);
-        __decorate([core_2.Input(), __metadata('design:type', Function)], DatePicker.prototype, "dateFilter", void 0);
-        __decorate([core_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "value", null);
-        __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DatePicker.prototype, "calendarScroller", void 0);
-        DatePicker = __decorate([core_1.Component({
-          selector: "date-picker",
-          styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n\n      table {\n        font-size: .75rem; }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
-          template: "\n      <div class=\"input-group\" (click)=\"toggleCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n          [(ngModel)]=\"inputDate\" #dateField readonly\n              placeholder=\"{{label}}\" />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      [height]=\"calendarHeight\"\n                      [hideScrollbar]=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
-          directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
-          changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ChangeDetectorRef !== 'undefined' && core_1.ChangeDetectorRef) === 'function' && _a) || Object])], DatePicker);
-        return DatePicker;
-        var _a;
-      }());
-      exports_1("DatePicker", DatePicker);
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var DatePickerCalendar_1 = $__require('./DatePickerCalendar');
+  var InfiniteScroller_1 = $__require('../InfiniteScroller/InfiniteScroller');
+  var DetectionUtils_1 = $__require('../../utilities/DetectionUtils');
+  var DatePicker = (function() {
+    function DatePicker(changeDetector) {
+      this._minDate = new Date(1900, 0, 1);
+      this._maxDate = new Date(2200, 0, 1);
+      this.valueChange = new core_2.EventEmitter();
+      this._inputDate = "";
+      this.calendarDisplayed = false;
+      this.calendarX = 1;
+      this.calendarY = 1;
+      this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
+      this.calendarMonths = [];
+      this._preGenMonths = 2;
+      this.changeDetector = changeDetector;
     }
-  };
+    Object.defineProperty(DatePicker.prototype, "minDate", {
+      get: function() {
+        return this._minDate;
+      },
+      set: function(value) {
+        this._minDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DatePicker.prototype, "maxDate", {
+      get: function() {
+        return this._maxDate;
+      },
+      set: function(value) {
+        this._maxDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DatePicker.prototype, "value", {
+      set: function(value) {
+        this._selectedDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DatePicker.prototype, "selectedDate", {
+      get: function() {
+        return this._selectedDate;
+      },
+      set: function(value) {
+        this._selectedDate = value;
+        this._inputDate = value.toLocaleDateString();
+        this.valueChange.next(this.selectedDate);
+        this.hideCalendar();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DatePicker.prototype, "inputDate", {
+      get: function() {
+        return this._inputDate;
+      },
+      set: function(value) {
+        this._inputDate = value;
+        this._selectedDate = new Date(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    DatePicker.prototype.ngOnInit = function() {
+      var _this = this;
+      var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+      this.calendarMonths = [new Date(currentDate.getFullYear(), currentDate.getMonth() - 1), new Date(currentDate.getFullYear(), currentDate.getMonth())];
+      for (var i = 0; i < this._preGenMonths; i++) {
+        var earliestDate = this.calendarMonths[0];
+        var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
+        if (this.canPrevMonth)
+          this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
+        if (this.canNextMonth)
+          this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
+      }
+      setTimeout(function() {
+        if (_this.calendarScroller == null)
+          return;
+        var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
+          return m.getFullYear() == currentDate.getFullYear() && m.getMonth() == currentDate.getMonth();
+        });
+        _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
+        _this.calendarScroller.scrollToIndex(scrollToMonth);
+      }, 1);
+    };
+    DatePicker.prototype.handleDateInput = function(value) {
+      if (value instanceof Date && !isNaN(value.valueOf()))
+        return value;
+      else
+        return new Date(value);
+    };
+    DatePicker.prototype.toggleCalendar = function(event) {
+      if (!this.calendarDisplayed)
+        this.showCalendar(event);
+      else
+        this.hideCalendar();
+    };
+    DatePicker.prototype.showCalendar = function(event) {
+      if (event != null) {
+        var clickedRect = event.target ? event.target.parentElement.getBoundingClientRect() : event.srcElement.parentElement.getBoundingClientRect();
+        this.calendarX = clickedRect.left;
+        if (screen.height - clickedRect.bottom <= 500) {
+          this.calendarY = (clickedRect.top);
+        } else {
+          this.calendarY = 0;
+        }
+      }
+      this.ngOnInit();
+      this.calendarDisplayed = true;
+      this.changeDetector.markForCheck();
+    };
+    DatePicker.prototype.hideCalendar = function() {
+      this.calendarDisplayed = false;
+      this.changeDetector.markForCheck();
+    };
+    Object.defineProperty(DatePicker.prototype, "canPrevMonth", {
+      get: function() {
+        var currentDate = this.calendarMonths[0];
+        var prevDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
+        var compareDate = new Date(this._minDate.getFullYear(), this._minDate.getMonth());
+        return prevDate >= compareDate;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DatePicker.prototype, "canNextMonth", {
+      get: function() {
+        var currentDate = this.calendarMonths[this.calendarMonths.length - 1];
+        var nextDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
+        var compareDate = new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
+        return nextDate <= compareDate;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    DatePicker.prototype.disablePrev = function() {
+      return this.calendarScroller ? this.calendarScroller.isTop() : false;
+    };
+    DatePicker.prototype.disableNext = function() {
+      return this.calendarScroller ? this.calendarScroller.isBottom() : false;
+    };
+    DatePicker.prototype.scrollPrevMonth = function() {
+      var _this = this;
+      if (this.calendarScroller.topIndex == 0)
+        this.addPrevMonth();
+      setTimeout(function() {
+        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex - 1);
+      }, 10);
+    };
+    DatePicker.prototype.scrollNextMonth = function() {
+      var _this = this;
+      setTimeout(function() {
+        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex + 1);
+      }, 10);
+    };
+    DatePicker.prototype.addNextMonth = function() {
+      if (!this.canNextMonth)
+        return;
+      var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
+      var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
+      this.calendarMonths.push(nextMonth);
+      this.changeDetector.markForCheck();
+    };
+    DatePicker.prototype.addPrevMonth = function() {
+      if (!this.canPrevMonth)
+        return;
+      var firstMonth = this.calendarMonths[0];
+      var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
+      this.calendarMonths.unshift(prevMonth);
+      this.changeDetector.markForCheck();
+    };
+    __decorate([core_2.Input(), __metadata('design:type', String)], DatePicker.prototype, "label", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "minDate", null);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "maxDate", null);
+    __decorate([core_2.Input(), __metadata('design:type', Function)], DatePicker.prototype, "dateFilter", void 0);
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePicker.prototype, "valueChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DatePicker.prototype, "value", null);
+    __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DatePicker.prototype, "calendarScroller", void 0);
+    DatePicker = __decorate([core_1.Component({
+      selector: "date-picker",
+      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n\n      table {\n        font-size: .75rem; }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
+      template: "\n      <div class=\"input-group\" (click)=\"toggleCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n          [(ngModel)]=\"inputDate\" #dateField readonly\n              placeholder=\"{{label}}\" />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      [height]=\"calendarHeight\"\n                      [hideScrollbar]=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+      directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
+      changeDetection: core_1.ChangeDetectionStrategy.OnPush
+    }), __metadata('design:paramtypes', [core_1.ChangeDetectorRef])], DatePicker);
+    return DatePicker;
+  }());
+  exports.DatePicker = DatePicker;
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["angular2/core", "angular2/common"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -588,121 +548,114 @@ System.register("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["angul
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      core_2,
-      common_1;
-  var DatePickerCalendar;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-      core_2 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }],
-    execute: function() {
-      DatePickerCalendar = (function() {
-        function DatePickerCalendar() {
-          this.selectedDateChange = new core_2.EventEmitter();
-          this.dateTarget = null;
-          this.showMonth = true;
-        }
-        DatePickerCalendar.prototype.ngOnInit = function() {
-          this.buildWeeks(this.currentMonth || new Date());
-        };
-        DatePickerCalendar.prototype.checkSelectable = function(date) {
-          var dateNumber = parseInt(date);
-          if (isNaN(dateNumber))
-            return false;
-          var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-          if (typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
-            return false;
-          return compareDate >= this.minDate && compareDate <= this.maxDate;
-        };
-        DatePickerCalendar.prototype.checkSelectedDate = function(date) {
-          if (typeof this.selectedDate == undefined || this.selectedDate == null)
-            return false;
-          if (typeof this.startDate != undefined && this.startDate != null && typeof this.endDate != undefined && this.endDate != null) {
-            var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
-            return compareDate >= this.startDate && compareDate <= this.endDate;
-          }
-          return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
-        };
-        DatePickerCalendar.prototype.checkStartDate = function(date) {
-          if (typeof this.startDate == undefined || this.startDate == null)
-            return false;
-          if (this.startDate == this.endDate)
-            return false;
-          return this.startDate.getFullYear() == this.currentMonth.getFullYear() && this.startDate.getMonth() == this.currentMonth.getMonth() && this.startDate.getDate().toString() == date;
-        };
-        DatePickerCalendar.prototype.checkEndDate = function(date) {
-          if (typeof this.endDate == undefined || this.endDate == null)
-            return false;
-          if (this.startDate == this.endDate)
-            return false;
-          return this.endDate.getFullYear() == this.currentMonth.getFullYear() && this.endDate.getMonth() == this.currentMonth.getMonth() && this.endDate.getDate().toString() == date;
-        };
-        DatePickerCalendar.prototype.selectDate = function(date) {
-          if (!this.checkSelectable(date))
-            return;
-          var dateNumber = parseInt(date);
-          this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
-          this.selectedDateChange.next(this.selectedDate);
-        };
-        DatePickerCalendar.prototype.buildWeeks = function(date) {
-          this.currentMonth = date;
-          var currentDay = new Date(this.currentMonth.toDateString());
-          currentDay.setDate(1);
-          currentDay.setDate(currentDay.getDate() - currentDay.getDay());
-          var lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0);
-          lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
-          this.weeks = [];
-          var currentWeek = [];
-          while (currentDay <= lastDay) {
-            if (currentDay.getMonth() == this.currentMonth.getMonth())
-              currentWeek.push(currentDay.getDate().toLocaleString());
-            else
-              currentWeek.push("");
-            currentDay.setDate(currentDay.getDate() + 1);
-            if (currentDay.getDay() == 0) {
-              this.weeks.push(currentWeek);
-              currentWeek = [];
-            }
-          }
-          if (this.weeks.length > 5)
-            return;
-          var firstWeekCount = this.weeks[0].filter(function(i) {
-            return i.length > 0;
-          }).length;
-          var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
-            return i.length > 0;
-          }).length;
-        };
-        __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate", void 0);
-        __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerCalendar.prototype, "selectedDateChange", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "dateTarget", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "startDate", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "endDate", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "minDate", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "maxDate", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Function)], DatePickerCalendar.prototype, "dateFilter", void 0);
-        __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "showMonth", void 0);
-        DatePickerCalendar = __decorate([core_1.Component({
-          selector: 'date-picker-calendar',
-          styles: ["\n   .table {\n     font-size: .75rem;\n     border: none;\n     border-top: 1px solid #eceeef;\n     background-color: #fff;\n     border-collapse: collapse; }\n     .table .calendar-date {\n       z-index: 200;\n       background-color: transparent; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     font-size: .75rem;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none;\n     position: relative; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       th, td {\n         padding: .5rem;\n         font-size: 1rem; } }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #99c4e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #c9c9c9; }\n\n   td.startDate, td.endDate {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.startDate:after {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     right: 0;\n     background-color: transparent;\n     border-left: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n\n   td.endDate:before {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     left: 0;\n     background-color: transparent;\n     border-right: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n    "],
-          template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"let week of weeks\">\n                <td *ngFor=\"let day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                       [class.startDate]=\"checkStartDate(day)\"\n                       [class.endDate]=\"checkEndDate(day)\"\n                    (click)=\"selectDate(day)\">\n                    <span class=\"calendar-date\">{{day}}</span>\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
-          directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-        }), __metadata('design:paramtypes', [])], DatePickerCalendar);
-        return DatePickerCalendar;
-      }());
-      exports_1("DatePickerCalendar", DatePickerCalendar);
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var DatePickerCalendar = (function() {
+    function DatePickerCalendar() {
+      this.selectedDateChange = new core_2.EventEmitter();
+      this.dateTarget = null;
+      this.showMonth = true;
     }
-  };
+    DatePickerCalendar.prototype.ngOnInit = function() {
+      this.buildWeeks(this.currentMonth || new Date());
+    };
+    DatePickerCalendar.prototype.checkSelectable = function(date) {
+      var dateNumber = parseInt(date);
+      if (isNaN(dateNumber))
+        return false;
+      var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+      if (typeof this.dateFilter == "function" && !this.dateFilter(compareDate))
+        return false;
+      return compareDate >= this.minDate && compareDate <= this.maxDate;
+    };
+    DatePickerCalendar.prototype.checkSelectedDate = function(date) {
+      if (typeof this.selectedDate == undefined || this.selectedDate == null)
+        return false;
+      if (typeof this.startDate != undefined && this.startDate != null && typeof this.endDate != undefined && this.endDate != null) {
+        var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
+        return compareDate >= this.startDate && compareDate <= this.endDate;
+      }
+      return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
+    };
+    DatePickerCalendar.prototype.checkStartDate = function(date) {
+      if (typeof this.startDate == undefined || this.startDate == null)
+        return false;
+      if (this.startDate == this.endDate)
+        return false;
+      return this.startDate.getFullYear() == this.currentMonth.getFullYear() && this.startDate.getMonth() == this.currentMonth.getMonth() && this.startDate.getDate().toString() == date;
+    };
+    DatePickerCalendar.prototype.checkEndDate = function(date) {
+      if (typeof this.endDate == undefined || this.endDate == null)
+        return false;
+      if (this.startDate == this.endDate)
+        return false;
+      return this.endDate.getFullYear() == this.currentMonth.getFullYear() && this.endDate.getMonth() == this.currentMonth.getMonth() && this.endDate.getDate().toString() == date;
+    };
+    DatePickerCalendar.prototype.selectDate = function(date) {
+      if (!this.checkSelectable(date))
+        return;
+      var dateNumber = parseInt(date);
+      this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+      this.selectedDateChange.next(this.selectedDate);
+    };
+    DatePickerCalendar.prototype.buildWeeks = function(date) {
+      this.currentMonth = date;
+      var currentDay = new Date(this.currentMonth.toDateString());
+      currentDay.setDate(1);
+      currentDay.setDate(currentDay.getDate() - currentDay.getDay());
+      var lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0);
+      lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
+      this.weeks = [];
+      var currentWeek = [];
+      while (currentDay <= lastDay) {
+        if (currentDay.getMonth() == this.currentMonth.getMonth())
+          currentWeek.push(currentDay.getDate().toLocaleString());
+        else
+          currentWeek.push("");
+        currentDay.setDate(currentDay.getDate() + 1);
+        if (currentDay.getDay() == 0) {
+          this.weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      }
+      if (this.weeks.length > 5)
+        return;
+      var firstWeekCount = this.weeks[0].filter(function(i) {
+        return i.length > 0;
+      }).length;
+      var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
+        return i.length > 0;
+      }).length;
+    };
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate", void 0);
+    __decorate([core_2.Output(), __metadata('design:type', Object)], DatePickerCalendar.prototype, "selectedDateChange", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "dateTarget", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "startDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "endDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "minDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "maxDate", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Function)], DatePickerCalendar.prototype, "dateFilter", void 0);
+    __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "showMonth", void 0);
+    DatePickerCalendar = __decorate([core_1.Component({
+      selector: 'date-picker-calendar',
+      styles: ["\n   .table {\n     font-size: .75rem;\n     border: none;\n     border-top: 1px solid #eceeef;\n     background-color: #fff;\n     border-collapse: collapse; }\n     .table .calendar-date {\n       z-index: 200;\n       background-color: transparent; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     font-size: .75rem;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none;\n     position: relative; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       th, td {\n         padding: .5rem;\n         font-size: 1rem; } }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #99c4e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #c9c9c9; }\n\n   td.startDate, td.endDate {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.startDate:after {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     right: 0;\n     background-color: transparent;\n     border-left: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n\n   td.endDate:before {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     left: 0;\n     background-color: transparent;\n     border-right: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n    "],
+      template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"let week of weeks\">\n                <td *ngFor=\"let day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                       [class.startDate]=\"checkStartDate(day)\"\n                       [class.endDate]=\"checkEndDate(day)\"\n                    (click)=\"selectDate(day)\">\n                    <span class=\"calendar-date\">{{day}}</span>\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+    }), __metadata('design:paramtypes', [])], DatePickerCalendar);
+    return DatePickerCalendar;
+  }());
+  exports.DatePickerCalendar = DatePickerCalendar;
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/DatePicker/DateRangePicker", ["angular2/core", "angular2/common", "../../utilities/DateUtils", "../../utilities/DetectionUtils", "./DatePicker", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@angular/core", "@angular/common", "../../utilities/DateUtils", "../../utilities/DetectionUtils", "./DatePicker", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -728,228 +681,205 @@ System.register("fuel-ui/dist/components/DatePicker/DateRangePicker", ["angular2
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      core_2,
-      common_1,
-      DateUtils_1,
-      DetectionUtils_1,
-      DatePicker_1,
-      DatePickerCalendar_1,
-      InfiniteScroller_1;
-  var DateRangePicker;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-      core_2 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(DateUtils_1_1) {
-      DateUtils_1 = DateUtils_1_1;
-    }, function(DetectionUtils_1_1) {
-      DetectionUtils_1 = DetectionUtils_1_1;
-    }, function(DatePicker_1_1) {
-      DatePicker_1 = DatePicker_1_1;
-    }, function(DatePickerCalendar_1_1) {
-      DatePickerCalendar_1 = DatePickerCalendar_1_1;
-    }, function(InfiniteScroller_1_1) {
-      InfiniteScroller_1 = InfiniteScroller_1_1;
-    }],
-    execute: function() {
-      DateRangePicker = (function(_super) {
-        __extends(DateRangePicker, _super);
-        function DateRangePicker(changeDetector) {
-          _super.call(this, changeDetector);
-          this.valueChange = new core_2.EventEmitter();
-          this._dateTarget = false;
-          this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
-          this.startDateChange = new core_2.EventEmitter();
-          this.endDateChange = new core_2.EventEmitter();
-          this._inputStartDate = "";
-          this._inputEndDate = "";
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var DateUtils_1 = $__require('../../utilities/DateUtils');
+  var DetectionUtils_1 = $__require('../../utilities/DetectionUtils');
+  var DatePicker_1 = $__require('./DatePicker');
+  var DatePickerCalendar_1 = $__require('./DatePickerCalendar');
+  var InfiniteScroller_1 = $__require('../InfiniteScroller/InfiniteScroller');
+  var DateRangePicker = (function(_super) {
+    __extends(DateRangePicker, _super);
+    function DateRangePicker(changeDetector) {
+      _super.call(this, changeDetector);
+      this.valueChange = new core_2.EventEmitter();
+      this._dateTarget = false;
+      this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
+      this.startDateChange = new core_2.EventEmitter();
+      this.endDateChange = new core_2.EventEmitter();
+      this._inputStartDate = "";
+      this._inputEndDate = "";
+    }
+    Object.defineProperty(DateRangePicker.prototype, "value", {
+      set: function(value) {
+        this._selectedDate = this.handleRangeInput(value).start;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "minDate", {
+      get: function() {
+        return this._minDate;
+      },
+      set: function(value) {
+        this._minDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DateRangePicker.prototype, "maxDate", {
+      get: function() {
+        return this._maxDate;
+      },
+      set: function(value) {
+        this._maxDate = this.handleDateInput(value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "selectedDate", {
+      get: function() {
+        return this._selectedDate;
+      },
+      set: function(value) {
+        this._selectedDate = value;
+        if ((this._dateTarget && this.startDate != null && value < this.startDate) || !this._dateTarget && this.endDate != null && value > this.endDate)
+          this._dateTarget = !this._dateTarget;
+        if (!this._dateTarget) {
+          this.inputStartDate = value.toLocaleDateString();
+          this.startDate = value;
+          if (this.startDateChange != null)
+            this.startDateChange.next(this._startDate);
+        } else {
+          this.inputEndDate = value.toLocaleDateString();
+          this.endDate = value;
+          this.hideCalendar();
+          if (this.endDateChange != null)
+            this.endDateChange.next(this._endDate);
         }
-        Object.defineProperty(DateRangePicker.prototype, "value", {
-          set: function(value) {
-            this._selectedDate = this.handleRangeInput(value).start;
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DateRangePicker.prototype, "minDate", {
-          get: function() {
-            return this._minDate;
-          },
-          set: function(value) {
-            this._minDate = this.handleDateInput(value);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(DateRangePicker.prototype, "maxDate", {
-          get: function() {
-            return this._maxDate;
-          },
-          set: function(value) {
-            this._maxDate = this.handleDateInput(value);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DateRangePicker.prototype, "selectedDate", {
-          get: function() {
-            return this._selectedDate;
-          },
-          set: function(value) {
-            this._selectedDate = value;
-            if ((this._dateTarget && this.startDate != null && value < this.startDate) || !this._dateTarget && this.endDate != null && value > this.endDate)
-              this._dateTarget = !this._dateTarget;
-            if (!this._dateTarget) {
-              this.inputStartDate = value.toLocaleDateString();
-              this.startDate = value;
-              if (this.startDateChange != null)
-                this.startDateChange.next(this._startDate);
-            } else {
-              this.inputEndDate = value.toLocaleDateString();
-              this.endDate = value;
-              this.hideCalendar();
-              if (this.endDateChange != null)
-                this.endDateChange.next(this._endDate);
-            }
-            this._dateTarget = !this._dateTarget;
-            if (this.startDate != null && this.endDate != null) {
-              var startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
-              var endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
-              this.valueChange.next(new DateUtils_1.DateRange(startDate, endDate));
-            }
-            this.changeDetector.markForCheck();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(DateRangePicker.prototype, "startDate", {
-          get: function() {
-            return this._startDate;
-          },
-          set: function(value) {
-            this._startDate = this.handleDateInput(value);
-            this.inputStartDate = this._startDate.toLocaleDateString();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DateRangePicker.prototype, "endDate", {
-          get: function() {
-            return this._endDate;
-          },
-          set: function(value) {
-            this._endDate = this.handleDateInput(value);
-            this.inputEndDate = this._endDate.toLocaleDateString();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Object.defineProperty(DateRangePicker.prototype, "inputStartDate", {
-          get: function() {
-            return this._inputStartDate;
-          },
-          set: function(value) {
-            this._inputStartDate = value;
-            this._selectedDate = new Date(value);
-            this.changeDetector.markForCheck();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(DateRangePicker.prototype, "inputEndDate", {
-          get: function() {
-            return this._inputEndDate;
-          },
-          set: function(value) {
-            this._inputEndDate = value;
-            this._selectedDate = new Date(value);
-            this.changeDetector.markForCheck();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        DateRangePicker.prototype.handleRangeInput = function(value) {
-          console.log(value);
-          if (!(value instanceof DateUtils_1.DateRange))
-            throw "DateRangePicker error: input is not of type DateRange";
-          var range = value;
-          this.startDate = range.start;
-          this.endDate = range.end;
-          return range;
-        };
-        DateRangePicker.prototype.focusStartDate = function() {
-          this._dateTarget = false;
-        };
-        DateRangePicker.prototype.focusEndDate = function() {
-          this._dateTarget = true;
-        };
-        DateRangePicker.prototype.checkStartDateTarget = function() {
-          return !this._dateTarget;
-        };
-        DateRangePicker.prototype.checkEndDateTarget = function() {
-          return this._dateTarget;
-        };
-        __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "valueChange", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "value", null);
-        __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "minDate", null);
-        __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "maxDate", null);
-        __decorate([core_1.Input(), __metadata('design:type', Function)], DateRangePicker.prototype, "dateFilter", void 0);
-        __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DateRangePicker.prototype, "calendarScroller", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], DateRangePicker.prototype, "startLabel", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], DateRangePicker.prototype, "endLabel", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "startDateChange", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "startDate", null);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "endDateChange", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "endDate", null);
-        DateRangePicker = __decorate([core_1.Component({
-          selector: "date-range-picker",
-          styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n\n      table {\n        font-size: .75rem; }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
-          template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"startDate\">{{startLabel}}</label>\n          <div class=\"input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusStartDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"startDate\"\n                  [(ngModel)]=\"inputStartDate\" #dateField1 \n                  placeholder=\"{{startLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField1.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"endDate\">{{endLabel}}</label>\n          <div class=\"input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusEndDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"endDate\"\n                  [(ngModel)]=\"inputEndDate\" #dateField2 \n                  placeholder=\"{{endLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField2.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkStartDateTarget()\"\n                          (click)=\"focusStartDate()\"\n                          id=\"startDate\" [(ngModel)]=\"inputStartDate\" readonly \n                          placeholder=\"{{startLabel}}\" />\n                      <span class=\"input-group-addon\"> - </span>\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkEndDateTarget()\"\n                          (click)=\"focusEndDate()\"\n                          id=\"endDate\" [(ngModel)]=\"inputEndDate\" readonly \n                          placeholder=\"{{endLabel}}\" />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\"\n                          [(startDate)]=\"startDate\"\n                          [(endDate)]=\"endDate\"\n                          [dateTarget]=\"_dateTarget\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
-          directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
-          changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ChangeDetectorRef !== 'undefined' && core_1.ChangeDetectorRef) === 'function' && _a) || Object])], DateRangePicker);
-        return DateRangePicker;
-        var _a;
-      }(DatePicker_1.DatePicker));
-      exports_1("DateRangePicker", DateRangePicker);
-    }
-  };
+        this._dateTarget = !this._dateTarget;
+        if (this.startDate != null && this.endDate != null) {
+          var startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
+          var endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
+          this.valueChange.next(new DateUtils_1.DateRange(startDate, endDate));
+        }
+        this.changeDetector.markForCheck();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DateRangePicker.prototype, "startDate", {
+      get: function() {
+        return this._startDate;
+      },
+      set: function(value) {
+        this._startDate = this.handleDateInput(value);
+        this.inputStartDate = this._startDate.toLocaleDateString();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "endDate", {
+      get: function() {
+        return this._endDate;
+      },
+      set: function(value) {
+        this._endDate = this.handleDateInput(value);
+        this.inputEndDate = this._endDate.toLocaleDateString();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "inputStartDate", {
+      get: function() {
+        return this._inputStartDate;
+      },
+      set: function(value) {
+        this._inputStartDate = value;
+        this._selectedDate = new Date(value);
+        this.changeDetector.markForCheck();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(DateRangePicker.prototype, "inputEndDate", {
+      get: function() {
+        return this._inputEndDate;
+      },
+      set: function(value) {
+        this._inputEndDate = value;
+        this._selectedDate = new Date(value);
+        this.changeDetector.markForCheck();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    DateRangePicker.prototype.handleRangeInput = function(value) {
+      console.log(value);
+      if (!(value instanceof DateUtils_1.DateRange))
+        throw "DateRangePicker error: input is not of type DateRange";
+      var range = value;
+      this.startDate = range.start;
+      this.endDate = range.end;
+      return range;
+    };
+    DateRangePicker.prototype.focusStartDate = function() {
+      this._dateTarget = false;
+    };
+    DateRangePicker.prototype.focusEndDate = function() {
+      this._dateTarget = true;
+    };
+    DateRangePicker.prototype.checkStartDateTarget = function() {
+      return !this._dateTarget;
+    };
+    DateRangePicker.prototype.checkEndDateTarget = function() {
+      return this._dateTarget;
+    };
+    __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "valueChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "value", null);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "minDate", null);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "maxDate", null);
+    __decorate([core_1.Input(), __metadata('design:type', Function)], DateRangePicker.prototype, "dateFilter", void 0);
+    __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DateRangePicker.prototype, "calendarScroller", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], DateRangePicker.prototype, "startLabel", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], DateRangePicker.prototype, "endLabel", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "startDateChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "startDate", null);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "endDateChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "endDate", null);
+    DateRangePicker = __decorate([core_1.Component({
+      selector: "date-range-picker",
+      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n\n      table {\n        font-size: .75rem; }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
+      template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"startDate\">{{startLabel}}</label>\n          <div class=\"input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusStartDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"startDate\"\n                  [(ngModel)]=\"inputStartDate\" #dateField1 \n                  placeholder=\"{{startLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField1.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"endDate\">{{endLabel}}</label>\n          <div class=\"input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusEndDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"endDate\"\n                  [(ngModel)]=\"inputEndDate\" #dateField2 \n                  placeholder=\"{{endLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField2.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkStartDateTarget()\"\n                          (click)=\"focusStartDate()\"\n                          id=\"startDate\" [(ngModel)]=\"inputStartDate\" readonly \n                          placeholder=\"{{startLabel}}\" />\n                      <span class=\"input-group-addon\"> - </span>\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkEndDateTarget()\"\n                          (click)=\"focusEndDate()\"\n                          id=\"endDate\" [(ngModel)]=\"inputEndDate\" readonly \n                          placeholder=\"{{endLabel}}\" />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\"\n                          [(startDate)]=\"startDate\"\n                          [(endDate)]=\"endDate\"\n                          [dateTarget]=\"_dateTarget\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+      directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
+      changeDetection: core_1.ChangeDetectionStrategy.OnPush
+    }), __metadata('design:paramtypes', [core_1.ChangeDetectorRef])], DateRangePicker);
+    return DateRangePicker;
+  }(DatePicker_1.DatePicker));
+  exports.DateRangePicker = DateRangePicker;
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/DatePicker/DatePickerProviders", ["./DatePickerCalendar", "./DatePicker", "./DateRangePicker"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerProviders", ["./DatePickerCalendar", "./DatePicker", "./DateRangePicker"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var DatePickerCalendar_1,
-      DatePicker_1,
-      DateRangePicker_1;
-  var DATE_PICKER_PROVIDERS;
-  return {
-    setters: [function(DatePickerCalendar_2_1) {
-      exports_1({"DatePickerCalendar": DatePickerCalendar_2_1["DatePickerCalendar"]});
-      DatePickerCalendar_1 = DatePickerCalendar_2_1;
-    }, function(DatePicker_2_1) {
-      exports_1({"DatePicker": DatePicker_2_1["DatePicker"]});
-      DatePicker_1 = DatePicker_2_1;
-    }, function(DateRangePicker_2_1) {
-      exports_1({"DateRangePicker": DateRangePicker_2_1["DateRangePicker"]});
-      DateRangePicker_1 = DateRangePicker_2_1;
-    }],
-    execute: function() {
-      exports_1("DATE_PICKER_PROVIDERS", DATE_PICKER_PROVIDERS = [DatePickerCalendar_1.DatePickerCalendar, DatePicker_1.DatePicker, DateRangePicker_1.DateRangePicker]);
-    }
-  };
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var DatePickerCalendar_1 = $__require('./DatePickerCalendar');
+  exports.DatePickerCalendar = DatePickerCalendar_1.DatePickerCalendar;
+  var DatePicker_1 = $__require('./DatePicker');
+  exports.DatePicker = DatePicker_1.DatePicker;
+  var DateRangePicker_1 = $__require('./DateRangePicker');
+  exports.DateRangePicker = DateRangePicker_1.DateRangePicker;
+  var DatePickerCalendar_2 = $__require('./DatePickerCalendar');
+  var DatePicker_2 = $__require('./DatePicker');
+  var DateRangePicker_2 = $__require('./DateRangePicker');
+  exports.DATE_PICKER_PROVIDERS = [DatePickerCalendar_2.DatePickerCalendar, DatePicker_2.DatePicker, DateRangePicker_2.DateRangePicker];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/Modal/Modal", ["angular2/core", "angular2/common", "../../directives/Animation/Animation"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", "@angular/common", "../../directives/Animation/Animation"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -966,354 +896,73 @@ System.register("fuel-ui/dist/components/Modal/Modal", ["angular2/core", "angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      common_1,
-      Animation_1;
-  var Modal,
-      MODAL_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(Animation_1_1) {
-      Animation_1 = Animation_1_1;
-    }],
-    execute: function() {
-      Modal = (function() {
-        function Modal(el) {
-          this.displayed = false;
-          this.closeOnUnfocus = true;
-          this.closeButton = true;
-          this.modalTitle = '';
-          this._el = el.nativeElement;
-        }
-        Modal.prototype.clickElement = function(e) {
-          if (this.closeOnUnfocus) {
-            if ((e.target && (e.target.className == 'modal customFadeIn' || e.target.className == 'modal-dialog')) || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
-              this.showModal(false);
-          }
-        };
-        Modal.prototype.getElement = function() {
-          return this._el;
-        };
-        Modal.prototype.closeModal = function() {
-          return this.showModal(false);
-        };
-        Modal.prototype.showModal = function(isDisplayed) {
-          var _this = this;
-          var body = document.body;
-          if (isDisplayed === undefined) {
-            this.displayed = !this.displayed;
-          } else {
-            this.displayed = isDisplayed;
-          }
-          if (this.displayed) {
-            body.classList.add('modal-open');
-          } else {
-            body.classList.remove('modal-open');
-            if (this.closeOnUnfocus) {
-              this._el.childNodes[0].removeEventListener('click', function(e) {
-                if ((e.target && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')) || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
-                  _this.showModal(false);
-              });
-            }
-          }
-          return false;
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle", void 0);
-        Modal = __decorate([core_1.Component({
-          selector: 'modal',
-          host: {'(click)': 'clickElement($event)'},
-          styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
-          template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
-          directives: [common_1.CORE_DIRECTIVES, Animation_1.Animation]
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], Modal);
-        return Modal;
-        var _a;
-      }());
-      exports_1("Modal", Modal);
-      exports_1("MODAL_PROVIDERS", MODAL_PROVIDERS = [Modal]);
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var Animation_1 = $__require('../../directives/Animation/Animation');
+  var Modal = (function() {
+    function Modal(el) {
+      this.displayed = false;
+      this.closeOnUnfocus = true;
+      this.closeButton = true;
+      this.modalTitle = '';
+      this._el = el.nativeElement;
     }
-  };
-});
-
-System.register("fuel-ui/dist/components/Pagination/Pagination", ["angular2/core", "angular2/common", "../../pipes/Range/Range"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      common_1,
-      Range_1;
-  var Pagination,
-      PAGINATION_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(Range_1_1) {
-      Range_1 = Range_1_1;
-    }],
-    execute: function() {
-      Pagination = (function() {
-        function Pagination() {
-          this.currentPage = 1;
-          this.pagesAtOnce = 5;
-          this.totalPages = 10;
-          this.showSteps = true;
-          this.showEnds = true;
-          this.showSelect = true;
-          this.currentPageChange = new core_1.EventEmitter();
-          this.pagesBlank = [];
-          this.setPage(this.currentPage);
-        }
-        Pagination.prototype.ngOnChanges = function(changes) {
-          this.setPage(this.currentPage);
-        };
-        Pagination.prototype.setPage = function(newPage) {
-          if (newPage < 1 || newPage > this.totalPages)
-            return;
-          this.currentPage = newPage;
-          if (this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0) {
-            this.startingIndex = 0;
-            this.endingIndex = this.pagesAtOnce;
-          } else if (this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
-            this.startingIndex = this.totalPages - this.pagesAtOnce;
-            this.endingIndex = this.totalPages;
-          } else {
-            this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
-            this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages ? this.startingIndex + this.pagesAtOnce : this.totalPages;
-          }
-          this.currentPageChange.next(this.currentPage);
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Pagination.prototype, "showSteps", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Pagination.prototype, "showEnds", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Pagination.prototype, "showSelect", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
-        Pagination = __decorate([core_1.Component({
-          selector: 'pagination',
-          changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-          properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"],
-          styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
-          template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\" *ngIf=\"showSelect\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"let page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
-          directives: [common_1.CORE_DIRECTIVES],
-          pipes: [common_1.SlicePipe, Range_1.RangePipe]
-        }), __metadata('design:paramtypes', [])], Pagination);
-        return Pagination;
-      }());
-      exports_1("Pagination", Pagination);
-      exports_1("PAGINATION_PROVIDERS", PAGINATION_PROVIDERS = [Pagination]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["angular2/core", "../../utilities/ElementUtils"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      ElementUtils_1;
-  var ScrollItem,
-      InfiniteScroller,
-      INFINITE_SCROLLER_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(ElementUtils_1_1) {
-      ElementUtils_1 = ElementUtils_1_1;
-    }],
-    execute: function() {
-      ScrollItem = (function() {
-        function ScrollItem(element) {
-          this.element = element.nativeElement;
-        }
-        Object.defineProperty(ScrollItem.prototype, "height", {
-          get: function() {
-            return ElementUtils_1.ElementUtils.outerHeight(this.element);
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ScrollItem.prototype.ngAfterViewInit = function() {
-          this.element = this.element.firstElementChild;
-        };
-        ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], ScrollItem);
-        return ScrollItem;
-        var _a;
-      }());
-      exports_1("ScrollItem", ScrollItem);
-      InfiniteScroller = (function() {
-        function InfiniteScroller(element) {
-          this.distance = 100;
-          this.height = 'auto';
-          this.hideScrollbar = false;
-          this.next = new core_1.EventEmitter();
-          this.prev = new core_1.EventEmitter();
-          this.topIndexChange = new core_1.EventEmitter();
-          this.topIndex = 0;
-          this.bottomIndexChange = new core_1.EventEmitter();
-          this.bottomIndex = 0;
-          this.lastScroll = 0;
-          this.container = element.nativeElement;
-        }
-        InfiniteScroller.prototype.ngAfterContentInit = function() {
-          var _this = this;
-          this.firstItem = this.itemQuery.first;
-          this.itemQuery.changes.subscribe(function() {
-            _this.handleItemChanges();
+    Modal.prototype.clickElement = function(e) {
+      if (this.closeOnUnfocus) {
+        if ((e.target && (e.target.className == 'modal customFadeIn' || e.target.className == 'modal-dialog')) || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
+          this.showModal(false);
+      }
+    };
+    Modal.prototype.getElement = function() {
+      return this._el;
+    };
+    Modal.prototype.closeModal = function() {
+      return this.showModal(false);
+    };
+    Modal.prototype.showModal = function(isDisplayed) {
+      var _this = this;
+      var body = document.body;
+      if (isDisplayed === undefined) {
+        this.displayed = !this.displayed;
+      } else {
+        this.displayed = isDisplayed;
+      }
+      if (this.displayed) {
+        body.classList.add('modal-open');
+      } else {
+        body.classList.remove('modal-open');
+        if (this.closeOnUnfocus) {
+          this._el.childNodes[0].removeEventListener('click', function(e) {
+            if ((e.target && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')) || (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
+              _this.showModal(false);
           });
-        };
-        InfiniteScroller.prototype.ngAfterViewInit = function() {
-          this.container = this.container.firstElementChild;
-          this.container.scrollTop += 1;
-        };
-        InfiniteScroller.prototype.handleItemChanges = function() {
-          if (this.firstItem == null)
-            this.firstItem = this.itemQuery.first;
-          if (this.firstItem !== this.itemQuery.first) {
-            this.container.scrollTop += this.itemQuery.first.height;
-            this.firstItem = this.itemQuery.first;
-          }
-        };
-        InfiniteScroller.prototype.getVisableIndicies = function() {
-          var _this = this;
-          var itemArray = this.itemQuery.toArray();
-          var visableIndicies = itemArray.filter(function(i) {
-            return _this.checkVisableItem(i);
-          }).map(function(i) {
-            return itemArray.indexOf(i);
-          });
-          if (visableIndicies.length > 1) {
-            this.topIndex = visableIndicies[0];
-            this.bottomIndex = visableIndicies[visableIndicies.length - 1];
-            this.topIndexChange.next(this.topIndex);
-            this.bottomIndexChange.next(this.bottomIndex);
-          } else if (visableIndicies.length > 0) {
-            this.topIndex = visableIndicies[0];
-            this.topIndexChange.next(this.topIndex);
-          }
-        };
-        InfiniteScroller.prototype.checkVisableItem = function(item) {
-          var itemTop = item.element.offsetTop;
-          var itemBottom = itemTop + ElementUtils_1.ElementUtils.outerHeight(item.element);
-          var viewTop = this.container.scrollTop + this.container.offsetTop;
-          var viewBottom = viewTop + this.container.clientHeight;
-          if (itemTop > viewTop && itemTop < viewBottom)
-            return true;
-          if (itemBottom > viewTop && itemBottom < viewBottom)
-            return true;
-          if (itemTop < viewTop && itemBottom > viewBottom)
-            return true;
-          return false;
-        };
-        InfiniteScroller.prototype.doscroll = function(event) {
-          var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
-          var targetRect = target.getBoundingClientRect();
-          var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
-          var scrollDown = target.scrollTop > this.lastScroll;
-          var saveLastScroll = this.lastScroll;
-          this.lastScroll = target.scrollTop;
-          if (scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance * 2) {
-            this.next.emit(null);
-            if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-              target.scrollTop -= 10;
-            }
-          } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
-            this.prev.emit(null);
-          }
-          this.getVisableIndicies();
-          if (target.scrollTop < 1)
-            target.scrollTop = 1;
-        };
-        InfiniteScroller.prototype.scrollTo = function(position) {
-          ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
-        };
-        InfiniteScroller.prototype.scrollToIndex = function(index) {
-          var itemArray = this.itemQuery.toArray();
-          var targetIndex = 0;
-          if (index > 0 && index < itemArray.length)
-            targetIndex = index;
-          else if (index >= itemArray.length)
-            targetIndex = itemArray.length - 1;
-          if (targetIndex < 0)
-            targetIndex = 0;
-          var target = this.itemQuery.toArray()[targetIndex];
-          var targetPos = target.element.offsetTop - this.container.offsetTop;
-          this.scrollTo(targetPos);
-        };
-        InfiniteScroller.prototype.isTop = function() {
-          return this.lastScroll <= 1;
-        };
-        InfiniteScroller.prototype.isBottom = function() {
-          return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)], InfiniteScroller.prototype, "next", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_b = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _b) || Object)], InfiniteScroller.prototype, "prev", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_c = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _c) || Object)], InfiniteScroller.prototype, "topIndexChange", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_d = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _d) || Object)], InfiniteScroller.prototype, "bottomIndexChange", void 0);
-        __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', (typeof(_e = typeof core_1.QueryList !== 'undefined' && core_1.QueryList) === 'function' && _e) || Object)], InfiniteScroller.prototype, "itemQuery", void 0);
-        InfiniteScroller = __decorate([core_1.Component({
-          selector: "infinite-scroller",
-          template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
-          styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
-          directives: []
-        }), __metadata('design:paramtypes', [(typeof(_f = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _f) || Object])], InfiniteScroller);
-        return InfiniteScroller;
-        var _a,
-            _b,
-            _c,
-            _d,
-            _e,
-            _f;
-      }());
-      exports_1("InfiniteScroller", InfiniteScroller);
-      exports_1("INFINITE_SCROLLER_PROVIDERS", INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem]);
-    }
-  };
+        }
+      }
+      return false;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle", void 0);
+    Modal = __decorate([core_1.Component({
+      selector: 'modal',
+      host: {'(click)': 'clickElement($event)'},
+      styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
+      template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, Animation_1.Animation]
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
+    return Modal;
+  }());
+  exports.Modal = Modal;
+  exports.MODAL_PROVIDERS = [Modal];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/core"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["@angular/core", "@angular/common", "../../pipes/Range/Range"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -1330,37 +979,69 @@ System.register("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/core"], 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1;
-  var Dropdown,
-      DROPDOWN_COMPONENT_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      Dropdown = (function() {
-        function Dropdown() {
-          this.dropdownOpen = false;
-        }
-        Dropdown.prototype.toggleDropdown = function() {
-          this.dropdownOpen = !this.dropdownOpen;
-        };
-        __decorate([core_1.Input(), __metadata('design:type', String)], Dropdown.prototype, "label", void 0);
-        Dropdown = __decorate([core_1.Component({
-          selector: "dropdown",
-          template: "\n      <div class=\"dropdown open\">\n        <button class=\"btn btn-secondary\" type=\"button\" \n          aria-haspopup=\"true\" aria-expanded=\"false\" (click)=\"toggleDropdown()\">\n          {{label}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\"\n          *ngIf=\"dropdownOpen\" (click)=\"toggleDropdown()\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
-        }), __metadata('design:paramtypes', [])], Dropdown);
-        return Dropdown;
-      }());
-      exports_1("Dropdown", Dropdown);
-      exports_1("DROPDOWN_COMPONENT_PROVIDERS", DROPDOWN_COMPONENT_PROVIDERS = [Dropdown]);
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var Range_1 = $__require('../../pipes/Range/Range');
+  var Pagination = (function() {
+    function Pagination() {
+      this.currentPage = 1;
+      this.pagesAtOnce = 5;
+      this.totalPages = 10;
+      this.showSteps = true;
+      this.showEnds = true;
+      this.showSelect = true;
+      this.currentPageChange = new core_1.EventEmitter();
+      this.pagesBlank = [];
+      this.setPage(this.currentPage);
     }
-  };
+    Pagination.prototype.ngOnChanges = function(changes) {
+      this.setPage(this.currentPage);
+    };
+    Pagination.prototype.setPage = function(newPage) {
+      if (newPage < 1 || newPage > this.totalPages)
+        return;
+      this.currentPage = newPage;
+      if (this.currentPage - Math.ceil(this.pagesAtOnce / 2) < 0 || this.totalPages - this.pagesAtOnce <= 0) {
+        this.startingIndex = 0;
+        this.endingIndex = this.pagesAtOnce;
+      } else if (this.totalPages - this.currentPage <= this.pagesAtOnce - Math.ceil(this.pagesAtOnce / 2)) {
+        this.startingIndex = this.totalPages - this.pagesAtOnce;
+        this.endingIndex = this.totalPages;
+      } else {
+        this.startingIndex = this.currentPage - Math.ceil(this.pagesAtOnce / 2);
+        this.endingIndex = this.startingIndex + this.pagesAtOnce < this.totalPages ? this.startingIndex + this.pagesAtOnce : this.totalPages;
+      }
+      this.currentPageChange.next(this.currentPage);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "currentPage", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "pagesAtOnce", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Pagination.prototype, "totalPages", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Pagination.prototype, "showSteps", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Pagination.prototype, "showEnds", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Pagination.prototype, "showSelect", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Pagination.prototype, "currentPageChange", void 0);
+    Pagination = __decorate([core_1.Component({
+      selector: 'pagination',
+      changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+      properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"],
+      styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
+      template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\" *ngIf=\"showSelect\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"let page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES],
+      pipes: [common_1.SlicePipe, Range_1.RangePipe]
+    }), __metadata('design:paramtypes', [])], Pagination);
+    return Pagination;
+  }());
+  exports.Pagination = Pagination;
+  exports.PAGINATION_PROVIDERS = [Pagination];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./TabSet"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["@angular/core", "../../utilities/ElementUtils"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -1377,262 +1058,438 @@ System.register("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./TabSet"]
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      TabSet_1;
-  var Tab,
-      TAB_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(TabSet_1_1) {
-      TabSet_1 = TabSet_1_1;
-    }],
-    execute: function() {
-      Tab = (function() {
-        function Tab(tabset) {
-          this.activeChange = new core_1.EventEmitter(false);
-          this.select = new core_1.EventEmitter(false);
-          this.deselect = new core_1.EventEmitter(false);
-          this.remove = new core_1.EventEmitter(false);
-          this.addClass = true;
-          this.tabset = tabset;
-          this.tabset.addTab(this);
+  var core_1 = $__require('@angular/core');
+  var ElementUtils_1 = $__require('../../utilities/ElementUtils');
+  var ScrollItem = (function() {
+    function ScrollItem(element) {
+      this.element = element.nativeElement;
+    }
+    Object.defineProperty(ScrollItem.prototype, "height", {
+      get: function() {
+        return ElementUtils_1.ElementUtils.outerHeight(this.element);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ScrollItem.prototype.ngAfterViewInit = function() {
+      this.element = this.element.firstElementChild;
+    };
+    ScrollItem = __decorate([core_1.Directive({selector: "[scroll-item],.scroll-item"}), __metadata('design:paramtypes', [core_1.ElementRef])], ScrollItem);
+    return ScrollItem;
+  }());
+  exports.ScrollItem = ScrollItem;
+  var InfiniteScroller = (function() {
+    function InfiniteScroller(element) {
+      this.distance = 100;
+      this.height = 'auto';
+      this.hideScrollbar = false;
+      this.next = new core_1.EventEmitter();
+      this.prev = new core_1.EventEmitter();
+      this.topIndexChange = new core_1.EventEmitter();
+      this.topIndex = 0;
+      this.bottomIndexChange = new core_1.EventEmitter();
+      this.bottomIndex = 0;
+      this.lastScroll = 0;
+      this.container = element.nativeElement;
+    }
+    InfiniteScroller.prototype.ngAfterContentInit = function() {
+      var _this = this;
+      this.firstItem = this.itemQuery.first;
+      this.itemQuery.changes.subscribe(function() {
+        _this.handleItemChanges();
+      });
+    };
+    InfiniteScroller.prototype.ngAfterViewInit = function() {
+      this.container = this.container.firstElementChild;
+      this.container.scrollTop += 1;
+    };
+    InfiniteScroller.prototype.handleItemChanges = function() {
+      if (this.firstItem == null)
+        this.firstItem = this.itemQuery.first;
+      if (this.firstItem !== this.itemQuery.first) {
+        this.container.scrollTop += this.itemQuery.first.height;
+        this.firstItem = this.itemQuery.first;
+      }
+    };
+    InfiniteScroller.prototype.getVisableIndicies = function() {
+      var _this = this;
+      var itemArray = this.itemQuery.toArray();
+      var visableIndicies = itemArray.filter(function(i) {
+        return _this.checkVisableItem(i);
+      }).map(function(i) {
+        return itemArray.indexOf(i);
+      });
+      if (visableIndicies.length > 1) {
+        this.topIndex = visableIndicies[0];
+        this.bottomIndex = visableIndicies[visableIndicies.length - 1];
+        this.topIndexChange.next(this.topIndex);
+        this.bottomIndexChange.next(this.bottomIndex);
+      } else if (visableIndicies.length > 0) {
+        this.topIndex = visableIndicies[0];
+        this.topIndexChange.next(this.topIndex);
+      }
+    };
+    InfiniteScroller.prototype.checkVisableItem = function(item) {
+      var itemTop = item.element.offsetTop;
+      var itemBottom = itemTop + ElementUtils_1.ElementUtils.outerHeight(item.element);
+      var viewTop = this.container.scrollTop + this.container.offsetTop;
+      var viewBottom = viewTop + this.container.clientHeight;
+      if (itemTop > viewTop && itemTop < viewBottom)
+        return true;
+      if (itemBottom > viewTop && itemBottom < viewBottom)
+        return true;
+      if (itemTop < viewTop && itemBottom > viewBottom)
+        return true;
+      return false;
+    };
+    InfiniteScroller.prototype.doscroll = function(event) {
+      var target = (typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
+      var targetRect = target.getBoundingClientRect();
+      var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
+      var scrollDown = target.scrollTop > this.lastScroll;
+      var saveLastScroll = this.lastScroll;
+      this.lastScroll = target.scrollTop;
+      if (scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance * 2) {
+        this.next.emit(null);
+        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+          target.scrollTop -= 10;
         }
-        Object.defineProperty(Tab.prototype, "active", {
-          get: function() {
-            return this._active;
-          },
-          set: function(active) {
-            var _this = this;
-            if (this.disabled && active || !active) {
-              if (this._active && this._active != active) {
-                this.deselect.next(this);
-              }
-              if (!active) {
-                this._active = active;
-              }
-              this.activeChange.next(this._active);
-              return;
-            }
-            if (this._active != active) {
-              this.select.next(this);
-            }
+      } else if (!scrollDown && target.scrollTop <= this.distance * 2) {
+        this.prev.emit(null);
+      }
+      this.getVisableIndicies();
+      if (target.scrollTop < 1)
+        target.scrollTop = 1;
+    };
+    InfiniteScroller.prototype.scrollTo = function(position) {
+      ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
+    };
+    InfiniteScroller.prototype.scrollToIndex = function(index) {
+      var itemArray = this.itemQuery.toArray();
+      var targetIndex = 0;
+      if (index > 0 && index < itemArray.length)
+        targetIndex = index;
+      else if (index >= itemArray.length)
+        targetIndex = itemArray.length - 1;
+      if (targetIndex < 0)
+        targetIndex = 0;
+      var target = this.itemQuery.toArray()[targetIndex];
+      var targetPos = target.element.offsetTop - this.container.offsetTop;
+      this.scrollTo(targetPos);
+    };
+    InfiniteScroller.prototype.isTop = function() {
+      return this.lastScroll <= 1;
+    };
+    InfiniteScroller.prototype.isBottom = function() {
+      return (this.lastScroll + this.container.clientHeight) >= this.container.scrollHeight - 10;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], InfiniteScroller.prototype, "distance", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], InfiniteScroller.prototype, "height", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], InfiniteScroller.prototype, "hideScrollbar", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "next", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "prev", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "topIndexChange", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], InfiniteScroller.prototype, "bottomIndexChange", void 0);
+    __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
+    InfiniteScroller = __decorate([core_1.Component({
+      selector: "infinite-scroller",
+      template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
+      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
+      directives: []
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
+    return InfiniteScroller;
+  }());
+  exports.InfiniteScroller = InfiniteScroller;
+  exports.INFINITE_SCROLLER_PROVIDERS = [InfiniteScroller, ScrollItem];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var Dropdown = (function() {
+    function Dropdown() {
+      this.dropdownOpen = false;
+    }
+    Dropdown.prototype.toggleDropdown = function() {
+      this.dropdownOpen = !this.dropdownOpen;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Dropdown.prototype, "label", void 0);
+    Dropdown = __decorate([core_1.Component({
+      selector: "dropdown",
+      template: "\n      <div class=\"dropdown open\">\n        <button class=\"btn btn-secondary\" type=\"button\" \n          aria-haspopup=\"true\" aria-expanded=\"false\" (click)=\"toggleDropdown()\">\n          {{label}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\"\n          *ngIf=\"dropdownOpen\" (click)=\"toggleDropdown()\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n    "
+    }), __metadata('design:paramtypes', [])], Dropdown);
+    return Dropdown;
+  }());
+  exports.Dropdown = Dropdown;
+  exports.DROPDOWN_COMPONENT_PROVIDERS = [Dropdown];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["@angular/core", "./TabSet"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var TabSet_1 = $__require('./TabSet');
+  var Tab = (function() {
+    function Tab(tabset) {
+      this.activeChange = new core_1.EventEmitter(false);
+      this.select = new core_1.EventEmitter(false);
+      this.deselect = new core_1.EventEmitter(false);
+      this.remove = new core_1.EventEmitter(false);
+      this.addClass = true;
+      this.tabset = tabset;
+      this.tabset.addTab(this);
+    }
+    Object.defineProperty(Tab.prototype, "active", {
+      get: function() {
+        return this._active;
+      },
+      set: function(active) {
+        var _this = this;
+        if (this.disabled && active || !active) {
+          if (this._active && this._active != active) {
+            this.deselect.next(this);
+          }
+          if (!active) {
             this._active = active;
-            this.activeChange.next(this._active);
-            this.tabset.tabs.forEach(function(tab) {
-              if (tab !== _this) {
-                tab.active = false;
-                tab.activeChange.next(false);
-              }
-            });
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Tab.prototype.ngOnDestroy = function() {
-          this.tabset.removeTab(this);
-        };
-        __decorate([core_1.Input(), __metadata('design:type', String)], Tab.prototype, "heading", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "disabled", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "removable", void 0);
-        __decorate([core_1.HostBinding('class.active'), core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "active", null);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)], Tab.prototype, "activeChange", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_b = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _b) || Object)], Tab.prototype, "select", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_c = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _c) || Object)], Tab.prototype, "deselect", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_d = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _d) || Object)], Tab.prototype, "remove", void 0);
-        __decorate([core_1.HostBinding('class.tab-pane'), __metadata('design:type', Boolean)], Tab.prototype, "addClass", void 0);
-        Tab = __decorate([core_1.Directive({selector: 'tab, [tab]'}), __metadata('design:paramtypes', [TabSet_1.TabSet])], Tab);
-        return Tab;
-        var _a,
-            _b,
-            _c,
-            _d;
-      }());
-      exports_1("Tab", Tab);
-      exports_1("TAB_PROVIDERS", TAB_PROVIDERS = [Tab, TabSet_1.TabSet]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./TagSet"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      TagSet_1;
-  var Tag,
-      TAG_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(TagSet_1_1) {
-      TagSet_1 = TagSet_1_1;
-    }],
-    execute: function() {
-      Tag = (function() {
-        function Tag(tagset) {
-          this.removable = false;
-          this.remove = new core_1.EventEmitter(false);
-          this.classMap = {};
-          this.tagset = tagset;
-          this.tagset.addTag(this);
-        }
-        Object.defineProperty(Tag.prototype, "pill", {
-          get: function() {
-            return this._pill;
-          },
-          set: function(value) {
-            this._pill = value;
-            this.setClassMap();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(Tag.prototype, "color", {
-          get: function() {
-            return this._color;
-          },
-          set: function(value) {
-            this._color = value;
-            this.setClassMap();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Object.defineProperty(Tag.prototype, "disabled", {
-          get: function() {
-            return this._disabled;
-          },
-          set: function(value) {
-            this._disabled = value;
-            this.setClassMap();
-          },
-          enumerable: true,
-          configurable: true
-        });
-        ;
-        Tag.prototype.ngOnInit = function() {
-          this.color = this.color !== 'undefined' ? this.color : 'default';
-        };
-        Tag.prototype.ngOnDestroy = function() {
-          this.remove.next(this);
-          this.tagset.removeTag(this);
-        };
-        Tag.prototype.setClassMap = function() {
-          this.classMap = (_a = {
-            'disabled': this.disabled,
-            'label-pill': this.pill
-          }, _a['label-' + ((this.color && this.color.toLowerCase()) || 'default')] = true, _a);
-          var _a;
-        };
-        __decorate([core_1.Input(), __metadata('design:type', String)], Tag.prototype, "title", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Object)], Tag.prototype, "value", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "removable", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "pill", null);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Tag.prototype, "color", null);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "disabled", null);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)], Tag.prototype, "remove", void 0);
-        Tag = __decorate([core_1.Directive({selector: 'tag, [tag]'}), __metadata('design:paramtypes', [TagSet_1.TagSet])], Tag);
-        return Tag;
-        var _a;
-      }());
-      exports_1("Tag", Tag);
-      exports_1("TAG_PROVIDERS", TAG_PROVIDERS = [Tag, TagSet_1.TagSet]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/TableSortable/TableSortable", ["angular2/core", "angular2/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      common_1,
-      OrderBy_1,
-      Format_1,
-      TableSortableSorting_1;
-  var TableSortable,
-      TABLESORTABLE_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(OrderBy_1_1) {
-      OrderBy_1 = OrderBy_1_1;
-    }, function(Format_1_1) {
-      Format_1 = Format_1_1;
-    }, function(TableSortableSorting_1_1) {
-      TableSortableSorting_1 = TableSortableSorting_1_1;
-      exports_1({"TableSortableSorting": TableSortableSorting_1_1["TableSortableSorting"]});
-    }, function(TableSortableColumn_1_1) {
-      exports_1({"TableSortableColumn": TableSortableColumn_1_1["TableSortableColumn"]});
-    }],
-    execute: function() {
-      TableSortable = (function() {
-        function TableSortable() {}
-        TableSortable.prototype.selectedClass = function(columnName) {
-          return columnName == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
-        };
-        TableSortable.prototype.changeSorting = function(columnName) {
-          var sort = this.sort;
-          if (sort.column == columnName) {
-            sort.descending = !sort.descending;
-          } else {
-            sort.column = columnName;
-            sort.descending = false;
           }
-        };
-        TableSortable.prototype.convertSorting = function() {
-          return this.sort.descending ? '-' + this.sort.column : this.sort.column;
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Array)], TableSortable.prototype, "columns", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Array)], TableSortable.prototype, "data", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
-        TableSortable = __decorate([core_1.Component({
-          selector: 'table-sortable',
-          template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
-          directives: [common_1.CORE_DIRECTIVES],
-          pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
-        }), __metadata('design:paramtypes', [])], TableSortable);
-        return TableSortable;
-      }());
-      exports_1("TableSortable", TableSortable);
-      exports_1("TABLESORTABLE_PROVIDERS", TABLESORTABLE_PROVIDERS = [TableSortable]);
-    }
+          this.activeChange.next(this._active);
+          return;
+        }
+        if (this._active != active) {
+          this.select.next(this);
+        }
+        this._active = active;
+        this.activeChange.next(this._active);
+        this.tabset.tabs.forEach(function(tab) {
+          if (tab !== _this) {
+            tab.active = false;
+            tab.activeChange.next(false);
+          }
+        });
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Tab.prototype.ngOnDestroy = function() {
+      this.tabset.removeTab(this);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Tab.prototype, "heading", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "disabled", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "removable", void 0);
+    __decorate([core_1.HostBinding('class.active'), core_1.Input(), __metadata('design:type', Boolean)], Tab.prototype, "active", null);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "activeChange", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "select", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "deselect", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tab.prototype, "remove", void 0);
+    __decorate([core_1.HostBinding('class.tab-pane'), __metadata('design:type', Boolean)], Tab.prototype, "addClass", void 0);
+    Tab = __decorate([core_1.Directive({selector: 'tab, [tab]'}), __metadata('design:paramtypes', [TabSet_1.TabSet])], Tab);
+    return Tab;
+  }());
+  exports.Tab = Tab;
+  exports.TAB_PROVIDERS = [Tab, TabSet_1.TabSet];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["@angular/core", "./TagSet"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var TagSet_1 = $__require('./TagSet');
+  var Tag = (function() {
+    function Tag(tagset) {
+      this.removable = false;
+      this.remove = new core_1.EventEmitter(false);
+      this.classMap = {};
+      this.tagset = tagset;
+      this.tagset.addTag(this);
+    }
+    Object.defineProperty(Tag.prototype, "pill", {
+      get: function() {
+        return this._pill;
+      },
+      set: function(value) {
+        this._pill = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(Tag.prototype, "color", {
+      get: function() {
+        return this._color;
+      },
+      set: function(value) {
+        this._color = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(Tag.prototype, "disabled", {
+      get: function() {
+        return this._disabled;
+      },
+      set: function(value) {
+        this._disabled = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Tag.prototype.ngOnInit = function() {
+      this.color = this.color !== 'undefined' ? this.color : 'default';
+    };
+    Tag.prototype.ngOnDestroy = function() {
+      this.remove.next(this);
+      this.tagset.removeTag(this);
+    };
+    Tag.prototype.setClassMap = function() {
+      this.classMap = (_a = {
+        'disabled': this.disabled,
+        'label-pill': this.pill
+      }, _a['label-' + ((this.color && this.color.toLowerCase()) || 'default')] = true, _a);
+      var _a;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Tag.prototype, "title", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Object)], Tag.prototype, "value", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "removable", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "pill", null);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Tag.prototype, "color", null);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Tag.prototype, "disabled", null);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], Tag.prototype, "remove", void 0);
+    Tag = __decorate([core_1.Directive({selector: 'tag, [tag]'}), __metadata('design:paramtypes', [TagSet_1.TagSet])], Tag);
+    return Tag;
+  }());
+  exports.Tag = Tag;
+  exports.TAG_PROVIDERS = [Tag, TagSet_1.TagSet];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var OrderBy_1 = $__require('../../pipes/OrderBy/OrderBy');
+  var Format_1 = $__require('../../pipes/Format/Format');
+  var TableSortableSorting_1 = $__require('./TableSortableSorting');
+  var TableSortable = (function() {
+    function TableSortable() {}
+    TableSortable.prototype.selectedClass = function(columnName) {
+      return columnName == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
+    };
+    TableSortable.prototype.changeSorting = function(columnName) {
+      var sort = this.sort;
+      if (sort.column == columnName) {
+        sort.descending = !sort.descending;
+      } else {
+        sort.column = columnName;
+        sort.descending = false;
+      }
+    };
+    TableSortable.prototype.convertSorting = function() {
+      return this.sort.descending ? '-' + this.sort.column : this.sort.column;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TableSortable.prototype, "columns", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TableSortable.prototype, "data", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
+    TableSortable = __decorate([core_1.Component({
+      selector: 'table-sortable',
+      template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
+      directives: [common_1.CORE_DIRECTIVES],
+      pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
+    }), __metadata('design:paramtypes', [])], TableSortable);
+    return TableSortable;
+  }());
+  exports.TableSortable = TableSortable;
+  exports.TABLESORTABLE_PROVIDERS = [TableSortable];
+  var TableSortableColumn_1 = $__require('./TableSortableColumn');
+  exports.TableSortableColumn = TableSortableColumn_1.TableSortableColumn;
+  var TableSortableSorting_2 = $__require('./TableSortableSorting');
+  exports.TableSortableSorting = TableSortableSorting_2.TableSortableSorting;
+  return module.exports;
 });
 
 System.registerDynamic("fuel-ui/dist/components/Slider/NoUiSlider", [], false, function($__require, $__exports, $__module) {
@@ -2816,9 +2673,12 @@ System.registerDynamic("fuel-ui/dist/components/Slider/NoUiSlider", [], false, f
   return _retrieveGlobal();
 });
 
-System.register("fuel-ui/dist/components/Slider/Slider", ["angular2/core", "./NoUiSlider"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["@angular/core", "./NoUiSlider"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -2835,1345 +2695,1219 @@ System.register("fuel-ui/dist/components/Slider/Slider", ["angular2/core", "./No
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1;
-  var Slider,
-      SLIDER_COMPONENT_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(_1) {}],
-    execute: function() {
-      Slider = (function() {
-        function Slider(_element) {
-          this._element = _element;
-          this.background = "#E24932";
-          this.height = "";
-          this.width = "";
-          this.orientation = "horizontal";
-          this.direction = "ltr";
-          this.behavior = "tap";
-          this.pips = 5;
-          this.pipDensity = 5;
-          this.step = 1;
-          this.decimals = 0;
-          this.minValue = 0;
-          this.maxValue = 100;
-          this.margin = 10;
-          this.value = 0;
-          this.secondValue = null;
-          this.valueChange = new core_1.EventEmitter();
-          this.secondValueChange = new core_1.EventEmitter();
-        }
-        Slider.prototype.ngAfterViewInit = function() {
-          var _this = this;
-          this._sliderElement = this._element.nativeElement.children[0];
-          if (this.orientation == 'vertical')
-            this._sliderElement.style.height = this.height.length > 0 ? this.height : "200px";
-          if (this.orientation == 'horizontal')
-            this._sliderElement.style.width = this.width.length > 0 ? this.width : null;
-          this._slider = noUiSlider.create(this._sliderElement, {
-            start: this.secondValue != null ? [this.value, this.secondValue] : this.value,
-            step: parseInt(this.step.toString()),
-            margin: this.margin,
-            connect: this.secondValue != null ? true : 'lower',
-            direction: this.direction,
-            orientation: this.orientation,
-            behaviour: this.behavior,
-            range: {
-              'min': parseInt(this.minValue.toString()),
-              'max': parseInt(this.maxValue.toString())
-            },
-            pips: {
-              mode: 'count',
-              values: this.pips,
-              density: this.pipDensity
-            },
-            format: {
-              to: function(value) {
-                return parseFloat(value).toFixed(_this.decimals);
-              },
-              from: function(value) {
-                return parseFloat(value).toFixed(_this.decimals);
-              }
-            }
-          });
-          if (!this._element.nativeElement.disabled) {
-            var noUI = this._element.nativeElement.getElementsByClassName('noUi-connect');
-            [].slice.call(noUI).forEach(function(el) {
-              el.style.background = _this.background;
-            });
-          }
-          this._sliderElement.noUiSlider.on('slide', function(val) {
-            _this.value = val[0];
-            _this.secondValue = val.length > 1 ? val[1] : null;
-            _this.valueChange.next(val[0]);
-            _this.secondValueChange.next(_this.secondValue);
-          });
-        };
-        Slider.prototype.ngOnChanges = function(changes) {
-          if (this._sliderElement && typeof changes.value !== 'undefined')
-            this._sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
-          if (this._sliderElement && typeof changes.secondValue !== 'undefined')
-            this._sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
-        };
-        __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "background", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "height", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "width", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "orientation", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "direction", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "behavior", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "pips", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "pipDensity", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "step", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "decimals", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "minValue", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "maxValue", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "margin", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "value", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "secondValue", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], Slider.prototype, "valueChange", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], Slider.prototype, "secondValueChange", void 0);
-        Slider = __decorate([core_1.Component({
-          selector: "slider",
-          template: "\n\n      <div class=\"slider\"></div>\n    "
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], Slider);
-        return Slider;
-        var _a;
-      }());
-      exports_1("Slider", Slider);
-      exports_1("SLIDER_COMPONENT_PROVIDERS", SLIDER_COMPONENT_PROVIDERS = [Slider]);
+  var core_1 = $__require('@angular/core');
+  $__require('./NoUiSlider');
+  var Slider = (function() {
+    function Slider(_element) {
+      this._element = _element;
+      this.background = "#E24932";
+      this.height = "";
+      this.width = "";
+      this.orientation = "horizontal";
+      this.direction = "ltr";
+      this.behavior = "tap";
+      this.pips = 5;
+      this.pipDensity = 5;
+      this.step = 1;
+      this.decimals = 0;
+      this.minValue = 0;
+      this.maxValue = 100;
+      this.margin = 10;
+      this.value = 0;
+      this.secondValue = null;
+      this.valueChange = new core_1.EventEmitter();
+      this.secondValueChange = new core_1.EventEmitter();
     }
-  };
-});
-
-System.register("fuel-ui/dist/components/TimePicker/TimePicker", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var TimePicker,
-      TIMEPICKER_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      TimePicker = (function() {
-        function TimePicker() {
-          this.hourStep = 1;
-          this.minuteStep = 1;
-          this.secondStep = 1;
-          this.showMeridian = true;
-          this.meridians = ["AM", "PM"];
-          this.showSeconds = false;
-          this.readonlyInput = false;
-          this.showSpinners = true;
-          this.disabled = false;
-          this.min = new Date(new Date().getFullYear(), 0, 1, 0, 0, 0);
-          this.max = new Date(new Date().getFullYear(), 0, 1, 23, 59, 59);
-          this.value = new Date(new Date().getFullYear(), 0, 1, 0, 0, 0);
-          this.meridian = this.meridians.length > 0 ? this.meridians[0] : null;
-          this.hours = 0;
-          this.minutes = "00";
-          this.seconds = "00";
-          this.invalidHours = false;
-          this.invalidMinutes = false;
-          this.invalidSeconds = false;
-          this.valueChange = new core_1.EventEmitter();
-        }
-        TimePicker.prototype.ngOnInit = function() {
-          this.hours = this.value.getHours();
-          this.minutes = this.value.getMinutes() > 9 ? this.value.getMinutes().toString() : "0" + this.value.getMinutes().toString();
-          this.seconds = this.value.getSeconds() > 9 ? this.value.getSeconds().toString() : "0" + this.value.getSeconds().toString();
-          this.refresh();
-        };
-        TimePicker.prototype.ngOnChanges = function(changes) {
-          this.refresh();
-        };
-        TimePicker.prototype.incrementHours = function() {
-          if (!this.noIncrementHours()) {
-            this.addSecondsToSelected(this.hourStep * 60 * 60);
-          }
-        };
-        ;
-        TimePicker.prototype.decrementHours = function() {
-          if (!this.noDecrementHours()) {
-            this.addSecondsToSelected(-this.hourStep * 60 * 60);
-          }
-        };
-        ;
-        TimePicker.prototype.incrementMinutes = function() {
-          if (!this.noIncrementMinutes()) {
-            this.addSecondsToSelected(this.minuteStep * 60);
-          }
-        };
-        ;
-        TimePicker.prototype.decrementMinutes = function() {
-          if (!this.noDecrementMinutes()) {
-            this.addSecondsToSelected(-this.minuteStep * 60);
-          }
-        };
-        ;
-        TimePicker.prototype.incrementSeconds = function() {
-          if (!this.noIncrementSeconds()) {
-            this.addSecondsToSelected(this.secondStep);
-          }
-        };
-        ;
-        TimePicker.prototype.decrementSeconds = function() {
-          if (!this.noDecrementSeconds()) {
-            this.addSecondsToSelected(-this.secondStep);
-          }
-        };
-        ;
-        TimePicker.prototype.toggleMeridian = function() {
-          if (this.noToggleMeridian())
-            return;
-          if (this.minutes && this.hours) {
-            this.addSecondsToSelected(12 * 60 * (this.value.getHours() < 12 ? 60 : -60));
-          } else {
-            this.meridian = this.meridian === this.meridians[0] ? this.meridians[1] : this.meridians[0];
-          }
-        };
-        ;
-        TimePicker.prototype.addSecondsToSelected = function(seconds) {
-          this.value = this.addSeconds(this.value, seconds);
-          this.hours = this.value.getHours();
-          this.minutes = this.value.getMinutes() > 9 ? this.value.getMinutes().toString() : "0" + this.value.getMinutes().toString();
-          this.seconds = this.value.getSeconds() > 9 ? this.value.getSeconds().toString() : "0" + this.value.getSeconds().toString();
-          this.valueChange.next(this.value);
-          this.sanitize();
-          this.refresh();
-        };
-        TimePicker.prototype.addMinutes = function(selected, minutes) {
-          return this.addSeconds(selected, minutes * 60);
-        };
-        TimePicker.prototype.addSeconds = function(date, seconds) {
-          var dt = new Date(date.getTime() + seconds * 1000);
-          var newDate = new Date(date.getTime());
-          newDate.setHours(dt.getHours(), dt.getMinutes(), dt.getSeconds());
-          return newDate;
-        };
-        TimePicker.prototype.invalidTime = function() {
-          return this.invalidHours || this.invalidMinutes || this.invalidSeconds;
-        };
-        TimePicker.prototype.sanitize = function() {
-          this.invalidHours = false;
-          this.invalidMinutes = false;
-          this.invalidSeconds = false;
-        };
-        TimePicker.prototype.refresh = function() {
-          this.hours = this.value.getHours();
-          this.minutes = this.value.getMinutes() > 9 ? this.value.getMinutes().toString() : "0" + this.value.getMinutes().toString();
-          this.seconds = this.value.getSeconds() > 9 ? this.value.getSeconds().toString() : "0" + this.value.getSeconds().toString();
-          if (this.hours >= 12 && this.showMeridian) {
-            this.meridian = this.meridians[1];
-          }
-          if (this.showMeridian) {
-            this.hours = this.hours === 0 || this.hours === 12 ? 12 : this.hours % 12;
-          }
-          this.meridian = this.value.getHours() < 12 ? this.meridians[0] : this.meridians[1];
-        };
-        TimePicker.prototype.updateHours = function() {
-          this.sanitize();
-          if (this.hours.toString().length <= 0 || isNaN(this.hours) || this.hours < 0 || this.hours > 23 || (this.showMeridian && this.hours > 12)) {
-            this.invalidHours = true;
-          } else {
-            this.hours = parseInt(this.hours.toString());
-            this.value.setHours(this.showMeridian && this.meridian == this.meridians[1] ? this.hours + 12 : this.hours);
-            this.addSecondsToSelected(0);
-          }
-        };
-        TimePicker.prototype.updateMinutes = function() {
-          this.sanitize();
-          if (this.minutes.length <= 0 || isNaN(parseInt(this.minutes)) || parseInt(this.minutes) < 0 || parseInt(this.minutes) > 59) {
-            this.invalidMinutes = true;
-          } else {
-            this.value.setMinutes(parseInt(this.minutes));
-            this.addSecondsToSelected(0);
-          }
-        };
-        TimePicker.prototype.updateSeconds = function() {
-          this.sanitize();
-          if (this.seconds.length <= 0 || isNaN(parseInt(this.seconds)) || parseInt(this.seconds) < 0 || parseInt(this.seconds) > 59) {
-            this.invalidSeconds = true;
-          } else {
-            this.value.setSeconds(parseInt(this.seconds));
-            this.addSecondsToSelected(0);
-          }
-        };
-        TimePicker.prototype.noIncrementHours = function() {
-          var incrementedSelected = this.addMinutes(this.value, this.hourStep * 60);
-          return this.disabled || incrementedSelected > this.max || incrementedSelected < this.value && incrementedSelected < this.min;
-        };
-        ;
-        TimePicker.prototype.noDecrementHours = function() {
-          var decrementedSelected = this.addMinutes(this.value, -this.hourStep * 60);
-          return this.disabled || decrementedSelected < this.min || decrementedSelected > this.value && decrementedSelected > this.max;
-        };
-        ;
-        TimePicker.prototype.noIncrementMinutes = function() {
-          var incrementedSelected = this.addMinutes(this.value, this.minuteStep);
-          return this.disabled || incrementedSelected > this.max || incrementedSelected < this.value && incrementedSelected < this.min;
-        };
-        ;
-        TimePicker.prototype.noDecrementMinutes = function() {
-          var decrementedSelected = this.addMinutes(this.value, -this.minuteStep);
-          return this.disabled || decrementedSelected < this.min || decrementedSelected > this.value && decrementedSelected > this.max;
-        };
-        ;
-        TimePicker.prototype.noIncrementSeconds = function() {
-          var incrementedSelected = this.addSeconds(this.value, this.secondStep);
-          return this.disabled || incrementedSelected > this.max || incrementedSelected < this.value && incrementedSelected < this.min;
-        };
-        ;
-        TimePicker.prototype.noDecrementSeconds = function() {
-          var decrementedSelected = this.addSeconds(this.value, -this.secondStep);
-          return this.disabled || decrementedSelected < this.min || decrementedSelected > this.value && decrementedSelected > this.max;
-        };
-        ;
-        TimePicker.prototype.noToggleMeridian = function() {
-          if (this.value.getHours() < 12) {
-            return this.disabled || this.addMinutes(this.value, 12 * 60) > this.max;
-          }
-          return this.disabled || this.addMinutes(this.value, -12 * 60) < this.min;
-        };
-        ;
-        __decorate([core_1.Input(), __metadata('design:type', Number)], TimePicker.prototype, "hourStep", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], TimePicker.prototype, "minuteStep", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], TimePicker.prototype, "secondStep", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "showMeridian", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Array)], TimePicker.prototype, "meridians", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "showSeconds", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "readonlyInput", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "showSpinners", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "disabled", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Date)], TimePicker.prototype, "min", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Date)], TimePicker.prototype, "max", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Date)], TimePicker.prototype, "value", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', (typeof(_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)], TimePicker.prototype, "valueChange", void 0);
-        TimePicker = __decorate([core_1.Component({
-          selector: "timepicker",
-          template: "\n      <table class=\"fuel-ui-timepicker\" [class.has-error]=\"invalidTime()\">\n          <tbody>\n              <tr class=\"text-center\" *ngIf=\"showSpinners\">\n                  <td class=\"fuel-ui-increment hours\">\n                      <a (click)=\"incrementHours()\" [class.disabled]=\"noIncrementHours()\" class=\"btn btn-link\" [attr.disabled]=\"noIncrementHours()\">\n                          <span class=\"fa fa-chevron-up\"></span>\n                      </a>\n                  </td>\n                  <td>&nbsp;</td>\n                  <td class=\"fuel-ui-increment minutes\">\n                      <a (click)=\"incrementMinutes()\" [class.disabled]=\"noIncrementMinutes()\" class=\"btn btn-link\" [attr.disabled]=\"noIncrementMinutes()\">\n                          <span class=\"fa fa-chevron-up\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showSeconds\">&nbsp;</td>\n                  <td *ngIf=\"showSeconds\" class=\"fuel-ui-increment seconds\">\n                      <a (click)=\"incrementSeconds()\" [class.disabled]=\"noIncrementSeconds()\" class=\"btn btn-link\" [attr.disabled]=\"noIncrementSeconds()\">\n                          <span class=\"fa fa-chevron-up\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n              </tr>\n              <tr>\n                  <td class=\"form-group fuel-ui-time hours\" [class.has-error]=\"invalidHours\">\n                      <input type=\"text\" placeholder=\"HH\" [(ngModel)]=\"hours\" (blur)=\"updateHours()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" maxlength=\"2\" [disabled]=\"noIncrementHours()\">\n                  </td>\n                  <td class=\"fuel-ui-separator\">:</td>\n                  <td class=\"form-group fuel-ui-time minutes\" [class.has-error]=\"invalidMinutes\">\n                      <input type=\"text\" placeholder=\"MM\" [(ngModel)]=\"minutes\" (blur)=\"updateMinutes()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" maxlength=\"2\" [disabled]=\"noIncrementMinutes()\">\n                  </td>\n                  <td *ngIf=\"showSeconds\" class=\"fuel-ui-separator\">:</td>\n                  <td class=\"form-group fuel-ui-time seconds\" [class.has-error]=\"invalidSeconds\" *ngIf=\"showSeconds\">\n                      <input type=\"text\" placeholder=\"SS\" [(ngModel)]=\"seconds\" (blur)=\"updateSeconds()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" maxlength=\"2\" [disabled]=\"noIncrementSeconds()\">\n                  </td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n                  <td *ngIf=\"showMeridian\" class=\"fuel-ui-time am-pm\"><button type=\"button\" [class.disabled]=\"noToggleMeridian()\" class=\"btn btn-primary text-center\" (click)=\"toggleMeridian()\">{{meridian}}</button></td>\n              </tr>\n              <tr class=\"text-center\" *ngIf=\"showSpinners\">\n                  <td class=\"fuel-ui-decrement hours\">\n                      <a (click)=\"decrementHours()\" [class.disabled]=\"noDecrementHours()\" class=\"btn btn-link\" [attr.disabled]=\"noDecrementHours()\">\n                          <span class=\"fa fa-chevron-down\"></span>\n                      </a>\n                  </td>\n                  <td>&nbsp;</td>\n                  <td class=\"fuel-ui-decrement minutes\">\n                      <a (click)=\"decrementMinutes()\" [class.disabled]=\"noDecrementMinutes()\" class=\"btn btn-link\" [attr.disabled]=\"noDecrementMinutes()\">\n                          <span class=\"fa fa-chevron-down\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showSeconds\">&nbsp;</td>\n                  <td *ngIf=\"showSeconds\" class=\"fuel-ui-decrement seconds\">\n                      <a (click)=\"decrementSeconds()\" [class.disabled]=\"noDecrementSeconds()\" class=\"btn btn-link\" [attr.disabled]=\"noDecrementSeconds()\">\n                          <span class=\"fa fa-chevron-down\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n              </tr>\n          </tbody>\n      </table>\n    "
-        }), __metadata('design:paramtypes', [])], TimePicker);
-        return TimePicker;
-        var _a;
-      }());
-      exports_1("TimePicker", TimePicker);
-      exports_1("TIMEPICKER_PROVIDERS", TIMEPICKER_PROVIDERS = [TimePicker]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/Accordion/Accordion", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var Accordion;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      Accordion = (function() {
-        function Accordion() {
-          this.closeOthers = true;
-          this.duration = 250;
-          this.items = [];
-        }
-        Accordion.prototype.closeOtherItems = function(openItem) {
-          if (!this.closeOthers)
-            return;
-          this.items.forEach(function(item) {
-            if (item !== openItem) {
-              item.open = false;
-              item.openChange.next(item.open);
-            }
-          });
-        };
-        Accordion.prototype.addItem = function(item) {
-          this.items.push(item);
-        };
-        Accordion.prototype.removeItem = function(item) {
-          var index = this.items.indexOf(item);
-          if (index !== -1) {
-            this.items.splice(index, 1);
-          }
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Accordion.prototype, "closeOthers", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
-        Accordion = __decorate([core_1.Component({
-          selector: 'accordion',
-          template: "<ng-content></ng-content>"
-        }), __metadata('design:paramtypes', [])], Accordion);
-        return Accordion;
-      }());
-      exports_1("Accordion", Accordion);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/Tab/TabSet", ["angular2/core", "angular2/common"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      common_1;
-  var TabSet;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }],
-    execute: function() {
-      TabSet = (function() {
-        function TabSet() {
-          this.tabs = [];
-          this.classMap = {};
-        }
-        Object.defineProperty(TabSet.prototype, "vertical", {
-          get: function() {
-            return this._vertical;
+    Slider.prototype.ngAfterViewInit = function() {
+      var _this = this;
+      this._sliderElement = this._element.nativeElement.children[0];
+      if (this.orientation == 'vertical')
+        this._sliderElement.style.height = this.height.length > 0 ? this.height : "200px";
+      if (this.orientation == 'horizontal')
+        this._sliderElement.style.width = this.width.length > 0 ? this.width : null;
+      this._slider = noUiSlider.create(this._sliderElement, {
+        start: this.secondValue != null ? [this.value, this.secondValue] : this.value,
+        step: parseInt(this.step.toString()),
+        margin: this.margin,
+        connect: this.secondValue != null ? true : 'lower',
+        direction: this.direction,
+        orientation: this.orientation,
+        behaviour: this.behavior,
+        range: {
+          'min': parseInt(this.minValue.toString()),
+          'max': parseInt(this.maxValue.toString())
+        },
+        pips: {
+          mode: 'count',
+          values: this.pips,
+          density: this.pipDensity
+        },
+        format: {
+          to: function(value) {
+            return parseFloat(value).toFixed(_this.decimals);
           },
-          set: function(value) {
-            this._vertical = value;
-            this.setClassMap();
-          },
-          enumerable: true,
-          configurable: true
+          from: function(value) {
+            return parseFloat(value).toFixed(_this.decimals);
+          }
+        }
+      });
+      if (!this._element.nativeElement.disabled) {
+        var noUI = this._element.nativeElement.getElementsByClassName('noUi-connect');
+        [].slice.call(noUI).forEach(function(el) {
+          el.style.background = _this.background;
         });
-        ;
-        Object.defineProperty(TabSet.prototype, "type", {
-          get: function() {
-            return this._type;
-          },
-          set: function(value) {
-            this._type = value;
-            this.setClassMap();
-          },
-          enumerable: true,
-          configurable: true
+      }
+      this._sliderElement.noUiSlider.on('slide', function(val) {
+        _this.value = val[0];
+        _this.secondValue = val.length > 1 ? val[1] : null;
+        _this.valueChange.next(val[0]);
+        _this.secondValueChange.next(_this.secondValue);
+      });
+    };
+    Slider.prototype.ngOnChanges = function(changes) {
+      if (this._sliderElement && typeof changes.value !== 'undefined')
+        this._sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
+      if (this._sliderElement && typeof changes.secondValue !== 'undefined')
+        this._sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "background", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "height", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "width", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "orientation", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "direction", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Slider.prototype, "behavior", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "pips", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "pipDensity", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "step", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "decimals", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "minValue", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "maxValue", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "margin", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "value", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Slider.prototype, "secondValue", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Slider.prototype, "valueChange", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Slider.prototype, "secondValueChange", void 0);
+    Slider = __decorate([core_1.Component({
+      selector: "slider",
+      template: "\n\n      <div class=\"slider\"></div>\n    "
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Slider);
+    return Slider;
+  }());
+  exports.Slider = Slider;
+  exports.SLIDER_COMPONENT_PROVIDERS = [Slider];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var TimePicker = (function() {
+    function TimePicker() {
+      this.hourStep = 1;
+      this.minuteStep = 1;
+      this.secondStep = 1;
+      this.showMeridian = true;
+      this.meridians = ["AM", "PM"];
+      this.showSeconds = false;
+      this.readonlyInput = false;
+      this.showSpinners = true;
+      this.disabled = false;
+      this.min = new Date(new Date().getFullYear(), 0, 1, 0, 0, 0);
+      this.max = new Date(new Date().getFullYear(), 0, 1, 23, 59, 59);
+      this.value = new Date(new Date().getFullYear(), 0, 1, 0, 0, 0);
+      this.meridian = this.meridians.length > 0 ? this.meridians[0] : null;
+      this.hours = 0;
+      this.minutes = "00";
+      this.seconds = "00";
+      this.invalidHours = false;
+      this.invalidMinutes = false;
+      this.invalidSeconds = false;
+      this.valueChange = new core_1.EventEmitter();
+    }
+    TimePicker.prototype.ngOnInit = function() {
+      this.hours = this.value.getHours();
+      this.minutes = this.value.getMinutes() > 9 ? this.value.getMinutes().toString() : "0" + this.value.getMinutes().toString();
+      this.seconds = this.value.getSeconds() > 9 ? this.value.getSeconds().toString() : "0" + this.value.getSeconds().toString();
+      this.refresh();
+    };
+    TimePicker.prototype.ngOnChanges = function(changes) {
+      this.refresh();
+    };
+    TimePicker.prototype.incrementHours = function() {
+      if (!this.noIncrementHours()) {
+        this.addSecondsToSelected(this.hourStep * 60 * 60);
+      }
+    };
+    ;
+    TimePicker.prototype.decrementHours = function() {
+      if (!this.noDecrementHours()) {
+        this.addSecondsToSelected(-this.hourStep * 60 * 60);
+      }
+    };
+    ;
+    TimePicker.prototype.incrementMinutes = function() {
+      if (!this.noIncrementMinutes()) {
+        this.addSecondsToSelected(this.minuteStep * 60);
+      }
+    };
+    ;
+    TimePicker.prototype.decrementMinutes = function() {
+      if (!this.noDecrementMinutes()) {
+        this.addSecondsToSelected(-this.minuteStep * 60);
+      }
+    };
+    ;
+    TimePicker.prototype.incrementSeconds = function() {
+      if (!this.noIncrementSeconds()) {
+        this.addSecondsToSelected(this.secondStep);
+      }
+    };
+    ;
+    TimePicker.prototype.decrementSeconds = function() {
+      if (!this.noDecrementSeconds()) {
+        this.addSecondsToSelected(-this.secondStep);
+      }
+    };
+    ;
+    TimePicker.prototype.toggleMeridian = function() {
+      if (this.noToggleMeridian())
+        return;
+      if (this.minutes && this.hours) {
+        this.addSecondsToSelected(12 * 60 * (this.value.getHours() < 12 ? 60 : -60));
+      } else {
+        this.meridian = this.meridian === this.meridians[0] ? this.meridians[1] : this.meridians[0];
+      }
+    };
+    ;
+    TimePicker.prototype.addSecondsToSelected = function(seconds) {
+      this.value = this.addSeconds(this.value, seconds);
+      this.hours = this.value.getHours();
+      this.minutes = this.value.getMinutes() > 9 ? this.value.getMinutes().toString() : "0" + this.value.getMinutes().toString();
+      this.seconds = this.value.getSeconds() > 9 ? this.value.getSeconds().toString() : "0" + this.value.getSeconds().toString();
+      this.valueChange.next(this.value);
+      this.sanitize();
+      this.refresh();
+    };
+    TimePicker.prototype.addMinutes = function(selected, minutes) {
+      return this.addSeconds(selected, minutes * 60);
+    };
+    TimePicker.prototype.addSeconds = function(date, seconds) {
+      var dt = new Date(date.getTime() + seconds * 1000);
+      var newDate = new Date(date.getTime());
+      newDate.setHours(dt.getHours(), dt.getMinutes(), dt.getSeconds());
+      return newDate;
+    };
+    TimePicker.prototype.invalidTime = function() {
+      return this.invalidHours || this.invalidMinutes || this.invalidSeconds;
+    };
+    TimePicker.prototype.sanitize = function() {
+      this.invalidHours = false;
+      this.invalidMinutes = false;
+      this.invalidSeconds = false;
+    };
+    TimePicker.prototype.refresh = function() {
+      this.hours = this.value.getHours();
+      this.minutes = this.value.getMinutes() > 9 ? this.value.getMinutes().toString() : "0" + this.value.getMinutes().toString();
+      this.seconds = this.value.getSeconds() > 9 ? this.value.getSeconds().toString() : "0" + this.value.getSeconds().toString();
+      if (this.hours >= 12 && this.showMeridian) {
+        this.meridian = this.meridians[1];
+      }
+      if (this.showMeridian) {
+        this.hours = this.hours === 0 || this.hours === 12 ? 12 : this.hours % 12;
+      }
+      this.meridian = this.value.getHours() < 12 ? this.meridians[0] : this.meridians[1];
+    };
+    TimePicker.prototype.updateHours = function() {
+      this.sanitize();
+      if (this.hours.toString().length <= 0 || isNaN(this.hours) || this.hours < 0 || this.hours > 23 || (this.showMeridian && this.hours > 12)) {
+        this.invalidHours = true;
+      } else {
+        this.hours = parseInt(this.hours.toString());
+        this.value.setHours(this.showMeridian && this.meridian == this.meridians[1] ? this.hours + 12 : this.hours);
+        this.addSecondsToSelected(0);
+      }
+    };
+    TimePicker.prototype.updateMinutes = function() {
+      this.sanitize();
+      if (this.minutes.length <= 0 || isNaN(parseInt(this.minutes)) || parseInt(this.minutes) < 0 || parseInt(this.minutes) > 59) {
+        this.invalidMinutes = true;
+      } else {
+        this.value.setMinutes(parseInt(this.minutes));
+        this.addSecondsToSelected(0);
+      }
+    };
+    TimePicker.prototype.updateSeconds = function() {
+      this.sanitize();
+      if (this.seconds.length <= 0 || isNaN(parseInt(this.seconds)) || parseInt(this.seconds) < 0 || parseInt(this.seconds) > 59) {
+        this.invalidSeconds = true;
+      } else {
+        this.value.setSeconds(parseInt(this.seconds));
+        this.addSecondsToSelected(0);
+      }
+    };
+    TimePicker.prototype.noIncrementHours = function() {
+      var incrementedSelected = this.addMinutes(this.value, this.hourStep * 60);
+      return this.disabled || incrementedSelected > this.max || incrementedSelected < this.value && incrementedSelected < this.min;
+    };
+    ;
+    TimePicker.prototype.noDecrementHours = function() {
+      var decrementedSelected = this.addMinutes(this.value, -this.hourStep * 60);
+      return this.disabled || decrementedSelected < this.min || decrementedSelected > this.value && decrementedSelected > this.max;
+    };
+    ;
+    TimePicker.prototype.noIncrementMinutes = function() {
+      var incrementedSelected = this.addMinutes(this.value, this.minuteStep);
+      return this.disabled || incrementedSelected > this.max || incrementedSelected < this.value && incrementedSelected < this.min;
+    };
+    ;
+    TimePicker.prototype.noDecrementMinutes = function() {
+      var decrementedSelected = this.addMinutes(this.value, -this.minuteStep);
+      return this.disabled || decrementedSelected < this.min || decrementedSelected > this.value && decrementedSelected > this.max;
+    };
+    ;
+    TimePicker.prototype.noIncrementSeconds = function() {
+      var incrementedSelected = this.addSeconds(this.value, this.secondStep);
+      return this.disabled || incrementedSelected > this.max || incrementedSelected < this.value && incrementedSelected < this.min;
+    };
+    ;
+    TimePicker.prototype.noDecrementSeconds = function() {
+      var decrementedSelected = this.addSeconds(this.value, -this.secondStep);
+      return this.disabled || decrementedSelected < this.min || decrementedSelected > this.value && decrementedSelected > this.max;
+    };
+    ;
+    TimePicker.prototype.noToggleMeridian = function() {
+      if (this.value.getHours() < 12) {
+        return this.disabled || this.addMinutes(this.value, 12 * 60) > this.max;
+      }
+      return this.disabled || this.addMinutes(this.value, -12 * 60) < this.min;
+    };
+    ;
+    __decorate([core_1.Input(), __metadata('design:type', Number)], TimePicker.prototype, "hourStep", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], TimePicker.prototype, "minuteStep", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], TimePicker.prototype, "secondStep", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "showMeridian", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TimePicker.prototype, "meridians", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "showSeconds", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "readonlyInput", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "showSpinners", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TimePicker.prototype, "disabled", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Date)], TimePicker.prototype, "min", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Date)], TimePicker.prototype, "max", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Date)], TimePicker.prototype, "value", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_1.EventEmitter)], TimePicker.prototype, "valueChange", void 0);
+    TimePicker = __decorate([core_1.Component({
+      selector: "timepicker",
+      template: "\n      <table class=\"fuel-ui-timepicker\" [class.has-error]=\"invalidTime()\">\n          <tbody>\n              <tr class=\"text-center\" *ngIf=\"showSpinners\">\n                  <td class=\"fuel-ui-increment hours\">\n                      <a (click)=\"incrementHours()\" [class.disabled]=\"noIncrementHours()\" class=\"btn btn-link\" [attr.disabled]=\"noIncrementHours()\">\n                          <span class=\"fa fa-chevron-up\"></span>\n                      </a>\n                  </td>\n                  <td>&nbsp;</td>\n                  <td class=\"fuel-ui-increment minutes\">\n                      <a (click)=\"incrementMinutes()\" [class.disabled]=\"noIncrementMinutes()\" class=\"btn btn-link\" [attr.disabled]=\"noIncrementMinutes()\">\n                          <span class=\"fa fa-chevron-up\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showSeconds\">&nbsp;</td>\n                  <td *ngIf=\"showSeconds\" class=\"fuel-ui-increment seconds\">\n                      <a (click)=\"incrementSeconds()\" [class.disabled]=\"noIncrementSeconds()\" class=\"btn btn-link\" [attr.disabled]=\"noIncrementSeconds()\">\n                          <span class=\"fa fa-chevron-up\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n              </tr>\n              <tr>\n                  <td class=\"form-group fuel-ui-time hours\" [class.has-error]=\"invalidHours\">\n                      <input type=\"text\" placeholder=\"HH\" [(ngModel)]=\"hours\" (blur)=\"updateHours()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" maxlength=\"2\" [disabled]=\"noIncrementHours()\">\n                  </td>\n                  <td class=\"fuel-ui-separator\">:</td>\n                  <td class=\"form-group fuel-ui-time minutes\" [class.has-error]=\"invalidMinutes\">\n                      <input type=\"text\" placeholder=\"MM\" [(ngModel)]=\"minutes\" (blur)=\"updateMinutes()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" maxlength=\"2\" [disabled]=\"noIncrementMinutes()\">\n                  </td>\n                  <td *ngIf=\"showSeconds\" class=\"fuel-ui-separator\">:</td>\n                  <td class=\"form-group fuel-ui-time seconds\" [class.has-error]=\"invalidSeconds\" *ngIf=\"showSeconds\">\n                      <input type=\"text\" placeholder=\"SS\" [(ngModel)]=\"seconds\" (blur)=\"updateSeconds()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" maxlength=\"2\" [disabled]=\"noIncrementSeconds()\">\n                  </td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n                  <td *ngIf=\"showMeridian\" class=\"fuel-ui-time am-pm\"><button type=\"button\" [class.disabled]=\"noToggleMeridian()\" class=\"btn btn-primary text-center\" (click)=\"toggleMeridian()\">{{meridian}}</button></td>\n              </tr>\n              <tr class=\"text-center\" *ngIf=\"showSpinners\">\n                  <td class=\"fuel-ui-decrement hours\">\n                      <a (click)=\"decrementHours()\" [class.disabled]=\"noDecrementHours()\" class=\"btn btn-link\" [attr.disabled]=\"noDecrementHours()\">\n                          <span class=\"fa fa-chevron-down\"></span>\n                      </a>\n                  </td>\n                  <td>&nbsp;</td>\n                  <td class=\"fuel-ui-decrement minutes\">\n                      <a (click)=\"decrementMinutes()\" [class.disabled]=\"noDecrementMinutes()\" class=\"btn btn-link\" [attr.disabled]=\"noDecrementMinutes()\">\n                          <span class=\"fa fa-chevron-down\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showSeconds\">&nbsp;</td>\n                  <td *ngIf=\"showSeconds\" class=\"fuel-ui-decrement seconds\">\n                      <a (click)=\"decrementSeconds()\" [class.disabled]=\"noDecrementSeconds()\" class=\"btn btn-link\" [attr.disabled]=\"noDecrementSeconds()\">\n                          <span class=\"fa fa-chevron-down\"></span>\n                      </a>\n                  </td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n                  <td *ngIf=\"showMeridian\">&nbsp;</td>\n              </tr>\n          </tbody>\n      </table>\n    "
+    }), __metadata('design:paramtypes', [])], TimePicker);
+    return TimePicker;
+  }());
+  exports.TimePicker = TimePicker;
+  exports.TIMEPICKER_PROVIDERS = [TimePicker];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var Accordion = (function() {
+    function Accordion() {
+      this.closeOthers = true;
+      this.duration = 250;
+      this.items = [];
+    }
+    Accordion.prototype.closeOtherItems = function(openItem) {
+      if (!this.closeOthers)
+        return;
+      this.items.forEach(function(item) {
+        if (item !== openItem) {
+          item.open = false;
+          item.openChange.next(item.open);
+        }
+      });
+    };
+    Accordion.prototype.addItem = function(item) {
+      this.items.push(item);
+    };
+    Accordion.prototype.removeItem = function(item) {
+      var index = this.items.indexOf(item);
+      if (index !== -1) {
+        this.items.splice(index, 1);
+      }
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Accordion.prototype, "closeOthers", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
+    Accordion = __decorate([core_1.Component({
+      selector: 'accordion',
+      template: "<ng-content></ng-content>"
+    }), __metadata('design:paramtypes', [])], Accordion);
+    return Accordion;
+  }());
+  exports.Accordion = Accordion;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var TabSet = (function() {
+    function TabSet() {
+      this.tabs = [];
+      this.classMap = {};
+    }
+    Object.defineProperty(TabSet.prototype, "vertical", {
+      get: function() {
+        return this._vertical;
+      },
+      set: function(value) {
+        this._vertical = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    Object.defineProperty(TabSet.prototype, "type", {
+      get: function() {
+        return this._type;
+      },
+      set: function(value) {
+        this._type = value;
+        this.setClassMap();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ;
+    TabSet.prototype.ngOnInit = function() {
+      this.type = this.type !== 'undefined' ? this.type : 'tabs';
+    };
+    TabSet.prototype.ngOnDestroy = function() {
+      this.destroyed = true;
+    };
+    TabSet.prototype.addTab = function(tab) {
+      this.tabs.push(tab);
+      tab.active = this.tabs.length === 1 && tab.active !== false;
+    };
+    TabSet.prototype.removeTab = function(tab) {
+      var index = this.tabs.indexOf(tab);
+      if (index === -1 || this.destroyed) {
+        return;
+      }
+      if (tab.active && this.hasAvailableTabs(index)) {
+        var newActiveIndex = this.getClosestTabIndex(index);
+        this.tabs[newActiveIndex].active = true;
+      }
+      tab.remove.next(tab);
+      this.tabs.splice(index, 1);
+    };
+    TabSet.prototype.getClosestTabIndex = function(index) {
+      var tabsLength = this.tabs.length;
+      if (!tabsLength) {
+        return -1;
+      }
+      for (var step = 1; step <= tabsLength; step += 1) {
+        var prevIndex = index - step;
+        var nextIndex = index + step;
+        if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
+          return prevIndex;
+        }
+        if (this.tabs[nextIndex] && !this.tabs[nextIndex].disabled) {
+          return nextIndex;
+        }
+      }
+      return -1;
+    };
+    TabSet.prototype.hasAvailableTabs = function(index) {
+      var tabsLength = this.tabs.length;
+      if (!tabsLength) {
+        return false;
+      }
+      for (var i = 0; i < tabsLength; i += 1) {
+        if (!this.tabs[i].disabled && i !== index) {
+          return true;
+        }
+      }
+      return false;
+    };
+    TabSet.prototype.setClassMap = function() {
+      this.classMap = (_a = {'nav-stacked': this.vertical}, _a['nav-' + (this.type || 'tabs')] = true, _a);
+      var _a;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TabSet.prototype, "vertical", null);
+    __decorate([core_1.Input(), __metadata('design:type', String)], TabSet.prototype, "type", null);
+    TabSet = __decorate([core_1.Component({
+      selector: 'tabset',
+      directives: [common_1.NgClass],
+      template: "\n      <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n          <li *ngFor=\"let tab of tabs\" class=\"nav-item\"\n              [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\">\n              <a href class=\"nav-link\" [class.active]=\"tab.active\" \n                  [class.disabled]=\"tab.disabled\" (click)=\"tab.active = true\">\n                  <span [innerHtml]=\"tab.heading\"></span>\n                  <span *ngIf=\"tab.removable\" (click)=\"$event.preventDefault(); removeTab(tab);\">\n                      <i class=\"fa fa-remove\"></i>\n                  </span>\n              </a>\n          </li>\n      </ul>\n      <div class=\"tab-content\">\n          <ng-content></ng-content>\n      </div>\n    "
+    }), __metadata('design:paramtypes', [])], TabSet);
+    return TabSet;
+  }());
+  exports.TabSet = TabSet;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableColumn", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var TableSortableColumn = (function() {
+    function TableSortableColumn(display, variable, filter) {
+      this.display = display;
+      this.variable = variable;
+      this.filter = filter;
+    }
+    return TableSortableColumn;
+  }());
+  exports.TableSortableColumn = TableSortableColumn;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorting", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var TableSortableSorting = (function() {
+    function TableSortableSorting(column, descending) {
+      this.column = column;
+      this.descending = descending;
+    }
+    return TableSortableSorting;
+  }());
+  exports.TableSortableSorting = TableSortableSorting;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var TagSet = (function() {
+    function TagSet() {
+      this.tags = [];
+    }
+    TagSet.prototype.ngOnDestroy = function() {
+      this.destroyed = true;
+    };
+    TagSet.prototype.addTag = function(tag) {
+      this.tags.push(tag);
+    };
+    TagSet.prototype.removeTag = function(tag) {
+      var index = this.tags.indexOf(tag);
+      if (index === -1 || this.destroyed || tag.disabled) {
+        return;
+      }
+      tag.remove.next(tag);
+      this.tags.splice(index, 1);
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Array)], TagSet.prototype, "tags", void 0);
+    TagSet = __decorate([core_1.Component({
+      selector: 'tagset',
+      directives: [common_1.NgClass],
+      template: "\n      <span *ngFor=\"let tag of tags\" class=\"label fuel-ui-label\" [ngClass]=\"tag.classMap\">\n          <span [innerHtml]=\"tag.title\"></span>\n          <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n              <i class=\"fa fa-remove\"></i>\n          </span>\n      </span>\n    "
+    }), __metadata('design:paramtypes', [])], TagSet);
+    return TagSet;
+  }());
+  exports.TagSet = TagSet;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tag/Tag", "./TableSortable/TableSortable", "./Slider/Slider", "./TimePicker/TimePicker", "./Accordion/Accordion", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/TagSet"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
+  }
+  var AccordionItem_1 = $__require('./Accordion/AccordionItem');
+  var Alert_1 = $__require('./Alert/Alert');
+  var Carousel_1 = $__require('./Carousel/Carousel');
+  var DatePickerProviders_1 = $__require('./DatePicker/DatePickerProviders');
+  var Modal_1 = $__require('./Modal/Modal');
+  var Pagination_1 = $__require('./Pagination/Pagination');
+  var InfiniteScroller_1 = $__require('./InfiniteScroller/InfiniteScroller');
+  var Dropdown_1 = $__require('./Dropdown/Dropdown');
+  var Tab_1 = $__require('./Tab/Tab');
+  var Tag_1 = $__require('./Tag/Tag');
+  var TableSortable_1 = $__require('./TableSortable/TableSortable');
+  var Slider_1 = $__require('./Slider/Slider');
+  var TimePicker_1 = $__require('./TimePicker/TimePicker');
+  exports.FUELUI_COMPONENT_PROVIDERS = [AccordionItem_1.ACCORDION_PROVIDERS, Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS, Tag_1.TAG_PROVIDERS, TimePicker_1.TIMEPICKER_PROVIDERS];
+  __export($__require('./Accordion/Accordion'));
+  __export($__require('./Accordion/AccordionItem'));
+  __export($__require('./Alert/Alert'));
+  __export($__require('./Carousel/Carousel'));
+  __export($__require('./DatePicker/DatePickerProviders'));
+  __export($__require('./Modal/Modal'));
+  __export($__require('./Pagination/Pagination'));
+  __export($__require('./InfiniteScroller/InfiniteScroller'));
+  __export($__require('./Dropdown/Dropdown'));
+  __export($__require('./Tab/Tab'));
+  __export($__require('./Tab/TabSet'));
+  __export($__require('./TableSortable/TableSortable'));
+  __export($__require('./TableSortable/TableSortableColumn'));
+  __export($__require('./TableSortable/TableSortableSorting'));
+  __export($__require('./Tag/Tag'));
+  __export($__require('./Tag/TagSet'));
+  __export($__require('./Slider/Slider'));
+  __export($__require('./TimePicker/TimePicker'));
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var Animation = (function() {
+    function Animation(element) {
+      this.onAnimationStart = new core_1.EventEmitter();
+      this.onAnimationEnd = new core_1.EventEmitter();
+      this.animationClasses = '';
+      this.play = false;
+      this.id = '';
+      this.group = '';
+      this._animationQueue = [];
+      this._callbacks = [];
+      this.element = element.nativeElement;
+    }
+    Animation.prototype.ngOnChanges = function() {
+      this.setup();
+    };
+    Animation.prototype.ngOnInit = function() {
+      this.setup();
+    };
+    Animation.prototype.addAnimation = function(animationClasses) {
+      var _this = this;
+      animationClasses.split(' ').map(function(c) {
+        return _this._animationQueue.push(c);
+      });
+      this.animationClasses += " " + animationClasses;
+      return this;
+    };
+    Animation.prototype.setup = function() {
+      this._animationQueue = this.animationClasses.split(" ").filter(function(c) {
+        return c.length > 0;
+      });
+      if (this.play && this._animationQueue.length > 0)
+        this.startAnimation();
+      return this;
+    };
+    Animation.prototype.startAnimation = function(callback) {
+      var _this = this;
+      if (callback === void 0) {
+        callback = null;
+      }
+      if (callback != null)
+        this._callbacks.push(callback);
+      this._animationQueue.shift().split('.').filter(function(c) {
+        return c.length > 0;
+      }).map(function(c) {
+        return _this.element.classList.add(c);
+      });
+      return this;
+    };
+    Animation.prototype.cleanAnimation = function() {
+      var _this = this;
+      this.animationClasses.replace('.', ' ').split(' ').filter(function(c) {
+        return c.length > 0;
+      }).map(function(c) {
+        _this.element.classList.remove(c);
+      });
+      return this;
+    };
+    Animation.prototype.animationStarted = function(event) {
+      this.onAnimationStart.next(null);
+    };
+    Animation.prototype.animationEnded = function(event) {
+      this.cleanAnimation();
+      if (this._animationQueue.length > 0) {
+        this.startAnimation();
+        return;
+      }
+      while (this._callbacks.length > 0)
+        this._callbacks.shift()();
+      this.onAnimationEnd.next(null);
+    };
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
+    __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
+    Animation = __decorate([core_1.Directive({
+      selector: '[animation]',
+      host: {
+        '(animationstart)': 'animationStarted($event)',
+        '(webkitAnimationStart)': 'animationStarted($event)',
+        '(oanimationstart)': 'animationStarted($event)',
+        '(MSAnimationStart)': 'animationStarted($event)',
+        '(animationend)': 'animationEnded($event)',
+        '(webkitAnimationEnd)': 'animationEnded($event)',
+        '(oanimationend)': 'animationEnded($event)',
+        '(MSAnimationEnd)': 'animationEnded($event)'
+      }
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Animation);
+    return Animation;
+  }());
+  exports.Animation = Animation;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var Tooltip = (function() {
+    function Tooltip(el) {
+      this._el = el.nativeElement;
+    }
+    Tooltip.prototype.getElement = function() {
+      return this._el;
+    };
+    Tooltip.prototype.show = function() {
+      this.hide();
+      var html = "\n        <div class=\"tooltip top customFadeIn\" role=\"tooltip\">\n          <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>\n        </div>\n        ";
+      var newEl = document.createElement('div');
+      newEl.setAttribute('role', 'tooltip');
+      newEl.className = 'tooltip top customFadeIn';
+      newEl.innerHTML = "\n        <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>";
+      newEl.style.visibility = "hidden";
+      this.getElement().appendChild(newEl);
+      var bodyRect = document.body.getBoundingClientRect(),
+          elemRect = this.getElement().getBoundingClientRect(),
+          offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
+      this.hide();
+      newEl.style.visibility = "";
+      newEl.style.top = offset + 'px';
+      newEl.style.left = elemRect.left + 'px';
+      this.getElement().appendChild(newEl);
+    };
+    Tooltip.prototype.hide = function() {
+      var tooltips = this.getElement().getElementsByClassName('tooltip');
+      for (var i = 0; i < tooltips.length; i++) {
+        tooltips[i].remove();
+      }
+    };
+    Tooltip = __decorate([core_1.Directive({
+      selector: '[tooltip]',
+      properties: ['text: tooltip'],
+      host: {
+        '(mouseover)': 'show()',
+        '(mouseout)': 'hide()',
+        '(focus)': 'show()',
+        '(unfocus)': 'hide()'
+      }
+    }), __metadata('design:paramtypes', [core_1.ElementRef])], Tooltip);
+    return Tooltip;
+  }());
+  exports.Tooltip = Tooltip;
+  exports.TOOLTIP_PROVIDERS = [Tooltip];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var CodeHighlighter = (function() {
+    function CodeHighlighter(_el) {
+      this._el = _el;
+    }
+    CodeHighlighter.prototype.ngAfterViewInit = function() {
+      if (this._el && this._el.nativeElement) {
+        Prism.highlightElement(this._el.nativeElement);
+      }
+    };
+    CodeHighlighter = __decorate([core_1.Directive({selector: '[code-highlight]'}), __metadata('design:paramtypes', [core_1.ElementRef])], CodeHighlighter);
+    return CodeHighlighter;
+  }());
+  exports.CodeHighlighter = CodeHighlighter;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/core", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
+  var Collapse = (function() {
+    function Collapse(animationBuilder, element) {
+      this.element = element;
+      this.duration = 500;
+      this.collapse = true;
+      this._animation = animationBuilder.css();
+    }
+    Object.defineProperty(Collapse.prototype, "_baseSequence", {
+      get: function() {
+        return this._animation.setDuration(this.duration).removeClass('fuel-ui-collapse').removeClass('in').addAnimationClass('fuel-ui-collapsing');
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Collapse.prototype.ngOnInit = function() {
+      if (!this.collapse) {
+        this._animation.setDuration(0).addClass('in').start(this.element.nativeElement);
+      }
+    };
+    Collapse.prototype.ngOnChanges = function(changes) {
+      if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
+        return;
+      return this.collapse ? this.hide() : this.show();
+    };
+    Collapse.prototype.hide = function() {
+      var _this = this;
+      this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
+      this._baseSequence.setFromStyles({
+        height: this.element.nativeElement.scrollHeight + 'px',
+        overflow: 'hidden'
+      }).setToStyles({
+        height: '0',
+        paddingTop: '0',
+        paddingBottom: '0'
+      });
+      var a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
+      a.onComplete(function() {
+        if (!_this.collapse)
+          return;
+        a.removeClasses(['in']);
+        a.addClasses(['fuel-ui-collapse']);
+      });
+    };
+    Collapse.prototype.show = function() {
+      var _this = this;
+      this._animation.setDuration(0).addClass('in').setFromStyles({overflow: 'hidden'}).setToStyles({
+        paddingTop: '',
+        paddingBottom: ''
+      }).start(this.element.nativeElement).onComplete(function() {
+        var a = _this._baseSequence.setFromStyles({height: '0'}).setToStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).start(_this.element.nativeElement);
+        a.onComplete(function() {
+          a.addClasses(['fuel-ui-collapse', 'in']);
+          _this._animation.setDuration(0).setFromStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).setToStyles({height: 'auto'}).start(_this.element.nativeElement).onComplete(function() {
+            if (_this.collapse)
+              a.addClasses(['fuel-ui-collapse']);
+          });
         });
-        ;
-        TabSet.prototype.ngOnInit = function() {
-          this.type = this.type !== 'undefined' ? this.type : 'tabs';
-        };
-        TabSet.prototype.ngOnDestroy = function() {
-          this.destroyed = true;
-        };
-        TabSet.prototype.addTab = function(tab) {
-          this.tabs.push(tab);
-          tab.active = this.tabs.length === 1 && tab.active !== false;
-        };
-        TabSet.prototype.removeTab = function(tab) {
-          var index = this.tabs.indexOf(tab);
-          if (index === -1 || this.destroyed) {
-            return;
-          }
-          if (tab.active && this.hasAvailableTabs(index)) {
-            var newActiveIndex = this.getClosestTabIndex(index);
-            this.tabs[newActiveIndex].active = true;
-          }
-          tab.remove.next(tab);
-          this.tabs.splice(index, 1);
-        };
-        TabSet.prototype.getClosestTabIndex = function(index) {
-          var tabsLength = this.tabs.length;
-          if (!tabsLength) {
-            return -1;
-          }
-          for (var step = 1; step <= tabsLength; step += 1) {
-            var prevIndex = index - step;
-            var nextIndex = index + step;
-            if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
-              return prevIndex;
+      });
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Collapse.prototype, "duration", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Collapse.prototype, "collapse", void 0);
+    Collapse = __decorate([core_1.Directive({
+      selector: '[collapse]',
+      host: {
+        '[attr.aria-expanded]': '!collapse',
+        '[attr.aria-hidden]': 'collapse'
+      }
+    }), __metadata('design:paramtypes', [animation_builder_1.AnimationBuilder, core_1.ElementRef])], Collapse);
+    return Collapse;
+  }());
+  exports.Collapse = Collapse;
+  exports.COLLAPSE_PROVIDERS = [Collapse];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter", "./Collapse/Collapse"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
+  }
+  var Animation_1 = $__require('./Animation/Animation');
+  var Tooltip_1 = $__require('./Tooltip/Tooltip');
+  var CodeHighlighter_1 = $__require('./CodeHighlighter/CodeHighlighter');
+  var Collapse_1 = $__require('./Collapse/Collapse');
+  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter, Collapse_1.Collapse];
+  __export($__require('./Animation/Animation'));
+  __export($__require('./Tooltip/Tooltip'));
+  __export($__require('./CodeHighlighter/CodeHighlighter'));
+  __export($__require('./Collapse/Collapse'));
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["@angular/core", "@angular/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var StringUtils_1 = $__require('../../utilities/StringUtils');
+  var FormatPipe = (function() {
+    function FormatPipe() {
+      this.datePipe = new common_1.DatePipe();
+      this.decimalPipe = new common_1.DecimalPipe();
+    }
+    FormatPipe.prototype.transform = function(input, args) {
+      var format = '';
+      var parsedFloat = 0;
+      var pipeArgs = args.split(':');
+      for (var i = 0; i < pipeArgs.length; i++) {
+        pipeArgs[i] = pipeArgs[i].trim(' ');
+      }
+      if (pipeArgs[0].toLowerCase() !== 'html')
+        input = StringUtils_1.StringHelper.escapeHtml(input);
+      switch (pipeArgs[0].toLowerCase()) {
+        case 'text':
+          return input;
+        case 'decimal':
+        case 'number':
+          parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
+          format = pipeArgs.length > 1 ? pipeArgs[1] : null;
+          return this.decimalPipe.transform(parsedFloat, format);
+        case 'percentage':
+          parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
+          format = pipeArgs.length > 1 ? pipeArgs[1] : null;
+          return this.decimalPipe.transform(parsedFloat, format) + '%';
+        case 'date':
+        case 'datetime':
+          var date = !isNaN(parseInt(input)) ? parseInt(input) : new Date(input);
+          format = 'MMM d, y h:mm:ss a';
+          if (pipeArgs.length > 1) {
+            format = '';
+            for (var i = 1; i < pipeArgs.length; i++) {
+              format += pipeArgs[i];
             }
-            if (this.tabs[nextIndex] && !this.tabs[nextIndex].disabled) {
-              return nextIndex;
-            }
           }
+          return this.datePipe.transform(date, format);
+        default:
+          return input;
+      }
+    };
+    FormatPipe = __decorate([core_1.Pipe({name: 'format'}), __metadata('design:paramtypes', [])], FormatPipe);
+    return FormatPipe;
+  }());
+  exports.FormatPipe = FormatPipe;
+  exports.FORMAT_PROVIDERS = [FormatPipe];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var MapToIterablePipe = (function() {
+    function MapToIterablePipe() {}
+    MapToIterablePipe.prototype.transform = function(dict, args) {
+      if (args === void 0) {
+        args = [];
+      }
+      var a = [];
+      for (var key in dict) {
+        if (dict.hasOwnProperty(key)) {
+          a.push({
+            key: key,
+            val: dict[key]
+          });
+        }
+      }
+      return a;
+    };
+    MapToIterablePipe = __decorate([core_1.Pipe({name: 'mapToIterable'}), __metadata('design:paramtypes', [])], MapToIterablePipe);
+    return MapToIterablePipe;
+  }());
+  exports.MapToIterablePipe = MapToIterablePipe;
+  exports.MAPTOITERABLE_PROVIDERS = [MapToIterablePipe];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var OrderByPipe = (function() {
+    function OrderByPipe() {
+      this.value = [];
+    }
+    OrderByPipe._orderByComparator = function(a, b) {
+      if (a === null || typeof a === 'undefined')
+        a = 0;
+      if (b === null || typeof b === 'undefined')
+        b = 0;
+      if ((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))) {
+        if (a.toLowerCase() < b.toLowerCase())
           return -1;
-        };
-        TabSet.prototype.hasAvailableTabs = function(index) {
-          var tabsLength = this.tabs.length;
-          if (!tabsLength) {
-            return false;
-          }
-          for (var i = 0; i < tabsLength; i += 1) {
-            if (!this.tabs[i].disabled && i !== index) {
-              return true;
-            }
-          }
-          return false;
-        };
-        TabSet.prototype.setClassMap = function() {
-          this.classMap = (_a = {'nav-stacked': this.vertical}, _a['nav-' + (this.type || 'tabs')] = true, _a);
-          var _a;
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], TabSet.prototype, "vertical", null);
-        __decorate([core_1.Input(), __metadata('design:type', String)], TabSet.prototype, "type", null);
-        TabSet = __decorate([core_1.Component({
-          selector: 'tabset',
-          directives: [common_1.NgClass],
-          template: "\n      <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n          <li *ngFor=\"let tab of tabs\" class=\"nav-item\"\n              [class.active]=\"tab.active\" [class.disabled]=\"tab.disabled\">\n              <a href class=\"nav-link\" [class.active]=\"tab.active\" \n                  [class.disabled]=\"tab.disabled\" (click)=\"tab.active = true\">\n                  <span [innerHtml]=\"tab.heading\"></span>\n                  <span *ngIf=\"tab.removable\" (click)=\"$event.preventDefault(); removeTab(tab);\">\n                      <i class=\"fa fa-remove\"></i>\n                  </span>\n              </a>\n          </li>\n      </ul>\n      <div class=\"tab-content\">\n          <ng-content></ng-content>\n      </div>\n    "
-        }), __metadata('design:paramtypes', [])], TabSet);
-        return TabSet;
-      }());
-      exports_1("TabSet", TabSet);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/TableSortable/TableSortableColumn", [], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var TableSortableColumn;
-  return {
-    setters: [],
-    execute: function() {
-      TableSortableColumn = (function() {
-        function TableSortableColumn(display, variable, filter) {
-          this.display = display;
-          this.variable = variable;
-          this.filter = filter;
-        }
-        return TableSortableColumn;
-      }());
-      exports_1("TableSortableColumn", TableSortableColumn);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/TableSortable/TableSortableSorting", [], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var TableSortableSorting;
-  return {
-    setters: [],
-    execute: function() {
-      TableSortableSorting = (function() {
-        function TableSortableSorting(column, descending) {
-          this.column = column;
-          this.descending = descending;
-        }
-        return TableSortableSorting;
-      }());
-      exports_1("TableSortableSorting", TableSortableSorting);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "angular2/common"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      common_1;
-  var TagSet;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }],
-    execute: function() {
-      TagSet = (function() {
-        function TagSet() {
-          this.tags = [];
-        }
-        TagSet.prototype.ngOnDestroy = function() {
-          this.destroyed = true;
-        };
-        TagSet.prototype.addTag = function(tag) {
-          this.tags.push(tag);
-        };
-        TagSet.prototype.removeTag = function(tag) {
-          var index = this.tags.indexOf(tag);
-          if (index === -1 || this.destroyed || tag.disabled) {
-            return;
-          }
-          tag.remove.next(tag);
-          this.tags.splice(index, 1);
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Array)], TagSet.prototype, "tags", void 0);
-        TagSet = __decorate([core_1.Component({
-          selector: 'tagset',
-          directives: [common_1.NgClass],
-          template: "\n      <span *ngFor=\"let tag of tags\" class=\"label fuel-ui-label\" [ngClass]=\"tag.classMap\">\n          <span [innerHtml]=\"tag.title\"></span>\n          <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n              <i class=\"fa fa-remove\"></i>\n          </span>\n      </span>\n    "
-        }), __metadata('design:paramtypes', [])], TagSet);
-        return TagSet;
-      }());
-      exports_1("TagSet", TagSet);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/components/components", ["./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tag/Tag", "./TableSortable/TableSortable", "./Slider/Slider", "./TimePicker/TimePicker", "./Accordion/Accordion", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/TagSet"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var AccordionItem_1,
-      Alert_1,
-      Carousel_1,
-      DatePickerProviders_1,
-      Modal_1,
-      Pagination_1,
-      InfiniteScroller_1,
-      Dropdown_1,
-      Tab_1,
-      Tag_1,
-      TableSortable_1,
-      Slider_1,
-      TimePicker_1;
-  var FUELUI_COMPONENT_PROVIDERS;
-  var exportedNames_1 = {'FUELUI_COMPONENT_PROVIDERS': true};
-  function exportStar_1(m) {
-    var exports = {};
-    for (var n in m) {
-      if (n !== "default" && !exportedNames_1.hasOwnProperty(n))
-        exports[n] = m[n];
-    }
-    exports_1(exports);
-  }
-  return {
-    setters: [function(AccordionItem_1_1) {
-      AccordionItem_1 = AccordionItem_1_1;
-      exportStar_1(AccordionItem_1_1);
-    }, function(Alert_1_1) {
-      Alert_1 = Alert_1_1;
-      exportStar_1(Alert_1_1);
-    }, function(Carousel_1_1) {
-      Carousel_1 = Carousel_1_1;
-      exportStar_1(Carousel_1_1);
-    }, function(DatePickerProviders_1_1) {
-      DatePickerProviders_1 = DatePickerProviders_1_1;
-      exportStar_1(DatePickerProviders_1_1);
-    }, function(Modal_1_1) {
-      Modal_1 = Modal_1_1;
-      exportStar_1(Modal_1_1);
-    }, function(Pagination_1_1) {
-      Pagination_1 = Pagination_1_1;
-      exportStar_1(Pagination_1_1);
-    }, function(InfiniteScroller_1_1) {
-      InfiniteScroller_1 = InfiniteScroller_1_1;
-      exportStar_1(InfiniteScroller_1_1);
-    }, function(Dropdown_1_1) {
-      Dropdown_1 = Dropdown_1_1;
-      exportStar_1(Dropdown_1_1);
-    }, function(Tab_1_1) {
-      Tab_1 = Tab_1_1;
-      exportStar_1(Tab_1_1);
-    }, function(Tag_1_1) {
-      Tag_1 = Tag_1_1;
-      exportStar_1(Tag_1_1);
-    }, function(TableSortable_1_1) {
-      TableSortable_1 = TableSortable_1_1;
-      exportStar_1(TableSortable_1_1);
-    }, function(Slider_1_1) {
-      Slider_1 = Slider_1_1;
-      exportStar_1(Slider_1_1);
-    }, function(TimePicker_1_1) {
-      TimePicker_1 = TimePicker_1_1;
-      exportStar_1(TimePicker_1_1);
-    }, function(Accordion_1_1) {
-      exportStar_1(Accordion_1_1);
-    }, function(TabSet_1_1) {
-      exportStar_1(TabSet_1_1);
-    }, function(TableSortableColumn_1_1) {
-      exportStar_1(TableSortableColumn_1_1);
-    }, function(TableSortableSorting_1_1) {
-      exportStar_1(TableSortableSorting_1_1);
-    }, function(TagSet_1_1) {
-      exportStar_1(TagSet_1_1);
-    }],
-    execute: function() {
-      exports_1("FUELUI_COMPONENT_PROVIDERS", FUELUI_COMPONENT_PROVIDERS = [AccordionItem_1.ACCORDION_PROVIDERS, Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS, Tag_1.TAG_PROVIDERS, TimePicker_1.TIMEPICKER_PROVIDERS]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/directives/Animation/Animation", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var Animation;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      Animation = (function() {
-        function Animation(element) {
-          this.onAnimationStart = new core_1.EventEmitter();
-          this.onAnimationEnd = new core_1.EventEmitter();
-          this.animationClasses = '';
-          this.play = false;
-          this.id = '';
-          this.group = '';
-          this._animationQueue = [];
-          this._callbacks = [];
-          this.element = element.nativeElement;
-        }
-        Animation.prototype.ngOnChanges = function() {
-          this.setup();
-        };
-        Animation.prototype.ngOnInit = function() {
-          this.setup();
-        };
-        Animation.prototype.addAnimation = function(animationClasses) {
-          var _this = this;
-          animationClasses.split(' ').map(function(c) {
-            return _this._animationQueue.push(c);
+        if (a.toLowerCase() > b.toLowerCase())
+          return 1;
+      } else {
+        if (parseFloat(a) < parseFloat(b))
+          return -1;
+        if (parseFloat(a) > parseFloat(b))
+          return 1;
+      }
+      return 0;
+    };
+    OrderByPipe.prototype.transform = function(input, config) {
+      if (config === void 0) {
+        config = '+';
+      }
+      this.value = input.slice();
+      var value = this.value;
+      if (!Array.isArray(value))
+        return value;
+      if (!Array.isArray(config) || (Array.isArray(config) && config.length == 1)) {
+        var propertyToCheck = !Array.isArray(config) ? config : config[0];
+        var desc = propertyToCheck.substr(0, 1) == '-';
+        if (!propertyToCheck || propertyToCheck == '-' || propertyToCheck == '+') {
+          return !desc ? value.sort() : value.sort().reverse();
+        } else {
+          var property = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-' ? propertyToCheck.substr(1) : propertyToCheck;
+          return value.sort(function(a, b) {
+            return !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
           });
-          this.animationClasses += " " + animationClasses;
-          return this;
-        };
-        Animation.prototype.setup = function() {
-          this._animationQueue = this.animationClasses.split(" ").filter(function(c) {
-            return c.length > 0;
-          });
-          if (this.play && this._animationQueue.length > 0)
-            this.startAnimation();
-          return this;
-        };
-        Animation.prototype.startAnimation = function(callback) {
-          var _this = this;
-          if (callback === void 0) {
-            callback = null;
-          }
-          if (callback != null)
-            this._callbacks.push(callback);
-          this._animationQueue.shift().split('.').filter(function(c) {
-            return c.length > 0;
-          }).map(function(c) {
-            return _this.element.classList.add(c);
-          });
-          return this;
-        };
-        Animation.prototype.cleanAnimation = function() {
-          var _this = this;
-          this.animationClasses.replace('.', ' ').split(' ').filter(function(c) {
-            return c.length > 0;
-          }).map(function(c) {
-            _this.element.classList.remove(c);
-          });
-          return this;
-        };
-        Animation.prototype.animationStarted = function(event) {
-          this.onAnimationStart.next(null);
-        };
-        Animation.prototype.animationEnded = function(event) {
-          this.cleanAnimation();
-          if (this._animationQueue.length > 0) {
-            this.startAnimation();
-            return;
-          }
-          while (this._callbacks.length > 0)
-            this._callbacks.shift()();
-          this.onAnimationEnd.next(null);
-        };
-        __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationStart", void 0);
-        __decorate([core_1.Output(), __metadata('design:type', Object)], Animation.prototype, "onAnimationEnd", void 0);
-        __decorate([core_1.Input('animation'), __metadata('design:type', String)], Animation.prototype, "animationClasses", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Animation.prototype, "play", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "id", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', String)], Animation.prototype, "group", void 0);
-        Animation = __decorate([core_1.Directive({
-          selector: '[animation]',
-          host: {
-            '(animationstart)': 'animationStarted($event)',
-            '(webkitAnimationStart)': 'animationStarted($event)',
-            '(oanimationstart)': 'animationStarted($event)',
-            '(MSAnimationStart)': 'animationStarted($event)',
-            '(animationend)': 'animationEnded($event)',
-            '(webkitAnimationEnd)': 'animationEnded($event)',
-            '(oanimationend)': 'animationEnded($event)',
-            '(MSAnimationEnd)': 'animationEnded($event)'
-          }
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], Animation);
-        return Animation;
-        var _a;
-      }());
-      exports_1("Animation", Animation);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var Tooltip,
-      TOOLTIP_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      Tooltip = (function() {
-        function Tooltip(el) {
-          this._el = el.nativeElement;
         }
-        Tooltip.prototype.getElement = function() {
-          return this._el;
-        };
-        Tooltip.prototype.show = function() {
-          this.hide();
-          var html = "\n        <div class=\"tooltip top customFadeIn\" role=\"tooltip\">\n          <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>\n        </div>\n        ";
-          var newEl = document.createElement('div');
-          newEl.setAttribute('role', 'tooltip');
-          newEl.className = 'tooltip top customFadeIn';
-          newEl.innerHTML = "\n        <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>";
-          newEl.style.visibility = "hidden";
-          this.getElement().appendChild(newEl);
-          var bodyRect = document.body.getBoundingClientRect(),
-              elemRect = this.getElement().getBoundingClientRect(),
-              offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
-          this.hide();
-          newEl.style.visibility = "";
-          newEl.style.top = offset + 'px';
-          newEl.style.left = elemRect.left + 'px';
-          this.getElement().appendChild(newEl);
-        };
-        Tooltip.prototype.hide = function() {
-          var tooltips = this.getElement().getElementsByClassName('tooltip');
-          for (var i = 0; i < tooltips.length; i++) {
-            tooltips[i].remove();
-          }
-        };
-        Tooltip = __decorate([core_1.Directive({
-          selector: '[tooltip]',
-          properties: ['text: tooltip'],
-          host: {
-            '(mouseover)': 'show()',
-            '(mouseout)': 'hide()',
-            '(focus)': 'show()',
-            '(unfocus)': 'hide()'
-          }
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], Tooltip);
-        return Tooltip;
-        var _a;
-      }());
-      exports_1("Tooltip", Tooltip);
-      exports_1("TOOLTIP_PROVIDERS", TOOLTIP_PROVIDERS = [Tooltip]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var CodeHighlighter;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      CodeHighlighter = (function() {
-        function CodeHighlighter(_el) {
-          this._el = _el;
-        }
-        CodeHighlighter.prototype.ngAfterViewInit = function() {
-          if (this._el && this._el.nativeElement) {
-            Prism.highlightElement(this._el.nativeElement);
-          }
-        };
-        CodeHighlighter = __decorate([core_1.Directive({selector: '[code-highlight]'}), __metadata('design:paramtypes', [(typeof(_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])], CodeHighlighter);
-        return CodeHighlighter;
-        var _a;
-      }());
-      exports_1("CodeHighlighter", CodeHighlighter);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/directives/Collapse/Collapse", ["angular2/core", "angular2/src/animate/animation_builder"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      animation_builder_1;
-  var Collapse,
-      COLLAPSE_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(animation_builder_1_1) {
-      animation_builder_1 = animation_builder_1_1;
-    }],
-    execute: function() {
-      Collapse = (function() {
-        function Collapse(animationBuilder, element) {
-          this.element = element;
-          this.duration = 500;
-          this.collapse = true;
-          this._animation = animationBuilder.css();
-        }
-        Object.defineProperty(Collapse.prototype, "_baseSequence", {
-          get: function() {
-            return this._animation.setDuration(this.duration).removeClass('fuel-ui-collapse').removeClass('in').addAnimationClass('fuel-ui-collapsing');
-          },
-          enumerable: true,
-          configurable: true
-        });
-        Collapse.prototype.ngOnInit = function() {
-          if (!this.collapse) {
-            this._animation.setDuration(0).addClass('in').start(this.element.nativeElement);
-          }
-        };
-        Collapse.prototype.ngOnChanges = function(changes) {
-          if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
-            return;
-          return this.collapse ? this.hide() : this.show();
-        };
-        Collapse.prototype.hide = function() {
-          var _this = this;
-          this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
-          this._baseSequence.setFromStyles({
-            height: this.element.nativeElement.scrollHeight + 'px',
-            overflow: 'hidden'
-          }).setToStyles({
-            height: '0',
-            paddingTop: '0',
-            paddingBottom: '0'
-          });
-          var a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
-          a.onComplete(function() {
-            if (!_this.collapse)
-              return;
-            a.removeClasses(['in']);
-            a.addClasses(['fuel-ui-collapse']);
-          });
-        };
-        Collapse.prototype.show = function() {
-          var _this = this;
-          this._animation.setDuration(0).addClass('in').setFromStyles({overflow: 'hidden'}).setToStyles({
-            paddingTop: '',
-            paddingBottom: ''
-          }).start(this.element.nativeElement).onComplete(function() {
-            var a = _this._baseSequence.setFromStyles({height: '0'}).setToStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).start(_this.element.nativeElement);
-            a.onComplete(function() {
-              a.addClasses(['fuel-ui-collapse', 'in']);
-              _this._animation.setDuration(0).setFromStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).setToStyles({height: 'auto'}).start(_this.element.nativeElement).onComplete(function() {
-                if (_this.collapse)
-                  a.addClasses(['fuel-ui-collapse']);
-              });
-            });
-          });
-        };
-        __decorate([core_1.Input(), __metadata('design:type', Number)], Collapse.prototype, "duration", void 0);
-        __decorate([core_1.Input(), __metadata('design:type', Boolean)], Collapse.prototype, "collapse", void 0);
-        Collapse = __decorate([core_1.Directive({
-          selector: '[collapse]',
-          host: {
-            '[attr.aria-expanded]': '!collapse',
-            '[attr.aria-hidden]': 'collapse'
-          }
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof animation_builder_1.AnimationBuilder !== 'undefined' && animation_builder_1.AnimationBuilder) === 'function' && _a) || Object, (typeof(_b = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _b) || Object])], Collapse);
-        return Collapse;
-        var _a,
-            _b;
-      }());
-      exports_1("Collapse", Collapse);
-      exports_1("COLLAPSE_PROVIDERS", COLLAPSE_PROVIDERS = [Collapse]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter", "./Collapse/Collapse"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var Animation_1,
-      Tooltip_1,
-      CodeHighlighter_1,
-      Collapse_1;
-  var FUELUI_DIRECTIVE_PROVIDERS;
-  var exportedNames_1 = {'FUELUI_DIRECTIVE_PROVIDERS': true};
-  function exportStar_1(m) {
-    var exports = {};
-    for (var n in m) {
-      if (n !== "default" && !exportedNames_1.hasOwnProperty(n))
-        exports[n] = m[n];
-    }
-    exports_1(exports);
-  }
-  return {
-    setters: [function(Animation_1_1) {
-      Animation_1 = Animation_1_1;
-      exportStar_1(Animation_1_1);
-    }, function(Tooltip_1_1) {
-      Tooltip_1 = Tooltip_1_1;
-      exportStar_1(Tooltip_1_1);
-    }, function(CodeHighlighter_1_1) {
-      CodeHighlighter_1 = CodeHighlighter_1_1;
-      exportStar_1(CodeHighlighter_1_1);
-    }, function(Collapse_1_1) {
-      Collapse_1 = Collapse_1_1;
-      exportStar_1(Collapse_1_1);
-    }],
-    execute: function() {
-      exports_1("FUELUI_DIRECTIVE_PROVIDERS", FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter, Collapse_1.Collapse]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "angular2/common", "../../utilities/StringUtils"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1,
-      common_1,
-      StringUtils_1;
-  var FormatPipe,
-      FORMAT_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(common_1_1) {
-      common_1 = common_1_1;
-    }, function(StringUtils_1_1) {
-      StringUtils_1 = StringUtils_1_1;
-    }],
-    execute: function() {
-      FormatPipe = (function() {
-        function FormatPipe() {
-          this.datePipe = new common_1.DatePipe();
-          this.decimalPipe = new common_1.DecimalPipe();
-        }
-        FormatPipe.prototype.transform = function(input, args) {
-          var format = '';
-          var parsedFloat = 0;
-          var pipeArgs = args.split(':');
-          for (var i = 0; i < pipeArgs.length; i++) {
-            pipeArgs[i] = pipeArgs[i].trim(' ');
-          }
-          if (pipeArgs[0].toLowerCase() !== 'html')
-            input = StringUtils_1.StringHelper.escapeHtml(input);
-          switch (pipeArgs[0].toLowerCase()) {
-            case 'text':
-              return input;
-            case 'decimal':
-            case 'number':
-              parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
-              format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-              return this.decimalPipe.transform(parsedFloat, format);
-            case 'percentage':
-              parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
-              format = pipeArgs.length > 1 ? pipeArgs[1] : null;
-              return this.decimalPipe.transform(parsedFloat, format) + '%';
-            case 'date':
-            case 'datetime':
-              var date = !isNaN(parseInt(input)) ? parseInt(input) : new Date(input);
-              format = 'MMM d, y h:mm:ss a';
-              if (pipeArgs.length > 1) {
-                format = '';
-                for (var i = 1; i < pipeArgs.length; i++) {
-                  format += pipeArgs[i];
-                }
-              }
-              return this.datePipe.transform(date, format);
-            default:
-              return input;
-          }
-        };
-        FormatPipe = __decorate([core_1.Pipe({name: 'format'}), __metadata('design:paramtypes', [])], FormatPipe);
-        return FormatPipe;
-      }());
-      exports_1("FormatPipe", FormatPipe);
-      exports_1("FORMAT_PROVIDERS", FORMAT_PROVIDERS = [FormatPipe]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var MapToIterablePipe,
-      MAPTOITERABLE_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      MapToIterablePipe = (function() {
-        function MapToIterablePipe() {}
-        MapToIterablePipe.prototype.transform = function(dict, args) {
-          if (args === void 0) {
-            args = [];
-          }
-          var a = [];
-          for (var key in dict) {
-            if (dict.hasOwnProperty(key)) {
-              a.push({
-                key: key,
-                val: dict[key]
-              });
-            }
-          }
-          return a;
-        };
-        MapToIterablePipe = __decorate([core_1.Pipe({name: 'mapToIterable'}), __metadata('design:paramtypes', [])], MapToIterablePipe);
-        return MapToIterablePipe;
-      }());
-      exports_1("MapToIterablePipe", MapToIterablePipe);
-      exports_1("MAPTOITERABLE_PROVIDERS", MAPTOITERABLE_PROVIDERS = [MapToIterablePipe]);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1;
-  var OrderByPipe,
-      ORDERBY_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      OrderByPipe = (function() {
-        function OrderByPipe() {
-          this.value = [];
-        }
-        OrderByPipe._orderByComparator = function(a, b) {
-          if (a === null || typeof a === 'undefined')
-            a = 0;
-          if (b === null || typeof b === 'undefined')
-            b = 0;
-          if ((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))) {
-            if (a.toLowerCase() < b.toLowerCase())
-              return -1;
-            if (a.toLowerCase() > b.toLowerCase())
-              return 1;
-          } else {
-            if (parseFloat(a) < parseFloat(b))
-              return -1;
-            if (parseFloat(a) > parseFloat(b))
-              return 1;
+      } else {
+        return value.sort(function(a, b) {
+          for (var i = 0; i < config.length; i++) {
+            var desc = config[i].substr(0, 1) == '-';
+            var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-' ? config[i].substr(1) : config[i];
+            var comparison = !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
+            if (comparison != 0)
+              return comparison;
           }
           return 0;
-        };
-        OrderByPipe.prototype.transform = function(input, config) {
-          if (config === void 0) {
-            config = '+';
-          }
-          this.value = input.slice();
-          var value = this.value;
-          if (!Array.isArray(value))
-            return value;
-          if (!Array.isArray(config) || (Array.isArray(config) && config.length == 1)) {
-            var propertyToCheck = !Array.isArray(config) ? config : config[0];
-            var desc = propertyToCheck.substr(0, 1) == '-';
-            if (!propertyToCheck || propertyToCheck == '-' || propertyToCheck == '+') {
-              return !desc ? value.sort() : value.sort().reverse();
-            } else {
-              var property = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-' ? propertyToCheck.substr(1) : propertyToCheck;
-              return value.sort(function(a, b) {
-                return !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
-              });
-            }
-          } else {
-            return value.sort(function(a, b) {
-              for (var i = 0; i < config.length; i++) {
-                var desc = config[i].substr(0, 1) == '-';
-                var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-' ? config[i].substr(1) : config[i];
-                var comparison = !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
-                if (comparison != 0)
-                  return comparison;
-              }
-              return 0;
-            });
-          }
-        };
-        OrderByPipe = __decorate([core_1.Pipe({
-          name: 'orderBy',
-          pure: false
-        }), __metadata('design:paramtypes', [])], OrderByPipe);
-        return OrderByPipe;
-      }());
-      exports_1("OrderByPipe", OrderByPipe);
-      exports_1("ORDERBY_PROVIDERS", ORDERBY_PROVIDERS = [OrderByPipe]);
-    }
-  };
+        });
+      }
+    };
+    OrderByPipe = __decorate([core_1.Pipe({
+      name: 'orderBy',
+      pure: false
+    }), __metadata('design:paramtypes', [])], OrderByPipe);
+    return OrderByPipe;
+  }());
+  exports.OrderByPipe = OrderByPipe;
+  exports.ORDERBY_PROVIDERS = [OrderByPipe];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -4190,289 +3924,248 @@ System.register("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], function(ex
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1;
-  var RangePipe,
-      RANGE_PROVIDERS;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }],
-    execute: function() {
-      RangePipe = (function() {
-        function RangePipe() {}
-        RangePipe.prototype.transform = function(value, min, max, step) {
-          if (min === void 0) {
-            min = 0;
-          }
-          if (max === void 0) {
-            max = 4;
-          }
-          if (step === void 0) {
-            step = 1;
-          }
-          var newValue = [];
-          for (var i = min; i <= max; i += step)
-            newValue.push(i);
-          return newValue;
-        };
-        RangePipe = __decorate([core_1.Pipe({
-          name: 'range',
-          pure: false
-        }), __metadata('design:paramtypes', [])], RangePipe);
-        return RangePipe;
-      }());
-      exports_1("RangePipe", RangePipe);
-      exports_1("RANGE_PROVIDERS", RANGE_PROVIDERS = [RangePipe]);
-    }
-  };
+  var core_1 = $__require('@angular/core');
+  var RangePipe = (function() {
+    function RangePipe() {}
+    RangePipe.prototype.transform = function(value, min, max, step) {
+      if (min === void 0) {
+        min = 0;
+      }
+      if (max === void 0) {
+        max = 4;
+      }
+      if (step === void 0) {
+        step = 1;
+      }
+      var newValue = [];
+      for (var i = min; i <= max; i += step)
+        newValue.push(i);
+      return newValue;
+    };
+    RangePipe = __decorate([core_1.Pipe({
+      name: 'range',
+      pure: false
+    }), __metadata('design:paramtypes', [])], RangePipe);
+    return RangePipe;
+  }());
+  exports.RangePipe = RangePipe;
+  exports.RANGE_PROVIDERS = [RangePipe];
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/pipes/pipes", ["./Format/Format", "./MapToIterable/MapToIterable", "./OrderBy/OrderBy", "./Range/Range"], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/pipes/pipes", ["./Format/Format", "./MapToIterable/MapToIterable", "./OrderBy/OrderBy", "./Range/Range"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var Format_1,
-      MapToIterable_1,
-      OrderBy_1,
-      Range_1;
-  var FUELUI_PIPE_PROVIDERS;
-  var exportedNames_1 = {'FUELUI_PIPE_PROVIDERS': true};
-  function exportStar_1(m) {
-    var exports = {};
-    for (var n in m) {
-      if (n !== "default" && !exportedNames_1.hasOwnProperty(n))
-        exports[n] = m[n];
-    }
-    exports_1(exports);
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
   }
-  return {
-    setters: [function(Format_1_1) {
-      Format_1 = Format_1_1;
-      exportStar_1(Format_1_1);
-    }, function(MapToIterable_1_1) {
-      MapToIterable_1 = MapToIterable_1_1;
-      exportStar_1(MapToIterable_1_1);
-    }, function(OrderBy_1_1) {
-      OrderBy_1 = OrderBy_1_1;
-      exportStar_1(OrderBy_1_1);
-    }, function(Range_1_1) {
-      Range_1 = Range_1_1;
-      exportStar_1(Range_1_1);
-    }],
-    execute: function() {
-      exports_1("FUELUI_PIPE_PROVIDERS", FUELUI_PIPE_PROVIDERS = [Format_1.FORMAT_PROVIDERS, MapToIterable_1.MAPTOITERABLE_PROVIDERS, OrderBy_1.ORDERBY_PROVIDERS, Range_1.RANGE_PROVIDERS]);
-    }
-  };
+  var Format_1 = $__require('./Format/Format');
+  var MapToIterable_1 = $__require('./MapToIterable/MapToIterable');
+  var OrderBy_1 = $__require('./OrderBy/OrderBy');
+  var Range_1 = $__require('./Range/Range');
+  exports.FUELUI_PIPE_PROVIDERS = [Format_1.FORMAT_PROVIDERS, MapToIterable_1.MAPTOITERABLE_PROVIDERS, OrderBy_1.ORDERBY_PROVIDERS, Range_1.RANGE_PROVIDERS];
+  __export($__require('./Format/Format'));
+  __export($__require('./MapToIterable/MapToIterable'));
+  __export($__require('./OrderBy/OrderBy'));
+  __export($__require('./Range/Range'));
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/utilities/DateUtils", [], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/utilities/DateUtils", [], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var DateRange;
-  return {
-    setters: [],
-    execute: function() {
-      DateRange = (function() {
-        function DateRange(start, end) {
-          this.start = start;
-          this.end = end;
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var DateRange = (function() {
+    function DateRange(start, end) {
+      this.start = start;
+      this.end = end;
+    }
+    DateRange.prototype.containsDate = function(date) {
+      return date >= this.start && date <= this.end;
+    };
+    DateRange.prototype.numberOfNights = function() {
+      return Math.ceil(Math.abs(this.start.getTime() - this.end.getTime()) / (1000 * 3600 * 24));
+    };
+    DateRange.prototype.dateArray = function() {
+      if (this.end < this.start)
+        return [];
+      var dateArr = [];
+      var currDate = new Date(this.start.toDateString());
+      while (currDate <= this.end) {
+        dateArr.push(currDate);
+        currDate = new Date(currDate.getTime() + 24 * 60 * 60 * 1000);
+      }
+      return dateArr;
+    };
+    DateRange.prototype.weekArray = function() {
+      if (this.end < this.start)
+        return [];
+      var weekArr = [];
+      var currDate = new Date(this.start.toDateString());
+      while (currDate <= this.end) {
+        var dateArr = [];
+        var dowNumber = currDate.getDay();
+        do {
+          dateArr.push(currDate);
+          ++dowNumber;
+          currDate = new Date(currDate.toDateString());
+          currDate.setDate(currDate.getDate() + 1);
+        } while (currDate <= this.end && dowNumber < 7);
+        weekArr.push(dateArr);
+      }
+      return weekArr;
+    };
+    return DateRange;
+  }());
+  exports.DateRange = DateRange;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/utilities/DetectionUtils", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var MobileDetection = (function() {
+    function MobileDetection() {}
+    MobileDetection.isAndroid = function() {
+      return navigator.userAgent.match(/Android/i) != null;
+    };
+    MobileDetection.isBlackBerry = function() {
+      return navigator.userAgent.match(/BlackBerry/i) != null;
+    };
+    MobileDetection.isIOS = function() {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i) != null;
+    };
+    MobileDetection.isOpera = function() {
+      return navigator.userAgent.match(/Opera Mini/i) != null;
+    };
+    MobileDetection.isWindows = function() {
+      return navigator.userAgent.match(/IEMobile|WPDesktop/i) != null;
+    };
+    MobileDetection.isAny = function() {
+      return (this.isAndroid() || this.isBlackBerry() || this.isIOS() || this.isOpera() || this.isWindows());
+    };
+    return MobileDetection;
+  }());
+  exports.MobileDetection = MobileDetection;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/utilities/AnimationUtils", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var AnimationUtils = (function() {
+    function AnimationUtils() {}
+    AnimationUtils.easeInOutQuart = function(time, beginning, change, duration) {
+      if ((time /= duration / 2) < 1)
+        return change / 2 * time * time * time * time + beginning;
+      return -change / 2 * ((time -= 2) * time * time * time - 2) + beginning;
+    };
+    return AnimationUtils;
+  }());
+  exports.AnimationUtils = AnimationUtils;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/utilities/ElementUtils", ["./AnimationUtils"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var AnimationUtils_1 = $__require('./AnimationUtils');
+  var ElementUtils = (function() {
+    function ElementUtils() {}
+    ElementUtils.outerHeight = function(el) {
+      var height = el.clientHeight;
+      var style = getComputedStyle(el);
+      height += parseInt(style.marginTop) + parseInt(style.marginBottom);
+      height += parseInt(style.borderTopWidth) + parseInt(style.borderBottomWidth);
+      return height;
+    };
+    ElementUtils.outerWidth = function(el) {
+      var width = el.clientWidth;
+      var style = getComputedStyle(el);
+      width += parseInt(style.marginLeft) + parseInt(style.marginRight);
+      width += parseInt(style.borderLeftWidth) + parseInt(style.borderRightWidth);
+      return width;
+    };
+    ElementUtils.scrollTo = function(element, to, duration) {
+      if (duration <= 0)
+        return;
+      var startTime = new Date().getTime();
+      var from = element.scrollTop;
+      var timer = setInterval(function() {
+        var time = new Date().getTime() - startTime;
+        var scrollTo = AnimationUtils_1.AnimationUtils.easeInOutQuart(time, from, to - from, duration);
+        element.scrollTop = scrollTo;
+        if (time >= duration) {
+          element.scrollTop = to;
+          clearInterval(timer);
         }
-        DateRange.prototype.containsDate = function(date) {
-          return date >= this.start && date <= this.end;
-        };
-        DateRange.prototype.numberOfNights = function() {
-          return Math.ceil(Math.abs(this.start.getTime() - this.end.getTime()) / (1000 * 3600 * 24));
-        };
-        DateRange.prototype.dateArray = function() {
-          if (this.end < this.start)
-            return [];
-          var dateArr = [];
-          var currDate = new Date(this.start.toDateString());
-          while (currDate <= this.end) {
-            dateArr.push(currDate);
-            currDate = new Date(currDate.getTime() + 24 * 60 * 60 * 1000);
-          }
-          return dateArr;
-        };
-        DateRange.prototype.weekArray = function() {
-          if (this.end < this.start)
-            return [];
-          var weekArr = [];
-          var currDate = new Date(this.start.toDateString());
-          while (currDate <= this.end) {
-            var dateArr = [];
-            var dowNumber = currDate.getDay();
-            do {
-              dateArr.push(currDate);
-              ++dowNumber;
-              currDate = new Date(currDate.toDateString());
-              currDate.setDate(currDate.getDate() + 1);
-            } while (currDate <= this.end && dowNumber < 7);
-            weekArr.push(dateArr);
-          }
-          return weekArr;
-        };
-        return DateRange;
-      }());
-      exports_1("DateRange", DateRange);
-    }
-  };
+      }, 1000 / 60);
+    };
+    return ElementUtils;
+  }());
+  exports.ElementUtils = ElementUtils;
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/utilities/DetectionUtils", [], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/utilities/StringUtils", [], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var MobileDetection;
-  return {
-    setters: [],
-    execute: function() {
-      MobileDetection = (function() {
-        function MobileDetection() {}
-        MobileDetection.isAndroid = function() {
-          return navigator.userAgent.match(/Android/i) != null;
-        };
-        MobileDetection.isBlackBerry = function() {
-          return navigator.userAgent.match(/BlackBerry/i) != null;
-        };
-        MobileDetection.isIOS = function() {
-          return navigator.userAgent.match(/iPhone|iPad|iPod/i) != null;
-        };
-        MobileDetection.isOpera = function() {
-          return navigator.userAgent.match(/Opera Mini/i) != null;
-        };
-        MobileDetection.isWindows = function() {
-          return navigator.userAgent.match(/IEMobile|WPDesktop/i) != null;
-        };
-        MobileDetection.isAny = function() {
-          return (this.isAndroid() || this.isBlackBerry() || this.isIOS() || this.isOpera() || this.isWindows());
-        };
-        return MobileDetection;
-      }());
-      exports_1("MobileDetection", MobileDetection);
-    }
-  };
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var StringHelper = (function() {
+    function StringHelper() {}
+    StringHelper.escapeHtml = function(html) {
+      var that = this;
+      return String(html).replace(/[<>"'\/]/g, function(s) {
+        return that.entityMap[s];
+      });
+    };
+    StringHelper.entityMap = {
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': '&quot;',
+      "'": '&apos;',
+      "/": '&#x2F;'
+    };
+    return StringHelper;
+  }());
+  exports.StringHelper = StringHelper;
+  return module.exports;
 });
 
-System.register("fuel-ui/dist/utilities/AnimationUtils", [], function(exports_1, context_1) {
+System.registerDynamic("fuel-ui/dist/utilities/utilities", ["./DateUtils", "./DetectionUtils", "./ElementUtils", "./StringUtils"], true, function($__require, exports, module) {
   "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var AnimationUtils;
-  return {
-    setters: [],
-    execute: function() {
-      AnimationUtils = (function() {
-        function AnimationUtils() {}
-        AnimationUtils.easeInOutQuart = function(time, beginning, change, duration) {
-          if ((time /= duration / 2) < 1)
-            return change / 2 * time * time * time * time + beginning;
-          return -change / 2 * ((time -= 2) * time * time * time - 2) + beginning;
-        };
-        return AnimationUtils;
-      }());
-      exports_1("AnimationUtils", AnimationUtils);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/utilities/ElementUtils", ["./AnimationUtils"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var AnimationUtils_1;
-  var ElementUtils;
-  return {
-    setters: [function(AnimationUtils_1_1) {
-      AnimationUtils_1 = AnimationUtils_1_1;
-    }],
-    execute: function() {
-      ElementUtils = (function() {
-        function ElementUtils() {}
-        ElementUtils.outerHeight = function(el) {
-          var height = el.clientHeight;
-          var style = getComputedStyle(el);
-          height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-          height += parseInt(style.borderTopWidth) + parseInt(style.borderBottomWidth);
-          return height;
-        };
-        ElementUtils.outerWidth = function(el) {
-          var width = el.clientWidth;
-          var style = getComputedStyle(el);
-          width += parseInt(style.marginLeft) + parseInt(style.marginRight);
-          width += parseInt(style.borderLeftWidth) + parseInt(style.borderRightWidth);
-          return width;
-        };
-        ElementUtils.scrollTo = function(element, to, duration) {
-          if (duration <= 0)
-            return;
-          var startTime = new Date().getTime();
-          var from = element.scrollTop;
-          var timer = setInterval(function() {
-            var time = new Date().getTime() - startTime;
-            var scrollTo = AnimationUtils_1.AnimationUtils.easeInOutQuart(time, from, to - from, duration);
-            element.scrollTop = scrollTo;
-            if (time >= duration) {
-              element.scrollTop = to;
-              clearInterval(timer);
-            }
-          }, 1000 / 60);
-        };
-        return ElementUtils;
-      }());
-      exports_1("ElementUtils", ElementUtils);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/utilities/StringUtils", [], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  var StringHelper;
-  return {
-    setters: [],
-    execute: function() {
-      StringHelper = (function() {
-        function StringHelper() {}
-        StringHelper.escapeHtml = function(html) {
-          var that = this;
-          return String(html).replace(/[<>"'\/]/g, function(s) {
-            return that.entityMap[s];
-          });
-        };
-        StringHelper.entityMap = {
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': '&quot;',
-          "'": '&apos;',
-          "/": '&#x2F;'
-        };
-        return StringHelper;
-      }());
-      exports_1("StringHelper", StringHelper);
-    }
-  };
-});
-
-System.register("fuel-ui/dist/utilities/utilities", ["./DateUtils", "./DetectionUtils", "./ElementUtils", "./StringUtils"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
-  function exportStar_1(m) {
-    var exports = {};
-    for (var n in m) {
-      if (n !== "default")
-        exports[n] = m[n];
-    }
-    exports_1(exports);
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
   }
-  return {
-    setters: [function(DateUtils_1_1) {
-      exportStar_1(DateUtils_1_1);
-    }, function(DetectionUtils_1_1) {
-      exportStar_1(DetectionUtils_1_1);
-    }, function(ElementUtils_1_1) {
-      exportStar_1(ElementUtils_1_1);
-    }, function(StringUtils_1_1) {
-      exportStar_1(StringUtils_1_1);
-    }],
-    execute: function() {}
-  };
+  __export($__require('./DateUtils'));
+  __export($__require('./DetectionUtils'));
+  __export($__require('./ElementUtils'));
+  __export($__require('./StringUtils'));
+  return module.exports;
 });
 
 System.registerDynamic("fuel-ui/fuel-ui", ["./dist/components/components", "./dist/directives/directives", "./dist/pipes/pipes", "./dist/utilities/utilities"], true, function($__require, exports, module) {

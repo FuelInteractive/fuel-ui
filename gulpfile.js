@@ -107,14 +107,14 @@ gulp.task('bundleScripts', ['scripts'], function() {
         },
         map: {
             typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
-            angular2: path.resolve('node_modules/angular2'),
+            '@angular': path.resolve('node_modules/@angular'),
             rxjs: path.resolve('node_modules/rxjs')
         },
         paths: {
             '*': '*.js'
         },
         meta: {
-            'fuel-ui/node_modules/angular2/*': { build: false },
+            'fuel-ui/node_modules/@angular/*': { build: false },
             'fuel-ui/node_modules/rxjs/*': { build: false }
         }
     };
