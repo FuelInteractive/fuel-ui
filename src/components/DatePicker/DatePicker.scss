@@ -21,7 +21,8 @@
 .date-picker-component {
     border: 1px solid $table-border-color;
     z-index: 120;
-    background-color: $body-bg;font-size: .75rem;
+    background-color: $body-bg;
+    font-size: .75rem;
     position: absolute;
     width: 350px;
     height: auto;
@@ -51,7 +52,7 @@ table {
     z-index: 110;
 }
 
-input:read-only {
+input:read-only, .form-control[readonly] {
     background-color: $input-bg;
 } 
 
@@ -118,7 +119,7 @@ header {
         cursor: pointer;
     }
     
-    input:read-only {
+    input:read-only, .form-control[readonly] {
         background-color: $body-bg;
     }
     

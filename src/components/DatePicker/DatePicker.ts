@@ -72,11 +72,8 @@ export class DatePicker implements OnInit {
     
     constructor(changeDetector: ChangeDetectorRef) {
         this.changeDetector = changeDetector;
-    }
-    
-    ngOnInit(): void {
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         this.calendarMonths = [
             new Date(currentDate.getFullYear(), currentDate.getMonth()-1),
             new Date(currentDate.getFullYear(), currentDate.getMonth())
@@ -90,6 +87,12 @@ export class DatePicker implements OnInit {
             if(this.canNextMonth)
                 this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth()+1));
         }
+        
+        console.log(this.calendarMonths);
+    }
+    
+    ngOnInit(): void {
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         
         setTimeout(() => {
             if(this.calendarScroller == null)
