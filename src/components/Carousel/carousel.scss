@@ -1,44 +1,44 @@
-//@import "../../bower_components/animatewithsass/animate.scss";
 @import "../../styles/bourbon";
 
 $slideDuration: .5s;
 
 .carousel-item {
 	width: 100%;
-}
+	
+	&.slide-in-left { 
+		display: block;
+		position: absolute;
+		top: 0;	
+		left: -100%;
+		@include animation-name(slideInLeft);
+		@include animation-duration($slideDuration);
+		@include animation-timing-function(ease);
+		//@include slideInLeft($duration: $slideDuration, $function: ease-out, $fill: forwards);
+	}
 
-.carousel-item.slide-in-left { 
-	display: block;
-	position: absolute;
-	top: 0;	
-	left: -100%;
-	@include animation-name(slideInLeft);
-	@include animation-duration($slideDuration);
-	@include animation-timing-function(ease);
-	//@include slideInLeft($duration: $slideDuration, $function: ease-out, $fill: forwards);
-}
+	&.slide-in-right {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 100%;
+		@include animation-name(slideInRight);
+		@include animation-duration($slideDuration);
+		@include animation-timing-function(ease);
+		//@include slideInRight($duration: $slideDuration, $function: ease-out, $fill: forwards);
+	}
 
-.carousel-item.slide-in-right {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 100%;
-	@include animation-name(slideInRight);
-	@include animation-duration($slideDuration);
-	@include animation-timing-function(ease);
-	//@include slideInRight($duration: $slideDuration, $function: ease-out, $fill: forwards);
-}
+	&.slide-out-left {
+		@include animation-name(slideOutLeft);
+		@include animation-duration($slideDuration);
+		@include animation-timing-function(ease);
+		//@include slideOutRight($duration: $slideDuration, $function: ease-in, $fill: forwards)
+	}
 
-.carousel-item.slide-out-left {
-	@include animation-name(slideOutLeft);
-	@include animation-duration($slideDuration);
-	@include animation-timing-function(ease);
-	//@include slideOutRight($duration: $slideDuration, $function: ease-in, $fill: forwards)
-}
-
-.carousel-item.slide-out-right {
-	@include animation-name(slideOutRight);
-	@include animation-duration($slideDuration);
-	@include animation-timing-function(ease);
-	//@include slideOutLeft($duration: $slideDuration, $function: ease-in, $fill: forwards);
+	&.slide-out-right {
+		@include animation-name(slideOutRight);
+		@include animation-duration($slideDuration);
+		@include animation-timing-function(ease);
+		//@include slideOutLeft($duration: $slideDuration, $function: ease-in, $fill: forwards);
+	}
+	
 }

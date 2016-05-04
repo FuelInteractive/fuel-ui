@@ -8,6 +8,7 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
+var sassGlob = require('gulp-sass-glob');
 var inlineNg2Template = require('gulp-inline-ng2-template');
 var merge = require('merge2');
 var webserver = require('gulp-webserver');
@@ -153,6 +154,7 @@ gulp.task('views', ['cleanViews'], function () {
 gulp.task('sass', ['cleanSass'], function () {
     return gulp.src(paths.source + '/**/*.{scss,sass}')
         //.pipe(sourcemaps.init())
+        .pipe(sassGlob())
         .pipe(sass({
             errLogToConsole: true
         }).on('error', sass.logError))

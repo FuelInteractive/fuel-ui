@@ -9,7 +9,6 @@ import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller
 
 @Component({
     selector: "date-range-picker",
-    styleUrls: ['components/DatePicker/DatePicker.css'],
     templateUrl: 'components/DatePicker/DateRangePicker.html',
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -117,7 +116,6 @@ export class DateRangePicker extends DatePicker {
     }
 
     handleRangeInput(value: any): DateRange {
-        console.log(value);
         if (!(value instanceof DateRange))
             throw "DateRangePicker error: input is not of type DateRange";
 

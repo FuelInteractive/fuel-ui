@@ -4,7 +4,6 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 
 @Component({
     selector: 'date-picker-calendar',
-    styleUrls: ['components/DatePicker/DatePickerCalendar.css'],
     templateUrl: 'components/DatePicker/DatePickerCalendar.html',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
@@ -28,7 +27,6 @@ export class DatePickerCalendar implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.currentMonth);
         this.buildWeeks(this.currentMonth || new Date());
     }
 
@@ -95,7 +93,6 @@ export class DatePickerCalendar implements OnInit {
     }
 
     buildWeeks(date: Date): void {
-        console.log(date);
         this.currentMonth = date;
         var currentDay = new Date(this.currentMonth.toDateString());
         currentDay.setDate(1);

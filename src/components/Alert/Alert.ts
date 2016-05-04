@@ -3,7 +3,6 @@ import {CORE_DIRECTIVES} from '@angular/common';
 
 @Component({
     selector: 'alert',
-    styleUrls: ['components/Alert/Alert.css'],
     templateUrl: 'components/Alert/Alert.html',
     directives: [CORE_DIRECTIVES]
 })

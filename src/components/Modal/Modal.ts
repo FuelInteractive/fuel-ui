@@ -7,7 +7,6 @@ import {Animation} from "../../directives/Animation/Animation";
 	host:{
 		'(click)': 'clickElement($event)'
 	},
-	styleUrls: ['components/Modal/Modal.css'],
 	templateUrl: 'components/Modal/Modal.html',
 	directives: [CORE_DIRECTIVES, Animation]
 })

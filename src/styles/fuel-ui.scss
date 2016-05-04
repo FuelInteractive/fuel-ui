@@ -1,112 +1,11 @@
 @import "framework";
-
-.fuel-ui-accordion {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    
-    .fuel-ui-accordion-heading {
-        background-color: #f5f5f5;
-        border-bottom: 1px solid #ddd;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        color: #333;
-        padding: 10px 15px;
-        
-        &.text-muted {
-            color: #818a91 !important;
-        }
-    }
-    
-    .fuel-ui-accordion-body {
-        padding: 15px;
-    }
-}
-
-.fuel-ui-collapse {
-    display: none;
-    
-    &.in {
-        display: block;
-    }
-}
-
-.fuel-ui-collapsing {
-    position: relative;
-    height: 0;
-    overflow: hidden;
-    -webkit-transition-timing-function: ease;
-    -o-transition-timing-function: ease;
-    transition-timing-function: ease;
-    -webkit-transition-duration: .35s;
-    -o-transition-duration: .35s;
-    transition-duration: .35s;
-    -webkit-transition-property: height, visibility, padding;
-    -o-transition-property: height, visibility, padding;
-    transition-property: height, visibility, padding;
-}
+@import "../components/**/*";
+@import "../directives/**/*";
 
 .fuel-ui-clickable {
     cursor: pointer;
     
     &.disabled {
         cursor: not-allowed;
-    }
-}
-
-.fuel-ui-label {
-    margin: 0 .25em;
-    
-    &.disabled {
-        cursor: not-allowed;
-        background: #818a91;
-        color: darkgray;
-    }
-}
-
-.fuel-ui-timepicker {
-    
-    &.has-error {
-        border: 1px red solid;
-    }
-    
-    .fuel-ui-time{
-    
-        &.has-error {
-            input {
-                border: 1px red solid;
-            }
-        }
-    
-        input {
-            width: 50px;
-        }
-    } 
-}
-
-.table-sortable > thead > tr > th {
-    cursor: pointer;
-    position: relative;
-    background-image: none;
-    white-space: nowrap;
-    
-    &:after, .sort-desc:after, .sort-asc:after{
-        font-family: FontAwesome;
-        padding-left: 5px;
-    }
-    
-    &:after{
-        content: "\f0dc";
-        color: #ddd;
-    }
-    
-    &.sort-asc:after{
-        content: "\f0de";
-        color: #767676;
-    }
-    
-    &.sort-desc:after{
-        content: "\f0dd";
-        color: #767676;       
     }
 }

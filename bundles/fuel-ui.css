@@ -259,6 +259,277 @@
   .fuel-ui-accordion .fuel-ui-accordion-body {
     padding: 15px; }
 
+.fuel-ui-alert-fade-in {
+  -webkit-animation-name: fadeIn;
+  -moz-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease; }
+
+.carousel-item {
+  width: 100%; }
+  .carousel-item.slide-in-left {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    -webkit-animation-name: slideInLeft;
+    -moz-animation-name: slideInLeft;
+    animation-name: slideInLeft;
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    animation-timing-function: ease; }
+  .carousel-item.slide-in-right {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    -webkit-animation-name: slideInRight;
+    -moz-animation-name: slideInRight;
+    animation-name: slideInRight;
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    animation-timing-function: ease; }
+  .carousel-item.slide-out-left {
+    -webkit-animation-name: slideOutLeft;
+    -moz-animation-name: slideOutLeft;
+    animation-name: slideOutLeft;
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    animation-timing-function: ease; }
+  .carousel-item.slide-out-right {
+    -webkit-animation-name: slideOutRight;
+    -moz-animation-name: slideOutRight;
+    animation-name: slideOutRight;
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    animation-timing-function: ease; }
+
+.date-picker-overlay {
+  background-color: transparent;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; }
+  @media (max-width: 480px), screen and (max-device-width: 480px) {
+    .date-picker-overlay {
+      background-color: #55595c;
+      opacity: .75; } }
+
+.fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {
+  background-color: #fff; }
+
+.fuel-ui-datepicker-input-group .input-group-addon {
+  background-color: #fff; }
+
+.date-picker-component {
+  border: 1px solid #eceeef;
+  z-index: 120;
+  background-color: #fff;
+  font-size: .75rem;
+  position: absolute;
+  width: 350px;
+  height: auto;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: 0.3rem;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  transition: all 0.1s ease; }
+  @media (max-width: 480px), screen and (max-device-width: 480px) {
+    .date-picker-component {
+      width: 90%;
+      height: 90%;
+      position: fixed;
+      top: 5%;
+      left: 5%; } }
+  .date-picker-component .input-group {
+    z-index: 110; }
+  .date-picker-component .container {
+    height: 100%; }
+    @media (max-width: 480px), screen and (max-device-width: 480px) {
+      .date-picker-component .container .calendar-container {
+        height: 91%; } }
+    .date-picker-component .container header {
+      position: relative;
+      top: 0;
+      left: 0;
+      vertical-align: middle;
+      background-color: #fff; }
+      .date-picker-component .container header .days-of-week {
+        background-color: #0275d8;
+        color: #fff; }
+      .date-picker-component .container header table {
+        border-top: none !important; }
+        .date-picker-component .container header table th, .date-picker-component .container header table td {
+          text-align: center; }
+      .date-picker-component .container header button {
+        border: none;
+        border-radius: 0;
+        color: #0275d8;
+        background-color: #fff;
+        width: 15%; }
+        .date-picker-component .container header button:active {
+          background-color: #eceeef; }
+        .date-picker-component .container header button.button-disable {
+          color: #eceeef;
+          cursor: default; }
+      .date-picker-component .container header .date-range {
+        width: 70%; }
+        .date-picker-component .container header .date-range span {
+          background-color: #eceeef;
+          border-left: none;
+          border-right: none; }
+      .date-picker-component .container header .input-group-addon {
+        border: none;
+        background-color: #fff !important; }
+      .date-picker-component .container header input {
+        border: none;
+        display: inline-block;
+        margin: 1px auto 0 auto;
+        cursor: pointer; }
+      .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {
+        background-color: #fff; }
+      .date-picker-component .container header input.target {
+        color: #0275d8; }
+        .date-picker-component .container header input.target::-webkit-input-placeholder {
+          color: #0275d8; }
+        .date-picker-component .container header input.target::-moz-placeholder {
+          color: #0275d8; }
+        .date-picker-component .container header input.target:-moz-placeholder {
+          color: #0275d8; }
+        .date-picker-component .container header input.target:-ms-input-placeholder {
+          color: #0275d8; }
+
+.fuel-ui-datepicker-calendar .table {
+  font-size: .75rem;
+  border: none;
+  border-top: 1px solid #eceeef;
+  background-color: #fff;
+  border-collapse: collapse; }
+  .fuel-ui-datepicker-calendar .table .calendar-date {
+    z-index: 200;
+    background-color: transparent; }
+  .fuel-ui-datepicker-calendar .table tr {
+    border: none; }
+  .fuel-ui-datepicker-calendar .table th, .fuel-ui-datepicker-calendar .table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: .75rem;
+    padding: .1rem;
+    height: 1.75rem;
+    border: none;
+    position: relative; }
+    @media (max-width: 480px), screen and (max-device-width: 480px) {
+      .fuel-ui-datepicker-calendar .table th, .fuel-ui-datepicker-calendar .table td {
+        padding: .5rem;
+        font-size: 1rem; } }
+  .fuel-ui-datepicker-calendar .table td.selectable {
+    cursor: pointer !important; }
+    .fuel-ui-datepicker-calendar .table td.selectable:hover {
+      background-color: #0275d8;
+      color: #fff; }
+  .fuel-ui-datepicker-calendar .table td.selected {
+    background-color: #99c4e9;
+    color: #fff; }
+  .fuel-ui-datepicker-calendar .table td.disabled {
+    color: #c9c9c9; }
+  .fuel-ui-datepicker-calendar .table td.startDate, .fuel-ui-datepicker-calendar .table td.endDate {
+    background-color: #0275d8;
+    color: #fff; }
+  .fuel-ui-datepicker-calendar .table td.startDate:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    right: 0;
+    background-color: transparent;
+    border-left: 1em solid transparent;
+    border-top: 1.1em solid #99c4e9;
+    border-bottom: 1.1em solid #99c4e9; }
+  .fuel-ui-datepicker-calendar .table td.endDate:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    left: 0;
+    background-color: transparent;
+    border-right: 1em solid transparent;
+    border-top: 1.1em solid #99c4e9;
+    border-bottom: 1.1em solid #99c4e9; }
+
+.fuel-ui-modal-fade-in {
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease; }
+
+.fuel-ui-pagination a {
+  cursor: pointer; }
+  .fuel-ui-pagination a:hover {
+    text-decoration: none; }
+
+.fuel-ui-table-sortable > thead > tr > th {
+  cursor: pointer;
+  position: relative;
+  background-image: none;
+  white-space: nowrap; }
+  .fuel-ui-table-sortable > thead > tr > th:after, .fuel-ui-table-sortable > thead > tr > th .sort-desc:after, .fuel-ui-table-sortable > thead > tr > th .sort-asc:after {
+    font-family: FontAwesome;
+    padding-left: 5px; }
+  .fuel-ui-table-sortable > thead > tr > th:after {
+    content: "\f0dc";
+    color: #ddd; }
+  .fuel-ui-table-sortable > thead > tr > th.sort-asc:after {
+    content: "\f0de";
+    color: #767676; }
+  .fuel-ui-table-sortable > thead > tr > th.sort-desc:after {
+    content: "\f0dd";
+    color: #767676; }
+
+.fuel-ui-tag-label {
+  margin: 0 .25em; }
+  .fuel-ui-tag-label.disabled {
+    cursor: not-allowed;
+    background: #818a91;
+    color: darkgray; }
+
+.fuel-ui-timepicker.has-error {
+  border: 1px red solid; }
+
+.fuel-ui-timepicker .fuel-ui-time.has-error input {
+  border: 1px red solid; }
+
+.fuel-ui-timepicker .fuel-ui-time input {
+  width: 50px; }
+
 .fuel-ui-collapse {
   display: none; }
   .fuel-ui-collapse.in {
@@ -282,37 +553,3 @@
   cursor: pointer; }
   .fuel-ui-clickable.disabled {
     cursor: not-allowed; }
-
-.fuel-ui-label {
-  margin: 0 .25em; }
-  .fuel-ui-label.disabled {
-    cursor: not-allowed;
-    background: #818a91;
-    color: darkgray; }
-
-.fuel-ui-timepicker.has-error {
-  border: 1px red solid; }
-
-.fuel-ui-timepicker .fuel-ui-time.has-error input {
-  border: 1px red solid; }
-
-.fuel-ui-timepicker .fuel-ui-time input {
-  width: 50px; }
-
-.table-sortable > thead > tr > th {
-  cursor: pointer;
-  position: relative;
-  background-image: none;
-  white-space: nowrap; }
-  .table-sortable > thead > tr > th:after, .table-sortable > thead > tr > th .sort-desc:after, .table-sortable > thead > tr > th .sort-asc:after {
-    font-family: FontAwesome;
-    padding-left: 5px; }
-  .table-sortable > thead > tr > th:after {
-    content: "\f0dc";
-    color: #ddd; }
-  .table-sortable > thead > tr > th.sort-asc:after {
-    content: "\f0de";
-    color: #767676; }
-  .table-sortable > thead > tr > th.sort-desc:after {
-    content: "\f0dd";
-    color: #767676; }

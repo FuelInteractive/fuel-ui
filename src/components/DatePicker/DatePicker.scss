@@ -18,6 +18,16 @@
     }
 }
 
+.fuel-ui-datepicker-input-group {
+    input:read-only, .form-control[readonly] {
+        background-color: $input-bg;
+    } 
+
+    .input-group-addon {
+        background-color: $input-bg;
+    }
+}
+
 .date-picker-component {
     border: 1px solid $table-border-color;
     z-index: 120;
@@ -42,122 +52,89 @@
         top: 5%;
         left: 5%;
     }
-}
 
-table {
-    font-size: .75rem;
-}
+    .input-group {
+        z-index: 110;
+    }
 
-.input-group {
-    z-index: 110;
-}
+    .container {
+        height: 100%;
 
-input:read-only, .form-control[readonly] {
-    background-color: $input-bg;
-} 
-
-.input-group-addon {
-    background-color: $input-bg;
-}
-
-header {
-	position: relative;
-	top: 0;
-	left: 0;
-    vertical-align: middle;
-    background-color: $input-bg;
-    
-    .days-of-week {
-        background-color: $brand-primary;
-        color: $btn-primary-color;
-    }
-    
-    table{
-        border-top: none !important;
-    }
-    
-    th, td {
-        text-align: center;
-    }
-    
-    button {
-        border: none;
-        border-radius: 0;
-        color: $brand-primary; 
-        background-color: $input-bg;
-        width: 15%;
-    }
-    
-    button:active {
-        background-color: $input-bg-disabled;
-    }
-    
-    .button-disable {
-        color: $input-bg-disabled;
-        cursor: default;
-    }
-    
-    .date-range {
-        width: 70%;
-    }
-    
-    .date-range span {
-        background-color: $gray-lighter;
-        border-left: none;
-        border-right: none;
-    }
-    
-    .input-group-addon {
-        border: none;
-        background-color: $input-bg !important;
-    }
-    
-    input {
-        border: none;
-        display: inline-block;
-        margin: 1px auto 0 auto;
-        cursor: pointer;
-    }
-    
-    input:read-only, .form-control[readonly] {
-        background-color: $body-bg;
-    }
-    
-    input.target {
-        color: $brand-primary;
-        @include placeholder {
-            color: $brand-primary;
+        .calendar-container {    
+            @include mobile-only {
+                height: 91%;
+            }
         }
-    }
-}
 
-.prev-month, .next-month {
-	position: absolute;
-	top: 0;
-	display: inline-block;
-	z-index: 100;
-	margin-top: .2rem;
-	.btn-sm {
-		padding: .1rem .7rem;
-	}
-}
-
-.prev-month {
-	left: 0;
-	margin-left: 4%;
-}
-
-.next-month {
-	right:0;
-	margin-right: 4%;
-}
-
-.container {
-    height: 100%;
-}
-
-.calendar-container {    
-    @include mobile-only {
-        height: 91%;
+        header {
+            position: relative;
+            top: 0;
+            left: 0;
+            vertical-align: middle;
+            background-color: $input-bg;
+            
+            .days-of-week {
+                background-color: $brand-primary;
+                color: $btn-primary-color;
+            }
+            
+            table{
+                border-top: none !important;
+                
+                th, td {
+                    text-align: center;
+                }
+            }
+            
+            button {
+                border: none;
+                border-radius: 0;
+                color: $brand-primary; 
+                background-color: $input-bg;
+                width: 15%;
+                
+                &:active {
+                    background-color: $input-bg-disabled;
+                }
+                
+                &.button-disable {
+                    color: $input-bg-disabled;
+                    cursor: default;
+                }
+            }
+            
+            .date-range {
+                width: 70%;
+                
+                span {
+                    background-color: $gray-lighter;
+                    border-left: none;
+                    border-right: none;
+                }
+            }
+            
+            .input-group-addon {
+                border: none;
+                background-color: $input-bg !important;
+            }
+            
+            input {
+                border: none;
+                display: inline-block;
+                margin: 1px auto 0 auto;
+                cursor: pointer;
+            }
+            
+            input:read-only, .form-control[readonly] {
+                background-color: $body-bg;
+            }
+            
+            input.target {
+                color: $brand-primary;
+                @include placeholder {
+                    color: $brand-primary;
+                }
+            }
+        }
     }
 }

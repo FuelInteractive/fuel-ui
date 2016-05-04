@@ -87,8 +87,6 @@ export class DatePicker implements OnInit {
             if(this.canNextMonth)
                 this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth()+1));
         }
-        
-        console.log(this.calendarMonths);
     }
     
     ngOnInit(): void {

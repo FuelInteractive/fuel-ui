@@ -9,7 +9,6 @@ import {RangePipe} from '../../pipes/Range/Range';
         "totalPages: total-pages",
         "pagesAtOnce: pages-at-once"
     ],
-    styleUrls: ['components/Pagination/Pagination.css'],
     templateUrl: 'components/Pagination/Pagination.html',
     directives: [CORE_DIRECTIVES],
     pipes: [SlicePipe, RangePipe]

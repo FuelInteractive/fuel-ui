@@ -33,6 +33,7 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
+    "gulp-sass-glob": "^1.0.6",
     "gulp-server-livereload": "^1.7.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-typescript": "^2.8.0",
