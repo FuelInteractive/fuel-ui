@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from "angular2/common";
+import {Component} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
 import {RANGE_PROVIDERS} from './Range';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';

@@ -1,5 +1,5 @@
-import {Component, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
 import {Animation} from "../../directives/Animation/Animation";
 
 @Component({
@@ -7,7 +7,6 @@ import {Animation} from "../../directives/Animation/Animation";
 	host:{
 		'(click)': 'clickElement($event)'
 	},
-	styleUrls: ['components/Modal/Modal.css'],
 	templateUrl: 'components/Modal/Modal.html',
 	directives: [CORE_DIRECTIVES, Animation]
 })

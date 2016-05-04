@@ -2,7 +2,7 @@
 
 $duration: 1s;
 
-.alertFadeIn{
+.fuel-ui-alert-fade-in {
   @include animation-name(fadeIn);
   @include animation-duration($duration);
   @include animation-timing-function(ease);

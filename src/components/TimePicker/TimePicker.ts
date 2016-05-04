@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: "timepicker",

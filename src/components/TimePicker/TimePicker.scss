@@ -1,0 +1,19 @@
+.fuel-ui-timepicker {
+    
+    &.has-error {
+        border: 1px red solid;
+    }
+    
+    .fuel-ui-time{
+    
+        &.has-error {
+            input {
+                border: 1px red solid;
+            }
+        }
+    
+        input {
+            width: 50px;
+        }
+    } 
+}

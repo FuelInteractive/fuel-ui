@@ -1,4 +1,4 @@
-System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["angular2/core", "angular2/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -20,8 +20,8 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["angu
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Collapse_1 = $__require('../../directives/Collapse/Collapse');
   var Accordion_1 = $__require('./Accordion');
   var AccordionItem = (function() {
@@ -73,7 +73,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["angu
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -95,8 +95,8 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Alert = (function() {
     function Alert(el) {
       this.displayed = false;
@@ -118,8 +118,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", 
     __decorate([core_1.Output(), __metadata('design:type', Object)], Alert.prototype, "displayedChange", void 0);
     Alert = __decorate([core_1.Component({
       selector: 'alert',
-      styles: ["\n      .alertFadeIn {\n        -webkit-animation-name: fadeIn;\n        -moz-animation-name: fadeIn;\n        animation-name: fadeIn;\n        -webkit-animation-duration: 1s;\n        -moz-animation-duration: 1s;\n        animation-duration: 1s;\n        -webkit-animation-timing-function: ease;\n        -moz-animation-timing-function: ease;\n        animation-timing-function: ease; }\n    "],
-      template: "\n      <div\n          *ngIf=\"displayed\"\n          role=\"alert\"\n          class=\"alert alertFadeIn\"\n          [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n          <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&#215;</span>\n              <span class=\"sr-only\">Close</span>\n          </button>\n          <ng-content></ng-content>\n      </div>\n    ",
+      template: "\n      <div\n          *ngIf=\"displayed\"\n          role=\"alert\"\n          class=\"alert fuel-ui-alert-fade-in\"\n          [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n          <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&#215;</span>\n              <span class=\"sr-only\">Close</span>\n          </button>\n          <ng-content></ng-content>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Alert);
     return Alert;
@@ -129,7 +128,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["angular2/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -151,9 +150,9 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/c
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var CarouselItem = (function() {
     function CarouselItem() {
       this.resetStatus();
@@ -290,8 +289,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/c
     __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "imageQuery", void 0);
     Carousel = __decorate([core_1.Component({
       selector: 'carousel',
-      styles: ["\n   .carousel-item {\n     width: 100%; }\n\n   .carousel-item.slide-in-left {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: -100%;\n     -webkit-animation-name: slideInLeft;\n     -moz-animation-name: slideInLeft;\n     animation-name: slideInLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-in-right {\n     display: block;\n     position: absolute;\n     top: 0;\n     left: 100%;\n     -webkit-animation-name: slideInRight;\n     -moz-animation-name: slideInRight;\n     animation-name: slideInRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-left {\n     -webkit-animation-name: slideOutLeft;\n     -moz-animation-name: slideOutLeft;\n     animation-name: slideOutLeft;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n\n   .carousel-item.slide-out-right {\n     -webkit-animation-name: slideOutRight;\n     -moz-animation-name: slideOutRight;\n     animation-name: slideOutRight;\n     -webkit-animation-duration: 0.5s;\n     -moz-animation-duration: 0.5s;\n     animation-duration: 0.5s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
-      template: "\n   <div class=\"carousel slide\">\n     <ol class=\"carousel-indicators\">\n       <li *ngFor=\"let image of images\"\n         (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\"></li> \n     </ol>\n     <div class=\"carousel-inner\" role=\"listbox\">\n         <ng-content></ng-content>\n     </div>\n     <a class=\"left carousel-control\" role=\"button\" (click)=\"prevImage()\">\n       <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Previous</span>\n     </a>\n     <a class=\"right carousel-control\" role=\"button\" (click)=\"nextImage()\">\n       <span class=\"icon-next\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Next</span>\n     </a>\n   </div>\n    ",
+      template: "\n   <div class=\"carousel slide fuel-ui-carousel\">\n     <ol class=\"carousel-indicators\">\n       <li *ngFor=\"let image of images\"\n         (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\"></li> \n     </ol>\n     <div class=\"carousel-inner\" role=\"listbox\">\n         <ng-content></ng-content>\n     </div>\n     <a class=\"left carousel-control\" role=\"button\" (click)=\"prevImage()\">\n       <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Previous</span>\n     </a>\n     <a class=\"right carousel-control\" role=\"button\" (click)=\"nextImage()\">\n       <span class=\"icon-next\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Next</span>\n     </a>\n   </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES, CarouselItem],
       encapsulation: core_1.ViewEncapsulation.None
     }), __metadata('design:paramtypes', [])], Carousel);
@@ -302,7 +300,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["angular2/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angular2/core", "angular2/common", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller", "../../utilities/DetectionUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angular/core", "@angular/common", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller", "../../utilities/DetectionUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -324,9 +322,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var DatePickerCalendar_1 = $__require('./DatePickerCalendar');
   var InfiniteScroller_1 = $__require('../InfiniteScroller/InfiniteScroller');
   var DetectionUtils_1 = $__require('../../utilities/DetectionUtils');
@@ -343,6 +341,16 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
       this.calendarMonths = [];
       this._preGenMonths = 2;
       this.changeDetector = changeDetector;
+      var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+      this.calendarMonths = [new Date(currentDate.getFullYear(), currentDate.getMonth() - 1), new Date(currentDate.getFullYear(), currentDate.getMonth())];
+      for (var i = 0; i < this._preGenMonths; i++) {
+        var earliestDate = this.calendarMonths[0];
+        var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
+        if (this.canPrevMonth)
+          this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
+        if (this.canNextMonth)
+          this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
+      }
     }
     Object.defineProperty(DatePicker.prototype, "minDate", {
       get: function() {
@@ -401,15 +409,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     DatePicker.prototype.ngOnInit = function() {
       var _this = this;
       var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-      this.calendarMonths = [new Date(currentDate.getFullYear(), currentDate.getMonth() - 1), new Date(currentDate.getFullYear(), currentDate.getMonth())];
-      for (var i = 0; i < this._preGenMonths; i++) {
-        var earliestDate = this.calendarMonths[0];
-        var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-        if (this.canPrevMonth)
-          this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-        if (this.canNextMonth)
-          this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-      }
       setTimeout(function() {
         if (_this.calendarScroller == null)
           return;
@@ -515,8 +514,8 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
     __decorate([core_2.ViewChild(InfiniteScroller_1.InfiniteScroller), __metadata('design:type', InfiniteScroller_1.InfiniteScroller)], DatePicker.prototype, "calendarScroller", void 0);
     DatePicker = __decorate([core_1.Component({
       selector: "date-picker",
-      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n\n      table {\n        font-size: .75rem; }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
-      template: "\n      <div class=\"input-group\" (click)=\"toggleCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n          [(ngModel)]=\"inputDate\" #dateField readonly\n              placeholder=\"{{label}}\" />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      [height]=\"calendarHeight\"\n                      [hideScrollbar]=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {\n        background-color: #fff; }\n\n      .fuel-ui-datepicker-input-group .input-group-addon {\n        background-color: #fff; }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n        .date-picker-component .input-group {\n          z-index: 110; }\n        .date-picker-component .container {\n          height: 100%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            .date-picker-component .container .calendar-container {\n              height: 91%; } }\n          .date-picker-component .container header {\n            position: relative;\n            top: 0;\n            left: 0;\n            vertical-align: middle;\n            background-color: #fff; }\n            .date-picker-component .container header .days-of-week {\n              background-color: #0275d8;\n              color: #fff; }\n            .date-picker-component .container header table {\n              border-top: none !important; }\n              .date-picker-component .container header table th, .date-picker-component .container header table td {\n                text-align: center; }\n            .date-picker-component .container header button {\n              border: none;\n              border-radius: 0;\n              color: #0275d8;\n              background-color: #fff;\n              width: 15%; }\n              .date-picker-component .container header button:active {\n                background-color: #eceeef; }\n              .date-picker-component .container header button.button-disable {\n                color: #eceeef;\n                cursor: default; }\n            .date-picker-component .container header .date-range {\n              width: 70%; }\n              .date-picker-component .container header .date-range span {\n                background-color: #eceeef;\n                border-left: none;\n                border-right: none; }\n            .date-picker-component .container header .input-group-addon {\n              border: none;\n              background-color: #fff !important; }\n            .date-picker-component .container header input {\n              border: none;\n              display: inline-block;\n              margin: 1px auto 0 auto;\n              cursor: pointer; }\n            .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {\n              background-color: #fff; }\n            .date-picker-component .container header input.target {\n              color: #0275d8; }\n              .date-picker-component .container header input.target::-webkit-input-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target::-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-ms-input-placeholder {\n                color: #0275d8; }\n    "],
+      template: "\n      <div class=\"input-group fuel-ui-datepicker-input-group\" (click)=\"toggleCalendar($event)\">\n        <input type=\"text\" class=\"form-control\"\n          [(ngModel)]=\"inputDate\" #dateField readonly\n              placeholder=\"{{label}}\" />\n        <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField.focus\">\n            <i class=\"fa fa-calendar\"></i>\n        </span>\n      </div>\n\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      [height]=\"calendarHeight\"\n                      [hideScrollbar]=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
       directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
       changeDetection: core_1.ChangeDetectionStrategy.OnPush
     }), __metadata('design:paramtypes', [core_1.ChangeDetectorRef])], DatePicker);
@@ -526,7 +525,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["angula
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -548,9 +547,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var DatePickerCalendar = (function() {
     function DatePickerCalendar() {
       this.selectedDateChange = new core_2.EventEmitter();
@@ -619,14 +618,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
           currentWeek = [];
         }
       }
-      if (this.weeks.length > 5)
-        return;
-      var firstWeekCount = this.weeks[0].filter(function(i) {
-        return i.length > 0;
-      }).length;
-      var lastWeekCount = this.weeks[this.weeks.length - 1].filter(function(i) {
-        return i.length > 0;
-      }).length;
     };
     __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "currentMonth", void 0);
     __decorate([core_2.Input(), __metadata('design:type', Date)], DatePickerCalendar.prototype, "selectedDate", void 0);
@@ -640,8 +631,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
     __decorate([core_2.Input(), __metadata('design:type', Boolean)], DatePickerCalendar.prototype, "showMonth", void 0);
     DatePickerCalendar = __decorate([core_1.Component({
       selector: 'date-picker-calendar',
-      styles: ["\n   .table {\n     font-size: .75rem;\n     border: none;\n     border-top: 1px solid #eceeef;\n     background-color: #fff;\n     border-collapse: collapse; }\n     .table .calendar-date {\n       z-index: 200;\n       background-color: transparent; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     font-size: .75rem;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none;\n     position: relative; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       th, td {\n         padding: .5rem;\n         font-size: 1rem; } }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #99c4e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #c9c9c9; }\n\n   td.startDate, td.endDate {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.startDate:after {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     right: 0;\n     background-color: transparent;\n     border-left: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n\n   td.endDate:before {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     left: 0;\n     background-color: transparent;\n     border-right: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n    "],
-      template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"let week of weeks\">\n                <td *ngFor=\"let day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                       [class.startDate]=\"checkStartDate(day)\"\n                       [class.endDate]=\"checkEndDate(day)\"\n                    (click)=\"selectDate(day)\">\n                    <span class=\"calendar-date\">{{day}}</span>\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
+      template: "\n      <div class=\"fuel-ui-datepicker-calendar text-center py\">\n        <table class=\"table m-a-0\">\t\n            <tbody>\n                  <tr *ngIf=\"showMonth\">\n                      <td colspan=\"7\">\n                          <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                      </td>\n                  </tr> \n                <tr *ngFor=\"let week of weeks\">\n                    <td *ngFor=\"let day of week\"\n                        [class.selectable]=\"checkSelectable(day)\" \n                        [class.disabled]=\"!checkSelectable(day)\"\n                        [class.selected]=\"checkSelectedDate(day)\" \n                          [class.startDate]=\"checkStartDate(day)\"\n                          [class.endDate]=\"checkEndDate(day)\"\n                        (click)=\"selectDate(day)\">\n                        <span class=\"calendar-date\">{{day}}</span>\n                    </td> \n                </tr>\n            </tbody>\n        </table>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
     }), __metadata('design:paramtypes', [])], DatePickerCalendar);
     return DatePickerCalendar;
@@ -650,7 +640,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["angular2/core", "angular2/common", "../../utilities/DateUtils", "../../utilities/DetectionUtils", "./DatePicker", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@angular/core", "@angular/common", "../../utilities/DateUtils", "../../utilities/DetectionUtils", "./DatePicker", "./DatePickerCalendar", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -681,9 +671,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["a
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var core_2 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var core_2 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var DateUtils_1 = $__require('../../utilities/DateUtils');
   var DetectionUtils_1 = $__require('../../utilities/DetectionUtils');
   var DatePicker_1 = $__require('./DatePicker');
@@ -810,7 +800,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["a
     });
     ;
     DateRangePicker.prototype.handleRangeInput = function(value) {
-      console.log(value);
       if (!(value instanceof DateUtils_1.DateRange))
         throw "DateRangePicker error: input is not of type DateRange";
       var range = value;
@@ -844,8 +833,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["a
     __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "endDate", null);
     DateRangePicker = __decorate([core_1.Component({
       selector: "date-range-picker",
-      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n\n      table {\n        font-size: .75rem; }\n\n      .input-group {\n        z-index: 110; }\n\n      input:read-only {\n        background-color: #fff; }\n\n      .input-group-addon {\n        background-color: #fff; }\n\n      header {\n        position: relative;\n        top: 0;\n        left: 0;\n        vertical-align: middle;\n        background-color: #fff; }\n        header .days-of-week {\n          background-color: #0275d8;\n          color: #fff; }\n        header table {\n          border-top: none !important; }\n        header th, header td {\n          text-align: center; }\n        header button {\n          border: none;\n          border-radius: 0;\n          color: #0275d8;\n          background-color: #fff;\n          width: 15%; }\n        header button:active {\n          background-color: #eceeef; }\n        header .button-disable {\n          color: #eceeef;\n          cursor: default; }\n        header .date-range {\n          width: 70%; }\n        header .date-range span {\n          background-color: #eceeef;\n          border-left: none;\n          border-right: none; }\n        header .input-group-addon {\n          border: none;\n          background-color: #fff !important; }\n        header input {\n          border: none;\n          display: inline-block;\n          margin: 1px auto 0 auto;\n          cursor: pointer; }\n        header input:read-only {\n          background-color: #fff; }\n        header input.target {\n          color: #0275d8; }\n          header input.target::-webkit-input-placeholder {\n            color: #0275d8; }\n          header input.target::-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-moz-placeholder {\n            color: #0275d8; }\n          header input.target:-ms-input-placeholder {\n            color: #0275d8; }\n\n      .prev-month, .next-month {\n        position: absolute;\n        top: 0;\n        display: inline-block;\n        z-index: 100;\n        margin-top: .2rem; }\n        .prev-month .btn-sm, .next-month .btn-sm {\n          padding: .1rem .7rem; }\n\n      .prev-month {\n        left: 0;\n        margin-left: 4%; }\n\n      .next-month {\n        right: 0;\n        margin-right: 4%; }\n\n      .container {\n        height: 100%; }\n\n      @media (max-width: 480px), screen and (max-device-width: 480px) {\n        .calendar-container {\n          height: 91%; } }\n    "],
-      template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"startDate\">{{startLabel}}</label>\n          <div class=\"input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusStartDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"startDate\"\n                  [(ngModel)]=\"inputStartDate\" #dateField1 \n                  placeholder=\"{{startLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField1.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"endDate\">{{endLabel}}</label>\n          <div class=\"input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusEndDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"endDate\"\n                  [(ngModel)]=\"inputEndDate\" #dateField2 \n                  placeholder=\"{{endLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField2.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkStartDateTarget()\"\n                          (click)=\"focusStartDate()\"\n                          id=\"startDate\" [(ngModel)]=\"inputStartDate\" readonly \n                          placeholder=\"{{startLabel}}\" />\n                      <span class=\"input-group-addon\"> - </span>\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkEndDateTarget()\"\n                          (click)=\"focusEndDate()\"\n                          id=\"endDate\" [(ngModel)]=\"inputEndDate\" readonly \n                          placeholder=\"{{endLabel}}\" />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\"\n                          [(startDate)]=\"startDate\"\n                          [(endDate)]=\"endDate\"\n                          [dateTarget]=\"_dateTarget\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+      template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"startDate\">{{startLabel}}</label>\n          <div class=\"input-group fuel-ui-datepicker-input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusStartDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"startDate\"\n                  [(ngModel)]=\"inputStartDate\" #dateField1 \n                  placeholder=\"{{startLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField1.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"form-group\">\n          <label for=\"endDate\">{{endLabel}}</label>\n          <div class=\"input-group fuel-ui-datepicker-input-group\" \n              (click)=\"toggleCalendar($event)\"\n              (click)=\"focusEndDate()\">\n              <input type=\"text\" class=\"form-control\" name=\"endDate\"\n                  [(ngModel)]=\"inputEndDate\" #dateField2 \n                  placeholder=\"{{endLabel}}\" readonly />\n              <span class=\"input-group-addon\" [class.input-group-addon-focus]=\"dateField2.focus\">\n                  <i class=\"fa fa-calendar\"></i>\n              </span>\n          </div>\n      </div>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkStartDateTarget()\"\n                          (click)=\"focusStartDate()\"\n                          id=\"startDate\" [(ngModel)]=\"inputStartDate\" readonly \n                          placeholder=\"{{startLabel}}\" />\n                      <span class=\"input-group-addon\"> - </span>\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          [class.target]=\"checkEndDateTarget()\"\n                          (click)=\"focusEndDate()\"\n                          id=\"endDate\" [(ngModel)]=\"inputEndDate\" readonly \n                          placeholder=\"{{endLabel}}\" />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      height=\"{{calendarHeight}}\"\n                      hideScrollbar=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\"\n                          [(startDate)]=\"startDate\"\n                          [(endDate)]=\"endDate\"\n                          [dateTarget]=\"_dateTarget\" \n                          (selectedDate)=\"hideCalendar()\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
       directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
       changeDetection: core_1.ChangeDetectionStrategy.OnPush
     }), __metadata('design:paramtypes', [core_1.ChangeDetectorRef])], DateRangePicker);
@@ -874,7 +862,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerProviders",
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", "angular2/common", "../../directives/Animation/Animation"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", "@angular/common", "../../directives/Animation/Animation"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -896,8 +884,8 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Animation_1 = $__require('../../directives/Animation/Animation');
   var Modal = (function() {
     function Modal(el) {
@@ -946,8 +934,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
     Modal = __decorate([core_1.Component({
       selector: 'modal',
       host: {'(click)': 'clickElement($event)'},
-      styles: ["\n   .customFadeIn {\n     -webkit-animation-name: fadeInDown;\n     -moz-animation-name: fadeInDown;\n     animation-name: fadeInDown;\n     -webkit-animation-duration: 1s;\n     -moz-animation-duration: 1s;\n     animation-duration: 1s;\n     -webkit-animation-timing-function: ease;\n     -moz-animation-timing-function: ease;\n     animation-timing-function: ease; }\n    "],
-      template: "\n   <div class=\"modal\" [ngClass]=\"{customFadeIn: displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
+      template: "\n   <div class=\"modal\" [ngClass]=\"{'fuel-ui-modal-fade-in': displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
       directives: [common_1.CORE_DIRECTIVES, Animation_1.Animation]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
     return Modal;
@@ -957,7 +944,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["angular2/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angular2/core", "angular2/common", "../../pipes/Range/Range"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["@angular/core", "@angular/common", "../../pipes/Range/Range"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -979,8 +966,8 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Range_1 = $__require('../../pipes/Range/Range');
   var Pagination = (function() {
     function Pagination() {
@@ -1024,8 +1011,7 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angula
       selector: 'pagination',
       changeDetection: core_1.ChangeDetectionStrategy.OnPush,
       properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"],
-      styles: ["\n      a {\n        cursor: pointer; }\n\n      a:hover {\n        text-decoration: none; }\n    "],
-      template: "\n      <nav>\n          <ul class=\"pagination\">\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\" *ngIf=\"showSelect\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"let page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
+      template: "\n      <nav class=\"fuel-ui-pagination\">\n          <ul class=\"pagination\">\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\" *ngIf=\"showSelect\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"let page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES],
       pipes: [common_1.SlicePipe, Range_1.RangePipe]
     }), __metadata('design:paramtypes', [])], Pagination);
@@ -1036,7 +1022,7 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["angula
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["angular2/core", "../../utilities/ElementUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["@angular/core", "../../utilities/ElementUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1058,7 +1044,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var ElementUtils_1 = $__require('../../utilities/ElementUtils');
   var ScrollItem = (function() {
     function ScrollItem(element) {
@@ -1204,7 +1190,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1226,7 +1212,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/c
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Dropdown = (function() {
     function Dropdown() {
       this.dropdownOpen = false;
@@ -1246,7 +1232,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["angular2/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./TabSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["@angular/core", "./TabSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1268,7 +1254,7 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./T
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var TabSet_1 = $__require('./TabSet');
   var Tab = (function() {
     function Tab(tabset) {
@@ -1331,7 +1317,7 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["angular2/core", "./T
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./TagSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["@angular/core", "./TagSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1353,7 +1339,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./T
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var TagSet_1 = $__require('./TagSet');
   var Tag = (function() {
     function Tag(tagset) {
@@ -1428,7 +1414,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["angular2/core", "./T
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["angular2/core", "angular2/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "../../pipes/OrderBy/OrderBy", "../../pipes/Format/Format", "./TableSortableSorting", "./TableSortableColumn"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1450,8 +1436,8 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var OrderBy_1 = $__require('../../pipes/OrderBy/OrderBy');
   var Format_1 = $__require('../../pipes/Format/Format');
   var TableSortableSorting_1 = $__require('./TableSortableSorting');
@@ -1477,7 +1463,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
     __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
     TableSortable = __decorate([core_1.Component({
       selector: 'table-sortable',
-      template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
+      template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped fuel-ui-table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
       directives: [common_1.CORE_DIRECTIVES],
       pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
     }), __metadata('design:paramtypes', [])], TableSortable);
@@ -2673,7 +2659,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/NoUiSlider", [], false, f
   return _retrieveGlobal();
 });
 
-System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core", "./NoUiSlider"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["@angular/core", "./NoUiSlider"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2695,7 +2681,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   $__require('./NoUiSlider');
   var Slider = (function() {
     function Slider(_element) {
@@ -2798,7 +2784,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["angular2/core"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2820,7 +2806,7 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["angula
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var TimePicker = (function() {
     function TimePicker() {
       this.hourStep = 1;
@@ -3026,7 +3012,7 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["angula
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3048,7 +3034,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["angular2
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Accordion = (function() {
     function Accordion() {
       this.closeOthers = true;
@@ -3086,7 +3072,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["angular2
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3108,8 +3094,8 @@ System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["angular2/core", "
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var TabSet = (function() {
     function TabSet() {
       this.tabs = [];
@@ -3242,7 +3228,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "angular2/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3264,8 +3250,8 @@ System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var TagSet = (function() {
     function TagSet() {
       this.tags = [];
@@ -3288,7 +3274,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["angular2/core", "
     TagSet = __decorate([core_1.Component({
       selector: 'tagset',
       directives: [common_1.NgClass],
-      template: "\n      <span *ngFor=\"let tag of tags\" class=\"label fuel-ui-label\" [ngClass]=\"tag.classMap\">\n          <span [innerHtml]=\"tag.title\"></span>\n          <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n              <i class=\"fa fa-remove\"></i>\n          </span>\n      </span>\n    "
+      template: "\n      <span *ngFor=\"let tag of tags\" class=\"label fuel-ui-tag-label\" [ngClass]=\"tag.classMap\">\n          <span [innerHtml]=\"tag.title\"></span>\n          <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n              <i class=\"fa fa-remove\"></i>\n          </span>\n      </span>\n    "
     }), __metadata('design:paramtypes', [])], TagSet);
     return TagSet;
   }());
@@ -3342,7 +3328,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/Accor
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3364,7 +3350,7 @@ System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["angular2
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Animation = (function() {
     function Animation(element) {
       this.onAnimationStart = new core_1.EventEmitter();
@@ -3460,7 +3446,7 @@ System.registerDynamic("fuel-ui/dist/directives/Animation/Animation", ["angular2
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3482,7 +3468,7 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/cor
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var Tooltip = (function() {
     function Tooltip(el) {
       this._el = el.nativeElement;
@@ -3531,7 +3517,7 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["angular2/cor
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3553,7 +3539,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var CodeHighlighter = (function() {
     function CodeHighlighter(_el) {
       this._el = _el;
@@ -3570,7 +3556,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["angular2/core", "angular2/src/animate/animation_builder"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/core", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3592,8 +3578,8 @@ System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["angular2/c
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var animation_builder_1 = $__require('angular2/src/animate/animation_builder');
+  var core_1 = $__require('@angular/core');
+  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
   var Collapse = (function() {
     function Collapse(animationBuilder, element) {
       this.element = element;
@@ -3692,7 +3678,7 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Anima
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "angular2/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["@angular/core", "@angular/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3714,8 +3700,8 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
-  var common_1 = $__require('angular2/common');
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var StringUtils_1 = $__require('../../utilities/StringUtils');
   var FormatPipe = (function() {
     function FormatPipe() {
@@ -3766,7 +3752,7 @@ System.registerDynamic("fuel-ui/dist/pipes/Format/Format", ["angular2/core", "an
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3788,7 +3774,7 @@ System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angul
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var MapToIterablePipe = (function() {
     function MapToIterablePipe() {}
     MapToIterablePipe.prototype.transform = function(dict, args) {
@@ -3814,7 +3800,7 @@ System.registerDynamic("fuel-ui/dist/pipes/MapToIterable/MapToIterable", ["angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3836,7 +3822,7 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], 
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var OrderByPipe = (function() {
     function OrderByPipe() {
       this.value = [];
@@ -3902,7 +3888,7 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["angular2/core"], 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3924,7 +3910,7 @@ System.registerDynamic("fuel-ui/dist/pipes/Range/Range", ["angular2/core"], true
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1 = $__require('angular2/core');
+  var core_1 = $__require('@angular/core');
   var RangePipe = (function() {
     function RangePipe() {}
     RangePipe.prototype.transform = function(value, min, max, step) {

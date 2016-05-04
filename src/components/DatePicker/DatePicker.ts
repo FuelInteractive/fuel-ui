@@ -1,6 +1,6 @@
-import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef} from "angular2/core";
-import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from "angular2/core";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
+import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from '@angular/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {MobileDetection} from "../../utilities/DetectionUtils";
@@ -72,11 +72,8 @@ export class DatePicker implements OnInit {
     
     constructor(changeDetector: ChangeDetectorRef) {
         this.changeDetector = changeDetector;
-    }
-    
-    ngOnInit(): void {
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         this.calendarMonths = [
             new Date(currentDate.getFullYear(), currentDate.getMonth()-1),
             new Date(currentDate.getFullYear(), currentDate.getMonth())
@@ -90,6 +87,10 @@ export class DatePicker implements OnInit {
             if(this.canNextMonth)
                 this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth()+1));
         }
+    }
+    
+    ngOnInit(): void {
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         
         setTimeout(() => {
             if(this.calendarScroller == null)

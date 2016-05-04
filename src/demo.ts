@@ -1,8 +1,7 @@
-import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "angular2/core";
-import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES } from "angular2/common";
-import {bootstrap} from "angular2/platform/browser";
-import {LocationStrategy, HashLocationStrategy} from "angular2/platform/common";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
+import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "@angular/core";
+import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES, LocationStrategy, HashLocationStrategy } from "@angular/common";
+import {bootstrap} from "@angular/platform-browser-dynamic";
+import {Routes, Route, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router";
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
 import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
@@ -64,32 +63,32 @@ export class InstallationComponent {
     
 }
 
-@RouteConfig([
-  {path:'/', name: 'DemoHome', component: DemoHome, useAsDefault: true},
-  {path:'/installation', name: 'InstallationComponent', component: InstallationComponent},
-  {path:'/component/accordion', name: 'AccordionDemo', component: AccordionDemo},
-  {path:'/component/alert', name: 'AlertDemo', component: AlertDemo},
-  {path:'/component/carousel', name: 'CarouselDemo', component: CarouselDemo},
-  {path:'/component/datepicker', name: 'DatePickerDemo', component: DatePickerDemo},
-  {path:'/component/daterangepicker', name: 'DateRangePickerDemo', component: DateRangePickerDemo},
-  {path:'/component/dropdown', name: 'DropdownDemo', component: DropdownDemo},
-  {path:'/component/infinitescroller', name: 'InfiniteScrollerDemo', component: InfiniteScrollerDemo},
-  {path:'/component/modal', name: 'ModalDemo', component: ModalDemo},
-  {path:'/component/pagination', name: 'PaginationDemo', component: PaginationDemo},
-  {path:'/component/progress', name: 'ProgressDemo', component: ProgressDemo},
-  {path:'/component/slider', name: 'SliderDemo', component: SliderDemo},
-  {path:'/component/tab', name: 'TabDemo', component: TabDemo},
-  {path:'/component/tablesortable', name: 'TableSortableDemo', component: TableSortableDemo},
-  {path:'/component/tag', name: 'TagDemo', component: TagDemo},
-  {path:'/component/timepicker', name: 'TimePickerDemo', component: TimePickerDemo},
-  {path:'/directive/animation', name: 'AnimationDemo', component: AnimationDemo},
-  {path:'/directive/codehighlighter', name: 'CodeHighlighterDemo', component: CodeHighlighterDemo},
-  {path:'/directive/collapse', name: 'CollapseDemo', component: CollapseDemo},
-  {path:'/directive/tooltip', name: 'TooltipDemo', component: TooltipDemo},
-  {path:'/pipe/format', name: 'FormatDemo', component: FormatDemo},
-  {path:'/pipe/maptoiterable', name: 'MapToIterableDemo', component: MapToIterableDemo},
-  {path:'/pipe/orderby', name: 'OrderByDemo', component: OrderByDemo},
-  {path:'/pipe/range', name: 'RangeDemo', component: RangeDemo}
+@Routes([
+    { path: '/', component: DemoHome},
+    { path: '/installation', component: InstallationComponent},
+    { path: '/component/accordion', component: AccordionDemo },
+    { path: '/component/alert', component: AlertDemo },
+    { path: '/component/carousel', component: CarouselDemo },
+    { path: '/component/datepicker', component: DatePickerDemo },
+    { path: '/component/daterangepicker', component: DateRangePickerDemo },
+    { path: '/component/dropdown', component: DropdownDemo },
+    { path: '/component/infinitescroller', component: InfiniteScrollerDemo },
+    { path: '/component/modal', component: ModalDemo },
+    { path: '/component/pagination', component: PaginationDemo },
+    { path: '/component/progress', component: ProgressDemo },
+    { path: '/component/slider', component: SliderDemo },
+    { path: '/component/tab', component: TabDemo },
+    { path: '/component/tablesortable', component: TableSortableDemo },
+    { path: '/component/tag', component: TagDemo },
+    { path: '/component/timepicker', component: TimePickerDemo },
+    { path: '/directive/animation', component: AnimationDemo },
+    { path: '/directive/codehighlighter', component: CodeHighlighterDemo },
+    { path: '/directive/collapse', component: CollapseDemo },
+    { path: '/directive/tooltip', component: TooltipDemo },
+    { path: '/pipe/format', component: FormatDemo },
+    { path: '/pipe/maptoiterable', component: MapToIterableDemo },
+    { path: '/pipe/orderby', component: OrderByDemo },
+    { path: '/pipe/range', component: RangeDemo}
 ])
 @Component({
 	selector: "fuel-ui",
@@ -101,13 +100,13 @@ export class InstallationComponent {
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a (click)="clickNavLink()" [routerLink]="['DemoHome']">
+                    <a (click)="clickNavLink()" [routerLink]="['/']">
                         <img src="https://pbs.twimg.com/profile_images/572406600309018624/r2ma7PE3.png" height="40"/> 
                         <span>Fuel-UI</span>
                     </a>
                     <i class="fa fa-bars fuel-ui-clickable pull-right" (click)="$event.preventDefault(); toggled = !toggled"></i>
                 </li>
-                <li><a (click)="clickNavLink()" [routerLink]="['InstallationComponent']">Installation</a></li>
+                <li><a (click)="clickNavLink()" [routerLink]="['/installation']">Installation</a></li>
                 <accordion [closeOthers]="false" duration="500">
                     <accordion-item #componentNav [open]="false">
                         <li accordion-heading class="fuel-ui-clickable sidebar-title">
@@ -116,21 +115,21 @@ export class InstallationComponent {
                                 [ngClass]="{'fa-minus': componentNav?.open, 'fa-plus': !componentNav || !componentNav.open}"></i>
                         </li>
                         
-                        <li><a (click)="clickNavLink()" [routerLink]="['AccordionDemo']">Accordion</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['AlertDemo']">Alert</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['CarouselDemo']">Carousel</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['DatePickerDemo']">DatePicker</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['DateRangePickerDemo']">DateRangePicker</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['DropdownDemo']">Dropdown</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['InfiniteScrollerDemo']">InfiniteScroller</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['ModalDemo']">Modal</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['PaginationDemo']">Pagination</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['ProgressDemo']">Progress</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['SliderDemo']">Slider</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['TabDemo']">Tabs</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['TableSortableDemo']">TableSortable</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['TagDemo']">Tags</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['TimePickerDemo']">TimePicker</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'accordion']">Accordion</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'alert']">Alert</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'carousel']">Carousel</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'datepicker']">DatePicker</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'daterangepicker']">DateRangePicker</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'dropdown']">Dropdown</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'infinitescroller']">InfiniteScroller</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'modal']">Modal</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'pagination']">Pagination</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'progress']">Progress</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'slider']">Slider</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'tab']">Tabs</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'tablesortable']">TableSortable</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'tag']">Tags</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/component', 'timepicker']">TimePicker</a></li>
                     </accordion-item>
                     <accordion-item #directiveNav [open]="false">
                         <li accordion-heading class="fuel-ui-clickable sidebar-title">
@@ -139,10 +138,10 @@ export class InstallationComponent {
                                 [ngClass]="{'fa-minus': directiveNav?.open, 'fa-plus': !directiveNav || !directiveNav.open}"></i>
                         </li>
                         
-                        <li><a (click)="clickNavLink()" [routerLink]="['AnimationDemo']">Animation</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['CodeHighlighterDemo']">Code Highlighter</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['CollapseDemo']">Collapse</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['TooltipDemo']">Tooltip</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'animation']">Animation</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'codehighlighter']">Code Highlighter</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'collapse']">Collapse</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'tooltip']">Tooltip</a></li>
                     </accordion-item>
                     <accordion-item #pipeNav [open]="false">
                         <li accordion-heading class="fuel-ui-clickable sidebar-title">
@@ -151,10 +150,10 @@ export class InstallationComponent {
                                 [ngClass]="{'fa-minus': pipeNav?.open, 'fa-plus': !pipeNav || !pipeNav.open}"></i>
                         </li>
                         
-                        <li><a (click)="clickNavLink()" [routerLink]="['FormatDemo']">Format</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['MapToIterableDemo']">MapToIterable</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['OrderByDemo']">OrderBy</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['RangeDemo']">Range</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/pipe', 'format']">Format</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/pipe', 'maptoiterable']">MapToIterable</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/pipe', 'orderby']">OrderBy</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['/pipe', 'range']">Range</a></li>
                     </accordion-item>
                 </accordion>
             </ul>
