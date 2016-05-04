@@ -1,5 +1,5 @@
-import {Component, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from 'angular2/core';
-import {CORE_DIRECTIVES, SlicePipe} from 'angular2/common';
+import {Component, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from '@angular/core';
+import {CORE_DIRECTIVES, SlicePipe} from '@angular/common';
 import {RangePipe} from '../../pipes/Range/Range';
 
 @Component({
@@ -9,7 +9,6 @@ import {RangePipe} from '../../pipes/Range/Range';
         "totalPages: total-pages",
         "pagesAtOnce: pages-at-once"
     ],
-    styleUrls: ['components/Pagination/Pagination.css'],
     templateUrl: 'components/Pagination/Pagination.html',
     directives: [CORE_DIRECTIVES],
     pipes: [SlicePipe, RangePipe]

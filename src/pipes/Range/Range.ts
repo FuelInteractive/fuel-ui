@@ -3,7 +3,7 @@
  *		Basic Array of single type: *ngFor="let n of someBlankArray | 0 : 9"
  */
 
-import {Pipe, PipeTransform} from "angular2/core";
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
     name: 'range',

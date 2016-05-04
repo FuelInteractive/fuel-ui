@@ -8,6 +8,7 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
+var sassGlob = require('gulp-sass-glob');
 var inlineNg2Template = require('gulp-inline-ng2-template');
 var merge = require('merge2');
 var webserver = require('gulp-webserver');
@@ -107,14 +108,14 @@ gulp.task('bundleScripts', ['scripts'], function() {
         },
         map: {
             typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
-            angular2: path.resolve('node_modules/angular2'),
+            '@angular': path.resolve('node_modules/@angular'),
             rxjs: path.resolve('node_modules/rxjs')
         },
         paths: {
             '*': '*.js'
         },
         meta: {
-            'fuel-ui/node_modules/angular2/*': { build: false },
+            'fuel-ui/node_modules/@angular/*': { build: false },
             'fuel-ui/node_modules/rxjs/*': { build: false }
         }
     };
@@ -153,6 +154,7 @@ gulp.task('views', ['cleanViews'], function () {
 gulp.task('sass', ['cleanSass'], function () {
     return gulp.src(paths.source + '/**/*.{scss,sass}')
         //.pipe(sourcemaps.init())
+        .pipe(sassGlob())
         .pipe(sass({
             errLogToConsole: true
         }).on('error', sass.logError))

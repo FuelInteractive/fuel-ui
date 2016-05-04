@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {CodeHighlighter} from './CodeHighlighter';
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 

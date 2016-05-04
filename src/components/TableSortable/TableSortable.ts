@@ -1,5 +1,5 @@
-import {Component, ChangeDetectionStrategy, Input} from 'angular2/core'
-import {CORE_DIRECTIVES, JsonPipe} from 'angular2/common'
+import {Component, ChangeDetectionStrategy, Input} from '@angular/core'
+import {CORE_DIRECTIVES, JsonPipe} from '@angular/common'
 import {OrderByPipe} from "../../pipes/OrderBy/OrderBy"
 import {FormatPipe} from "../../pipes/Format/Format"
 import {TableSortableColumn} from "./TableSortableColumn";

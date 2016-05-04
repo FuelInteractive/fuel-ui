@@ -1,7 +1,7 @@
-import {Directive, Component, ViewEncapsulation} from 'angular2/core';
-import {QueryList, ContentChildren, ElementRef, AfterContentInit} from 'angular2/core';
-import {Input, Output, EventEmitter, ChangeDetectionStrategy} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Directive, Component, ViewEncapsulation} from '@angular/core';
+import {QueryList, ContentChildren, ElementRef, AfterContentInit} from '@angular/core';
+import {Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
 
 @Directive({
 	selector: '.carousel-item',
@@ -83,8 +83,7 @@ export class CarouselItem {
 
 @Component({
 	selector: 'carousel',
-	styleUrls: ['components/carousel/carousel.css'],
-	templateUrl: 'components/carousel/carousel.html',
+	templateUrl: 'components/Carousel/Carousel.html',
 	directives: [CORE_DIRECTIVES, CarouselItem],
 	encapsulation: ViewEncapsulation.None
 })
