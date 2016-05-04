@@ -7,8 +7,6 @@
 #######################################################################
 
 # Build results
-[Dd]ebug/
-!Guestdesk.Core/Debug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
@@ -171,6 +169,8 @@ node_modules/*
 !node_modules/systemjs/
 !node_modules/font-awesome/
 !node_modules/prismjs/
+!node_modules/zone.js/
+!node_modules/reflect-metadata/
 **/jspm_packages/
 jspm_packages/
 CVS/
