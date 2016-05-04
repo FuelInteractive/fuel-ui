@@ -1,6 +1,6 @@
-.carousel-item {
+.carousel-inner > .carousel-item {
   width: 100%; }
-  .carousel-item.slide-in-left {
+  .carousel-inner > .carousel-item.slide-in-left {
     display: block;
     position: absolute;
     top: 0;
@@ -14,7 +14,7 @@
     -webkit-animation-timing-function: ease;
     -moz-animation-timing-function: ease;
     animation-timing-function: ease; }
-  .carousel-item.slide-in-right {
+  .carousel-inner > .carousel-item.slide-in-right {
     display: block;
     position: absolute;
     top: 0;
@@ -28,7 +28,7 @@
     -webkit-animation-timing-function: ease;
     -moz-animation-timing-function: ease;
     animation-timing-function: ease; }
-  .carousel-item.slide-out-left {
+  .carousel-inner > .carousel-item.slide-out-left {
     -webkit-animation-name: slideOutLeft;
     -moz-animation-name: slideOutLeft;
     animation-name: slideOutLeft;
@@ -38,7 +38,7 @@
     -webkit-animation-timing-function: ease;
     -moz-animation-timing-function: ease;
     animation-timing-function: ease; }
-  .carousel-item.slide-out-right {
+  .carousel-inner > .carousel-item.slide-out-right {
     -webkit-animation-name: slideOutRight;
     -moz-animation-name: slideOutRight;
     animation-name: slideOutRight;
