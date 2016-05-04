@@ -1,5 +1,4 @@
-a {
+.fuel-ui-pagination a {
   cursor: pointer; }
-
-a:hover {
-  text-decoration: none; }
+  .fuel-ui-pagination a:hover {
+    text-decoration: none; }

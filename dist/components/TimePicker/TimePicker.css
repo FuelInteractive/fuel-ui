@@ -1,0 +1,8 @@
+.fuel-ui-timepicker.has-error {
+  border: 1px red solid; }
+
+.fuel-ui-timepicker .fuel-ui-time.has-error input {
+  border: 1px red solid; }
+
+.fuel-ui-timepicker .fuel-ui-time input {
+  width: 50px; }

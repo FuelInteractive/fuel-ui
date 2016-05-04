@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var core_2 = require('angular2/core');
-var common_1 = require('angular2/common');
+var core_1 = require('@angular/core');
+var core_2 = require('@angular/core');
+var common_1 = require('@angular/common');
 var DatePickerCalendar = (function () {
     function DatePickerCalendar() {
         this.selectedDateChange = new core_2.EventEmitter();
@@ -86,12 +86,6 @@ var DatePickerCalendar = (function () {
                 currentWeek = [];
             }
         }
-        if (this.weeks.length > 5)
-            return;
-        var firstWeekCount = this.weeks[0]
-            .filter(function (i) { return i.length > 0; }).length;
-        var lastWeekCount = this.weeks[this.weeks.length - 1]
-            .filter(function (i) { return i.length > 0; }).length;
     };
     __decorate([
         core_2.Input(), 
@@ -136,8 +130,7 @@ var DatePickerCalendar = (function () {
     DatePickerCalendar = __decorate([
         core_1.Component({
             selector: 'date-picker-calendar',
-            styles: ["\n   .table {\n     font-size: .75rem;\n     border: none;\n     border-top: 1px solid #eceeef;\n     background-color: #fff;\n     border-collapse: collapse; }\n     .table .calendar-date {\n       z-index: 200;\n       background-color: transparent; }\n\n   tr {\n     border: none; }\n\n   th, td {\n     text-align: center;\n     vertical-align: middle;\n     font-size: .75rem;\n     padding: .1rem;\n     height: 1.75rem;\n     border: none;\n     position: relative; }\n     @media (max-width: 480px), screen and (max-device-width: 480px) {\n       th, td {\n         padding: .5rem;\n         font-size: 1rem; } }\n\n   td.selectable {\n     cursor: pointer !important;\n     /*border: 1px solid $table-border-color;*/ }\n\n   td.selectable:hover {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.selected {\n     background-color: #99c4e9;\n     color: #fff; }\n\n   td.disabled {\n     /*background-color: lighten($input-bg-disabled, 5%);*/\n     color: #c9c9c9; }\n\n   td.startDate, td.endDate {\n     background-color: #0275d8;\n     color: #fff; }\n\n   td.startDate:after {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     right: 0;\n     background-color: transparent;\n     border-left: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n\n   td.endDate:before {\n     content: '';\n     position: absolute;\n     top: 0;\n     bottom: 0;\n     width: 0;\n     left: 0;\n     background-color: transparent;\n     border-right: 1em solid transparent;\n     border-top: 1.1em solid #99c4e9;\n     border-bottom: 1.1em solid #99c4e9; }\n    "],
-            template: "\n   <div class=\"text-center py\">\n    <table class=\"table m-a-0\">\t\n        <tbody>\n               <tr *ngIf=\"showMonth\">\n                   <td colspan=\"7\">\n                       <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                   </td>\n               </tr> \n            <tr *ngFor=\"let week of weeks\">\n                <td *ngFor=\"let day of week\"\n                    [class.selectable]=\"checkSelectable(day)\" \n                    [class.disabled]=\"!checkSelectable(day)\"\n                    [class.selected]=\"checkSelectedDate(day)\" \n                       [class.startDate]=\"checkStartDate(day)\"\n                       [class.endDate]=\"checkEndDate(day)\"\n                    (click)=\"selectDate(day)\">\n                    <span class=\"calendar-date\">{{day}}</span>\n                </td> \n            </tr>\n        </tbody>\n    </table>\n   </div>\n    ",
+            template: "\n      <div class=\"fuel-ui-datepicker-calendar text-center py\">\n        <table class=\"table m-a-0\">\t\n            <tbody>\n                  <tr *ngIf=\"showMonth\">\n                      <td colspan=\"7\">\n                          <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                      </td>\n                  </tr> \n                <tr *ngFor=\"let week of weeks\">\n                    <td *ngFor=\"let day of week\"\n                        [class.selectable]=\"checkSelectable(day)\" \n                        [class.disabled]=\"!checkSelectable(day)\"\n                        [class.selected]=\"checkSelectedDate(day)\" \n                          [class.startDate]=\"checkStartDate(day)\"\n                          [class.endDate]=\"checkEndDate(day)\"\n                        (click)=\"selectDate(day)\">\n                        <span class=\"calendar-date\">{{day}}</span>\n                    </td> \n                </tr>\n            </tbody>\n        </table>\n      </div>\n    ",
             directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])

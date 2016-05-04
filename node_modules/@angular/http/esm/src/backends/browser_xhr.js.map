@@ -1,0 +1,1 @@
+{"version":3,"file":"browser_xhr.js","sourceRoot":"/Users/iminar/Dev/angular/modules/@angular/http/","sources":["src/backends/browser_xhr.ts"],"names":[],"mappings":"OAIS,EAAC,UAAU,EAAC,MAAM,eAAe;AAC1C;IACE;IAAe,CAAC;IAChB,KAAK,KAAU,MAAM,CAAM,CAAC,IAAI,cAAc,EAAE,CAAC,CAAC,CAAC,CAAC;AAMtD,CAAC;AALM,qBAAU,GAA0B;IAC3C,EAAE,IAAI,EAAE,UAAU,EAAE;CACnB,CAAC;AACK,yBAAc,GAA2D,EAC/E,CACA"}

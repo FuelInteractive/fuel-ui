@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var common_1 = require('angular2/common');
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var TagSet = (function () {
     function TagSet() {
         this.tags = [];
@@ -36,7 +36,7 @@ var TagSet = (function () {
         core_1.Component({
             selector: 'tagset',
             directives: [common_1.NgClass],
-            template: "\n      <span *ngFor=\"let tag of tags\" class=\"label fuel-ui-label\" [ngClass]=\"tag.classMap\">\n          <span [innerHtml]=\"tag.title\"></span>\n          <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n              <i class=\"fa fa-remove\"></i>\n          </span>\n      </span>\n    "
+            template: "\n      <span *ngFor=\"let tag of tags\" class=\"label fuel-ui-tag-label\" [ngClass]=\"tag.classMap\">\n          <span [innerHtml]=\"tag.title\"></span>\n          <span class=\"fuel-ui-clickable\" [class.disabled]=\"tag.disabled\" *ngIf=\"tag.removable\" (click)=\"$event.preventDefault(); removeTag(tag);\">\n              <i class=\"fa fa-remove\"></i>\n          </span>\n      </span>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], TagSet);

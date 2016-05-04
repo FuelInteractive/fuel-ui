@@ -164,7 +164,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/*
-!node_modules/angular2
+!node_modules/@angular
 !node_modules/bootstrap
 !node_modules/core-js/
 !node_modules/rxjs/

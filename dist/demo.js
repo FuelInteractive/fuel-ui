@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("angular2/core");
-var common_1 = require("angular2/common");
-var browser_1 = require("angular2/platform/browser");
-var common_2 = require("angular2/platform/common");
-var router_1 = require('angular2/router');
+var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
+var platform_browser_dynamic_1 = require("@angular/platform-browser-dynamic");
+var router_1 = require("@angular/router");
 var fuel_ui_1 = require("./fuel-ui");
 var fuel_ui_demo_1 = require('./fuel-ui-demo');
 var DemoHome = (function () {
@@ -50,36 +49,36 @@ var DemoComponent = (function () {
         this.toggled = this.toggled ? !this.toggled : this.toggled;
     };
     DemoComponent = __decorate([
-        router_1.RouteConfig([
-            { path: '/', name: 'DemoHome', component: DemoHome, useAsDefault: true },
-            { path: '/installation', name: 'InstallationComponent', component: InstallationComponent },
-            { path: '/component/accordion', name: 'AccordionDemo', component: fuel_ui_demo_1.AccordionDemo },
-            { path: '/component/alert', name: 'AlertDemo', component: fuel_ui_demo_1.AlertDemo },
-            { path: '/component/carousel', name: 'CarouselDemo', component: fuel_ui_demo_1.CarouselDemo },
-            { path: '/component/datepicker', name: 'DatePickerDemo', component: fuel_ui_demo_1.DatePickerDemo },
-            { path: '/component/daterangepicker', name: 'DateRangePickerDemo', component: fuel_ui_demo_1.DateRangePickerDemo },
-            { path: '/component/dropdown', name: 'DropdownDemo', component: fuel_ui_demo_1.DropdownDemo },
-            { path: '/component/infinitescroller', name: 'InfiniteScrollerDemo', component: fuel_ui_demo_1.InfiniteScrollerDemo },
-            { path: '/component/modal', name: 'ModalDemo', component: fuel_ui_demo_1.ModalDemo },
-            { path: '/component/pagination', name: 'PaginationDemo', component: fuel_ui_demo_1.PaginationDemo },
-            { path: '/component/progress', name: 'ProgressDemo', component: fuel_ui_demo_1.ProgressDemo },
-            { path: '/component/slider', name: 'SliderDemo', component: fuel_ui_demo_1.SliderDemo },
-            { path: '/component/tab', name: 'TabDemo', component: fuel_ui_demo_1.TabDemo },
-            { path: '/component/tablesortable', name: 'TableSortableDemo', component: fuel_ui_demo_1.TableSortableDemo },
-            { path: '/component/tag', name: 'TagDemo', component: fuel_ui_demo_1.TagDemo },
-            { path: '/component/timepicker', name: 'TimePickerDemo', component: fuel_ui_demo_1.TimePickerDemo },
-            { path: '/directive/animation', name: 'AnimationDemo', component: fuel_ui_demo_1.AnimationDemo },
-            { path: '/directive/codehighlighter', name: 'CodeHighlighterDemo', component: fuel_ui_demo_1.CodeHighlighterDemo },
-            { path: '/directive/collapse', name: 'CollapseDemo', component: fuel_ui_demo_1.CollapseDemo },
-            { path: '/directive/tooltip', name: 'TooltipDemo', component: fuel_ui_demo_1.TooltipDemo },
-            { path: '/pipe/format', name: 'FormatDemo', component: fuel_ui_demo_1.FormatDemo },
-            { path: '/pipe/maptoiterable', name: 'MapToIterableDemo', component: fuel_ui_demo_1.MapToIterableDemo },
-            { path: '/pipe/orderby', name: 'OrderByDemo', component: fuel_ui_demo_1.OrderByDemo },
-            { path: '/pipe/range', name: 'RangeDemo', component: fuel_ui_demo_1.RangeDemo }
+        router_1.Routes([
+            { path: '/', component: DemoHome },
+            { path: '/installation', component: InstallationComponent },
+            { path: '/component/accordion', component: fuel_ui_demo_1.AccordionDemo },
+            { path: '/component/alert', component: fuel_ui_demo_1.AlertDemo },
+            { path: '/component/carousel', component: fuel_ui_demo_1.CarouselDemo },
+            { path: '/component/datepicker', component: fuel_ui_demo_1.DatePickerDemo },
+            { path: '/component/daterangepicker', component: fuel_ui_demo_1.DateRangePickerDemo },
+            { path: '/component/dropdown', component: fuel_ui_demo_1.DropdownDemo },
+            { path: '/component/infinitescroller', component: fuel_ui_demo_1.InfiniteScrollerDemo },
+            { path: '/component/modal', component: fuel_ui_demo_1.ModalDemo },
+            { path: '/component/pagination', component: fuel_ui_demo_1.PaginationDemo },
+            { path: '/component/progress', component: fuel_ui_demo_1.ProgressDemo },
+            { path: '/component/slider', component: fuel_ui_demo_1.SliderDemo },
+            { path: '/component/tab', component: fuel_ui_demo_1.TabDemo },
+            { path: '/component/tablesortable', component: fuel_ui_demo_1.TableSortableDemo },
+            { path: '/component/tag', component: fuel_ui_demo_1.TagDemo },
+            { path: '/component/timepicker', component: fuel_ui_demo_1.TimePickerDemo },
+            { path: '/directive/animation', component: fuel_ui_demo_1.AnimationDemo },
+            { path: '/directive/codehighlighter', component: fuel_ui_demo_1.CodeHighlighterDemo },
+            { path: '/directive/collapse', component: fuel_ui_demo_1.CollapseDemo },
+            { path: '/directive/tooltip', component: fuel_ui_demo_1.TooltipDemo },
+            { path: '/pipe/format', component: fuel_ui_demo_1.FormatDemo },
+            { path: '/pipe/maptoiterable', component: fuel_ui_demo_1.MapToIterableDemo },
+            { path: '/pipe/orderby', component: fuel_ui_demo_1.OrderByDemo },
+            { path: '/pipe/range', component: fuel_ui_demo_1.RangeDemo }
         ]),
         core_1.Component({
             selector: "fuel-ui",
-            template: "\n    <div id=\"wrapper\" [class.toggled]=\"toggled\">\n        <span *ngIf=\"toggled\" class=\"fuel-ui-clickable fuel-ui-toggle\" (click)=\"$event.preventDefault(); toggled = !toggled\">\n            <i class=\"fa fa-chevron-right\"></i>\n        </span>\n        <div id=\"sidebar-wrapper\">\n            <ul class=\"sidebar-nav\">\n                <li class=\"sidebar-brand\">\n                    <a (click)=\"clickNavLink()\" [routerLink]=\"['DemoHome']\">\n                        <img src=\"https://pbs.twimg.com/profile_images/572406600309018624/r2ma7PE3.png\" height=\"40\"/> \n                        <span>Fuel-UI</span>\n                    </a>\n                    <i class=\"fa fa-bars fuel-ui-clickable pull-right\" (click)=\"$event.preventDefault(); toggled = !toggled\"></i>\n                </li>\n                <li><a (click)=\"clickNavLink()\" [routerLink]=\"['InstallationComponent']\">Installation</a></li>\n                <accordion [closeOthers]=\"false\" duration=\"500\">\n                    <accordion-item #componentNav [open]=\"false\">\n                        <li accordion-heading class=\"fuel-ui-clickable sidebar-title\">\n                            Components\n                            <i class=\"pull-right fa\"\n                                [ngClass]=\"{'fa-minus': componentNav?.open, 'fa-plus': !componentNav || !componentNav.open}\"></i>\n                        </li>\n                        \n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['AccordionDemo']\">Accordion</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['AlertDemo']\">Alert</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['CarouselDemo']\">Carousel</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['DatePickerDemo']\">DatePicker</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['DateRangePickerDemo']\">DateRangePicker</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['DropdownDemo']\">Dropdown</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['InfiniteScrollerDemo']\">InfiniteScroller</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['ModalDemo']\">Modal</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['PaginationDemo']\">Pagination</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['ProgressDemo']\">Progress</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['SliderDemo']\">Slider</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['TabDemo']\">Tabs</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['TableSortableDemo']\">TableSortable</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['TagDemo']\">Tags</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['TimePickerDemo']\">TimePicker</a></li>\n                    </accordion-item>\n                    <accordion-item #directiveNav [open]=\"false\">\n                        <li accordion-heading class=\"fuel-ui-clickable sidebar-title\">\n                            Directives\n                            <i class=\"pull-right fa\"\n                                [ngClass]=\"{'fa-minus': directiveNav?.open, 'fa-plus': !directiveNav || !directiveNav.open}\"></i>\n                        </li>\n                        \n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['AnimationDemo']\">Animation</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['CodeHighlighterDemo']\">Code Highlighter</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['CollapseDemo']\">Collapse</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['TooltipDemo']\">Tooltip</a></li>\n                    </accordion-item>\n                    <accordion-item #pipeNav [open]=\"false\">\n                        <li accordion-heading class=\"fuel-ui-clickable sidebar-title\">\n                            Pipes\n                            <i class=\"pull-right fa\"\n                                [ngClass]=\"{'fa-minus': pipeNav?.open, 'fa-plus': !pipeNav || !pipeNav.open}\"></i>\n                        </li>\n                        \n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['FormatDemo']\">Format</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['MapToIterableDemo']\">MapToIterable</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['OrderByDemo']\">OrderBy</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['RangeDemo']\">Range</a></li>\n                    </accordion-item>\n                </accordion>\n            </ul>\n        </div>\n        <!-- /#sidebar-wrapper -->\n\n        <!-- Page Content -->\n        <div id=\"page-content-wrapper\">\n            <div class=\"container-fluid\">\n                <div class=\"row\">\n                    <div class=\"col-lg-12\">\n                        <router-outlet></router-outlet>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <!-- /#page-content-wrapper -->\n\n    </div>",
+            template: "\n    <div id=\"wrapper\" [class.toggled]=\"toggled\">\n        <span *ngIf=\"toggled\" class=\"fuel-ui-clickable fuel-ui-toggle\" (click)=\"$event.preventDefault(); toggled = !toggled\">\n            <i class=\"fa fa-chevron-right\"></i>\n        </span>\n        <div id=\"sidebar-wrapper\">\n            <ul class=\"sidebar-nav\">\n                <li class=\"sidebar-brand\">\n                    <a (click)=\"clickNavLink()\" [routerLink]=\"['/']\">\n                        <img src=\"https://pbs.twimg.com/profile_images/572406600309018624/r2ma7PE3.png\" height=\"40\"/> \n                        <span>Fuel-UI</span>\n                    </a>\n                    <i class=\"fa fa-bars fuel-ui-clickable pull-right\" (click)=\"$event.preventDefault(); toggled = !toggled\"></i>\n                </li>\n                <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/installation']\">Installation</a></li>\n                <accordion [closeOthers]=\"false\" duration=\"500\">\n                    <accordion-item #componentNav [open]=\"false\">\n                        <li accordion-heading class=\"fuel-ui-clickable sidebar-title\">\n                            Components\n                            <i class=\"pull-right fa\"\n                                [ngClass]=\"{'fa-minus': componentNav?.open, 'fa-plus': !componentNav || !componentNav.open}\"></i>\n                        </li>\n                        \n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'accordion']\">Accordion</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'alert']\">Alert</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'carousel']\">Carousel</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'datepicker']\">DatePicker</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'daterangepicker']\">DateRangePicker</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'dropdown']\">Dropdown</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'infinitescroller']\">InfiniteScroller</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'modal']\">Modal</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'pagination']\">Pagination</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'progress']\">Progress</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'slider']\">Slider</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'tab']\">Tabs</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'tablesortable']\">TableSortable</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'tag']\">Tags</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/component', 'timepicker']\">TimePicker</a></li>\n                    </accordion-item>\n                    <accordion-item #directiveNav [open]=\"false\">\n                        <li accordion-heading class=\"fuel-ui-clickable sidebar-title\">\n                            Directives\n                            <i class=\"pull-right fa\"\n                                [ngClass]=\"{'fa-minus': directiveNav?.open, 'fa-plus': !directiveNav || !directiveNav.open}\"></i>\n                        </li>\n                        \n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/directive', 'animation']\">Animation</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/directive', 'codehighlighter']\">Code Highlighter</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/directive', 'collapse']\">Collapse</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/directive', 'tooltip']\">Tooltip</a></li>\n                    </accordion-item>\n                    <accordion-item #pipeNav [open]=\"false\">\n                        <li accordion-heading class=\"fuel-ui-clickable sidebar-title\">\n                            Pipes\n                            <i class=\"pull-right fa\"\n                                [ngClass]=\"{'fa-minus': pipeNav?.open, 'fa-plus': !pipeNav || !pipeNav.open}\"></i>\n                        </li>\n                        \n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/pipe', 'format']\">Format</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/pipe', 'maptoiterable']\">MapToIterable</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/pipe', 'orderby']\">OrderBy</a></li>\n                        <li><a (click)=\"clickNavLink()\" [routerLink]=\"['/pipe', 'range']\">Range</a></li>\n                    </accordion-item>\n                </accordion>\n            </ul>\n        </div>\n        <!-- /#sidebar-wrapper -->\n\n        <!-- Page Content -->\n        <div id=\"page-content-wrapper\">\n            <div class=\"container-fluid\">\n                <div class=\"row\">\n                    <div class=\"col-lg-12\">\n                        <router-outlet></router-outlet>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <!-- /#page-content-wrapper -->\n\n    </div>",
             directives: [common_1.CORE_DIRECTIVES, fuel_ui_1.FUELUI_COMPONENT_PROVIDERS, fuel_ui_1.FUELUI_DIRECTIVE_PROVIDERS, common_1.FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES],
             encapsulation: core_1.ViewEncapsulation.None,
             pipes: [fuel_ui_1.FUELUI_PIPE_PROVIDERS]
@@ -90,10 +89,10 @@ var DemoComponent = (function () {
 }());
 exports.DemoComponent = DemoComponent;
 // enableProdMode();
-browser_1.bootstrap(DemoComponent, [
+platform_browser_dynamic_1.bootstrap(DemoComponent, [
     router_1.ROUTER_PROVIDERS,
     common_1.FORM_PROVIDERS,
-    core_1.provide(common_2.LocationStrategy, { useClass: common_2.HashLocationStrategy }),
+    core_1.provide(common_1.LocationStrategy, { useClass: common_1.HashLocationStrategy }),
     fuel_ui_1.FUELUI_COMPONENT_PROVIDERS
 ]);
 

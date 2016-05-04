@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("angular2/core");
-var animation_builder_1 = require('angular2/src/animate/animation_builder');
+var core_1 = require('@angular/core');
+var animation_builder_1 = require('@angular/platform-browser/src/animate/animation_builder');
 var Collapse = (function () {
     function Collapse(animationBuilder, element) {
         this.element = element;

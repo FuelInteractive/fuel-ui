@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var common_1 = require('angular2/common');
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var OrderBy_1 = require("../../pipes/OrderBy/OrderBy");
 var Format_1 = require("../../pipes/Format/Format");
 var TableSortableSorting_1 = require("./TableSortableSorting");
@@ -47,7 +47,7 @@ var TableSortable = (function () {
     TableSortable = __decorate([
         core_1.Component({
             selector: 'table-sortable',
-            template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
+            template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped fuel-ui-table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
             directives: [common_1.CORE_DIRECTIVES],
             pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
         }), 

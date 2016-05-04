@@ -1,0 +1,6 @@
+.fuel-ui-tag-label {
+  margin: 0 .25em; }
+  .fuel-ui-tag-label.disabled {
+    cursor: not-allowed;
+    background: #818a91;
+    color: darkgray; }
