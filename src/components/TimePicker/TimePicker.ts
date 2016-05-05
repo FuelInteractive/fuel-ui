@@ -26,7 +26,7 @@ export class TimePicker implements OnInit, OnChanges {
     invalidMinutes:boolean = false;
     invalidSeconds:boolean = false;
 
-    @Output() public valueChange:EventEmitter<Date> = new EventEmitter();
+    @Output() public valueChange:EventEmitter<Date> = new EventEmitter<Date>();
 
     ngOnInit():void {
         this.hours = this.value.getHours();

@@ -33,7 +33,7 @@ export class Tag implements OnInit, OnDestroy {
     }
     protected _disabled:boolean;
 
-    @Output() public remove:EventEmitter<Tag> = new EventEmitter(false);
+    @Output() public remove:EventEmitter<Tag> = new EventEmitter<Tag>(false);
 
     private classMap:any = {};
     public tagset:TagSet;
