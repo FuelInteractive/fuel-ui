@@ -26,12 +26,24 @@ export class Slider implements AfterViewInit, OnChanges {
     @Input() margin: number = 10;
     @Input() value: number = 0;
     @Input() secondValue: number = null;
+    @Input() debounceTime: number = 150;
     @Output() valueChange = new EventEmitter<any>();
     @Output() secondValueChange = new EventEmitter<any>();
     private _sliderElement: any;
     private _slider: any;
     
+    timeout: any = null;
+    
     constructor(private _element: ElementRef) {}
+    
+    update(val: any[]): any{
+        this.value = parseInt(val[0]);
+        this.secondValue = val.length > 1 ? parseInt(val[1]) : null;
+        this.valueChange.next(this.value);
+        this.secondValueChange.next(this.secondValue);
+        
+        this.timeout = null;
+    };
     
     ngAfterViewInit(){
         this._sliderElement = this._element.nativeElement.children[0];
@@ -83,10 +95,19 @@ export class Slider implements AfterViewInit, OnChanges {
         }
         
         this._sliderElement.noUiSlider.on('slide', (val: number[]) => {
-            this.value = val[0];
-            this.secondValue = val.length > 1 ? val[1] : null;
-            this.valueChange.next(val[0]);
-            this.secondValueChange.next(this.secondValue);
+            if(this.timeout)
+                clearTimeout(this.timeout);
+                
+            this.timeout = setTimeout(() => {
+                this.update(val);
+            }, this.debounceTime);
+        });
+        
+        this._sliderElement.noUiSlider.on('end', (val: number[]) => {
+            if(this.timeout)
+                clearTimeout(this.timeout);
+                
+            this.update(val);
         });
     }
     
