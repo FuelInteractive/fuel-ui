@@ -161,7 +161,8 @@ export class SliderDemo{
         new Attribute('secondValue', 'number', 'null', 'The value of the second number of the slider. When set to null the second handle will not display.'),
         new Attribute('step', 'number', '1', 'Slider increment on dragging'),
         new Attribute('value', 'number', '0', 'The value of the first number of the slider'),
-        new Attribute('width', 'string', 'null', 'Width of the slider element')
+        new Attribute('width', 'string', 'null', 'Width of the slider element'),
+        new Attribute('debounceTime', 'number', '150', 'The amount of debounce time in milliseconds for the values to emit while sliding. Setting a shorter debounce time may result in decreased performance of the sliding mechanism. Values emit instantly on tap, and when a user lets go of the slider.')
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
