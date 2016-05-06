@@ -1,16 +1,9 @@
-<div class="input-group fuel-ui-datepicker-input-group" (click)="toggleCalendar($event)">
-	<input type="text" class="form-control"
-    [(ngModel)]="inputDate" #dateField readonly
-        placeholder="{{label}}" />
-	<span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
-		<i class="fa fa-calendar"></i>
-	</span>
-</div>
-
 <div class="date-picker-overlay" aria-hidden="true"
     *ngIf="calendarDisplayed" 
     (click)="hideCalendar()">
 </div>
+
+<ng-content></ng-content>
 
 <div class="date-picker-component" *ngIf="calendarDisplayed">
     <div class="container p-a-0">

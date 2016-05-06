@@ -1,47 +1,31 @@
-import {Component, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {AfterContentInit, AfterContentChecked} from "@angular/core";
+import {Component, Directive, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
+import {AfterContentInit, AfterContentChecked, OnInit} from "@angular/core";
 import {EventEmitter, ElementRef, ViewChild, ViewChildren,ContentChild,QueryList} from '@angular/core';
+import {Input, Output, HostListener, HostBinding} from "@angular/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DateRange} from "../../utilities/DateUtils";
 import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DatePicker} from "./DatePicker";
 import {DatePickerCalendar} from "./DatePickerCalendar";
+import {DatePickerField} from "./DatePickerField";
 import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
 
-export class DateRangePickerDateField {
-    @Input() placeholder: string;
-    
-    private _value = "";
-    
-    @Input() 
-    get value(): string {return this._value;}
-    set value(value: string) {
-        this._value = value;
-        this.valueChange.next(value);
-    }
-    @Output() valueChange = new EventEmitter<string>();
-    
-    @Output() select = new EventEmitter<MouseEvent>();
-    
-    selected(event: MouseEvent): void {
-        this.select.next(event);
+@Directive({
+    selector: "[startDateField], .start-date-field",
+})
+export class StartDateField extends DatePickerField {
+    constructor(public element: ElementRef) {
+        super();
     }
 }
 
-@Component({
-    selector: "start-date",
-    templateUrl: 'components/DatePicker/DateRangePickerDate.html'
+@Directive({
+    selector: "[endDateField], .start-date-field",
 })
-export class StartDateField extends DateRangePickerDateField {
-    
-}
-
-@Component({
-    selector: "end-date",
-    templateUrl: 'components/DatePicker/DateRangePickerDate.html'
-})
-export class EndDateField extends DateRangePickerDateField {
-    
+export class EndDateField extends DatePickerField {
+    constructor(public element: ElementRef) {
+        super();
+    }
 }
 
 @Component({
@@ -50,7 +34,7 @@ export class EndDateField extends DateRangePickerDateField {
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DateRangePicker extends DatePicker implements AfterContentInit {
+export class DateRangePicker extends DatePicker implements AfterContentInit {    
     @Output() valueChange = new EventEmitter();
     @Input()
     set value(value: any) {
@@ -59,13 +43,13 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
     @Input()
     set minDate(value: Date | string) {
-        this._minDate = this.handleDateInput(value);
+        this._minDate = DatePicker.handleDateInput(value);
     }
     get minDate(): Date | string { return this._minDate; };
 
     @Input()
     set maxDate(value: Date | string) {
-        this._maxDate = this.handleDateInput(value);
+        this._maxDate = DatePicker.handleDateInput(value);
     }
     get maxDate(): Date | string { return this._maxDate; }
 
@@ -121,7 +105,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Output() startDateChange = new EventEmitter();
     @Input()
     set startDate(value: any) {
-        this._startDate = this.handleDateInput(value);
+        this._startDate = DatePicker.handleDateInput(value);
         this.inputStartDate = this._startDate.toLocaleDateString();
     }
     get startDate(): any { return this._startDate; }
@@ -129,7 +113,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Output() endDateChange = new EventEmitter();
     @Input()
     set endDate(value: any) {
-        this._endDate = this.handleDateInput(value);
+        this._endDate = DatePicker.handleDateInput(value);
         this.inputEndDate = this._endDate.toLocaleDateString();
     }
     get endDate(): any { return this._endDate; }
@@ -148,16 +132,16 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
         this.changeDetector.markForCheck();
     }
 
-    constructor(changeDetector: ChangeDetectorRef) {
-        super(changeDetector);
+    constructor(changeDetector: ChangeDetectorRef, renderer: Renderer) {
+        super(changeDetector, renderer);
     }
 
     ngAfterContentInit(): void {
         if(this.startDateField == undefined)
-            throw "Fuel-UI Error: DateRangePicker missing start-date field";
+            throw "Fuel-UI Error: DateRangePicker missing startDate field";
         
         if(this.startDateField.value.length > 0)
-            this.selectedDate = this.handleDateInput(this.startDateField.value);
+            this.selectedDate = DatePicker.handleDateInput(this.startDateField.value);
         
         this.startDateField.select
             .subscribe((event: MouseEvent) => {
@@ -166,10 +150,10 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
             });
         
         if(this.endDateField == undefined)
-            throw "Fuel-UI Error: DateRangePicker missing end-date field";
+            throw "Fuel-UI Error: DateRangePicker missing endDate field";
         
         if(this.endDateField.value.length > 0)
-            this.selectedDate = this.handleDateInput(this.endDateField.value);
+            this.selectedDate = DatePicker.handleDateInput(this.endDateField.value);
         
         this.endDateField.select
             .subscribe((event: MouseEvent) => {

@@ -18,17 +18,28 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 </div>
 
 <section class="row">
-    <div class="col-md-3">
-        <date-range-picker
-            minDate="11/1/2015"
-            maxDate="11/12/2016" 
-            [dateFilter]="dateFilter"
-            (valueChange)="datePickerValueChange($event)"> 
-            
-            <start-date placeholder="Arrival" value="5/5/2016"></start-date>
-            <end-date placeholder="Departure" value="5/10/2016"></end-date>
-            
-        </date-range-picker>
+    <div class="col-md-4">
+        <form class="form-inline">
+            <date-range-picker
+                minDate="11/1/2015"
+                maxDate="11/12/2016" 
+                [dateFilter]="dateFilter"
+                (valueChange)="datePickerValueChange($event)">
+                <div class="form-group">
+                    <label for="arrival">Arrival Date</label>
+                    <div class="date-picker-input-group">
+                        <input name="arrival" startDateField class="form-control" value="5/5/2016" placeholder="Arrival" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="departure">Departure Date</label>
+                    <div class="date-picker-input-group">
+                        <input name="departure" endDateField class="form-control" value="5/10/2016" placeholder="Departure" />
+                    </div>
+                </div>
+            </date-range-picker>
+        </form>
     </div>
     <div class="col-md-6" *ngIf="dateRangePickerValue != null">
         value.start: {{dateRangePickerValue.start}} <br/>
@@ -40,7 +51,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
+import {DateRange, DATE_PICKER_PROVIDERS} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -52,16 +63,27 @@ import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;date-range-picker
-    minDate=&quot;11/1/2015&quot;
-    maxDate=&quot;11/12/2016&quot; 
-    [dateFilter]=&quot;dateFilter&quot;
-    (valueChange)=&quot;datePickerValueChange($event)&quot;&gt;
-    
-    &lt;start-date placeholder=&quot;Arrival&quot; value=&quot;5/5/2016&quot;&gt;&lt;/start-date&gt;
-    &lt;end-date placeholder=&quot;Departure&quot; value=&quot;5/10/2016&quot;&gt;&lt;/end-date&gt;
-     
-&lt;/date-range-picker&gt;
+&lt;form class=&quot;form-inline&quot;&gt;
+    &lt;date-range-picker
+        minDate=&quot;11/1/2015&quot;
+        maxDate=&quot;11/12/2016&quot; 
+        [dateFilter]=&quot;dateFilter&quot;
+        (valueChange)=&quot;datePickerValueChange($event)&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;arrival&quot;&gt;Arrival Date&lt;/label&gt;
+            &lt;div class=&quot;date-picker-input-group&quot;&gt;
+                &lt;input name=&quot;arrival&quot; startDateField class=&quot;form-control&quot; value=&quot;5/5/2016&quot; placeholder=&quot;Arrival&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;departure&quot;&gt;Departure Date&lt;/label&gt;
+            &lt;div class=&quot;date-picker-input-group&quot;&gt;
+                &lt;input name=&quot;departure&quot; endDateField class=&quot;form-control&quot; value=&quot;5/10/2016&quot; placeholder=&quot;Departure&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/date-range-picker&gt;
+&lt;/form&gt;
 </code>
 </pre>
 </tab>
@@ -130,8 +152,7 @@ export class DateRangePickerDemo {
     ];
     
     dateFieldAttributes:any[] = [
-        new Attribute('placeholder', 'string', 'null', 'date field placeholder text'),
-        new Attribute('value', 'Date', 'null', 'Two-way binding of the selected date')
+        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date')
     ];
     
     attributesColumns:TableSortableColumn[] = AttributeColumns;

@@ -1,7 +1,8 @@
-import {Component, OnInit, OnChanges, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {Input, Output, EventEmitter, ElementRef, ViewChild, QueryList} from '@angular/core';
+import {Component, OnInit, OnChanges, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,Renderer} from '@angular/core';
+import {Input, Output, EventEmitter, ElementRef, ViewChild, ContentChild, QueryList} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DatePickerCalendar} from "./DatePickerCalendar";
+import {DatePickerField} from "./DatePickerField";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DateRange} from "../../utilities/DateUtils";
@@ -13,21 +14,19 @@ import {DateRange} from "../../utilities/DateUtils";
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePicker implements OnInit {
-    @Input() label: string;
-    
+export class DatePicker implements OnInit, AfterContentInit {    
     _minDate: Date = new Date(1900,0,1);
 	_maxDate: Date = new Date(2200,0,1);
 
     @Input()
     set minDate(value: Date|string) {
-		this._minDate = this.handleDateInput(value);
+		this._minDate = DatePicker.handleDateInput(value);
 	}
 	get minDate(): Date|string { return this._minDate; };
 	
     @Input()
     set maxDate(value: Date|string) {
-		this._maxDate = this.handleDateInput(value);
+		this._maxDate = DatePicker.handleDateInput(value);
 	}
 	get maxDate(): Date|string { return this._maxDate; }
     
@@ -36,11 +35,15 @@ export class DatePicker implements OnInit {
     @Output() valueChange = new EventEmitter();
 	@Input()
 	set value(value: any) {
-		this._selectedDate = this.handleDateInput(value);
+		this._selectedDate = DatePicker.handleDateInput(value);
 	}
  
     @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
+    
+    @ContentChild(DatePickerField)
+    dateField: DatePickerField;
+    
  
 	protected _selectedDate: Date;
 	get selectedDate(): Date { return this._selectedDate; };
@@ -57,6 +60,7 @@ export class DatePicker implements OnInit {
 	set inputDate(value: string) {
 		this._inputDate = value;
 		this._selectedDate = new Date(value);
+        this.dateField.value = value;
 	}
     
     calendarDisplayed: boolean = false;
@@ -69,9 +73,11 @@ export class DatePicker implements OnInit {
     _preGenMonths = 2;
  
     changeDetector: ChangeDetectorRef;
+    renderer: Renderer;
     
-    constructor(changeDetector: ChangeDetectorRef) {
+    constructor(changeDetector: ChangeDetectorRef, renderer: Renderer) {
         this.changeDetector = changeDetector;
+        this.renderer = renderer;
         
         var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
         this.calendarMonths = [
@@ -108,7 +114,20 @@ export class DatePicker implements OnInit {
         }, 1);
     }
     
-    handleDateInput(value: any): Date {
+    ngAfterContentInit(): void {
+         if(this.dateField == undefined)
+            throw "Fuel-UI Error: DatePicker missing date field";
+        
+        if(this.dateField.value.length > 0)
+            this.selectedDate = DatePicker.handleDateInput(this.dateField.value);
+        
+        this.dateField.select
+            .subscribe((event: MouseEvent) => {
+                this.toggleCalendar(event);
+            });
+    }
+    
+    static handleDateInput(value: any): Date {
 		if(value instanceof Date && !isNaN(value.valueOf()))
 			return value;
 		else
