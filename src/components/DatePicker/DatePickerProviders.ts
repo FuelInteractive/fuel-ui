@@ -4,11 +4,13 @@ export {DateRangePicker} from "./DateRangePicker";
 
 import {DatePickerCalendar}  from "./DatePickerCalendar";
 import {DatePicker} from "./DatePicker";
-import {DateRangePicker} from "./DateRangePicker";
+import {DateRangePicker, StartDateField, EndDateField} from "./DateRangePicker";
 
 export var DATE_PICKER_PROVIDERS = [
 	DatePickerCalendar,
 	DatePicker,
-    DateRangePicker
+    DateRangePicker,
+	StartDateField,
+	EndDateField
 ];
 

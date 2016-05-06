@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DateRange} from '../../utilities/DateUtils';
-import {DateRangePicker} from './DateRangePicker';
+import {DATE_PICKER_PROVIDERS} from './DatePickerProviders';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
@@ -23,9 +23,11 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             minDate="11/1/2015"
             maxDate="11/12/2016" 
             [dateFilter]="dateFilter"
-            startLabel="Arrival"
-            endLabel="Departure"
             (valueChange)="datePickerValueChange($event)"> 
+            
+            <start-date placeholder="Arrival" value="5/5/2016"></start-date>
+            <end-date placeholder="Departure" value="5/10/2016"></end-date>
+            
         </date-range-picker>
     </div>
     <div class="col-md-6" *ngIf="dateRangePickerValue != null">
@@ -54,9 +56,11 @@ import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
     minDate=&quot;11/1/2015&quot;
     maxDate=&quot;11/12/2016&quot; 
     [dateFilter]=&quot;dateFilter&quot;
-    startLabel=&quot;Arrival&quot;
-    endLabel=&quot;Departure&quot;
-    (valueChange)=&quot;datePickerValueChange($event)&quot;&gt; 
+    (valueChange)=&quot;datePickerValueChange($event)&quot;&gt;
+    
+    &lt;start-date placeholder=&quot;Arrival&quot; value=&quot;5/5/2016&quot;&gt;&lt;/start-date&gt;
+    &lt;end-date placeholder=&quot;Departure&quot; value=&quot;5/10/2016&quot;&gt;&lt;/end-date&gt;
+     
 &lt;/date-range-picker&gt;
 </code>
 </pre>
@@ -85,7 +89,7 @@ export class DateRangePickerExample {
 </tab>
 </tabset>
 
-<h3>Attributes</h3>
+<h3>DateRangePicker Attributes</h3>
 <table-sortable
     [columns]="attributesColumns"
     [data]="attributes"
@@ -93,8 +97,16 @@ export class DateRangePickerExample {
     Loading table...
 </table-sortable>
 
+<h3>StartDate / EndDate Attributes</h3>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="dateFieldAttributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
+
 </div>`,
-        directives: [DateRangePicker, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange;
@@ -111,15 +123,17 @@ export class DateRangePickerDemo {
     }
     
     attributes:any[] = [
-        new Attribute('startLabel', 'string', 'null', 'Placeholder and label to display for the start date input'),
-        new Attribute('endLabel', 'string', 'null', 'Placeholder and label to display for the end date input'),
         new Attribute('minDate', 'string|Date', 'new Date(1900,0,1)', 'Minimum selectable date'),
         new Attribute('maxDate', 'string|Date', 'new Date(2200,0,1)', 'Maximum selectable date'),
         new Attribute('dateFilter', 'function(date): boolean', 'null', 'Filter to disable dates. A return of <i>false</i> will disable the day'),
-        new Attribute('value', 'DateRange', 'null', 'Two-way binding of the selected DateRange'),
-        new Attribute('startDate', 'Date', 'null', 'Two-way binding of the selected start date'),
-        new Attribute('endDate', 'Date', 'null', 'Two-way binding of the selected end date')
+        new Attribute('value', 'DateRange', 'null', 'Two-way binding of the selected DateRange')
     ];
+    
+    dateFieldAttributes:any[] = [
+        new Attribute('placeholder', 'string', 'null', 'date field placeholder text'),
+        new Attribute('value', 'Date', 'null', 'Two-way binding of the selected date')
+    ];
+    
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
 }

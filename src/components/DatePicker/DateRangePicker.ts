@@ -1,5 +1,6 @@
 import {Component, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {EventEmitter, ElementRef, ViewChild, ViewChildren, QueryList} from '@angular/core';
+import {AfterContentInit, AfterContentChecked} from "@angular/core";
+import {EventEmitter, ElementRef, ViewChild, ViewChildren,ContentChild,QueryList} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DateRange} from "../../utilities/DateUtils";
 import {MobileDetection} from "../../utilities/DetectionUtils";
@@ -7,13 +8,49 @@ import {DatePicker} from "./DatePicker";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
 
+export class DateRangePickerDateField {
+    @Input() placeholder: string;
+    
+    private _value = "";
+    
+    @Input() 
+    get value(): string {return this._value;}
+    set value(value: string) {
+        this._value = value;
+        this.valueChange.next(value);
+    }
+    @Output() valueChange = new EventEmitter<string>();
+    
+    @Output() select = new EventEmitter<MouseEvent>();
+    
+    selected(event: MouseEvent): void {
+        this.select.next(event);
+    }
+}
+
+@Component({
+    selector: "start-date",
+    templateUrl: 'components/DatePicker/DateRangePickerDate.html'
+})
+export class StartDateField extends DateRangePickerDateField {
+    
+}
+
+@Component({
+    selector: "end-date",
+    templateUrl: 'components/DatePicker/DateRangePickerDate.html'
+})
+export class EndDateField extends DateRangePickerDateField {
+    
+}
+
 @Component({
     selector: "date-range-picker",
     templateUrl: 'components/DatePicker/DateRangePicker.html',
     directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DateRangePicker extends DatePicker {
+export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Output() valueChange = new EventEmitter();
     @Input()
     set value(value: any) {
@@ -36,6 +73,11 @@ export class DateRangePicker extends DatePicker {
 
     @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
+    
+    @ContentChild(StartDateField)
+    startDateField: StartDateField;
+    @ContentChild(EndDateField)
+    endDateField: EndDateField;
 
     private _dateTarget: boolean = false;
     calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
@@ -73,9 +115,6 @@ export class DateRangePicker extends DatePicker {
         this.changeDetector.markForCheck();
     }
 
-    @Input() startLabel: string;
-    @Input() endLabel: string;
-
     private _startDate: Date;
     private _endDate: Date;
 
@@ -95,24 +134,48 @@ export class DateRangePicker extends DatePicker {
     }
     get endDate(): any { return this._endDate; }
 
-    private _inputStartDate: string = "";
-    get inputStartDate(): string { return this._inputStartDate };
+    get inputStartDate(): string { return this.startDateField.value; };
     set inputStartDate(value: string) {
-        this._inputStartDate = value;
+        this.startDateField.value = value;
         this._selectedDate = new Date(value);
         this.changeDetector.markForCheck();
     }
 
-    private _inputEndDate: string = "";
-    get inputEndDate(): string { return this._inputEndDate };
+    get inputEndDate(): string { return this.endDateField.value; };
     set inputEndDate(value: string) {
-        this._inputEndDate = value;
+        this.endDateField.value = value;
         this._selectedDate = new Date(value);
         this.changeDetector.markForCheck();
     }
 
     constructor(changeDetector: ChangeDetectorRef) {
         super(changeDetector);
+    }
+
+    ngAfterContentInit(): void {
+        if(this.startDateField == undefined)
+            throw "Fuel-UI Error: DateRangePicker missing start-date field";
+        
+        if(this.startDateField.value.length > 0)
+            this.selectedDate = this.handleDateInput(this.startDateField.value);
+        
+        this.startDateField.select
+            .subscribe((event: MouseEvent) => {
+                this.toggleCalendar(event);
+                this.focusStartDate();
+            });
+        
+        if(this.endDateField == undefined)
+            throw "Fuel-UI Error: DateRangePicker missing end-date field";
+        
+        if(this.endDateField.value.length > 0)
+            this.selectedDate = this.handleDateInput(this.endDateField.value);
+        
+        this.endDateField.select
+            .subscribe((event: MouseEvent) => {
+                this.toggleCalendar(event);
+                this.focusEndDate();
+            });
     }
 
     handleRangeInput(value: any): DateRange {
