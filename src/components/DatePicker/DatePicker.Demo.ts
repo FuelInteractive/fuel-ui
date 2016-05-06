@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DatePicker} from './DatePicker';
+import {DATE_PICKER_PROVIDERS} from './DatePickerProviders';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
@@ -18,13 +18,18 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 <div class="row">
     <div class="col-md-4">
-        <date-picker
-            label="Pick a date"
-            minDate="11/1/2015"
-            maxDate="11/12/2016" 
-            [dateFilter]="dateFilter"
-            (valueChange)="datePickerValue">
-        </date-picker>
+        <div class="form-group">
+            <label for="date">Pick a Date</label>
+            <date-picker
+                minDate="11/1/2015"
+                maxDate="11/12/2016" 
+                [dateFilter]="dateFilter"
+                (valueChange)="datePickerValue">
+                <div class="date-picker-input-group">
+                    <input name="date" dateField class="form-control" value="5/6/2016" placeholder="pick a date" />
+                </div>
+            </date-picker>
+        </div>
     </div>
 </div>
 
@@ -32,7 +37,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {DatePicker} from 'fuel-ui/fuel-ui';
+import {DATE_PICKER_PROVIDERS} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -44,13 +49,18 @@ import {DatePicker} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;date-picker
-    label=&quot;Pick a date&quot;
-    minDate=&quot;11/1/2015&quot;
-    maxDate=&quot;11/12/2016&quot; 
-    [dateFilter]=&quot;dateFilter&quot;
-    (valueChange)=&quot;datePickerValue&quot;&gt;
-&lt;/date-picker&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;date&quot;&gt;Pick a Date&lt;/label&gt;
+    &lt;date-picker
+        minDate=&quot;11/1/2015&quot;
+        maxDate=&quot;11/12/2016&quot; 
+        [dateFilter]=&quot;dateFilter&quot;
+        (valueChange)=&quot;datePickerValue&quot;&gt;
+        &lt;div class=&quot;date-picker-input-group&quot;&gt;
+            &lt;input name=&quot;date&quot; dateField class=&quot;form-control&quot; value=&quot;5/6/2016&quot; placeholder=&quot;pick a date&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/date-picker&gt;
+&lt;/div&gt;
 </code>
 </pre>
 </tab>
@@ -83,7 +93,7 @@ export class DatePickerExample {
 </table-sortable>
 
 </div>`,
-        directives: [DatePicker, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DatePickerDemo { 
     datePickerValue: Date;
@@ -96,7 +106,6 @@ export class DatePickerDemo {
     }
     
     attributes:any[] = [
-        new Attribute('label', 'string', 'null', 'Placeholder and label to display for the date input'),
         new Attribute('minDate', 'string|Date', 'new Date(1900,0,1)', 'Minimum selectable date'),
         new Attribute('maxDate', 'string|Date', 'new Date(2200,0,1)', 'Maximum selectable date'),
         new Attribute('dateFilter', 'function(date): boolean', 'null', 'Filter to disable dates. A return of <i>false</i> will disable the day'),
