@@ -46,10 +46,10 @@ export class Tab implements OnDestroy {
         });
     }
 
-    @Output() activeChange:EventEmitter<Tab> = new EventEmitter(false);
-    @Output() select:EventEmitter<Tab> = new EventEmitter(false);
-    @Output() deselect:EventEmitter<Tab> = new EventEmitter(false);
-    @Output() remove:EventEmitter<Tab> = new EventEmitter(false);
+    @Output() activeChange:EventEmitter<Tab> = new EventEmitter<Tab>(false);
+    @Output() select:EventEmitter<Tab> = new EventEmitter<Tab>(false);
+    @Output() deselect:EventEmitter<Tab> = new EventEmitter<Tab>(false);
+    @Output() remove:EventEmitter<Tab> = new EventEmitter<Tab>(false);
 
     @HostBinding('class.tab-pane') addClass:boolean = true;
 

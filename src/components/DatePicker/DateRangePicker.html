@@ -3,33 +3,7 @@
     (click)="hideCalendar()">
 </div>
 
-<div class="form-group">
-    <label for="startDate">{{startLabel}}</label>
-    <div class="input-group fuel-ui-datepicker-input-group" 
-        (click)="toggleCalendar($event)"
-        (click)="focusStartDate()">
-        <input type="text" class="form-control" name="startDate"
-            [(ngModel)]="inputStartDate" #dateField1 
-            placeholder="{{startLabel}}" readonly />
-        <span class="input-group-addon" [class.input-group-addon-focus]="dateField1.focus">
-            <i class="fa fa-calendar"></i>
-        </span>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="endDate">{{endLabel}}</label>
-    <div class="input-group fuel-ui-datepicker-input-group" 
-        (click)="toggleCalendar($event)"
-        (click)="focusEndDate()">
-        <input type="text" class="form-control" name="endDate"
-            [(ngModel)]="inputEndDate" #dateField2 
-            placeholder="{{endLabel}}" readonly />
-        <span class="input-group-addon" [class.input-group-addon-focus]="dateField2.focus">
-            <i class="fa fa-calendar"></i>
-        </span>
-    </div>
-</div>
+<ng-content></ng-content>
 
 <div class="date-picker-component" *ngIf="calendarDisplayed">
     <div class="container p-a-0">

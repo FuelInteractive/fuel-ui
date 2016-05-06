@@ -21,8 +21,8 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
     <div (click)="$event.preventDefault()">
     <p>Select a tab by setting active binding to true:</p>
     <p>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tabs[1].active" (click)="tabs[1].active = true">Select 2nd tab</button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tabs[2].active" (click)="tabs[2].active = true">Select 3rd tab</button>
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="tabs[1].active" (click)="setActiveTab(1)">Select 2nd tab</button>
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="tabs[2].active" (click)="setActiveTab(2)">Select 3rd tab</button>
     </p>
     <p>
         <button type="button" class="btn btn-primary btn-sm" (click)="tabs[2].disabled = ! tabs[2].disabled">Enable/Disable 3rd tab</button>
@@ -41,7 +41,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
         {{theTab?.content}}
         </tab>
     </tabset>
-
+    
     <hr />
 
     <tabset [vertical]="true" type="pills">

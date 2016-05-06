@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DateRange} from '../../utilities/DateUtils';
-import {DateRangePicker} from './DateRangePicker';
+import {DATE_PICKER_PROVIDERS} from './DatePickerProviders';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
@@ -18,15 +18,28 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 </div>
 
 <section class="row">
-    <div class="col-md-3">
-        <date-range-picker
-            minDate="11/1/2015"
-            maxDate="11/12/2016" 
-            [dateFilter]="dateFilter"
-            startLabel="Arrival"
-            endLabel="Departure"
-            (valueChange)="datePickerValueChange($event)"> 
-        </date-range-picker>
+    <div class="col-md-4">
+        <form class="form-inline">
+            <date-range-picker
+                minDate="11/1/2015"
+                maxDate="11/12/2016" 
+                [dateFilter]="dateFilter"
+                (valueChange)="datePickerValueChange($event)">
+                <div class="form-group">
+                    <label for="arrival">Arrival Date</label>
+                    <div class="date-picker-input-group">
+                        <input name="arrival" startDateField class="form-control" value="5/5/2016" placeholder="Arrival" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="departure">Departure Date</label>
+                    <div class="date-picker-input-group">
+                        <input name="departure" endDateField class="form-control" value="5/10/2016" placeholder="Departure" />
+                    </div>
+                </div>
+            </date-range-picker>
+        </form>
     </div>
     <div class="col-md-6" *ngIf="dateRangePickerValue != null">
         value.start: {{dateRangePickerValue.start}} <br/>
@@ -38,7 +51,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
+import {DateRange, DATE_PICKER_PROVIDERS} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -50,14 +63,27 @@ import {DateRange, DateRangePicker} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;date-range-picker
-    minDate=&quot;11/1/2015&quot;
-    maxDate=&quot;11/12/2016&quot; 
-    [dateFilter]=&quot;dateFilter&quot;
-    startLabel=&quot;Arrival&quot;
-    endLabel=&quot;Departure&quot;
-    (valueChange)=&quot;datePickerValueChange($event)&quot;&gt; 
-&lt;/date-range-picker&gt;
+&lt;form class=&quot;form-inline&quot;&gt;
+    &lt;date-range-picker
+        minDate=&quot;11/1/2015&quot;
+        maxDate=&quot;11/12/2016&quot; 
+        [dateFilter]=&quot;dateFilter&quot;
+        (valueChange)=&quot;datePickerValueChange($event)&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;arrival&quot;&gt;Arrival Date&lt;/label&gt;
+            &lt;div class=&quot;date-picker-input-group&quot;&gt;
+                &lt;input name=&quot;arrival&quot; startDateField class=&quot;form-control&quot; value=&quot;5/5/2016&quot; placeholder=&quot;Arrival&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;departure&quot;&gt;Departure Date&lt;/label&gt;
+            &lt;div class=&quot;date-picker-input-group&quot;&gt;
+                &lt;input name=&quot;departure&quot; endDateField class=&quot;form-control&quot; value=&quot;5/10/2016&quot; placeholder=&quot;Departure&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/date-range-picker&gt;
+&lt;/form&gt;
 </code>
 </pre>
 </tab>
@@ -85,7 +111,7 @@ export class DateRangePickerExample {
 </tab>
 </tabset>
 
-<h3>Attributes</h3>
+<h3>DateRangePicker Attributes</h3>
 <table-sortable
     [columns]="attributesColumns"
     [data]="attributes"
@@ -93,8 +119,16 @@ export class DateRangePickerExample {
     Loading table...
 </table-sortable>
 
+<h3>StartDate / EndDate Attributes</h3>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="dateFieldAttributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
+
 </div>`,
-        directives: [DateRangePicker, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange;
@@ -111,15 +145,16 @@ export class DateRangePickerDemo {
     }
     
     attributes:any[] = [
-        new Attribute('startLabel', 'string', 'null', 'Placeholder and label to display for the start date input'),
-        new Attribute('endLabel', 'string', 'null', 'Placeholder and label to display for the end date input'),
         new Attribute('minDate', 'string|Date', 'new Date(1900,0,1)', 'Minimum selectable date'),
         new Attribute('maxDate', 'string|Date', 'new Date(2200,0,1)', 'Maximum selectable date'),
         new Attribute('dateFilter', 'function(date): boolean', 'null', 'Filter to disable dates. A return of <i>false</i> will disable the day'),
-        new Attribute('value', 'DateRange', 'null', 'Two-way binding of the selected DateRange'),
-        new Attribute('startDate', 'Date', 'null', 'Two-way binding of the selected start date'),
-        new Attribute('endDate', 'Date', 'null', 'Two-way binding of the selected end date')
+        new Attribute('value', 'DateRange', 'null', 'Two-way binding of the selected DateRange')
     ];
+    
+    dateFieldAttributes:any[] = [
+        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date')
+    ];
+    
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
