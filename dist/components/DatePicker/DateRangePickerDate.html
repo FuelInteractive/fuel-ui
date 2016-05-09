@@ -1,0 +1,9 @@
+ <div class="input-group fuel-ui-datepicker-input-group" 
+    (click)="selected($event)">
+    <input type="text" class="form-control"
+        [(ngModel)]="value" #dateField
+        placeholder="{{placeholder}}" readonly />
+    <span class="input-group-addon" [class.input-group-addon-focus]="dateField.focus">
+        <i class="fa fa-calendar"></i>
+    </span>
+</div>

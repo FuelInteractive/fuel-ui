@@ -29,9 +29,19 @@ var Slider = (function () {
         this.margin = 10;
         this.value = 0;
         this.secondValue = null;
+        this.debounceTime = 150;
         this.valueChange = new core_1.EventEmitter();
         this.secondValueChange = new core_1.EventEmitter();
+        this.timeout = null;
     }
+    Slider.prototype.update = function (val) {
+        this.value = parseInt(val[0]);
+        this.secondValue = val.length > 1 ? parseInt(val[1]) : null;
+        this.valueChange.next(this.value);
+        this.secondValueChange.next(this.secondValue);
+        this.timeout = null;
+    };
+    ;
     Slider.prototype.ngAfterViewInit = function () {
         var _this = this;
         this._sliderElement = this._element.nativeElement.children[0];
@@ -77,10 +87,16 @@ var Slider = (function () {
             });
         }
         this._sliderElement.noUiSlider.on('slide', function (val) {
-            _this.value = val[0];
-            _this.secondValue = val.length > 1 ? val[1] : null;
-            _this.valueChange.next(val[0]);
-            _this.secondValueChange.next(_this.secondValue);
+            if (_this.timeout)
+                clearTimeout(_this.timeout);
+            _this.timeout = setTimeout(function () {
+                _this.update(val);
+            }, _this.debounceTime);
+        });
+        this._sliderElement.noUiSlider.on('end', function (val) {
+            if (_this.timeout)
+                clearTimeout(_this.timeout);
+            _this.update(val);
         });
     };
     Slider.prototype.ngOnChanges = function (changes) {
@@ -149,6 +165,10 @@ var Slider = (function () {
         core_1.Input(), 
         __metadata('design:type', Number)
     ], Slider.prototype, "secondValue", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Slider.prototype, "debounceTime", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)

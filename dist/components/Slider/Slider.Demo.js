@@ -36,7 +36,8 @@ var SliderDemo = (function () {
             new demoUtilities_1.Attribute('secondValue', 'number', 'null', 'The value of the second number of the slider. When set to null the second handle will not display.'),
             new demoUtilities_1.Attribute('step', 'number', '1', 'Slider increment on dragging'),
             new demoUtilities_1.Attribute('value', 'number', '0', 'The value of the first number of the slider'),
-            new demoUtilities_1.Attribute('width', 'string', 'null', 'Width of the slider element')
+            new demoUtilities_1.Attribute('width', 'string', 'null', 'Width of the slider element'),
+            new demoUtilities_1.Attribute('debounceTime', 'number', '150', 'The amount of debounce time in milliseconds for the values to emit while sliding. Setting a shorter debounce time may result in decreased performance of the sliding mechanism. Values emit instantly on tap, and when a user lets go of the slider.')
         ];
         this.attributesColumns = demoUtilities_1.AttributeColumns;
         this.attributesSort = demoUtilities_1.AttributesDefaultSort;
