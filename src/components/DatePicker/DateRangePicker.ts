@@ -120,14 +120,18 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
     get inputStartDate(): string { return this.startDateField.value; };
     set inputStartDate(value: string) {
-        this.startDateField.value = value;
+        if(typeof this.startDateField !== undefined)
+            this.startDateField.value = value;
+            
         this._selectedDate = new Date(value);
         this.changeDetector.markForCheck();
     }
 
     get inputEndDate(): string { return this.endDateField.value; };
     set inputEndDate(value: string) {
-        this.endDateField.value = value;
+        if(typeof this.endDateField !== undefined)
+            this.endDateField.value = value;
+            
         this._selectedDate = new Date(value);
         this.changeDetector.markForCheck();
     }

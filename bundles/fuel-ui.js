@@ -906,7 +906,8 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@
         return this.startDateField.value;
       },
       set: function(value) {
-        this.startDateField.value = value;
+        if (typeof this.startDateField !== undefined)
+          this.startDateField.value = value;
         this._selectedDate = new Date(value);
         this.changeDetector.markForCheck();
       },
@@ -919,7 +920,8 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@
         return this.endDateField.value;
       },
       set: function(value) {
-        this.endDateField.value = value;
+        if (typeof this.endDateField !== undefined)
+          this.endDateField.value = value;
         this._selectedDate = new Date(value);
         this.changeDetector.markForCheck();
       },

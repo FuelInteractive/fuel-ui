@@ -2,7 +2,7 @@ import {ACCORDION_PROVIDERS, AccordionItem} from "./Accordion/AccordionItem";
 import {Accordion} from "./Accordion/Accordion";
 import {ALERT_PROVIDERS, Alert} from "./Alert/Alert";
 import {CAROUSEL_PROVIDERS, Carousel, CarouselItem} from "./Carousel/Carousel";
-import {DATE_PICKER_PROVIDERS, DatePickerCalendar, DatePicker, DateRangePicker} from "./DatePicker/DatePickerProviders";
+import {DATE_PICKER_PROVIDERS, DatePickerCalendar, DatePicker, DateRangePicker, StartDateField, EndDateField, DatePickerField, DatePickerFieldStyler} from "./DatePicker/DatePickerProviders";
 import {MODAL_PROVIDERS, Modal} from "./Modal/Modal";
 import {PAGINATION_PROVIDERS, Pagination} from "./Pagination/Pagination";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./InfiniteScroller/InfiniteScroller";
