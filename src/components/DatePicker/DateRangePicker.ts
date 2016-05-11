@@ -68,35 +68,15 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
     get selectedDate(): Date { return this._selectedDate };
     set selectedDate(value: Date) {
-        this._selectedDate = value;
+        this.selectDate(value);
+    }
 
-        if ((this._dateTarget && this.startDate != null && value < this.startDate)
-            || !this._dateTarget && this.endDate != null && value > this.endDate)
-            this._dateTarget = !this._dateTarget;
-
-        if (!this._dateTarget) {
-            this.inputStartDate = value.toLocaleDateString();
-            this.startDate = value;
-            if (this.startDateChange != null)
-                this.startDateChange.next(this._startDate);
-        }
-        else {
-            this.inputEndDate = value.toLocaleDateString();
-            this.endDate = value;
-            this.hideCalendar();
-            if (this.endDateChange != null)
-                this.endDateChange.next(this._endDate);
-        }
-
-        this._dateTarget = !this._dateTarget;
-
-        if (this.startDate != null && this.endDate != null) {
-            let startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
-            let endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
-
-            this.valueChange.next(new DateRange(startDate, endDate));
-        }
-        this.changeDetector.markForCheck();
+    get inputStartDate(): string {
+        return this.startDateField != null ? this.startDateField.value : "";
+    }
+    
+    get inputEndDate(): string {
+        return this.endDateField != null ? this.endDateField.value : "";
     }
 
     private _startDate: Date;
@@ -106,7 +86,8 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Input()
     set startDate(value: any) {
         this._startDate = DatePicker.handleDateInput(value);
-        this.inputStartDate = this._startDate.toLocaleDateString();
+        if(this.startDateField != null)
+            this.startDateField._value = this._startDate.toLocaleDateString();
     }
     get startDate(): any { return this._startDate; }
 
@@ -114,56 +95,88 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Input()
     set endDate(value: any) {
         this._endDate = DatePicker.handleDateInput(value);
-        this.inputEndDate = this._endDate.toLocaleDateString();
+        if(this.endDateField != null)
+            this.endDateField._value = this._endDate.toLocaleDateString();
     }
     get endDate(): any { return this._endDate; }
-
-    get inputStartDate(): string { return this.startDateField.value; };
-    set inputStartDate(value: string) {
-        if(typeof this.startDateField !== undefined)
-            this.startDateField.value = value;
-            
-        this._selectedDate = new Date(value);
-        this.changeDetector.markForCheck();
-    }
-
-    get inputEndDate(): string { return this.endDateField.value; };
-    set inputEndDate(value: string) {
-        if(typeof this.endDateField !== undefined)
-            this.endDateField.value = value;
-            
-        this._selectedDate = new Date(value);
-        this.changeDetector.markForCheck();
-    }
 
     constructor(changeDetector: ChangeDetectorRef, renderer: Renderer) {
         super(changeDetector, renderer);
     }
 
     ngAfterContentInit(): void {
-        if(this.startDateField == undefined)
+        if(typeof this.startDateField === "undefined")
             throw "Fuel-UI Error: DateRangePicker missing startDate field";
         
-        if(this.startDateField.value.length > 0)
-            this.selectedDate = DatePicker.handleDateInput(this.startDateField.value);
+        if(this.startDateField.value.length > 0) {
+            let startDateValue = DatePicker.handleDateInput(this.startDateField.value);
+            if(!isNaN(startDateValue.getTime()))
+                this.selectDate(startDateValue, false);
+        }
         
         this.startDateField.select
             .subscribe((event: MouseEvent) => {
                 this.toggleCalendar(event);
                 this.focusStartDate();
             });
+            
+        this.startDateField.dateChange
+            .subscribe((date: Date) => {
+                this.startDate = date;
+            });
         
-        if(this.endDateField == undefined)
+        if(typeof this.endDateField === "undefined")
             throw "Fuel-UI Error: DateRangePicker missing endDate field";
         
-        if(this.endDateField.value.length > 0)
-            this.selectedDate = DatePicker.handleDateInput(this.endDateField.value);
+        if(this.endDateField.value.length > 0) {
+            let endDateValue = DatePicker.handleDateInput(this.endDateField.value);
+            if(!isNaN(endDateValue.getTime()))
+                this.selectDate(endDateValue, true); 
+        }
         
         this.endDateField.select
             .subscribe((event: MouseEvent) => {
                 this.toggleCalendar(event);
                 this.focusEndDate();
             });
+            
+        this.endDateField.dateChange
+            .subscribe((date: Date) => {
+                this.endDate = date;
+            });
+    }
+
+    selectDate(value: Date, target?: boolean): void {
+        this._selectedDate = value;
+
+        let dateTarget = (typeof target !== "undefined" && target != null) ? target : this._dateTarget;
+
+        if ((this._startDate != undefined && this._endDate != undefined) && 
+            (this._startDate.getFullYear() > 1970 && this._endDate.getFullYear() > 1970) &&
+            ((dateTarget && value < this._startDate) || (!dateTarget && value > this._endDate)))
+            dateTarget = !dateTarget;
+
+        if (!dateTarget) {
+            this.startDate = value;
+            if (this.startDateChange != null)
+                this.startDateChange.next(this._startDate);
+        }
+        else {
+            this.endDate = value;
+            this.hideCalendar();
+            if (this.endDateChange != null)
+                this.endDateChange.next(this._endDate);
+        }
+
+        this._dateTarget = !dateTarget;
+
+        if (this.startDate != null && this.endDate != null) {
+            let startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
+            let endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
+
+            this.valueChange.next(new DateRange(startDate, endDate));
+        }
+        this.changeDetector.markForCheck();
     }
 
     handleRangeInput(value: any): DateRange {

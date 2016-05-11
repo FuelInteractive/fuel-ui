@@ -24,7 +24,9 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                 minDate="11/1/2015"
                 maxDate="11/12/2016" 
                 [dateFilter]="dateFilter"
-                (valueChange)="datePickerValueChange($event)">
+                (valueChange)="datePickerValueChange($event)"
+                [startDate]="5/10/2016"
+                [endDate]="5/16/2016">
                 <div class="form-group">
                     <label for="arrival">Arrival Date</label>
                     <div class="date-picker-input-group">

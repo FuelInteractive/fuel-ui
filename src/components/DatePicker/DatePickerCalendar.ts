@@ -45,11 +45,10 @@ export class DatePickerCalendar implements OnInit {
     }
 
     checkSelectedDate(date: string): boolean {
-        if (typeof this.selectedDate == undefined || this.selectedDate == null)
+        if (this.selectedDate == null)
             return false;
 
-        if (typeof this.startDate != undefined && this.startDate != null
-            && typeof this.endDate != undefined && this.endDate != null) {
+        if (this.startDate != null && this.endDate != null) {
             let compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
             return compareDate >= this.startDate && compareDate <= this.endDate;
         }
@@ -60,10 +59,12 @@ export class DatePickerCalendar implements OnInit {
     }
 
     checkStartDate(date: string): boolean {
-        if (typeof this.startDate == undefined || this.startDate == null)
+        if (this.startDate == null)
             return false;
 
-        if (this.startDate == this.endDate)
+        if (this.startDate.getFullYear() == this.endDate.getFullYear()
+            && this.startDate.getMonth() == this.endDate.getMonth()
+            && this.startDate.getDate().toString() == this.endDate.getDate().toString())
             return false;
 
         return this.startDate.getFullYear() == this.currentMonth.getFullYear()
@@ -72,10 +73,12 @@ export class DatePickerCalendar implements OnInit {
     }
 
     checkEndDate(date: string): boolean {
-        if (typeof this.endDate == undefined || this.endDate == null)
+        if (this.endDate == null)
             return false;
 
-        if (this.startDate == this.endDate)
+        if (this.startDate.getFullYear() == this.endDate.getFullYear()
+            && this.startDate.getMonth() == this.endDate.getMonth()
+            && this.startDate.getDate().toString() == this.endDate.getDate().toString())
             return false;
 
         return this.endDate.getFullYear() == this.currentMonth.getFullYear()

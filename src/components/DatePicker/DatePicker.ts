@@ -37,6 +37,10 @@ export class DatePicker implements OnInit, AfterContentInit {
 	set value(value: any) {
 		this._selectedDate = DatePicker.handleDateInput(value);
 	}
+    
+    get inputDate(): string {
+        return this.dateField != null ? this.dateField.value : "";
+    }
  
     @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
@@ -49,18 +53,10 @@ export class DatePicker implements OnInit, AfterContentInit {
 	get selectedDate(): Date { return this._selectedDate; };
 	set selectedDate(value: Date) {
 		this._selectedDate = value;
-		this._inputDate = value.toLocaleDateString();
+        if(this.dateField != null)
+		    this.dateField._value = value.toLocaleDateString();
 		this.valueChange.next(this.selectedDate);
 		this.hideCalendar();
-	}
-
-	private _inputDate: string = "";
-	
-	get inputDate(): string {return this._inputDate};
-	set inputDate(value: string) {
-		this._inputDate = value;
-		this._selectedDate = new Date(value);
-        this.dateField.value = value;
 	}
     
     calendarDisplayed: boolean = false;
@@ -124,6 +120,11 @@ export class DatePicker implements OnInit, AfterContentInit {
         this.dateField.select
             .subscribe((event: MouseEvent) => {
                 this.toggleCalendar(event);
+            });
+            
+        this.dateField.dateChange
+            .subscribe((date: Date) => {
+                this.selectedDate = date;
             });
     }
     

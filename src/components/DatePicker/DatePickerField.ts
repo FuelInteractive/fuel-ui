@@ -17,8 +17,8 @@ export class DatePickerField implements OnInit {
         this.valueChange.next(value);
         this.dateChange.next(this._date);
     }
-     
     get value(): string {return this._value;}
+    
     @Output() valueChange = new EventEmitter<string>();
     
     @Input()
