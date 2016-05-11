@@ -344,25 +344,25 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePickerCalendar", 
       return compareDate >= this.minDate && compareDate <= this.maxDate;
     };
     DatePickerCalendar.prototype.checkSelectedDate = function(date) {
-      if (typeof this.selectedDate == undefined || this.selectedDate == null)
+      if (this.selectedDate == null)
         return false;
-      if (typeof this.startDate != undefined && this.startDate != null && typeof this.endDate != undefined && this.endDate != null) {
+      if (this.startDate != null && this.endDate != null) {
         var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
         return compareDate >= this.startDate && compareDate <= this.endDate;
       }
       return this.selectedDate.getFullYear() == this.currentMonth.getFullYear() && this.selectedDate.getMonth() == this.currentMonth.getMonth() && this.selectedDate.getDate().toString() == date;
     };
     DatePickerCalendar.prototype.checkStartDate = function(date) {
-      if (typeof this.startDate == undefined || this.startDate == null)
+      if (this.startDate == null)
         return false;
-      if (this.startDate == this.endDate)
+      if (this.startDate.getFullYear() == this.endDate.getFullYear() && this.startDate.getMonth() == this.endDate.getMonth() && this.startDate.getDate().toString() == this.endDate.getDate().toString())
         return false;
       return this.startDate.getFullYear() == this.currentMonth.getFullYear() && this.startDate.getMonth() == this.currentMonth.getMonth() && this.startDate.getDate().toString() == date;
     };
     DatePickerCalendar.prototype.checkEndDate = function(date) {
-      if (typeof this.endDate == undefined || this.endDate == null)
+      if (this.endDate == null)
         return false;
-      if (this.startDate == this.endDate)
+      if (this.startDate.getFullYear() == this.endDate.getFullYear() && this.startDate.getMonth() == this.endDate.getMonth() && this.startDate.getDate().toString() == this.endDate.getDate().toString())
         return false;
       return this.endDate.getFullYear() == this.currentMonth.getFullYear() && this.endDate.getMonth() == this.currentMonth.getMonth() && this.endDate.getDate().toString() == date;
     };
@@ -449,7 +449,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
       this._minDate = new Date(1900, 0, 1);
       this._maxDate = new Date(2200, 0, 1);
       this.valueChange = new core_2.EventEmitter();
-      this._inputDate = "";
       this.calendarDisplayed = false;
       this.calendarX = 1;
       this.calendarY = 1;
@@ -497,28 +496,23 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
       enumerable: true,
       configurable: true
     });
+    Object.defineProperty(DatePicker.prototype, "inputDate", {
+      get: function() {
+        return this.dateField != null ? this.dateField.value : "";
+      },
+      enumerable: true,
+      configurable: true
+    });
     Object.defineProperty(DatePicker.prototype, "selectedDate", {
       get: function() {
         return this._selectedDate;
       },
       set: function(value) {
         this._selectedDate = value;
-        this._inputDate = value.toLocaleDateString();
+        if (this.dateField != null)
+          this.dateField._value = value.toLocaleDateString();
         this.valueChange.next(this.selectedDate);
         this.hideCalendar();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DatePicker.prototype, "inputDate", {
-      get: function() {
-        return this._inputDate;
-      },
-      set: function(value) {
-        this._inputDate = value;
-        this._selectedDate = new Date(value);
-        this.dateField.value = value;
       },
       enumerable: true,
       configurable: true
@@ -545,6 +539,9 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
         this.selectedDate = DatePicker.handleDateInput(this.dateField.value);
       this.dateField.select.subscribe(function(event) {
         _this.toggleCalendar(event);
+      });
+      this.dateField.dateChange.subscribe(function(date) {
+        _this.selectedDate = date;
       });
     };
     DatePicker.handleDateInput = function(value) {
@@ -852,40 +849,34 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@
         return this._selectedDate;
       },
       set: function(value) {
-        this._selectedDate = value;
-        if ((this._dateTarget && this.startDate != null && value < this.startDate) || !this._dateTarget && this.endDate != null && value > this.endDate)
-          this._dateTarget = !this._dateTarget;
-        if (!this._dateTarget) {
-          this.inputStartDate = value.toLocaleDateString();
-          this.startDate = value;
-          if (this.startDateChange != null)
-            this.startDateChange.next(this._startDate);
-        } else {
-          this.inputEndDate = value.toLocaleDateString();
-          this.endDate = value;
-          this.hideCalendar();
-          if (this.endDateChange != null)
-            this.endDateChange.next(this._endDate);
-        }
-        this._dateTarget = !this._dateTarget;
-        if (this.startDate != null && this.endDate != null) {
-          var startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
-          var endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
-          this.valueChange.next(new DateUtils_1.DateRange(startDate, endDate));
-        }
-        this.changeDetector.markForCheck();
+        this.selectDate(value);
       },
       enumerable: true,
       configurable: true
     });
     ;
+    Object.defineProperty(DateRangePicker.prototype, "inputStartDate", {
+      get: function() {
+        return this.startDateField != null ? this.startDateField.value : "";
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(DateRangePicker.prototype, "inputEndDate", {
+      get: function() {
+        return this.endDateField != null ? this.endDateField.value : "";
+      },
+      enumerable: true,
+      configurable: true
+    });
     Object.defineProperty(DateRangePicker.prototype, "startDate", {
       get: function() {
         return this._startDate;
       },
       set: function(value) {
         this._startDate = DatePicker_1.DatePicker.handleDateInput(value);
-        this.inputStartDate = this._startDate.toLocaleDateString();
+        if (this.startDateField != null)
+          this.startDateField._value = this._startDate.toLocaleDateString();
       },
       enumerable: true,
       configurable: true
@@ -896,57 +887,65 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@
       },
       set: function(value) {
         this._endDate = DatePicker_1.DatePicker.handleDateInput(value);
-        this.inputEndDate = this._endDate.toLocaleDateString();
+        if (this.endDateField != null)
+          this.endDateField._value = this._endDate.toLocaleDateString();
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(DateRangePicker.prototype, "inputStartDate", {
-      get: function() {
-        return this.startDateField.value;
-      },
-      set: function(value) {
-        if (typeof this.startDateField !== undefined)
-          this.startDateField.value = value;
-        this._selectedDate = new Date(value);
-        this.changeDetector.markForCheck();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
-    Object.defineProperty(DateRangePicker.prototype, "inputEndDate", {
-      get: function() {
-        return this.endDateField.value;
-      },
-      set: function(value) {
-        if (typeof this.endDateField !== undefined)
-          this.endDateField.value = value;
-        this._selectedDate = new Date(value);
-        this.changeDetector.markForCheck();
-      },
-      enumerable: true,
-      configurable: true
-    });
-    ;
     DateRangePicker.prototype.ngAfterContentInit = function() {
       var _this = this;
-      if (this.startDateField == undefined)
+      if (typeof this.startDateField === "undefined")
         throw "Fuel-UI Error: DateRangePicker missing startDate field";
-      if (this.startDateField.value.length > 0)
-        this.selectedDate = DatePicker_1.DatePicker.handleDateInput(this.startDateField.value);
+      if (this.startDateField.value.length > 0) {
+        var startDateValue = DatePicker_1.DatePicker.handleDateInput(this.startDateField.value);
+        if (!isNaN(startDateValue.getTime()))
+          this.selectDate(startDateValue, false);
+      }
       this.startDateField.select.subscribe(function(event) {
         _this.toggleCalendar(event);
         _this.focusStartDate();
       });
-      if (this.endDateField == undefined)
+      this.startDateField.dateChange.subscribe(function(date) {
+        _this.startDate = date;
+      });
+      if (typeof this.endDateField === "undefined")
         throw "Fuel-UI Error: DateRangePicker missing endDate field";
-      if (this.endDateField.value.length > 0)
-        this.selectedDate = DatePicker_1.DatePicker.handleDateInput(this.endDateField.value);
+      if (this.endDateField.value.length > 0) {
+        var endDateValue = DatePicker_1.DatePicker.handleDateInput(this.endDateField.value);
+        if (!isNaN(endDateValue.getTime()))
+          this.selectDate(endDateValue, true);
+      }
       this.endDateField.select.subscribe(function(event) {
         _this.toggleCalendar(event);
         _this.focusEndDate();
       });
+      this.endDateField.dateChange.subscribe(function(date) {
+        _this.endDate = date;
+      });
+    };
+    DateRangePicker.prototype.selectDate = function(value, target) {
+      this._selectedDate = value;
+      var dateTarget = (typeof target !== "undefined" && target != null) ? target : this._dateTarget;
+      if ((this._startDate != undefined && this._endDate != undefined) && (this._startDate.getFullYear() > 1970 && this._endDate.getFullYear() > 1970) && ((dateTarget && value < this._startDate) || (!dateTarget && value > this._endDate)))
+        dateTarget = !dateTarget;
+      if (!dateTarget) {
+        this.startDate = value;
+        if (this.startDateChange != null)
+          this.startDateChange.next(this._startDate);
+      } else {
+        this.endDate = value;
+        this.hideCalendar();
+        if (this.endDateChange != null)
+          this.endDateChange.next(this._endDate);
+      }
+      this._dateTarget = !dateTarget;
+      if (this.startDate != null && this.endDate != null) {
+        var startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
+        var endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate());
+        this.valueChange.next(new DateUtils_1.DateRange(startDate, endDate));
+      }
+      this.changeDetector.markForCheck();
     };
     DateRangePicker.prototype.handleRangeInput = function(value) {
       if (!(value instanceof DateUtils_1.DateRange))
