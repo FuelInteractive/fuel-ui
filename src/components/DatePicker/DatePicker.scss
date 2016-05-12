@@ -18,6 +18,12 @@
     }
 }
 
+.date-picker-content {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 .fuel-ui-datepicker-input-group {
     input:read-only, .form-control[readonly] {
         background-color: $input-bg;
