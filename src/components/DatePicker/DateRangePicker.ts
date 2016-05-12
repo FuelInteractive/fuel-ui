@@ -1,13 +1,13 @@
 import {Component, Directive, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
 import {AfterContentInit, AfterContentChecked, OnInit} from "@angular/core";
-import {EventEmitter, ElementRef, ViewChild, ViewChildren,ContentChild,QueryList} from '@angular/core';
+import {EventEmitter, ElementRef, ViewChild, ContentChildren ,ContentChild,QueryList} from '@angular/core';
 import {Input, Output, HostListener, HostBinding} from "@angular/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DateRange} from "../../utilities/DateUtils";
 import {MobileDetection} from "../../utilities/DetectionUtils";
 import {DatePicker} from "./DatePicker";
 import {DatePickerCalendar} from "./DatePickerCalendar";
-import {DatePickerField} from "./DatePickerField";
+import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
 import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
 
 @Directive({
@@ -62,6 +62,9 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     startDateField: StartDateField;
     @ContentChild(EndDateField)
     endDateField: EndDateField;
+    
+    @ContentChildren(DatePickerFieldStyler)
+    dateFieldIcons: QueryList<DatePickerFieldStyler>;
 
     private _dateTarget: boolean = false;
     calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
@@ -116,7 +119,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
         
         this.startDateField.select
             .subscribe((event: MouseEvent) => {
-                this.toggleCalendar(event);
+                this.showCalendar(event);
                 this.focusStartDate();
             });
             
@@ -136,7 +139,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
         
         this.endDateField.select
             .subscribe((event: MouseEvent) => {
-                this.toggleCalendar(event);
+                this.showCalendar(event);
                 this.focusEndDate();
             });
             
@@ -144,6 +147,12 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
             .subscribe((date: Date) => {
                 this.endDate = date;
             });
+            
+        this.dateFieldIcons.map((i: DatePickerFieldStyler) => {
+            i.selectEvent.subscribe((event: Event) => {
+                this.showCalendar(event);
+            });
+        });
     }
 
     selectDate(value: Date, target?: boolean): void {

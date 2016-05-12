@@ -36,7 +36,7 @@ export class DatePickerField implements OnInit {
         this.value = value;
     }
     
-    @HostListener("focus")
+    @HostListener("focus", ["$event"])
     focused(event: Event): void {
         this.select.next(event);
     }
@@ -57,11 +57,15 @@ export class DatePickerField implements OnInit {
     template: ` 
     <div class="input-group fuel-ui-datepicker-input-group">
         <ng-content></ng-content>
-        <span class="input-group-addon" > 
+        <span class="input-group-addon" (click)="select($event)"> 
             <i class="fa fa-calendar"></i>
         </span>
     </div>`
 })
 export class DatePickerFieldStyler {
+    selectEvent = new EventEmitter<Event>();
     
+    select(event: Event): void {
+        this.selectEvent.next(event);
+    }
 }

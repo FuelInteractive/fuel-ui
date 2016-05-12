@@ -168,6 +168,7 @@ gulp.task('serve', function(){
 		.pipe(server({
 			livereload: {
 				enable: true,
+                port: 35728,
 				filter: function(filePath, cb) {
 					cb( 
 						/dist\/[^\/]*\.js$/.test(filePath) &&
@@ -178,7 +179,8 @@ gulp.task('serve', function(){
 				}
 			},
 			defaultFile: 'index.html',
-			open: true
+			open: true,
+            port: 8001
 		}));
 });
 

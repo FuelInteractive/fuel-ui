@@ -5,7 +5,8 @@
 
 <ng-content></ng-content>
 
-<div class="date-picker-component" *ngIf="calendarDisplayed">
+<div class="date-picker-component" *ngIf="calendarDisplayed"
+    [style.left]="calendarX" [style.top]="calendarY">
     <div class="container p-a-0">
         <header>
             <button type="button" class="btn btn-secondary pull-left"

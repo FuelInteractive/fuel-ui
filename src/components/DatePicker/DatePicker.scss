@@ -10,7 +10,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    z-index: 900;
     
     @include mobile-only {
         background-color: $gray;
@@ -30,7 +30,7 @@
 
 .date-picker-component {
     border: 1px solid $table-border-color;
-    z-index: 120;
+    z-index: 1000;
     background-color: $body-bg;
     font-size: .75rem;
     position: absolute;
