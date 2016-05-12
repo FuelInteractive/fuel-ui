@@ -1,5 +1,5 @@
 import {Component, Directive, Input, Output, HostBinding, HostListener, OnInit, EventEmitter} from "@angular/core";
-import {DatePicker} from "./DatePicker";
+import {DateUtils} from "../../utilities/utilities";
 
 @Directive({
     selector: "[dateField], .date-field"
@@ -13,13 +13,18 @@ export class DatePickerField implements OnInit {
     @Input()
     set value(value: string) {
         this._value = value;
-        this._date = DatePicker.handleDateInput(value);
+        this._date = DateUtils.handleDateInput(value);
         this.valueChange.next(value);
         this.dateChange.next(this._date);
     }
     get value(): string {return this._value;}
     
     @Output() valueChange = new EventEmitter<string>();
+    
+    @Input()
+    set ngModel(value: any) {
+        this.value = value;
+    }
     
     @Input()
     set date(date: Date) {
@@ -48,7 +53,7 @@ export class DatePickerField implements OnInit {
     }
     
     ngOnInit(): void {
-        this.date = DatePicker.handleDateInput(this.value);
+        this.date = DateUtils.handleDateInput(this.value);
     }
 }
 

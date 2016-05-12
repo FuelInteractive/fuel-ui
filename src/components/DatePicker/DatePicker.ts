@@ -5,7 +5,7 @@ import {DatePickerCalendar} from "./DatePickerCalendar";
 import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
 import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {MobileDetection} from "../../utilities/DetectionUtils";
-import {DateRange} from "../../utilities/DateUtils";
+import {DateRange, DateUtils} from "../../utilities/utilities";
 
 @Component({
     selector: "date-picker",
@@ -20,13 +20,13 @@ export class DatePicker implements OnInit, AfterContentInit {
 
     @Input()
     set minDate(value: Date | string) {
-        this._minDate = DatePicker.handleDateInput(value);
+        this._minDate = DateUtils.handleDateInput(value);
     }
     get minDate(): Date | string { return this._minDate; };
 
     @Input()
     set maxDate(value: Date | string) {
-        this._maxDate = DatePicker.handleDateInput(value);
+        this._maxDate = DateUtils.handleDateInput(value);
     }
     get maxDate(): Date | string { return this._maxDate; }
 
@@ -35,7 +35,7 @@ export class DatePicker implements OnInit, AfterContentInit {
     @Output() valueChange = new EventEmitter();
     @Input()
     set value(value: any) {
-        this._selectedDate = DatePicker.handleDateInput(value);
+        this._selectedDate = DateUtils.handleDateInput(value);
     }
 
     get inputDate(): string {
@@ -77,20 +77,7 @@ export class DatePicker implements OnInit, AfterContentInit {
         this.changeDetector = changeDetector;
         this.renderer = renderer;
 
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-        this.calendarMonths = [
-            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
-            new Date(currentDate.getFullYear(), currentDate.getMonth())
-        ]
-
-        for (let i = 0; i < this._preGenMonths; i++) {
-            let earliestDate = this.calendarMonths[0];
-            let latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-            if (this.canPrevMonth)
-                this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-            if (this.canNextMonth)
-                this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-        }
+        this.generateMonths();
     }
 
     ngOnInit(): void {
@@ -116,8 +103,9 @@ export class DatePicker implements OnInit, AfterContentInit {
         if (this.dateField == undefined)
             throw "Fuel-UI Error: DatePicker missing date field";
 
-        if (this.dateField.value.length > 0)
-            this.selectedDate = DatePicker.handleDateInput(this.dateField.value);
+        var parsedDate = DateUtils.handleDateInput(this.dateField.value);
+        if (this.dateField.value.length > 0 && DateUtils.isValidDate(parsedDate))
+            this.selectedDate = parsedDate;
 
         this.dateField.select
             .subscribe((event: MouseEvent) => {
@@ -134,13 +122,25 @@ export class DatePicker implements OnInit, AfterContentInit {
                 this.showCalendar(event);
             });
         });
+        
+        this.generateMonths();
     }
 
-    static handleDateInput(value: any): Date {
-        if (value instanceof Date && !isNaN(value.valueOf()))
-            return value;
-        else
-            return new Date(<string>value);
+    generateMonths(): void {
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+        this.calendarMonths = [
+            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
+            new Date(currentDate.getFullYear(), currentDate.getMonth())
+        ]
+
+        for (let i = 0; i < this._preGenMonths; i++) {
+            let earliestDate = this.calendarMonths[0];
+            let latestDate = this.calendarMonths[this.calendarMonths.length - 1];
+            if (this.canPrevMonth)
+                this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
+            if (this.canNextMonth)
+                this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
+        }
     }
 
     toggleCalendar(event: Event): void {

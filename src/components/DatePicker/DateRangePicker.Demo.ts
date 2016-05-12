@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DateRange} from '../../utilities/DateUtils';
+import {DateRange} from '../../utilities/utilities';
 import {DATE_PICKER_PROVIDERS} from './DatePickerProviders';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
@@ -24,20 +24,18 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                 minDate="11/1/2015"
                 maxDate="11/12/2016" 
                 [dateFilter]="dateFilter"
-                (valueChange)="datePickerValueChange($event)"
-                [startDate]="5/10/2016"
-                [endDate]="5/16/2016">
+                (valueChange)="datePickerValueChange($event)">
                 <div class="form-group">
                     <label for="arrival">Arrival Date</label>
                     <div class="date-picker-input-group">
-                        <input name="arrival" startDateField class="form-control" value="5/5/2016" placeholder="Arrival" />
+                        <input name="arrival" [(ngModel)]="arrivalDate" startDateField class="form-control" placeholder="Arrival" />
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="departure">Departure Date</label>
                     <div class="date-picker-input-group">
-                        <input name="departure" endDateField class="form-control" value="5/10/2016" placeholder="Departure" />
+                        <input name="departure" [(ngModel)]="departureDate" endDateField class="form-control" placeholder="Departure" />
                     </div>
                 </div>
             </date-range-picker>
@@ -134,6 +132,10 @@ export class DateRangePickerExample {
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange;
+    /*arrivalDate = new Date(2016,7,6);
+    departureDate = new Date(2016,7,10);*/
+    arrivalDate = "8/6/2016";
+    departureDate = "8/10/2016";
     
     datePickerValueChange(event: any){
         this.dateRangePickerValue = event;

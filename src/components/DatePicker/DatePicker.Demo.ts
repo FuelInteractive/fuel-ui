@@ -26,7 +26,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                 [dateFilter]="dateFilter"
                 (valueChange)="datePickerValue">
                 <div class="date-picker-input-group">
-                    <input name="date" dateField class="form-control" value="5/6/2016" placeholder="pick a date" />
+                    <input name="date" [(ngModel)]="datePickerFieldValue" dateField class="form-control" value="5/6/2016" placeholder="pick a date" />
                 </div>
             </date-picker>
         </div>
@@ -97,7 +97,7 @@ export class DatePickerExample {
 })
 export class DatePickerDemo { 
     datePickerValue: Date;
-    
+    datePickerFieldValue = "8/6/2016";
     dateFilter(d: Date): boolean {
         if([2].indexOf(d.getDay()) > -1)
             return false;
