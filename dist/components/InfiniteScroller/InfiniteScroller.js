@@ -118,7 +118,7 @@ var InfiniteScroller = (function () {
             target.scrollTop = 1;
     };
     InfiniteScroller.prototype.scrollTo = function (position) {
-        ElementUtils_1.ElementUtils.scrollTo(this.container, position, 500);
+        ElementUtils_1.ElementUtils.scrollTo(this.container, position, 400);
     };
     InfiniteScroller.prototype.scrollToIndex = function (index) {
         var itemArray = this.itemQuery.toArray();

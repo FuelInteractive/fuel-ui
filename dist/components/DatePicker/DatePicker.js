@@ -15,38 +15,26 @@ var DatePickerCalendar_1 = require("./DatePickerCalendar");
 var DatePickerField_1 = require("./DatePickerField");
 var InfiniteScroller_1 = require("../InfiniteScroller/InfiniteScroller");
 var DetectionUtils_1 = require("../../utilities/DetectionUtils");
+var utilities_1 = require("../../utilities/utilities");
 var DatePicker = (function () {
     function DatePicker(changeDetector, renderer) {
         this._minDate = new Date(1900, 0, 1);
         this._maxDate = new Date(2200, 0, 1);
         this.valueChange = new core_2.EventEmitter();
-        this._inputDate = "";
         this.calendarDisplayed = false;
-        this.calendarX = 1;
-        this.calendarY = 1;
+        this.calendarX = "5%";
+        this.calendarY = "5%";
         this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
         this.calendarMonths = [];
         this._preGenMonths = 2;
         this.changeDetector = changeDetector;
         this.renderer = renderer;
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-        this.calendarMonths = [
-            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
-            new Date(currentDate.getFullYear(), currentDate.getMonth())
-        ];
-        for (var i = 0; i < this._preGenMonths; i++) {
-            var earliestDate = this.calendarMonths[0];
-            var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-            if (this.canPrevMonth)
-                this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-            if (this.canNextMonth)
-                this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-        }
+        this.generateMonths();
     }
     Object.defineProperty(DatePicker.prototype, "minDate", {
         get: function () { return this._minDate; },
         set: function (value) {
-            this._minDate = DatePicker.handleDateInput(value);
+            this._minDate = utilities_1.DateUtils.handleDateInput(value);
         },
         enumerable: true,
         configurable: true
@@ -55,14 +43,21 @@ var DatePicker = (function () {
     Object.defineProperty(DatePicker.prototype, "maxDate", {
         get: function () { return this._maxDate; },
         set: function (value) {
-            this._maxDate = DatePicker.handleDateInput(value);
+            this._maxDate = utilities_1.DateUtils.handleDateInput(value);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(DatePicker.prototype, "value", {
         set: function (value) {
-            this._selectedDate = DatePicker.handleDateInput(value);
+            this._selectedDate = utilities_1.DateUtils.handleDateInput(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DatePicker.prototype, "inputDate", {
+        get: function () {
+            return this.dateField != null ? this.dateField.value : "";
         },
         enumerable: true,
         configurable: true
@@ -71,20 +66,10 @@ var DatePicker = (function () {
         get: function () { return this._selectedDate; },
         set: function (value) {
             this._selectedDate = value;
-            this._inputDate = value.toLocaleDateString();
+            if (this.dateField != null && this.dateField.date.getTime() != value.getTime())
+                this.dateField.date = value;
             this.valueChange.next(this.selectedDate);
             this.hideCalendar();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ;
-    Object.defineProperty(DatePicker.prototype, "inputDate", {
-        get: function () { return this._inputDate; },
-        set: function (value) {
-            this._inputDate = value;
-            this._selectedDate = new Date(value);
-            this.dateField.value = value;
         },
         enumerable: true,
         configurable: true
@@ -109,18 +94,39 @@ var DatePicker = (function () {
         var _this = this;
         if (this.dateField == undefined)
             throw "Fuel-UI Error: DatePicker missing date field";
-        if (this.dateField.value.length > 0)
-            this.selectedDate = DatePicker.handleDateInput(this.dateField.value);
+        var parsedDate = utilities_1.DateUtils.handleDateInput(this.dateField.value);
+        if (this.dateField.value.length > 0 && utilities_1.DateUtils.isValidDate(parsedDate))
+            this.selectedDate = parsedDate;
         this.dateField.select
             .subscribe(function (event) {
-            _this.toggleCalendar(event);
+            _this.showCalendar(event);
         });
+        this.dateField.dateChange
+            .subscribe(function (date) {
+            if (date.getTime() != _this.selectedDate.getTime())
+                _this.selectedDate = date;
+        });
+        this.dateFieldIcons.map(function (i) {
+            i.selectEvent.subscribe(function (event) {
+                _this.showCalendar(event);
+            });
+        });
+        this.generateMonths();
     };
-    DatePicker.handleDateInput = function (value) {
-        if (value instanceof Date && !isNaN(value.valueOf()))
-            return value;
-        else
-            return new Date(value);
+    DatePicker.prototype.generateMonths = function () {
+        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+        this.calendarMonths = [
+            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
+            new Date(currentDate.getFullYear(), currentDate.getMonth())
+        ];
+        for (var i = 0; i < this._preGenMonths; i++) {
+            var earliestDate = this.calendarMonths[0];
+            var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
+            if (this.canPrevMonth)
+                this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
+            if (this.canNextMonth)
+                this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
+        }
     };
     DatePicker.prototype.toggleCalendar = function (event) {
         if (!this.calendarDisplayed)
@@ -129,15 +135,21 @@ var DatePicker = (function () {
             this.hideCalendar();
     };
     DatePicker.prototype.showCalendar = function (event) {
-        if (event != null) {
-            var clickedRect = event.target ? event.target.parentElement.getBoundingClientRect() : event.srcElement.parentElement.getBoundingClientRect();
-            this.calendarX = clickedRect.left;
-            if (screen.height - clickedRect.bottom <= 500) {
-                this.calendarY = (clickedRect.top);
+        if (event != null && !DetectionUtils_1.MobileDetection.isAny()) {
+            var clickedTarget = event.target ? event.target.parentElement : event.srcElement.parentElement;
+            if (clickedTarget.classList.contains("input-group-addon"))
+                clickedTarget = clickedTarget.parentElement;
+            this.calendarX = clickedTarget.offsetLeft + "px";
+            if (screen.height - clickedTarget.getBoundingClientRect().bottom <= 500) {
+                this.calendarY = (clickedTarget.offsetTop - 300) + "px";
             }
             else {
-                this.calendarY = 0;
+                this.calendarY = clickedTarget.offsetTop + "px";
             }
+        }
+        else if (DetectionUtils_1.MobileDetection.isAny()) {
+            this.calendarX = "5%";
+            this.calendarY = "5%";
         }
         this.ngOnInit();
         this.calendarDisplayed = true;
@@ -234,11 +246,15 @@ var DatePicker = (function () {
         core_2.ContentChild(DatePickerField_1.DatePickerField), 
         __metadata('design:type', DatePickerField_1.DatePickerField)
     ], DatePicker.prototype, "dateField", void 0);
+    __decorate([
+        core_2.ContentChildren(DatePickerField_1.DatePickerFieldStyler), 
+        __metadata('design:type', core_2.QueryList)
+    ], DatePicker.prototype, "dateFieldIcons", void 0);
     DatePicker = __decorate([
         core_1.Component({
             selector: "date-picker",
-            styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 100; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {\n        background-color: #fff; }\n\n      .fuel-ui-datepicker-input-group .input-group-addon {\n        background-color: #fff; }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 120;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n        .date-picker-component .input-group {\n          z-index: 110; }\n        .date-picker-component .container {\n          height: 100%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            .date-picker-component .container .calendar-container {\n              height: 91%; } }\n          .date-picker-component .container header {\n            position: relative;\n            top: 0;\n            left: 0;\n            vertical-align: middle;\n            background-color: #fff; }\n            .date-picker-component .container header .days-of-week {\n              background-color: #0275d8;\n              color: #fff; }\n            .date-picker-component .container header table {\n              border-top: none !important; }\n              .date-picker-component .container header table th, .date-picker-component .container header table td {\n                text-align: center; }\n            .date-picker-component .container header button {\n              border: none;\n              border-radius: 0;\n              color: #0275d8;\n              background-color: #fff;\n              width: 15%; }\n              .date-picker-component .container header button:active {\n                background-color: #eceeef; }\n              .date-picker-component .container header button.button-disable {\n                color: #eceeef;\n                cursor: default; }\n            .date-picker-component .container header .date-range {\n              width: 70%; }\n              .date-picker-component .container header .date-range span {\n                background-color: #eceeef;\n                border-left: none;\n                border-right: none; }\n            .date-picker-component .container header .input-group-addon {\n              border: none;\n              background-color: #fff !important; }\n            .date-picker-component .container header input {\n              border: none;\n              display: inline-block;\n              margin: 1px auto 0 auto;\n              cursor: pointer; }\n            .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {\n              background-color: #fff; }\n            .date-picker-component .container header input.target {\n              color: #0275d8; }\n              .date-picker-component .container header input.target::-webkit-input-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target::-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-ms-input-placeholder {\n                color: #0275d8; }\n    "],
-            template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <ng-content></ng-content>\n\n      <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\">\n          <div class=\"container p-a-0\">\n              <header>\n                  <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                      (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                      <i class=\"fa fa-chevron-left\"></i>\n                  </button>\n                  <div class=\"date-range pull-left input-group\">\n                      <input type=\"text\" class=\"form-control text-xs-center\" \n                          id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                  </div>\n                  <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                      (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                      <i class=\"fa fa-chevron-right\"></i>\n                  </button>\n                  <table class=\"table m-b-0 days-of-week\">\n                      <tbody>\n                      <tr>\n                          <th>S</th>\n                          <th>M</th>\n                          <th>T</th>\n                          <th>W</th>\n                          <th>T</th>\n                          <th>F</th>\n                          <th>S</th>\n                      </tr>\n                      </tbody>\n                  </table>\n              </header>\n              <div class=\"calendar-container m-a-0\">\n                  <infinite-scroller\n                      (next)=\"addNextMonth()\"\n                      (prev)=\"addPrevMonth()\"\n                      distance=\"100\"\n                      [height]=\"calendarHeight\"\n                      [hideScrollbar]=\"true\">\n                      <date-picker-calendar scroll-item\n                          *ngFor=\"let month of calendarMonths; let i=index\" \n                          [id]=\"i\"\n                          [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                          [dateFilter]=\"dateFilter\"\n                          [currentMonth]=\"month\" \n                          [(selectedDate)]=\"selectedDate\">\n                          {{i}}\n                      </date-picker-calendar>\n                  </infinite-scroller>\n              </div>\n          </div>\n      </div>\n    ",
+            styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 900; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-content {\n        position: relative;\n        top: 0;\n        left: 0; }\n\n      .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {\n        background-color: #fff; }\n\n      .fuel-ui-datepicker-input-group .input-group-addon {\n        background-color: #fff; }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 1000;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n        .date-picker-component .input-group {\n          z-index: 110; }\n        .date-picker-component .container {\n          height: 100%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            .date-picker-component .container .calendar-container {\n              height: 91%; } }\n          .date-picker-component .container header {\n            position: relative;\n            top: 0;\n            left: 0;\n            vertical-align: middle;\n            background-color: #fff; }\n            .date-picker-component .container header .days-of-week {\n              background-color: #0275d8;\n              color: #fff; }\n            .date-picker-component .container header table {\n              border-top: none !important; }\n              .date-picker-component .container header table th, .date-picker-component .container header table td {\n                text-align: center; }\n            .date-picker-component .container header button {\n              border: none;\n              border-radius: 0;\n              color: #0275d8;\n              background-color: #fff;\n              width: 15%; }\n              .date-picker-component .container header button:active {\n                background-color: #eceeef; }\n              .date-picker-component .container header button.button-disable {\n                color: #eceeef;\n                cursor: default; }\n            .date-picker-component .container header .date-range {\n              width: 70%; }\n              .date-picker-component .container header .date-range span {\n                background-color: #eceeef;\n                border-left: none;\n                border-right: none; }\n            .date-picker-component .container header .input-group-addon {\n              border: none;\n              background-color: #fff !important; }\n            .date-picker-component .container header input {\n              border: none;\n              display: inline-block;\n              margin: 1px auto 0 auto;\n              cursor: pointer; }\n            .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {\n              background-color: #fff; }\n            .date-picker-component .container header input.target {\n              color: #0275d8; }\n              .date-picker-component .container header input.target::-webkit-input-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target::-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-ms-input-placeholder {\n                color: #0275d8; }\n    "],
+            template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-content\">\n          <ng-content></ng-content>\n\n          <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\"\n              [style.left]=\"calendarX\"\n              [style.top]=\"calendarY\">\n              <div class=\"container p-a-0\">\n                  <header>\n                      <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                          (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                          <i class=\"fa fa-chevron-left\"></i>\n                      </button>\n                      <div class=\"date-range pull-left input-group\">\n                          <input type=\"text\" class=\"form-control text-xs-center\" \n                              id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                      </div>\n                      <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                          (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                          <i class=\"fa fa-chevron-right\"></i>\n                      </button>\n                      <table class=\"table m-b-0 days-of-week\">\n                          <tbody>\n                          <tr>\n                              <th>S</th>\n                              <th>M</th>\n                              <th>T</th>\n                              <th>W</th>\n                              <th>T</th>\n                              <th>F</th>\n                              <th>S</th>\n                          </tr>\n                          </tbody>\n                      </table>\n                  </header>\n                  <div class=\"calendar-container m-a-0\">\n                      <infinite-scroller\n                          (next)=\"addNextMonth()\"\n                          (prev)=\"addPrevMonth()\"\n                          distance=\"100\"\n                          [height]=\"calendarHeight\"\n                          [hideScrollbar]=\"true\">\n                          <date-picker-calendar scroll-item\n                              *ngFor=\"let month of calendarMonths; let i=index\" \n                              [id]=\"i\"\n                              [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                              [dateFilter]=\"dateFilter\"\n                              [currentMonth]=\"month\" \n                              [(selectedDate)]=\"selectedDate\">\n                              {{i}}\n                          </date-picker-calendar>\n                      </infinite-scroller>\n                  </div>\n              </div>\n          </div>\n      </div>\n    ",
             directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 

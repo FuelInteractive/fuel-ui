@@ -8,9 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var core_2 = require('@angular/core');
-var common_1 = require('@angular/common');
+var core_1 = require("@angular/core");
+var core_2 = require("@angular/core");
+var common_1 = require("@angular/common");
+var utilities_1 = require("../../utilities/utilities");
 var DatePickerCalendar = (function () {
     function DatePickerCalendar() {
         this.selectedDateChange = new core_2.EventEmitter();
@@ -30,10 +31,9 @@ var DatePickerCalendar = (function () {
         return compareDate >= this.minDate && compareDate <= this.maxDate;
     };
     DatePickerCalendar.prototype.checkSelectedDate = function (date) {
-        if (typeof this.selectedDate == undefined || this.selectedDate == null)
+        if (this.selectedDate == null)
             return false;
-        if (typeof this.startDate != undefined && this.startDate != null
-            && typeof this.endDate != undefined && this.endDate != null) {
+        if (this.startDate != null && this.endDate != null) {
             var compareDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), parseInt(date));
             return compareDate >= this.startDate && compareDate <= this.endDate;
         }
@@ -42,18 +42,22 @@ var DatePickerCalendar = (function () {
             && this.selectedDate.getDate().toString() == date;
     };
     DatePickerCalendar.prototype.checkStartDate = function (date) {
-        if (typeof this.startDate == undefined || this.startDate == null)
+        if (this.endDate == null || !utilities_1.DateUtils.isValidDate(this.startDate) || !utilities_1.DateUtils.isValidDate(this.endDate))
             return false;
-        if (this.startDate == this.endDate)
+        if (this.startDate.getFullYear() == this.endDate.getFullYear()
+            && this.startDate.getMonth() == this.endDate.getMonth()
+            && this.startDate.getDate().toString() == this.endDate.getDate().toString())
             return false;
         return this.startDate.getFullYear() == this.currentMonth.getFullYear()
             && this.startDate.getMonth() == this.currentMonth.getMonth()
             && this.startDate.getDate().toString() == date;
     };
     DatePickerCalendar.prototype.checkEndDate = function (date) {
-        if (typeof this.endDate == undefined || this.endDate == null)
+        if (this.endDate == null || !utilities_1.DateUtils.isValidDate(this.startDate) || !utilities_1.DateUtils.isValidDate(this.endDate))
             return false;
-        if (this.startDate == this.endDate)
+        if (this.startDate.getFullYear() == this.endDate.getFullYear()
+            && this.startDate.getMonth() == this.endDate.getMonth()
+            && this.startDate.getDate().toString() == this.endDate.getDate().toString())
             return false;
         return this.endDate.getFullYear() == this.currentMonth.getFullYear()
             && this.endDate.getMonth() == this.currentMonth.getMonth()
@@ -129,7 +133,7 @@ var DatePickerCalendar = (function () {
     ], DatePickerCalendar.prototype, "showMonth", void 0);
     DatePickerCalendar = __decorate([
         core_1.Component({
-            selector: 'date-picker-calendar',
+            selector: "date-picker-calendar",
             template: "\n      <div class=\"fuel-ui-datepicker-calendar text-center py\">\n        <table class=\"table m-a-0\">\t\n            <tbody>\n                  <tr *ngIf=\"showMonth\">\n                      <td colspan=\"7\">\n                          <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>\n                      </td>\n                  </tr> \n                <tr *ngFor=\"let week of weeks\">\n                    <td *ngFor=\"let day of week\"\n                        [class.selectable]=\"checkSelectable(day)\" \n                        [class.disabled]=\"!checkSelectable(day)\"\n                        [class.selected]=\"checkSelectedDate(day)\" \n                          [class.startDate]=\"checkStartDate(day)\"\n                          [class.endDate]=\"checkEndDate(day)\"\n                        (click)=\"selectDate(day)\">\n                        <span class=\"calendar-date\">{{day}}</span>\n                    </td> \n                </tr>\n            </tbody>\n        </table>\n      </div>\n    ",
             directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
         }), 
