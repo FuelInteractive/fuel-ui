@@ -90,7 +90,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     set startDate(value: any) {
         this._startDate = DateUtils.handleDateInput(value);
         if(this.startDateField != null)
-            this.startDateField._value = this._startDate.toLocaleDateString();
+            this.startDateField.value = this._startDate.toLocaleDateString();
     }
     get startDate(): any { return this._startDate; }
 
@@ -99,7 +99,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     set endDate(value: any) {
         this._endDate = DateUtils.handleDateInput(value);
         if(this.endDateField != null)
-            this.endDateField._value = this._endDate.toLocaleDateString();
+            this.endDateField.value = this._endDate.toLocaleDateString();
     }
     get endDate(): any { return this._endDate; }
 
@@ -129,7 +129,8 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
             
         this.startDateField.dateChange
             .subscribe((date: Date) => {
-                this.startDate = date;
+                if(this.startDate !== date)
+                    this.startDate = date;
             });
         
         if(typeof this.endDateField === "undefined")
@@ -154,7 +155,8 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
             
         this.endDateField.dateChange
             .subscribe((date: Date) => {
-                this.endDate = date;
+                if(this.endDate !== date)
+                    this.endDate = date;
             });
             
         this.dateFieldIcons.map((i: DatePickerFieldStyler) => {

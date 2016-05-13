@@ -12,9 +12,13 @@ export class DatePickerField implements OnInit {
     
     @Input()
     set value(value: string) {
+        if(value == this._value)
+            return;
+        
         this._value = value;
         this._date = DateUtils.handleDateInput(value);
         this.valueChange.next(value);
+        this.ngModelChange.next(value);
         this.dateChange.next(this._date);
     }
     get value(): string {return this._value;}
@@ -26,11 +30,18 @@ export class DatePickerField implements OnInit {
         this.value = value;
     }
     
+    @Output()
+    ngModelChange = new EventEmitter<any>();
+    
     @Input()
     set date(date: Date) {
+        if(date.getTime() == this._date.getTime())
+            return;
+            
         this._date = date;
         this._value = date.toLocaleDateString();
         this.dateChange.next(date);
+        this.ngModelChange.next(this._value);
         this.valueChange.next(this._value);
     }
     get date(): Date {return this._date;}

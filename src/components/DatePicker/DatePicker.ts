@@ -55,8 +55,8 @@ export class DatePicker implements OnInit, AfterContentInit {
     get selectedDate(): Date { return this._selectedDate; };
     set selectedDate(value: Date) {
         this._selectedDate = value;
-        if (this.dateField != null)
-            this.dateField._value = value.toLocaleDateString();
+        if (this.dateField != null && this.dateField.date.getTime() != value.getTime())
+            this.dateField.date = value;
         this.valueChange.next(this.selectedDate);
         this.hideCalendar();
     }
@@ -114,7 +114,8 @@ export class DatePicker implements OnInit, AfterContentInit {
 
         this.dateField.dateChange
             .subscribe((date: Date) => {
-                this.selectedDate = date;
+                if(date.getTime() != this.selectedDate.getTime())
+                    this.selectedDate = date;
             });
 
         this.dateFieldIcons.map((i: DatePickerFieldStyler) => {

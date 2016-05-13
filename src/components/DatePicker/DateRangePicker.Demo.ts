@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {FORM_DIRECTIVES} from '@angular/common';
 import {DateRange} from '../../utilities/utilities';
 import {DATE_PICKER_PROVIDERS} from './DatePickerProviders';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
@@ -43,7 +44,9 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     </div>
     <div class="col-md-6" *ngIf="dateRangePickerValue != null">
         value.start: {{dateRangePickerValue.start}} <br/>
-        value.end: {{dateRangePickerValue.end}}
+        value.end: {{dateRangePickerValue.end}} <br />
+        startDateField: {{arrivalDate}} <br />
+        endDateField: {{departureDate}} <br />
     </div>
 </section>
 
@@ -128,7 +131,7 @@ export class DateRangePickerExample {
 </table-sortable>
 
 </div>`,
-        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS, FORM_DIRECTIVES]
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange;
@@ -156,7 +159,9 @@ export class DateRangePickerDemo {
     ];
     
     dateFieldAttributes:any[] = [
-        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date')
+        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date'),
+        new Attribute('value', 'string|Date', 'null', 'Two-way binding of the selected date'),
+        new Attribute('ngModel', 'string', 'null', 'Two-way binding of the result input string'),
     ];
     
     attributesColumns:TableSortableColumn[] = AttributeColumns;

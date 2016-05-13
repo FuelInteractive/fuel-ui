@@ -24,12 +24,16 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                 minDate="11/1/2015"
                 maxDate="11/12/2016" 
                 [dateFilter]="dateFilter"
-                (valueChange)="datePickerValue">
+                [(value)]="datePickerValue">
                 <div class="date-picker-input-group">
-                    <input name="date" [(ngModel)]="datePickerFieldValue" dateField class="form-control" value="5/6/2016" placeholder="pick a date" />
+                    <input name="date" [(ngModel)]="datePickerFieldValue" dateField class="form-control" placeholder="pick a date" />
                 </div>
             </date-picker>
         </div>
+    </div>
+    <div class="col-md-4">
+        date-picker value: {{datePickerValue}}<br />
+        input ngModel: {{datePickerFieldValue}}
     </div>
 </div>
 
@@ -92,11 +96,19 @@ export class DatePickerExample {
     Loading table...
 </table-sortable>
 
+<h3>DateField Attributes</h3>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="dateFieldAttributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
+
 </div>`,
         directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class DatePickerDemo { 
-    datePickerValue: Date;
+    datePickerValue = new Date(2016,7,6);
     datePickerFieldValue = "8/6/2016";
     dateFilter(d: Date): boolean {
         if([2].indexOf(d.getDay()) > -1)
@@ -111,6 +123,13 @@ export class DatePickerDemo {
         new Attribute('dateFilter', 'function(date): boolean', 'null', 'Filter to disable dates. A return of <i>false</i> will disable the day'),
         new Attribute('value', 'Date', 'null', 'Two-way binding of the selected DateRange')
     ];
+    
+    dateFieldAttributes:any[] = [
+        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date'),
+        new Attribute('value', 'string|Date', 'null', 'Two-way binding of the selected date'),
+        new Attribute('ngModel', 'string', 'null', 'Two-way binding of the result input string'),
+    ];
+    
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
