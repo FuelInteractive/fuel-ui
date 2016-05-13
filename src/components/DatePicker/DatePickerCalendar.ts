@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {Input, Output, EventEmitter, OnInit} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+import {Component} from "@angular/core";
+import {Input, Output, EventEmitter, OnInit} from "@angular/core";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
+import {DateUtils} from "../../utilities/utilities";
 
 @Component({
-    selector: 'date-picker-calendar',
-    templateUrl: 'components/DatePicker/DatePickerCalendar.html',
+    selector: "date-picker-calendar",
+    templateUrl: "components/DatePicker/DatePickerCalendar.html",
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class DatePickerCalendar implements OnInit {
@@ -59,7 +60,7 @@ export class DatePickerCalendar implements OnInit {
     }
 
     checkStartDate(date: string): boolean {
-        if (this.startDate == null)
+        if (this.endDate == null  || !DateUtils.isValidDate(this.startDate) || !DateUtils.isValidDate(this.endDate))
             return false;
 
         if (this.startDate.getFullYear() == this.endDate.getFullYear()
@@ -73,9 +74,9 @@ export class DatePickerCalendar implements OnInit {
     }
 
     checkEndDate(date: string): boolean {
-        if (this.endDate == null)
+        if (this.endDate == null  || !DateUtils.isValidDate(this.startDate) || !DateUtils.isValidDate(this.endDate))
             return false;
-
+        
         if (this.startDate.getFullYear() == this.endDate.getFullYear()
             && this.startDate.getMonth() == this.endDate.getMonth()
             && this.startDate.getDate().toString() == this.endDate.getDate().toString())

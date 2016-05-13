@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {DateRange} from '../../utilities/DateUtils';
+import {FORM_DIRECTIVES} from '@angular/common';
+import {DateRange} from '../../utilities/utilities';
 import {DATE_PICKER_PROVIDERS} from './DatePickerProviders';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
@@ -24,20 +25,18 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                 minDate="11/1/2015"
                 maxDate="11/12/2016" 
                 [dateFilter]="dateFilter"
-                (valueChange)="datePickerValueChange($event)"
-                [startDate]="5/10/2016"
-                [endDate]="5/16/2016">
+                (valueChange)="datePickerValueChange($event)">
                 <div class="form-group">
                     <label for="arrival">Arrival Date</label>
                     <div class="date-picker-input-group">
-                        <input name="arrival" startDateField class="form-control" value="5/5/2016" placeholder="Arrival" />
+                        <input name="arrival" [(ngModel)]="arrivalDate" startDateField class="form-control" placeholder="Arrival" />
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="departure">Departure Date</label>
                     <div class="date-picker-input-group">
-                        <input name="departure" endDateField class="form-control" value="5/10/2016" placeholder="Departure" />
+                        <input name="departure" [(ngModel)]="departureDate" endDateField class="form-control" placeholder="Departure" />
                     </div>
                 </div>
             </date-range-picker>
@@ -45,7 +44,9 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     </div>
     <div class="col-md-6" *ngIf="dateRangePickerValue != null">
         value.start: {{dateRangePickerValue.start}} <br/>
-        value.end: {{dateRangePickerValue.end}}
+        value.end: {{dateRangePickerValue.end}} <br />
+        startDateField: {{arrivalDate}} <br />
+        endDateField: {{departureDate}} <br />
     </div>
 </section>
 
@@ -130,10 +131,14 @@ export class DateRangePickerExample {
 </table-sortable>
 
 </div>`,
-        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+        directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS, FORM_DIRECTIVES]
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange;
+    /*arrivalDate = new Date(2016,7,6);
+    departureDate = new Date(2016,7,10);*/
+    arrivalDate = "8/6/2016";
+    departureDate = "8/10/2016";
     
     datePickerValueChange(event: any){
         this.dateRangePickerValue = event;
@@ -154,7 +159,9 @@ export class DateRangePickerDemo {
     ];
     
     dateFieldAttributes:any[] = [
-        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date')
+        new Attribute('date', 'Date', 'null', 'Two-way binding of the selected date'),
+        new Attribute('value', 'string|Date', 'null', 'Two-way binding of the selected date'),
+        new Attribute('ngModel', 'string', 'null', 'Two-way binding of the result input string'),
     ];
     
     attributesColumns:TableSortableColumn[] = AttributeColumns;
