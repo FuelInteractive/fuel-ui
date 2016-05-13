@@ -329,11 +329,16 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 100; }
+  z-index: 900; }
   @media (max-width: 480px), screen and (max-device-width: 480px) {
     .date-picker-overlay {
       background-color: #55595c;
       opacity: .75; } }
+
+.date-picker-content {
+  position: relative;
+  top: 0;
+  left: 0; }
 
 .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {
   background-color: #fff; }
@@ -343,7 +348,7 @@
 
 .date-picker-component {
   border: 1px solid #eceeef;
-  z-index: 120;
+  z-index: 1000;
   background-color: #fff;
   font-size: .75rem;
   position: absolute;
