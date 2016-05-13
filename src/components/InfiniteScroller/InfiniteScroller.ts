@@ -182,7 +182,7 @@ export class InfiniteScroller
 	}
     
     scrollTo(position: number): void {
-        ElementUtils.scrollTo(this.container, position, 500);
+        ElementUtils.scrollTo(this.container, position, 400);
     }
     
     scrollToIndex(index: number): void {
