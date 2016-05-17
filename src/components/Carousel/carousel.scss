@@ -1,44 +1,36 @@
 @import "../../styles/bourbon";
+@import "../../styles/variables";
 
-$slideDuration: .5s;
+.carousel {
+    background-color: $gray-light;
+}
 
-.carousel-inner > .carousel-item {
-	width: 100%;
-	
-	&.slide-in-left { 
-		display: block;
-		position: absolute;
-		top: 0;	
-		left: -100%;
-		@include animation-name(slideInLeft);
-		@include animation-duration($slideDuration);
-		@include animation-timing-function(ease);
-		//@include slideInLeft($duration: $slideDuration, $function: ease-out, $fill: forwards);
-	}
-
-	&.slide-in-right {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 100%;
-		@include animation-name(slideInRight);
-		@include animation-duration($slideDuration);
-		@include animation-timing-function(ease);
-		//@include slideInRight($duration: $slideDuration, $function: ease-out, $fill: forwards);
-	}
-
-	&.slide-out-left {
-		@include animation-name(slideOutLeft);
-		@include animation-duration($slideDuration);
-		@include animation-timing-function(ease);
-		//@include slideOutRight($duration: $slideDuration, $function: ease-in, $fill: forwards)
-	}
-
-	&.slide-out-right {
-		@include animation-name(slideOutRight);
-		@include animation-duration($slideDuration);
-		@include animation-timing-function(ease);
-		//@include slideOutLeft($duration: $slideDuration, $function: ease-in, $fill: forwards);
-	}
-	
+.carousel-item {
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: block !important;
+    overflow: hidden;
+    
+    @include transition-timing-function(ease);
+    @include transition-duration($defaultAnimationSpeed);
+    @include transition-property(transform);
+    
+    &.hide {
+        display: none !important;
+    }
+    
+    &.active {
+        display: block !important;
+        @include transform(translate(0,0));
+    }
+    
+    &.out-left {
+        @include transform(translate(-100%,0));
+    }
+    
+    &.out-right {
+        @include transform(translate(100%,0));
+    }
 }

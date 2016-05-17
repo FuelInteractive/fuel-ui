@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/nouislider/nouislider.d.ts" />
-
 import {Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, OnChanges} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import "./NoUiSlider";
