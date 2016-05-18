@@ -1,7 +1,7 @@
 <div class="carousel slide" 
-  (swiperight)="prev()" (swipeleft)="next()"
-  (pan)="pan($event)" (panleft)="panleft($event)" (panright)="panright($event)"
-  (panend)="panend($event)">
+  (swiperight)="prev()" (swipeleft)="next()">
+  <!--(pan)="pan($event)" (panleft)="panleft($event)" (panright)="panright($event)"
+  (panend)="panend($event)"-->
   <ol class="carousel-indicators">
     <!--<li *ngFor="let image of images"
       (click)="switchTo(image)" [class.active]="image.isActive && !image.checkIfAnimating()">
