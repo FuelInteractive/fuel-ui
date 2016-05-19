@@ -26,7 +26,7 @@
  */
 [data-hint] {
   position: relative;
-  display: inline-block;
+  display: block;
 
   /**
 	 * tooltip arrow
@@ -49,10 +49,12 @@
     -webkit-transition-delay: 0ms;
     -moz-transition-delay: 0ms;
     transition-delay: 0ms; }
-  [data-hint]:hover:before, [data-hint]:hover:after {
+  [data-hint]:hover:before, [data-hint]:hover:after, 
+  [data-hint]:focus:before, [data-hint]:focus:after {
     visibility: visible;
     opacity: 1; }
-  [data-hint]:hover:before, [data-hint]:hover:after {
+  [data-hint]:hover:before, [data-hint]:hover:after,
+  [data-hint]:focus:before, [data-hint]:focus:after {
     -webkit-transition-delay: 100ms;
     -moz-transition-delay: 100ms;
     transition-delay: 100ms; }
@@ -357,7 +359,8 @@
 .hint--medium:after,
 .hint--large:after {
   white-space: normal;
-  line-height: 1.4em; }
+  line-height: 1.4em; 
+  text-align: center;}
 
 .hint--small:after {
   width: 80px; }

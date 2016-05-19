@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef} from '@angular/core';
+import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnChanges} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
 @Directive({
@@ -17,20 +17,24 @@ import {CORE_DIRECTIVES} from '@angular/common';
         '(unfocus)': 'hide()'
     }
 })
-export class Tooltip {
-    text:string;
-    position:string;
-    color:string;
-    size:string;
-    rounded:string;
+export class Tooltip implements OnChanges{
+    text:string = '';
+    position:string = 'top';
+    color:string = 'none';
+    size:string = 'auto';
+    rounded:boolean = false;
     private _el:HTMLElement;
 
     constructor(el: ElementRef) {
         this._el = el.nativeElement;
     }
-
-    getElement(): HTMLElement{
-        return this._el;
+    
+    ngOnChanges() {
+        for (var i = 0; i < this._el.classList.length; i++) {
+            var currentClass = this._el.classList[i];
+            if(currentClass.startsWith("hint--"))
+                this._el.classList.remove(currentClass)
+        }
     }
 
     show() {
@@ -47,16 +51,16 @@ export class Tooltip {
         this._el.classList.add("hint--" + this.position);
         
         switch(this.color) {
-            case "indianred":
+            case "error":
                 this._el.classList.add("hint--error");
                 break;
-            case "orange":
+            case "warning":
                 this._el.classList.add("hint--warning");
                 break;
-            case "lightblue":
+            case "info":
                 this._el.classList.add("hint--info");
                 break;
-            case "lightgreen":
+            case "success":
                 this._el.classList.add("hint--success");
                 break;
             default:
@@ -76,18 +80,12 @@ export class Tooltip {
             default:      
         }
         
-        if(this.rounded == "true")
+        if(this.rounded)
             this._el.classList.add("hint--rounded");
     }
 
     hide() {
         this._el.removeAttribute("data-hint");
-        
-        for (var i = 0; i < this._el.classList.length; i++) {
-            var currentClass = this._el.classList[i];
-            if(currentClass.startsWith("hint--"))
-                this._el.classList.remove(currentClass)
-        }
     }
 }
 
