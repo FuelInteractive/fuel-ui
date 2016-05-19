@@ -17,8 +17,53 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 </div>
 
 <section class="row m-a">
-    <div tooltip="Tooltip text goes here.">Some text here.</div>
-    <div tooltip="Example data binding: {{tooltipText}}!">Hover me with input value</div> <input [(ngModel)]="tooltipText" type="text" class="form-control">
+    <div>
+        <div tooltip="Tooltip text goes here." 
+            position="{{position}}" color="{{color}}" size="{{size}}"
+            rounded="{{rounded}}">
+            Some text here.
+        </div>
+    </div>
+    <div>
+        <div tooltip="Example data binding: {{tooltipText}}!" 
+            position={{position}} color="{{color}}" size="{{size}}"
+            rounded="{{rounded}}">
+            Hover me with input value
+        </div>
+    </div>
+    <br />
+    <input [(ngModel)]="tooltipText" type="text" class="form-control" placeholder="Tooltip text"><br />
+    <label style="margin-bottom:0;">Tooltip position</label>
+    <select [(ngModel)]="position" class="form-control">
+        <option value="bottom-right">bottom-right</option>
+        <option value="bottom">bottom</option>
+        <option value="bottom-left">bottom-left</option>
+        <option value="right">right</option>
+        <option value="left">left</option>
+        <option value="top-right">top-right</option>
+        <option value="top">top</option>
+        <option value="top-left">top-left</option>
+    </select><br />
+    <label style="margin-bottom:0;">Tooltip color</label>
+    <select [(ngModel)]="color" class="form-control">
+        <option value="none">none</option>
+        <option value="indianred" style="background-color:indianred; color:white;">indianred</option>
+        <option value="orange" style="background-color:orange; color:white;">orange</option>
+        <option value="lightblue" style="background-color:lightblue; color:white;">lightblue</option>
+        <option value="lightgreen" style="background-color:lightgreen; color:white;">lightgreen</option>      
+    </select><br />
+    <label style="margin-bottom:0;">Tooltip size</label>
+    <select [(ngModel)]="size" class="form-control">
+        <option value="auto">auto</option>
+        <option value="small">small</option>
+        <option value="medium">medium</option>
+        <option value="large">large</option>    
+    </select><br />
+    <label style="margin-bottom:0;">Rounded corners</label>
+    <select [(ngModel)]="rounded" class="form-control">
+        <option value="false">no</option>
+        <option value="true">yes</option>
+    </select>
 </section>
 
 <div class="source">
@@ -60,6 +105,10 @@ export class TooltipDemo {
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
+    position: string = "top-left";
+    color: string = "none";
+    size: string = "auto";
+    rounded: string = "false";
 }
 
 export var TOOLTIP_DEMO_PROVIDERS = [

@@ -4,7 +4,11 @@ import {CORE_DIRECTIVES} from '@angular/common';
 @Directive({
     selector: '[tooltip]',
     properties: [
-        'text: tooltip'
+        'text: tooltip',
+        'position: position',
+        'color: color',
+        'size: size',
+        'rounded: rounded'
     ],
     host: {
         '(mouseover)': 'show()',
@@ -15,6 +19,10 @@ import {CORE_DIRECTIVES} from '@angular/common';
 })
 export class Tooltip {
     text:string;
+    position:string;
+    color:string;
+    size:string;
+    rounded:string;
     private _el:HTMLElement;
 
     constructor(el: ElementRef) {
@@ -28,45 +36,57 @@ export class Tooltip {
     show() {
         this.hide();
 
-        var html = `
-        <div class="tooltip top customFadeIn" role="tooltip">
-          <div class="tooltip-arrow"></div>
-          <div class="tooltip-inner">
-          ` + this.text + `
-          </div>
-        </div>
-        `;
-
-        var newEl = document.createElement('div');
-        newEl.setAttribute('role', 'tooltip');
-        newEl.className = 'tooltip top customFadeIn';
-        newEl.innerHTML = `
-        <div class="tooltip-arrow"></div>
-          <div class="tooltip-inner">
-          ` + this.text + `
-          </div>`;
-        newEl.style.visibility = "hidden";
-        this.getElement().appendChild(newEl);
-
-        var bodyRect = document.body.getBoundingClientRect(),
-            elemRect = this.getElement().getBoundingClientRect(),
-            offset   = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
-
-        this.hide();
-
-        newEl.style.visibility = "";
-        newEl.style.top = offset + 'px';
-        newEl.style.left = elemRect.left + 'px';
-
-        this.getElement().appendChild(newEl);
-
+        this._el.setAttribute("data-hint", this.text);
+        
+        for (var i = 0; i < this._el.classList.length; i++) {
+            var currentClass = this._el.classList[i];
+            if(currentClass.startsWith("hint"))
+                this._el.classList.remove(currentClass)
+        }
+        
+        this._el.classList.add("hint--" + this.position);
+        
+        switch(this.color) {
+            case "indianred":
+                this._el.classList.add("hint--error");
+                break;
+            case "orange":
+                this._el.classList.add("hint--warning");
+                break;
+            case "lightblue":
+                this._el.classList.add("hint--info");
+                break;
+            case "lightgreen":
+                this._el.classList.add("hint--success");
+                break;
+            default:
+                
+        } 
+        
+        switch(this.size) {
+            case "small":
+                this._el.classList.add("hint--small");
+                break;
+            case "medium":
+                this._el.classList.add("hint--medium");
+                break;
+            case "large":
+                this._el.classList.add("hint--large");
+                break;
+            default:      
+        }
+        
+        if(this.rounded == "true")
+            this._el.classList.add("hint--rounded");
     }
 
     hide() {
-        var tooltips = this.getElement().getElementsByClassName('tooltip');
-
-        for(var i = 0; i < tooltips.length; i++){
-            tooltips[i].remove();
+        this._el.removeAttribute("data-hint");
+        
+        for (var i = 0; i < this._el.classList.length; i++) {
+            var currentClass = this._el.classList[i];
+            if(currentClass.startsWith("hint--"))
+                this._el.classList.remove(currentClass)
         }
     }
 }
