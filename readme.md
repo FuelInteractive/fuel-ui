@@ -9,7 +9,7 @@ See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo 
 - Gulp
 
 ##Build
-Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at http://localhost:8000
+Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at [http://localhost:8001](http://localhost:8001)
 
 ```
 npm install
