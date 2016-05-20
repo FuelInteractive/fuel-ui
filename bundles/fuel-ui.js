@@ -3696,13 +3696,24 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/cor
       this.color = 'none';
       this.size = 'auto';
       this.rounded = false;
+      this.always = false;
       this._el = el.nativeElement;
     }
+    Tooltip.prototype.ngOnInit = function() {
+      if (this.always) {
+        this._el.classList.add("hint--always");
+        this.show();
+      }
+    };
     Tooltip.prototype.ngOnChanges = function() {
       for (var i = 0; i < this._el.classList.length; i++) {
         var currentClass = this._el.classList[i];
         if (currentClass.startsWith("hint--"))
           this._el.classList.remove(currentClass);
+      }
+      if (this.always) {
+        this._el.classList.add("hint--always");
+        this.show();
       }
     };
     Tooltip.prototype.show = function() {
@@ -3712,6 +3723,9 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/cor
         var currentClass = this._el.classList[i];
         if (currentClass.startsWith("hint"))
           this._el.classList.remove(currentClass);
+      }
+      if (this.always) {
+        this._el.classList.add("hint--always");
       }
       this._el.classList.add("hint--" + this.position);
       switch (this.color) {
@@ -3745,11 +3759,13 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/cor
         this._el.classList.add("hint--rounded");
     };
     Tooltip.prototype.hide = function() {
+      if (this.always)
+        return;
       this._el.removeAttribute("data-hint");
     };
     Tooltip = __decorate([core_1.Directive({
       selector: '[tooltip]',
-      properties: ['text: tooltip', 'position: position', 'color: color', 'size: size', 'rounded: rounded'],
+      properties: ['text: tooltip', 'position: position', 'color: color', 'size: size', 'rounded: rounded', 'always: always'],
       host: {
         '(mouseover)': 'show()',
         '(mouseout)': 'hide()',
