@@ -44,7 +44,7 @@
     "run-sequence": "^1.1.5",
     "systemjs-builder": "^0.15.15",
     "typescript": "^1.8.10",
-    "typings": "^1.0.1",
+    "typings": "^1.0.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^2.1.0",
     "vinyl-source-stream": "^1.1.0"
