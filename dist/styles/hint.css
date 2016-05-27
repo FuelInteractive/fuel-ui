@@ -25,7 +25,6 @@
  */
 [data-hint] {
   position: relative;
-  display: block;
   /**
 	 * tooltip arrow
 	 */
