@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnChanges} from '@angular/core';
+import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnInit, OnChanges} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
 @Directive({
@@ -8,7 +8,8 @@ import {CORE_DIRECTIVES} from '@angular/common';
         'position: position',
         'color: color',
         'size: size',
-        'rounded: rounded'
+        'rounded: rounded',
+        'always: always'
     ],
     host: {
         '(mouseover)': 'show()',
@@ -17,16 +18,24 @@ import {CORE_DIRECTIVES} from '@angular/common';
         '(unfocus)': 'hide()'
     }
 })
-export class Tooltip implements OnChanges{
+export class Tooltip implements OnInit, OnChanges{
     text:string = '';
     position:string = 'top';
     color:string = 'none';
     size:string = 'auto';
     rounded:boolean = false;
+    always:boolean = false; 
     private _el:HTMLElement;
 
     constructor(el: ElementRef) {
         this._el = el.nativeElement;
+    }
+    
+    ngOnInit() {
+        if(this.always){
+            this._el.classList.add("hint--always");
+            this.show();
+        }
     }
     
     ngOnChanges() {
@@ -34,6 +43,11 @@ export class Tooltip implements OnChanges{
             var currentClass = this._el.classList[i];
             if(currentClass.startsWith("hint--"))
                 this._el.classList.remove(currentClass)
+        }
+        
+        if(this.always){
+            this._el.classList.add("hint--always");
+            this.show();
         }
     }
 
@@ -46,6 +60,10 @@ export class Tooltip implements OnChanges{
             var currentClass = this._el.classList[i];
             if(currentClass.startsWith("hint"))
                 this._el.classList.remove(currentClass)
+        }
+        
+        if(this.always){
+            this._el.classList.add("hint--always");
         }
         
         this._el.classList.add("hint--" + this.position);
@@ -85,6 +103,8 @@ export class Tooltip implements OnChanges{
     }
 
     hide() {
+        if(this.always) return;
+        
         this._el.removeAttribute("data-hint");
     }
 }
