@@ -17,6 +17,10 @@
     @include transition-duration($defaultAnimationSpeed);
     @include transition-property(transform);
     
+    img {
+        width: 100%;
+    }
+    
     &.hide {
         display: none !important;
     }

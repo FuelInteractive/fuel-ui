@@ -1,5 +1,6 @@
 import {Directive, Component, ViewEncapsulation, Renderer} from "@angular/core";
-import {QueryList, ContentChildren, ElementRef, AfterContentInit, AfterViewInit} from "@angular/core";
+import {QueryList, ContentChildren, ElementRef} from "@angular/core";
+import {AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked} from "@angular/core";
 import {Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {Animation} from "@angular/platform-browser/src/animate/animation";
@@ -7,12 +8,10 @@ import {AnimationBuilder} from "@angular/platform-browser/src/animate/animation_
 import {CssAnimationBuilder} from "@angular/platform-browser/src/animate/css_animation_builder";
 //import {HammerGesturesPluginCommon} from "@angular//platform-browser/src/dom/events/hammer_common";
 
-@Component({
+
+
+@Directive({
     selector: ".carousel-item",
-    template: `
-        <!-- [style.transition]="transition()" -->
-            <ng-content></ng-content>
-    `
 })
 export class CarouselItem implements AfterContentInit, AfterViewInit {
     id: any = 0;
@@ -52,6 +51,20 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
         
     }
     
+    getTotalHeight(): number {
+        var height = this.element.clientHeight;
+        if(height > 1)
+            return height;
+        
+        var child = this.element.firstElementChild;
+        while(child != null) {
+            height += (<HTMLElement>child).offsetHeight;
+            child = child.nextElementSibling;
+        }
+        
+        return height;
+    }
+    
     setClasses(classes: Array<string>, isAdd: boolean) {
         classes.map((c) => {
             this._render.setElementClass(this.element, c, isAdd);
@@ -68,8 +81,7 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
     }
     
     slide(start: number, end:number): Promise<any> {
-        console.log(`slide from ${start} to ${end}`);
-        console.log(this);
+        console.log(`slide ${this.id} from ${start} to ${end}`);
         let animation = this._animation
             .setFromStyles({"transform": `translate(${start}%,0)`})
             .setToStyles({"transform": `translate(${end}%,0)`});
@@ -86,11 +98,17 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
         this.isActive = activate;
         this._render.setElementClass(this.element, "hide", false);
         
+        
         return new Promise<any>((resolve, reject) => {
+            //hack for animation onComplete for non chrome
+            setTimeout(function() {
+                this.isActive = activate;
+                resolve();
+            }, this.duration);
+            
             animation.start(this.element)
                 .onComplete(() => {
-                    this.isActive = activate;
-                    resolve();
+                    console.log(`slide ${this.id} from ${start} to ${end} complete`);
                 });
         });            
     }
@@ -117,7 +135,9 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
     templateUrl: 'components/Carousel/Carousel.html',
     directives: [CORE_DIRECTIVES, CarouselItem]
 })
-export class Carousel implements AfterContentInit {
+export class Carousel 
+    implements AfterContentInit, AfterContentChecked, 
+        AfterViewInit, AfterViewChecked {
     items: CarouselItem[] = [];
     
     private _activeIndex: number = 0;
@@ -133,9 +153,10 @@ export class Carousel implements AfterContentInit {
         for(let i in this.items) {
             this.items[i].isActive = (i == val.toString());
         }
-    }    
+    }
     
-    innerHeight: any = 0;
+    innerHeight: number = 0;
+    
     animation: Promise<any> = null;
 
     @ContentChildren(CarouselItem)
@@ -152,6 +173,20 @@ export class Carousel implements AfterContentInit {
         this.itemQuery.changes.subscribe(() => this.registerItems());
         this.registerItems();
     }
+    
+    ngAfterContentChecked(): void {
+        this.innerHeight = this.items[this.activeIndex].getTotalHeight();
+        
+        if(this.innerHeight < 1)
+            this.innerHeight = 250;
+    }
+    
+    ngAfterViewInit(): void {
+    }
+    
+    ngAfterViewChecked(): void {
+        
+    }
 
     registerItems(): void {
         this.items = [];
@@ -164,12 +199,6 @@ export class Carousel implements AfterContentInit {
             itemArray[i].id = i;
             
         this.items = this.itemQuery.toArray();
-        this.innerHeight = this.items.reduce((prev: number, current: CarouselItem) => {
-            return current.element.clientHeight < prev ? current.element.clientHeight : prev;
-        },2000);
-        
-        if(this.innerHeight < 1)
-            this.innerHeight = "auto";
          
         this.activeIndex = 
             this.items.reduce((prev: number, current: CarouselItem, index: number) => {
@@ -183,7 +212,21 @@ export class Carousel implements AfterContentInit {
         if(this.activeIndex == -1)
             this.activeIndex = 0;
         
+        this.updateInnerHeight();
+        
+        // hack for initial height (chrome)
+        setTimeout(() => {
+            this.updateInnerHeight();
+        },400);
+        
         this._change.markForCheck();
+    }
+    
+    updateInnerHeight(): void {
+        this.innerHeight = this.items[this.activeIndex].getTotalHeight();
+        
+        if(this.innerHeight < 1)
+            this.innerHeight = 250;
     }
     
     getRelativeItem(rel: number): CarouselItem {
@@ -233,9 +276,9 @@ export class Carousel implements AfterContentInit {
             .then(() => { 
                 this.animation = null;
                 this.activeIndex = this.items.indexOf(prev);
+                this.innerHeight = this.items[this.activeIndex].getTotalHeight();
+                this._change.markForCheck();
             });
-        
-        this._change.markForCheck();
     }
     
     next(item: CarouselItem = null): void {
@@ -256,9 +299,9 @@ export class Carousel implements AfterContentInit {
             .then(() => { 
                 this.animation = null;
                 this.activeIndex = this.items.indexOf(next);
+                this.innerHeight = this.items[this.activeIndex].getTotalHeight();
+                this._change.markForCheck();
              });
-        
-        this._change.markForCheck();
     }
     
     swipeleft(): void {
@@ -293,13 +336,11 @@ export class Carousel implements AfterContentInit {
         var offset = this.lastPanOffset = ((100/width)*event.deltaX);
         var nextOffset = (100 - Math.abs(offset)) * (offset/Math.abs(offset)) * -1;
         
-        console.log("pan");
         current.translate(offset);
         next.translate(nextOffset);
     }
     
     panend(event: any): void {
-        console.log(event);
         if(this.lastPanOffset == 0)
             return;
         

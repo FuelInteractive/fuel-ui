@@ -15,7 +15,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 </div>
 
 <div class="row">
-    <carousel>
+<!--<carousel>
         <div class="carousel-item" style="background-color: SteelBlue; height: 200px;">
             <h3 style="margin: auto auto;">Some title</h3>
         </div>
@@ -32,8 +32,10 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             <h3 style="margin: auto auto;">really another title?</h3>
         </div>
     </carousel>
+</div>-->
 
-    <!--<carousel class="col-md-6">
+<div class="row">
+    <carousel class="col-md-6">
         <img *ngFor="let image of carouselImages" src="{{image}}" class="carousel-item" />
     </carousel>
     
@@ -45,7 +47,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                 <p>Path: {{image}}</p>
             </div>
         </div>
-    </carousel>-->
+    </carousel>
 </div>
 
 <div class="source">
