@@ -128,7 +128,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -152,147 +152,295 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
   };
   var core_1 = $__require('@angular/core');
   var core_2 = $__require('@angular/core');
+  var core_3 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
   var CarouselItem = (function() {
-    function CarouselItem() {
-      this.resetStatus();
+    function CarouselItem(element, animationBuilder, _render, _change) {
+      this._render = _render;
+      this._change = _change;
+      this.id = 0;
+      this.duration = 250;
+      this.element = element.nativeElement;
+      this._animationBuilder = animationBuilder;
     }
-    CarouselItem.prototype.resetStatus = function() {
-      this.isActive = false;
-      this.exiting = false;
-      this.resetAnimation();
-    };
-    CarouselItem.prototype.resetAnimation = function() {
-      this.left = this.right = this.next = this.prev = false;
-    };
-    CarouselItem.prototype.animationStart = function() {};
-    CarouselItem.prototype.animationEnd = function() {
-      if (this.exiting)
-        this.resetStatus();
-      else
-        this.resetAnimation();
-    };
-    CarouselItem.prototype.moveLeft = function() {
-      if (this.isActive) {
-        this.exiting = true;
-        this.left = true;
-      } else {
-        this.isActive = true;
-        this.prev = true;
+    Object.defineProperty(CarouselItem.prototype, "isActive", {
+      get: function() {
+        return this._isActive;
+      },
+      set: function(value) {
+        this._isActive = value;
+        this._render.setElementClass(this.element, "active", value);
+        this._render.setElementClass(this.element, "hide", !value);
+        this.setClasses(["out-left", "out-right"], false);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(CarouselItem.prototype, "_animation", {
+      get: function() {
+        return this._animationBuilder.css().setDuration(this.duration);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    CarouselItem.prototype.ngAfterViewInit = function() {};
+    CarouselItem.prototype.ngAfterContentInit = function() {};
+    CarouselItem.prototype.getTotalHeight = function() {
+      var height = this.element.clientHeight;
+      if (height > 1)
+        return height;
+      var child = this.element.firstElementChild;
+      while (child != null) {
+        height += child.offsetHeight;
+        child = child.nextElementSibling;
       }
+      return height;
     };
-    CarouselItem.prototype.moveRight = function() {
-      if (this.isActive) {
-        this.exiting = true;
-        this.right = true;
-      } else {
-        this.isActive = true;
-        this.next = true;
+    CarouselItem.prototype.setClasses = function(classes, isAdd) {
+      var _this = this;
+      classes.map(function(c) {
+        _this._render.setElementClass(_this.element, c, isAdd);
+      });
+    };
+    CarouselItem.prototype.translate = function(x) {
+      this._render.setElementClass(this.element, "hide", false);
+      this._render.setElementStyle(this.element, "transform", "translate(" + x + "%,0)");
+    };
+    CarouselItem.prototype.resetTranslation = function() {
+      this._render.setElementStyle(this.element, "transform", "");
+    };
+    CarouselItem.prototype.slide = function(start, end) {
+      var _this = this;
+      console.log("slide " + this.id + " from " + start + " to " + end);
+      var animation = this._animation.setFromStyles({"transform": "translate(" + start + "%,0)"}).setToStyles({"transform": "translate(" + end + "%,0)"});
+      var activate = end == 0;
+      if (activate) {
+        if (start > end)
+          animation.addAnimationClass("out-right");
+        else
+          animation.addAnimationClass("out-left");
       }
+      this.isActive = activate;
+      this._render.setElementClass(this.element, "hide", false);
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          this.isActive = activate;
+          resolve();
+        }, _this.duration);
+        animation.start(_this.element).onComplete(function() {
+          console.log("slide " + _this.id + " from " + start + " to " + end + " complete");
+        });
+      });
     };
-    CarouselItem.prototype.checkIfAnimating = function() {
-      return this.left || this.right || this.next || this.prev;
+    CarouselItem.prototype.slideOutLeft = function() {
+      return this.slide(0, -100);
     };
-    CarouselItem = __decorate([core_1.Directive({
-      selector: '.carousel-item',
-      host: {
-        '[class.active]': 'isActive',
-        '[class.slide-out-left]': 'left',
-        '[class.slide-out-right]': 'right',
-        '[class.slide-in-right]': 'next',
-        '[class.slide-in-left]': 'prev',
-        '(animationstart)': 'animationStart()',
-        '(webkitAnimationStart)': 'animationStart()',
-        '(oanimationstart)': 'animationStart()',
-        '(MSAnimationStart)': 'animationStart()',
-        '(animationend)': 'animationEnd()',
-        '(webkitAnimationEnd)': 'animationEnd()',
-        '(oanimationend)': 'animationEnd()',
-        '(MSAnimationEnd)': 'animationEnd()'
-      }
-    }), __metadata('design:paramtypes', [])], CarouselItem);
+    CarouselItem.prototype.slideOutRight = function() {
+      return this.slide(0, 100);
+    };
+    CarouselItem.prototype.slideInLeft = function() {
+      return this.slide(100, 0);
+    };
+    CarouselItem.prototype.slideInRight = function() {
+      return this.slide(-100, 0);
+    };
+    CarouselItem = __decorate([core_1.Directive({selector: ".carousel-item"}), __metadata('design:paramtypes', [core_2.ElementRef, animation_builder_1.AnimationBuilder, core_1.Renderer, core_3.ChangeDetectorRef])], CarouselItem);
     return CarouselItem;
   }());
   exports.CarouselItem = CarouselItem;
   var Carousel = (function() {
-    function Carousel() {
-      this.images = [];
+    function Carousel(_change) {
+      this._change = _change;
+      this.items = [];
+      this._activeIndex = 0;
+      this.innerHeight = 0;
+      this.animation = null;
+      this.panDirection = 0;
+      this.lastPanOffset = 0;
     }
+    Object.defineProperty(Carousel.prototype, "activeIndex", {
+      get: function() {
+        return this._activeIndex;
+      },
+      set: function(val) {
+        if (this.items.length == 0) {
+          this._activeIndex = -1;
+          return;
+        }
+        this._activeIndex = val;
+        for (var i in this.items) {
+          this.items[i].isActive = (i == val.toString());
+        }
+      },
+      enumerable: true,
+      configurable: true
+    });
     Carousel.prototype.ngAfterContentInit = function() {
       var _this = this;
-      this.imageQuery.changes.subscribe(function() {
-        return _this.registerImages();
+      this.itemQuery.changes.subscribe(function() {
+        return _this.registerItems();
       });
-      this.registerImages();
+      this.registerItems();
     };
-    Carousel.prototype.registerImages = function() {
+    Carousel.prototype.ngAfterContentChecked = function() {
+      this.innerHeight = this.items[this.activeIndex].getTotalHeight();
+      if (this.innerHeight < 1)
+        this.innerHeight = 250;
+    };
+    Carousel.prototype.ngAfterViewInit = function() {};
+    Carousel.prototype.ngAfterViewChecked = function() {};
+    Carousel.prototype.registerItems = function() {
       var _this = this;
-      this.images = [];
-      this.imageQuery.map(function(i) {
-        return _this.images.push(i);
-      });
-      var activeImage = this.getActiveImage();
-      if (this.images.length > 0 && activeImage == null)
-        setTimeout(function() {
-          return _this.images[0].isActive = true;
-        }, 1);
+      this.items = [];
+      if (this.itemQuery.length == 0)
+        return;
+      var itemArray = this.itemQuery.toArray();
+      for (var i in itemArray)
+        itemArray[i].id = i;
+      this.items = this.itemQuery.toArray();
+      this.activeIndex = this.items.reduce(function(prev, current, index) {
+        if (prev != -1 && current.isActive || !current.isActive) {
+          current.isActive = false;
+          return prev;
+        } else
+          return index;
+      }, -1);
+      if (this.activeIndex == -1)
+        this.activeIndex = 0;
+      this.updateInnerHeight();
+      setTimeout(function() {
+        _this.updateInnerHeight();
+      }, 400);
+      this._change.markForCheck();
     };
-    Carousel.prototype.setAllInactive = function() {
-      this.images.map(function(i) {
-        return i.resetStatus();
-      });
+    Carousel.prototype.updateInnerHeight = function() {
+      this.innerHeight = this.items[this.activeIndex].getTotalHeight();
+      if (this.innerHeight < 1)
+        this.innerHeight = 250;
     };
-    Carousel.prototype.switchTo = function(image) {
-      var activeImage = this.getActiveImage();
-      if (this.images.indexOf(image) < this.images.indexOf(activeImage)) {
-        image.moveLeft();
-        activeImage.moveLeft();
-      } else {
-        image.moveRight();
-        activeImage.moveRight();
+    Carousel.prototype.getRelativeItem = function(rel) {
+      if (this.items.length == 1)
+        return this.items[0];
+      return this.items[this.getRelativeIndex(rel)];
+    };
+    Carousel.prototype.getRelativeIndex = function(rel) {
+      var target = this.activeIndex + rel;
+      if (this.items.length == 0)
+        return null;
+      if (target < 0)
+        target = this.items.length - 1;
+      else if (target > (this.items.length - 1))
+        target = 0;
+      return target;
+    };
+    Carousel.prototype.navigateTo = function(item) {
+      var index = this.items.indexOf(item);
+      if (index > this.activeIndex)
+        this.next(item);
+      else
+        this.prev(item);
+    };
+    Carousel.prototype.prev = function(item) {
+      var _this = this;
+      if (item === void 0) {
+        item = null;
       }
-    };
-    Carousel.prototype.nextImage = function() {
-      if (this.checkIfAnimating())
+      if (this.animation != null) {
+        this.animation.then(function() {
+          _this.prev();
+        });
         return;
-      var activeImage = this.getActiveImage();
-      var index = this.getActiveIndex() + 1;
-      index = index >= this.images.length ? 0 : index;
-      activeImage.moveLeft();
-      this.images[index].moveLeft();
-    };
-    Carousel.prototype.prevImage = function() {
-      if (this.checkIfAnimating())
+      }
+      if (this.items.length < 2)
         return;
-      var activeImage = this.getActiveImage();
-      var index = this.getActiveIndex() - 1;
-      index = index < 0 ? this.images.length - 1 : index;
-      activeImage.moveRight();
-      this.images[index].moveRight();
+      var current = this.getRelativeItem(0);
+      var prev = item != null ? item : this.getRelativeItem(-1);
+      current.slideOutRight();
+      prev.slideInRight().then(function() {
+        _this.animation = null;
+        _this.activeIndex = _this.items.indexOf(prev);
+        _this.innerHeight = _this.items[_this.activeIndex].getTotalHeight();
+        _this._change.markForCheck();
+      });
     };
-    Carousel.prototype.checkIfAnimating = function() {
-      return this.images.reduce(function(prev, curr) {
-        return curr.checkIfAnimating() || prev;
-      }, false);
+    Carousel.prototype.next = function(item) {
+      var _this = this;
+      if (item === void 0) {
+        item = null;
+      }
+      if (this.animation != null) {
+        this.animation.then(function() {
+          _this.next();
+        });
+        return;
+      }
+      if (this.items.length < 2)
+        return;
+      var current = this.getRelativeItem(0);
+      var next = item != null ? item : this.getRelativeItem(1);
+      current.slideOutLeft();
+      this.animation = next.slideInLeft().then(function() {
+        _this.animation = null;
+        _this.activeIndex = _this.items.indexOf(next);
+        _this.innerHeight = _this.items[_this.activeIndex].getTotalHeight();
+        _this._change.markForCheck();
+      });
     };
-    Carousel.prototype.getActiveIndex = function() {
-      var activeImage = this.getActiveImage();
-      if (activeImage == null)
-        return -1;
-      return this.images.indexOf(activeImage);
+    Carousel.prototype.swipeleft = function() {
+      if (this.panDirection == 0)
+        this.next();
     };
-    Carousel.prototype.getActiveImage = function() {
-      return this.images.reduce(function(prev, curr) {
-        return curr.isActive ? curr : prev;
-      }, null);
+    Carousel.prototype.swiperight = function() {
+      if (this.panDirection == 0)
+        this.prev();
     };
-    __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "imageQuery", void 0);
+    Carousel.prototype.panleft = function(event) {
+      if (this.panDirection == 0)
+        this.panDirection = 1;
+    };
+    Carousel.prototype.panright = function(event) {
+      if (this.panDirection == 0)
+        this.panDirection = -1;
+    };
+    Carousel.prototype.pan = function(event) {
+      event.preventDefault();
+      if (this.panDirection == 0 || event.deltaX == 0)
+        return;
+      var current = this.getRelativeItem(0);
+      var next = this.getRelativeItem(this.panDirection);
+      var width = current.element.clientWidth;
+      var offset = this.lastPanOffset = ((100 / width) * event.deltaX);
+      var nextOffset = (100 - Math.abs(offset)) * (offset / Math.abs(offset)) * -1;
+      current.translate(offset);
+      next.translate(nextOffset);
+    };
+    Carousel.prototype.panend = function(event) {
+      var _this = this;
+      if (this.lastPanOffset == 0)
+        return;
+      var current = this.getRelativeItem(0);
+      var next = this.getRelativeItem(this.panDirection);
+      var offset = this.lastPanOffset;
+      var nextOffset = (100 - Math.abs(offset)) * (offset / Math.abs(offset)) * -1;
+      if (Math.abs(this.lastPanOffset) < 50) {
+        current.slide(this.lastPanOffset, 0);
+        next.slide(nextOffset, 100 * this.panDirection);
+      } else {
+        current.slide(this.lastPanOffset, 100 * this.panDirection);
+        this.animation = next.slide(nextOffset, 0).then(function() {
+          _this.animation = null;
+          _this.activeIndex = _this.getRelativeIndex(_this.panDirection);
+        });
+      }
+      this.lastPanOffset = 0;
+    };
+    __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "itemQuery", void 0);
     Carousel = __decorate([core_1.Component({
       selector: 'carousel',
-      template: "\n   <div class=\"carousel slide fuel-ui-carousel\">\n     <ol class=\"carousel-indicators\">\n       <li *ngFor=\"let image of images\"\n         (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\"></li> \n     </ol>\n     <div class=\"carousel-inner\" role=\"listbox\">\n         <ng-content></ng-content>\n     </div>\n     <a class=\"left carousel-control\" role=\"button\" (click)=\"prevImage()\">\n       <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Previous</span>\n     </a>\n     <a class=\"right carousel-control\" role=\"button\" (click)=\"nextImage()\">\n       <span class=\"icon-next\" aria-hidden=\"true\"></span>\n       <span class=\"sr-only\">Next</span>\n     </a>\n   </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, CarouselItem],
-      encapsulation: core_1.ViewEncapsulation.None
-    }), __metadata('design:paramtypes', [])], Carousel);
+      template: "\n      <div class=\"carousel slide\" \n        (swiperight)=\"prev()\" (swipeleft)=\"next()\">\n        <!--(pan)=\"pan($event)\" (panleft)=\"panleft($event)\" (panright)=\"panright($event)\"\n        (panend)=\"panend($event)\"-->\n        <ol class=\"carousel-indicators\">\n          <!--<li *ngFor=\"let image of images\"\n            (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\">\n            </li> -->\n            <li *ngFor=\"let item of items\"\n              [class.active]=\"item.isActive\"\n              (click)=\"navigateTo(item)\">\n            </li>\n        </ol>\n        <div class=\"carousel-inner\" role=\"listbox\"\n          [style.height.px]=\"innerHeight\">\n            <ng-content select=\"carousel-item,.carousel-item\"></ng-content>\n        </div>\n        <a class=\"left carousel-control\" role=\"button\" (click)=\"prev()\">\n          <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Previous</span>\n        </a>\n        <a class=\"right carousel-control\" role=\"button\" (click)=\"next()\">\n          <span class=\"icon-next\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Next</span>\n        </a>\n      </div>\n    ",
+      directives: [common_1.CORE_DIRECTIVES, CarouselItem]
+    }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef])], Carousel);
     return Carousel;
   }());
   exports.Carousel = Carousel;
