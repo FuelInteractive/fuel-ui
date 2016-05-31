@@ -212,7 +212,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
     };
     CarouselItem.prototype.slide = function(start, end) {
       var _this = this;
-      console.log("slide " + this.id + " from " + start + " to " + end);
       var animation = this._animation.setFromStyles({"transform": "translate(" + start + "%,0)"}).setToStyles({"transform": "translate(" + end + "%,0)"});
       var activate = end == 0;
       if (activate) {
@@ -228,9 +227,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
           this.isActive = activate;
           resolve();
         }, _this.duration);
-        animation.start(_this.element).onComplete(function() {
-          console.log("slide " + _this.id + " from " + start + " to " + end + " complete");
-        });
+        animation.start(_this.element);
       });
     };
     CarouselItem.prototype.slideOutLeft = function() {
@@ -307,7 +304,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
     Carousel.prototype.ngAfterViewInit = function() {
       var _this = this;
       if (!this.hammerInitialized && typeof Hammer !== "undefined") {
-        console.log('hammer not initialised');
         var hammer = new Hammer(this.element);
         hammer.on('swiperight', function(ev) {
           _this.prev();
