@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {CAROUSEL_PROVIDERS} from './Carousel';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
+import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
   template: `
@@ -15,11 +17,31 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 </div>
 
 <div class="row">
-    <carousel class="col-md-6">
+<!--<carousel>
+        <div class="carousel-item" style="background-color: SteelBlue; height: 200px;">
+            <h3 style="margin: auto auto;">Some title</h3>
+        </div>
+        <div class="carousel-item" style="background-color: Crimson; height: 300px;">
+            <h3 style="margin: auto auto;">another title</h3>
+        </div>
+        <div class="carousel-item" style="background-color: MediumAquaMarine; height: 250px;">
+            <h3 style="margin: auto auto;">gratuitous title</h3>
+        </div>
+        <div class="carousel-item" style="background-color: MediumSlateBlue; height: 250px;">
+            <h3 style="margin: auto auto;">yet another title title</h3>
+        </div>
+        <div class="carousel-item" style="background-color: Khaki; height: 250px;">
+            <h3 style="margin: auto auto;">really another title?</h3>
+        </div>
+    </carousel>
+</div>-->
+
+<div class="row">
+    <carousel interval="10000" class="col-md-6">
         <img *ngFor="let image of carouselImages" src="{{image}}" class="carousel-item" />
     </carousel>
     
-    <carousel class="col-md-6">
+    <carousel interval="10000" class="col-md-6">
         <div *ngFor="let image of carouselImages" class="carousel-item">
             <img src="{{image}}" />
             <div class="carousel-caption">
@@ -40,6 +62,7 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 
 <h3>Getting Started</h3>
 <p>Carousel is a custom element to display a slideshow of cycling elements</p>
+<p>Swipe left and swipe right events are supported if hammerjs has been included.</p>
 
 <h3>Usage</h3>
 <tabset>
@@ -77,8 +100,16 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 </pre>
 </tab>
 </tabset>
+
+<h3>Attributes</h3>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
 </div>`,
-        directives: [CAROUSEL_PROVIDERS, CodeHighlighter, TAB_PROVIDERS]
+        directives: [CAROUSEL_PROVIDERS, CodeHighlighter, TAB_PROVIDERS, TableSortable]
 })
 export class CarouselDemo {
     carouselImages: string[] = [
@@ -86,6 +117,13 @@ export class CarouselDemo {
         "images/carouselImages/river.jpg",
         "images/carouselImages/windmill.jpg"
     ];
+    
+    attributes:any[] = [
+        new Attribute('interval', 'number', '0', 'Time in ms before auto-advancing slide. If set to 0 slides will not auto-advance')
+    ];
+    
+    attributesColumns:TableSortableColumn[] = AttributeColumns;
+    attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
 
 export var CAROUSEL_DEMO_PROVIDERS = [
