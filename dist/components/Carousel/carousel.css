@@ -1,50 +1,43 @@
-.carousel-inner > .carousel-item {
-  width: 100%; }
-  .carousel-inner > .carousel-item.slide-in-left {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -100%;
-    -webkit-animation-name: slideInLeft;
-    -moz-animation-name: slideInLeft;
-    animation-name: slideInLeft;
-    -webkit-animation-duration: 0.5s;
-    -moz-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    animation-timing-function: ease; }
-  .carousel-inner > .carousel-item.slide-in-right {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    -webkit-animation-name: slideInRight;
-    -moz-animation-name: slideInRight;
-    animation-name: slideInRight;
-    -webkit-animation-duration: 0.5s;
-    -moz-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    animation-timing-function: ease; }
-  .carousel-inner > .carousel-item.slide-out-left {
-    -webkit-animation-name: slideOutLeft;
-    -moz-animation-name: slideOutLeft;
-    animation-name: slideOutLeft;
-    -webkit-animation-duration: 0.5s;
-    -moz-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    animation-timing-function: ease; }
-  .carousel-inner > .carousel-item.slide-out-right {
-    -webkit-animation-name: slideOutRight;
-    -moz-animation-name: slideOutRight;
-    animation-name: slideOutRight;
-    -webkit-animation-duration: 0.5s;
-    -moz-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    animation-timing-function: ease; }
+.carousel {
+  background-color: #818a91; }
+
+.carousel-item {
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: block !important;
+  overflow: hidden;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform; }
+  .carousel-item img {
+    width: 100%;
+    pointer-events: none; }
+  .carousel-item.hide {
+    display: none !important; }
+  .carousel-item.active {
+    display: block !important;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0); }
+  .carousel-item.out-left {
+    -webkit-transform: translate(-100%, 0);
+    -moz-transform: translate(-100%, 0);
+    -ms-transform: translate(-100%, 0);
+    -o-transform: translate(-100%, 0);
+    transform: translate(-100%, 0); }
+  .carousel-item.out-right {
+    -webkit-transform: translate(100%, 0);
+    -moz-transform: translate(100%, 0);
+    -ms-transform: translate(100%, 0);
+    -o-transform: translate(100%, 0);
+    transform: translate(100%, 0); }
