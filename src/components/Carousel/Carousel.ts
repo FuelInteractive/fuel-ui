@@ -81,7 +81,6 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
     }
     
     slide(start: number, end:number): Promise<any> {
-        console.log(`slide ${this.id} from ${start} to ${end}`);
         let animation = this._animation
             .setFromStyles({"transform": `translate(${start}%,0)`})
             .setToStyles({"transform": `translate(${end}%,0)`});
@@ -106,10 +105,7 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
                 resolve();
             }, this.duration);
             
-            animation.start(this.element)
-                .onComplete(() => {
-                    console.log(`slide ${this.id} from ${start} to ${end} complete`);
-                });
+            animation.start(this.element);
         });            
     }
     
@@ -197,8 +193,6 @@ export class Carousel
     
     ngAfterViewInit(): void {
         if (!this.hammerInitialized && typeof Hammer !== "undefined") {
-            console.log('hammer not initialised');
-
             var hammer = new Hammer(this.element);
             hammer.on('swiperight', (ev) => {
                 this.prev();
