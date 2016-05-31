@@ -1,6 +1,6 @@
 import {Directive, Component, ViewEncapsulation, Renderer} from "@angular/core";
 import {QueryList, ContentChildren, ElementRef} from "@angular/core";
-import {AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked} from "@angular/core";
+import {AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked, OnDestroy} from "@angular/core";
 import {Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {Animation} from "@angular/platform-browser/src/animate/animation";
@@ -137,7 +137,9 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
 })
 export class Carousel 
     implements AfterContentInit, AfterContentChecked, 
-        AfterViewInit, AfterViewChecked {
+        AfterViewInit, OnDestroy {
+    hammerInitialized = false;
+            
     items: CarouselItem[] = [];
     
     private _activeIndex: number = 0;
@@ -155,6 +157,19 @@ export class Carousel
         }
     }
     
+    @Input()
+    set interval(val: number) {
+        if(this._intervalRef != null) {
+            clearInterval(this._intervalRef);
+            this._intervalRef = null;
+        }
+        
+        if(val > 0)
+            setInterval(() => { this.next(); }, val);
+    }    
+    
+    _intervalRef: any = null;
+    
     innerHeight: number = 0;
     
     animation: Promise<any> = null;
@@ -164,9 +179,11 @@ export class Carousel
     
     panDirection: number = 0; // 1 left -1 right
     lastPanOffset: number = 0;
+    
+    element: HTMLElement;
 
-    constructor(private _change: ChangeDetectorRef) {
-
+    constructor(private _change: ChangeDetectorRef, element: ElementRef) {
+        this.element = element.nativeElement;
     }
 
     ngAfterContentInit(): void {
@@ -175,17 +192,38 @@ export class Carousel
     }
     
     ngAfterContentChecked(): void {
-        this.innerHeight = this.items[this.activeIndex].getTotalHeight();
-        
-        if(this.innerHeight < 1)
-            this.innerHeight = 250;
+        this.updateInnerHeight();
     }
     
     ngAfterViewInit(): void {
+        if (!this.hammerInitialized && typeof Hammer !== "undefined") {
+            console.log('hammer not initialised');
+
+            var hammer = new Hammer(this.element);
+            hammer.on('swiperight', (ev) => {
+                this.prev();
+            });
+            hammer.on('swipeleft', (ev) => {
+                this.next();
+            });
+            /*hammer.on('pan', (ev) => {
+                this.pan(ev);
+            });
+            hammer.on('panleft', (ev) => {
+                this.panleft(ev);
+            });
+            hammer.on('panright', (ev) => {
+                this.panright(ev);
+            });*/
+            this.hammerInitialized = true;
+        }
     }
-    
-    ngAfterViewChecked(): void {
-        
+
+    ngOnDestroy(): void {
+        if(this._intervalRef != null) {
+            clearInterval(this._intervalRef);
+            this._intervalRef = null;
+        }
     }
 
     registerItems(): void {

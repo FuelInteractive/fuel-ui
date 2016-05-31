@@ -941,7 +941,8 @@
   -moz-transition-property: -moz-transform;
   transition-property: transform; }
   .carousel-item img {
-    width: 100%; }
+    width: 100%;
+    pointer-events: none; }
   .carousel-item.hide {
     display: none !important; }
   .carousel-item.active {

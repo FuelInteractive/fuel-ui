@@ -250,14 +250,17 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
   }());
   exports.CarouselItem = CarouselItem;
   var Carousel = (function() {
-    function Carousel(_change) {
+    function Carousel(_change, element) {
       this._change = _change;
+      this.hammerInitialized = false;
       this.items = [];
       this._activeIndex = 0;
+      this._intervalRef = null;
       this.innerHeight = 0;
       this.animation = null;
       this.panDirection = 0;
       this.lastPanOffset = 0;
+      this.element = element.nativeElement;
     }
     Object.defineProperty(Carousel.prototype, "activeIndex", {
       get: function() {
@@ -276,6 +279,21 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       enumerable: true,
       configurable: true
     });
+    Object.defineProperty(Carousel.prototype, "interval", {
+      set: function(val) {
+        var _this = this;
+        if (this._intervalRef != null) {
+          clearInterval(this._intervalRef);
+          this._intervalRef = null;
+        }
+        if (val > 0)
+          setInterval(function() {
+            _this.next();
+          }, val);
+      },
+      enumerable: true,
+      configurable: true
+    });
     Carousel.prototype.ngAfterContentInit = function() {
       var _this = this;
       this.itemQuery.changes.subscribe(function() {
@@ -284,12 +302,28 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       this.registerItems();
     };
     Carousel.prototype.ngAfterContentChecked = function() {
-      this.innerHeight = this.items[this.activeIndex].getTotalHeight();
-      if (this.innerHeight < 1)
-        this.innerHeight = 250;
+      this.updateInnerHeight();
     };
-    Carousel.prototype.ngAfterViewInit = function() {};
-    Carousel.prototype.ngAfterViewChecked = function() {};
+    Carousel.prototype.ngAfterViewInit = function() {
+      var _this = this;
+      if (!this.hammerInitialized && typeof Hammer !== "undefined") {
+        console.log('hammer not initialised');
+        var hammer = new Hammer(this.element);
+        hammer.on('swiperight', function(ev) {
+          _this.prev();
+        });
+        hammer.on('swipeleft', function(ev) {
+          _this.next();
+        });
+        this.hammerInitialized = true;
+      }
+    };
+    Carousel.prototype.ngOnDestroy = function() {
+      if (this._intervalRef != null) {
+        clearInterval(this._intervalRef);
+        this._intervalRef = null;
+      }
+    };
     Carousel.prototype.registerItems = function() {
       var _this = this;
       this.items = [];
@@ -435,12 +469,13 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       }
       this.lastPanOffset = 0;
     };
+    __decorate([core_3.Input(), __metadata('design:type', Number), __metadata('design:paramtypes', [Number])], Carousel.prototype, "interval", null);
     __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "itemQuery", void 0);
     Carousel = __decorate([core_1.Component({
       selector: 'carousel',
-      template: "\n      <div class=\"carousel slide\" \n        (swiperight)=\"prev()\" (swipeleft)=\"next()\">\n        <!--(pan)=\"pan($event)\" (panleft)=\"panleft($event)\" (panright)=\"panright($event)\"\n        (panend)=\"panend($event)\"-->\n        <ol class=\"carousel-indicators\">\n          <!--<li *ngFor=\"let image of images\"\n            (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\">\n            </li> -->\n            <li *ngFor=\"let item of items\"\n              [class.active]=\"item.isActive\"\n              (click)=\"navigateTo(item)\">\n            </li>\n        </ol>\n        <div class=\"carousel-inner\" role=\"listbox\"\n          [style.height.px]=\"innerHeight\">\n            <ng-content select=\"carousel-item,.carousel-item\"></ng-content>\n        </div>\n        <a class=\"left carousel-control\" role=\"button\" (click)=\"prev()\">\n          <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Previous</span>\n        </a>\n        <a class=\"right carousel-control\" role=\"button\" (click)=\"next()\">\n          <span class=\"icon-next\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Next</span>\n        </a>\n      </div>\n    ",
+      template: "\n      <div class=\"carousel slide\" >\n        <!--(swiperight)=\"prev()\" (swipeleft)=\"next()\"-->\n        <!--(pan)=\"pan($event)\" (panleft)=\"panleft($event)\" (panright)=\"panright($event)\"\n        (panend)=\"panend($event)\"-->\n        <ol class=\"carousel-indicators\">\n          <!--<li *ngFor=\"let image of images\"\n            (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\">\n            </li> -->\n            <li *ngFor=\"let item of items\"\n              [class.active]=\"item.isActive\"\n              (click)=\"navigateTo(item)\">\n            </li>\n        </ol>\n        <div class=\"carousel-inner\" role=\"listbox\"\n          [style.height.px]=\"innerHeight\">\n            <ng-content select=\"carousel-item,.carousel-item\"></ng-content>\n        </div>\n        <a class=\"left carousel-control\" role=\"button\" (click)=\"prev()\">\n          <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Previous</span>\n        </a>\n        <a class=\"right carousel-control\" role=\"button\" (click)=\"next()\">\n          <span class=\"icon-next\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Next</span>\n        </a>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES, CarouselItem]
-    }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef])], Carousel);
+    }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], Carousel);
     return Carousel;
   }());
   exports.Carousel = Carousel;
