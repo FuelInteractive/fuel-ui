@@ -1,10 +1,15 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef} from '@angular/core';
+import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnInit, OnChanges} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
 @Directive({
     selector: '[tooltip]',
     properties: [
-        'text: tooltip'
+        'text: tooltip',
+        'position: position',
+        'color: color',
+        'size: size',
+        'rounded: rounded',
+        'always: always'
     ],
     host: {
         '(mouseover)': 'show()',
@@ -13,61 +18,94 @@ import {CORE_DIRECTIVES} from '@angular/common';
         '(unfocus)': 'hide()'
     }
 })
-export class Tooltip {
-    text:string;
+export class Tooltip implements OnInit, OnChanges{
+    text:string = '';
+    position:string = 'top';
+    color:string = 'none';
+    size:string = 'auto';
+    rounded:boolean = false;
+    always:boolean = false; 
     private _el:HTMLElement;
 
     constructor(el: ElementRef) {
         this._el = el.nativeElement;
     }
-
-    getElement(): HTMLElement{
-        return this._el;
+    
+    ngOnInit() {
+        if(this.always){
+            this._el.classList.add("hint--always");
+            this.show();
+        }
+    }
+    
+    ngOnChanges() {
+        for (var i = 0; i < this._el.classList.length; i++) {
+            var currentClass = this._el.classList[i];
+            if(currentClass.startsWith("hint--"))
+                this._el.classList.remove(currentClass)
+        }
+        
+        if(this.always){
+            this._el.classList.add("hint--always");
+            this.show();
+        }
     }
 
     show() {
         this.hide();
 
-        var html = `
-        <div class="tooltip top customFadeIn" role="tooltip">
-          <div class="tooltip-arrow"></div>
-          <div class="tooltip-inner">
-          ` + this.text + `
-          </div>
-        </div>
-        `;
-
-        var newEl = document.createElement('div');
-        newEl.setAttribute('role', 'tooltip');
-        newEl.className = 'tooltip top customFadeIn';
-        newEl.innerHTML = `
-        <div class="tooltip-arrow"></div>
-          <div class="tooltip-inner">
-          ` + this.text + `
-          </div>`;
-        newEl.style.visibility = "hidden";
-        this.getElement().appendChild(newEl);
-
-        var bodyRect = document.body.getBoundingClientRect(),
-            elemRect = this.getElement().getBoundingClientRect(),
-            offset   = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
-
-        this.hide();
-
-        newEl.style.visibility = "";
-        newEl.style.top = offset + 'px';
-        newEl.style.left = elemRect.left + 'px';
-
-        this.getElement().appendChild(newEl);
-
+        this._el.setAttribute("data-hint", this.text);
+        
+        for (var i = 0; i < this._el.classList.length; i++) {
+            var currentClass = this._el.classList[i];
+            if(currentClass.startsWith("hint"))
+                this._el.classList.remove(currentClass)
+        }
+        
+        if(this.always){
+            this._el.classList.add("hint--always");
+        }
+        
+        this._el.classList.add("hint--" + this.position);
+        
+        switch(this.color) {
+            case "error":
+                this._el.classList.add("hint--error");
+                break;
+            case "warning":
+                this._el.classList.add("hint--warning");
+                break;
+            case "info":
+                this._el.classList.add("hint--info");
+                break;
+            case "success":
+                this._el.classList.add("hint--success");
+                break;
+            default:
+                
+        } 
+        
+        switch(this.size) {
+            case "small":
+                this._el.classList.add("hint--small");
+                break;
+            case "medium":
+                this._el.classList.add("hint--medium");
+                break;
+            case "large":
+                this._el.classList.add("hint--large");
+                break;
+            default:      
+        }
+        
+        if(this.rounded)
+            this._el.classList.add("hint--rounded");
     }
 
     hide() {
-        var tooltips = this.getElement().getElementsByClassName('tooltip');
-
-        for(var i = 0; i < tooltips.length; i++){
-            tooltips[i].remove();
-        }
+        if(this.always) return;
+        
+        this._el.removeAttribute("data-hint");
     }
 }
 

@@ -9,7 +9,7 @@ See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo 
 - Gulp
 
 ##Build
-Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at http://localhost:8000
+Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at [http://localhost:8001](http://localhost:8001)
 
 ```
 npm install
@@ -19,6 +19,9 @@ gulp
 ##Installation
 
 ####Fork our Quickstart! [https://github.com/coryshaw1/ng2-play/](https://github.com/coryshaw1/ng2-play/)
+####Fork our angular-cli Quickstart! [https://github.com/FuelInteractive/fuel-ui-cli-quickstart/](https://github.com/FuelInteractive/fuel-ui-cli-quickstart/)
+
+###Manually
 
 If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:
 
@@ -38,6 +41,38 @@ Then simply add the proper script tags to your `index.html`
 
 <!-- All your SystemJS, Angular2, Rx, etc. scripts first! -->
 <script src="node_modules/fuel-ui/bundles/fuel-ui.min.js"></script>
+```
+
+###Manually with [angular-cli](https://github.com/angular/angular-cli)
+
+```
+ng new example-project
+cd example-project
+npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
+```
+Go to your `angular-cli-build.js` file, and add the following to your `vendorNpmFiles` array: 
+```js
+'bootstrap/**/bootstrap.min.css',
+'font-awesome/**/font-awesome.min.css',
+'font-awesome/fonts/*',
+'fuel-ui/bundles/*'
+```
+Now build the project to copy over the necessary files to your vendor directory
+```
+ng build
+```
+Then simply add the proper script tags to your `index.html`
+```html
+<head>
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="vendor/fuel-ui/bundles/fuel-ui.min.css" />
+</head>
+
+...
+
+<!-- All your SystemJS, Angular2, Rx, zone, etc. scripts first! -->
+<script src="vendor/fuel-ui/bundles/fuel-ui.min.js"></script>
 ```
 
 ##Components

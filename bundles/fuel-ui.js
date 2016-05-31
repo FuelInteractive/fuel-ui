@@ -3691,38 +3691,81 @@ System.registerDynamic("fuel-ui/dist/directives/Tooltip/Tooltip", ["@angular/cor
   var core_1 = $__require('@angular/core');
   var Tooltip = (function() {
     function Tooltip(el) {
+      this.text = '';
+      this.position = 'top';
+      this.color = 'none';
+      this.size = 'auto';
+      this.rounded = false;
+      this.always = false;
       this._el = el.nativeElement;
     }
-    Tooltip.prototype.getElement = function() {
-      return this._el;
+    Tooltip.prototype.ngOnInit = function() {
+      if (this.always) {
+        this._el.classList.add("hint--always");
+        this.show();
+      }
+    };
+    Tooltip.prototype.ngOnChanges = function() {
+      for (var i = 0; i < this._el.classList.length; i++) {
+        var currentClass = this._el.classList[i];
+        if (currentClass.startsWith("hint--"))
+          this._el.classList.remove(currentClass);
+      }
+      if (this.always) {
+        this._el.classList.add("hint--always");
+        this.show();
+      }
     };
     Tooltip.prototype.show = function() {
       this.hide();
-      var html = "\n        <div class=\"tooltip top customFadeIn\" role=\"tooltip\">\n          <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>\n        </div>\n        ";
-      var newEl = document.createElement('div');
-      newEl.setAttribute('role', 'tooltip');
-      newEl.className = 'tooltip top customFadeIn';
-      newEl.innerHTML = "\n        <div class=\"tooltip-arrow\"></div>\n          <div class=\"tooltip-inner\">\n          " + this.text + "\n          </div>";
-      newEl.style.visibility = "hidden";
-      this.getElement().appendChild(newEl);
-      var bodyRect = document.body.getBoundingClientRect(),
-          elemRect = this.getElement().getBoundingClientRect(),
-          offset = (elemRect.top - bodyRect.top) - newEl.offsetHeight;
-      this.hide();
-      newEl.style.visibility = "";
-      newEl.style.top = offset + 'px';
-      newEl.style.left = elemRect.left + 'px';
-      this.getElement().appendChild(newEl);
+      this._el.setAttribute("data-hint", this.text);
+      for (var i = 0; i < this._el.classList.length; i++) {
+        var currentClass = this._el.classList[i];
+        if (currentClass.startsWith("hint"))
+          this._el.classList.remove(currentClass);
+      }
+      if (this.always) {
+        this._el.classList.add("hint--always");
+      }
+      this._el.classList.add("hint--" + this.position);
+      switch (this.color) {
+        case "error":
+          this._el.classList.add("hint--error");
+          break;
+        case "warning":
+          this._el.classList.add("hint--warning");
+          break;
+        case "info":
+          this._el.classList.add("hint--info");
+          break;
+        case "success":
+          this._el.classList.add("hint--success");
+          break;
+        default:
+      }
+      switch (this.size) {
+        case "small":
+          this._el.classList.add("hint--small");
+          break;
+        case "medium":
+          this._el.classList.add("hint--medium");
+          break;
+        case "large":
+          this._el.classList.add("hint--large");
+          break;
+        default:
+      }
+      if (this.rounded)
+        this._el.classList.add("hint--rounded");
     };
     Tooltip.prototype.hide = function() {
-      var tooltips = this.getElement().getElementsByClassName('tooltip');
-      for (var i = 0; i < tooltips.length; i++) {
-        tooltips[i].remove();
-      }
+      if (this.always)
+        return;
+      this._el.removeAttribute("data-hint");
     };
     Tooltip = __decorate([core_1.Directive({
       selector: '[tooltip]',
-      properties: ['text: tooltip'],
+      properties: ['text: tooltip', 'position: position', 'color: color', 'size: size', 'rounded: rounded', 'always: always'],
       host: {
         '(mouseover)': 'show()',
         '(mouseout)': 'hide()',
