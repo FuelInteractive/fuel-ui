@@ -171,6 +171,7 @@ node_modules/*
 !node_modules/prismjs/
 !node_modules/zone.js/
 !node_modules/reflect-metadata/
+!node_modules/hammerjs/
 **/jspm_packages/
 jspm_packages/
 CVS/
