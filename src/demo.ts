@@ -1,3 +1,4 @@
+import "node_modules/core-js/client/library.min.js";
 import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "@angular/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES, LocationStrategy, HashLocationStrategy } from "@angular/common";
 import {bootstrap} from "@angular/platform-browser-dynamic";
