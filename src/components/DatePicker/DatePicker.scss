@@ -26,11 +26,11 @@
 
 .fuel-ui-datepicker-input-group {
     input:read-only, .form-control[readonly] {
-        background-color: $input-bg;
+        background-color: $input-bg !important;
     } 
 
     .input-group-addon {
-        background-color: $input-bg;
+        background-color: $input-bg !important;
     }
 }
 
@@ -129,10 +129,11 @@
                 display: inline-block;
                 margin: 1px auto 0 auto;
                 cursor: pointer;
+                background-color: $input-bg !important;
             }
             
             input:read-only, .form-control[readonly] {
-                background-color: $body-bg;
+                background-color: $body-bg !important;
             }
             
             input.target {

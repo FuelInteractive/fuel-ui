@@ -73,6 +73,8 @@ export class DatePicker implements OnInit, AfterContentInit {
     changeDetector: ChangeDetectorRef;
     renderer: Renderer;
 
+    doInitialScroll = true;
+
     constructor(changeDetector: ChangeDetectorRef, renderer: Renderer) {
         this.changeDetector = changeDetector;
         this.renderer = renderer;
@@ -92,10 +94,14 @@ export class DatePicker implements OnInit, AfterContentInit {
                     && m.getMonth() == currentDate.getMonth()
             });
 
-            this.calendarScroller.container.scrollTop =
+            if(this.doInitialScroll) {
+                this.calendarScroller.container.scrollTop =
                 this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
 
-            this.calendarScroller.scrollToIndex(scrollToMonth);
+                this.calendarScroller.scrollToIndex(scrollToMonth);
+                this.doInitialScroll = false;
+            }
+            
         }, 1);
     }
 

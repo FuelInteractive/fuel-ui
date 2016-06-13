@@ -49,6 +49,10 @@ export class ScrollItem implements AfterViewInit {
 			overflow-x: hidden;
             max-height: 100%;
 		}
+
+        .scroll-container.hide-scrollbar {
+            overflow: hidden;
+        }
 		
 		.scroll-container.hide-scrollbar::-webkit-scrollbar {
 			display: none;
