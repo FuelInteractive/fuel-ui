@@ -36,12 +36,13 @@ export class ScrollItem implements AfterViewInit {
 @Component({
 	selector: "infinite-scroller",
 	template: `
-		<div class="scroll-container" 
-			(scroll)="doscroll($event)"
-			[style.height]="height"
-			[class.hide-scrollbar]="hideScrollbar">
-			<ng-content></ng-content>
-		</div>
+        <div class="scroll-outer" [class.hide-scrollbar]="hideScrollbar">
+            <div class="scroll-container"
+                (scroll)="doscroll($event)"
+                [style.height]="height">
+                <ng-content></ng-content>
+            </div>
+        </div>
 	`,
 	styles: [`
 		.scroll-container {
@@ -50,14 +51,10 @@ export class ScrollItem implements AfterViewInit {
             max-height: 100%;
 		}
 
-        .scroll-container.hide-scrollbar {
-            overflow: hidden;
+        .scroll-outer.hide-scrollbar .scroll-container {
+            margin-right: -16px;
         }
-		
-		.scroll-container.hide-scrollbar::-webkit-scrollbar {
-			display: none;
-		}
-		
+
 		.scroll-content {
 			overflow: auto;
 		}
@@ -185,11 +182,14 @@ export class InfiniteScroller
             target.scrollTop = 1;
 	}
     
-    scrollTo(position: number): void {
-        ElementUtils.scrollTo(this.container, position, 400);
+    scrollTo(position: number, animate = true): void {
+        if(animate)
+            ElementUtils.scrollTo(this.container, position, 400);
+        else
+            this.container.scrollTop = position;
     }
     
-    scrollToIndex(index: number): void {
+    scrollToIndex(index: number, animate = true): void {
         var itemArray = this.itemQuery.toArray();
         
         var targetIndex = 0;
@@ -203,7 +203,7 @@ export class InfiniteScroller
         
         var target = this.itemQuery.toArray()[targetIndex];
         var targetPos = target.element.offsetTop - this.container.offsetTop;
-        this.scrollTo(targetPos);
+        this.scrollTo(targetPos, animate);
     }
     
     isTop(): boolean {

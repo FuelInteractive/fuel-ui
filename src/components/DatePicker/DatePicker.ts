@@ -94,14 +94,12 @@ export class DatePicker implements OnInit, AfterContentInit {
                     && m.getMonth() == currentDate.getMonth()
             });
 
-            if(this.doInitialScroll) {
-                this.calendarScroller.container.scrollTop =
-                this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-
-                this.calendarScroller.scrollToIndex(scrollToMonth);
-                this.doInitialScroll = false;
-            }
             
+            this.calendarScroller.container.scrollTop =
+            this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
+
+            this.calendarScroller.scrollToIndex(scrollToMonth, this.doInitialScroll);
+            this.doInitialScroll = false;            
         }, 1);
     }
 
