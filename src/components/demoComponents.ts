@@ -13,6 +13,7 @@ import {SLIDER_DEMO_PROVIDERS, SliderDemo} from "./Slider/Slider.Demo";
 import {TAB_DEMO_PROVIDERS, TabDemo} from "./Tab/Tab.Demo";
 import {TAG_DEMO_PROVIDERS, TagDemo} from "./Tag/Tag.Demo";
 import {TIMEPICKER_DEMO_PROVIDERS, TimePickerDemo} from "./TimePicker/TimePicker.Demo";
+import {TEXTEXPANDER_DEMO_PROVIDERS, TextExpanderDemo} from "./TextExpander/TextExpander.Demo";
 
 export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     ACCORDION_DEMO_PROVIDERS,
@@ -29,6 +30,7 @@ export var FUELUI_DEMO_COMPONENT_PROVIDERS = [
     SLIDER_DEMO_PROVIDERS,
     TAB_DEMO_PROVIDERS,
     TAG_DEMO_PROVIDERS,
+    TEXTEXPANDER_DEMO_PROVIDERS,
     TIMEPICKER_DEMO_PROVIDERS
 ];
 
@@ -47,3 +49,4 @@ export * from "./Slider/Slider.Demo";
 export * from "./Tab/Tab.Demo";
 export * from "./Tag/Tag.Demo";
 export * from "./TimePicker/TimePicker.Demo";
+export * from "./TextExpander/TextExpander.Demo";
