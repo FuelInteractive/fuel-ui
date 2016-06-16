@@ -3411,6 +3411,92 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angul
   return module.exports;
 });
 
+System.registerDynamic("fuel-ui/dist/components/TextExpander/TextExpander", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var TextExpander = (function() {
+    function TextExpander() {
+      this.expanded = false;
+      this.ellipsis = true;
+      this.text = null;
+      this.characters = 50;
+      this.words = 0;
+      this.expandText = "show more";
+      this.shrinkText = "show less";
+      this.expandedChange = new core_1.EventEmitter();
+    }
+    TextExpander.prototype.toggleExpand = function() {
+      this.expanded = !this.expanded;
+      this.expandedChange.next(this.expanded);
+    };
+    TextExpander.prototype.amountOfCharacters = function() {
+      if (this.words > 0)
+        return this.getCharactersUpToNumberOfWords(this.words);
+      return this.characters;
+    };
+    TextExpander.prototype.getCharactersUpToNumberOfWords = function(words) {
+      var textCopy = this.text;
+      textCopy = textCopy.replace(/(^\s*)|(\s*$)/gi, "");
+      textCopy = textCopy.replace(/[ ]{2,}/gi, " ");
+      textCopy = textCopy.replace(/\n /, "\n");
+      var wordsArr = textCopy.split(' ');
+      if (words >= wordsArr.length - 1)
+        return this.text.length;
+      wordsArr = wordsArr.splice(0, words);
+      var lastWordToShow = wordsArr[wordsArr.length - 1];
+      var occurencesOfLastWord = wordsArr.filter(function(str) {
+        return str === lastWordToShow;
+      }).length;
+      if (occurencesOfLastWord == 1)
+        return this.text.split(lastWordToShow)[0].length + lastWordToShow.length;
+      var charactersUntilLastWord = 0;
+      for (var i = 0; i < occurencesOfLastWord; i++) {
+        charactersUntilLastWord += this.text.split(lastWordToShow)[i].length;
+      }
+      return charactersUntilLastWord + lastWordToShow.length;
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TextExpander.prototype, "expanded", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], TextExpander.prototype, "ellipsis", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], TextExpander.prototype, "text", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], TextExpander.prototype, "characters", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], TextExpander.prototype, "words", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], TextExpander.prototype, "expandText", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], TextExpander.prototype, "shrinkText", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], TextExpander.prototype, "expandedChange", void 0);
+    TextExpander = __decorate([core_1.Component({
+      selector: 'text-expander',
+      template: "\n      <span *ngIf=\"text\">\n          {{text | slice : 0 : (expanded ? text.length : amountOfCharacters())}}\n          <span *ngIf=\"!expanded && text.length > amountOfCharacters()\">\n              <span *ngIf=\"ellipsis\">&hellip;</span>\n              <a href=\"javascript:void(8);\" (click)=\"toggleExpand()\">\n                  {{expandText}}\n              </a>\n          </span>\n          <span *ngIf=\"expanded && text.length > amountOfCharacters()\">\n              <a href=\"javascript:void(8);\" (click)=\"toggleExpand()\">\n                  {{shrinkText}}\n              </a>\n          </span>\n      </span>\n    ",
+      directives: [common_1.CORE_DIRECTIVES],
+      pipes: [common_1.SlicePipe]
+    }), __metadata('design:paramtypes', [])], TextExpander);
+    return TextExpander;
+  }());
+  exports.TextExpander = TextExpander;
+  exports.TEXTEXPANDER_PROVIDERS = [TextExpander];
+  return module.exports;
+});
+
 System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -3681,7 +3767,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["@angular/core", "
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tag/Tag", "./TableSortable/TableSortable", "./Slider/Slider", "./TimePicker/TimePicker", "./Accordion/Accordion", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/TagSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./DatePicker/DatePickerProviders", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tag/Tag", "./TableSortable/TableSortable", "./Slider/Slider", "./TimePicker/TimePicker", "./TextExpander/TextExpander", "./Accordion/Accordion", "./Tab/TabSet", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/TagSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3705,7 +3791,8 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/Accor
   var TableSortable_1 = $__require('./TableSortable/TableSortable');
   var Slider_1 = $__require('./Slider/Slider');
   var TimePicker_1 = $__require('./TimePicker/TimePicker');
-  exports.FUELUI_COMPONENT_PROVIDERS = [AccordionItem_1.ACCORDION_PROVIDERS, Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS, Tag_1.TAG_PROVIDERS, TimePicker_1.TIMEPICKER_PROVIDERS];
+  var TextExpander_1 = $__require('./TextExpander/TextExpander');
+  exports.FUELUI_COMPONENT_PROVIDERS = [AccordionItem_1.ACCORDION_PROVIDERS, Alert_1.ALERT_PROVIDERS, Carousel_1.CAROUSEL_PROVIDERS, DatePickerProviders_1.DATE_PICKER_PROVIDERS, Modal_1.MODAL_PROVIDERS, Pagination_1.PAGINATION_PROVIDERS, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, Dropdown_1.DROPDOWN_COMPONENT_PROVIDERS, TableSortable_1.TABLESORTABLE_PROVIDERS, Slider_1.SLIDER_COMPONENT_PROVIDERS, Tab_1.TAB_PROVIDERS, Tag_1.TAG_PROVIDERS, TextExpander_1.TEXTEXPANDER_PROVIDERS, TimePicker_1.TIMEPICKER_PROVIDERS];
   __export($__require('./Accordion/Accordion'));
   __export($__require('./Accordion/AccordionItem'));
   __export($__require('./Alert/Alert'));
@@ -3724,6 +3811,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["./Accordion/Accor
   __export($__require('./Tag/TagSet'));
   __export($__require('./Slider/Slider'));
   __export($__require('./TimePicker/TimePicker'));
+  __export($__require('./TextExpander/TextExpander'));
   return module.exports;
 });
 
@@ -4039,14 +4127,16 @@ System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/c
     Collapse.prototype.ngOnInit = function() {
       if (!this.collapse) {
         this._animation.setDuration(0).addClass('in').start(this.element.nativeElement);
+      } else {
+        this.hide(0);
       }
     };
     Collapse.prototype.ngOnChanges = function(changes) {
       if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
         return;
-      return this.collapse ? this.hide() : this.show();
+      return this.collapse ? this.hide(this.duration) : this.show();
     };
-    Collapse.prototype.hide = function() {
+    Collapse.prototype.hide = function(duration) {
       var _this = this;
       this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
       this._baseSequence.setFromStyles({
@@ -4057,7 +4147,7 @@ System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/c
         paddingTop: '0',
         paddingBottom: '0'
       });
-      var a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
+      var a = this._animation.setDuration(duration).start(this.element.nativeElement);
       a.onComplete(function() {
         if (!_this.collapse)
           return;

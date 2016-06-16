@@ -34,14 +34,17 @@ export class Collapse implements OnInit, OnChanges{
                 .addClass('in')
                 .start(this.element.nativeElement);
         }
+        else{
+            this.hide(0);
+        }
     }
 
     ngOnChanges(changes: any) {
         if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean') return;
-        return this.collapse ? this.hide() : this.show();
+        return this.collapse ? this.hide(this.duration) : this.show();
     }
     
-    hide(): void {
+    hide(duration: number): void {
         
         //Webkit fix
         this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
@@ -57,7 +60,7 @@ export class Collapse implements OnInit, OnChanges{
                 paddingBottom: '0'
             });
         
-        let a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
+        let a = this._animation.setDuration(duration).start(this.element.nativeElement);
         a.onComplete(() => {
             //Check if user toggled collapse mid-animation
             if(!this.collapse) return;

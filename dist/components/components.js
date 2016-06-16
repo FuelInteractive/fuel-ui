@@ -15,6 +15,7 @@ var Tag_1 = require("./Tag/Tag");
 var TableSortable_1 = require("./TableSortable/TableSortable");
 var Slider_1 = require("./Slider/Slider");
 var TimePicker_1 = require("./TimePicker/TimePicker");
+var TextExpander_1 = require("./TextExpander/TextExpander");
 exports.FUELUI_COMPONENT_PROVIDERS = [
     AccordionItem_1.ACCORDION_PROVIDERS,
     Alert_1.ALERT_PROVIDERS,
@@ -28,6 +29,7 @@ exports.FUELUI_COMPONENT_PROVIDERS = [
     Slider_1.SLIDER_COMPONENT_PROVIDERS,
     Tab_1.TAB_PROVIDERS,
     Tag_1.TAG_PROVIDERS,
+    TextExpander_1.TEXTEXPANDER_PROVIDERS,
     TimePicker_1.TIMEPICKER_PROVIDERS
 ];
 __export(require("./Accordion/Accordion"));
@@ -48,5 +50,6 @@ __export(require("./Tag/Tag"));
 __export(require("./Tag/TagSet"));
 __export(require("./Slider/Slider"));
 __export(require("./TimePicker/TimePicker"));
+__export(require("./TextExpander/TextExpander"));
 
 //# sourceMappingURL=components.js.map

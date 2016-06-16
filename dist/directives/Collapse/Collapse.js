@@ -35,13 +35,16 @@ var Collapse = (function () {
                 .addClass('in')
                 .start(this.element.nativeElement);
         }
+        else {
+            this.hide(0);
+        }
     };
     Collapse.prototype.ngOnChanges = function (changes) {
         if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
             return;
-        return this.collapse ? this.hide() : this.show();
+        return this.collapse ? this.hide(this.duration) : this.show();
     };
-    Collapse.prototype.hide = function () {
+    Collapse.prototype.hide = function (duration) {
         var _this = this;
         //Webkit fix
         this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
@@ -55,7 +58,7 @@ var Collapse = (function () {
             paddingTop: '0',
             paddingBottom: '0'
         });
-        var a = this._animation.setDuration(this.duration).start(this.element.nativeElement);
+        var a = this._animation.setDuration(duration).start(this.element.nativeElement);
         a.onComplete(function () {
             //Check if user toggled collapse mid-animation
             if (!_this.collapse)

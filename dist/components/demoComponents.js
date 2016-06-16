@@ -17,6 +17,7 @@ var Slider_Demo_1 = require("./Slider/Slider.Demo");
 var Tab_Demo_1 = require("./Tab/Tab.Demo");
 var Tag_Demo_1 = require("./Tag/Tag.Demo");
 var TimePicker_Demo_1 = require("./TimePicker/TimePicker.Demo");
+var TextExpander_Demo_1 = require("./TextExpander/TextExpander.Demo");
 exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Accordion_Demo_1.ACCORDION_DEMO_PROVIDERS,
     Alert_Demo_1.ALERT_DEMO_PROVIDERS,
@@ -32,6 +33,7 @@ exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Slider_Demo_1.SLIDER_DEMO_PROVIDERS,
     Tab_Demo_1.TAB_DEMO_PROVIDERS,
     Tag_Demo_1.TAG_DEMO_PROVIDERS,
+    TextExpander_Demo_1.TEXTEXPANDER_DEMO_PROVIDERS,
     TimePicker_Demo_1.TIMEPICKER_DEMO_PROVIDERS
 ];
 __export(require("./Accordion/Accordion.Demo"));
@@ -49,5 +51,6 @@ __export(require("./Slider/Slider.Demo"));
 __export(require("./Tab/Tab.Demo"));
 __export(require("./Tag/Tag.Demo"));
 __export(require("./TimePicker/TimePicker.Demo"));
+__export(require("./TextExpander/TextExpander.Demo"));
 
 //# sourceMappingURL=demoComponents.js.map

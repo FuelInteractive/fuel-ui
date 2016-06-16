@@ -89,6 +89,8 @@ Then simply add the proper script tags to your `index.html`
 - [TableSortable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TableSortable#readme)
 - [Tabs](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Tab#readme)
 - [Tags](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Tag#readme)
+- [TextExpander](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TextExpander#readme)
+- [TimePicker](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TimePicker#readme)
 
 ##Directives
 - [Animation (helper)](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Animation#readme)
