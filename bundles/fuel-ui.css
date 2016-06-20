@@ -985,10 +985,10 @@
   left: 0; }
 
 .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {
-  background-color: #fff; }
+  background-color: #fff !important; }
 
 .fuel-ui-datepicker-input-group .input-group-addon {
-  background-color: #fff; }
+  background-color: #fff !important; }
 
 .date-picker-component {
   border: 1px solid #eceeef;
@@ -1056,9 +1056,10 @@
         border: none;
         display: inline-block;
         margin: 1px auto 0 auto;
-        cursor: pointer; }
+        cursor: pointer;
+        background-color: #fff !important; }
       .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {
-        background-color: #fff; }
+        background-color: #fff !important; }
       .date-picker-component .container header input.target {
         color: #0275d8; }
         .date-picker-component .container header input.target::-webkit-input-placeholder {

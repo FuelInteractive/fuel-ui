@@ -107,7 +107,7 @@ export class InfiniteScroller
 	}
     
     ngAfterViewInit(): void {
-        this.container = <HTMLElement>this.container.firstElementChild;        
+        this.container = <HTMLElement>this.container.querySelector(".scroll-container");        
         this.container.scrollTop += 1;
     }
     
@@ -185,7 +185,7 @@ export class InfiniteScroller
     scrollTo(position: number, animate = true): void {
         if(animate)
             ElementUtils.scrollTo(this.container, position, 400);
-        else
+        else 
             this.container.scrollTop = position;
     }
     
