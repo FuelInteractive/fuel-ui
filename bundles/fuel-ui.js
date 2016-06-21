@@ -3499,16 +3499,14 @@ System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/c
       duration = 350;
     }
     return core_1.trigger('collapse', [core_1.state('collapsed, true, void', core_1.style({
-      height: '0px',
-      paddingTop: '0',
-      paddingBottom: '0',
-      overflow: 'hidden',
-      opacity: '0'
+      height: '0',
+      opacity: '0',
+      overflow: 'hidden'
     })), core_1.state('expanded, false', core_1.style({
       height: '*',
-      overflow: 'hidden',
-      opacity: '1'
-    })), core_1.transition('true <=> false, collapsed <=> expanded', [core_1.animate(duration, core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})])), core_1.animate(duration)])]);
+      opacity: '1',
+      overflow: 'hidden'
+    })), core_1.transition('true => false, collapsed => expanded', [core_1.animate(duration + 'ms ease', core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})]))]), core_1.transition('false => true, expanded => collapsed', [core_1.animate(duration + 'ms ease', core_1.style({height: '0'}))])]);
   }
   exports.Collapse = Collapse;
   exports.COLLAPSE_PROVIDERS = [Collapse];

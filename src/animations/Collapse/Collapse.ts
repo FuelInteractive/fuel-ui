@@ -3,28 +3,23 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/co
 export function Collapse(duration: number = 350) {
     return trigger('collapse', [
             state('collapsed, true, void', style({
-                height: '0px', 
-                paddingTop: '0', 
-                paddingBottom: '0',
-                overflow: 'hidden',
-                opacity: '0'
+                height: '0',
+                opacity: '0',
+                overflow: 'hidden'
             })),
             state('expanded, false', style({
                 height: '*',
-                overflow: 'hidden',
-                opacity: '1'
+                opacity: '1',
+                overflow: 'hidden'
             })),
-            transition('true <=> false, collapsed <=> expanded', [
-                // animate(350, style({height: '*'})), animate(350), 
-                animate(duration, keyframes([
-                    style({
-                        opacity: '1',
-                    }),
-                    style({
-                        height: '*'
-                    })
-                ])),
-                animate(duration)
+            transition('true => false, collapsed => expanded', [
+                animate(duration+'ms ease', keyframes([
+                    style({opacity: '1'}),
+                    style({height: '*'})
+                ]))
+            ]),
+            transition('false => true, expanded => collapsed', [
+                animate(duration+'ms ease', style({height: '0'}))
             ])
         ])
 }
