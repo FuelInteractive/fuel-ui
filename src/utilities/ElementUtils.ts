@@ -17,21 +17,24 @@ export class ElementUtils {
         return width;
     }
     
-    static scrollTo(element: HTMLElement, to: number, duration: number) {
+    static scrollTo(element: HTMLElement, to: number, duration: number): Promise<any> {
         if (duration <= 0) return;
         
         var startTime = new Date().getTime();
         var from = element.scrollTop;
         
-        var timer = setInterval(() => {
-           var time = new Date().getTime() - startTime;
-           var scrollTo = AnimationUtils.easeInOutQuart(time, from, to-from, duration);
+        return new Promise<any>((resolve, reject) => {
+            var timer = setInterval(() => {
+                var time = new Date().getTime() - startTime;
+                var scrollTo = AnimationUtils.easeInOutQuart(time, from, to-from, duration);
 
-           element.scrollTop = scrollTo;
-           if(time >= duration) {
-               element.scrollTop = to;
-               clearInterval(timer);
-           } 
-        }, 1000 / 60);
+                element.scrollTop = scrollTo;
+                if(time >= duration) {
+                    element.scrollTop = to;
+                    clearInterval(timer);
+                    resolve();
+                } 
+            }, 1000 / 60);
+        });
     }
 }

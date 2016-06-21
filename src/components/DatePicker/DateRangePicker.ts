@@ -127,11 +127,12 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
                 this.focusStartDate();
             });
             
+        /* removed due to binding issues in FF
         this.startDateField.dateChange
             .subscribe((date: Date) => {
                 if(this.startDate !== date)
                     this.startDate = date;
-            });
+            });*/
         
         if(typeof this.endDateField === "undefined")
             throw "Fuel-UI Error: DateRangePicker missing endDate field";
@@ -153,11 +154,12 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
                 this.focusEndDate();
             });
             
+        /* removed due to binding issues in FF
         this.endDateField.dateChange
             .subscribe((date: Date) => {
                 if(this.endDate !== date)
                     this.endDate = date;
-            });
+            });*/
             
         this.dateFieldIcons.map((i: DatePickerFieldStyler) => {
             i.selectEvent.subscribe((event: Event) => {
