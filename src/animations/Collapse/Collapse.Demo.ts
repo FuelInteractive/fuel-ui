@@ -41,7 +41,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 import {Collapse} from 'fuel-ui/fuel-ui';
 
 @Component({
-    animations: [Collapse(350)]
+    animations: [Collapse(300)]
 })
 </code>
 </pre>
@@ -87,7 +87,7 @@ export class CollapseExample {
 
 </div>`,
     animations: [
-        Collapse(350)
+        Collapse(300)
     ],
     directives: [CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })

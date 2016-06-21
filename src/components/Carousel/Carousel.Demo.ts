@@ -38,7 +38,9 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 
 <div class="row">
     <carousel interval="10000" class="col-md-6">
-        <img *ngFor="let image of carouselImages" src="{{image}}" class="carousel-item" />
+        <div *ngFor="let image of carouselImages" class="carousel-item">
+            <img src="{{image}}" />
+        </div>        
     </carousel>
     
     <carousel interval="10000" class="col-md-6">
@@ -70,9 +72,15 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 <pre>
 <code class="language-markup" code-highlight>
 &lt;carousel&gt;
-    &lt;img src=&quot;image1.jpg&quot; class=&quot;carousel-item&quot; /&gt;
-    &lt;img src=&quot;image2.jpg&quot; class=&quot;carousel-item&quot; /&gt;
-    &lt;img src=&quot;image3.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;div class="carousel-item"&gt;
+        &lt;img src=&quot;image1.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;
+        &lt;img src=&quot;image2.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;
+        &lt;img src=&quot;image3.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;/div&gt;
 &lt;/carousel&gt;
 </code>
 </pre>
