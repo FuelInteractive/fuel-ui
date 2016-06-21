@@ -155,29 +155,35 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
   var core_2 = $__require('@angular/core');
   var core_3 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var core_4 = $__require('@angular/core');
   var CarouselItem = (function() {
-    function CarouselItem(element, _render, _change) {
-      this._render = _render;
+    function CarouselItem(_change, element) {
       this._change = _change;
       this.id = 0;
-      this.duration = 250;
+      this._state = "void";
       this.element = element.nativeElement;
     }
-    Object.defineProperty(CarouselItem.prototype, "isActive", {
+    Object.defineProperty(CarouselItem.prototype, "state", {
       get: function() {
-        return this._isActive;
+        return this._state;
       },
-      set: function(value) {
-        this._isActive = value;
-        this._render.setElementClass(this.element, "active", value);
-        this._render.setElementClass(this.element, "hide", !value);
-        this.setClasses(["out-left", "out-right"], false);
+      set: function(val) {
+        var _this = this;
+        this._state = val;
+        setTimeout(function() {
+          _this._change.markForCheck();
+        }, 1);
       },
       enumerable: true,
       configurable: true
     });
-    CarouselItem.prototype.ngAfterViewInit = function() {};
-    CarouselItem.prototype.ngAfterContentInit = function() {};
+    Object.defineProperty(CarouselItem.prototype, "isActive", {
+      get: function() {
+        return this.state == "in";
+      },
+      enumerable: true,
+      configurable: true
+    });
     CarouselItem.prototype.getTotalHeight = function() {
       var height = this.element.clientHeight;
       if (height > 1)
@@ -189,45 +195,12 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       }
       return height;
     };
-    CarouselItem.prototype.setClasses = function(classes, isAdd) {
-      var _this = this;
-      classes.map(function(c) {
-        _this._render.setElementClass(_this.element, c, isAdd);
-      });
-    };
-    CarouselItem.prototype.translate = function(x) {
-      this._render.setElementClass(this.element, "hide", false);
-      this._render.setElementStyle(this.element, "transform", "translate(" + x + "%,0)");
-    };
-    CarouselItem.prototype.resetTranslation = function() {
-      this._render.setElementStyle(this.element, "transform", "");
-    };
-    CarouselItem.prototype.slide = function(start, end) {
-      var _this = this;
-      var activate = end == 0;
-      if (activate) {}
-      this.isActive = activate;
-      this._render.setElementClass(this.element, "hide", false);
-      return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-          this.isActive = activate;
-          resolve();
-        }, _this.duration);
-      });
-    };
-    CarouselItem.prototype.slideOutLeft = function() {
-      return this.slide(0, -100);
-    };
-    CarouselItem.prototype.slideOutRight = function() {
-      return this.slide(0, 100);
-    };
-    CarouselItem.prototype.slideInLeft = function() {
-      return this.slide(100, 0);
-    };
-    CarouselItem.prototype.slideInRight = function() {
-      return this.slide(-100, 0);
-    };
-    CarouselItem = __decorate([core_1.Directive({selector: ".carousel-item"}), __metadata('design:paramtypes', [core_2.ElementRef, core_1.Renderer, core_3.ChangeDetectorRef])], CarouselItem);
+    CarouselItem = __decorate([core_1.Component({
+      selector: ".carousel-item",
+      changeDetection: core_3.ChangeDetectionStrategy.OnPush,
+      template: "\n        <div @slide=\"state\" class=\"item-content\">\n            <ng-content></ng-content>\n        </div>\n    ",
+      animations: [core_4.trigger("slide", [core_4.state("right", core_4.style({transform: "translate(100%,0)"})), core_4.state("in, void", core_4.style({transform: "translate(0,0)"})), core_4.state("left", core_4.style({transform: "translate(-100%, 0)"})), core_4.transition("right <=> in", [core_4.animate("300ms ease")]), core_4.transition("left <=> in", [core_4.animate("300ms ease")])])]
+    }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], CarouselItem);
     return CarouselItem;
   }());
   exports.CarouselItem = CarouselItem;
@@ -239,7 +212,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       this._activeIndex = 0;
       this._intervalRef = null;
       this.innerHeight = 0;
-      this.animation = null;
       this.panDirection = 0;
       this.lastPanOffset = 0;
       this.element = element.nativeElement;
@@ -255,7 +227,15 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
         }
         this._activeIndex = val;
         for (var i in this.items) {
-          this.items[i].isActive = (i == val.toString());
+          var itemIndex = parseInt(i);
+          if (i == val.toString())
+            this.items[i].state = "in";
+          else if (itemIndex == this.getRelativeIndex(-1))
+            this.items[i].state = "left";
+          else if (itemIndex == this.getRelativeIndex(1))
+            this.items[i].state = "right";
+          else
+            this.items[i].state = "right";
         }
       },
       enumerable: true,
@@ -306,7 +286,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       }
     };
     Carousel.prototype.registerItems = function() {
-      var _this = this;
       this.items = [];
       if (this.itemQuery.length == 0)
         return;
@@ -316,7 +295,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       this.items = this.itemQuery.toArray();
       this.activeIndex = this.items.reduce(function(prev, current, index) {
         if (prev != -1 && current.isActive || !current.isActive) {
-          current.isActive = false;
           return prev;
         } else
           return index;
@@ -324,15 +302,12 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       if (this.activeIndex == -1)
         this.activeIndex = 0;
       this.updateInnerHeight();
-      setTimeout(function() {
-        _this.updateInnerHeight();
-      }, 400);
-      this._change.markForCheck();
     };
     Carousel.prototype.updateInnerHeight = function() {
       this.innerHeight = this.items[this.activeIndex].getTotalHeight();
       if (this.innerHeight < 1)
         this.innerHeight = 250;
+      this._change.markForCheck();
     };
     Carousel.prototype.getRelativeItem = function(rel) {
       if (this.items.length == 1)
@@ -357,50 +332,22 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
         this.prev(item);
     };
     Carousel.prototype.prev = function(item) {
-      var _this = this;
       if (item === void 0) {
         item = null;
       }
-      if (this.animation != null) {
-        this.animation.then(function() {
-          _this.prev();
-        });
-        return;
-      }
       if (this.items.length < 2)
         return;
-      var current = this.getRelativeItem(0);
-      var prev = item != null ? item : this.getRelativeItem(-1);
-      current.slideOutRight();
-      prev.slideInRight().then(function() {
-        _this.animation = null;
-        _this.activeIndex = _this.items.indexOf(prev);
-        _this.innerHeight = _this.items[_this.activeIndex].getTotalHeight();
-        _this._change.markForCheck();
-      });
+      this.activeIndex = this.getRelativeIndex(-1);
+      this._change.markForCheck();
     };
     Carousel.prototype.next = function(item) {
-      var _this = this;
       if (item === void 0) {
         item = null;
       }
-      if (this.animation != null) {
-        this.animation.then(function() {
-          _this.next();
-        });
-        return;
-      }
       if (this.items.length < 2)
         return;
-      var current = this.getRelativeItem(0);
-      var next = item != null ? item : this.getRelativeItem(1);
-      current.slideOutLeft();
-      this.animation = next.slideInLeft().then(function() {
-        _this.animation = null;
-        _this.activeIndex = _this.items.indexOf(next);
-        _this.innerHeight = _this.items[_this.activeIndex].getTotalHeight();
-        _this._change.markForCheck();
-      });
+      this.activeIndex = this.getRelativeIndex(1);
+      this._change.markForCheck();
     };
     Carousel.prototype.swipeleft = function() {
       if (this.panDirection == 0)
@@ -410,52 +357,13 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       if (this.panDirection == 0)
         this.prev();
     };
-    Carousel.prototype.panleft = function(event) {
-      if (this.panDirection == 0)
-        this.panDirection = 1;
-    };
-    Carousel.prototype.panright = function(event) {
-      if (this.panDirection == 0)
-        this.panDirection = -1;
-    };
-    Carousel.prototype.pan = function(event) {
-      event.preventDefault();
-      if (this.panDirection == 0 || event.deltaX == 0)
-        return;
-      var current = this.getRelativeItem(0);
-      var next = this.getRelativeItem(this.panDirection);
-      var width = current.element.clientWidth;
-      var offset = this.lastPanOffset = ((100 / width) * event.deltaX);
-      var nextOffset = (100 - Math.abs(offset)) * (offset / Math.abs(offset)) * -1;
-      current.translate(offset);
-      next.translate(nextOffset);
-    };
-    Carousel.prototype.panend = function(event) {
-      var _this = this;
-      if (this.lastPanOffset == 0)
-        return;
-      var current = this.getRelativeItem(0);
-      var next = this.getRelativeItem(this.panDirection);
-      var offset = this.lastPanOffset;
-      var nextOffset = (100 - Math.abs(offset)) * (offset / Math.abs(offset)) * -1;
-      if (Math.abs(this.lastPanOffset) < 50) {
-        current.slide(this.lastPanOffset, 0);
-        next.slide(nextOffset, 100 * this.panDirection);
-      } else {
-        current.slide(this.lastPanOffset, 100 * this.panDirection);
-        this.animation = next.slide(nextOffset, 0).then(function() {
-          _this.animation = null;
-          _this.activeIndex = _this.getRelativeIndex(_this.panDirection);
-        });
-      }
-      this.lastPanOffset = 0;
-    };
     __decorate([core_3.Input(), __metadata('design:type', Number), __metadata('design:paramtypes', [Number])], Carousel.prototype, "interval", null);
     __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "itemQuery", void 0);
     Carousel = __decorate([core_1.Component({
-      selector: 'carousel',
+      selector: "carousel",
       template: "\n      <div class=\"carousel slide\" >\n        <!--(swiperight)=\"prev()\" (swipeleft)=\"next()\"-->\n        <!--(pan)=\"pan($event)\" (panleft)=\"panleft($event)\" (panright)=\"panright($event)\"\n        (panend)=\"panend($event)\"-->\n        <ol class=\"carousel-indicators\">\n          <!--<li *ngFor=\"let image of images\"\n            (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\">\n            </li> -->\n            <li *ngFor=\"let item of items\"\n              [class.active]=\"item.isActive\"\n              (click)=\"navigateTo(item)\">\n            </li>\n        </ol>\n        <div class=\"carousel-inner\" role=\"listbox\"\n          [style.height.px]=\"innerHeight\">\n            <ng-content select=\"carousel-item,.carousel-item\"></ng-content>\n        </div>\n        <a class=\"left carousel-control\" role=\"button\" (click)=\"prev()\">\n          <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Previous</span>\n        </a>\n        <a class=\"right carousel-control\" role=\"button\" (click)=\"next()\">\n          <span class=\"icon-next\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Next</span>\n        </a>\n      </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, CarouselItem]
+      directives: [common_1.CORE_DIRECTIVES, CarouselItem],
+      changeDetection: core_3.ChangeDetectionStrategy.OnPush
     }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], Carousel);
     return Carousel;
   }());
@@ -3496,19 +3404,17 @@ System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/c
   var core_1 = $__require('@angular/core');
   function Collapse(duration) {
     if (duration === void 0) {
-      duration = 350;
+      duration = 300;
     }
     return core_1.trigger('collapse', [core_1.state('collapsed, true, void', core_1.style({
-      height: '0px',
-      paddingTop: '0',
-      paddingBottom: '0',
-      overflow: 'hidden',
-      opacity: '0'
+      height: '0',
+      opacity: '0',
+      overflow: 'hidden'
     })), core_1.state('expanded, false', core_1.style({
       height: '*',
-      overflow: 'hidden',
-      opacity: '1'
-    })), core_1.transition('true <=> false, collapsed <=> expanded', [core_1.animate(duration, core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})])), core_1.animate(duration)])]);
+      opacity: '1',
+      overflow: 'hidden'
+    })), core_1.transition('true => false, collapsed => expanded', [core_1.animate(duration + 'ms ease', core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})]))]), core_1.transition('false => true, expanded => collapsed', [core_1.animate(duration + 'ms ease', core_1.style({height: '0'}))])]);
   }
   exports.Collapse = Collapse;
   exports.COLLAPSE_PROVIDERS = [Collapse];

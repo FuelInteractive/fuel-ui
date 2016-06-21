@@ -11,7 +11,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     <div class="col-md-12">
         <div class="card card-block">
             <h2 class="card-title">Collapse</h2>
-            <p class="card-text">Collapse is a custom directive to display and hide content on click</p>
+            <p class="card-text">Collapse is a custom animation to display and hide content</p>
         </div>
     </div>
 </div>
@@ -22,9 +22,10 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
         border: 1px solid black; 
         padding: 0 25px;
         box-sizing: border-box;
+        overflow: hidden;
     }
 </style>
-<div id="collapse-demo-box" @collapse="collapsed ? 'collapsed' : 'expanded'"> 
+<div id="collapse-demo-box" @collapse="collapsed ? 'true' : 'false'"> 
     <h2>All of your content</h2>
     <ul>
         <li>That you wish</li>
@@ -47,7 +48,7 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 </pre>
 
 <h3>Getting Started</h3>
-<p>Collapse allows you to toggle content on the page with a nice sliding animation</p>
+<p>Collapse allows you to toggle content on the page with a nice sliding animation. Import the Collapse function from 'fuel-ui/fuel-ui', and add the function to your animations array of any component. You can optionally add a duration number as a parameter.</p>
 
 <h3>Usage</h3>
 <tabset>
@@ -77,7 +78,7 @@ export class CollapseExample {
 </tab>
 </tabset>
 
-<h3>Attributes</h3>
+<h3>Parameters</h3>
 <table-sortable
     [columns]="attributesColumns"
     [data]="attributes"
@@ -95,8 +96,7 @@ export class CollapseDemo {
     collapsed: boolean = false;
   
     attributes:any[] = [
-        new Attribute('collapse', 'boolean', 'true', 'Boolean whether the content is shown or hidden'),
-        new Attribute('duration', 'number', '500', 'Number of milliseconds for how long the open/close animation takes')
+        new Attribute('duration', 'number', '300', 'Number of milliseconds for how long the open/close animation takes')
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;

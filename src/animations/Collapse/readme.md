@@ -1,21 +1,27 @@
 ### Collapse Selector
-`[collapse]` - `<any [collapse]="collapsed" duration="500"></any>`
+`@collapse` - `<any @collapse="collapsed"></any>`
 
-### collapse Settings
+### Collapse Import
+```javascript
+import {Collapse} from 'fuel-ui/fuel-ui';
 
-  * `collapse` _- boolean -
-    Boolean whether the content is shown or hidden
+@Component({
+    animations: [Collapse(300)]
+})
+```
+
+### Collapse Parameter
+
   * `duration` _- number -
     Number of milliseconds for how long the open/close animation takes
  
 ### Collapse Example
 ```javascript
 collapsed: boolean = false;
-duration: number = 500;
 ```
 
 ```html
-<div [collapse]="collapsed" [duration]="duration">
+<div @collapse="collapsed ? 'true' : 'false'">
     <h2>All of your content</h2>
     <ul>
         <li>That you wish</li>
