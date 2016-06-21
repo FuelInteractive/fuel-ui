@@ -7,6 +7,7 @@ import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, Da
 const routes: RouterConfig = [
     { path: '/', component: DemoHome, index: true},
     { path: '/installation', component: InstallationComponent},
+    { path: '/animation/collapse', component: CollapseDemo },
     { path: '/component/accordion', component: AccordionDemo },
     { path: '/component/alert', component: AlertDemo },
     { path: '/component/carousel', component: CarouselDemo },
@@ -25,7 +26,6 @@ const routes: RouterConfig = [
     { path: '/component/timepicker', component: TimePickerDemo },
     { path: '/directive/animation', component: AnimationDemo },
     { path: '/directive/codehighlighter', component: CodeHighlighterDemo },
-    { path: '/directive/collapse', component: CollapseDemo },
     { path: '/directive/tooltip', component: TooltipDemo },
     { path: '/pipe/format', component: FormatDemo },
     { path: '/pipe/maptoiterable', component: MapToIterableDemo },

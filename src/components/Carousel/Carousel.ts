@@ -3,9 +3,8 @@ import {QueryList, ContentChildren, ElementRef} from "@angular/core";
 import {AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked, OnDestroy} from "@angular/core";
 import {Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
-import {Animation} from "@angular/platform-browser/src/animate/animation";
-import {AnimationBuilder} from "@angular/platform-browser/src/animate/animation_builder";
-import {CssAnimationBuilder} from "@angular/platform-browser/src/animate/css_animation_builder";
+// import {AnimationBuilder} from "@angular/platform-browser/src/animate/animation_builder";
+// import {CssAnimationBuilder} from "@angular/platform-browser/src/animate/css_animation_builder";
 //import {HammerGesturesPluginCommon} from "@angular//platform-browser/src/dom/events/hammer_common";
 
 
@@ -30,17 +29,22 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
     element: HTMLElement;
     duration: number = 250;
     
-    private _animationBuilder: AnimationBuilder;
-    private get _animation(): CssAnimationBuilder {
-        return this._animationBuilder.css()
-            .setDuration(this.duration)
-    }
+    // private _animationBuilder: AnimationBuilder;
+    // private get _animation(): CssAnimationBuilder {
+    //     return this._animationBuilder.css()
+    //         .setDuration(this.duration)
+    // }
     
-    constructor(element: ElementRef, animationBuilder: AnimationBuilder,
+    // constructor(element: ElementRef, animationBuilder: AnimationBuilder,
+    //     private _render: Renderer,
+    //     private _change: ChangeDetectorRef) {
+    //     this.element = element.nativeElement;
+    //     this._animationBuilder = animationBuilder;
+    // }
+    constructor(element: ElementRef,
         private _render: Renderer,
         private _change: ChangeDetectorRef) {
         this.element = element.nativeElement;
-        this._animationBuilder = animationBuilder;
     }
     
     ngAfterViewInit(): void {
@@ -81,17 +85,17 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
     }
     
     slide(start: number, end:number): Promise<any> {
-        let animation = this._animation
-            .setFromStyles({"transform": `translate(${start}%,0)`})
-            .setToStyles({"transform": `translate(${end}%,0)`});
+        // let animation = this._animation
+        //     .setFromStyles({"transform": `translate(${start}%,0)`})
+        //     .setToStyles({"transform": `translate(${end}%,0)`});
         
         let activate = end == 0;
         
         if(activate) {
-            if(start > end)
-            animation.addAnimationClass("out-right");
-            else
-                animation.addAnimationClass("out-left");
+            // if(start > end)
+            //     animation.addAnimationClass("out-right");
+            // else
+            //     animation.addAnimationClass("out-left");
         }
         
         this.isActive = activate;
@@ -105,7 +109,7 @@ export class CarouselItem implements AfterContentInit, AfterViewInit {
                 resolve();
             }, this.duration);
             
-            animation.start(this.element);
+            // animation.start(this.element);
         });            
     }
     

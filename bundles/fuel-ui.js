@@ -1,4 +1,4 @@
-System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../animations/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -22,7 +22,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@ang
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
-  var Collapse_1 = $__require('../../directives/Collapse/Collapse');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
   var Accordion_1 = $__require('./Accordion');
   var AccordionItem = (function() {
     function AccordionItem(accordion) {
@@ -63,8 +63,9 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@ang
     __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
     AccordionItem = __decorate([core_1.Component({
       selector: 'accordion-item, [accordion-item]',
-      directives: [Collapse_1.Collapse, common_1.NgClass],
-      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [collapse]=\"!open\" [duration]=\"accordion.duration\">\n          <ng-content></ng-content>\n      </div>\n    "
+      directives: [common_1.NgClass],
+      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" @collapse=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+      animations: [Collapse_1.Collapse(350)]
     }), __metadata('design:paramtypes', [Accordion_1.Accordion])], AccordionItem);
     return AccordionItem;
   }());
@@ -128,7 +129,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -154,15 +155,13 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
   var core_2 = $__require('@angular/core');
   var core_3 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
-  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
   var CarouselItem = (function() {
-    function CarouselItem(element, animationBuilder, _render, _change) {
+    function CarouselItem(element, _render, _change) {
       this._render = _render;
       this._change = _change;
       this.id = 0;
       this.duration = 250;
       this.element = element.nativeElement;
-      this._animationBuilder = animationBuilder;
     }
     Object.defineProperty(CarouselItem.prototype, "isActive", {
       get: function() {
@@ -173,13 +172,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
         this._render.setElementClass(this.element, "active", value);
         this._render.setElementClass(this.element, "hide", !value);
         this.setClasses(["out-left", "out-right"], false);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(CarouselItem.prototype, "_animation", {
-      get: function() {
-        return this._animationBuilder.css().setDuration(this.duration);
       },
       enumerable: true,
       configurable: true
@@ -212,14 +204,8 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
     };
     CarouselItem.prototype.slide = function(start, end) {
       var _this = this;
-      var animation = this._animation.setFromStyles({"transform": "translate(" + start + "%,0)"}).setToStyles({"transform": "translate(" + end + "%,0)"});
       var activate = end == 0;
-      if (activate) {
-        if (start > end)
-          animation.addAnimationClass("out-right");
-        else
-          animation.addAnimationClass("out-left");
-      }
+      if (activate) {}
       this.isActive = activate;
       this._render.setElementClass(this.element, "hide", false);
       return new Promise(function(resolve, reject) {
@@ -227,7 +213,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
           this.isActive = activate;
           resolve();
         }, _this.duration);
-        animation.start(_this.element);
       });
     };
     CarouselItem.prototype.slideOutLeft = function() {
@@ -242,7 +227,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
     CarouselItem.prototype.slideInRight = function() {
       return this.slide(-100, 0);
     };
-    CarouselItem = __decorate([core_1.Directive({selector: ".carousel-item"}), __metadata('design:paramtypes', [core_2.ElementRef, animation_builder_1.AnimationBuilder, core_1.Renderer, core_3.ChangeDetectorRef])], CarouselItem);
+    CarouselItem = __decorate([core_1.Directive({selector: ".carousel-item"}), __metadata('design:paramtypes', [core_2.ElementRef, core_1.Renderer, core_3.ChangeDetectorRef])], CarouselItem);
     return CarouselItem;
   }());
   exports.CarouselItem = CarouselItem;
@@ -3497,7 +3482,35 @@ System.registerDynamic("fuel-ui/dist/components/TextExpander/TextExpander", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var core_1 = $__require('@angular/core');
+  function Collapse(duration) {
+    if (duration === void 0) {
+      duration = 350;
+    }
+    return core_1.trigger('collapse', [core_1.state('collapsed, true, void', core_1.style({
+      height: '0px',
+      paddingTop: '0',
+      paddingBottom: '0',
+      overflow: 'hidden',
+      opacity: '0'
+    })), core_1.state('expanded, false', core_1.style({
+      height: '*',
+      overflow: 'hidden',
+      opacity: '1'
+    })), core_1.transition('true <=> false, collapsed <=> expanded', [core_1.animate(duration, core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})])), core_1.animate(duration)])]);
+  }
+  exports.Collapse = Collapse;
+  exports.COLLAPSE_PROVIDERS = [Collapse];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3520,6 +3533,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
   var Accordion = (function() {
     function Accordion() {
       this.closeOthers = true;
@@ -3549,7 +3563,8 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular
     __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
     Accordion = __decorate([core_1.Component({
       selector: 'accordion',
-      template: "<ng-content></ng-content>"
+      template: "<ng-content></ng-content>",
+      animations: [Collapse_1.Collapse(350)]
     }), __metadata('design:paramtypes', [])], Accordion);
     return Accordion;
   }());
@@ -4086,108 +4101,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/core", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('@angular/core');
-  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
-  var Collapse = (function() {
-    function Collapse(animationBuilder, element) {
-      this.element = element;
-      this.duration = 500;
-      this.collapse = true;
-      this._animation = animationBuilder.css();
-    }
-    Object.defineProperty(Collapse.prototype, "_baseSequence", {
-      get: function() {
-        return this._animation.setDuration(this.duration).removeClass('fuel-ui-collapse').removeClass('in').addAnimationClass('fuel-ui-collapsing');
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Collapse.prototype.ngOnInit = function() {
-      if (!this.collapse) {
-        this._animation.setDuration(0).addClass('in').start(this.element.nativeElement);
-      } else {
-        this.hide(0);
-      }
-    };
-    Collapse.prototype.ngOnChanges = function(changes) {
-      if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
-        return;
-      return this.collapse ? this.hide(this.duration) : this.show();
-    };
-    Collapse.prototype.hide = function(duration) {
-      var _this = this;
-      this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
-      this._baseSequence.setFromStyles({
-        height: this.element.nativeElement.scrollHeight + 'px',
-        overflow: 'hidden'
-      }).setToStyles({
-        height: '0',
-        paddingTop: '0',
-        paddingBottom: '0'
-      });
-      var a = this._animation.setDuration(duration).start(this.element.nativeElement);
-      a.onComplete(function() {
-        if (!_this.collapse)
-          return;
-        a.removeClasses(['in']);
-        a.addClasses(['fuel-ui-collapse']);
-      });
-    };
-    Collapse.prototype.show = function() {
-      var _this = this;
-      this._animation.setDuration(0).addClass('in').setFromStyles({overflow: 'hidden'}).setToStyles({
-        paddingTop: '',
-        paddingBottom: ''
-      }).start(this.element.nativeElement).onComplete(function() {
-        var a = _this._baseSequence.setFromStyles({height: '0'}).setToStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).start(_this.element.nativeElement);
-        a.onComplete(function() {
-          a.addClasses(['fuel-ui-collapse', 'in']);
-          _this._animation.setDuration(0).setFromStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).setToStyles({height: 'auto'}).start(_this.element.nativeElement).onComplete(function() {
-            if (_this.collapse)
-              a.addClasses(['fuel-ui-collapse']);
-          });
-        });
-      });
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Collapse.prototype, "duration", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Collapse.prototype, "collapse", void 0);
-    Collapse = __decorate([core_1.Directive({
-      selector: '[collapse]',
-      host: {
-        '[attr.aria-expanded]': '!collapse',
-        '[attr.aria-hidden]': 'collapse'
-      }
-    }), __metadata('design:paramtypes', [animation_builder_1.AnimationBuilder, core_1.ElementRef])], Collapse);
-    return Collapse;
-  }());
-  exports.Collapse = Collapse;
-  exports.COLLAPSE_PROVIDERS = [Collapse];
-  return module.exports;
-});
-
-System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter", "./Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4201,12 +4115,10 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Anima
   var Animation_1 = $__require('./Animation/Animation');
   var Tooltip_1 = $__require('./Tooltip/Tooltip');
   var CodeHighlighter_1 = $__require('./CodeHighlighter/CodeHighlighter');
-  var Collapse_1 = $__require('./Collapse/Collapse');
-  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter, Collapse_1.Collapse];
+  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter];
   __export($__require('./Animation/Animation'));
   __export($__require('./Tooltip/Tooltip'));
   __export($__require('./CodeHighlighter/CodeHighlighter'));
-  __export($__require('./Collapse/Collapse'));
   return module.exports;
 });
 
