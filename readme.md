@@ -75,6 +75,9 @@ Then simply add the proper script tags to your `index.html`
 <script src="vendor/fuel-ui/bundles/fuel-ui.min.js"></script>
 ```
 
+##Animations
+- [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/animations/Collapse#readme)
+
 ##Components
 - [Accordion](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Accordion#readme)
 - [Alert](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Alert#readme)
@@ -95,7 +98,6 @@ Then simply add the proper script tags to your `index.html`
 ##Directives
 - [Animation (helper)](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Animation#readme)
 - [CodeHighlighter](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/CodeHighlighter#readme)
-- [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Collapse#readme)
 - [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
 
 ##Pipes

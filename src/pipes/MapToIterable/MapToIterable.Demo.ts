@@ -25,7 +25,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 <h3>Reasoning</h3>
 <div>
-    <p>According to Miško Hevery (<a href="" target="_blank">reference</a>):</p>
+    <p>According to Miško Hevery (<a href="https://github.com/angular/angular/issues/2246#issuecomment-107212606" target="_blank">reference</a>):</p>
 
     <blockquote class="blockquote">
         <p>Maps have no orders in keys and hence they iteration is unpredictable. This was supported in ng1, but we think it was a mistake and will not be supported in NG2</p>

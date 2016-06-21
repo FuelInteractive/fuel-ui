@@ -1,9 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {AccordionItem} from './AccordionItem';
+import {Collapse} from '../../animations/Collapse/Collapse';
 
 @Component({
     selector: 'accordion',
-    template: `<ng-content></ng-content>`
+    template: `<ng-content></ng-content>`,
+    animations: [Collapse(350)]
 })
 export class Accordion {
     @Input() public closeOthers:boolean = true;

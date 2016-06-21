@@ -1,4 +1,4 @@
-System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../directives/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../animations/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -22,7 +22,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@ang
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
-  var Collapse_1 = $__require('../../directives/Collapse/Collapse');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
   var Accordion_1 = $__require('./Accordion');
   var AccordionItem = (function() {
     function AccordionItem(accordion) {
@@ -63,8 +63,9 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@ang
     __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
     AccordionItem = __decorate([core_1.Component({
       selector: 'accordion-item, [accordion-item]',
-      directives: [Collapse_1.Collapse, common_1.NgClass],
-      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [collapse]=\"!open\" [duration]=\"accordion.duration\">\n          <ng-content></ng-content>\n      </div>\n    "
+      directives: [common_1.NgClass],
+      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" @collapse=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+      animations: [Collapse_1.Collapse(350)]
     }), __metadata('design:paramtypes', [Accordion_1.Accordion])], AccordionItem);
     return AccordionItem;
   }());
@@ -128,7 +129,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -154,38 +155,35 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
   var core_2 = $__require('@angular/core');
   var core_3 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
-  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
+  var core_4 = $__require('@angular/core');
   var CarouselItem = (function() {
-    function CarouselItem(element, animationBuilder, _render, _change) {
-      this._render = _render;
+    function CarouselItem(_change, element) {
       this._change = _change;
       this.id = 0;
-      this.duration = 250;
+      this._state = "void";
       this.element = element.nativeElement;
-      this._animationBuilder = animationBuilder;
     }
+    Object.defineProperty(CarouselItem.prototype, "state", {
+      get: function() {
+        return this._state;
+      },
+      set: function(val) {
+        var _this = this;
+        this._state = val;
+        setTimeout(function() {
+          _this._change.markForCheck();
+        }, 1);
+      },
+      enumerable: true,
+      configurable: true
+    });
     Object.defineProperty(CarouselItem.prototype, "isActive", {
       get: function() {
-        return this._isActive;
-      },
-      set: function(value) {
-        this._isActive = value;
-        this._render.setElementClass(this.element, "active", value);
-        this._render.setElementClass(this.element, "hide", !value);
-        this.setClasses(["out-left", "out-right"], false);
+        return this.state == "in";
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(CarouselItem.prototype, "_animation", {
-      get: function() {
-        return this._animationBuilder.css().setDuration(this.duration);
-      },
-      enumerable: true,
-      configurable: true
-    });
-    CarouselItem.prototype.ngAfterViewInit = function() {};
-    CarouselItem.prototype.ngAfterContentInit = function() {};
     CarouselItem.prototype.getTotalHeight = function() {
       var height = this.element.clientHeight;
       if (height > 1)
@@ -197,52 +195,12 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       }
       return height;
     };
-    CarouselItem.prototype.setClasses = function(classes, isAdd) {
-      var _this = this;
-      classes.map(function(c) {
-        _this._render.setElementClass(_this.element, c, isAdd);
-      });
-    };
-    CarouselItem.prototype.translate = function(x) {
-      this._render.setElementClass(this.element, "hide", false);
-      this._render.setElementStyle(this.element, "transform", "translate(" + x + "%,0)");
-    };
-    CarouselItem.prototype.resetTranslation = function() {
-      this._render.setElementStyle(this.element, "transform", "");
-    };
-    CarouselItem.prototype.slide = function(start, end) {
-      var _this = this;
-      var animation = this._animation.setFromStyles({"transform": "translate(" + start + "%,0)"}).setToStyles({"transform": "translate(" + end + "%,0)"});
-      var activate = end == 0;
-      if (activate) {
-        if (start > end)
-          animation.addAnimationClass("out-right");
-        else
-          animation.addAnimationClass("out-left");
-      }
-      this.isActive = activate;
-      this._render.setElementClass(this.element, "hide", false);
-      return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-          this.isActive = activate;
-          resolve();
-        }, _this.duration);
-        animation.start(_this.element);
-      });
-    };
-    CarouselItem.prototype.slideOutLeft = function() {
-      return this.slide(0, -100);
-    };
-    CarouselItem.prototype.slideOutRight = function() {
-      return this.slide(0, 100);
-    };
-    CarouselItem.prototype.slideInLeft = function() {
-      return this.slide(100, 0);
-    };
-    CarouselItem.prototype.slideInRight = function() {
-      return this.slide(-100, 0);
-    };
-    CarouselItem = __decorate([core_1.Directive({selector: ".carousel-item"}), __metadata('design:paramtypes', [core_2.ElementRef, animation_builder_1.AnimationBuilder, core_1.Renderer, core_3.ChangeDetectorRef])], CarouselItem);
+    CarouselItem = __decorate([core_1.Component({
+      selector: ".carousel-item",
+      changeDetection: core_3.ChangeDetectionStrategy.OnPush,
+      template: "\n        <div @slide=\"state\" class=\"item-content\">\n            <ng-content></ng-content>\n        </div>\n    ",
+      animations: [core_4.trigger("slide", [core_4.state("right", core_4.style({transform: "translate(100%,0)"})), core_4.state("in, void", core_4.style({transform: "translate(0,0)"})), core_4.state("left", core_4.style({transform: "translate(-100%, 0)"})), core_4.transition("right <=> in", [core_4.animate("300ms ease")]), core_4.transition("left <=> in", [core_4.animate("300ms ease")])])]
+    }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], CarouselItem);
     return CarouselItem;
   }());
   exports.CarouselItem = CarouselItem;
@@ -254,7 +212,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       this._activeIndex = 0;
       this._intervalRef = null;
       this.innerHeight = 0;
-      this.animation = null;
       this.panDirection = 0;
       this.lastPanOffset = 0;
       this.element = element.nativeElement;
@@ -270,7 +227,15 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
         }
         this._activeIndex = val;
         for (var i in this.items) {
-          this.items[i].isActive = (i == val.toString());
+          var itemIndex = parseInt(i);
+          if (i == val.toString())
+            this.items[i].state = "in";
+          else if (itemIndex == this.getRelativeIndex(-1))
+            this.items[i].state = "left";
+          else if (itemIndex == this.getRelativeIndex(1))
+            this.items[i].state = "right";
+          else
+            this.items[i].state = "right";
         }
       },
       enumerable: true,
@@ -321,7 +286,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       }
     };
     Carousel.prototype.registerItems = function() {
-      var _this = this;
       this.items = [];
       if (this.itemQuery.length == 0)
         return;
@@ -331,7 +295,6 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       this.items = this.itemQuery.toArray();
       this.activeIndex = this.items.reduce(function(prev, current, index) {
         if (prev != -1 && current.isActive || !current.isActive) {
-          current.isActive = false;
           return prev;
         } else
           return index;
@@ -339,15 +302,12 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       if (this.activeIndex == -1)
         this.activeIndex = 0;
       this.updateInnerHeight();
-      setTimeout(function() {
-        _this.updateInnerHeight();
-      }, 400);
-      this._change.markForCheck();
     };
     Carousel.prototype.updateInnerHeight = function() {
       this.innerHeight = this.items[this.activeIndex].getTotalHeight();
       if (this.innerHeight < 1)
         this.innerHeight = 250;
+      this._change.markForCheck();
     };
     Carousel.prototype.getRelativeItem = function(rel) {
       if (this.items.length == 1)
@@ -372,50 +332,22 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
         this.prev(item);
     };
     Carousel.prototype.prev = function(item) {
-      var _this = this;
       if (item === void 0) {
         item = null;
       }
-      if (this.animation != null) {
-        this.animation.then(function() {
-          _this.prev();
-        });
-        return;
-      }
       if (this.items.length < 2)
         return;
-      var current = this.getRelativeItem(0);
-      var prev = item != null ? item : this.getRelativeItem(-1);
-      current.slideOutRight();
-      prev.slideInRight().then(function() {
-        _this.animation = null;
-        _this.activeIndex = _this.items.indexOf(prev);
-        _this.innerHeight = _this.items[_this.activeIndex].getTotalHeight();
-        _this._change.markForCheck();
-      });
+      this.activeIndex = this.getRelativeIndex(-1);
+      this._change.markForCheck();
     };
     Carousel.prototype.next = function(item) {
-      var _this = this;
       if (item === void 0) {
         item = null;
       }
-      if (this.animation != null) {
-        this.animation.then(function() {
-          _this.next();
-        });
-        return;
-      }
       if (this.items.length < 2)
         return;
-      var current = this.getRelativeItem(0);
-      var next = item != null ? item : this.getRelativeItem(1);
-      current.slideOutLeft();
-      this.animation = next.slideInLeft().then(function() {
-        _this.animation = null;
-        _this.activeIndex = _this.items.indexOf(next);
-        _this.innerHeight = _this.items[_this.activeIndex].getTotalHeight();
-        _this._change.markForCheck();
-      });
+      this.activeIndex = this.getRelativeIndex(1);
+      this._change.markForCheck();
     };
     Carousel.prototype.swipeleft = function() {
       if (this.panDirection == 0)
@@ -425,52 +357,13 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
       if (this.panDirection == 0)
         this.prev();
     };
-    Carousel.prototype.panleft = function(event) {
-      if (this.panDirection == 0)
-        this.panDirection = 1;
-    };
-    Carousel.prototype.panright = function(event) {
-      if (this.panDirection == 0)
-        this.panDirection = -1;
-    };
-    Carousel.prototype.pan = function(event) {
-      event.preventDefault();
-      if (this.panDirection == 0 || event.deltaX == 0)
-        return;
-      var current = this.getRelativeItem(0);
-      var next = this.getRelativeItem(this.panDirection);
-      var width = current.element.clientWidth;
-      var offset = this.lastPanOffset = ((100 / width) * event.deltaX);
-      var nextOffset = (100 - Math.abs(offset)) * (offset / Math.abs(offset)) * -1;
-      current.translate(offset);
-      next.translate(nextOffset);
-    };
-    Carousel.prototype.panend = function(event) {
-      var _this = this;
-      if (this.lastPanOffset == 0)
-        return;
-      var current = this.getRelativeItem(0);
-      var next = this.getRelativeItem(this.panDirection);
-      var offset = this.lastPanOffset;
-      var nextOffset = (100 - Math.abs(offset)) * (offset / Math.abs(offset)) * -1;
-      if (Math.abs(this.lastPanOffset) < 50) {
-        current.slide(this.lastPanOffset, 0);
-        next.slide(nextOffset, 100 * this.panDirection);
-      } else {
-        current.slide(this.lastPanOffset, 100 * this.panDirection);
-        this.animation = next.slide(nextOffset, 0).then(function() {
-          _this.animation = null;
-          _this.activeIndex = _this.getRelativeIndex(_this.panDirection);
-        });
-      }
-      this.lastPanOffset = 0;
-    };
     __decorate([core_3.Input(), __metadata('design:type', Number), __metadata('design:paramtypes', [Number])], Carousel.prototype, "interval", null);
     __decorate([core_2.ContentChildren(CarouselItem), __metadata('design:type', core_2.QueryList)], Carousel.prototype, "itemQuery", void 0);
     Carousel = __decorate([core_1.Component({
-      selector: 'carousel',
+      selector: "carousel",
       template: "\n      <div class=\"carousel slide\" >\n        <!--(swiperight)=\"prev()\" (swipeleft)=\"next()\"-->\n        <!--(pan)=\"pan($event)\" (panleft)=\"panleft($event)\" (panright)=\"panright($event)\"\n        (panend)=\"panend($event)\"-->\n        <ol class=\"carousel-indicators\">\n          <!--<li *ngFor=\"let image of images\"\n            (click)=\"switchTo(image)\" [class.active]=\"image.isActive && !image.checkIfAnimating()\">\n            </li> -->\n            <li *ngFor=\"let item of items\"\n              [class.active]=\"item.isActive\"\n              (click)=\"navigateTo(item)\">\n            </li>\n        </ol>\n        <div class=\"carousel-inner\" role=\"listbox\"\n          [style.height.px]=\"innerHeight\">\n            <ng-content select=\"carousel-item,.carousel-item\"></ng-content>\n        </div>\n        <a class=\"left carousel-control\" role=\"button\" (click)=\"prev()\">\n          <span class=\"icon-prev\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Previous</span>\n        </a>\n        <a class=\"right carousel-control\" role=\"button\" (click)=\"next()\">\n          <span class=\"icon-next\" aria-hidden=\"true\"></span>\n          <span class=\"sr-only\">Next</span>\n        </a>\n      </div>\n    ",
-      directives: [common_1.CORE_DIRECTIVES, CarouselItem]
+      directives: [common_1.CORE_DIRECTIVES, CarouselItem],
+      changeDetection: core_3.ChangeDetectionStrategy.OnPush
     }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], Carousel);
     return Carousel;
   }());
@@ -520,6 +413,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
       this.calendarHeight = DetectionUtils_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
       this.calendarMonths = [];
       this._preGenMonths = 2;
+      this.initialScroll = true;
       this.changeDetector = changeDetector;
       this.renderer = renderer;
       this.generateMonths();
@@ -575,17 +469,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
     });
     ;
     DatePicker.prototype.ngOnInit = function() {
-      var _this = this;
-      var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-      setTimeout(function() {
-        if (_this.calendarScroller == null)
-          return;
-        var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
-          return m.getFullYear() == currentDate.getFullYear() && m.getMonth() == currentDate.getMonth();
-        });
-        _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-        _this.calendarScroller.scrollToIndex(scrollToMonth);
-      }, 1);
+      this.scrollerReset();
     };
     DatePicker.prototype.ngAfterContentInit = function() {
       var _this = this;
@@ -596,10 +480,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
         this.selectedDate = parsedDate;
       this.dateField.select.subscribe(function(event) {
         _this.showCalendar(event);
-      });
-      this.dateField.dateChange.subscribe(function(date) {
-        if (date.getTime() != _this.selectedDate.getTime())
-          _this.selectedDate = date;
       });
       this.dateFieldIcons.map(function(i) {
         i.selectEvent.subscribe(function(event) {
@@ -619,6 +499,22 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
         if (this.canNextMonth)
           this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
       }
+    };
+    DatePicker.prototype.scrollerReset = function() {
+      var _this = this;
+      setTimeout(function() {
+        var currentDate = _this.selectedDate != null ? _this.selectedDate : new Date();
+        if (_this.calendarScroller == null)
+          return;
+        var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
+          return m.getFullYear() == currentDate.getFullYear() && m.getMonth() == currentDate.getMonth();
+        });
+        if (_this.initialScroll) {
+          _this.initialScroll = false;
+          _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
+        }
+        _this.calendarScroller.scrollToIndex(scrollToMonth);
+      }, 1);
     };
     DatePicker.prototype.toggleCalendar = function(event) {
       if (!this.calendarDisplayed)
@@ -641,12 +537,13 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
         this.calendarX = "5%";
         this.calendarY = "5%";
       }
-      this.ngOnInit();
-      this.calendarDisplayed = true;
+      this.scrollerReset();
       this.changeDetector.markForCheck();
+      this.calendarDisplayed = true;
     };
     DatePicker.prototype.hideCalendar = function() {
       this.calendarDisplayed = false;
+      this.initialScroll = true;
       this.changeDetector.markForCheck();
     };
     Object.defineProperty(DatePicker.prototype, "canPrevMonth", {
@@ -715,7 +612,7 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DatePicker", ["@angul
     __decorate([core_2.ContentChildren(DatePickerField_1.DatePickerFieldStyler), __metadata('design:type', core_2.QueryList)], DatePicker.prototype, "dateFieldIcons", void 0);
     DatePicker = __decorate([core_1.Component({
       selector: "date-picker",
-      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 900; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-content {\n        position: relative;\n        top: 0;\n        left: 0; }\n\n      .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {\n        background-color: #fff; }\n\n      .fuel-ui-datepicker-input-group .input-group-addon {\n        background-color: #fff; }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 1000;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n        .date-picker-component .input-group {\n          z-index: 110; }\n        .date-picker-component .container {\n          height: 100%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            .date-picker-component .container .calendar-container {\n              height: 91%; } }\n          .date-picker-component .container header {\n            position: relative;\n            top: 0;\n            left: 0;\n            vertical-align: middle;\n            background-color: #fff; }\n            .date-picker-component .container header .days-of-week {\n              background-color: #0275d8;\n              color: #fff; }\n            .date-picker-component .container header table {\n              border-top: none !important; }\n              .date-picker-component .container header table th, .date-picker-component .container header table td {\n                text-align: center; }\n            .date-picker-component .container header button {\n              border: none;\n              border-radius: 0;\n              color: #0275d8;\n              background-color: #fff;\n              width: 15%; }\n              .date-picker-component .container header button:active {\n                background-color: #eceeef; }\n              .date-picker-component .container header button.button-disable {\n                color: #eceeef;\n                cursor: default; }\n            .date-picker-component .container header .date-range {\n              width: 70%; }\n              .date-picker-component .container header .date-range span {\n                background-color: #eceeef;\n                border-left: none;\n                border-right: none; }\n            .date-picker-component .container header .input-group-addon {\n              border: none;\n              background-color: #fff !important; }\n            .date-picker-component .container header input {\n              border: none;\n              display: inline-block;\n              margin: 1px auto 0 auto;\n              cursor: pointer; }\n            .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {\n              background-color: #fff; }\n            .date-picker-component .container header input.target {\n              color: #0275d8; }\n              .date-picker-component .container header input.target::-webkit-input-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target::-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-ms-input-placeholder {\n                color: #0275d8; }\n    "],
+      styles: ["\n      .date-picker-overlay {\n        background-color: transparent;\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 900; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-overlay {\n            background-color: #55595c;\n            opacity: .75; } }\n\n      .date-picker-content {\n        position: relative;\n        top: 0;\n        left: 0; }\n\n      .fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {\n        background-color: #fff !important; }\n\n      .fuel-ui-datepicker-input-group .input-group-addon {\n        background-color: #fff !important; }\n\n      .date-picker-component {\n        border: 1px solid #eceeef;\n        z-index: 1000;\n        background-color: #fff;\n        font-size: .75rem;\n        position: absolute;\n        width: 350px;\n        height: auto;\n        top: 0;\n        left: 0;\n        overflow: hidden;\n        border-radius: 0.3rem;\n        -webkit-transition: all 0.1s ease;\n        -moz-transition: all 0.1s ease;\n        transition: all 0.1s ease; }\n        @media (max-width: 480px), screen and (max-device-width: 480px) {\n          .date-picker-component {\n            width: 90%;\n            height: 90%;\n            position: fixed;\n            top: 5%;\n            left: 5%; } }\n        .date-picker-component .input-group {\n          z-index: 110; }\n        .date-picker-component .container {\n          height: 100%; }\n          @media (max-width: 480px), screen and (max-device-width: 480px) {\n            .date-picker-component .container .calendar-container {\n              height: 91%; } }\n          .date-picker-component .container header {\n            position: relative;\n            top: 0;\n            left: 0;\n            vertical-align: middle;\n            background-color: #fff; }\n            .date-picker-component .container header .days-of-week {\n              background-color: #0275d8;\n              color: #fff; }\n            .date-picker-component .container header table {\n              border-top: none !important; }\n              .date-picker-component .container header table th, .date-picker-component .container header table td {\n                text-align: center; }\n            .date-picker-component .container header button {\n              border: none;\n              border-radius: 0;\n              color: #0275d8;\n              background-color: #fff;\n              width: 15%; }\n              .date-picker-component .container header button:active {\n                background-color: #eceeef; }\n              .date-picker-component .container header button.button-disable {\n                color: #eceeef;\n                cursor: default; }\n            .date-picker-component .container header .date-range {\n              width: 70%; }\n              .date-picker-component .container header .date-range span {\n                background-color: #eceeef;\n                border-left: none;\n                border-right: none; }\n            .date-picker-component .container header .input-group-addon {\n              border: none;\n              background-color: #fff !important; }\n            .date-picker-component .container header input {\n              border: none;\n              display: inline-block;\n              margin: 1px auto 0 auto;\n              cursor: pointer;\n              background-color: #fff !important; }\n            .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {\n              background-color: #fff !important; }\n            .date-picker-component .container header input.target {\n              color: #0275d8; }\n              .date-picker-component .container header input.target::-webkit-input-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target::-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-moz-placeholder {\n                color: #0275d8; }\n              .date-picker-component .container header input.target:-ms-input-placeholder {\n                color: #0275d8; }\n    "],
       template: "\n      <div class=\"date-picker-overlay\" aria-hidden=\"true\"\n          *ngIf=\"calendarDisplayed\" \n          (click)=\"hideCalendar()\">\n      </div>\n\n      <div class=\"date-picker-content\">\n          <ng-content></ng-content>\n\n          <div class=\"date-picker-component\" *ngIf=\"calendarDisplayed\"\n              [style.left]=\"calendarX\"\n              [style.top]=\"calendarY\">\n              <div class=\"container p-a-0\">\n                  <header>\n                      <button type=\"button\" class=\"btn btn-secondary pull-left\"\n                          (click)=\"scrollPrevMonth()\" [class.button-disable]=\"disablePrev()\">\n                          <i class=\"fa fa-chevron-left\"></i>\n                      </button>\n                      <div class=\"date-range pull-left input-group\">\n                          <input type=\"text\" class=\"form-control text-xs-center\" \n                              id=\"startDate\" [(ngModel)]=\"inputDate\" readonly />\n                      </div>\n                      <button type=\"button\" class=\"btn btn-secondary pull-right\"\n                          (click)=\"scrollNextMonth()\" [class.button-disable]=\"disableNext()\">\n                          <i class=\"fa fa-chevron-right\"></i>\n                      </button>\n                      <table class=\"table m-b-0 days-of-week\">\n                          <tbody>\n                          <tr>\n                              <th>S</th>\n                              <th>M</th>\n                              <th>T</th>\n                              <th>W</th>\n                              <th>T</th>\n                              <th>F</th>\n                              <th>S</th>\n                          </tr>\n                          </tbody>\n                      </table>\n                  </header>\n                  <div class=\"calendar-container m-a-0\">\n                      <infinite-scroller\n                          (next)=\"addNextMonth()\"\n                          (prev)=\"addPrevMonth()\"\n                          distance=\"100\"\n                          [height]=\"calendarHeight\"\n                          [hideScrollbar]=\"true\">\n                          <date-picker-calendar scroll-item\n                              *ngFor=\"let month of calendarMonths; let i=index\" \n                              [id]=\"i\"\n                              [minDate]=\"minDate\" [maxDate]=\"maxDate\"\n                              [dateFilter]=\"dateFilter\"\n                              [currentMonth]=\"month\" \n                              [(selectedDate)]=\"selectedDate\">\n                              {{i}}\n                          </date-picker-calendar>\n                      </infinite-scroller>\n                  </div>\n              </div>\n          </div>\n      </div>\n    ",
       directives: [DatePickerCalendar_1.DatePickerCalendar, InfiniteScroller_1.INFINITE_SCROLLER_PROVIDERS, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
       changeDetection: core_1.ChangeDetectionStrategy.OnPush
@@ -1121,10 +1018,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@
         _this.showCalendar(event);
         _this.focusStartDate();
       });
-      this.startDateField.dateChange.subscribe(function(date) {
-        if (_this.startDate !== date)
-          _this.startDate = date;
-      });
       if (typeof this.endDateField === "undefined")
         throw "Fuel-UI Error: DateRangePicker missing endDate field";
       var endDateValue = utilities_1.DateUtils.handleDateInput(this.endDateField.value);
@@ -1137,10 +1030,6 @@ System.registerDynamic("fuel-ui/dist/components/DatePicker/DateRangePicker", ["@
       this.endDateField.select.subscribe(function(event) {
         _this.showCalendar(event);
         _this.focusEndDate();
-      });
-      this.endDateField.dateChange.subscribe(function(date) {
-        if (_this.endDate !== date)
-          _this.endDate = date;
       });
       this.dateFieldIcons.map(function(i) {
         i.selectEvent.subscribe(function(event) {
@@ -1468,7 +1357,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
       });
     };
     InfiniteScroller.prototype.ngAfterViewInit = function() {
-      this.container = this.container.firstElementChild;
+      this.container = this.container.querySelector(".scroll-container");
       this.container.scrollTop += 1;
     };
     InfiniteScroller.prototype.handleItemChanges = function() {
@@ -1529,10 +1418,19 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
       if (target.scrollTop < 1)
         target.scrollTop = 1;
     };
-    InfiniteScroller.prototype.scrollTo = function(position) {
-      ElementUtils_1.ElementUtils.scrollTo(this.container, position, 400);
+    InfiniteScroller.prototype.scrollTo = function(position, animate) {
+      if (animate === void 0) {
+        animate = true;
+      }
+      if (animate)
+        ElementUtils_1.ElementUtils.scrollTo(this.container, position, 400);
+      else
+        this.container.scrollTop = position;
     };
-    InfiniteScroller.prototype.scrollToIndex = function(index) {
+    InfiniteScroller.prototype.scrollToIndex = function(index, animate) {
+      if (animate === void 0) {
+        animate = true;
+      }
       var itemArray = this.itemQuery.toArray();
       var targetIndex = 0;
       if (index > 0 && index < itemArray.length)
@@ -1543,7 +1441,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
         targetIndex = 0;
       var target = this.itemQuery.toArray()[targetIndex];
       var targetPos = target.element.offsetTop - this.container.offsetTop;
-      this.scrollTo(targetPos);
+      this.scrollTo(targetPos, animate);
     };
     InfiniteScroller.prototype.isTop = function() {
       return this.lastScroll <= 1;
@@ -1561,8 +1459,8 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
     __decorate([core_1.ContentChildren(ScrollItem), __metadata('design:type', core_1.QueryList)], InfiniteScroller.prototype, "itemQuery", void 0);
     InfiniteScroller = __decorate([core_1.Component({
       selector: "infinite-scroller",
-      template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
-      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
+      template: "\n        <div class=\"scroll-outer\" [class.hide-scrollbar]=\"hideScrollbar\">\n            <div class=\"scroll-container\"\n                (scroll)=\"doscroll($event)\"\n                [style.height]=\"height\">\n                <ng-content></ng-content>\n            </div>\n        </div>\n\t",
+      styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\n        .scroll-outer.hide-scrollbar .scroll-container {\n            margin-right: -16px;\n        }\n\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
       directives: []
     }), __metadata('design:paramtypes', [core_1.ElementRef])], InfiniteScroller);
     return InfiniteScroller;
@@ -3497,7 +3395,33 @@ System.registerDynamic("fuel-ui/dist/components/TextExpander/TextExpander", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var core_1 = $__require('@angular/core');
+  function Collapse(duration) {
+    if (duration === void 0) {
+      duration = 300;
+    }
+    return core_1.trigger('collapse', [core_1.state('collapsed, true, void', core_1.style({
+      height: '0',
+      opacity: '0',
+      overflow: 'hidden'
+    })), core_1.state('expanded, false', core_1.style({
+      height: '*',
+      opacity: '1',
+      overflow: 'hidden'
+    })), core_1.transition('true => false, collapsed => expanded', [core_1.animate(duration + 'ms ease', core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})]))]), core_1.transition('false => true, expanded => collapsed', [core_1.animate(duration + 'ms ease', core_1.style({height: '0'}))])]);
+  }
+  exports.Collapse = Collapse;
+  exports.COLLAPSE_PROVIDERS = [Collapse];
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -3520,6 +3444,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
   var Accordion = (function() {
     function Accordion() {
       this.closeOthers = true;
@@ -3549,7 +3474,8 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular
     __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
     Accordion = __decorate([core_1.Component({
       selector: 'accordion',
-      template: "<ng-content></ng-content>"
+      template: "<ng-content></ng-content>",
+      animations: [Collapse_1.Collapse(350)]
     }), __metadata('design:paramtypes', [])], Accordion);
     return Accordion;
   }());
@@ -4086,108 +4012,7 @@ System.registerDynamic("fuel-ui/dist/directives/CodeHighlighter/CodeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/Collapse/Collapse", ["@angular/core", "@angular/platform-browser/src/animate/animation_builder"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('@angular/core');
-  var animation_builder_1 = $__require('@angular/platform-browser/src/animate/animation_builder');
-  var Collapse = (function() {
-    function Collapse(animationBuilder, element) {
-      this.element = element;
-      this.duration = 500;
-      this.collapse = true;
-      this._animation = animationBuilder.css();
-    }
-    Object.defineProperty(Collapse.prototype, "_baseSequence", {
-      get: function() {
-        return this._animation.setDuration(this.duration).removeClass('fuel-ui-collapse').removeClass('in').addAnimationClass('fuel-ui-collapsing');
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Collapse.prototype.ngOnInit = function() {
-      if (!this.collapse) {
-        this._animation.setDuration(0).addClass('in').start(this.element.nativeElement);
-      } else {
-        this.hide(0);
-      }
-    };
-    Collapse.prototype.ngOnChanges = function(changes) {
-      if (!changes.collapse || typeof changes.collapse.previousValue !== 'boolean')
-        return;
-      return this.collapse ? this.hide(this.duration) : this.show();
-    };
-    Collapse.prototype.hide = function(duration) {
-      var _this = this;
-      this.element.nativeElement.style.height = this.element.nativeElement.scrollHeight + 'px';
-      this._baseSequence.setFromStyles({
-        height: this.element.nativeElement.scrollHeight + 'px',
-        overflow: 'hidden'
-      }).setToStyles({
-        height: '0',
-        paddingTop: '0',
-        paddingBottom: '0'
-      });
-      var a = this._animation.setDuration(duration).start(this.element.nativeElement);
-      a.onComplete(function() {
-        if (!_this.collapse)
-          return;
-        a.removeClasses(['in']);
-        a.addClasses(['fuel-ui-collapse']);
-      });
-    };
-    Collapse.prototype.show = function() {
-      var _this = this;
-      this._animation.setDuration(0).addClass('in').setFromStyles({overflow: 'hidden'}).setToStyles({
-        paddingTop: '',
-        paddingBottom: ''
-      }).start(this.element.nativeElement).onComplete(function() {
-        var a = _this._baseSequence.setFromStyles({height: '0'}).setToStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).start(_this.element.nativeElement);
-        a.onComplete(function() {
-          a.addClasses(['fuel-ui-collapse', 'in']);
-          _this._animation.setDuration(0).setFromStyles({height: _this.element.nativeElement.scrollHeight + 'px'}).setToStyles({height: 'auto'}).start(_this.element.nativeElement).onComplete(function() {
-            if (_this.collapse)
-              a.addClasses(['fuel-ui-collapse']);
-          });
-        });
-      });
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Collapse.prototype, "duration", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Collapse.prototype, "collapse", void 0);
-    Collapse = __decorate([core_1.Directive({
-      selector: '[collapse]',
-      host: {
-        '[attr.aria-expanded]': '!collapse',
-        '[attr.aria-hidden]': 'collapse'
-      }
-    }), __metadata('design:paramtypes', [animation_builder_1.AnimationBuilder, core_1.ElementRef])], Collapse);
-    return Collapse;
-  }());
-  exports.Collapse = Collapse;
-  exports.COLLAPSE_PROVIDERS = [Collapse];
-  return module.exports;
-});
-
-System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter", "./Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Animation", "./Tooltip/Tooltip", "./CodeHighlighter/CodeHighlighter"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4201,12 +4026,10 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["./Animation/Anima
   var Animation_1 = $__require('./Animation/Animation');
   var Tooltip_1 = $__require('./Tooltip/Tooltip');
   var CodeHighlighter_1 = $__require('./CodeHighlighter/CodeHighlighter');
-  var Collapse_1 = $__require('./Collapse/Collapse');
-  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter, Collapse_1.Collapse];
+  exports.FUELUI_DIRECTIVE_PROVIDERS = [Tooltip_1.TOOLTIP_PROVIDERS, Animation_1.Animation, CodeHighlighter_1.CodeHighlighter];
   __export($__require('./Animation/Animation'));
   __export($__require('./Tooltip/Tooltip'));
   __export($__require('./CodeHighlighter/CodeHighlighter'));
-  __export($__require('./Collapse/Collapse'));
   return module.exports;
 });
 
@@ -4647,15 +4470,18 @@ System.registerDynamic("fuel-ui/dist/utilities/ElementUtils", ["./AnimationUtils
         return;
       var startTime = new Date().getTime();
       var from = element.scrollTop;
-      var timer = setInterval(function() {
-        var time = new Date().getTime() - startTime;
-        var scrollTo = AnimationUtils_1.AnimationUtils.easeInOutQuart(time, from, to - from, duration);
-        element.scrollTop = scrollTo;
-        if (time >= duration) {
-          element.scrollTop = to;
-          clearInterval(timer);
-        }
-      }, 1000 / 60);
+      return new Promise(function(resolve, reject) {
+        var timer = setInterval(function() {
+          var time = new Date().getTime() - startTime;
+          var scrollTo = AnimationUtils_1.AnimationUtils.easeInOutQuart(time, from, to - from, duration);
+          element.scrollTop = scrollTo;
+          if (time >= duration) {
+            element.scrollTop = to;
+            clearInterval(timer);
+            resolve();
+          }
+        }, 1000 / 60);
+      });
     };
     return ElementUtils;
   }());

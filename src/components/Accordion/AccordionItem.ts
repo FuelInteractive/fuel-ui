@@ -1,12 +1,13 @@
 import {Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {Collapse} from '../../directives/Collapse/Collapse';
+import {Collapse} from '../../animations/Collapse/Collapse';
 import {Accordion} from './Accordion';
 
 @Component({
     selector: 'accordion-item, [accordion-item]',
-    directives: [Collapse, NgClass],
-    templateUrl: 'components/Accordion/AccordionItem.html'
+    directives: [NgClass],
+    templateUrl: 'components/Accordion/AccordionItem.html',
+    animations: [Collapse(350)]
 })
 export class AccordionItem implements OnInit, OnDestroy {
     @Input() heading:string;
