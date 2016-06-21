@@ -1,3 +1,6 @@
+/**
+ * @stable
+ */
 export declare abstract class ChangeDetectorRef {
     /**
      * Marks all {@link ChangeDetectionStrategy#OnPush} ancestors as to be checked.

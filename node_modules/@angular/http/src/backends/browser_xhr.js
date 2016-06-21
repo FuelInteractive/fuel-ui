@@ -4,9 +4,11 @@ var BrowserXhr = (function () {
     function BrowserXhr() {
     }
     BrowserXhr.prototype.build = function () { return (new XMLHttpRequest()); };
+    /** @nocollapse */
     BrowserXhr.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     BrowserXhr.ctorParameters = [];
     return BrowserXhr;
 }());

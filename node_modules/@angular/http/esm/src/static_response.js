@@ -1,5 +1,5 @@
-import { isString, Json } from '../src/facade/lang';
 import { BaseException } from '../src/facade/exceptions';
+import { Json, isString } from '../src/facade/lang';
 import { isJsObject } from './http_utils';
 /**
  * Creates `Response` instances from provided values.
@@ -57,6 +57,9 @@ export class Response {
     // TODO: ArrayBuffer return type
     arrayBuffer() {
         throw new BaseException('"arrayBuffer()" method not implemented on Response superclass');
+    }
+    toString() {
+        return `Response with status: ${this.status} ${this.statusText} for URL: ${this.url}`;
     }
 }
 //# sourceMappingURL=static_response.js.map

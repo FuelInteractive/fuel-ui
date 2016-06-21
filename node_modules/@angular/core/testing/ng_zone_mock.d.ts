@@ -4,7 +4,6 @@ import { EventEmitter } from '../src/facade/async';
  * A mock implementation of {@link NgZone}.
  */
 export declare class MockNgZone extends NgZone {
-    /** @internal */
     private _mockOnStable;
     constructor();
     onStable: EventEmitter<any>;

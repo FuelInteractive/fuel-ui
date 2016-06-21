@@ -1,4 +1,4 @@
-import { ViewContainerRef, TemplateRef } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * Removes or recreates a portion of the DOM tree based on an {expression}.
  *
@@ -20,6 +20,8 @@ import { ViewContainerRef, TemplateRef } from '@angular/core';
  * - `<div *ngIf="condition">...</div>`
  * - `<div template="ngIf condition">...</div>`
  * - `<template [ngIf]="condition"><div>...</div></template>`
+ *
+ * @stable
  */
 export declare class NgIf {
     private _viewContainer;

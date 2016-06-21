@@ -1,4 +1,4 @@
-import { Type } from '../../src/facade/lang';
+import { Type } from '../facade/lang';
 /**
  * An interface that a function passed into {@link forwardRef} has to implement.
  *
@@ -19,6 +19,7 @@ export interface ForwardRefFn {
  *
  * ### Example
  * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref'}
+ * @experimental
  */
 export declare function forwardRef(forwardRefFn: ForwardRefFn): Type;
 /**
@@ -35,5 +36,6 @@ export declare function forwardRef(forwardRefFn: ForwardRefFn): Type;
  * ```
  *
  * See: {@link forwardRef}
+ * @experimental
  */
 export declare function resolveForwardRef(type: any): any;

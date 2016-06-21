@@ -1,4 +1,4 @@
-import { ConcreteType, Type } from '../../src/facade/lang';
+import { ConcreteType, Type } from '../facade/lang';
 /**
  * Declares the interface to be used with {@link Class}.
  */
@@ -142,6 +142,7 @@ export interface TypeDecorator {
  *   }
  * });
  * ```
+ * @stable
  */
 export declare function Class(clsDef: ClassDefinition): ConcreteType;
 export declare function makeDecorator(annotationCls: any, chainFn?: (fn: Function) => void): (...args: any[]) => (cls: any) => any;

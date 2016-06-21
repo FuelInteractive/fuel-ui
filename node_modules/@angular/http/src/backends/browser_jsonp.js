@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var _nextRequestId = 0;
 exports.JSONP_HOME = '__ng_jsonp__';
 var _jsonpConnections = null;
@@ -37,6 +37,7 @@ var BrowserJsonp = (function () {
             node.parentNode.removeChild((node));
         }
     };
+    /** @nocollapse */
     BrowserJsonp.decorators = [
         { type: core_1.Injectable },
     ];

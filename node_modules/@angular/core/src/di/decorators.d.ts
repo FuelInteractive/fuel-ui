@@ -1,6 +1,7 @@
-import { InjectMetadata, OptionalMetadata, InjectableMetadata, SelfMetadata, HostMetadata, SkipSelfMetadata } from './metadata';
+import { HostMetadata, InjectMetadata, InjectableMetadata, OptionalMetadata, SelfMetadata, SkipSelfMetadata } from './metadata';
 /**
  * Factory for creating {@link InjectMetadata}.
+ * @stable
  */
 export interface InjectMetadataFactory {
     (token: any): any;
@@ -8,6 +9,7 @@ export interface InjectMetadataFactory {
 }
 /**
  * Factory for creating {@link OptionalMetadata}.
+ * @stable
  */
 export interface OptionalMetadataFactory {
     (): any;
@@ -15,6 +17,7 @@ export interface OptionalMetadataFactory {
 }
 /**
  * Factory for creating {@link InjectableMetadata}.
+ * @stable
  */
 export interface InjectableMetadataFactory {
     (): any;
@@ -22,6 +25,7 @@ export interface InjectableMetadataFactory {
 }
 /**
  * Factory for creating {@link SelfMetadata}.
+ * @stable
  */
 export interface SelfMetadataFactory {
     (): any;
@@ -29,6 +33,7 @@ export interface SelfMetadataFactory {
 }
 /**
  * Factory for creating {@link HostMetadata}.
+ * @stable
  */
 export interface HostMetadataFactory {
     (): any;
@@ -36,6 +41,7 @@ export interface HostMetadataFactory {
 }
 /**
  * Factory for creating {@link SkipSelfMetadata}.
+ * @stable
  */
 export interface SkipSelfMetadataFactory {
     (): any;
@@ -43,25 +49,31 @@ export interface SkipSelfMetadataFactory {
 }
 /**
  * Factory for creating {@link InjectMetadata}.
+ * @stable
  */
 export declare var Inject: InjectMetadataFactory;
 /**
  * Factory for creating {@link OptionalMetadata}.
+ * @stable
  */
 export declare var Optional: OptionalMetadataFactory;
 /**
  * Factory for creating {@link InjectableMetadata}.
+ * @stable
  */
 export declare var Injectable: InjectableMetadataFactory;
 /**
  * Factory for creating {@link SelfMetadata}.
+ * @stable
  */
 export declare var Self: SelfMetadataFactory;
 /**
  * Factory for creating {@link HostMetadata}.
+ * @stable
  */
 export declare var Host: HostMetadataFactory;
 /**
  * Factory for creating {@link SkipSelfMetadata}.
+ * @stable
  */
 export declare var SkipSelf: SkipSelfMetadataFactory;

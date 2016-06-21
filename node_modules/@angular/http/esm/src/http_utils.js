@@ -1,6 +1,6 @@
+import { makeTypeError } from '../src/facade/exceptions';
 import { isString } from '../src/facade/lang';
 import { RequestMethod } from './enums';
-import { makeTypeError } from '../src/facade/exceptions';
 export function normalizeMethodName(method) {
     if (isString(method)) {
         var originalMethod = method;

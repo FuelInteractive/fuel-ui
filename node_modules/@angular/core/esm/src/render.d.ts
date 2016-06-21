@@ -1,1 +1,1 @@
-export { RootRenderer, Renderer, RenderComponentType } from './render/api';
+export { RenderComponentType, Renderer, RootRenderer } from './render/api';

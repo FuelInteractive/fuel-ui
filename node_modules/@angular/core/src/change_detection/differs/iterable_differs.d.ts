@@ -1,8 +1,10 @@
-import { ChangeDetectorRef } from '../change_detector_ref';
 import { Provider } from '../../di';
+import { ChangeDetectorRef } from '../change_detector_ref';
 /**
  * A strategy for tracking changes over time to an iterable. Used for {@link NgFor} to
  * respond to changes in an iterable by effecting equivalent changes in the DOM.
+ *
+ * @stable
  */
 export interface IterableDiffer {
     diff(object: any): any;
@@ -25,6 +27,7 @@ export interface IterableDifferFactory {
 /**
  * A repository of different iterable diffing strategies used by NgFor, NgClass, and others.
  * @ts2dart_const
+ * @stable
  */
 export declare class IterableDiffers {
     factories: IterableDifferFactory[];

@@ -1,6 +1,6 @@
+import { CompilePipeMetadata } from '../compile_metadata';
 import * as o from '../output/output_ast';
 import { CompileView } from './compile_view';
-import { CompilePipeMetadata } from '../compile_metadata';
 export declare class CompilePipe {
     view: CompileView;
     meta: CompilePipeMetadata;

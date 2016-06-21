@@ -1,4 +1,3 @@
-import { EventEmitter } from '../src/facade/async';
 import { LocationStrategy } from '../index';
 /**
  * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
@@ -9,8 +8,6 @@ export declare class MockLocationStrategy extends LocationStrategy {
     internalPath: string;
     internalTitle: string;
     urlChanges: string[];
-    /** @internal */
-    _subject: EventEmitter<any>;
     constructor();
     simulatePopState(url: string): void;
     path(): string;

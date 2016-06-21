@@ -1,4 +1,4 @@
-import { BaseException } from '../../src/facade/exceptions';
+import { BaseException } from '../facade/exceptions';
 export declare enum TokenType {
     Character = 0,
     Identifier = 1,
@@ -68,8 +68,8 @@ export declare const $LBRACE: number;
 export declare const $BAR: number;
 export declare const $RBRACE: number;
 export declare class ScannerError extends BaseException {
-    message: any;
-    constructor(message: any);
+    message: string;
+    constructor(message: string);
     toString(): string;
 }
 export declare function isIdentifier(input: string): boolean;

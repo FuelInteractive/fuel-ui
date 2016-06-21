@@ -1,4 +1,4 @@
-import { Type } from '../../src/facade/lang';
+import { Type } from '../facade/lang';
 import { ReflectiveKey } from './reflective_key';
 import { Provider } from './provider';
 /**
@@ -60,6 +60,7 @@ export declare class ResolvedReflectiveProvider_ implements ResolvedReflectiveBi
 }
 /**
  * An internal resolved representation of a factory function created by resolving {@link Provider}.
+ * @experimental
  */
 export declare class ResolvedReflectiveFactory {
     /**

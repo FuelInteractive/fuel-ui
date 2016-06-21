@@ -1,9 +1,9 @@
 import { CompileDirectiveMetadata, CompilePipeMetadata } from './compile_metadata';
-import { StyleCompiler } from './style_compiler';
-import { ViewCompiler } from './view_compiler/view_compiler';
-import { TemplateParser } from './template_parser';
 import { DirectiveNormalizer } from './directive_normalizer';
 import { OutputEmitter } from './output/abstract_emitter';
+import { StyleCompiler } from './style_compiler';
+import { TemplateParser } from './template_parser';
+import { ViewCompiler } from './view_compiler/view_compiler';
 import { XHR } from './xhr';
 export declare class SourceModule {
     moduleUrl: string;

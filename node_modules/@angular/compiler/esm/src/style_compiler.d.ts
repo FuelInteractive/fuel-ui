@@ -1,4 +1,4 @@
-import { CompileIdentifierMetadata, CompileDirectiveMetadata } from './compile_metadata';
+import { CompileDirectiveMetadata, CompileIdentifierMetadata } from './compile_metadata';
 import * as o from './output/output_ast';
 import { UrlResolver } from './url_resolver';
 export declare class StylesCompileDependency {

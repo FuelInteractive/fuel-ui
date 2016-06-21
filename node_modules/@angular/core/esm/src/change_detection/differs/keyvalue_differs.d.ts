@@ -1,5 +1,5 @@
-import { ChangeDetectorRef } from '../change_detector_ref';
 import { Provider } from '../../di';
+import { ChangeDetectorRef } from '../change_detector_ref';
 /**
  * A differ that tracks changes made to an object over time.
  */
@@ -17,6 +17,7 @@ export interface KeyValueDifferFactory {
 /**
  * A repository of different Map diffing strategies used by NgClass, NgStyle, and others.
  * @ts2dart_const
+ * @stable
  */
 export declare class KeyValueDiffers {
     factories: KeyValueDifferFactory[];

@@ -4,8 +4,10 @@ export class BrowserXhr {
     }
     build() { return (new XMLHttpRequest()); }
 }
+/** @nocollapse */
 BrowserXhr.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 BrowserXhr.ctorParameters = [];
 //# sourceMappingURL=browser_xhr.js.map

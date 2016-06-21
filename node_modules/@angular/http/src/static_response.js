@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../src/facade/lang');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 var http_utils_1 = require('./http_utils');
 /**
  * Creates `Response` instances from provided values.
@@ -58,6 +58,9 @@ var Response = (function () {
     // TODO: ArrayBuffer return type
     Response.prototype.arrayBuffer = function () {
         throw new exceptions_1.BaseException('"arrayBuffer()" method not implemented on Response superclass');
+    };
+    Response.prototype.toString = function () {
+        return "Response with status: " + this.status + " " + this.statusText + " for URL: " + this.url;
     };
     return Response;
 }());

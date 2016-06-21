@@ -31,10 +31,6 @@ export declare class UrlResolver {
      * `baseUrl` and `url`,
      * - if `url` is absolute (it has a scheme: 'http://', 'https://' or start with '/'), the `url` is
      * returned as is (ignoring the `baseUrl`)
-     *
-     * @param {string} baseUrl
-     * @param {string} url
-     * @returns {string} the resolved URL
      */
     resolve(baseUrl: string, url: string): string;
 }

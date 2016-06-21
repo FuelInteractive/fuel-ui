@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var Collapse_1 = require('../../directives/Collapse/Collapse');
+var Collapse_1 = require('../../animations/Collapse/Collapse');
 var Accordion_1 = require('./Accordion');
 var AccordionItem = (function () {
     function AccordionItem(accordion) {
@@ -64,8 +64,9 @@ var AccordionItem = (function () {
     AccordionItem = __decorate([
         core_1.Component({
             selector: 'accordion-item, [accordion-item]',
-            directives: [Collapse_1.Collapse, common_1.NgClass],
-            template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [collapse]=\"!open\" [duration]=\"accordion.duration\">\n          <ng-content></ng-content>\n      </div>\n    "
+            directives: [common_1.NgClass],
+            template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" @collapse=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+            animations: [Collapse_1.Collapse(350)]
         }), 
         __metadata('design:paramtypes', [Accordion_1.Accordion])
     ], AccordionItem);

@@ -3,6 +3,6 @@
     <ng-content select="accordion-heading"></ng-content>
     <ng-content select="[accordion-heading]"></ng-content>
 </div>
-<div class="fuel-ui-collapse" [collapse]="!open" [duration]="accordion.duration">
+<div class="fuel-ui-collapse" @collapse="!open ? 'true' : 'false'">
     <ng-content></ng-content>
 </div>

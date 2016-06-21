@@ -15,6 +15,8 @@ import { UrlChangeListener } from './platform_location';
  * `http://example.com/foo` as an equivalent URL.
  *
  * See these two classes for more.
+ *
+ * @stable
  */
 export declare abstract class LocationStrategy {
     abstract path(): string;
@@ -51,8 +53,9 @@ export declare abstract class LocationStrategy {
  *
  * bootstrap(AppCmp, [
  *   ROUTER_PROVIDERS,
- *   provide(APP_BASE_HREF, {useValue: '/my/app'})
+ *   {provide: APP_BASE_HREF, useValue: '/my/app'}
  * ]);
  * ```
+ * @stable
  */
 export declare const APP_BASE_HREF: OpaqueToken;

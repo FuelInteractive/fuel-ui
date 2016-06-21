@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Request } from '../src/static_request';
-import { ReadyState } from '../src/enums';
-import { isPresent } from '../src/facade/lang';
-import { BaseException } from '../src/facade/exceptions';
-import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
 import { take } from 'rxjs/operator/take';
+import { ReadyState } from '../src/enums';
+import { BaseException } from '../src/facade/exceptions';
+import { isPresent } from '../src/facade/lang';
+import { Request } from '../src/static_request';
 /**
  *
  * Mock Connection to represent a {@link Connection} for tests.
@@ -27,7 +27,8 @@ export class MockConnection {
      * var connection;
      * backend.connections.subscribe(c => connection = c);
      * http.request('data.json').subscribe(res => console.log(res.text()));
-     * connection.mockRespond(new Response('fake response')); //logs 'fake response'
+     * connection.mockRespond(new Response(new ResponseOptions({ body: 'fake response' }))); //logs
+     * 'fake response'
      * ```
      *
      */
@@ -56,6 +57,16 @@ export class MockConnection {
      * Emits the provided error object as an error to the {@link Response} {@link EventEmitter}
      * returned
      * from {@link Http}.
+     *
+     * ### Example
+     *
+     * ```
+     * var connection;
+     * backend.connections.subscribe(c => connection = c);
+     * http.request('data.json').subscribe(res => res, err => console.log(err)));
+     * connection.mockError(new Error('error'));
+     * ```
+     *
      */
     mockError(err) {
         // Matches XHR semantics
@@ -103,8 +114,10 @@ export class MockBackend {
         return connection;
     }
 }
+/** @nocollapse */
 MockBackend.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 MockBackend.ctorParameters = [];
 //# sourceMappingURL=mock_backend.js.map

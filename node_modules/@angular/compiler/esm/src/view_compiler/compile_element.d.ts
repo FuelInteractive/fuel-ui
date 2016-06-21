@@ -1,6 +1,6 @@
 import * as o from '../output/output_ast';
+import { ProviderAst, ReferenceAst, TemplateAst } from '../template_ast';
 import { CompileView } from './compile_view';
-import { TemplateAst, ProviderAst, ReferenceAst } from '../template_ast';
 import { CompileDirectiveMetadata, CompileTokenMetadata } from '../compile_metadata';
 export declare class CompileNode {
     parent: CompileElement;

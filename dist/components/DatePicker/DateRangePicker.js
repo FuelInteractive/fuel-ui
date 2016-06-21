@@ -147,11 +147,12 @@ var DateRangePicker = (function (_super) {
             _this.showCalendar(event);
             _this.focusStartDate();
         });
+        /* removed due to binding issues in FF
         this.startDateField.dateChange
-            .subscribe(function (date) {
-            if (_this.startDate !== date)
-                _this.startDate = date;
-        });
+            .subscribe((date: Date) => {
+                if(this.startDate !== date)
+                    this.startDate = date;
+            });*/
         if (typeof this.endDateField === "undefined")
             throw "Fuel-UI Error: DateRangePicker missing endDate field";
         var endDateValue = utilities_1.DateUtils.handleDateInput(this.endDateField.value);
@@ -167,11 +168,12 @@ var DateRangePicker = (function (_super) {
             _this.showCalendar(event);
             _this.focusEndDate();
         });
+        /* removed due to binding issues in FF
         this.endDateField.dateChange
-            .subscribe(function (date) {
-            if (_this.endDate !== date)
-                _this.endDate = date;
-        });
+            .subscribe((date: Date) => {
+                if(this.endDate !== date)
+                    this.endDate = date;
+            });*/
         this.dateFieldIcons.map(function (i) {
             i.selectEvent.subscribe(function (event) {
                 _this.showCalendar(event);

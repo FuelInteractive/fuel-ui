@@ -1,5 +1,8 @@
 import { BaseWrappedException } from './base_wrapped_exception';
 export { ExceptionHandler } from './exception_handler';
+/**
+ * @stable
+ */
 export declare class BaseException extends Error {
     message: string;
     stack: any;
@@ -8,6 +11,7 @@ export declare class BaseException extends Error {
 }
 /**
  * Wraps an exception and provides additional context or information.
+ * @stable
  */
 export declare class WrappedException extends BaseWrappedException {
     private _wrapperMessage;

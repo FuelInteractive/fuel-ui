@@ -1,9 +1,9 @@
-import { isPresent, isString } from '../src/facade/lang';
-import { Headers } from './headers';
-import { RequestMethod } from './enums';
 import { Injectable } from '@angular/core';
-import { URLSearchParams } from './url_search_params';
+import { isPresent, isString } from '../src/facade/lang';
+import { RequestMethod } from './enums';
+import { Headers } from './headers';
 import { normalizeMethodName } from './http_utils';
+import { URLSearchParams } from './url_search_params';
 /**
  * Creates a request options object to be optionally provided when instantiating a
  * {@link Request}.
@@ -29,14 +29,15 @@ import { normalizeMethodName } from './http_utils';
  * ```
  */
 export class RequestOptions {
-    constructor({ method, headers, body, url, search } = {}) {
+    constructor({ method, headers, body, url, search, withCredentials } = {}) {
         this.method = isPresent(method) ? normalizeMethodName(method) : null;
         this.headers = isPresent(headers) ? headers : null;
         this.body = isPresent(body) ? body : null;
         this.url = isPresent(url) ? url : null;
-        this.search = isPresent(search) ? (isString(search) ? new URLSearchParams((search)) :
-            (search)) :
+        this.search = isPresent(search) ?
+            (isString(search) ? new URLSearchParams((search)) : (search)) :
             null;
+        this.withCredentials = isPresent(withCredentials) ? withCredentials : null;
     }
     /**
      * Creates a copy of the `RequestOptions` instance, using the optional input as values to override
@@ -72,7 +73,10 @@ export class RequestOptions {
             search: isPresent(options) && isPresent(options.search) ?
                 (isString(options.search) ? new URLSearchParams((options.search)) :
                     (options.search).clone()) :
-                this.search
+                this.search,
+            withCredentials: isPresent(options) && isPresent(options.withCredentials) ?
+                options.withCredentials :
+                this.withCredentials
         });
     }
 }
@@ -81,8 +85,10 @@ export class BaseRequestOptions extends RequestOptions {
         super({ method: RequestMethod.Get, headers: new Headers() });
     }
 }
+/** @nocollapse */
 BaseRequestOptions.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 BaseRequestOptions.ctorParameters = [];
 //# sourceMappingURL=base_request_options.js.map

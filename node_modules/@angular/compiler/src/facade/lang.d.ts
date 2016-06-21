@@ -49,6 +49,7 @@ export declare function lockMode(): void;
  * One important assertion this disables verifies that a change detection pass
  * does not result in additional changes to any bindings (also known as
  * unidirectional data flow).
+ * @stable
  */
 export declare function enableProdMode(): void;
 export declare function assertionsEnabled(): boolean;
@@ -56,14 +57,14 @@ export declare function isPresent(obj: any): boolean;
 export declare function isBlank(obj: any): boolean;
 export declare function isBoolean(obj: any): boolean;
 export declare function isNumber(obj: any): boolean;
-export declare function isString(obj: any): boolean;
+export declare function isString(obj: any): obj is String;
 export declare function isFunction(obj: any): boolean;
 export declare function isType(obj: any): boolean;
 export declare function isStringMap(obj: any): boolean;
 export declare function isStrictStringMap(obj: any): boolean;
 export declare function isPromise(obj: any): boolean;
 export declare function isArray(obj: any): boolean;
-export declare function isDate(obj: any): boolean;
+export declare function isDate(obj: any): obj is Date;
 export declare function noop(): void;
 export declare function stringify(token: any): string;
 export declare function serializeEnum(val: any): number;
@@ -84,8 +85,8 @@ export declare class StringWrapper {
     static compare(a: string, b: string): number;
 }
 export declare class StringJoiner {
-    parts: any[];
-    constructor(parts?: any[]);
+    parts: string[];
+    constructor(parts?: string[]);
     add(part: string): void;
     toString(): string;
 }
@@ -124,6 +125,7 @@ export declare class RegExpMatcherWrapper {
 }
 export declare class FunctionWrapper {
     static apply(fn: Function, posArgs: any): any;
+    static bind(fn: Function, scope: any): Function;
 }
 export declare function looseIdentical(a: any, b: any): boolean;
 export declare function getMapKey<T>(value: T): T;

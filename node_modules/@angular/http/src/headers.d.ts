@@ -25,8 +25,6 @@
  * ```
  */
 export declare class Headers {
-    /** @internal */
-    _headersMap: Map<string, string[]>;
     constructor(headers?: Headers | {
         [key: string]: any;
     });

@@ -20,4 +20,11 @@ var Connection = (function () {
     return Connection;
 }());
 exports.Connection = Connection;
+/** An XSRFStrategy configures XSRF protection (e.g. via headers) on an HTTP request. */
+var XSRFStrategy = (function () {
+    function XSRFStrategy() {
+    }
+    return XSRFStrategy;
+}());
+exports.XSRFStrategy = XSRFStrategy;
 //# sourceMappingURL=interfaces.js.map

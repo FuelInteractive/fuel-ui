@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../src/facade/lang');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 var collection_1 = require('../src/facade/collection');
 /**
  * Polyfill for [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers), as
@@ -113,7 +113,7 @@ var Headers = (function () {
         var serializableHeaders = {};
         this._headersMap.forEach(function (values, name) {
             var list = [];
-            collection_1.iterateListLike(values, function (val) { return list = collection_1.ListWrapper.concat(list, val.split(',')); });
+            collection_1.iterateListLike(values, function (val /** TODO #9100 */) { return list = collection_1.ListWrapper.concat(list, val.split(',')); });
             serializableHeaders[name] = list;
         });
         return serializableHeaders;

@@ -1,5 +1,5 @@
+import { ListWrapper, Map, isListLikeIterable } from '../src/facade/collection';
 import { isPresent } from '../src/facade/lang';
-import { Map, ListWrapper, isListLikeIterable } from '../src/facade/collection';
 function paramParser(rawParams = '') {
     var map = new Map();
     if (rawParams.length > 0) {
@@ -112,7 +112,7 @@ export class URLSearchParams {
     }
     toString() {
         var paramsList = [];
-        this.paramsMap.forEach((values, k) => { values.forEach(v => paramsList.push(k + '=' + v)); });
+        this.paramsMap.forEach((values, k) => { values.forEach(v => paramsList.push(k + '=' + encodeURIComponent(v))); });
         return paramsList.join('&');
     }
     delete(param) { this.paramsMap.delete(param); }

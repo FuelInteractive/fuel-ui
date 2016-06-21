@@ -1,4 +1,4 @@
-import { TestabilityRegistry, Testability, GetTestability } from '@angular/core';
+import { GetTestability, Testability, TestabilityRegistry } from '@angular/core';
 export declare class BrowserGetTestability implements GetTestability {
     static init(): void;
     addToWindow(registry: TestabilityRegistry): void;

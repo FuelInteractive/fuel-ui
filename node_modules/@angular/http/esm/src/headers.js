@@ -1,5 +1,5 @@
-import { isBlank } from '../src/facade/lang';
 import { BaseException } from '../src/facade/exceptions';
+import { isBlank } from '../src/facade/lang';
 import { isListLikeIterable, iterateListLike, Map, MapWrapper, StringMapWrapper, ListWrapper } from '../src/facade/collection';
 /**
  * Polyfill for [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers), as
@@ -105,7 +105,7 @@ export class Headers {
         let serializableHeaders = {};
         this._headersMap.forEach((values, name) => {
             let list = [];
-            iterateListLike(values, val => list = ListWrapper.concat(list, val.split(',')));
+            iterateListLike(values, (val /** TODO #9100 */) => list = ListWrapper.concat(list, val.split(',')));
             serializableHeaders[name] = list;
         });
         return serializableHeaders;

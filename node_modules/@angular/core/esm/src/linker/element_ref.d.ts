@@ -23,6 +23,7 @@ export declare class ElementRef {
      *    web worker.
      *   </p>
      * </div>
+     * @stable
      */
     nativeElement: any;
     constructor(nativeElement: any);

@@ -1,5 +1,7 @@
-import { ViewContainerRef, TemplateRef, QueryList, AfterContentInit } from '@angular/core';
-import { SwitchView } from './ng_switch';
+import { AfterContentInit, QueryList, TemplateRef, ViewContainerRef } from '@angular/core';
+/**
+ * @experimental
+ */
 export declare abstract class NgLocalization {
     abstract getPluralCategory(value: any): string;
 }
@@ -32,7 +34,7 @@ export declare abstract class NgLocalization {
  *
  * @Component({
  *    selector: 'app',
- *    providers: [provide(NgLocalization, {useClass: MyLocalization})]
+ *    providers: [{provide: NgLocalization, useClass: MyLocalization}]
  * })
  * @View({
  *   template: `
@@ -57,13 +59,15 @@ export declare abstract class NgLocalization {
  * }
  *
  * ```
+ * @experimental
  */
 export declare class NgPluralCase {
     value: string;
-    /** @internal */
-    _view: SwitchView;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef);
 }
+/**
+ * @experimental
+ */
 export declare class NgPlural implements AfterContentInit {
     private _localization;
     private _switchValue;
@@ -73,18 +77,4 @@ export declare class NgPlural implements AfterContentInit {
     constructor(_localization: NgLocalization);
     ngPlural: number;
     ngAfterContentInit(): void;
-    /** @internal */
-    _updateView(): void;
-    /** @internal */
-    _clearViews(): void;
-    /** @internal */
-    _activateView(view: SwitchView): void;
-    /** @internal */
-    _getCategoryView(value: number): SwitchView;
-    /** @internal */
-    _isValueView(pluralCase: NgPluralCase): boolean;
-    /** @internal */
-    _formatValue(pluralCase: NgPluralCase): any;
-    /** @internal */
-    _stripValue(value: string): number;
 }

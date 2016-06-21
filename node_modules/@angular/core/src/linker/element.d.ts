@@ -1,8 +1,8 @@
-import { AppView } from './view';
-import { ElementRef } from './element_ref';
-import { ViewContainerRef_ } from './view_container_ref';
-import { QueryList } from './query_list';
 import { Injector } from '../di/injector';
+import { ElementRef } from './element_ref';
+import { QueryList } from './query_list';
+import { AppView } from './view';
+import { ViewContainerRef_ } from './view_container_ref';
 /**
  * An AppElement is created for elements that have a ViewContainerRef,
  * a nested component or a <template> element to keep data around

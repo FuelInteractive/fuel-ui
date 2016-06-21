@@ -41,5 +41,7 @@ import { Type } from '@angular/core';
  *   ...
  * }
  * ```
+ *
+ * @experimental Contains forms which are experimental.
  */
 export declare const COMMON_DIRECTIVES: Type[][];

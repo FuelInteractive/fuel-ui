@@ -29,6 +29,7 @@ import { PipeTransform } from '@angular/core';
  *  }
  *  ```
  *
+ * @experimental
  */
 export declare class I18nPluralPipe implements PipeTransform {
     transform(value: number, pluralMap: {

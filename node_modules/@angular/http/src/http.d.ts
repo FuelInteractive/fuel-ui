@@ -1,8 +1,8 @@
-import { RequestOptionsArgs, ConnectionBackend } from './interfaces';
+import { Observable } from 'rxjs/Observable';
+import { RequestOptions } from './base_request_options';
+import { ConnectionBackend, RequestOptionsArgs } from './interfaces';
 import { Request } from './static_request';
 import { Response } from './static_response';
-import { RequestOptions } from './base_request_options';
-import { Observable } from 'rxjs/Observable';
 /**
  * Performs http requests using `XMLHttpRequest` as the default backend.
  *
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
  *
  * ```typescript
  * import {Http, HTTP_PROVIDERS} from '@angular/http';
+ * import 'rxjs/add/operator/map'
  * @Component({
  *   selector: 'http-app',
  *   viewProviders: [HTTP_PROVIDERS],
@@ -35,7 +36,7 @@ import { Observable } from 'rxjs/Observable';
  * ### Example
  *
  * ```
- * http.get('people.json').observer({next: (value) => this.people = value});
+ * http.get('people.json').subscribe((res:Response) => this.people = res.json());
  * ```
  *
  * The default construct used to perform requests, `XMLHttpRequest`, is abstracted as a "Backend" (
@@ -50,11 +51,11 @@ import { Observable } from 'rxjs/Observable';
  * var injector = Injector.resolveAndCreate([
  *   BaseRequestOptions,
  *   MockBackend,
- *   provide(Http, {useFactory:
+ *   {provide: Http, useFactory:
  *       function(backend, defaultOptions) {
  *         return new Http(backend, defaultOptions);
  *       },
- *       deps: [MockBackend, BaseRequestOptions]})
+ *       deps: [MockBackend, BaseRequestOptions]}
  * ]);
  * var http = injector.get(Http);
  * http.get('request-from-mock-backend.json').subscribe((res:Response) => doSomething(res));
@@ -79,11 +80,11 @@ export declare class Http {
     /**
      * Performs a request with `post` http method.
      */
-    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response>;
+    post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
     /**
      * Performs a request with `put` http method.
      */
-    put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response>;
+    put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
     /**
      * Performs a request with `delete` http method.
      */
@@ -91,7 +92,7 @@ export declare class Http {
     /**
      * Performs a request with `patch` http method.
      */
-    patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response>;
+    patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
     /**
      * Performs a request with `head` http method.
      */

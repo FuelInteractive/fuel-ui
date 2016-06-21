@@ -25,7 +25,7 @@ export declare class RuntimeCompiler implements ComponentResolver {
     private _compiledTemplateCache;
     private _compiledTemplateDone;
     constructor(_metadataResolver: CompileMetadataResolver, _templateNormalizer: DirectiveNormalizer, _templateParser: TemplateParser, _styleCompiler: StyleCompiler, _viewCompiler: ViewCompiler, _xhr: XHR, _genConfig: CompilerConfig);
-    resolveComponent(componentType: Type): Promise<ComponentFactory<any>>;
+    resolveComponent(component: Type | string): Promise<ComponentFactory<any>>;
     clearCache(): void;
     private _loadAndCompileComponent(cacheKey, compMeta, viewDirectives, pipes, compilingComponentsPath);
     private _compileComponent(compMeta, parsedTemplate, styles, pipes, compilingComponentsPath, childPromises);

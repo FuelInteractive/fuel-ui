@@ -2,14 +2,15 @@
  * This indirection is needed to free up Component, etc symbols in the public API
  * to be used by the decorator versions of these annotations.
  */
-export { QueryMetadata, ContentChildrenMetadata, ContentChildMetadata, ViewChildrenMetadata, ViewQueryMetadata, ViewChildMetadata, AttributeMetadata } from './metadata/di';
-export { ComponentMetadata, DirectiveMetadata, PipeMetadata, InputMetadata, OutputMetadata, HostBindingMetadata, HostListenerMetadata } from './metadata/directives';
-export { ViewMetadata, ViewEncapsulation } from './metadata/view';
-export { AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy, OnInit, DoCheck } from './metadata/lifecycle_hooks';
-import { QueryMetadata, ContentChildrenMetadata, ViewChildrenMetadata, AttributeMetadata } from './metadata/di';
+import { ChangeDetectionStrategy } from '../src/change_detection/change_detection';
+import { AnimationEntryMetadata } from './animation/metadata';
+import { AttributeMetadata, ContentChildrenMetadata, QueryMetadata, ViewChildrenMetadata } from './metadata/di';
 import { ComponentMetadata, DirectiveMetadata } from './metadata/directives';
-import { ViewMetadata, ViewEncapsulation } from './metadata/view';
-import { ChangeDetectionStrategy } from './change_detection/change_detection';
+import { ViewEncapsulation, ViewMetadata } from './metadata/view';
+export { AttributeMetadata, ContentChildMetadata, ContentChildrenMetadata, QueryMetadata, ViewChildMetadata, ViewChildrenMetadata, ViewQueryMetadata } from './metadata/di';
+export { ComponentMetadata, DirectiveMetadata, HostBindingMetadata, HostListenerMetadata, InputMetadata, OutputMetadata, PipeMetadata } from './metadata/directives';
+export { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, DoCheck, OnChanges, OnDestroy, OnInit } from './metadata/lifecycle_hooks';
+export { ViewEncapsulation, ViewMetadata } from './metadata/view';
 import { TypeDecorator } from './util/decorators';
 import { Type } from '../src/facade/lang';
 /**
@@ -36,6 +37,7 @@ export interface ComponentDecorator extends TypeDecorator {
         renderer?: string;
         styles?: string[];
         styleUrls?: string[];
+        animations?: AnimationEntryMetadata[];
     }): ViewDecorator;
 }
 /**
@@ -55,6 +57,7 @@ export interface ViewDecorator extends TypeDecorator {
         renderer?: string;
         styles?: string[];
         styleUrls?: string[];
+        animations?: AnimationEntryMetadata[];
     }): ViewDecorator;
 }
 /**
@@ -98,7 +101,6 @@ export interface DirectiveMetadataFactory {
         host?: {
             [key: string]: string;
         };
-        bindings?: any[];
         providers?: any[];
         exportAs?: string;
         queries?: {
@@ -114,7 +116,6 @@ export interface DirectiveMetadataFactory {
         host?: {
             [key: string]: string;
         };
-        bindings?: any[];
         providers?: any[];
         exportAs?: string;
         queries?: {
@@ -163,20 +164,19 @@ export interface ComponentMetadataFactory {
         host?: {
             [key: string]: string;
         };
-        bindings?: any[];
         providers?: any[];
         exportAs?: string;
         moduleId?: string;
         queries?: {
             [key: string]: any;
         };
-        viewBindings?: any[];
         viewProviders?: any[];
         changeDetection?: ChangeDetectionStrategy;
         templateUrl?: string;
         template?: string;
         styleUrls?: string[];
         styles?: string[];
+        animations?: AnimationEntryMetadata[];
         directives?: Array<Type | any[]>;
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
@@ -190,20 +190,19 @@ export interface ComponentMetadataFactory {
         host?: {
             [key: string]: string;
         };
-        bindings?: any[];
         providers?: any[];
         exportAs?: string;
         moduleId?: string;
         queries?: {
             [key: string]: any;
         };
-        viewBindings?: any[];
         viewProviders?: any[];
         changeDetection?: ChangeDetectionStrategy;
         templateUrl?: string;
         template?: string;
         styleUrls?: string[];
         styles?: string[];
+        animations?: AnimationEntryMetadata[];
         directives?: Array<Type | any[]>;
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
@@ -260,6 +259,7 @@ export interface ViewMetadataFactory {
         encapsulation?: ViewEncapsulation;
         styles?: string[];
         styleUrls?: string[];
+        animations?: AnimationEntryMetadata[];
     }): ViewDecorator;
     new (obj: {
         templateUrl?: string;
@@ -269,6 +269,7 @@ export interface ViewMetadataFactory {
         encapsulation?: ViewEncapsulation;
         styles?: string[];
         styleUrls?: string[];
+        animations?: AnimationEntryMetadata[];
     }): ViewMetadata;
 }
 /**
@@ -351,6 +352,7 @@ export interface AttributeMetadataFactory {
  *   [new ng.Query(SomeType)]
  * ]
  * ```
+ * @deprecated
  */
 export interface QueryMetadataFactory {
     (selector: Type | string, {descendants, read}?: {
@@ -364,6 +366,7 @@ export interface QueryMetadataFactory {
 }
 /**
  * Factory for {@link ContentChildren}.
+ * @stable
  */
 export interface ContentChildrenMetadataFactory {
     (selector: Type | string, {descendants, read}?: {
@@ -377,6 +380,7 @@ export interface ContentChildrenMetadataFactory {
 }
 /**
  * Factory for {@link ContentChild}.
+ * @stable
  */
 export interface ContentChildMetadataFactory {
     (selector: Type | string, {read}?: {
@@ -388,6 +392,7 @@ export interface ContentChildMetadataFactory {
 }
 /**
  * Factory for {@link ViewChildren}.
+ * @stable
  */
 export interface ViewChildrenMetadataFactory {
     (selector: Type | string, {read}?: {
@@ -399,6 +404,7 @@ export interface ViewChildrenMetadataFactory {
 }
 /**
  * Factory for {@link ViewChild}.
+ * @stable
  */
 export interface ViewChildMetadataFactory {
     (selector: Type | string, {read}?: {
@@ -414,6 +420,7 @@ export interface ViewChildMetadataFactory {
  * ### Example
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
+ * @stable
  */
 export interface PipeMetadataFactory {
     (obj: {
@@ -429,6 +436,7 @@ export interface PipeMetadataFactory {
  * {@link InputMetadata} factory for creating decorators.
  *
  * See {@link InputMetadata}.
+ * @stable
  */
 export interface InputMetadataFactory {
     (bindingPropertyName?: string): any;
@@ -438,6 +446,7 @@ export interface InputMetadataFactory {
  * {@link OutputMetadata} factory for creating decorators.
  *
  * See {@link OutputMetadata}.
+ * @stable
  */
 export interface OutputMetadataFactory {
     (bindingPropertyName?: string): any;
@@ -445,6 +454,7 @@ export interface OutputMetadataFactory {
 }
 /**
  * {@link HostBindingMetadata} factory function.
+ * @stable
  */
 export interface HostBindingMetadataFactory {
     (hostPropertyName?: string): any;
@@ -452,6 +462,7 @@ export interface HostBindingMetadataFactory {
 }
 /**
  * {@link HostListenerMetadata} factory function.
+ * @stable
  */
 export interface HostListenerMetadataFactory {
     (eventName: string, args?: string[]): any;
@@ -479,6 +490,7 @@ export interface HostListenerMetadataFactory {
  * ### Example
  *
  * {@example core/ts/metadata/metadata.ts region='component'}
+ * @stable
  */
 export declare var Component: ComponentMetadataFactory;
 /**
@@ -858,6 +870,7 @@ export declare var Component: ComponentMetadataFactory;
  * Note also that although the `<li></li>` template still exists inside the `<template></template>`,
  * the instantiated
  * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
+ * @stable
  */
 export declare var Directive: DirectiveMetadataFactory;
 /**
@@ -876,6 +889,7 @@ export declare var Directive: DirectiveMetadataFactory;
  * A decorator can inject string literal `text` like so:
  *
  * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
+ * @stable
  */
 export declare var Attribute: AttributeMetadataFactory;
 /**
@@ -984,6 +998,7 @@ export declare var Attribute: AttributeMetadataFactory;
  *
  * The injected object is an unmodifiable live list.
  * See {@link QueryList} for more details.
+ * @deprecated
  */
 export declare var Query: QueryMetadataFactory;
 /**
@@ -1005,6 +1020,7 @@ export declare var Query: QueryMetadataFactory;
  *   }
  * }
  * ```
+ * @stable
  */
 export declare var ContentChildren: ContentChildrenMetadataFactory;
 /**
@@ -1020,12 +1036,22 @@ export declare var ContentChildren: ContentChildrenMetadataFactory;
  * })
  * class SomeDir {
  *   @ContentChild(ChildDirective) contentChild;
+ *   @ContentChild('container_ref') containerChild
  *
  *   ngAfterContentInit() {
  *     // contentChild is set
+ *     // containerChild is set
  *   }
  * }
  * ```
+ *
+ * ```html
+ * <container #container_ref>
+ *   <item>a</item>
+ *   <item>b</item>
+ * </container>
+ * ```
+ * @stable
  */
 export declare var ContentChild: ContentChildMetadataFactory;
 /**
@@ -1106,6 +1132,7 @@ export declare var ContentChild: ContentChildMetadataFactory;
  * ```
  *
  * See also: [ViewChildrenMetadata]
+ * @stable
  */
 export declare var ViewChildren: ViewChildrenMetadataFactory;
 /**
@@ -1177,6 +1204,7 @@ export declare var ViewChildren: ViewChildrenMetadataFactory;
  * }
  * ```
  * See also: [ViewChildMetadata]
+ * @stable
  */
 export declare var ViewChild: ViewChildMetadataFactory;
 /**
@@ -1213,6 +1241,7 @@ export declare var ViewChild: ViewChildMetadataFactory;
  *
  * The injected object is an iterable and observable live list.
  * See {@link QueryList} for more details.
+ * @deprecated
  */
 export declare var ViewQuery: QueryMetadataFactory;
 /**
@@ -1221,6 +1250,7 @@ export declare var ViewQuery: QueryMetadataFactory;
  * ### Example
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
+ * @stable
  */
 export declare var Pipe: PipeMetadataFactory;
 /**
@@ -1263,6 +1293,7 @@ export declare var Pipe: PipeMetadataFactory;
  *
  * bootstrap(App);
  * ```
+ * @stable
  */
 export declare var Input: InputMetadataFactory;
 /**
@@ -1305,6 +1336,7 @@ export declare var Input: InputMetadataFactory;
  * }
  * bootstrap(App);
  * ```
+ * @stable
  */
 export declare var Output: OutputMetadataFactory;
 /**
@@ -1326,8 +1358,8 @@ export declare var Output: OutputMetadataFactory;
  * @Directive({selector: '[ngModel]'})
  * class NgModelStatus {
  *   constructor(public control:NgModel) {}
- *   @HostBinding('[class.valid]') get valid { return this.control.valid; }
- *   @HostBinding('[class.invalid]') get invalid { return this.control.invalid; }
+ *   @HostBinding('class.valid') get valid() { return this.control.valid; }
+ *   @HostBinding('class.invalid') get invalid() { return this.control.invalid; }
  * }
  *
  * @Component({
@@ -1341,6 +1373,7 @@ export declare var Output: OutputMetadataFactory;
  *
  * bootstrap(App);
  * ```
+ * @stable
  */
 export declare var HostBinding: HostBindingMetadataFactory;
 /**
@@ -1376,5 +1409,6 @@ export declare var HostBinding: HostBindingMetadataFactory;
  *
  * bootstrap(App);
  * ```
+ * @stable
  */
 export declare var HostListener: HostListenerMetadataFactory;

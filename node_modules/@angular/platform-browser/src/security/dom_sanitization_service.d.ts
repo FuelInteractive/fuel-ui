@@ -1,4 +1,4 @@
-import { SecurityContext, SanitizationService } from '../../core_private';
+import { SanitizationService, SecurityContext } from '../../core_private';
 export { SecurityContext };
 /** Marker interface for a value that's safe to use in a particular context. */
 export interface SafeValue {
@@ -74,23 +74,22 @@ export declare abstract class DomSanitizationService implements SanitizationServ
     abstract bypassSecurityTrustScript(value: string): SafeScript;
     /**
      * Bypass security and trust the given value to be a safe style URL, i.e. a value that can be used
-     * in hyperlinks or `<iframe src>`.
+     * in hyperlinks or `<img src>`.
      *
      * WARNING: calling this method with untrusted user data will cause severe security bugs!
      */
     abstract bypassSecurityTrustUrl(value: string): SafeUrl;
     /**
      * Bypass security and trust the given value to be a safe resource URL, i.e. a location that may
-     * be used to load executable code from, like `<script src>`.
+     * be used to load executable code from, like `<script src>`, or `<iframe src>`.
      *
      * WARNING: calling this method with untrusted user data will cause severe security bugs!
      */
-    abstract bypassSecurityTrustResourceUrl(value: string): any;
+    abstract bypassSecurityTrustResourceUrl(value: string): SafeResourceUrl;
 }
 export declare class DomSanitizationServiceImpl extends DomSanitizationService {
     sanitize(ctx: SecurityContext, value: any): string;
     private checkNotSafeValue(value, expectedType);
-    private sanitizeHtml(value);
     bypassSecurityTrustHtml(value: string): SafeHtml;
     bypassSecurityTrustStyle(value: string): SafeStyle;
     bypassSecurityTrustScript(value: string): SafeScript;

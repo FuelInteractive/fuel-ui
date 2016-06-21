@@ -1,4 +1,4 @@
-import { Observable } from '../../src/facade/async';
+import { Observable } from '../facade/async';
 /**
  * An unmodifiable list of items that Angular keeps up to date when the state
  * of the application changes.
@@ -17,11 +17,10 @@ import { Observable } from '../../src/facade/async';
  * ```typescript
  * @Component({...})
  * class Container {
- *   constructor(@Query(Item) items: QueryList<Item>) {
- *     items.changes.subscribe(_ => console.log(items.length));
- *   }
+ *   @ViewChildren(Item) items:QueryList<Item>;
  * }
  * ```
+ * @stable
  */
 export declare class QueryList<T> {
     private _dirty;
@@ -52,12 +51,6 @@ export declare class QueryList<T> {
      */
     toArray(): T[];
     toString(): string;
-    /**
-     * @internal
-     */
-    reset(res: Array<T | any[]>): void;
-    /** @internal */
-    notifyOnChanges(): void;
     /** internal */
     setDirty(): void;
     /** internal */

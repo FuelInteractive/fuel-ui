@@ -21,6 +21,8 @@
  * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class
  * they are all platform independent.
+ *
+ * @stable
  */
 export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
@@ -36,6 +38,8 @@ export declare abstract class PlatformLocation {
 }
 /**
  * A serializable version of the event from onPopState or onHashChange
+ *
+ * @stable
  */
 export interface UrlChangeEvent {
     type: string;

@@ -17,6 +17,104 @@ export declare abstract class CompileMetadataWithType extends CompileMetadataWit
 export declare function metadataFromJson(data: {
     [key: string]: any;
 }): any;
+export declare class CompileAnimationEntryMetadata {
+    name: string;
+    definitions: CompileAnimationStateMetadata[];
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationEntryMetadata;
+    constructor(name?: string, definitions?: CompileAnimationStateMetadata[]);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare abstract class CompileAnimationStateMetadata {
+}
+export declare class CompileAnimationStateDeclarationMetadata extends CompileAnimationStateMetadata {
+    stateNameExpr: string;
+    styles: CompileAnimationStyleMetadata;
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationStateDeclarationMetadata;
+    constructor(stateNameExpr: string, styles: CompileAnimationStyleMetadata);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare class CompileAnimationStateTransitionMetadata extends CompileAnimationStateMetadata {
+    stateChangeExpr: string;
+    steps: CompileAnimationMetadata;
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationStateTransitionMetadata;
+    constructor(stateChangeExpr: string, steps: CompileAnimationMetadata);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare abstract class CompileAnimationMetadata {
+    abstract toJson(): {
+        [key: string]: any;
+    };
+}
+export declare class CompileAnimationKeyframesSequenceMetadata extends CompileAnimationMetadata {
+    steps: CompileAnimationStyleMetadata[];
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationKeyframesSequenceMetadata;
+    constructor(steps?: CompileAnimationStyleMetadata[]);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare class CompileAnimationStyleMetadata extends CompileAnimationMetadata {
+    offset: number;
+    styles: Array<string | {
+        [key: string]: string | number;
+    }>;
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationStyleMetadata;
+    constructor(offset: number, styles?: Array<string | {
+        [key: string]: string | number;
+    }>);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare class CompileAnimationAnimateMetadata extends CompileAnimationMetadata {
+    timings: string | number;
+    styles: CompileAnimationStyleMetadata | CompileAnimationKeyframesSequenceMetadata;
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationAnimateMetadata;
+    constructor(timings?: string | number, styles?: CompileAnimationStyleMetadata | CompileAnimationKeyframesSequenceMetadata);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare abstract class CompileAnimationWithStepsMetadata extends CompileAnimationMetadata {
+    steps: CompileAnimationMetadata[];
+    constructor(steps?: CompileAnimationMetadata[]);
+}
+export declare class CompileAnimationSequenceMetadata extends CompileAnimationWithStepsMetadata {
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationSequenceMetadata;
+    constructor(steps?: CompileAnimationMetadata[]);
+    toJson(): {
+        [key: string]: any;
+    };
+}
+export declare class CompileAnimationGroupMetadata extends CompileAnimationWithStepsMetadata {
+    static fromJson(data: {
+        [key: string]: any;
+    }): CompileAnimationGroupMetadata;
+    constructor(steps?: CompileAnimationMetadata[]);
+    toJson(): {
+        [key: string]: any;
+    };
+}
 export declare class CompileIdentifierMetadata implements CompileMetadataWithIdentifier {
     runtime: any;
     name: string;
@@ -119,6 +217,7 @@ export declare class CompileTokenMetadata implements CompileMetadataWithIdentifi
     value: any;
     identifier: CompileIdentifierMetadata;
     identifierIsInstance: boolean;
+    private _assetCacheKey;
     constructor({value, identifier, identifierIsInstance}: {
         value?: any;
         identifier?: CompileIdentifierMetadata;
@@ -201,14 +300,16 @@ export declare class CompileTemplateMetadata {
     templateUrl: string;
     styles: string[];
     styleUrls: string[];
+    animations: CompileAnimationEntryMetadata[];
     ngContentSelectors: string[];
-    constructor({encapsulation, template, templateUrl, styles, styleUrls, ngContentSelectors}?: {
+    constructor({encapsulation, template, templateUrl, styles, styleUrls, animations, ngContentSelectors}?: {
         encapsulation?: ViewEncapsulation;
         template?: string;
         templateUrl?: string;
         styles?: string[];
         styleUrls?: string[];
         ngContentSelectors?: string[];
+        animations?: CompileAnimationEntryMetadata[];
     });
     static fromJson(data: {
         [key: string]: any;

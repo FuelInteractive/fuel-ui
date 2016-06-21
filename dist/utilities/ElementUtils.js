@@ -22,15 +22,18 @@ var ElementUtils = (function () {
             return;
         var startTime = new Date().getTime();
         var from = element.scrollTop;
-        var timer = setInterval(function () {
-            var time = new Date().getTime() - startTime;
-            var scrollTo = AnimationUtils_1.AnimationUtils.easeInOutQuart(time, from, to - from, duration);
-            element.scrollTop = scrollTo;
-            if (time >= duration) {
-                element.scrollTop = to;
-                clearInterval(timer);
-            }
-        }, 1000 / 60);
+        return new Promise(function (resolve, reject) {
+            var timer = setInterval(function () {
+                var time = new Date().getTime() - startTime;
+                var scrollTo = AnimationUtils_1.AnimationUtils.easeInOutQuart(time, from, to - from, duration);
+                element.scrollTop = scrollTo;
+                if (time >= duration) {
+                    element.scrollTop = to;
+                    clearInterval(timer);
+                    resolve();
+                }
+            }, 1000 / 60);
+        });
     };
     return ElementUtils;
 }());

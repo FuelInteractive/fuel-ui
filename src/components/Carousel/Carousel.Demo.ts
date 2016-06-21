@@ -17,28 +17,10 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 </div>
 
 <div class="row">
-<!--<carousel>
-        <div class="carousel-item" style="background-color: SteelBlue; height: 200px;">
-            <h3 style="margin: auto auto;">Some title</h3>
-        </div>
-        <div class="carousel-item" style="background-color: Crimson; height: 300px;">
-            <h3 style="margin: auto auto;">another title</h3>
-        </div>
-        <div class="carousel-item" style="background-color: MediumAquaMarine; height: 250px;">
-            <h3 style="margin: auto auto;">gratuitous title</h3>
-        </div>
-        <div class="carousel-item" style="background-color: MediumSlateBlue; height: 250px;">
-            <h3 style="margin: auto auto;">yet another title title</h3>
-        </div>
-        <div class="carousel-item" style="background-color: Khaki; height: 250px;">
-            <h3 style="margin: auto auto;">really another title?</h3>
-        </div>
-    </carousel>
-</div>-->
-
-<div class="row">
     <carousel interval="10000" class="col-md-6">
-        <img *ngFor="let image of carouselImages" src="{{image}}" class="carousel-item" />
+        <div *ngFor="let image of carouselImages" class="carousel-item">
+            <img src="{{image}}" />
+        </div>        
     </carousel>
     
     <carousel interval="10000" class="col-md-6">
@@ -70,9 +52,15 @@ import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
 <pre>
 <code class="language-markup" code-highlight>
 &lt;carousel&gt;
-    &lt;img src=&quot;image1.jpg&quot; class=&quot;carousel-item&quot; /&gt;
-    &lt;img src=&quot;image2.jpg&quot; class=&quot;carousel-item&quot; /&gt;
-    &lt;img src=&quot;image3.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;div class="carousel-item"&gt;
+        &lt;img src=&quot;image1.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;
+        &lt;img src=&quot;image2.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;
+        &lt;img src=&quot;image3.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+    &lt;/div&gt;
 &lt;/carousel&gt;
 </code>
 </pre>

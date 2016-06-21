@@ -1,7 +1,7 @@
 "use strict";
 /**
-* Supported http methods.
-*/
+ * Supported http methods.
+ */
 (function (RequestMethod) {
     RequestMethod[RequestMethod["Get"] = 0] = "Get";
     RequestMethod[RequestMethod["Post"] = 1] = "Post";
@@ -38,4 +38,17 @@ var ReadyState = exports.ReadyState;
     ResponseType[ResponseType["Opaque"] = 4] = "Opaque";
 })(exports.ResponseType || (exports.ResponseType = {}));
 var ResponseType = exports.ResponseType;
+/**
+ * Supported content type to be automatically associated with a {@link Request}.
+ */
+(function (ContentType) {
+    ContentType[ContentType["NONE"] = 0] = "NONE";
+    ContentType[ContentType["JSON"] = 1] = "JSON";
+    ContentType[ContentType["FORM"] = 2] = "FORM";
+    ContentType[ContentType["FORM_DATA"] = 3] = "FORM_DATA";
+    ContentType[ContentType["TEXT"] = 4] = "TEXT";
+    ContentType[ContentType["BLOB"] = 5] = "BLOB";
+    ContentType[ContentType["ARRAY_BUFFER"] = 6] = "ARRAY_BUFFER";
+})(exports.ContentType || (exports.ContentType = {}));
+var ContentType = exports.ContentType;
 //# sourceMappingURL=enums.js.map

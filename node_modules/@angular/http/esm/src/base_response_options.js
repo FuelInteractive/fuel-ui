@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { isPresent } from '../src/facade/lang';
-import { Headers } from './headers';
 import { ResponseType } from './enums';
+import { Headers } from './headers';
 /**
  * Creates a response options object to be optionally provided when instantiating a
  * {@link Response}.
@@ -79,8 +79,10 @@ export class BaseResponseOptions extends ResponseOptions {
         super({ status: 200, statusText: 'Ok', type: ResponseType.Default, headers: new Headers() });
     }
 }
+/** @nocollapse */
 BaseResponseOptions.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 BaseResponseOptions.ctorParameters = [];
 //# sourceMappingURL=base_response_options.js.map

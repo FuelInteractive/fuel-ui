@@ -1,13 +1,13 @@
-import { ReflectiveInjector, Provider, Type } from '../index';
+import { Provider, ReflectiveInjector, Type } from '../index';
 export { async } from './async';
 export declare class TestInjector {
     private _instantiated;
     private _injector;
     private _providers;
     reset(): void;
-    platformProviders: Array<Type | Provider | any[]>;
-    applicationProviders: Array<Type | Provider | any[]>;
-    addProviders(providers: Array<Type | Provider | any[]>): void;
+    platformProviders: Array<Type | Provider | any[] | any>;
+    applicationProviders: Array<Type | Provider | any[] | any>;
+    addProviders(providers: Array<Type | Provider | any[] | any>): void;
     createInjector(): ReflectiveInjector;
     get(token: any): any;
     execute(tokens: any[], fn: Function): any;
@@ -51,9 +51,6 @@ export declare function resetBaseTestProviders(): void;
  * eventually
  *   becomes `it('...', @Inject (object: AClass, async: AsyncTestCompleter) => { ... });`
  *
- * @param {Array} tokens
- * @param {Function} fn
- * @return {Function}
  */
 export declare function inject(tokens: any[], fn: Function): Function;
 export declare class InjectSetupWrapper {
@@ -61,12 +58,12 @@ export declare class InjectSetupWrapper {
     constructor(_providers: () => any);
     private _addProviders();
     inject(tokens: any[], fn: Function): Function;
-    /** @Deprecated {use async(withProviders().inject())} */
+    /** @deprecated {use async(withProviders().inject())} */
     injectAsync(tokens: any[], fn: Function): Function;
 }
 export declare function withProviders(providers: () => any): InjectSetupWrapper;
 /**
- * @Deprecated {use async(inject())}
+ * @deprecated {use async(inject())}
  *
  * Allows injecting dependencies in `beforeEach()` and `it()`. The test must return
  * a promise which will resolve when all asynchronous activity is complete.
@@ -81,8 +78,5 @@ export declare function withProviders(providers: () => any): InjectSetupWrapper;
  * })
  * ```
  *
- * @param {Array} tokens
- * @param {Function} fn
- * @return {Function}
  */
 export declare function injectAsync(tokens: any[], fn: Function): Function;

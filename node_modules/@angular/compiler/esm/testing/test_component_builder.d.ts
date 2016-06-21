@@ -1,4 +1,4 @@
-import { OpaqueToken, ComponentRef, ComponentFactory, Injector, ViewMetadata, ElementRef, ChangeDetectorRef, NgZone, DebugElement } from '@angular/core';
+import { AnimationEntryMetadata, ChangeDetectorRef, ComponentFactory, ComponentRef, DebugElement, ElementRef, Injector, NgZone, OpaqueToken, ViewMetadata } from '@angular/core';
 import { Type } from '../src/facade/lang';
 /**
  * An abstract class for inserting the root test component element in a platform independent way.
@@ -85,46 +85,19 @@ export declare class ComponentFixture<T> {
  */
 export declare class TestComponentBuilder {
     private _injector;
-    /** @internal */
-    _bindingsOverrides: Map<Type, any[]>;
-    /** @internal */
-    _directiveOverrides: Map<Type, Map<Type, Type>>;
-    /** @internal */
-    _templateOverrides: Map<Type, string>;
-    /** @internal */
-    _viewBindingsOverrides: Map<Type, any[]>;
-    /** @internal */
-    _viewOverrides: Map<Type, ViewMetadata>;
     constructor(_injector: Injector);
-    /** @internal */
-    _clone(): TestComponentBuilder;
     /**
      * Overrides only the html of a {@link ComponentMetadata}.
      * All the other properties of the component's {@link ViewMetadata} are preserved.
-     *
-     * @param {Type} component
-     * @param {string} html
-     *
-     * @return {TestComponentBuilder}
      */
     overrideTemplate(componentType: Type, template: string): TestComponentBuilder;
+    overrideAnimations(componentType: Type, animations: AnimationEntryMetadata[]): TestComponentBuilder;
     /**
      * Overrides a component's {@link ViewMetadata}.
-     *
-     * @param {Type} component
-     * @param {view} View
-     *
-     * @return {TestComponentBuilder}
      */
     overrideView(componentType: Type, view: ViewMetadata): TestComponentBuilder;
     /**
      * Overrides the directives from the component {@link ViewMetadata}.
-     *
-     * @param {Type} component
-     * @param {Type} from
-     * @param {Type} to
-     *
-     * @return {TestComponentBuilder}
      */
     overrideDirective(componentType: Type, from: Type, to: Type): TestComponentBuilder;
     /**
@@ -136,11 +109,6 @@ export declare class TestComponentBuilder {
      * The providers specified via this method are appended to the existing `providers` causing the
      * duplicated providers to
      * be overridden.
-     *
-     * @param {Type} component
-     * @param {any[]} providers
-     *
-     * @return {TestComponentBuilder}
      */
     overrideProviders(type: Type, providers: any[]): TestComponentBuilder;
     /**
@@ -156,11 +124,6 @@ export declare class TestComponentBuilder {
      * The providers specified via this method are appended to the existing `providers` causing the
      * duplicated providers to
      * be overridden.
-     *
-     * @param {Type} component
-     * @param {any[]} providers
-     *
-     * @return {TestComponentBuilder}
      */
     overrideViewProviders(type: Type, providers: any[]): TestComponentBuilder;
     /**
@@ -170,8 +133,6 @@ export declare class TestComponentBuilder {
     private _create<C>(ngZone, componentFactory);
     /**
      * Builds and returns a ComponentFixture.
-     *
-     * @return {Promise<ComponentFixture>}
      */
     createAsync(rootComponentType: Type): Promise<ComponentFixture<any>>;
     createFakeAsync(rootComponentType: Type): ComponentFixture<any>;

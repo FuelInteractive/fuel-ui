@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var Collapse_1 = require('../../animations/Collapse/Collapse');
 var Accordion = (function () {
     function Accordion() {
         this.closeOthers = true;
@@ -45,7 +46,8 @@ var Accordion = (function () {
     Accordion = __decorate([
         core_1.Component({
             selector: 'accordion',
-            template: "<ng-content></ng-content>"
+            template: "<ng-content></ng-content>",
+            animations: [Collapse_1.Collapse(350)]
         }), 
         __metadata('design:paramtypes', [])
     ], Accordion);

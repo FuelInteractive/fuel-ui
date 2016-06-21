@@ -11,4 +11,7 @@ export class ConnectionBackend {
  */
 export class Connection {
 }
+/** An XSRFStrategy configures XSRF protection (e.g. via headers) on an HTTP request. */
+export class XSRFStrategy {
+}
 //# sourceMappingURL=interfaces.js.map

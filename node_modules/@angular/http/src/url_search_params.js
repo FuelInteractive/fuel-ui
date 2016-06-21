@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../src/facade/lang');
 var collection_1 = require('../src/facade/collection');
+var lang_1 = require('../src/facade/lang');
 function paramParser(rawParams) {
     if (rawParams === void 0) { rawParams = ''; }
     var map = new collection_1.Map();
@@ -118,7 +118,7 @@ var URLSearchParams = (function () {
     };
     URLSearchParams.prototype.toString = function () {
         var paramsList = [];
-        this.paramsMap.forEach(function (values, k) { values.forEach(function (v) { return paramsList.push(k + '=' + v); }); });
+        this.paramsMap.forEach(function (values, k) { values.forEach(function (v) { return paramsList.push(k + '=' + encodeURIComponent(v)); }); });
         return paramsList.join('&');
     };
     URLSearchParams.prototype.delete = function (param) { this.paramsMap.delete(param); };

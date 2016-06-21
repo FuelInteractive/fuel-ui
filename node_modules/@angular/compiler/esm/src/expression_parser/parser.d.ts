@@ -1,5 +1,5 @@
+import { AST, ASTWithSource, BindingPipe, LiteralMap, TemplateBinding } from './ast';
 import { Lexer, Token } from './lexer';
-import { AST, BindingPipe, LiteralMap, TemplateBinding, ASTWithSource } from './ast';
 export declare class SplitInterpolation {
     strings: string[];
     expressions: string[];
@@ -60,11 +60,10 @@ export declare class _ParseAST {
     parsePrefix(): AST;
     parseCallChain(): AST;
     parsePrimary(): AST;
-    parseExpressionList(terminator: number): any[];
+    parseExpressionList(terminator: number): AST[];
     parseLiteralMap(): LiteralMap;
     parseAccessMemberOrMethodCall(receiver: AST, isSafe?: boolean): AST;
     parseCallArguments(): BindingPipe[];
-    parseBlockContent(): AST;
     /**
      * An identifier, a keyword, a string with an optional `-` inbetween.
      */

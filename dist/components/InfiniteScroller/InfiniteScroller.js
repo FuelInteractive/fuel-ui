@@ -56,7 +56,7 @@ var InfiniteScroller = (function () {
         });
     };
     InfiniteScroller.prototype.ngAfterViewInit = function () {
-        this.container = this.container.firstElementChild;
+        this.container = this.container.querySelector(".scroll-container");
         this.container.scrollTop += 1;
     };
     InfiniteScroller.prototype.handleItemChanges = function () {
@@ -117,10 +117,15 @@ var InfiniteScroller = (function () {
         if (target.scrollTop < 1)
             target.scrollTop = 1;
     };
-    InfiniteScroller.prototype.scrollTo = function (position) {
-        ElementUtils_1.ElementUtils.scrollTo(this.container, position, 400);
+    InfiniteScroller.prototype.scrollTo = function (position, animate) {
+        if (animate === void 0) { animate = true; }
+        if (animate)
+            ElementUtils_1.ElementUtils.scrollTo(this.container, position, 400);
+        else
+            this.container.scrollTop = position;
     };
-    InfiniteScroller.prototype.scrollToIndex = function (index) {
+    InfiniteScroller.prototype.scrollToIndex = function (index, animate) {
+        if (animate === void 0) { animate = true; }
         var itemArray = this.itemQuery.toArray();
         var targetIndex = 0;
         if (index > 0 && index < itemArray.length)
@@ -131,7 +136,7 @@ var InfiniteScroller = (function () {
             targetIndex = 0;
         var target = this.itemQuery.toArray()[targetIndex];
         var targetPos = target.element.offsetTop - this.container.offsetTop;
-        this.scrollTo(targetPos);
+        this.scrollTo(targetPos, animate);
     };
     InfiniteScroller.prototype.isTop = function () {
         return this.lastScroll <= 1;
@@ -174,8 +179,8 @@ var InfiniteScroller = (function () {
     InfiniteScroller = __decorate([
         core_1.Component({
             selector: "infinite-scroller",
-            template: "\n\t\t<div class=\"scroll-container\" \n\t\t\t(scroll)=\"doscroll($event)\"\n\t\t\t[style.height]=\"height\"\n\t\t\t[class.hide-scrollbar]=\"hideScrollbar\">\n\t\t\t<ng-content></ng-content>\n\t\t</div>\n\t",
-            styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\t\t\n\t\t.scroll-container.hide-scrollbar::-webkit-scrollbar {\n\t\t\tdisplay: none;\n\t\t}\n\t\t\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
+            template: "\n        <div class=\"scroll-outer\" [class.hide-scrollbar]=\"hideScrollbar\">\n            <div class=\"scroll-container\"\n                (scroll)=\"doscroll($event)\"\n                [style.height]=\"height\">\n                <ng-content></ng-content>\n            </div>\n        </div>\n\t",
+            styles: ["\n\t\t.scroll-container {\n\t\t\toverflow-y: scroll;\n\t\t\toverflow-x: hidden;\n            max-height: 100%;\n\t\t}\n\n        .scroll-outer.hide-scrollbar .scroll-container {\n            margin-right: -16px;\n        }\n\n\t\t.scroll-content {\n\t\t\toverflow: auto;\n\t\t}\n\t"],
             directives: []
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])

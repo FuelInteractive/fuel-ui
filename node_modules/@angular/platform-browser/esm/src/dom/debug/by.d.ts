@@ -1,6 +1,6 @@
 import { DebugElement } from '@angular/core';
-import { Type } from '../../../src/facade/lang';
-import { Predicate } from '../../../src/facade/collection';
+import { Predicate } from '../../facade/collection';
+import { Type } from '../../facade/lang';
 /**
  * Predicates for use with {@link DebugElement}'s query functions.
  */

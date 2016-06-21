@@ -1,5 +1,6 @@
 /**
  * Stores error information; delivered via [NgZone.onError] stream.
+ * @deprecated
  */
 export declare class NgZoneError {
     error: any;
@@ -8,10 +9,6 @@ export declare class NgZoneError {
 }
 export declare class NgZoneImpl {
     static isInAngularZone(): boolean;
-    /** @internal */
-    private outer;
-    /** @internal */
-    private inner;
     private onEnter;
     private onLeave;
     private setMicrotask;

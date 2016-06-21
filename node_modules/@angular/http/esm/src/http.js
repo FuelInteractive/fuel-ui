@@ -1,10 +1,10 @@
-import { isString, isPresent } from '../src/facade/lang';
-import { makeTypeError } from '../src/facade/exceptions';
 import { Injectable } from '@angular/core';
-import { ConnectionBackend } from './interfaces';
-import { Request } from './static_request';
+import { makeTypeError } from '../src/facade/exceptions';
+import { isPresent, isString } from '../src/facade/lang';
 import { RequestOptions } from './base_request_options';
 import { RequestMethod } from './enums';
+import { ConnectionBackend } from './interfaces';
+import { Request } from './static_request';
 function httpRequest(backend, request) {
     return backend.createConnection(request).response;
 }
@@ -17,7 +17,8 @@ function mergeOptions(defaultOpts, providedOpts, method, url) {
             url: providedOpts.url || url,
             search: providedOpts.search,
             headers: providedOpts.headers,
-            body: providedOpts.body
+            body: providedOpts.body,
+            withCredentials: providedOpts.withCredentials
         }));
     }
     if (isPresent(method)) {
@@ -88,9 +89,11 @@ export class Http {
         return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions, options, RequestMethod.Head, url)));
     }
 }
+/** @nocollapse */
 Http.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 Http.ctorParameters = [
     { type: ConnectionBackend, },
     { type: RequestOptions, },
@@ -123,9 +126,11 @@ export class Jsonp extends Http {
         return responseObservable;
     }
 }
+/** @nocollapse */
 Jsonp.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 Jsonp.ctorParameters = [
     { type: ConnectionBackend, },
     { type: RequestOptions, },

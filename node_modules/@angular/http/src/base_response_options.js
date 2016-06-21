@@ -6,8 +6,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = require('@angular/core');
 var lang_1 = require('../src/facade/lang');
-var headers_1 = require('./headers');
 var enums_1 = require('./enums');
+var headers_1 = require('./headers');
 /**
  * Creates a response options object to be optionally provided when instantiating a
  * {@link Response}.
@@ -88,9 +88,11 @@ var BaseResponseOptions = (function (_super) {
     function BaseResponseOptions() {
         _super.call(this, { status: 200, statusText: 'Ok', type: enums_1.ResponseType.Default, headers: new headers_1.Headers() });
     }
+    /** @nocollapse */
     BaseResponseOptions.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     BaseResponseOptions.ctorParameters = [];
     return BaseResponseOptions;
 }(ResponseOptions));

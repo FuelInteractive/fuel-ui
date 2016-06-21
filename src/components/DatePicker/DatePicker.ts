@@ -73,6 +73,8 @@ export class DatePicker implements OnInit, AfterContentInit {
     changeDetector: ChangeDetectorRef;
     renderer: Renderer;
 
+    initialScroll = true;
+
     constructor(changeDetector: ChangeDetectorRef, renderer: Renderer) {
         this.changeDetector = changeDetector;
         this.renderer = renderer;
@@ -81,22 +83,7 @@ export class DatePicker implements OnInit, AfterContentInit {
     }
 
     ngOnInit(): void {
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-
-        setTimeout(() => {
-            if (this.calendarScroller == null)
-                return;
-
-            let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
-                return m.getFullYear() == currentDate.getFullYear()
-                    && m.getMonth() == currentDate.getMonth()
-            });
-
-            this.calendarScroller.container.scrollTop =
-                this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-
-            this.calendarScroller.scrollToIndex(scrollToMonth);
-        }, 1);
+        this.scrollerReset();
     }
 
     ngAfterContentInit(): void {
@@ -112,11 +99,12 @@ export class DatePicker implements OnInit, AfterContentInit {
                 this.showCalendar(event);
             });
 
+        /* removed due to binding issues in FF
         this.dateField.dateChange
             .subscribe((date: Date) => {
                 if(date.getTime() != this.selectedDate.getTime())
                     this.selectedDate = date;
-            });
+            });*/
 
         this.dateFieldIcons.map((i: DatePickerFieldStyler) => {
             i.selectEvent.subscribe((event: Event) => {
@@ -144,6 +132,28 @@ export class DatePicker implements OnInit, AfterContentInit {
         }
     }
 
+    scrollerReset(): void {
+        setTimeout(() => {
+            var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+            if (this.calendarScroller == null)
+                return;
+
+            let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
+                return m.getFullYear() == currentDate.getFullYear()
+                    && m.getMonth() == currentDate.getMonth()
+            });
+
+            if(this.initialScroll) {
+                this.initialScroll = false;
+                this.calendarScroller.container.scrollTop =
+                    this.calendarScroller.itemQuery.toArray()[scrollToMonth]
+                        .element.offsetTop - 20;
+            }
+
+            this.calendarScroller.scrollToIndex(scrollToMonth);
+        }, 1);
+    }
+
     toggleCalendar(event: Event): void {
         if (!this.calendarDisplayed)
             this.showCalendar(event);
@@ -167,14 +177,15 @@ export class DatePicker implements OnInit, AfterContentInit {
             this.calendarY = "5%";
         }
 
-        this.ngOnInit();
+        this.scrollerReset();
 
-        this.calendarDisplayed = true;
         this.changeDetector.markForCheck();
+        this.calendarDisplayed = true;
     }
 
     hideCalendar(): void {
         this.calendarDisplayed = false;
+        this.initialScroll = true;
         this.changeDetector.markForCheck();
     }
 
@@ -193,6 +204,7 @@ export class DatePicker implements OnInit, AfterContentInit {
             new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
         var compareDate =
             new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
+
         return nextDate <= compareDate;
     }
 
