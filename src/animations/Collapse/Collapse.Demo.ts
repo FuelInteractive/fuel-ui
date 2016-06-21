@@ -42,7 +42,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 import {Collapse} from 'fuel-ui/fuel-ui';
 
 @Component({
-    animations: [Collapse(350)]
+    animations: [Collapse(300)]
 })
 </code>
 </pre>
@@ -88,7 +88,7 @@ export class CollapseExample {
 
 </div>`,
     animations: [
-        Collapse(350)
+        Collapse(300)
     ],
     directives: [CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
@@ -96,7 +96,7 @@ export class CollapseDemo {
     collapsed: boolean = false;
   
     attributes:any[] = [
-        new Attribute('duration', 'number', '350', 'Number of milliseconds for how long the open/close animation takes')
+        new Attribute('duration', 'number', '300', 'Number of milliseconds for how long the open/close animation takes')
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;

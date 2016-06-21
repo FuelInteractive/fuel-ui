@@ -6,7 +6,7 @@
 import {Collapse} from 'fuel-ui/fuel-ui';
 
 @Component({
-    animations: [Collapse(350)]
+    animations: [Collapse(300)]
 })
 ```
 
