@@ -1,8 +1,8 @@
-import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode} from "@angular/core";
+import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode, trigger, state, style, transition, animate} from "@angular/core";
 import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES, LocationStrategy, HashLocationStrategy } from "@angular/common";
 import {bootstrap} from "@angular/platform-browser-dynamic";
 import {ROUTER_DIRECTIVES} from '@angular/router';
-import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter} from "./fuel-ui";
+import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter, FUELUI_ANIMATION_PROVIDERS} from "./fuel-ui";
 import {APP_ROUTER_PROVIDERS} from './demo.routes';
 
 @Component({
@@ -23,6 +23,15 @@ import {APP_ROUTER_PROVIDERS} from './demo.routes';
                 </li>
                 <li><a (click)="clickNavLink()" [routerLink]="['/installation']">Installation</a></li>
                 <accordion [closeOthers]="false" duration="500">
+                    <accordion-item #animationNav [open]="false">
+                        <li accordion-heading class="fuel-ui-clickable sidebar-title">
+                            Animations
+                            <i class="pull-right fa"
+                                [ngClass]="{'fa-minus': animationNav?.open, 'fa-plus': !animationNav || !animationNav.open}"></i>
+                        </li>
+                        
+                        <li><a (click)="clickNavLink()" [routerLink]="['/animation', 'collapse']">Collapse</a></li>
+                    </accordion-item>
                     <accordion-item #componentNav [open]="false">
                         <li accordion-heading class="fuel-ui-clickable sidebar-title">
                             Components
@@ -56,7 +65,6 @@ import {APP_ROUTER_PROVIDERS} from './demo.routes';
                         
                         <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'animation']">Animation</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'codehighlighter']">Code Highlighter</a></li>
-                        <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'collapse']">Collapse</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['/directive', 'tooltip']">Tooltip</a></li>
                     </accordion-item>
                     <accordion-item #pipeNav [open]="false">
@@ -91,7 +99,8 @@ import {APP_ROUTER_PROVIDERS} from './demo.routes';
     </div>`,
     directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     encapsulation: ViewEncapsulation.None,
-    pipes: [FUELUI_PIPE_PROVIDERS]
+    pipes: [FUELUI_PIPE_PROVIDERS],
+    animations: FUELUI_ANIMATION_PROVIDERS
 })
 export class DemoComponent {
     toggled: boolean = false;

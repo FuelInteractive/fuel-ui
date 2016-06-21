@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {COLLAPSE_PROVIDERS} from './Collapse';
+import {Component, trigger, state, style, transition, animate, group, keyframes} from '@angular/core';
+import {Collapse} from './Collapse';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
@@ -21,9 +21,10 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     #collapse-demo-box {
         border: 1px solid black; 
         padding: 0 25px;
+        box-sizing: border-box;
     }
 </style>
-<div id="collapse-demo-box" [collapse]="collapsed" [duration]="duration">
+<div id="collapse-demo-box" @collapse="collapsed ? 'collapsed' : 'expanded'"> 
     <h2>All of your content</h2>
     <ul>
         <li>That you wish</li>
@@ -38,6 +39,10 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <pre>
 <code class="language-javascript" code-highlight>
 import {Collapse} from 'fuel-ui/fuel-ui';
+
+@Component({
+    animations: [Collapse(350)]
+})
 </code>
 </pre>
 
@@ -49,7 +54,7 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;div [collapse]=&quot;collapsed&quot; [duration]=&quot;duration&quot;&gt;
+&lt;div @collapse=&quot;collapsed ? 'true' : 'false'&quot;&gt;
     &lt;h2&gt;All of your content&lt;/h2&gt;
     &lt;ul&gt;
         &lt;li&gt;That you wish&lt;/li&gt;
@@ -66,7 +71,6 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 <code class="language-javascript" code-highlight>
 export class CollapseExample { 
     collapsed: boolean = false;
-    duration: number = 500;
 }
 </code>
 </pre>
@@ -82,11 +86,13 @@ export class CollapseExample {
 </table-sortable>
 
 </div>`,
-        directives: [COLLAPSE_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+    animations: [
+        Collapse(350)
+    ],
+    directives: [CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class CollapseDemo { 
     collapsed: boolean = false;
-    duration: number = 500;
   
     attributes:any[] = [
         new Attribute('collapse', 'boolean', 'true', 'Boolean whether the content is shown or hidden'),
