@@ -63,7 +63,12 @@ export class XHRConnection {
             };
             // error event handler
             let onError = (err) => {
-                var responseOptions = new ResponseOptions({ body: err, type: ResponseType.Error });
+                var responseOptions = new ResponseOptions({
+                    body: err,
+                    type: ResponseType.Error,
+                    status: _xhr.status,
+                    statusText: _xhr.statusText,
+                });
                 if (isPresent(baseResponseOptions)) {
                     responseOptions = baseResponseOptions.merge(responseOptions);
                 }

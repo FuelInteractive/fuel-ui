@@ -87,10 +87,10 @@ function mapNestedViews(declarationAppElement, view, expressions) {
     ]);
 }
 export function createQueryList(query, directiveInstance, propertyName, compileView) {
-    compileView.fields.push(new o.ClassField(propertyName, o.importType(Identifiers.QueryList)));
+    compileView.fields.push(new o.ClassField(propertyName, o.importType(Identifiers.QueryList, [o.DYNAMIC_TYPE])));
     var expr = o.THIS_EXPR.prop(propertyName);
     compileView.createMethod.addStmt(o.THIS_EXPR.prop(propertyName)
-        .set(o.importExpr(Identifiers.QueryList).instantiate([]))
+        .set(o.importExpr(Identifiers.QueryList, [o.DYNAMIC_TYPE]).instantiate([]))
         .toStmt());
     return expr;
 }

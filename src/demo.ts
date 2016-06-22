@@ -1,7 +1,8 @@
 import {Component, ViewEncapsulation, provide, ChangeDetectionStrategy, enableProdMode, trigger, state, style, transition, animate} from "@angular/core";
-import {FORM_DIRECTIVES, FORM_PROVIDERS, CORE_DIRECTIVES, LocationStrategy, HashLocationStrategy } from "@angular/common";
+import {CORE_DIRECTIVES, LocationStrategy, HashLocationStrategy } from "@angular/common";
 import {bootstrap} from "@angular/platform-browser-dynamic";
 import {ROUTER_DIRECTIVES} from '@angular/router';
+import {provideForms, disableDeprecatedForms} from '@angular/forms';
 import {FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FUELUI_PIPE_PROVIDERS, CodeHighlighter, FUELUI_ANIMATION_PROVIDERS} from "./fuel-ui";
 import {APP_ROUTER_PROVIDERS} from './demo.routes';
 
@@ -97,7 +98,7 @@ import {APP_ROUTER_PROVIDERS} from './demo.routes';
         <!-- /#page-content-wrapper -->
 
     </div>`,
-    directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FUELUI_COMPONENT_PROVIDERS, FUELUI_DIRECTIVE_PROVIDERS, ROUTER_DIRECTIVES],
     encapsulation: ViewEncapsulation.None,
     pipes: [FUELUI_PIPE_PROVIDERS],
     animations: FUELUI_ANIMATION_PROVIDERS
@@ -117,7 +118,8 @@ export class DemoComponent {
 
 bootstrap(DemoComponent, [
     APP_ROUTER_PROVIDERS,
-    FORM_PROVIDERS,
+    disableDeprecatedForms(),
+    provideForms(),
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
     FUELUI_COMPONENT_PROVIDERS
 ]).catch(err => console.error(err));

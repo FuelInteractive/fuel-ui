@@ -1,6 +1,6 @@
 "use strict";
+var core_1 = require('@angular/core');
 var dom_adapter_1 = require('../dom/dom_adapter');
-var lang_1 = require('../facade/lang');
 /**
  * A pattern that recognizes a commonly useful subset of URLs that are safe.
  *
@@ -34,7 +34,7 @@ function sanitizeUrl(url) {
     url = String(url);
     if (url.match(SAFE_URL_PATTERN) || url.match(DATA_URL_PATTERN))
         return url;
-    if (lang_1.assertionsEnabled())
+    if (core_1.isDevMode())
         dom_adapter_1.getDOM().log('WARNING: sanitizing unsafe URL value ' + url);
     return 'unsafe:' + url;
 }

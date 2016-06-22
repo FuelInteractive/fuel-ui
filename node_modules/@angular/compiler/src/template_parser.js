@@ -153,6 +153,13 @@ var TemplateParseVisitor = (function () {
         this.directivesIndex = new Map();
         this.ngContentCount = 0;
         this.selectorMatcher = new selector_1.SelectorMatcher();
+        var tempMeta = providerViewContext.component.template;
+        if (lang_1.isPresent(tempMeta) && lang_1.isPresent(tempMeta.interpolation)) {
+            this._interpolationConfig = {
+                start: tempMeta.interpolation[0],
+                end: tempMeta.interpolation[1]
+            };
+        }
         collection_1.ListWrapper.forEachWithIndex(directives, function (directive, index) {
             var selector = selector_1.CssSelector.parse(directive.selector);
             _this.selectorMatcher.addSelectables(selector, directive);
@@ -168,7 +175,7 @@ var TemplateParseVisitor = (function () {
     TemplateParseVisitor.prototype._parseInterpolation = function (value, sourceSpan) {
         var sourceInfo = sourceSpan.start.toString();
         try {
-            var ast = this._exprParser.parseInterpolation(value, sourceInfo);
+            var ast = this._exprParser.parseInterpolation(value, sourceInfo, this._interpolationConfig);
             this._checkPipes(ast, sourceSpan);
             if (lang_1.isPresent(ast) &&
                 ast.ast.expressions.length > core_private_1.MAX_INTERPOLATION_VALUES) {
@@ -184,7 +191,7 @@ var TemplateParseVisitor = (function () {
     TemplateParseVisitor.prototype._parseAction = function (value, sourceSpan) {
         var sourceInfo = sourceSpan.start.toString();
         try {
-            var ast = this._exprParser.parseAction(value, sourceInfo);
+            var ast = this._exprParser.parseAction(value, sourceInfo, this._interpolationConfig);
             this._checkPipes(ast, sourceSpan);
             return ast;
         }
@@ -196,7 +203,7 @@ var TemplateParseVisitor = (function () {
     TemplateParseVisitor.prototype._parseBinding = function (value, sourceSpan) {
         var sourceInfo = sourceSpan.start.toString();
         try {
-            var ast = this._exprParser.parseBinding(value, sourceInfo);
+            var ast = this._exprParser.parseBinding(value, sourceInfo, this._interpolationConfig);
             this._checkPipes(ast, sourceSpan);
             return ast;
         }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injectable, Pipe, WrappedValue } from '@angular/core';
+import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core';
 import { ObservableWrapper } from '../facade/async';
 import { isBlank, isPresent, isPromise } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
@@ -94,7 +94,6 @@ export class AsyncPipe {
 /** @nocollapse */
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] },
-    { type: Injectable },
 ];
 /** @nocollapse */
 AsyncPipe.ctorParameters = [

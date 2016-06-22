@@ -302,7 +302,8 @@ export declare class CompileTemplateMetadata {
     styleUrls: string[];
     animations: CompileAnimationEntryMetadata[];
     ngContentSelectors: string[];
-    constructor({encapsulation, template, templateUrl, styles, styleUrls, animations, ngContentSelectors}?: {
+    interpolation: [string, string];
+    constructor({encapsulation, template, templateUrl, styles, styleUrls, animations, ngContentSelectors, interpolation}?: {
         encapsulation?: ViewEncapsulation;
         template?: string;
         templateUrl?: string;
@@ -310,6 +311,7 @@ export declare class CompileTemplateMetadata {
         styleUrls?: string[];
         ngContentSelectors?: string[];
         animations?: CompileAnimationEntryMetadata[];
+        interpolation?: [string, string];
     });
     static fromJson(data: {
         [key: string]: any;

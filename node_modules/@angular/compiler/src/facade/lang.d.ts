@@ -41,18 +41,6 @@ export interface ConcreteType extends Type {
 export declare function getTypeNameForDebugging(type: Type): string;
 export declare var Math: any;
 export declare var Date: DateConstructor;
-export declare function lockMode(): void;
-/**
- * Disable Angular's development mode, which turns off assertions and other
- * checks within the framework.
- *
- * One important assertion this disables verifies that a change detection pass
- * does not result in additional changes to any bindings (also known as
- * unidirectional data flow).
- * @stable
- */
-export declare function enableProdMode(): void;
-export declare function assertionsEnabled(): boolean;
 export declare function isPresent(obj: any): boolean;
 export declare function isBlank(obj: any): boolean;
 export declare function isBoolean(obj: any): boolean;
@@ -80,7 +68,7 @@ export declare class StringWrapper {
     static replace(s: string, from: string, replace: string): string;
     static replaceAll(s: string, from: RegExp, replace: string): string;
     static slice<T>(s: string, from?: number, to?: number): string;
-    static replaceAllMapped(s: string, from: RegExp, cb: Function): string;
+    static replaceAllMapped(s: string, from: RegExp, cb: (m: string[]) => string): string;
     static contains(s: string, substr: string): boolean;
     static compare(a: string, b: string): number;
 }
@@ -103,6 +91,7 @@ export declare class NumberWrapper {
     static parseInt(text: string, radix: number): number;
     static parseFloat(text: string): number;
     static NaN: number;
+    static isNumeric(value: any): boolean;
     static isNaN(value: any): boolean;
     static isInteger(value: any): boolean;
 }
@@ -153,6 +142,5 @@ export declare function evalExpression(sourceUrl: string, expr: string, declarat
 }): any;
 export declare function isPrimitive(obj: any): boolean;
 export declare function hasConstructor(value: Object, type: Type): boolean;
-export declare function bitWiseOr(values: number[]): number;
-export declare function bitWiseAnd(values: number[]): number;
 export declare function escape(s: string): string;
+export declare function escapeRegExp(s: string): string;

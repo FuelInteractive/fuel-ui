@@ -69,6 +69,7 @@ export class ViewRef_ {
     constructor(_view) {
         this._view = _view;
         this._view = _view;
+        this._originalMode = this._view.cdMode;
     }
     get internalView() { return this._view; }
     get rootNodes() { return this._view.flatRootNodes; }
@@ -79,7 +80,7 @@ export class ViewRef_ {
     detectChanges() { this._view.detectChanges(false); }
     checkNoChanges() { this._view.detectChanges(true); }
     reattach() {
-        this._view.cdMode = ChangeDetectionStrategy.CheckAlways;
+        this._view.cdMode = this._originalMode;
         this.markForCheck();
     }
     onDestroy(callback) { this._view.disposables.push(callback); }

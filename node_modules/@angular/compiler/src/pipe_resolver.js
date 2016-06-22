@@ -8,12 +8,8 @@ function _isPipeMetadata(type) {
 }
 var PipeResolver = (function () {
     function PipeResolver(_reflector) {
-        if (lang_1.isPresent(_reflector)) {
-            this._reflector = _reflector;
-        }
-        else {
-            this._reflector = core_private_1.reflector;
-        }
+        if (_reflector === void 0) { _reflector = core_private_1.reflector; }
+        this._reflector = _reflector;
     }
     /**
      * Return {@link PipeMetadata} for a given `Type`.
@@ -39,5 +35,4 @@ var PipeResolver = (function () {
     return PipeResolver;
 }());
 exports.PipeResolver = PipeResolver;
-exports.CODEGEN_PIPE_RESOLVER = new PipeResolver(core_private_1.reflector);
 //# sourceMappingURL=pipe_resolver.js.map

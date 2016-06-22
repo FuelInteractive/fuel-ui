@@ -1,5 +1,6 @@
 import { Parser } from '../expression_parser/parser';
 import { HtmlAst, HtmlAttrAst, HtmlElementAst, HtmlTextAst } from '../html_ast';
+import { InterpolationConfig } from '../interpolation_config';
 import { ParseError, ParseSourceSpan } from '../parse_util';
 import { Message } from './message';
 export declare const I18N_ATTR: string;
@@ -19,12 +20,12 @@ export declare class Part {
     hasI18n: boolean;
     constructor(rootElement: HtmlElementAst, rootTextNode: HtmlTextAst, children: HtmlAst[], i18n: string, hasI18n: boolean);
     readonly sourceSpan: ParseSourceSpan;
-    createMessage(parser: Parser): Message;
+    createMessage(parser: Parser, interpolationConfig: InterpolationConfig): Message;
 }
 export declare function meaning(i18n: string): string;
 export declare function description(i18n: string): string;
-export declare function messageFromAttribute(parser: Parser, attr: HtmlAttrAst, meaning?: string, description?: string): Message;
-export declare function removeInterpolation(value: string, source: ParseSourceSpan, parser: Parser): string;
+export declare function messageFromAttribute(parser: Parser, interpolationConfig: InterpolationConfig, attr: HtmlAttrAst, meaning?: string, description?: string): Message;
+export declare function removeInterpolation(value: string, source: ParseSourceSpan, parser: Parser, interpolationConfig: InterpolationConfig): string;
 export declare function getPhNameFromBinding(input: string, index: number): string;
 export declare function dedupePhName(usedNames: Map<string, number>, name: string): string;
-export declare function stringifyNodes(nodes: HtmlAst[], parser: Parser): string;
+export declare function stringifyNodes(nodes: HtmlAst[], parser: Parser, interpolationConfig: InterpolationConfig): string;

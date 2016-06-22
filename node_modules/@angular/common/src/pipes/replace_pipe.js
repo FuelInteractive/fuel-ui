@@ -19,8 +19,6 @@ var ReplacePipe = (function () {
         if (!this._supportedReplacement(replacement)) {
             throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(ReplacePipe, replacement);
         }
-        // template fails with literal RegExp e.g /pattern/igm
-        // var rgx = pattern instanceof RegExp ? pattern : RegExpWrapper.create(pattern);
         if (lang_1.isFunction(replacement)) {
             var rgxPattern = lang_1.isString(pattern) ? lang_1.RegExpWrapper.create(pattern) : pattern;
             return lang_1.StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
@@ -41,7 +39,6 @@ var ReplacePipe = (function () {
     /** @nocollapse */
     ReplacePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'replace' },] },
-        { type: core_1.Injectable },
     ];
     return ReplacePipe;
 }());

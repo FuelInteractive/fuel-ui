@@ -7,7 +7,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 var async_1 = require('../facade/async');
 var collection_1 = require('../facade/collection');
 var lang_1 = require('../facade/lang');
-var promise_1 = require('../facade/promise');
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.
  */
@@ -47,7 +46,7 @@ function _find(control, path) {
     }, control);
 }
 function toObservable(r) {
-    return promise_1.PromiseWrapper.isPromise(r) ? async_1.ObservableWrapper.fromPromise(r) : r;
+    return lang_1.isPromise(r) ? async_1.ObservableWrapper.fromPromise(r) : r;
 }
 /**
  * @experimental

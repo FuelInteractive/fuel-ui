@@ -35,7 +35,6 @@ export class PromiseWrapper {
     static scheduleMicrotask(computation) {
         PromiseWrapper.then(PromiseWrapper.resolve(null), computation, (_) => { });
     }
-    static isPromise(obj) { return obj instanceof Promise; }
     static completer() { return new PromiseCompleter(); }
 }
 //# sourceMappingURL=promise.js.map

@@ -1,7 +1,6 @@
 import { EventEmitter, ObservableWrapper } from '../facade/async';
 import { ListWrapper, StringMapWrapper } from '../facade/collection';
-import { isBlank, isPresent, normalizeBool } from '../facade/lang';
-import { PromiseWrapper } from '../facade/promise';
+import { isBlank, isPresent, isPromise, normalizeBool } from '../facade/lang';
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.
  */
@@ -40,7 +39,7 @@ function _find(control, path) {
     }, control);
 }
 function toObservable(r) {
-    return PromiseWrapper.isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
+    return isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
 }
 /**
  * @experimental

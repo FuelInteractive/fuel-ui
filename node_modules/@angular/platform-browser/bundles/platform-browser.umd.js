@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-rc.2
+ * @license Angular 2.0.0-rc.3
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -31,10 +31,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     // exports the original value of the symbol.
     var global$1 = globalScope;
     var Date = global$1.Date;
-    var _devMode = true;
-    function assertionsEnabled() {
-        return _devMode;
-    }
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
@@ -197,6 +193,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
         NumberWrapper.isNaN = function (value) { return isNaN(value); };
         NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
@@ -1293,7 +1290,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return _angular_core.getDebugNode(element);
     }
     function _createConditionalRootRenderer(rootRenderer /** TODO #9100 */) {
-        if (assertionsEnabled()) {
+        if (_angular_core.isDevMode()) {
             return _createRootRenderer(rootRenderer);
         }
         return rootRenderer;
@@ -1567,7 +1564,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         url = String(url);
         if (url.match(SAFE_URL_PATTERN) || url.match(DATA_URL_PATTERN))
             return url;
-        if (assertionsEnabled())
+        if (_angular_core.isDevMode())
             getDOM().log('WARNING: sanitizing unsafe URL value ' + url);
         return 'unsafe:' + url;
     }
@@ -1800,7 +1797,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 var child = _a[_i];
                 DOM.removeChild(parent_1, child);
             }
-            if (assertionsEnabled() && safeHtml !== unsafeHtml) {
+            if (_angular_core.isDevMode() && safeHtml !== unsafeHtml) {
                 DOM.log('WARNING: sanitizing HTML stripped some content.');
             }
             return safeHtml;
@@ -1884,7 +1881,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             value.match(SAFE_STYLE_VALUE) && hasBalancedQuotes(value)) {
             return value; // Safe style values.
         }
-        if (assertionsEnabled())
+        if (_angular_core.isDevMode())
             getDOM().log('WARNING: sanitizing unsafe style value ' + value);
         return 'unsafe';
     }
@@ -1981,6 +1978,9 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
             // empty
         }
+        SafeValueImpl.prototype.toString = function () {
+            return "SafeValue must use [property]=binding: " + this.changingThisBreaksApplicationSecurity;
+        };
         return SafeValueImpl;
     }());
     var SafeHtmlImpl = (function (_super) {
@@ -2091,7 +2091,12 @@ var __extends = (this && this.__extends) || function (d, b) {
                 start['offset'] = null;
                 formattedSteps = [start, start];
             }
-            var player = this._triggerWebAnimation(anyElm, formattedSteps, { 'duration': duration, 'delay': delay, 'easing': easing, 'fill': 'forwards' });
+            var playerOptions = {
+                'duration': duration,
+                'delay': delay,
+                'fill': 'both' // we use `both` because it allows for styling at 0% to work with `delay`
+            };
+            var player = this._triggerWebAnimation(anyElm, formattedSteps, playerOptions);
             return new WebAnimationsPlayer(player, duration);
         };
         /** @internal */
@@ -2856,7 +2861,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         PromiseWrapper.scheduleMicrotask = function (computation) {
             PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
         };
-        PromiseWrapper.isPromise = function (obj) { return obj instanceof Promise; };
         PromiseWrapper.completer = function () { return new PromiseCompleter(); };
         return PromiseWrapper;
     }());
@@ -2879,7 +2883,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         /**
          * @deprecated - use callEmit() instead
          */
-        ObservableWrapper.callNext = function (emitter, value) { emitter.next(value); };
+        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
         ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
@@ -4053,14 +4057,14 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.OpaqueToken('WorkerRenderStartableMsgService');
     /**
-     * * @experimental
+     * @experimental
      */
     var WORKER_UI_PLATFORM_PROVIDERS = [
         _angular_core.PLATFORM_COMMON_PROVIDERS, { provide: WORKER_RENDER_PLATFORM_MARKER, useValue: true },
         { provide: _angular_core.PLATFORM_INITIALIZER, useValue: initWebWorkerRenderPlatform, multi: true }
     ];
     /**
-     * * @experimental
+     * @experimental
      */
     var WORKER_UI_APPLICATION_PROVIDERS = [
         _angular_core.APPLICATION_COMMON_PROVIDERS,
@@ -4108,7 +4112,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         BrowserGetTestability.init();
     }
     /**
-     * * @experimental
+     * @experimental
      */
     function workerUiPlatform() {
         if (isBlank(_angular_core.getPlatform())) {

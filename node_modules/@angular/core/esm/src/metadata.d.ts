@@ -38,6 +38,7 @@ export interface ComponentDecorator extends TypeDecorator {
         styles?: string[];
         styleUrls?: string[];
         animations?: AnimationEntryMetadata[];
+        interpolation?: [string, string];
     }): ViewDecorator;
 }
 /**
@@ -58,6 +59,7 @@ export interface ViewDecorator extends TypeDecorator {
         styles?: string[];
         styleUrls?: string[];
         animations?: AnimationEntryMetadata[];
+        interpolation?: [string, string];
     }): ViewDecorator;
 }
 /**
@@ -180,6 +182,7 @@ export interface ComponentMetadataFactory {
         directives?: Array<Type | any[]>;
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
+        interpolation?: [string, string];
     }): ComponentDecorator;
     new (obj: {
         selector?: string;
@@ -206,6 +209,7 @@ export interface ComponentMetadataFactory {
         directives?: Array<Type | any[]>;
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
+        interpolation?: [string, string];
     }): ComponentMetadata;
 }
 /**
@@ -260,6 +264,7 @@ export interface ViewMetadataFactory {
         styles?: string[];
         styleUrls?: string[];
         animations?: AnimationEntryMetadata[];
+        interpolation?: [string, string];
     }): ViewDecorator;
     new (obj: {
         templateUrl?: string;
@@ -270,6 +275,7 @@ export interface ViewMetadataFactory {
         styles?: string[];
         styleUrls?: string[];
         animations?: AnimationEntryMetadata[];
+        interpolation?: [string, string];
     }): ViewMetadata;
 }
 /**
@@ -491,6 +497,7 @@ export interface HostListenerMetadataFactory {
  *
  * {@example core/ts/metadata/metadata.ts region='component'}
  * @stable
+ * @Annotation
  */
 export declare var Component: ComponentMetadataFactory;
 /**
@@ -871,6 +878,7 @@ export declare var Component: ComponentMetadataFactory;
  * the instantiated
  * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
  * @stable
+ * @Annotation
  */
 export declare var Directive: DirectiveMetadataFactory;
 /**
@@ -890,6 +898,7 @@ export declare var Directive: DirectiveMetadataFactory;
  *
  * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
  * @stable
+ * @Annotation
  */
 export declare var Attribute: AttributeMetadataFactory;
 /**
@@ -999,6 +1008,7 @@ export declare var Attribute: AttributeMetadataFactory;
  * The injected object is an unmodifiable live list.
  * See {@link QueryList} for more details.
  * @deprecated
+ * @Annotation
  */
 export declare var Query: QueryMetadataFactory;
 /**
@@ -1021,6 +1031,7 @@ export declare var Query: QueryMetadataFactory;
  * }
  * ```
  * @stable
+ * @Annotation
  */
 export declare var ContentChildren: ContentChildrenMetadataFactory;
 /**
@@ -1052,6 +1063,7 @@ export declare var ContentChildren: ContentChildrenMetadataFactory;
  * </container>
  * ```
  * @stable
+ * @Annotation
  */
 export declare var ContentChild: ContentChildMetadataFactory;
 /**
@@ -1133,6 +1145,7 @@ export declare var ContentChild: ContentChildMetadataFactory;
  *
  * See also: [ViewChildrenMetadata]
  * @stable
+ * @Annotation
  */
 export declare var ViewChildren: ViewChildrenMetadataFactory;
 /**
@@ -1205,6 +1218,7 @@ export declare var ViewChildren: ViewChildrenMetadataFactory;
  * ```
  * See also: [ViewChildMetadata]
  * @stable
+ * @Annotation
  */
 export declare var ViewChild: ViewChildMetadataFactory;
 /**
@@ -1242,6 +1256,7 @@ export declare var ViewChild: ViewChildMetadataFactory;
  * The injected object is an iterable and observable live list.
  * See {@link QueryList} for more details.
  * @deprecated
+ * @Annotation
  */
 export declare var ViewQuery: QueryMetadataFactory;
 /**
@@ -1251,6 +1266,7 @@ export declare var ViewQuery: QueryMetadataFactory;
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
  * @stable
+ * @Annotation
  */
 export declare var Pipe: PipeMetadataFactory;
 /**
@@ -1294,6 +1310,7 @@ export declare var Pipe: PipeMetadataFactory;
  * bootstrap(App);
  * ```
  * @stable
+ * @Annotation
  */
 export declare var Input: InputMetadataFactory;
 /**
@@ -1337,6 +1354,7 @@ export declare var Input: InputMetadataFactory;
  * bootstrap(App);
  * ```
  * @stable
+ * @Annotation
  */
 export declare var Output: OutputMetadataFactory;
 /**
@@ -1374,6 +1392,7 @@ export declare var Output: OutputMetadataFactory;
  * bootstrap(App);
  * ```
  * @stable
+ * @Annotation
  */
 export declare var HostBinding: HostBindingMetadataFactory;
 /**
@@ -1410,5 +1429,6 @@ export declare var HostBinding: HostBindingMetadataFactory;
  * bootstrap(App);
  * ```
  * @stable
+ * @Annotation
  */
 export declare var HostListener: HostListenerMetadataFactory;

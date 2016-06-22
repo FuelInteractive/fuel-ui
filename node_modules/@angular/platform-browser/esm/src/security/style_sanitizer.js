@@ -1,5 +1,5 @@
+import { isDevMode } from '@angular/core';
 import { getDOM } from '../dom/dom_adapter';
-import { assertionsEnabled } from '../facade/lang';
 import { sanitizeUrl } from './url_sanitizer';
 /**
  * Regular expression for safe style values.
@@ -74,7 +74,7 @@ export function sanitizeStyle(value) {
         value.match(SAFE_STYLE_VALUE) && hasBalancedQuotes(value)) {
         return value; // Safe style values.
     }
-    if (assertionsEnabled())
+    if (isDevMode())
         getDOM().log('WARNING: sanitizing unsafe style value ' + value);
     return 'unsafe';
 }

@@ -4,15 +4,10 @@ import { stringify, isBlank, isPresent } from '../src/facade/lang';
 import { BaseException } from '../src/facade/exceptions';
 import { Map } from '../src/facade/collection';
 export class ViewResolver {
-    constructor(_reflector) {
+    constructor(_reflector = reflector) {
+        this._reflector = _reflector;
         /** @internal */
         this._cache = new Map();
-        if (isPresent(_reflector)) {
-            this._reflector = _reflector;
-        }
-        else {
-            this._reflector = reflector;
-        }
     }
     resolve(component) {
         var view = this._cache.get(component);
@@ -43,7 +38,8 @@ export class ViewResolver {
                     encapsulation: compMeta.encapsulation,
                     styles: compMeta.styles,
                     styleUrls: compMeta.styleUrls,
-                    animations: compMeta.animations
+                    animations: compMeta.animations,
+                    interpolation: compMeta.interpolation
                 });
             }
         }

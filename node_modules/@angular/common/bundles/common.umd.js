@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-rc.2
+ * @license Angular 2.0.0-rc.3
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -203,6 +203,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
         NumberWrapper.isNaN = function (value) { return isNaN(value); };
         NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
@@ -358,7 +359,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         PromiseWrapper.scheduleMicrotask = function (computation) {
             PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
         };
-        PromiseWrapper.isPromise = function (obj) { return obj instanceof Promise; };
         PromiseWrapper.completer = function () { return new PromiseCompleter(); };
         return PromiseWrapper;
     }());
@@ -381,7 +381,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         /**
          * @deprecated - use callEmit() instead
          */
-        ObservableWrapper.callNext = function (emitter, value) { emitter.next(value); };
+        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
         ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
@@ -933,7 +933,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     AsyncPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
-        { type: _angular_core.Injectable },
     ];
     /** @nocollapse */
     AsyncPipe.ctorParameters = [
@@ -1005,9 +1004,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
         jj: datePartGetterFactory(digitCondition('hour', 2)),
         j: datePartGetterFactory(digitCondition('hour', 1)),
-        mm: datePartGetterFactory(digitCondition('minute', 2)),
+        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
         m: datePartGetterFactory(digitCondition('minute', 1)),
-        ss: datePartGetterFactory(digitCondition('second', 2)),
+        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
         s: datePartGetterFactory(digitCondition('second', 1)),
         // while ISO 8601 requires fractions to be prefixed with `.` or `,`
         // we can be just safely rely on using `sss` since we currently don't support single or two digit
@@ -1029,6 +1028,12 @@ var __extends = (this && this.__extends) || function (d, b) {
         GGG: datePartGetterFactory(nameCondition('era', 3)),
         GGGG: datePartGetterFactory(nameCondition('era', 4))
     };
+    function digitModifier(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.length == 1 ? '0' + result : result;
+        };
+    }
     function hourClockExtracter(inner) {
         return function (date, locale) {
             var result = inner(date, locale);
@@ -1123,8 +1128,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (!this.supports(value)) {
                 throw new InvalidPipeArgumentException(DatePipe, value);
             }
-            if (isNumber(value)) {
-                value = DateWrapper.fromMillis(value);
+            if (NumberWrapper.isNumeric(value)) {
+                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
             }
             else if (isString(value)) {
                 value = DateWrapper.fromISOString(value);
@@ -1135,7 +1140,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             return DateFormatter.format(value, defaultLocale, pattern);
         };
         DatePipe.prototype.supports = function (obj) {
-            if (isDate(obj) || isNumber(obj)) {
+            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
                 return true;
             }
             if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
@@ -1159,9 +1164,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-        { type: _angular_core.Injectable },
     ];
-    var interpolationExp = RegExpWrapper.create('#');
+    var _INTERPOLATION_REGEXP = /#/g;
     var I18nPluralPipe = (function () {
         function I18nPluralPipe() {
         }
@@ -1173,7 +1177,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             key = value === 0 || value === 1 ? "=" + value : 'other';
             valueStr = isPresent(value) ? value.toString() : '';
-            return StringWrapper.replaceAll(pluralMap[key], interpolationExp, valueStr);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, valueStr);
         };
         return I18nPluralPipe;
     }());
@@ -1224,7 +1228,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
     var defaultLocale$1 = 'en-US';
-    var _re = RegExpWrapper.create('^(\\d+)?\\.((\\d+)(\\-(\\d+))?)?$');
+    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
     /**
      * Internal function to format numbers used by Decimal, Percent and Date pipes.
      */
@@ -1238,7 +1242,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         var minInt = 1, minFraction = 0, maxFraction = 3;
         if (isPresent(digits)) {
-            var parts = RegExpWrapper.firstMatch(_re, digits);
+            var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
             if (isBlank(parts)) {
                 throw new BaseException(digits + " is not a valid digit info for number pipes");
             }
@@ -1318,8 +1322,6 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (!this._supportedReplacement(replacement)) {
                 throw new InvalidPipeArgumentException(ReplacePipe, replacement);
             }
-            // template fails with literal RegExp e.g /pattern/igm
-            // var rgx = pattern instanceof RegExp ? pattern : RegExpWrapper.create(pattern);
             if (isFunction(replacement)) {
                 var rgxPattern = isString(pattern) ? RegExpWrapper.create(pattern) : pattern;
                 return StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
@@ -1342,7 +1344,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     ReplacePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'replace' },] },
-        { type: _angular_core.Injectable },
     ];
     var SlicePipe = (function () {
         function SlicePipe() {
@@ -2112,7 +2113,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * See {@link DefaultValueAccessor} for how to implement one.
      * @experimental
      */
-    var NG_VALUE_ACCESSOR = 
+    var NG_VALUE_ACCESSOR =
     /*@ts2dart_const*/ new _angular_core.OpaqueToken('NgValueAccessor');
     /**
      * Base class for control directives.
@@ -2341,7 +2342,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }, control);
     }
     function toObservable(r) {
-        return PromiseWrapper.isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
+        return isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
     }
     /**
      * @experimental
@@ -2906,7 +2907,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
     ];
-    var DEFAULT_VALUE_ACCESSOR = 
+    var DEFAULT_VALUE_ACCESSOR =
     /* @ts2dart_Provider */ {
         provide: NG_VALUE_ACCESSOR,
         useExisting: _angular_core.forwardRef(function () { return DefaultValueAccessor; }),
@@ -2964,7 +2965,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * @experimental
      */
-    var NG_ASYNC_VALIDATORS = 
+    var NG_ASYNC_VALIDATORS =
     /*@ts2dart_const*/ new _angular_core.OpaqueToken('NgAsyncValidators');
     /**
      * Provides a set of validators used by form controls.
@@ -3062,7 +3063,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return Validators;
     }());
     function _convertToPromise(obj) {
-        return PromiseWrapper.isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
+        return isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
     }
     function _executeValidators(control, validators) {
         return validators.map(function (v) { return v(control); });
@@ -3367,7 +3368,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         _throwError(dir, 'No valid value accessor for');
         return null;
     }
-    var controlGroupProvider = 
+    var controlGroupProvider =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
         provide: ControlContainer,
         useExisting: _angular_core.forwardRef(function () { return NgControlGroup; })
@@ -3433,7 +3434,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
-    var controlNameBinding = 
+    var controlNameBinding =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgControlName; })
@@ -3577,7 +3578,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     NgControlStatus.ctorParameters = [
         { type: NgControl, decorators: [{ type: _angular_core.Self },] },
     ];
-    var formDirectiveProvider = 
+    var formDirectiveProvider =
     /*@ts2dart_const*/ { provide: ControlContainer, useExisting: _angular_core.forwardRef(function () { return NgForm; }) };
     var _formWarningDisplayed = false;
     var NgForm = (function (_super) {
@@ -3699,7 +3700,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
-    var formControlBinding = 
+    var formControlBinding =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgFormControl; })
@@ -3770,7 +3771,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
     ];
-    var formDirectiveProvider$1 = 
+    var formDirectiveProvider$1 =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
         provide: ControlContainer,
         useExisting: _angular_core.forwardRef(function () { return NgFormModel; })
@@ -3883,7 +3884,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
-    var formControlBinding$1 = 
+    var formControlBinding$1 =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgModel; })
@@ -4342,17 +4343,17 @@ var __extends = (this && this.__extends) || function (d, b) {
         function PlatformLocation() {
         }
         Object.defineProperty(PlatformLocation.prototype, "pathname", {
-            /* abstract */ get: function () { return null; },
+            get: function () { return null; },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(PlatformLocation.prototype, "search", {
-            /* abstract */ get: function () { return null; },
+            get: function () { return null; },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(PlatformLocation.prototype, "hash", {
-            /* abstract */ get: function () { return null; },
+            get: function () { return null; },
             enumerable: true,
             configurable: true
         });

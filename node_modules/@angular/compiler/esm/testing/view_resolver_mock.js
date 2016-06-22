@@ -97,7 +97,8 @@ export class MockViewResolver extends ViewResolver {
             styles: view.styles,
             styleUrls: view.styleUrls,
             pipes: view.pipes,
-            encapsulation: view.encapsulation
+            encapsulation: view.encapsulation,
+            interpolation: view.interpolation
         });
         this._viewCache.set(component, view);
         return view;

@@ -566,7 +566,7 @@ export class DirectiveMetadata extends InjectableMetadata {
  * @stable
  */
 export class ComponentMetadata extends DirectiveMetadata {
-    constructor({ selector, inputs, outputs, properties, events, host, exportAs, moduleId, providers, viewProviders, changeDetection = ChangeDetectionStrategy.Default, queries, templateUrl, template, styleUrls, styles, animations, directives, pipes, encapsulation } = {}) {
+    constructor({ selector, inputs, outputs, properties, events, host, exportAs, moduleId, providers, viewProviders, changeDetection = ChangeDetectionStrategy.Default, queries, templateUrl, template, styleUrls, styles, animations, directives, pipes, encapsulation, interpolation } = {}) {
         super({
             selector: selector,
             inputs: inputs,
@@ -589,6 +589,7 @@ export class ComponentMetadata extends DirectiveMetadata {
         this.encapsulation = encapsulation;
         this.moduleId = moduleId;
         this.animations = animations;
+        this.interpolation = interpolation;
     }
     /**
      * Defines the set of injectable objects that are visible to its view DOM children.

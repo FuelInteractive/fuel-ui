@@ -98,7 +98,12 @@ function _wrapTestFn(fn) {
             var retVal = fn();
             if (lang_1.isPromise(retVal)) {
                 // Asynchronous test function - wait for completion.
-                retVal.then(done, done.fail);
+                retVal.then(done, function (err) {
+                    if (lang_1.isString(err)) {
+                        return done.fail(new Error(err));
+                    }
+                    return done.fail(err);
+                });
             }
             else {
                 // Synchronous test function - complete immediately.

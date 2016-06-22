@@ -29,17 +29,17 @@ var PlatformLocation = (function () {
     function PlatformLocation() {
     }
     Object.defineProperty(PlatformLocation.prototype, "pathname", {
-        /* abstract */ get: function () { return null; },
+        get: function () { return null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(PlatformLocation.prototype, "search", {
-        /* abstract */ get: function () { return null; },
+        get: function () { return null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(PlatformLocation.prototype, "hash", {
-        /* abstract */ get: function () { return null; },
+        get: function () { return null; },
         enumerable: true,
         configurable: true
     });

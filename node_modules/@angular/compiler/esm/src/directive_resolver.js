@@ -1,19 +1,14 @@
-import { resolveForwardRef, Injectable, DirectiveMetadata, ComponentMetadata, InputMetadata, OutputMetadata, HostBindingMetadata, HostListenerMetadata, ContentChildrenMetadata, ViewChildrenMetadata, ContentChildMetadata, ViewChildMetadata } from '@angular/core';
+import { ComponentMetadata, DirectiveMetadata, HostBindingMetadata, HostListenerMetadata, Injectable, InputMetadata, OutputMetadata, QueryMetadata, resolveForwardRef } from '@angular/core';
 import { ReflectorReader, reflector } from '../core_private';
-import { isPresent, stringify } from '../src/facade/lang';
-import { BaseException } from '../src/facade/exceptions';
 import { ListWrapper, StringMapWrapper } from '../src/facade/collection';
+import { BaseException } from '../src/facade/exceptions';
+import { isPresent, stringify } from '../src/facade/lang';
 function _isDirectiveMetadata(type) {
     return type instanceof DirectiveMetadata;
 }
 export class DirectiveResolver {
-    constructor(_reflector) {
-        if (isPresent(_reflector)) {
-            this._reflector = _reflector;
-        }
-        else {
-            this._reflector = reflector;
-        }
+    constructor(_reflector = reflector) {
+        this._reflector = _reflector;
     }
     /**
      * Return {@link DirectiveMetadata} for a given `Type`.
@@ -64,16 +59,7 @@ export class DirectiveResolver {
                     var args = isPresent(a.args) ? a.args.join(', ') : '';
                     host[`(${a.eventName})`] = `${propName}(${args})`;
                 }
-                if (a instanceof ContentChildrenMetadata) {
-                    queries[propName] = a;
-                }
-                if (a instanceof ViewChildrenMetadata) {
-                    queries[propName] = a;
-                }
-                if (a instanceof ContentChildMetadata) {
-                    queries[propName] = a;
-                }
-                if (a instanceof ViewChildMetadata) {
+                if (a instanceof QueryMetadata) {
                     queries[propName] = a;
                 }
             });

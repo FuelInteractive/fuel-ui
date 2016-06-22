@@ -45,7 +45,9 @@ export class QueryList {
     /**
      * returns a reduced value.
      */
-    reduce(fn, init) { return this._results.reduce(fn, init); }
+    reduce(fn, init) {
+        return this._results.reduce(fn, init);
+    }
     /**
      * executes function for each element in a query.
      */
@@ -58,14 +60,10 @@ export class QueryList {
         return this._results[getSymbolIterator()]();
     }
     toString() { return this._results.toString(); }
-    /**
-     * @internal
-     */
     reset(res) {
         this._results = ListWrapper.flatten(res);
         this._dirty = false;
     }
-    /** @internal */
     notifyOnChanges() { this._emitter.emit(this); }
     /** internal */
     setDirty() { this._dirty = true; }

@@ -25,8 +25,8 @@
  * @stable
  */
 export class PlatformLocation {
-    /* abstract */ get pathname() { return null; }
-    /* abstract */ get search() { return null; }
-    /* abstract */ get hash() { return null; }
+    get pathname() { return null; }
+    get search() { return null; }
+    get hash() { return null; }
 }
 //# sourceMappingURL=platform_location.js.map

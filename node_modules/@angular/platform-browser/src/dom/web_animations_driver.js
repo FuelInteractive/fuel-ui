@@ -31,7 +31,12 @@ var WebAnimationsDriver = (function () {
             start['offset'] = null;
             formattedSteps = [start, start];
         }
-        var player = this._triggerWebAnimation(anyElm, formattedSteps, { 'duration': duration, 'delay': delay, 'easing': easing, 'fill': 'forwards' });
+        var playerOptions = {
+            'duration': duration,
+            'delay': delay,
+            'fill': 'both' // we use `both` because it allows for styling at 0% to work with `delay`
+        };
+        var player = this._triggerWebAnimation(anyElm, formattedSteps, playerOptions);
         return new web_animations_player_1.WebAnimationsPlayer(player, duration);
     };
     /** @internal */

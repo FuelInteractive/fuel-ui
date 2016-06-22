@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-rc.2
+ * @license Angular 2.0.0-rc.3
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -42,30 +42,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         return typeof type;
     }
     var Math = global$1.Math;
-    var _devMode = true;
-    var _modeLocked = false;
-    function lockMode() {
-        _modeLocked = true;
-    }
-    /**
-     * Disable Angular's development mode, which turns off assertions and other
-     * checks within the framework.
-     *
-     * One important assertion this disables verifies that a change detection pass
-     * does not result in additional changes to any bindings (also known as
-     * unidirectional data flow).
-     * @stable
-     */
-    function enableProdMode() {
-        if (_modeLocked) {
-            // Cannot use BaseException as that ends up importing from facade/lang.
-            throw 'Cannot enable prod mode after platform setup.';
-        }
-        _devMode = false;
-    }
-    function assertionsEnabled() {
-        return _devMode;
-    }
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
@@ -226,6 +202,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
         NumberWrapper.isNaN = function (value) { return isNaN(value); };
         NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
@@ -1719,7 +1696,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     var ComponentMetadata = (function (_super) {
         __extends(ComponentMetadata, _super);
         function ComponentMetadata(_a) {
-            var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, exportAs = _b.exportAs, moduleId = _b.moduleId, providers = _b.providers, viewProviders = _b.viewProviders, _c = _b.changeDetection, changeDetection = _c === void 0 ? exports.ChangeDetectionStrategy.Default : _c, queries = _b.queries, templateUrl = _b.templateUrl, template = _b.template, styleUrls = _b.styleUrls, styles = _b.styles, animations = _b.animations, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation;
+            var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, exportAs = _b.exportAs, moduleId = _b.moduleId, providers = _b.providers, viewProviders = _b.viewProviders, _c = _b.changeDetection, changeDetection = _c === void 0 ? exports.ChangeDetectionStrategy.Default : _c, queries = _b.queries, templateUrl = _b.templateUrl, template = _b.template, styleUrls = _b.styleUrls, styles = _b.styles, animations = _b.animations, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, interpolation = _b.interpolation;
             _super.call(this, {
                 selector: selector,
                 inputs: inputs,
@@ -1742,6 +1719,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.encapsulation = encapsulation;
             this.moduleId = moduleId;
             this.animations = animations;
+            this.interpolation = interpolation;
         }
         Object.defineProperty(ComponentMetadata.prototype, "viewProviders", {
             /**
@@ -2066,7 +2044,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var ViewMetadata = (function () {
         function ViewMetadata(_a) {
-            var _b = _a === void 0 ? {} : _a, templateUrl = _b.templateUrl, template = _b.template, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, styles = _b.styles, styleUrls = _b.styleUrls, animations = _b.animations;
+            var _b = _a === void 0 ? {} : _a, templateUrl = _b.templateUrl, template = _b.template, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, styles = _b.styles, styleUrls = _b.styleUrls, animations = _b.animations, interpolation = _b.interpolation;
             this.templateUrl = templateUrl;
             this.template = template;
             this.styleUrls = styleUrls;
@@ -2075,6 +2053,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.pipes = pipes;
             this.encapsulation = encapsulation;
             this.animations = animations;
+            this.interpolation = interpolation;
         }
         return ViewMetadata;
     }());
@@ -2849,6 +2828,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * {@example core/ts/metadata/metadata.ts region='component'}
      * @stable
+     * @Annotation
      */
     var Component = makeDecorator(ComponentMetadata, function (fn) { return fn.View = View; });
     // TODO(alexeagle): remove the duplication of this doc. It is copied from DirectiveMetadata.
@@ -3230,6 +3210,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * the instantiated
      * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
      * @stable
+     * @Annotation
      */
     var Directive = makeDecorator(DirectiveMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewMetadata.
@@ -3262,6 +3243,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * }
      * ```
      * @deprecated
+     * @Annotation
      */
     var View = makeDecorator(ViewMetadata, function (fn) { return fn.View = View; });
     /**
@@ -3281,6 +3263,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
      * @stable
+     * @Annotation
      */
     var Attribute = makeParamDecorator(AttributeMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from QueryMetadata.
@@ -3391,6 +3374,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * The injected object is an unmodifiable live list.
      * See {@link QueryList} for more details.
      * @deprecated
+     * @Annotation
      */
     var Query = makeParamDecorator(QueryMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from ContentChildrenMetadata.
@@ -3414,6 +3398,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * }
      * ```
      * @stable
+     * @Annotation
      */
     var ContentChildren = makePropDecorator(ContentChildrenMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from ContentChildMetadata.
@@ -3446,6 +3431,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * </container>
      * ```
      * @stable
+     * @Annotation
      */
     var ContentChild = makePropDecorator(ContentChildMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewChildrenMetadata.
@@ -3528,6 +3514,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * See also: [ViewChildrenMetadata]
      * @stable
+     * @Annotation
      */
     var ViewChildren = makePropDecorator(ViewChildrenMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewChildMetadata.
@@ -3601,6 +3588,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ```
      * See also: [ViewChildMetadata]
      * @stable
+     * @Annotation
      */
     var ViewChild = makePropDecorator(ViewChildMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewQueryMetadata.
@@ -3639,6 +3627,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * The injected object is an iterable and observable live list.
      * See {@link QueryList} for more details.
      * @deprecated
+     * @Annotation
      */
     var ViewQuery = makeParamDecorator(ViewQueryMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from PipeMetadata.
@@ -3649,6 +3638,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * {@example core/ts/metadata/metadata.ts region='pipe'}
      * @stable
+     * @Annotation
      */
     var Pipe = makeDecorator(PipeMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from InputMetadata.
@@ -3693,6 +3683,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * bootstrap(App);
      * ```
      * @stable
+     * @Annotation
      */
     var Input = makePropDecorator(InputMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from OutputMetadata.
@@ -3737,6 +3728,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * bootstrap(App);
      * ```
      * @stable
+     * @Annotation
      */
     var Output = makePropDecorator(OutputMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from HostBindingMetadata.
@@ -3775,6 +3767,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * bootstrap(App);
      * ```
      * @stable
+     * @Annotation
      */
     var HostBinding = makePropDecorator(HostBindingMetadata);
     // TODO(alexeagle): remove the duplication of this doc. It is copied from HostListenerMetadata.
@@ -3812,36 +3805,43 @@ var __extends = (this && this.__extends) || function (d, b) {
      * bootstrap(App);
      * ```
      * @stable
+     * @Annotation
      */
     var HostListener = makePropDecorator(HostListenerMetadata);
     /**
      * Factory for creating {@link InjectMetadata}.
      * @stable
+     * @Annotation
      */
     var Inject = makeParamDecorator(InjectMetadata);
     /**
      * Factory for creating {@link OptionalMetadata}.
      * @stable
+     * @Annotation
      */
     var Optional = makeParamDecorator(OptionalMetadata);
     /**
      * Factory for creating {@link InjectableMetadata}.
      * @stable
+     * @Annotation
      */
     var Injectable = makeDecorator(InjectableMetadata);
     /**
      * Factory for creating {@link SelfMetadata}.
      * @stable
+     * @Annotation
      */
     var Self = makeParamDecorator(SelfMetadata);
     /**
      * Factory for creating {@link HostMetadata}.
      * @stable
+     * @Annotation
      */
     var Host = makeParamDecorator(HostMetadata);
     /**
      * Factory for creating {@link SkipSelfMetadata}.
      * @stable
+     * @Annotation
      */
     var SkipSelf = makeParamDecorator(SkipSelfMetadata);
     /**
@@ -4586,7 +4586,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * }
      *
      * var injector = Injector.resolveAndCreate([A]);
-  
+
      * try {
      *   injector.get(A);
      * } catch (e) {
@@ -5482,7 +5482,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             /**
              * Factory function which can return an instance of an object represented by a key.
              */
-            factory, 
+            factory,
             /**
              * Arguments (dependencies) to the `factory` function.
              */
@@ -6546,7 +6546,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         PromiseWrapper.scheduleMicrotask = function (computation) {
             PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
         };
-        PromiseWrapper.isPromise = function (obj) { return obj instanceof Promise; };
         PromiseWrapper.completer = function () { return new PromiseCompleter(); };
         return PromiseWrapper;
     }());
@@ -6569,7 +6568,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         /**
          * @deprecated - use callEmit() instead
          */
-        ObservableWrapper.callNext = function (emitter, value) { emitter.next(value); };
+        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
         ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
@@ -6694,7 +6693,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Providers that will generate a random APP_ID_TOKEN.
      * @experimental
      */
-    var APP_ID_RANDOM_PROVIDER = 
+    var APP_ID_RANDOM_PROVIDER =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
         provide: APP_ID,
         useFactory: _appIdRandomProviderFactory,
@@ -6707,19 +6706,19 @@ var __extends = (this && this.__extends) || function (d, b) {
      * A function that will be executed when a platform is initialized.
      * @experimental
      */
-    var PLATFORM_INITIALIZER = 
+    var PLATFORM_INITIALIZER =
     /*@ts2dart_const*/ new OpaqueToken('Platform Initializer');
     /**
      * A function that will be executed when an application is initialized.
      * @experimental
      */
-    var APP_INITIALIZER = 
+    var APP_INITIALIZER =
     /*@ts2dart_const*/ new OpaqueToken('Application Initializer');
     /**
      * A token which indicates the root directory of the application
      * @experimental
      */
-    var PACKAGE_ROOT_URL = 
+    var PACKAGE_ROOT_URL =
     /*@ts2dart_const*/ new OpaqueToken('Application Packages Root URL');
     // Note: Need to rename warn as in Dart
     // class members and imports can't use the same name.
@@ -7951,12 +7950,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     /**
      * Structural diffing for `Object`s and `Map`s.
      */
-    var keyValDiff = 
+    var keyValDiff =
     /*@ts2dart_const*/ [new DefaultKeyValueDifferFactory()];
     /**
      * Structural diffing for `Iterable` types such as `Array`s.
      */
-    var iterableDiff = 
+    var iterableDiff =
     /*@ts2dart_const*/ [new DefaultIterableDifferFactory()];
     var defaultIterableDiffers = new IterableDiffers(iterableDiff);
     var defaultKeyValueDiffers = new KeyValueDiffers(keyValDiff);
@@ -9421,10 +9420,48 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @experimental
      */
     function createNgZone() {
-        return new NgZone({ enableLongStackTrace: assertionsEnabled() });
+        return new NgZone({ enableLongStackTrace: isDevMode() });
     }
+    var _devMode = true;
+    var _runModeLocked = false;
     var _platform;
     var _inPlatformCreate = false;
+    /**
+     * Disable Angular's development mode, which turns off assertions and other
+     * checks within the framework.
+     *
+     * One important assertion this disables verifies that a change detection pass
+     * does not result in additional changes to any bindings (also known as
+     * unidirectional data flow).
+     * @stable
+     */
+    function enableProdMode() {
+        if (_runModeLocked) {
+            // Cannot use BaseException as that ends up importing from facade/lang.
+            throw new BaseException('Cannot enable prod mode after platform setup.');
+        }
+        _devMode = false;
+    }
+    /**
+     * Returns whether Angular is in development mode.
+     * This can only be read after `lockRunMode` has been called.
+     *
+     * By default, this is true, unless a user calls `enableProdMode`.
+     */
+    function isDevMode() {
+        if (!_runModeLocked) {
+            throw new BaseException("Dev mode can't be read before bootstrap!");
+        }
+        return _devMode;
+    }
+    /**
+     * Locks the run mode of Angular. After this has been called,
+     * it can't be changed any more. I.e. `isDevMode()` will always
+     * return the same value.
+     */
+    function lockRunMode() {
+        _runModeLocked = true;
+    }
     /**
      * Creates a platform.
      * Platforms have to be eagerly created via this function.
@@ -9437,7 +9474,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         if (isPresent(_platform) && !_platform.disposed) {
             throw new BaseException('There can be only one platform. Destroy the previous one to create a new one.');
         }
-        lockMode();
+        lockRunMode();
         _inPlatformCreate = true;
         try {
             _platform = injector.get(PlatformRef);
@@ -9638,7 +9675,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             /** @internal */
             this._enforceNoNewChanges = false;
             var zone = _injector.get(NgZone);
-            this._enforceNoNewChanges = assertionsEnabled();
+            this._enforceNoNewChanges = isDevMode();
             zone.run(function () { _this._exceptionHandler = _injector.get(ExceptionHandler); });
             this._asyncInitDonePromise = this.run(function () {
                 var inits = _injector.get(APP_INITIALIZER, null);
@@ -9722,7 +9759,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 }
                 _this._loadComponent(compRef);
                 var c = _this._injector.get(Console);
-                if (assertionsEnabled()) {
+                if (isDevMode()) {
                     var prodDescription = IS_DART ? 'Production mode is disabled in Dart.' :
                         'Call enableProdMode() to enable the production mode.';
                     c.log("Angular 2 is running in the development mode. " + prodDescription);
@@ -9797,7 +9834,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: NgZone, },
         { type: Injector, },
     ];
-    var PLATFORM_CORE_PROVIDERS = 
+    var PLATFORM_CORE_PROVIDERS =
     /*@ts2dart_const*/ [
         PlatformRef_,
         /*@ts2dart_const*/ (
@@ -9914,7 +9951,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         /**
          * returns a reduced value.
          */
-        QueryList.prototype.reduce = function (fn, init) { return this._results.reduce(fn, init); };
+        QueryList.prototype.reduce = function (fn, init) {
+            return this._results.reduce(fn, init);
+        };
         /**
          * executes function for each element in a query.
          */
@@ -9927,14 +9966,10 @@ var __extends = (this && this.__extends) || function (d, b) {
             return this._results[getSymbolIterator()]();
         };
         QueryList.prototype.toString = function () { return this._results.toString(); };
-        /**
-         * @internal
-         */
         QueryList.prototype.reset = function (res) {
             this._results = ListWrapper.flatten(res);
             this._dirty = false;
         };
-        /** @internal */
         QueryList.prototype.notifyOnChanges = function () { this._emitter.emit(this); };
         /** internal */
         QueryList.prototype.setDirty = function () { this._dirty = true; };
@@ -10140,6 +10175,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         function ViewRef_(_view) {
             this._view = _view;
             this._view = _view;
+            this._originalMode = this._view.cdMode;
         }
         Object.defineProperty(ViewRef_.prototype, "internalView", {
             get: function () { return this._view; },
@@ -10166,7 +10202,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         ViewRef_.prototype.detectChanges = function () { this._view.detectChanges(false); };
         ViewRef_.prototype.checkNoChanges = function () { this._view.detectChanges(true); };
         ViewRef_.prototype.reattach = function () {
-            this._view.cdMode = exports.ChangeDetectionStrategy.CheckAlways;
+            this._view.cdMode = this._originalMode;
             this.markForCheck();
         };
         ViewRef_.prototype.onDestroy = function (callback) { this._view.disposables.push(callback); };
@@ -10387,7 +10423,7 @@ var __extends = (this && this.__extends) || function (d, b) {
       * ```
       * @stable
       */
-    var PLATFORM_DIRECTIVES = 
+    var PLATFORM_DIRECTIVES =
     /*@ts2dart_const*/ new OpaqueToken('Platform Directives');
     /**
       * A token that can be provided when bootstraping an application to make an array of pipes
@@ -10434,7 +10470,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * application, regardless of the platform it runs onto.
      * @stable
      */
-    var APPLICATION_COMMON_PROVIDERS = 
+    var APPLICATION_COMMON_PROVIDERS =
     /*@ts2dart_const*/ [
         APPLICATION_CORE_PROVIDERS,
         /* @ts2dart_Provider */ { provide: ComponentResolver, useClass: ReflectorComponentResolver },
@@ -12081,6 +12117,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.createNgZone = createNgZone;
     exports.PlatformRef = PlatformRef;
     exports.ApplicationRef = ApplicationRef;
+    exports.enableProdMode = enableProdMode;
+    exports.lockRunMode = lockRunMode;
+    exports.isDevMode = isDevMode;
     exports.APP_ID = APP_ID;
     exports.APP_INITIALIZER = APP_INITIALIZER;
     exports.PACKAGE_ROOT_URL = PACKAGE_ROOT_URL;
@@ -12094,7 +12133,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.wtfStartTimeRange = wtfStartTimeRange;
     exports.wtfEndTimeRange = wtfEndTimeRange;
     exports.Type = Type;
-    exports.enableProdMode = enableProdMode;
     exports.EventEmitter = EventEmitter;
     exports.ExceptionHandler = ExceptionHandler;
     exports.WrappedException = WrappedException;

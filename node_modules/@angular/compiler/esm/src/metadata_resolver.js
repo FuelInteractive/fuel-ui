@@ -3,7 +3,7 @@ import { LIFECYCLE_HOOKS_VALUES, ReflectorReader, createProvider, isProviderLite
 import { StringMapWrapper } from '../src/facade/collection';
 import { BaseException } from '../src/facade/exceptions';
 import { Type, isArray, isBlank, isPresent, isString, isStringMap, stringify } from '../src/facade/lang';
-import { assertArrayOfStrings } from './assertions';
+import { assertArrayOfStrings, assertInterpolationSymbols } from './assertions';
 import * as cpl from './compile_metadata';
 import { CompilerConfig } from './config';
 import { hasLifecycleHook } from './directive_lifecycle_reflector';
@@ -13,21 +13,16 @@ import { getUrlScheme } from './url_resolver';
 import { MODULE_SUFFIX, ValueTransformer, sanitizeIdentifier, visitValue } from './util';
 import { ViewResolver } from './view_resolver';
 export class CompileMetadataResolver {
-    constructor(_directiveResolver, _pipeResolver, _viewResolver, _config, _reflector) {
+    constructor(_directiveResolver, _pipeResolver, _viewResolver, _config, _reflector = reflector) {
         this._directiveResolver = _directiveResolver;
         this._pipeResolver = _pipeResolver;
         this._viewResolver = _viewResolver;
         this._config = _config;
+        this._reflector = _reflector;
         this._directiveCache = new Map();
         this._pipeCache = new Map();
         this._anonymousTypes = new Map();
         this._anonymousTypeIndex = 0;
-        if (isPresent(_reflector)) {
-            this._reflector = _reflector;
-        }
-        else {
-            this._reflector = reflector;
-        }
     }
     sanitizeTokenName(token) {
         let identifier = stringify(token);
@@ -95,6 +90,7 @@ export class CompileMetadataResolver {
                 var cmpMeta = dirMeta;
                 var viewMeta = this._viewResolver.resolve(directiveType);
                 assertArrayOfStrings('styles', viewMeta.styles);
+                assertInterpolationSymbols('interpolation', viewMeta.interpolation);
                 var animations = isPresent(viewMeta.animations) ?
                     viewMeta.animations.map(e => this.getAnimationEntryMetadata(e)) :
                     null;
@@ -104,7 +100,8 @@ export class CompileMetadataResolver {
                     templateUrl: viewMeta.templateUrl,
                     styles: viewMeta.styles,
                     styleUrls: viewMeta.styleUrls,
-                    animations: animations
+                    animations: animations,
+                    interpolation: viewMeta.interpolation
                 });
                 changeDetectionStrategy = cmpMeta.changeDetection;
                 if (isPresent(dirMeta.viewProviders)) {
@@ -157,20 +154,20 @@ export class CompileMetadataResolver {
             throw e;
         }
     }
-    getTypeMetadata(type, moduleUrl) {
+    getTypeMetadata(type, moduleUrl, dependencies = null) {
         return new cpl.CompileTypeMetadata({
             name: this.sanitizeTokenName(type),
             moduleUrl: moduleUrl,
             runtime: type,
-            diDeps: this.getDependenciesMetadata(type, null)
+            diDeps: this.getDependenciesMetadata(type, dependencies)
         });
     }
-    getFactoryMetadata(factory, moduleUrl) {
+    getFactoryMetadata(factory, moduleUrl, dependencies = null) {
         return new cpl.CompileFactoryMetadata({
             name: this.sanitizeTokenName(factory),
             moduleUrl: moduleUrl,
             runtime: factory,
-            diDeps: this.getDependenciesMetadata(factory, null)
+            diDeps: this.getDependenciesMetadata(factory, dependencies)
         });
     }
     getPipeMetadata(pipeType) {
@@ -214,9 +211,6 @@ export class CompileMetadataResolver {
             params = [];
         }
         let dependenciesMetadata = params.map((param) => {
-            if (isBlank(param)) {
-                return null;
-            }
             let isAttribute = false;
             let isHost = false;
             let isSelf = false;
@@ -320,21 +314,21 @@ export class CompileMetadataResolver {
     }
     getProviderMetadata(provider) {
         var compileDeps;
+        var compileTypeMetadata = null;
+        var compileFactoryMetadata = null;
         if (isPresent(provider.useClass)) {
-            compileDeps = this.getDependenciesMetadata(provider.useClass, provider.dependencies);
+            compileTypeMetadata = this.getTypeMetadata(provider.useClass, staticTypeModuleUrl(provider.useClass), provider.dependencies);
+            compileDeps = compileTypeMetadata.diDeps;
         }
         else if (isPresent(provider.useFactory)) {
-            compileDeps = this.getDependenciesMetadata(provider.useFactory, provider.dependencies);
+            compileFactoryMetadata = this.getFactoryMetadata(provider.useFactory, staticTypeModuleUrl(provider.useFactory), provider.dependencies);
+            compileDeps = compileFactoryMetadata.diDeps;
         }
         return new cpl.CompileProviderMetadata({
             token: this.getTokenMetadata(provider.token),
-            useClass: isPresent(provider.useClass) ?
-                this.getTypeMetadata(provider.useClass, staticTypeModuleUrl(provider.useClass)) :
-                null,
+            useClass: compileTypeMetadata,
             useValue: convertToCompileValue(provider.useValue),
-            useFactory: isPresent(provider.useFactory) ?
-                this.getFactoryMetadata(provider.useFactory, staticTypeModuleUrl(provider.useFactory)) :
-                null,
+            useFactory: compileFactoryMetadata,
             useExisting: isPresent(provider.useExisting) ? this.getTokenMetadata(provider.useExisting) :
                 null,
             deps: compileDeps,

@@ -65,7 +65,12 @@ var XHRConnection = (function () {
             };
             // error event handler
             var onError = function (err) {
-                var responseOptions = new base_response_options_1.ResponseOptions({ body: err, type: enums_1.ResponseType.Error });
+                var responseOptions = new base_response_options_1.ResponseOptions({
+                    body: err,
+                    type: enums_1.ResponseType.Error,
+                    status: _xhr.status,
+                    statusText: _xhr.statusText,
+                });
                 if (lang_1.isPresent(baseResponseOptions)) {
                     responseOptions = baseResponseOptions.merge(responseOptions);
                 }

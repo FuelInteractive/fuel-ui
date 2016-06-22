@@ -1,4 +1,5 @@
 import { PLATFORM_INITIALIZER, ReflectiveInjector } from '../index';
+import { lockRunMode } from '../src/application_ref';
 import { ListWrapper } from '../src/facade/collection';
 import { BaseException } from '../src/facade/exceptions';
 import { FunctionWrapper, isPresent } from '../src/facade/lang';
@@ -25,6 +26,7 @@ export class TestInjector {
         this._providers = ListWrapper.concat(this._providers, providers);
     }
     createInjector() {
+        lockRunMode();
         var rootInjector = ReflectiveInjector.resolveAndCreate(this.platformProviders);
         this._injector = rootInjector.resolveAndCreateChild(ListWrapper.concat(this.applicationProviders, this._providers));
         this._instantiated = true;
@@ -56,7 +58,7 @@ export function getTestInjector() {
  * common to every test in the suite.
  *
  * This may only be called once, to set up the common providers for the current test
- * suite on teh current platform. If you absolutely need to change the providers,
+ * suite on the current platform. If you absolutely need to change the providers,
  * first use `resetBaseTestProviders`.
  *
  * Test Providers for individual platforms are available from

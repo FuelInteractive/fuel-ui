@@ -46,14 +46,14 @@ export const WORKER_SCRIPT = new OpaqueToken('WebWorkerScript');
  */
 export const WORKER_UI_STARTABLE_MESSAGING_SERVICE = new OpaqueToken('WorkerRenderStartableMsgService');
 /**
- * * @experimental
+ * @experimental
  */
 export const WORKER_UI_PLATFORM_PROVIDERS = [
     PLATFORM_COMMON_PROVIDERS, { provide: WORKER_RENDER_PLATFORM_MARKER, useValue: true },
     { provide: PLATFORM_INITIALIZER, useValue: initWebWorkerRenderPlatform, multi: true }
 ];
 /**
- * * @experimental
+ * @experimental
  */
 export const WORKER_UI_APPLICATION_PROVIDERS = [
     APPLICATION_COMMON_PROVIDERS,
@@ -101,7 +101,7 @@ function initWebWorkerRenderPlatform() {
     BrowserGetTestability.init();
 }
 /**
- * * @experimental
+ * @experimental
  */
 export function workerUiPlatform() {
     if (isBlank(getPlatform())) {

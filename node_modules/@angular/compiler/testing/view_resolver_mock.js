@@ -104,7 +104,8 @@ var MockViewResolver = (function (_super) {
             styles: view.styles,
             styleUrls: view.styleUrls,
             pipes: view.pipes,
-            encapsulation: view.encapsulation
+            encapsulation: view.encapsulation,
+            interpolation: view.interpolation
         });
         this._viewCache.set(component, view);
         return view;

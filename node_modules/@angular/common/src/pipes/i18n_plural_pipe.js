@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
-var interpolationExp = lang_1.RegExpWrapper.create('#');
+var _INTERPOLATION_REGEXP = /#/g;
 var I18nPluralPipe = (function () {
     function I18nPluralPipe() {
     }
@@ -14,7 +14,7 @@ var I18nPluralPipe = (function () {
         }
         key = value === 0 || value === 1 ? "=" + value : 'other';
         valueStr = lang_1.isPresent(value) ? value.toString() : '';
-        return lang_1.StringWrapper.replaceAll(pluralMap[key], interpolationExp, valueStr);
+        return lang_1.StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, valueStr);
     };
     /** @nocollapse */
     I18nPluralPipe.decorators = [

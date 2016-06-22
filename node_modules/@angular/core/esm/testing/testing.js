@@ -1,4 +1,4 @@
-import { isPromise } from '../src/facade/lang';
+import { isPromise, isString } from '../src/facade/lang';
 import { getTestInjector } from './test_injector';
 export { async, inject, injectAsync } from './test_injector';
 var _global = (typeof window === 'undefined' ? global : window);
@@ -89,7 +89,12 @@ function _wrapTestFn(fn) {
             let retVal = fn();
             if (isPromise(retVal)) {
                 // Asynchronous test function - wait for completion.
-                retVal.then(done, done.fail);
+                retVal.then(done, (err) => {
+                    if (isString(err)) {
+                        return done.fail(new Error(err));
+                    }
+                    return done.fail(err);
+                });
             }
             else {
                 // Synchronous test function - complete immediately.

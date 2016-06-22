@@ -139,6 +139,13 @@ class TemplateParseVisitor {
         this.directivesIndex = new Map();
         this.ngContentCount = 0;
         this.selectorMatcher = new SelectorMatcher();
+        const tempMeta = providerViewContext.component.template;
+        if (isPresent(tempMeta) && isPresent(tempMeta.interpolation)) {
+            this._interpolationConfig = {
+                start: tempMeta.interpolation[0],
+                end: tempMeta.interpolation[1]
+            };
+        }
         ListWrapper.forEachWithIndex(directives, (directive, index) => {
             var selector = CssSelector.parse(directive.selector);
             this.selectorMatcher.addSelectables(selector, directive);
@@ -153,7 +160,7 @@ class TemplateParseVisitor {
     _parseInterpolation(value, sourceSpan) {
         var sourceInfo = sourceSpan.start.toString();
         try {
-            var ast = this._exprParser.parseInterpolation(value, sourceInfo);
+            var ast = this._exprParser.parseInterpolation(value, sourceInfo, this._interpolationConfig);
             this._checkPipes(ast, sourceSpan);
             if (isPresent(ast) &&
                 ast.ast.expressions.length > MAX_INTERPOLATION_VALUES) {
@@ -169,7 +176,7 @@ class TemplateParseVisitor {
     _parseAction(value, sourceSpan) {
         var sourceInfo = sourceSpan.start.toString();
         try {
-            var ast = this._exprParser.parseAction(value, sourceInfo);
+            var ast = this._exprParser.parseAction(value, sourceInfo, this._interpolationConfig);
             this._checkPipes(ast, sourceSpan);
             return ast;
         }
@@ -181,7 +188,7 @@ class TemplateParseVisitor {
     _parseBinding(value, sourceSpan) {
         var sourceInfo = sourceSpan.start.toString();
         try {
-            var ast = this._exprParser.parseBinding(value, sourceInfo);
+            var ast = this._exprParser.parseBinding(value, sourceInfo, this._interpolationConfig);
             this._checkPipes(ast, sourceSpan);
             return ast;
         }

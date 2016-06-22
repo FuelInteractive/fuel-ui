@@ -53,7 +53,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             <div class="row">
                 <div class="checkbox col-md-3">
                     <label for="expanded" class="form-control-label">
-                        <input [(ngModel)]="expanded" type="checkbox" /> 
+                        <input [(ngModel)]="expanded" type="checkbox" name="expanded" /> 
                         Expanded
                     </label>
                 </div>
@@ -61,7 +61,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             <div class="row">
                 <div class="checkbox col-md-3">
                     <label for="ellipsis" class="form-control-label">
-                        <input [(ngModel)]="ellipsis" type="checkbox" /> 
+                        <input [(ngModel)]="ellipsis" type="checkbox" name="ellipsis" /> 
                         Ellipsis
                     </label>
                 </div>

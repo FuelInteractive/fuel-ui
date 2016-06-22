@@ -9,6 +9,29 @@ import { NgZone } from './zone/ng_zone';
  */
 export declare function createNgZone(): NgZone;
 /**
+ * Disable Angular's development mode, which turns off assertions and other
+ * checks within the framework.
+ *
+ * One important assertion this disables verifies that a change detection pass
+ * does not result in additional changes to any bindings (also known as
+ * unidirectional data flow).
+ * @stable
+ */
+export declare function enableProdMode(): void;
+/**
+ * Returns whether Angular is in development mode.
+ * This can only be read after `lockRunMode` has been called.
+ *
+ * By default, this is true, unless a user calls `enableProdMode`.
+ */
+export declare function isDevMode(): boolean;
+/**
+ * Locks the run mode of Angular. After this has been called,
+ * it can't be changed any more. I.e. `isDevMode()` will always
+ * return the same value.
+ */
+export declare function lockRunMode(): void;
+/**
  * Creates a platform.
  * Platforms have to be eagerly created via this function.
  * @experimental

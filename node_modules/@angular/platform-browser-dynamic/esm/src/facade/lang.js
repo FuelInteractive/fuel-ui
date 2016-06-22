@@ -28,30 +28,6 @@ export function getTypeNameForDebugging(type) {
 }
 export var Math = _global.Math;
 export var Date = _global.Date;
-var _devMode = true;
-var _modeLocked = false;
-export function lockMode() {
-    _modeLocked = true;
-}
-/**
- * Disable Angular's development mode, which turns off assertions and other
- * checks within the framework.
- *
- * One important assertion this disables verifies that a change detection pass
- * does not result in additional changes to any bindings (also known as
- * unidirectional data flow).
- * @stable
- */
-export function enableProdMode() {
-    if (_modeLocked) {
-        // Cannot use BaseException as that ends up importing from facade/lang.
-        throw 'Cannot enable prod mode after platform setup.';
-    }
-    _devMode = false;
-}
-export function assertionsEnabled() {
-    return _devMode;
-}
 // TODO: remove calls to assert in production environment
 // Note: Can't just export this and import in in other files
 // as `assert` is a reserved keyword in Dart
@@ -229,6 +205,7 @@ export class NumberWrapper {
     // TODO: NaN is a valid literal but is returned by parseFloat to indicate an error.
     static parseFloat(text) { return parseFloat(text); }
     static get NaN() { return NaN; }
+    static isNumeric(value) { return !isNaN(value - parseFloat(value)); }
     static isNaN(value) { return isNaN(value); }
     static isInteger(value) { return Number.isInteger(value); }
 }
@@ -374,13 +351,10 @@ export function isPrimitive(obj) {
 export function hasConstructor(value, type) {
     return value.constructor === type;
 }
-export function bitWiseOr(values) {
-    return values.reduce((a, b) => { return a | b; });
-}
-export function bitWiseAnd(values) {
-    return values.reduce((a, b) => { return a & b; });
-}
 export function escape(s) {
     return _global.encodeURI(s);
+}
+export function escapeRegExp(s) {
+    return s.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
 }
 //# sourceMappingURL=lang.js.map

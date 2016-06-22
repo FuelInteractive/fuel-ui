@@ -41,7 +41,6 @@ var PromiseWrapper = (function () {
     PromiseWrapper.scheduleMicrotask = function (computation) {
         PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
     };
-    PromiseWrapper.isPromise = function (obj) { return obj instanceof Promise; };
     PromiseWrapper.completer = function () { return new PromiseCompleter(); };
     return PromiseWrapper;
 }());

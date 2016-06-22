@@ -124,7 +124,7 @@ var Validators = (function () {
 }());
 exports.Validators = Validators;
 function _convertToPromise(obj) {
-    return promise_1.PromiseWrapper.isPromise(obj) ? obj : async_1.ObservableWrapper.toPromise(obj);
+    return lang_1.isPromise(obj) ? obj : async_1.ObservableWrapper.toPromise(obj);
 }
 function _executeValidators(control, validators) {
     return validators.map(function (v) { return v(control); });

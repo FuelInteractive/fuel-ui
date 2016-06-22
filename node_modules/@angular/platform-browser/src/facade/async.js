@@ -48,7 +48,7 @@ var ObservableWrapper = (function () {
     /**
      * @deprecated - use callEmit() instead
      */
-    ObservableWrapper.callNext = function (emitter, value) { emitter.next(value); };
+    ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
     ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
     ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
     ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };

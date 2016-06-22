@@ -8,11 +8,10 @@ var core_1 = require('@angular/core');
 var collection_1 = require('../facade/collection');
 var exceptions_1 = require('../facade/exceptions');
 var lang_1 = require('../facade/lang');
+var interpolation_config_1 = require('../interpolation_config');
 var ast_1 = require('./ast');
 var lexer_1 = require('./lexer');
 var _implicitReceiver = new ast_1.ImplicitReceiver();
-// TODO(tbosch): Cannot make this const/final right now because of the transpiler...
-var INTERPOLATION_REGEXP = /\{\{([\s\S]*?)\}\}/g;
 var ParseException = (function (_super) {
     __extends(ParseException, _super);
     function ParseException(message, input, errLocation, ctxLocation) {
@@ -36,35 +35,42 @@ var TemplateBindingParseResult = (function () {
     return TemplateBindingParseResult;
 }());
 exports.TemplateBindingParseResult = TemplateBindingParseResult;
+function _createInterpolateRegExp(config) {
+    var regexp = lang_1.escapeRegExp(config.start) + '([\\s\\S]*?)' + lang_1.escapeRegExp(config.end);
+    return lang_1.RegExpWrapper.create(regexp, 'g');
+}
 var Parser = (function () {
     function Parser(/** @internal */ _lexer) {
         this._lexer = _lexer;
     }
-    Parser.prototype.parseAction = function (input, location) {
-        this._checkNoInterpolation(input, location);
+    Parser.prototype.parseAction = function (input, location, interpolationConfig) {
+        if (interpolationConfig === void 0) { interpolationConfig = interpolation_config_1.DEFAULT_INTERPOLATION_CONFIG; }
+        this._checkNoInterpolation(input, location, interpolationConfig);
         var tokens = this._lexer.tokenize(this._stripComments(input));
         var ast = new _ParseAST(input, location, tokens, true).parseChain();
         return new ast_1.ASTWithSource(ast, input, location);
     };
-    Parser.prototype.parseBinding = function (input, location) {
-        var ast = this._parseBindingAst(input, location);
+    Parser.prototype.parseBinding = function (input, location, interpolationConfig) {
+        if (interpolationConfig === void 0) { interpolationConfig = interpolation_config_1.DEFAULT_INTERPOLATION_CONFIG; }
+        var ast = this._parseBindingAst(input, location, interpolationConfig);
         return new ast_1.ASTWithSource(ast, input, location);
     };
-    Parser.prototype.parseSimpleBinding = function (input, location) {
-        var ast = this._parseBindingAst(input, location);
+    Parser.prototype.parseSimpleBinding = function (input, location, interpolationConfig) {
+        if (interpolationConfig === void 0) { interpolationConfig = interpolation_config_1.DEFAULT_INTERPOLATION_CONFIG; }
+        var ast = this._parseBindingAst(input, location, interpolationConfig);
         if (!SimpleExpressionChecker.check(ast)) {
             throw new ParseException('Host binding expression can only contain field access and constants', input, location);
         }
         return new ast_1.ASTWithSource(ast, input, location);
     };
-    Parser.prototype._parseBindingAst = function (input, location) {
+    Parser.prototype._parseBindingAst = function (input, location, interpolationConfig) {
         // Quotes expressions use 3rd-party expression language. We don't want to use
         // our lexer or parser for that, so we check for that ahead of time.
         var quote = this._parseQuote(input, location);
         if (lang_1.isPresent(quote)) {
             return quote;
         }
-        this._checkNoInterpolation(input, location);
+        this._checkNoInterpolation(input, location, interpolationConfig);
         var tokens = this._lexer.tokenize(this._stripComments(input));
         return new _ParseAST(input, location, tokens, false).parseChain();
     };
@@ -84,8 +90,9 @@ var Parser = (function () {
         var tokens = this._lexer.tokenize(input);
         return new _ParseAST(input, location, tokens, false).parseTemplateBindings();
     };
-    Parser.prototype.parseInterpolation = function (input, location) {
-        var split = this.splitInterpolation(input, location);
+    Parser.prototype.parseInterpolation = function (input, location, interpolationConfig) {
+        if (interpolationConfig === void 0) { interpolationConfig = interpolation_config_1.DEFAULT_INTERPOLATION_CONFIG; }
+        var split = this.splitInterpolation(input, location, interpolationConfig);
         if (split == null)
             return null;
         var expressions = [];
@@ -96,8 +103,10 @@ var Parser = (function () {
         }
         return new ast_1.ASTWithSource(new ast_1.Interpolation(split.strings, expressions), input, location);
     };
-    Parser.prototype.splitInterpolation = function (input, location) {
-        var parts = lang_1.StringWrapper.split(input, INTERPOLATION_REGEXP);
+    Parser.prototype.splitInterpolation = function (input, location, interpolationConfig) {
+        if (interpolationConfig === void 0) { interpolationConfig = interpolation_config_1.DEFAULT_INTERPOLATION_CONFIG; }
+        var regexp = _createInterpolateRegExp(interpolationConfig);
+        var parts = lang_1.StringWrapper.split(input, regexp);
         if (parts.length <= 1) {
             return null;
         }
@@ -113,7 +122,7 @@ var Parser = (function () {
                 expressions.push(part);
             }
             else {
-                throw new ParseException('Blank expressions are not allowed in interpolated strings', input, "at column " + this._findInterpolationErrorColumn(parts, i) + " in", location);
+                throw new ParseException('Blank expressions are not allowed in interpolated strings', input, "at column " + this._findInterpolationErrorColumn(parts, i, interpolationConfig) + " in", location);
             }
         }
         return new SplitInterpolation(strings, expressions);
@@ -141,16 +150,19 @@ var Parser = (function () {
         }
         return null;
     };
-    Parser.prototype._checkNoInterpolation = function (input, location) {
-        var parts = lang_1.StringWrapper.split(input, INTERPOLATION_REGEXP);
+    Parser.prototype._checkNoInterpolation = function (input, location, interpolationConfig) {
+        var regexp = _createInterpolateRegExp(interpolationConfig);
+        var parts = lang_1.StringWrapper.split(input, regexp);
         if (parts.length > 1) {
-            throw new ParseException('Got interpolation ({{}}) where expression was expected', input, "at column " + this._findInterpolationErrorColumn(parts, 1) + " in", location);
+            throw new ParseException("Got interpolation (" + interpolationConfig.start + interpolationConfig.end + ") where expression was expected", input, "at column " + this._findInterpolationErrorColumn(parts, 1, interpolationConfig) + " in", location);
         }
     };
-    Parser.prototype._findInterpolationErrorColumn = function (parts, partInErrIdx) {
+    Parser.prototype._findInterpolationErrorColumn = function (parts, partInErrIdx, interpolationConfig) {
         var errLocation = '';
         for (var j = 0; j < partInErrIdx; j++) {
-            errLocation += j % 2 === 0 ? parts[j] : "{{" + parts[j] + "}}";
+            errLocation += j % 2 === 0 ?
+                parts[j] :
+                "" + interpolationConfig.start + parts[j] + interpolationConfig.end;
         }
         return errLocation.length;
     };

@@ -22,14 +22,14 @@ export declare const WORKER_SCRIPT: OpaqueToken;
  */
 export declare const WORKER_UI_STARTABLE_MESSAGING_SERVICE: OpaqueToken;
 /**
- * * @experimental
+ * @experimental
  */
 export declare const WORKER_UI_PLATFORM_PROVIDERS: Array<any>;
 /**
- * * @experimental
+ * @experimental
  */
 export declare const WORKER_UI_APPLICATION_PROVIDERS: Array<any>;
 /**
- * * @experimental
+ * @experimental
  */
 export declare function workerUiPlatform(): PlatformRef;

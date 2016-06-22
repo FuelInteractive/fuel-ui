@@ -97,6 +97,9 @@ export function bootstrap(appComponentType, customProviders) {
     var appInjector = ReflectiveInjector.resolveAndCreate(providers, browserPlatform().injector);
     return coreLoadAndBootstrap(appComponentType, appInjector);
 }
+/**
+ * @experimental
+ */
 export function bootstrapWorkerUi(workerScriptUri, customProviders) {
     var app = ReflectiveInjector.resolveAndCreate([
         WORKER_UI_APPLICATION_PROVIDERS, BROWSER_APP_COMPILER_PROVIDERS,
@@ -108,6 +111,9 @@ export function bootstrapWorkerUi(workerScriptUri, customProviders) {
     // in the future...
     return PromiseWrapper.resolve(app.get(ApplicationRef));
 }
+/**
+ * @experimental
+ */
 const WORKER_APP_COMPILER_PROVIDERS = [
     COMPILER_PROVIDERS, {
         provide: CompilerConfig,
@@ -120,6 +126,9 @@ const WORKER_APP_COMPILER_PROVIDERS = [
     { provide: PLATFORM_DIRECTIVES, useValue: COMMON_DIRECTIVES, multi: true },
     { provide: PLATFORM_PIPES, useValue: COMMON_PIPES, multi: true }
 ];
+/**
+ * @experimental
+ */
 export function bootstrapWorkerApp(appComponentType, customProviders) {
     var appInjector = ReflectiveInjector.resolveAndCreate([
         WORKER_APP_APPLICATION_PROVIDERS, WORKER_APP_COMPILER_PROVIDERS,

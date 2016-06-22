@@ -452,7 +452,7 @@ export class CompileQueryMetadata {
  * Metadata regarding compilation of a template.
  */
 export class CompileTemplateMetadata {
-    constructor({ encapsulation, template, templateUrl, styles, styleUrls, animations, ngContentSelectors } = {}) {
+    constructor({ encapsulation, template, templateUrl, styles, styleUrls, animations, ngContentSelectors, interpolation } = {}) {
         this.encapsulation = encapsulation;
         this.template = template;
         this.templateUrl = templateUrl;
@@ -460,6 +460,10 @@ export class CompileTemplateMetadata {
         this.styleUrls = isPresent(styleUrls) ? styleUrls : [];
         this.animations = isPresent(animations) ? ListWrapper.flatten(animations) : [];
         this.ngContentSelectors = isPresent(ngContentSelectors) ? ngContentSelectors : [];
+        if (isPresent(interpolation) && interpolation.length != 2) {
+            throw new BaseException(`'interpolation' should have a start and an end symbol.`);
+        }
+        this.interpolation = interpolation;
     }
     static fromJson(data) {
         var animations = _arrayFromJson(data['animations'], metadataFromJson);
@@ -472,7 +476,8 @@ export class CompileTemplateMetadata {
             styles: data['styles'],
             styleUrls: data['styleUrls'],
             animations: animations,
-            ngContentSelectors: data['ngContentSelectors']
+            ngContentSelectors: data['ngContentSelectors'],
+            interpolation: data['interpolation']
         });
     }
     toJson() {
@@ -484,7 +489,8 @@ export class CompileTemplateMetadata {
             'styles': this.styles,
             'styleUrls': this.styleUrls,
             'animations': _objToJson(this.animations),
-            'ngContentSelectors': this.ngContentSelectors
+            'ngContentSelectors': this.ngContentSelectors,
+            'interpolation': this.interpolation
         };
     }
 }

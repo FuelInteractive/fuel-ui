@@ -114,7 +114,8 @@ export declare class ViewMetadata {
      */
     encapsulation: ViewEncapsulation;
     animations: AnimationEntryMetadata[];
-    constructor({templateUrl, template, directives, pipes, encapsulation, styles, styleUrls, animations}?: {
+    interpolation: [string, string];
+    constructor({templateUrl, template, directives, pipes, encapsulation, styles, styleUrls, animations, interpolation}?: {
         templateUrl?: string;
         template?: string;
         directives?: Array<Type | any[]>;
@@ -123,5 +124,6 @@ export declare class ViewMetadata {
         styles?: string[];
         styleUrls?: string[];
         animations?: AnimationEntryMetadata[];
+        interpolation?: [string, string];
     });
 }

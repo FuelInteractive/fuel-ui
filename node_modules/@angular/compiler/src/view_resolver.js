@@ -6,14 +6,10 @@ var exceptions_1 = require('../src/facade/exceptions');
 var collection_1 = require('../src/facade/collection');
 var ViewResolver = (function () {
     function ViewResolver(_reflector) {
+        if (_reflector === void 0) { _reflector = core_private_1.reflector; }
+        this._reflector = _reflector;
         /** @internal */
         this._cache = new collection_1.Map();
-        if (lang_1.isPresent(_reflector)) {
-            this._reflector = _reflector;
-        }
-        else {
-            this._reflector = core_private_1.reflector;
-        }
     }
     ViewResolver.prototype.resolve = function (component) {
         var view = this._cache.get(component);
@@ -44,7 +40,8 @@ var ViewResolver = (function () {
                     encapsulation: compMeta.encapsulation,
                     styles: compMeta.styles,
                     styleUrls: compMeta.styleUrls,
-                    animations: compMeta.animations
+                    animations: compMeta.animations,
+                    interpolation: compMeta.interpolation
                 });
             }
         }

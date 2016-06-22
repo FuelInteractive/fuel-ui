@@ -89,6 +89,9 @@ class SafeValueImpl {
         this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
         // empty
     }
+    toString() {
+        return `SafeValue must use [property]=binding: ${this.changingThisBreaksApplicationSecurity}`;
+    }
 }
 class SafeHtmlImpl extends SafeValueImpl {
     getTypeName() { return 'HTML'; }

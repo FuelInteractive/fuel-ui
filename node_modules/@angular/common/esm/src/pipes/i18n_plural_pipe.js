@@ -1,7 +1,7 @@
 import { Pipe } from '@angular/core';
-import { RegExpWrapper, StringWrapper, isPresent, isStringMap } from '../facade/lang';
+import { StringWrapper, isPresent, isStringMap } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
-var interpolationExp = RegExpWrapper.create('#');
+const _INTERPOLATION_REGEXP = /#/g;
 export class I18nPluralPipe {
     transform(value, pluralMap) {
         var key;
@@ -11,7 +11,7 @@ export class I18nPluralPipe {
         }
         key = value === 0 || value === 1 ? `=${value}` : 'other';
         valueStr = isPresent(value) ? value.toString() : '';
-        return StringWrapper.replaceAll(pluralMap[key], interpolationExp, valueStr);
+        return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, valueStr);
     }
 }
 /** @nocollapse */

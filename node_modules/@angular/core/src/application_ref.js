@@ -20,11 +20,52 @@ var ng_zone_1 = require('./zone/ng_zone');
  * @experimental
  */
 function createNgZone() {
-    return new ng_zone_1.NgZone({ enableLongStackTrace: lang_1.assertionsEnabled() });
+    return new ng_zone_1.NgZone({ enableLongStackTrace: isDevMode() });
 }
 exports.createNgZone = createNgZone;
+var _devMode = true;
+var _runModeLocked = false;
 var _platform;
 var _inPlatformCreate = false;
+/**
+ * Disable Angular's development mode, which turns off assertions and other
+ * checks within the framework.
+ *
+ * One important assertion this disables verifies that a change detection pass
+ * does not result in additional changes to any bindings (also known as
+ * unidirectional data flow).
+ * @stable
+ */
+function enableProdMode() {
+    if (_runModeLocked) {
+        // Cannot use BaseException as that ends up importing from facade/lang.
+        throw new exceptions_1.BaseException('Cannot enable prod mode after platform setup.');
+    }
+    _devMode = false;
+}
+exports.enableProdMode = enableProdMode;
+/**
+ * Returns whether Angular is in development mode.
+ * This can only be read after `lockRunMode` has been called.
+ *
+ * By default, this is true, unless a user calls `enableProdMode`.
+ */
+function isDevMode() {
+    if (!_runModeLocked) {
+        throw new exceptions_1.BaseException("Dev mode can't be read before bootstrap!");
+    }
+    return _devMode;
+}
+exports.isDevMode = isDevMode;
+/**
+ * Locks the run mode of Angular. After this has been called,
+ * it can't be changed any more. I.e. `isDevMode()` will always
+ * return the same value.
+ */
+function lockRunMode() {
+    _runModeLocked = true;
+}
+exports.lockRunMode = lockRunMode;
 /**
  * Creates a platform.
  * Platforms have to be eagerly created via this function.
@@ -37,7 +78,7 @@ function createPlatform(injector) {
     if (lang_1.isPresent(_platform) && !_platform.disposed) {
         throw new exceptions_1.BaseException('There can be only one platform. Destroy the previous one to create a new one.');
     }
-    lang_1.lockMode();
+    lockRunMode();
     _inPlatformCreate = true;
     try {
         _platform = injector.get(PlatformRef);
@@ -247,7 +288,7 @@ var ApplicationRef_ = (function (_super) {
         /** @internal */
         this._enforceNoNewChanges = false;
         var zone = _injector.get(ng_zone_1.NgZone);
-        this._enforceNoNewChanges = lang_1.assertionsEnabled();
+        this._enforceNoNewChanges = isDevMode();
         zone.run(function () { _this._exceptionHandler = _injector.get(exceptions_1.ExceptionHandler); });
         this._asyncInitDonePromise = this.run(function () {
             var inits = _injector.get(application_tokens_1.APP_INITIALIZER, null);
@@ -331,7 +372,7 @@ var ApplicationRef_ = (function (_super) {
             }
             _this._loadComponent(compRef);
             var c = _this._injector.get(console_1.Console);
-            if (lang_1.assertionsEnabled()) {
+            if (isDevMode()) {
                 var prodDescription = lang_1.IS_DART ? 'Production mode is disabled in Dart.' :
                     'Call enableProdMode() to enable the production mode.';
                 c.log("Angular 2 is running in the development mode. " + prodDescription);

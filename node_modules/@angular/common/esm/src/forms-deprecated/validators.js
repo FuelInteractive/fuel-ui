@@ -1,7 +1,7 @@
 import { OpaqueToken } from '@angular/core';
 import { ObservableWrapper } from '../facade/async';
 import { StringMapWrapper } from '../facade/collection';
-import { isBlank, isPresent, isString } from '../facade/lang';
+import { isBlank, isPresent, isPromise, isString } from '../facade/lang';
 import { PromiseWrapper } from '../facade/promise';
 /**
  * Providers for validators to be used for {@link Control}s in a form.
@@ -119,7 +119,7 @@ export class Validators {
     }
 }
 function _convertToPromise(obj) {
-    return PromiseWrapper.isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
+    return isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
 }
 function _executeValidators(control, validators) {
     return validators.map(v => v(control));

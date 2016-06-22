@@ -923,7 +923,8 @@ export declare class ComponentMetadata extends DirectiveMetadata {
     directives: Array<Type | any[]>;
     pipes: Array<Type | any[]>;
     encapsulation: ViewEncapsulation;
-    constructor({selector, inputs, outputs, properties, events, host, exportAs, moduleId, providers, viewProviders, changeDetection, queries, templateUrl, template, styleUrls, styles, animations, directives, pipes, encapsulation}?: {
+    interpolation: [string, string];
+    constructor({selector, inputs, outputs, properties, events, host, exportAs, moduleId, providers, viewProviders, changeDetection, queries, templateUrl, template, styleUrls, styles, animations, directives, pipes, encapsulation, interpolation}?: {
         selector?: string;
         inputs?: string[];
         outputs?: string[];
@@ -948,6 +949,7 @@ export declare class ComponentMetadata extends DirectiveMetadata {
         directives?: Array<Type | any[]>;
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
+        interpolation?: [string, string];
     });
 }
 /**

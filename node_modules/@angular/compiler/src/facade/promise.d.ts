@@ -12,6 +12,5 @@ export declare class PromiseWrapper {
     static then<T, U>(promise: Promise<T>, success: (value: T) => U | PromiseLike<U>, rejection?: (error: any, stack?: any) => U | PromiseLike<U>): Promise<U>;
     static wrap<T>(computation: () => T): Promise<T>;
     static scheduleMicrotask(computation: () => any): void;
-    static isPromise(obj: any): boolean;
     static completer<T>(): PromiseCompleter<T>;
 }

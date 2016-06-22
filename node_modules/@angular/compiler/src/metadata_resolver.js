@@ -20,20 +20,16 @@ var util_1 = require('./util');
 var view_resolver_1 = require('./view_resolver');
 var CompileMetadataResolver = (function () {
     function CompileMetadataResolver(_directiveResolver, _pipeResolver, _viewResolver, _config, _reflector) {
+        if (_reflector === void 0) { _reflector = core_private_1.reflector; }
         this._directiveResolver = _directiveResolver;
         this._pipeResolver = _pipeResolver;
         this._viewResolver = _viewResolver;
         this._config = _config;
+        this._reflector = _reflector;
         this._directiveCache = new Map();
         this._pipeCache = new Map();
         this._anonymousTypes = new Map();
         this._anonymousTypeIndex = 0;
-        if (lang_1.isPresent(_reflector)) {
-            this._reflector = _reflector;
-        }
-        else {
-            this._reflector = core_private_1.reflector;
-        }
     }
     CompileMetadataResolver.prototype.sanitizeTokenName = function (token) {
         var identifier = lang_1.stringify(token);
@@ -104,6 +100,7 @@ var CompileMetadataResolver = (function () {
                 var cmpMeta = dirMeta;
                 var viewMeta = this._viewResolver.resolve(directiveType);
                 assertions_1.assertArrayOfStrings('styles', viewMeta.styles);
+                assertions_1.assertInterpolationSymbols('interpolation', viewMeta.interpolation);
                 var animations = lang_1.isPresent(viewMeta.animations) ?
                     viewMeta.animations.map(function (e) { return _this.getAnimationEntryMetadata(e); }) :
                     null;
@@ -113,7 +110,8 @@ var CompileMetadataResolver = (function () {
                     templateUrl: viewMeta.templateUrl,
                     styles: viewMeta.styles,
                     styleUrls: viewMeta.styleUrls,
-                    animations: animations
+                    animations: animations,
+                    interpolation: viewMeta.interpolation
                 });
                 changeDetectionStrategy = cmpMeta.changeDetection;
                 if (lang_1.isPresent(dirMeta.viewProviders)) {
@@ -166,20 +164,22 @@ var CompileMetadataResolver = (function () {
             throw e;
         }
     };
-    CompileMetadataResolver.prototype.getTypeMetadata = function (type, moduleUrl) {
+    CompileMetadataResolver.prototype.getTypeMetadata = function (type, moduleUrl, dependencies) {
+        if (dependencies === void 0) { dependencies = null; }
         return new cpl.CompileTypeMetadata({
             name: this.sanitizeTokenName(type),
             moduleUrl: moduleUrl,
             runtime: type,
-            diDeps: this.getDependenciesMetadata(type, null)
+            diDeps: this.getDependenciesMetadata(type, dependencies)
         });
     };
-    CompileMetadataResolver.prototype.getFactoryMetadata = function (factory, moduleUrl) {
+    CompileMetadataResolver.prototype.getFactoryMetadata = function (factory, moduleUrl, dependencies) {
+        if (dependencies === void 0) { dependencies = null; }
         return new cpl.CompileFactoryMetadata({
             name: this.sanitizeTokenName(factory),
             moduleUrl: moduleUrl,
             runtime: factory,
-            diDeps: this.getDependenciesMetadata(factory, null)
+            diDeps: this.getDependenciesMetadata(factory, dependencies)
         });
     };
     CompileMetadataResolver.prototype.getPipeMetadata = function (pipeType) {
@@ -226,9 +226,6 @@ var CompileMetadataResolver = (function () {
             params = [];
         }
         var dependenciesMetadata = params.map(function (param) {
-            if (lang_1.isBlank(param)) {
-                return null;
-            }
             var isAttribute = false;
             var isHost = false;
             var isSelf = false;
@@ -333,21 +330,21 @@ var CompileMetadataResolver = (function () {
     };
     CompileMetadataResolver.prototype.getProviderMetadata = function (provider) {
         var compileDeps;
+        var compileTypeMetadata = null;
+        var compileFactoryMetadata = null;
         if (lang_1.isPresent(provider.useClass)) {
-            compileDeps = this.getDependenciesMetadata(provider.useClass, provider.dependencies);
+            compileTypeMetadata = this.getTypeMetadata(provider.useClass, staticTypeModuleUrl(provider.useClass), provider.dependencies);
+            compileDeps = compileTypeMetadata.diDeps;
         }
         else if (lang_1.isPresent(provider.useFactory)) {
-            compileDeps = this.getDependenciesMetadata(provider.useFactory, provider.dependencies);
+            compileFactoryMetadata = this.getFactoryMetadata(provider.useFactory, staticTypeModuleUrl(provider.useFactory), provider.dependencies);
+            compileDeps = compileFactoryMetadata.diDeps;
         }
         return new cpl.CompileProviderMetadata({
             token: this.getTokenMetadata(provider.token),
-            useClass: lang_1.isPresent(provider.useClass) ?
-                this.getTypeMetadata(provider.useClass, staticTypeModuleUrl(provider.useClass)) :
-                null,
+            useClass: compileTypeMetadata,
             useValue: convertToCompileValue(provider.useValue),
-            useFactory: lang_1.isPresent(provider.useFactory) ?
-                this.getFactoryMetadata(provider.useFactory, staticTypeModuleUrl(provider.useFactory)) :
-                null,
+            useFactory: compileFactoryMetadata,
             useExisting: lang_1.isPresent(provider.useExisting) ? this.getTokenMetadata(provider.useExisting) :
                 null,
             deps: compileDeps,

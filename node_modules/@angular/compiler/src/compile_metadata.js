@@ -580,7 +580,7 @@ exports.CompileQueryMetadata = CompileQueryMetadata;
  */
 var CompileTemplateMetadata = (function () {
     function CompileTemplateMetadata(_a) {
-        var _b = _a === void 0 ? {} : _a, encapsulation = _b.encapsulation, template = _b.template, templateUrl = _b.templateUrl, styles = _b.styles, styleUrls = _b.styleUrls, animations = _b.animations, ngContentSelectors = _b.ngContentSelectors;
+        var _b = _a === void 0 ? {} : _a, encapsulation = _b.encapsulation, template = _b.template, templateUrl = _b.templateUrl, styles = _b.styles, styleUrls = _b.styleUrls, animations = _b.animations, ngContentSelectors = _b.ngContentSelectors, interpolation = _b.interpolation;
         this.encapsulation = encapsulation;
         this.template = template;
         this.templateUrl = templateUrl;
@@ -588,6 +588,10 @@ var CompileTemplateMetadata = (function () {
         this.styleUrls = lang_1.isPresent(styleUrls) ? styleUrls : [];
         this.animations = lang_1.isPresent(animations) ? collection_1.ListWrapper.flatten(animations) : [];
         this.ngContentSelectors = lang_1.isPresent(ngContentSelectors) ? ngContentSelectors : [];
+        if (lang_1.isPresent(interpolation) && interpolation.length != 2) {
+            throw new exceptions_1.BaseException("'interpolation' should have a start and an end symbol.");
+        }
+        this.interpolation = interpolation;
     }
     CompileTemplateMetadata.fromJson = function (data) {
         var animations = _arrayFromJson(data['animations'], metadataFromJson);
@@ -600,7 +604,8 @@ var CompileTemplateMetadata = (function () {
             styles: data['styles'],
             styleUrls: data['styleUrls'],
             animations: animations,
-            ngContentSelectors: data['ngContentSelectors']
+            ngContentSelectors: data['ngContentSelectors'],
+            interpolation: data['interpolation']
         });
     };
     CompileTemplateMetadata.prototype.toJson = function () {
@@ -612,7 +617,8 @@ var CompileTemplateMetadata = (function () {
             'styles': this.styles,
             'styleUrls': this.styleUrls,
             'animations': _objToJson(this.animations),
-            'ngContentSelectors': this.ngContentSelectors
+            'ngContentSelectors': this.ngContentSelectors,
+            'interpolation': this.interpolation
         };
     };
     return CompileTemplateMetadata;

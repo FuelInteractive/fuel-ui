@@ -1,6 +1,8 @@
 import { SanitizationService, SecurityContext } from '../../core_private';
 export { SecurityContext };
-/** Marker interface for a value that's safe to use in a particular context. */
+/**
+ * Marker interface for a value that's safe to use in a particular context.
+ */
 export interface SafeValue {
 }
 /** Marker interface for a value that's safe to use as HTML. */
