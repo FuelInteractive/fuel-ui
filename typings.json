@@ -5,7 +5,6 @@
   },
   "globalDependencies": {
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
-    "hammerjs": "registry:dt/hammerjs#2.0.4+20160417130828",
-    "nouislider": "registry:dt/nouislider#8.0.2+20160412140110"
+    "hammerjs": "registry:dt/hammerjs#2.0.4+20160417130828"
   }
 }

@@ -42,7 +42,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             </date-range-picker>
         </form>
     </div>
-    <div class="col-md-6" *ngIf="dateRangePickerValue != null">
+    <div class="col-md-6">
         value.start: {{dateRangePickerValue.start}} <br/>
         value.end: {{dateRangePickerValue.end}} <br />
         startDateField: {{arrivalDate}} <br />
@@ -134,7 +134,7 @@ export class DateRangePickerExample {
         directives: [DATE_PICKER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS, FORM_DIRECTIVES]
 })
 export class DateRangePickerDemo { 
-    dateRangePickerValue: DateRange;
+    dateRangePickerValue: DateRange = new DateRange(new Date(), new Date());
     /*arrivalDate = new Date(2016,7,6);
     departureDate = new Date(2016,7,10);*/
     arrivalDate = "8/6/2016";
