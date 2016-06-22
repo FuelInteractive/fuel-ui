@@ -27,7 +27,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     <div>
         <h3>Animation Log</h3>
         <div *ngFor="let event of animationLog">
-            ({{event.timeStamp | date : 'mediumTime'}}) {{event.animationName}}: {{event.type}}
+            ({{event.time | date : 'mediumTime'}}) {{event.animationName}}: {{event.type}}
         </div>
     </div>
 </section>
@@ -110,11 +110,13 @@ export class AnimationDemo {
     }
     
     logStart($event: any): void {
+        $event.time = new Date().getTime();
         this.animationLog.push($event);
     }
 
     logEnd($event: any): void {
         this.play = false;
+        $event.time = new Date().getTime();
         this.animationLog.push($event);
     }
     
