@@ -1,3 +1,20 @@
+System.registerDynamic("fuel-ui/dist/animations/animations", ["./Collapse/Collapse"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
+  }
+  var Collapse_1 = $__require('./Collapse/Collapse');
+  exports.FUELUI_ANIMATION_PROVIDERS = [Collapse_1.Collapse()];
+  __export($__require('./Collapse/Collapse'));
+  return module.exports;
+});
+
 System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../animations/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -4535,7 +4552,7 @@ System.registerDynamic("fuel-ui/dist/utilities/utilities", ["./DateRange", "./Da
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/fuel-ui", ["./dist/components/components", "./dist/directives/directives", "./dist/pipes/pipes", "./dist/utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/fuel-ui", ["./dist/animations/animations", "./dist/components/components", "./dist/directives/directives", "./dist/pipes/pipes", "./dist/utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4546,6 +4563,7 @@ System.registerDynamic("fuel-ui/fuel-ui", ["./dist/components/components", "./di
       if (!exports.hasOwnProperty(p))
         exports[p] = m[p];
   }
+  __export($__require('./dist/animations/animations'));
   __export($__require('./dist/components/components'));
   __export($__require('./dist/directives/directives'));
   __export($__require('./dist/pipes/pipes'));
