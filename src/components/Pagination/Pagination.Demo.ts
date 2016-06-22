@@ -40,19 +40,19 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
             <div class="row">
                 <div class="checkbox col-md-3">
                     <label for="showSteps" class="form-control-label">
-                        <input [(ngModel)]="showSteps" type="checkbox" /> 
+                        <input [(ngModel)]="showSteps" name="showSteps" type="checkbox" /> 
                         Show Next/Previous
                     </label>
                 </div>
                 <div class="checkbox col-md-3">
                     <label for="showEnds" class="form-control-label">
-                        <input [(ngModel)]="showEnds" type="checkbox" /> 
+                        <input [(ngModel)]="showEnds" name="showEnds" type="checkbox" /> 
                         Show First/Last
                     </label>
                 </div>
                 <div class="checkbox col-md-3">
                     <label for="showSelect" class="form-control-label">
-                        <input [(ngModel)]="showSelect" type="checkbox" /> 
+                        <input [(ngModel)]="showSelect" name="showSelect" type="checkbox" /> 
                         Show Jump To
                     </label>
                 </div>

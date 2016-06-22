@@ -38,7 +38,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
             </div>
             <div class="checkbox col-md-3">
                 <label for="oneAtATime" class="form-control-label">
-                    <input [(ngModel)]="oneAtATime" type="checkbox" /> 
+                    <input [(ngModel)]="oneAtATime" name="oneAtATime" type="checkbox" /> 
                     Open only one at a time
                 </label>
             </div>
