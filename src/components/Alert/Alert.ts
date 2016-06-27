@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {Component, ElementRef, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
 @Component({
@@ -6,24 +6,41 @@ import {CORE_DIRECTIVES} from '@angular/common';
     templateUrl: 'components/Alert/Alert.html',
     directives: [CORE_DIRECTIVES]
 })
-export class Alert {
-    private _el:HTMLElement;
+export class Alert extends OnChanges {
     @Input() displayed: boolean = false;
     @Input() closeButton: boolean = true;
     @Input() type: string = 'success';
+    @Input() closeDelay: number = 0;
     @Output() displayedChange = new EventEmitter<any>();
 
-    constructor(el: ElementRef){
-        this._el = el.nativeElement;
+    constructor(private _el:ElementRef){
+        super();
     }
 
-    getElement(): HTMLElement{
-        return this._el;
+    ngOnChanges(event: any): void {
+        if(this.displayed && this._el.nativeElement.querySelector('.alert')){
+            let classes = this._el.nativeElement.querySelector('.alert').className;
+            classes = classes.replace('fuel-ui-alert-fade-out', 'fuel-ui-alert-fade-in');
+            this._el.nativeElement.querySelector('.alert').className = classes;
+        }
+
+        if(this.closeDelay > 0) {
+            setTimeout(() => {
+                this.close();
+            }, this.closeDelay);
+        }
     }
 
     close():void{
-        this.displayed = false;
-        this.displayedChange.next(null);
+        if(this._el.nativeElement.querySelector('.alert')){
+            let classes = this._el.nativeElement.querySelector('.alert').className;
+            classes = classes.replace('fuel-ui-alert-fade-in', 'fuel-ui-alert-fade-out');
+            this._el.nativeElement.querySelector('.alert').className = classes;
+        }
+        setTimeout(() => {
+            this.displayed = false;
+            this.displayedChange.next(null);
+        }, 1000);
     }
 }
 
