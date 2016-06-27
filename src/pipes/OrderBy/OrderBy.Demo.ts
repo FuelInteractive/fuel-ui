@@ -5,7 +5,19 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 export class Person {
-  constructor(public firstName: string, public lastName: string, public age: number) {}
+    public firstName: string;
+    public lastName: string;
+    public info: PersonInfo;
+
+    constructor(firstName: string, lastName: string, age: number) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.info = new PersonInfo(age);
+    }
+}
+
+export class PersonInfo {
+    constructor(public age: number){}
 }
 
 @Component({
@@ -83,11 +95,11 @@ export class Person {
             </div>
             <div class="col-md-3 form-group">
                 <label for="age">Age</label>
-                <input type="number" min="18" max="120" class="form-control" [(ngModel)]="newPerson.age" name="age">
+                <input type="number" min="18" max="120" class="form-control" [(ngModel)]="newPerson.info.age" name="age">
             </div>
             <div class="col-md-3 form-group">
                 <label for="add">&nbsp;</label>
-                <button type="button" class="btn btn-primary form-control" (click)="addPerson()" [class.disabled]="!newPerson.firstName || !newPerson.lastName || !newPerson.age">Add</button>
+                <button type="button" class="btn btn-primary form-control" (click)="addPerson()" [class.disabled]="!newPerson.firstName || !newPerson.lastName || !newPerson.info.age">Add</button>
             </div>
         </div>
     </div>
@@ -97,7 +109,7 @@ export class Person {
         <h4>Unordered</h4>
         <code>*ngFor="let person of people"</code><br/>
         <ul>
-            <li *ngFor="let person of people">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+            <li *ngFor="let person of people">{{person.firstName}} {{person.lastName}}, {{person.info.age}}</li>
         </ul>
     </div>
     <div class="col-md-8">
@@ -106,7 +118,7 @@ export class Person {
         <div class="row">
             <div class="col-md-4">
                 <ul>
-                    <li *ngFor="let person of people | orderBy : peopleOrderByConfig">{{person.firstName}} {{person.lastName}}, {{person.age}}</li>
+                    <li *ngFor="let person of people | orderBy : peopleOrderByConfig">{{person.firstName}} {{person.lastName}}, {{person.info.age}}</li>
                 </ul>
             </div>
             <div class="col-md-6" style="padding-top: 25px">
@@ -116,7 +128,7 @@ export class Person {
                         <select class="form-control" (change)="setPeopleConfig('property', 1, $event.target.value)">
                             <option value="firstName" [selected]="peopleOrderBy1Property == 'firstName'">First Name</option>
                             <option value="lastName" [selected]="peopleOrderBy1Property == 'lastName'">Last Name</option>
-                            <option value="age" [selected]="peopleOrderBy1Property == 'age'">Age</option>
+                            <option value="info.age" [selected]="peopleOrderBy1Property == 'info.age'">Age</option>
                         </select>
                         <select class="form-control" (change)="setPeopleConfig('desc', 1, $event.target.value)">
                             <option value="" [selected]="peopleOrderBy1Desc == ''">Ascending</option>
@@ -130,7 +142,7 @@ export class Person {
                         <select class="form-control" (change)="setPeopleConfig('property', 2, $event.target.value)">
                             <option value="firstName" [selected]="peopleOrderBy2Property == 'firstName'">First Name</option>
                             <option value="lastName" [selected]="peopleOrderBy2Property == 'lastName'">Last Name</option>
-                            <option value="age" [selected]="peopleOrderBy2Property == 'age'">Age</option>
+                            <option value="info.age" [selected]="peopleOrderBy2Property == 'info.age'">Age</option>
                         </select>
                         <select class="form-control" (change)="setPeopleConfig('desc', 2, $event.target.value)">
                             <option value="" [selected]="peopleOrderBy2Desc == ''">Ascending</option>
@@ -184,7 +196,7 @@ export class OrderByExample {
 <tab heading="HTML">
 <pre>
 <code class="language-javascript" code-highlight>
-*ngFor="let person of people | orderBy : ['-age', 'firstName']"
+*ngFor="let person of people | orderBy : ['-info.age', 'firstName']"
 </code>
 </pre>
 </tab>
@@ -192,7 +204,19 @@ export class OrderByExample {
 <pre>
 <code class="language-javascript" code-highlight>
 export class Person {
-  constructor(public firstName: string, public lastName: string, public age: number) {}
+    public firstName: string;
+    public lastName: string;
+    public info: PersonInfo;
+
+    constructor(firstName: string, lastName: string, age: number) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.info = new PersonInfo(age);
+    }
+}
+
+export class PersonInfo {
+    constructor(public age: number){}
 }
 
 export class OrderByExample {
@@ -227,7 +251,7 @@ export class OrderByDemo {
         new Person('John', 'Papa', 42)
     ];
     peopleOrderBy1Desc: string = "-";
-    peopleOrderBy1Property: string = "age";
+    peopleOrderBy1Property: string = "info.age";
     peopleOrderBy2Desc: string = "";
     peopleOrderBy2Property: string = "firstName";
     peopleOrderByConfig = [
@@ -281,7 +305,7 @@ export class OrderByDemo {
 	addPerson(){
 		if(this.newPerson.firstName.length <= 0 || 
 			this.newPerson.lastName.length <= 0 ||
-			this.newPerson.age <= 0) return;
+			this.newPerson.info.age <= 0) return;
 
 		this.people.push(this.newPerson);
     	this.newPerson = new Person('', '', 18);
