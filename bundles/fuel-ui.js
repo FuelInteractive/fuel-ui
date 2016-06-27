@@ -97,6 +97,15 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
   var define,
       global = this,
       GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -115,24 +124,42 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
-  var Alert = (function() {
-    function Alert(el) {
+  var Alert = (function(_super) {
+    __extends(Alert, _super);
+    function Alert(_el) {
+      _super.call(this);
+      this._el = _el;
       this.displayed = false;
       this.closeButton = true;
       this.type = 'success';
+      this.closeDelay = 0;
       this.displayedChange = new core_1.EventEmitter();
-      this._el = el.nativeElement;
     }
-    Alert.prototype.getElement = function() {
-      return this._el;
+    Alert.prototype.ngOnChanges = function(event) {
+      var _this = this;
+      if (this.displayed && this._el.nativeElement.querySelector('.alert')) {
+        this._el.nativeElement.querySelector('.alert').className = "alert fuel-ui-alert-fade-in";
+      }
+      if (this.closeDelay > 0) {
+        setTimeout(function() {
+          _this.close();
+        }, this.closeDelay);
+      }
     };
     Alert.prototype.close = function() {
-      this.displayed = false;
-      this.displayedChange.next(null);
+      var _this = this;
+      if (this._el.nativeElement.querySelector('.alert')) {
+        this._el.nativeElement.querySelector('.alert').className = "alert fuel-ui-alert-fade-out";
+      }
+      setTimeout(function() {
+        _this.displayed = false;
+        _this.displayedChange.next(null);
+      }, 1000);
     };
     __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "displayed", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Boolean)], Alert.prototype, "closeButton", void 0);
     __decorate([core_1.Input(), __metadata('design:type', String)], Alert.prototype, "type", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Alert.prototype, "closeDelay", void 0);
     __decorate([core_1.Output(), __metadata('design:type', Object)], Alert.prototype, "displayedChange", void 0);
     Alert = __decorate([core_1.Component({
       selector: 'alert',
@@ -140,7 +167,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
       directives: [common_1.CORE_DIRECTIVES]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Alert);
     return Alert;
-  }());
+  }(core_1.OnChanges));
   exports.Alert = Alert;
   exports.ALERT_PROVIDERS = [Alert];
   return module.exports;
@@ -4233,7 +4260,18 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["@angular/core"], 
         } else {
           var property = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-' ? propertyToCheck.substr(1) : propertyToCheck;
           return value.sort(function(a, b) {
-            return !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
+            var aValue = a[property];
+            var bValue = b[property];
+            var propertySplit = property.split('.');
+            if (typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1) {
+              aValue = a;
+              bValue = b;
+              for (var j = 0; j < propertySplit.length; j++) {
+                aValue = aValue[propertySplit[j]];
+                bValue = bValue[propertySplit[j]];
+              }
+            }
+            return !desc ? OrderByPipe._orderByComparator(aValue, bValue) : -OrderByPipe._orderByComparator(aValue, bValue);
           });
         }
       } else {
@@ -4241,7 +4279,18 @@ System.registerDynamic("fuel-ui/dist/pipes/OrderBy/OrderBy", ["@angular/core"], 
           for (var i = 0; i < config.length; i++) {
             var desc = config[i].substr(0, 1) == '-';
             var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-' ? config[i].substr(1) : config[i];
-            var comparison = !desc ? OrderByPipe._orderByComparator(a[property], b[property]) : -OrderByPipe._orderByComparator(a[property], b[property]);
+            var aValue = a[property];
+            var bValue = b[property];
+            var propertySplit = property.split('.');
+            if (typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1) {
+              aValue = a;
+              bValue = b;
+              for (var j = 0; j < propertySplit.length; j++) {
+                aValue = aValue[propertySplit[j]];
+                bValue = bValue[propertySplit[j]];
+              }
+            }
+            var comparison = !desc ? OrderByPipe._orderByComparator(aValue, bValue) : -OrderByPipe._orderByComparator(aValue, bValue);
             if (comparison != 0)
               return comparison;
           }

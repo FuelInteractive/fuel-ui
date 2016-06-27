@@ -59,27 +59,32 @@ export class TableSortableExample {
     {
       Name: 'Data 1',
       Amount: 100.23,
-      Date: 1441588216000
+      Date: 1441588216000,
+      Desc: "You can't sort"
     },
     {
       Name: 'Data 2',
       Amount: 0.875623,
-      Date: 1442387616000
+      Date: 1442387616000,
+      Desc: "On this"
     },
     {
       Name: 'Data 3',
       Amount: .010123,
-      Date: 1442187616000
+      Date: 1442187616000,
+      Desc: "Table column"
     }
   ];
   columns: TableSortableColumn[] = [
     {
       display: 'Column 1', //The text to display
       variable: 'Name', //The name of the key that's apart of the data array
-      filter: 'text' //The type data type of the column (number, text, date, etc.)
+      filter: 'text', //The type data type of the column (number, text, date, etc.)
+      sortable: true //Whether the user can sort on the column
     },
     new TableSortableColumn('Column 2', 'Amount', 'decimal : 1.0-2'),
-    new TableSortableColumn('Column 3', 'Date', 'dateTime')
+    new TableSortableColumn('Column 3', 'Date', 'dateTime'),
+    new TableSortableColumn('Column 4', 'Desc', 'string', false)
   ];
   sorting: TableSortableSorting = {
     column: 'Name', //to match the variable of one of the columns
@@ -107,27 +112,32 @@ export class TableSortableDemo {
     {
       Name: 'Data 1',
       Amount: 100.23,
-      Date: 1441588216000
+      Date: 1441588216000,
+      Desc: "You can't sort"
     },
     {
       Name: 'Data 2',
       Amount: 0.875623,
-      Date: 1442387616000
+      Date: 1442387616000,
+      Desc: "On this"
     },
     {
       Name: 'Data 3',
       Amount: .010123,
-      Date: 1442187616000
+      Date: 1442187616000,
+      Desc: "Table column"
     }
   ];
   columns: TableSortableColumn[] = [
     {
       display: 'Column 1', //The text to display
       variable: 'Name', //The name of the key that's apart of the data array
-      filter: 'text' //The type data type of the column (number, text, date, etc.)
+      filter: 'text', //The type data type of the column (number, text, date, etc.)
+      sortable: true //Whether the user can sort on the column
     },
     new TableSortableColumn('Column 2', 'Amount', 'decimal : 1.0-2'),
-    new TableSortableColumn('Column 3', 'Date', 'dateTime')
+    new TableSortableColumn('Column 3', 'Date', 'dateTime'),
+    new TableSortableColumn('Column 4', 'Desc', 'string', false)
   ];
   sorting: TableSortableSorting = {
     column: 'Name', //to match the variable of one of the columns
