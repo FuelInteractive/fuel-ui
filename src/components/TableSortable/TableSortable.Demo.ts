@@ -84,7 +84,7 @@ export class TableSortableExample {
     },
     new TableSortableColumn('Column 2', 'Amount', 'decimal : 1.0-2'),
     new TableSortableColumn('Column 3', 'Date', 'dateTime'),
-    new TableSortableColumn('Column 4', 'Desc', 'string', false)
+    new TableSortableColumn('Column 4', 'Desc', 'text', false)
   ];
   sorting: TableSortableSorting = {
     column: 'Name', //to match the variable of one of the columns
@@ -137,7 +137,7 @@ export class TableSortableDemo {
     },
     new TableSortableColumn('Column 2', 'Amount', 'decimal : 1.0-2'),
     new TableSortableColumn('Column 3', 'Date', 'dateTime'),
-    new TableSortableColumn('Column 4', 'Desc', 'string', false)
+    new TableSortableColumn('Column 4', 'Desc', 'text', false)
   ];
   sorting: TableSortableSorting = {
     column: 'Name', //to match the variable of one of the columns
