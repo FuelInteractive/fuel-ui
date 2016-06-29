@@ -7,3 +7,9 @@ $duration: 1s;
   @include animation-duration($duration);
   @include animation-timing-function(ease);
 }
+
+.fuel-ui-alert-fade-out {
+  @include animation-name(fadeOut);
+  @include animation-duration($duration);
+  @include animation-timing-function(ease);
+}

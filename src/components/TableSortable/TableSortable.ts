@@ -19,16 +19,20 @@ export class TableSortable {
     
   constructor() {}
   
-  selectedClass(columnName: string): string{
-    return columnName == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
+  selectedClass(column: TableSortableColumn): string{
+    if(!column.sortable) return 'fuel-ui-not-sortable';
+
+    return column.variable == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
   }
   
-  changeSorting(columnName: string): void{
+  changeSorting(column: TableSortableColumn): void{
+    if(!column.sortable) return;
+
     var sort = this.sort;
-    if (sort.column == columnName) {
+    if (sort.column == column.variable) {
       sort.descending = !sort.descending;
     } else {
-      sort.column = columnName;
+      sort.column = column.variable;
       sort.descending = false;
     }
   }

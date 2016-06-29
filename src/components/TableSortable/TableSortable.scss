@@ -1,4 +1,4 @@
-.fuel-ui-table-sortable > thead > tr > th {
+.fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable) {
     cursor: pointer;
     position: relative;
     background-image: none;

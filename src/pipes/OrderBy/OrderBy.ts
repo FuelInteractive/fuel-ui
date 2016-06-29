@@ -13,7 +13,7 @@ export class OrderByPipe implements PipeTransform {
 	value:string[] =[];
 
 	static _orderByComparator(a:any, b:any):number{
-        
+
         if(a === null || typeof a === 'undefined') a = 0;
         if(b === null || typeof b === 'undefined') b = 0;
 
@@ -53,9 +53,23 @@ export class OrderByPipe implements PipeTransform {
                     : propertyToCheck;
 
                 return value.sort(function(a:any,b:any){
+                    let aValue = a[property];
+                    let bValue = b[property];
+
+                    let propertySplit = property.split('.');
+
+                    if(typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1){
+                        aValue = a;
+                        bValue = b;
+                        for(let j = 0; j < propertySplit.length; j++) {
+                            aValue = aValue[propertySplit[j]];
+                            bValue = bValue[propertySplit[j]];
+                        }
+                    }
+
                     return !desc 
-                        ? OrderByPipe._orderByComparator(a[property], b[property]) 
-                        : -OrderByPipe._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(aValue, bValue) 
+                        : -OrderByPipe._orderByComparator(aValue, bValue);
                 });
             }
         }
@@ -68,10 +82,24 @@ export class OrderByPipe implements PipeTransform {
                         ? config[i].substr(1)
                         : config[i];
 
+                    let aValue = a[property];
+                    let bValue = b[property];
+
+                    let propertySplit = property.split('.');
+
+                    if(typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1){
+                        aValue = a;
+                        bValue = b;
+                        for(let j = 0; j < propertySplit.length; j++) {
+                            aValue = aValue[propertySplit[j]];
+                            bValue = bValue[propertySplit[j]];
+                        }
+                    }
+
                     var comparison = !desc 
-                        ? OrderByPipe._orderByComparator(a[property], b[property]) 
-                        : -OrderByPipe._orderByComparator(a[property], b[property]);
-                    
+                        ? OrderByPipe._orderByComparator(aValue, bValue) 
+                        : -OrderByPipe._orderByComparator(aValue, bValue);
+
                     //Don't return 0 yet in case of needing to sort by next property
                     if(comparison != 0) return comparison;
                 }
