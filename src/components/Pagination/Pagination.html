@@ -32,7 +32,7 @@
 
 <div class="input-group col-md-3" *ngIf="showSelect">
     <span class="input-group-addon">Jump to:</span>
-    <select class="form-control" (change)="setPage($event.target.value)">
+    <select class="c-select" (change)="setPage($event.target.value)">
         <option *ngFor="let page of pagesBlank | range : 1 : totalPages" [value]="page" [selected]="page == currentPage">{{page}}</option>
     </select>
 </div>
