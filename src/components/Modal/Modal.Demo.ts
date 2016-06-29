@@ -16,11 +16,22 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     </div>
 </div>
 
-<button class="btn btn-primary" (click)="modal.showModal()">Toggle Modal</button>
+<div class="form-group row">
+    <label for="size" class="col-md-1 form-control-label">Size</label>
+    <div class="col-md-2">
+        <select name="size" [(ngModel)]="size" class="c-select">
+            <option value="">Default</option>
+            <option value="sm">Small</option>
+            <option value="lg">Large</option>
+        </select>
+    </div>
+</div>
+<button class="btn btn-primary" (click)="modal.showModal()">Show Modal</button>
 <modal #modal
     modalTitle="Modal Title"
     [closeButton]="true"
-    [closeOnUnfocus]="true">
+    [closeOnUnfocus]="true"
+    [size]="size">
     <div class="modal-body">
         <ul>
             <li>Testing 1</li>
@@ -87,6 +98,7 @@ import {Modal} from 'fuel-ui/fuel-ui';
 })
 export class ModalDemo {
     closeText: string = "Cancel";
+    size: string = "";
     
     attributes:any[] = [
         new Attribute('closeOnUnfocus', 'boolean', 'true', 'Closes the opened modal when the user clicks off of it'),
