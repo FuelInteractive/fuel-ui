@@ -66,7 +66,8 @@ import {Modal} from 'fuel-ui/fuel-ui';
 &lt;modal #modal
     modalTitle=&quot;Modal Title&quot;
     [closeButton]=&quot;true&quot;
-    [closeOnUnfocus]=&quot;true&quot;&gt;
+    [closeOnUnfocus]=&quot;true&quot;
+    size=&quot;lg&quot;&gt;
     &lt;div class=&quot;modal-body&quot;&gt;
         &lt;ul&gt;
             &lt;li&gt;Any&lt;/li&gt;
@@ -103,7 +104,8 @@ export class ModalDemo {
     attributes:any[] = [
         new Attribute('closeOnUnfocus', 'boolean', 'true', 'Closes the opened modal when the user clicks off of it'),
         new Attribute('closeButton', 'boolean', 'true', "Option to display an 'X' close button in the corner of the modal"),
-        new Attribute('modalTitle', 'string', 'null', 'Text to display in modal header')
+        new Attribute('modalTitle', 'string', 'null', 'Text to display in modal header'),
+        new Attribute('size', 'string', 'null', "Change the size of the modal. Supports 'sm' and 'small' for small size and 'lg' and 'large' for large. Null or empty will keep the default size")
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
