@@ -138,7 +138,9 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
     Alert.prototype.ngOnChanges = function(event) {
       var _this = this;
       if (this.displayed && this._el.nativeElement.querySelector('.alert')) {
-        this._el.nativeElement.querySelector('.alert').className = "alert fuel-ui-alert-fade-in";
+        var classes = this._el.nativeElement.querySelector('.alert').className;
+        classes = classes.replace('fuel-ui-alert-fade-out', 'fuel-ui-alert-fade-in');
+        this._el.nativeElement.querySelector('.alert').className = classes;
       }
       if (this.closeDelay > 0) {
         setTimeout(function() {
@@ -149,7 +151,9 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
     Alert.prototype.close = function() {
       var _this = this;
       if (this._el.nativeElement.querySelector('.alert')) {
-        this._el.nativeElement.querySelector('.alert').className = "alert fuel-ui-alert-fade-out";
+        var classes = this._el.nativeElement.querySelector('.alert').className;
+        classes = classes.replace('fuel-ui-alert-fade-in', 'fuel-ui-alert-fade-out');
+        this._el.nativeElement.querySelector('.alert').className = classes;
       }
       setTimeout(function() {
         _this.displayed = false;
@@ -1208,6 +1212,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", 
       this.closeOnUnfocus = true;
       this.closeButton = true;
       this.modalTitle = '';
+      this.size = '';
       this._el = el.nativeElement;
     }
     Modal.prototype.clickElement = function(e) {
@@ -1246,10 +1251,11 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", 
     __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeOnUnfocus", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Boolean)], Modal.prototype, "closeButton", void 0);
     __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "modalTitle", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', String)], Modal.prototype, "size", void 0);
     Modal = __decorate([core_1.Component({
       selector: 'modal',
       host: {'(click)': 'clickElement($event)'},
-      template: "\n   <div class=\"modal\" [ngClass]=\"{'fuel-ui-modal-fade-in': displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
+      template: "\n   <div class=\"modal\" [ngClass]=\"{'fuel-ui-modal-fade-in': displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\" [ngClass]=\"{'modal-lg': size == 'large' || size == 'lg', 'modal-sm': size == 'small' || size == 'sm'}\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
       directives: [common_1.CORE_DIRECTIVES, Animation_1.Animation]
     }), __metadata('design:paramtypes', [core_1.ElementRef])], Modal);
     return Modal;
@@ -1326,7 +1332,7 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["@angul
       selector: 'pagination',
       changeDetection: core_1.ChangeDetectionStrategy.OnPush,
       properties: ["totalPages: total-pages", "pagesAtOnce: pages-at-once"],
-      template: "\n      <nav class=\"fuel-ui-pagination\">\n          <ul class=\"pagination\">\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\" *ngIf=\"showSelect\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"form-control\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"let page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
+      template: "\n      <nav class=\"fuel-ui-pagination\">\n          <ul class=\"pagination\">\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(1)\" aria-label=\"First\">\n                      <span aria-hidden=\"true\">First</span>\n                      <span class=\"sr-only\">First</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == 1\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == 1\" (click)=\"setPage(currentPage - 1)\" aria-label=\"Previous\">\n                      <span aria-hidden=\"true\">&#171;</span>\n                      <span class=\"sr-only\">Previous</span>\n                  </a>\n              </li>\n              <li *ngFor=\"let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex\" class=\"page-item\" [class.active]=\"currentPage == page\">\n                  <a class=\"page-link\" (click)=\"setPage(page)\">{{page}}</a>\n              </li>\n              <li *ngIf=\"showSteps\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(currentPage + 1)\" aria-label=\"Next\">\n                      <span aria-hidden=\"true\">&#187;</span>\n                      <span class=\"sr-only\">Next</span>\n                  </a>\n              </li>\n              <li *ngIf=\"showEnds\" class=\"page-item\" [class.disabled]=\"currentPage == totalPages\">\n                  <a class=\"page-link\" [attr.disabled]=\"currentPage == totalPages\" (click)=\"setPage(totalPages)\" aria-label=\"Last\">\n                      <span aria-hidden=\"true\">Last</span>\n                      <span class=\"sr-only\">Last</span>\n                  </a>\n              </li>\n          </ul>\n      </nav>\n\n      <div class=\"input-group col-md-3\" *ngIf=\"showSelect\">\n          <span class=\"input-group-addon\">Jump to:</span>\n          <select class=\"c-select\" (change)=\"setPage($event.target.value)\">\n              <option *ngFor=\"let page of pagesBlank | range : 1 : totalPages\" [value]=\"page\" [selected]=\"page == currentPage\">{{page}}</option>\n          </select>\n      </div>\n    ",
       directives: [common_1.CORE_DIRECTIVES],
       pipes: [common_1.SlicePipe, Range_1.RangePipe]
     }), __metadata('design:paramtypes', [])], Pagination);
@@ -1767,15 +1773,19 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
   var TableSortableSorting_1 = $__require('./TableSortableSorting');
   var TableSortable = (function() {
     function TableSortable() {}
-    TableSortable.prototype.selectedClass = function(columnName) {
-      return columnName == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
+    TableSortable.prototype.selectedClass = function(column) {
+      if (!column.sortable)
+        return 'fuel-ui-not-sortable';
+      return column.variable == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
     };
-    TableSortable.prototype.changeSorting = function(columnName) {
+    TableSortable.prototype.changeSorting = function(column) {
+      if (!column.sortable)
+        return;
       var sort = this.sort;
-      if (sort.column == columnName) {
+      if (sort.column == column.variable) {
         sort.descending = !sort.descending;
       } else {
-        sort.column = columnName;
+        sort.column = column.variable;
         sort.descending = false;
       }
     };
@@ -1787,7 +1797,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
     __decorate([core_1.Input(), __metadata('design:type', TableSortableSorting_1.TableSortableSorting)], TableSortable.prototype, "sort", void 0);
     TableSortable = __decorate([core_1.Component({
       selector: 'table-sortable',
-      template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped fuel-ui-table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
+      template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped fuel-ui-table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column)\" (click)=\"changeSorting(column)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
       directives: [common_1.CORE_DIRECTIVES],
       pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
     }), __metadata('design:paramtypes', [])], TableSortable);
@@ -3655,10 +3665,12 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableColum
       global = this,
       GLOBAL = this;
   var TableSortableColumn = (function() {
-    function TableSortableColumn(display, variable, filter) {
+    function TableSortableColumn(display, variable, filter, sortable) {
+      this.sortable = true;
       this.display = display;
       this.variable = variable;
       this.filter = filter;
+      this.sortable = sortable != null ? sortable : true;
     }
     return TableSortableColumn;
   }());
