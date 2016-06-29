@@ -2,7 +2,7 @@
   <table class="table table-bordered table-hover table-striped fuel-ui-table-sortable">
     <thead>
       <tr>
-        <th *ngFor="let column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">
+        <th *ngFor="let column of columns" [class]="selectedClass(column)" (click)="changeSorting(column)">
           {{column.display}}
         </th>
       </tr>

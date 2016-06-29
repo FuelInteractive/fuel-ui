@@ -17,6 +17,7 @@ var Modal = (function () {
         this.closeOnUnfocus = true;
         this.closeButton = true;
         this.modalTitle = '';
+        this.size = '';
         this._el = el.nativeElement;
     }
     Modal.prototype.clickElement = function (e) {
@@ -68,13 +69,17 @@ var Modal = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], Modal.prototype, "modalTitle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], Modal.prototype, "size", void 0);
     Modal = __decorate([
         core_1.Component({
             selector: 'modal',
             host: {
                 '(click)': 'clickElement($event)'
             },
-            template: "\n   <div class=\"modal\" [ngClass]=\"{'fuel-ui-modal-fade-in': displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
+            template: "\n   <div class=\"modal\" [ngClass]=\"{'fuel-ui-modal-fade-in': displayed}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\" [style.display]=\"displayed ? 'block' : 'none'\">\n       <div class=\"modal-dialog\" role=\"document\" [ngClass]=\"{'modal-lg': size == 'large' || size == 'lg', 'modal-sm': size == 'small' || size == 'sm'}\">\n           <div class=\"modal-content\">\n               <div class=\"modal-header\">\n                   <button *ngIf=\"closeButton\" type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"showModal(false)\">\n                       <span aria-hidden=\"true\">&#215;</span>\n                       <span class=\"sr-only\">Close</span>\n                   </button>\n                   <h4 class=\"modal-title\" id=\"myModalLabel\">{{modalTitle}}</h4>\n               </div>\n               <ng-content></ng-content>\n           </div>\n       </div>\n   </div>\n   <div class=\"modal-backdrop\" [ngClass]=\"{fade: displayed, in: displayed}\" [style.display]=\"displayed ? 'block' : 'none'\"></div>\n    ",
             directives: [common_1.CORE_DIRECTIVES, Animation_1.Animation]
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])

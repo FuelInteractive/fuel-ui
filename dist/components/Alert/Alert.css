@@ -8,3 +8,14 @@
   -webkit-animation-timing-function: ease;
   -moz-animation-timing-function: ease;
   animation-timing-function: ease; }
+
+.fuel-ui-alert-fade-out {
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  animation-name: fadeOut;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease; }

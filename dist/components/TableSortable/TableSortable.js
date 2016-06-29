@@ -16,16 +16,20 @@ var TableSortableSorting_1 = require("./TableSortableSorting");
 var TableSortable = (function () {
     function TableSortable() {
     }
-    TableSortable.prototype.selectedClass = function (columnName) {
-        return columnName == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
+    TableSortable.prototype.selectedClass = function (column) {
+        if (!column.sortable)
+            return 'fuel-ui-not-sortable';
+        return column.variable == this.sort.column ? 'sort-' + (this.sort.descending ? 'desc' : 'asc') : '';
     };
-    TableSortable.prototype.changeSorting = function (columnName) {
+    TableSortable.prototype.changeSorting = function (column) {
+        if (!column.sortable)
+            return;
         var sort = this.sort;
-        if (sort.column == columnName) {
+        if (sort.column == column.variable) {
             sort.descending = !sort.descending;
         }
         else {
-            sort.column = columnName;
+            sort.column = column.variable;
             sort.descending = false;
         }
     };
@@ -47,7 +51,7 @@ var TableSortable = (function () {
     TableSortable = __decorate([
         core_1.Component({
             selector: 'table-sortable',
-            template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped fuel-ui-table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column.variable)\" (click)=\"changeSorting(column.variable)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
+            template: "\n    <div class=\"table-responsive\">\n      <table class=\"table table-bordered table-hover table-striped fuel-ui-table-sortable\">\n        <thead>\n          <tr>\n            <th *ngFor=\"let column of columns\" [class]=\"selectedClass(column)\" (click)=\"changeSorting(column)\">\n              {{column.display}}\n            </th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let object of data | orderBy : convertSorting()\">\n            <td *ngFor=\"let column of columns\" [innerHtml]=\"object[column.variable] | format : column.filter\"></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  ",
             directives: [common_1.CORE_DIRECTIVES],
             pipes: [OrderBy_1.OrderByPipe, common_1.JsonPipe, Format_1.FormatPipe]
         }), 

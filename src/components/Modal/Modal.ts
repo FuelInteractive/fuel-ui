@@ -16,6 +16,7 @@ export class Modal {
 	@Input() closeOnUnfocus:boolean = true;
 	@Input() closeButton:boolean = true;
     @Input() modalTitle:string = '';
+    @Input() size:string = '';
 
 	constructor(el: ElementRef) {
         this._el = el.nativeElement;

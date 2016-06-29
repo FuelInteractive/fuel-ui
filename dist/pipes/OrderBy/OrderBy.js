@@ -59,9 +59,20 @@ var OrderByPipe = (function () {
                     ? propertyToCheck.substr(1)
                     : propertyToCheck;
                 return value.sort(function (a, b) {
+                    var aValue = a[property];
+                    var bValue = b[property];
+                    var propertySplit = property.split('.');
+                    if (typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1) {
+                        aValue = a;
+                        bValue = b;
+                        for (var j = 0; j < propertySplit.length; j++) {
+                            aValue = aValue[propertySplit[j]];
+                            bValue = bValue[propertySplit[j]];
+                        }
+                    }
                     return !desc
-                        ? OrderByPipe._orderByComparator(a[property], b[property])
-                        : -OrderByPipe._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(aValue, bValue)
+                        : -OrderByPipe._orderByComparator(aValue, bValue);
                 });
             }
         }
@@ -73,9 +84,20 @@ var OrderByPipe = (function () {
                     var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-'
                         ? config[i].substr(1)
                         : config[i];
+                    var aValue = a[property];
+                    var bValue = b[property];
+                    var propertySplit = property.split('.');
+                    if (typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1) {
+                        aValue = a;
+                        bValue = b;
+                        for (var j = 0; j < propertySplit.length; j++) {
+                            aValue = aValue[propertySplit[j]];
+                            bValue = bValue[propertySplit[j]];
+                        }
+                    }
                     var comparison = !desc
-                        ? OrderByPipe._orderByComparator(a[property], b[property])
-                        : -OrderByPipe._orderByComparator(a[property], b[property]);
+                        ? OrderByPipe._orderByComparator(aValue, bValue)
+                        : -OrderByPipe._orderByComparator(aValue, bValue);
                     //Don't return 0 yet in case of needing to sort by next property
                     if (comparison != 0)
                         return comparison;

@@ -921,6 +921,17 @@
   -moz-animation-timing-function: ease;
   animation-timing-function: ease; }
 
+.fuel-ui-alert-fade-out {
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  animation-name: fadeOut;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease; }
+
 .carousel {
   background-color: #818a91; }
 
@@ -1116,21 +1127,21 @@
   .fuel-ui-pagination a:hover {
     text-decoration: none; }
 
-.fuel-ui-table-sortable > thead > tr > th {
+.fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable) {
   cursor: pointer;
   position: relative;
   background-image: none;
   white-space: nowrap; }
-  .fuel-ui-table-sortable > thead > tr > th:after, .fuel-ui-table-sortable > thead > tr > th .sort-desc:after, .fuel-ui-table-sortable > thead > tr > th .sort-asc:after {
+  .fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable):after, .fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable) .sort-desc:after, .fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable) .sort-asc:after {
     font-family: FontAwesome;
     padding-left: 5px; }
-  .fuel-ui-table-sortable > thead > tr > th:after {
+  .fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable):after {
     content: "\f0dc";
     color: #ddd; }
-  .fuel-ui-table-sortable > thead > tr > th.sort-asc:after {
+  .fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable).sort-asc:after {
     content: "\f0de";
     color: #767676; }
-  .fuel-ui-table-sortable > thead > tr > th.sort-desc:after {
+  .fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable).sort-desc:after {
     content: "\f0dd";
     color: #767676; }
 
