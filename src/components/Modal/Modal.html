@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document" [ngClass]="{'modal-lg': size == 'large' || size == 'lg', 'modal-sm': size == 'small' || size == 'sm'}">
         <div class="modal-content">
             <div class="modal-header">
-                <button *ngIf="closeButton" type="button" class="close" aria-label="Close" (click)="showModal(false)">
+                <button *ngIf="closeButton" type="button" class="close" aria-label="Close" (click)="closeModal()">
                     <span aria-hidden="true">&#215;</span>
                     <span class="sr-only">Close</span>
                 </button>
