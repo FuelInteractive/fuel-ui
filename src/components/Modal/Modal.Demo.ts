@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MODAL_PROVIDERS} from './Modal';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
-import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
@@ -31,7 +31,9 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     modalTitle="Modal Title"
     [closeButton]="true"
     [closeOnUnfocus]="true"
-    [size]="size">
+    [size]="size"
+    (close)="onClose()"
+    (open)="onOpen()">
     <div class="modal-body">
         <ul>
             <li>Testing 1</li>
@@ -67,7 +69,9 @@ import {Modal} from 'fuel-ui/fuel-ui';
     modalTitle=&quot;Modal Title&quot;
     [closeButton]=&quot;true&quot;
     [closeOnUnfocus]=&quot;true&quot;
-    size=&quot;lg&quot;&gt;
+    size=&quot;lg&quot;
+    (close)=&quot;onClose()&quot;
+    (open)=&quot;onOpen()&quot;&gt;
     &lt;div class=&quot;modal-body&quot;&gt;
         &lt;ul&gt;
             &lt;li&gt;Any&lt;/li&gt;
@@ -84,6 +88,20 @@ import {Modal} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 </tab>
+<tab heading="TypeScript">
+<pre>
+<code class="language-javascript" code-highlight>
+export class ModalExample {
+    onClose(){
+        console.log("Modal has been closed!");
+    }
+    onOpen(){
+        console.log("Modal has been opened!");
+    }
+}
+</code>
+</pre>
+</tab>
 </tabset>
 
 <h3>Attributes</h3>
@@ -94,12 +112,27 @@ import {Modal} from 'fuel-ui/fuel-ui';
     Loading table...
 </table-sortable>
 
+<h3>Events</h3>
+<table-sortable
+    [columns]="eventsColumns"
+    [data]="events"
+    [sort]="eventsSort">
+    Loading table...
+</table-sortable>
+
 </div>`,
         directives: [MODAL_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class ModalDemo {
     closeText: string = "Cancel";
     size: string = "";
+
+    onClose(){
+        console.log("Modal has been closed!");
+    }
+    onOpen(){
+        console.log("Modal has been opened!");
+    }
     
     attributes:any[] = [
         new Attribute('closeOnUnfocus', 'boolean', 'true', 'Closes the opened modal when the user clicks off of it'),
@@ -109,6 +142,12 @@ export class ModalDemo {
     ];
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
+    events:Event[] = [
+        new Event('close', 'null', 'When the model is closed'),
+        new Event('open', 'null', 'When the model is opened')
+    ];
+    eventsColumns:TableSortableColumn[] = EventColumns;
+    eventsSort:TableSortableSorting = EventsDefaultSort;
 }
 
 export var MODAL_DEMO_PROVIDERS = [

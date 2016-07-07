@@ -17,6 +17,8 @@ export class Modal {
 	@Input() closeButton:boolean = true;
     @Input() modalTitle:string = '';
     @Input() size:string = '';
+	@Output() close:EventEmitter<any> = new EventEmitter<any>();
+	@Output() open:EventEmitter<any> = new EventEmitter<any>();
 
 	constructor(el: ElementRef) {
         this._el = el.nativeElement;
@@ -26,7 +28,7 @@ export class Modal {
 		if(this.closeOnUnfocus){
 			if((e.target && (e.target.className == 'modal customFadeIn' || e.target.className == 'modal-dialog')) 
 				|| (e.srcElement && (e.srcElement.className == 'modal customFadeIn' || e.srcElement.className == 'modal-dialog')))
-				this.showModal(false);
+				this.closeModal();
 		}
 	}
 
@@ -35,7 +37,9 @@ export class Modal {
 	}
     
     closeModal(): boolean {
-        return this.showModal(false);
+        this.showModal(false);
+		this.close.next(null);
+		return false;
     }
 
 	showModal(isDisplayed: boolean): boolean {
@@ -50,6 +54,7 @@ export class Modal {
 
 		if(this.displayed){
 			body.classList.add('modal-open');
+			this.open.next(null);
 		}
 		else{
 			body.classList.remove('modal-open');

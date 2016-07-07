@@ -52,6 +52,8 @@ export class Tooltip implements OnInit, OnChanges{
     }
 
     show() {
+        if(!this.text || this.text.length == 0) return;
+
         this.hide();
 
         this._el.setAttribute("data-hint", this.text);
