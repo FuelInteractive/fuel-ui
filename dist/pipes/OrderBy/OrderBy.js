@@ -42,6 +42,9 @@ var OrderByPipe = (function () {
     };
     OrderByPipe.prototype.transform = function (input, config) {
         if (config === void 0) { config = '+'; }
+        //invalid input given
+        if (!input)
+            return input;
         //make a copy of the input's reference
         this.value = input.slice();
         var value = this.value;
@@ -49,19 +52,19 @@ var OrderByPipe = (function () {
             return value;
         if (!Array.isArray(config) || (Array.isArray(config) && config.length == 1)) {
             var propertyToCheck = !Array.isArray(config) ? config : config[0];
-            var desc = propertyToCheck.substr(0, 1) == '-';
+            var desc_1 = propertyToCheck.substr(0, 1) == '-';
             //Basic array
             if (!propertyToCheck || propertyToCheck == '-' || propertyToCheck == '+') {
-                return !desc ? value.sort() : value.sort().reverse();
+                return !desc_1 ? value.sort() : value.sort().reverse();
             }
             else {
-                var property = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-'
+                var property_1 = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-'
                     ? propertyToCheck.substr(1)
                     : propertyToCheck;
                 return value.sort(function (a, b) {
-                    var aValue = a[property];
-                    var bValue = b[property];
-                    var propertySplit = property.split('.');
+                    var aValue = a[property_1];
+                    var bValue = b[property_1];
+                    var propertySplit = property_1.split('.');
                     if (typeof aValue === 'undefined' && typeof bValue === 'undefined' && propertySplit.length > 1) {
                         aValue = a;
                         bValue = b;
@@ -70,7 +73,7 @@ var OrderByPipe = (function () {
                             bValue = bValue[propertySplit[j]];
                         }
                     }
-                    return !desc
+                    return !desc_1
                         ? OrderByPipe._orderByComparator(aValue, bValue)
                         : -OrderByPipe._orderByComparator(aValue, bValue);
                 });

@@ -31,24 +31,27 @@ export class OrderByPipe implements PipeTransform {
 		return 0; //equal each other
 	}
 
-    transform(input:any, config:string = '+'): any{
+    transform(input:any, config:string = '+'): any {
+
+        //invalid input given
+        if(!input) return input;
 
     	//make a copy of the input's reference
     	this.value = [...input];
-    	var value = this.value;
+    	let value = this.value;
         
         if(!Array.isArray(value)) return value;
 
         if(!Array.isArray(config) || (Array.isArray(config) && config.length == 1)){
-            var propertyToCheck:string = !Array.isArray(config) ? config : config[0];
-            var desc = propertyToCheck.substr(0, 1) == '-';
+            let propertyToCheck:string = !Array.isArray(config) ? config : config[0];
+            let desc = propertyToCheck.substr(0, 1) == '-';
             
             //Basic array
             if(!propertyToCheck || propertyToCheck == '-' || propertyToCheck == '+'){
                 return !desc ? value.sort() : value.sort().reverse();
             }
             else {
-                var property:string = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-'
+                let property:string = propertyToCheck.substr(0, 1) == '+' || propertyToCheck.substr(0, 1) == '-'
                     ? propertyToCheck.substr(1)
                     : propertyToCheck;
 
@@ -76,9 +79,9 @@ export class OrderByPipe implements PipeTransform {
         else {
             //Loop over property of the array in order and sort
             return value.sort(function(a:any,b:any){
-                for(var i:number = 0; i < config.length; i++){
-                    var desc = config[i].substr(0, 1) == '-';
-                    var property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-'
+                for(let i:number = 0; i < config.length; i++){
+                    let desc = config[i].substr(0, 1) == '-';
+                    let property = config[i].substr(0, 1) == '+' || config[i].substr(0, 1) == '-'
                         ? config[i].substr(1)
                         : config[i];
 
@@ -96,7 +99,7 @@ export class OrderByPipe implements PipeTransform {
                         }
                     }
 
-                    var comparison = !desc 
+                    let comparison = !desc 
                         ? OrderByPipe._orderByComparator(aValue, bValue) 
                         : -OrderByPipe._orderByComparator(aValue, bValue);
 
@@ -110,6 +113,6 @@ export class OrderByPipe implements PipeTransform {
     }
 }
 
-export var ORDERBY_PROVIDERS = [
+export let ORDERBY_PROVIDERS = [
     OrderByPipe
 ];
