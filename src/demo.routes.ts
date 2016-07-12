@@ -1,7 +1,7 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 import {DemoHome, InstallationComponent} from './demo.only';
 import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
-    InfiniteScrollerDemo, ModalDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
+    InfiniteScrollerDemo, ModalDemo, OffCanvasMenuDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
     TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo, TextExpanderDemo} from './fuel-ui-demo';
 
 const routes: RouterConfig = [
@@ -16,6 +16,7 @@ const routes: RouterConfig = [
     { path: 'component/dropdown', component: DropdownDemo },
     { path: 'component/infinitescroller', component: InfiniteScrollerDemo },
     { path: 'component/modal', component: ModalDemo },
+    { path: 'component/offCanvasMenu', component: OffCanvasMenuDemo },
     { path: 'component/pagination', component: PaginationDemo },
     { path: 'component/progress', component: ProgressDemo },
     { path: 'component/slider', component: SliderDemo },

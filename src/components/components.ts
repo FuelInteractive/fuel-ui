@@ -17,6 +17,7 @@ import {TableSortableSorting} from "./TableSortable/TableSortableSorting";
 import {SLIDER_COMPONENT_PROVIDERS, Slider} from "./Slider/Slider";
 import {TIMEPICKER_PROVIDERS, TimePicker} from "./TimePicker/TimePicker";
 import {TEXTEXPANDER_PROVIDERS, TextExpander} from "./TextExpander/TextExpander";
+import {OFF_CANVAS_MENU_PROVIDERS, OffCanvasMenu, OffCanvasMenuClose} from "./OffCanvasMenu/OffCanvasMenu";
 
 export var FUELUI_COMPONENT_PROVIDERS = [
 	ACCORDION_PROVIDERS,
@@ -32,7 +33,8 @@ export var FUELUI_COMPONENT_PROVIDERS = [
 	TAB_PROVIDERS,
 	TAG_PROVIDERS,
 	TEXTEXPANDER_PROVIDERS,
-	TIMEPICKER_PROVIDERS
+	TIMEPICKER_PROVIDERS, 
+	OFF_CANVAS_MENU_PROVIDERS
 ];
 
 export * from "./Accordion/Accordion";
@@ -54,3 +56,4 @@ export * from "./Tag/TagSet";
 export * from "./Slider/Slider";
 export * from "./TimePicker/TimePicker";
 export * from "./TextExpander/TextExpander";
+export * from "./OffCanvasMenu/OffCanvasMenu";

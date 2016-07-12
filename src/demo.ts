@@ -48,6 +48,7 @@ import {APP_ROUTER_PROVIDERS} from './demo.routes';
                         <li><a (click)="clickNavLink()" [routerLink]="['component/dropdown']">Dropdown</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['component/infinitescroller']">InfiniteScroller</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['component/modal']">Modal</a></li>
+                        <li><a (click)="clickNavLink()" [routerLink]="['component/offCanvasMenu']">Off Canvas Menu</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['component/pagination']">Pagination</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['component/progress']">Progress</a></li>
                         <li><a (click)="clickNavLink()" [routerLink]="['component/slider']">Slider</a></li>
