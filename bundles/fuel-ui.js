@@ -3512,7 +3512,6 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
     };
     OffCanvasMenu.prototype.ngAfterContentInit = function() {
       var _this = this;
-      console.log(this.closeButtons);
       this.closeButtons.map(function(b) {
         return b.close.subscribe(function() {
           return _this.toggleMenu();
