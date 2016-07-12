@@ -65,9 +65,7 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
     }
 
     ngAfterContentInit(): void {
-        console.log(this.closeButtons);
-        this.closeButtons.map(b => b.close.subscribe(() => this.toggleMenu()));
-        
+        this.closeButtons.map(b => b.close.subscribe(() => this.toggleMenu()));        
     }
 
     ngOnDestroy(): void {
