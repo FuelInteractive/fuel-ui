@@ -3500,19 +3500,15 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
       this.origin = "left";
       this.width = "25%";
       this.height = "25%";
+      this.computedWidth = this.width;
+      this.computedHeight = this.height;
       this.isOpen = false;
       this.overlayState = null;
       this.openState = null;
     }
-    OffCanvasMenu.prototype.ngOnInit = function() {
-      if (this.origin == "left" || this.origin == "right")
-        this.height = "100%";
-      else if (this.origin == "top" || this.origin == "bottom")
-        this.width = "100%";
-    };
+    OffCanvasMenu.prototype.ngOnInit = function() {};
     OffCanvasMenu.prototype.ngAfterContentInit = function() {
       var _this = this;
-      console.log(this.closeButtons);
       this.closeButtons.map(function(b) {
         return b.close.subscribe(function() {
           return _this.toggleMenu();
@@ -3529,6 +3525,13 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
         this.overlayState = null;
         this.openState = null;
       }
+      if (this.origin == "left" || this.origin == "right") {
+        this.computedHeight = "100%";
+        this.computedWidth = this.width;
+      } else if (this.origin == "top" || this.origin == "bottom") {
+        this.computedWidth = "100%";
+        this.computedHeight = this.height;
+      }
     };
     __decorate([core_1.Input(), __metadata('design:type', Object)], OffCanvasMenu.prototype, "origin", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Object)], OffCanvasMenu.prototype, "width", void 0);
@@ -3536,7 +3539,7 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
     __decorate([core_1.ContentChildren(OffCanvasMenuClose), __metadata('design:type', core_1.QueryList)], OffCanvasMenu.prototype, "closeButtons", void 0);
     OffCanvasMenu = __decorate([core_1.Component({
       selector: "off-canvas-menu",
-      template: "\n      <div *ngIf=\"isOpen\" @fade=\"overlayState\" class=\"off-canvas-menu-overlay\" \n          (click)=\"toggleMenu()\"></div>\n\n      <div *ngIf=\"isOpen\" @open=\"openState\" class=\"off-canvas-menu\"\n          [class.off-canvas-menu-left]=\"origin.toLowerCase() == 'left'\"\n          [class.off-canvas-menu-right]=\"origin.toLowerCase() == 'right'\"\n          [class.off-canvas-menu-top]=\"origin.toLowerCase() == 'top'\"\n          [class.off-canvas-menu-bottom]=\"origin.toLowerCase() == 'bottom'\"\n          [style.width]=\"width\"\n          [style.height]=\"height\">\n          <ng-content></ng-content>    \n      </div>\n    ",
+      template: "\n      <div *ngIf=\"isOpen\" @fade=\"overlayState\" class=\"off-canvas-menu-overlay\" \n          (click)=\"toggleMenu()\"></div>\n\n      <div *ngIf=\"isOpen\" @open=\"openState\" class=\"off-canvas-menu\"\n          [class.off-canvas-menu-left]=\"origin.toLowerCase() == 'left'\"\n          [class.off-canvas-menu-right]=\"origin.toLowerCase() == 'right'\"\n          [class.off-canvas-menu-top]=\"origin.toLowerCase() == 'top'\"\n          [class.off-canvas-menu-bottom]=\"origin.toLowerCase() == 'bottom'\"\n          [style.width]=\"computedWidth\"\n          [style.height]=\"computedHeight\">\n          <ng-content></ng-content>    \n      </div>\n    ",
       styles: ["\n      .off-canvas-menu-overlay {\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 900;\n        background-color: #55595c;\n        opacity: 0; }\n\n      .off-canvas-menu {\n        display: block;\n        position: fixed;\n        z-index: 1000;\n        background-color: #fff; }\n        .off-canvas-menu.off-canvas-menu-left {\n          top: 0;\n          left: 0;\n          bottom: 0;\n          transform: translate(-100%, 0);\n          width: 75%; }\n        .off-canvas-menu.off-canvas-menu-right {\n          top: 0;\n          right: 0;\n          bottom: 0;\n          transform: translate(100%, 0);\n          width: 75%; }\n        .off-canvas-menu.off-canvas-menu-top {\n          top: 0;\n          left: 0;\n          right: 0;\n          transform: translate(0, -100%);\n          height: 75%; }\n        .off-canvas-menu.off-canvas-menu-bottom {\n          left: 0;\n          right: 0;\n          bottom: 0;\n          transform: translate(0, 100%);\n          height: 75%; }\n    "],
       directives: [common_1.CORE_DIRECTIVES, OffCanvasMenuClose],
       animations: [core_3.trigger("open", [core_3.state("open", core_3.style({transform: "translate(0,0)"})), core_3.transition("void => open", [core_3.animate("200ms ease")]), core_3.transition("open => void", [core_3.animate("200ms ease")])]), core_3.trigger("fade", [core_3.state("in", core_3.style({opacity: ".75"})), core_3.transition("void => in", [core_3.animate("200ms ease")]), core_3.transition("in => void", [core_3.animate("200ms ease")])])]

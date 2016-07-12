@@ -6,7 +6,7 @@
     [class.off-canvas-menu-right]="origin.toLowerCase() == 'right'"
     [class.off-canvas-menu-top]="origin.toLowerCase() == 'top'"
     [class.off-canvas-menu-bottom]="origin.toLowerCase() == 'bottom'"
-    [style.width]="width"
-    [style.height]="height">
+    [style.width]="computedWidth"
+    [style.height]="computedHeight">
     <ng-content></ng-content>    
 </div>

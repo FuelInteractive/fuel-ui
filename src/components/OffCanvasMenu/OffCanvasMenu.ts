@@ -45,6 +45,9 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
     @Input()
     height = "25%";
 
+    computedWidth = this.width;
+    computedHeight = this.height;
+
     @ContentChildren(OffCanvasMenuClose)
     closeButtons: QueryList<OffCanvasMenuClose>;
 
@@ -58,10 +61,7 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
     }
 
     ngOnInit(): void {
-        if(this.origin == "left" || this.origin == "right")
-            this.height = "100%";
-        else if(this.origin == "top" || this.origin == "bottom")
-            this.width = "100%";
+        
     }
 
     ngAfterContentInit(): void {
@@ -81,6 +81,15 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
         } else {
             this.overlayState = null;
             this.openState = null;
+        }
+
+        if(this.origin == "left" || this.origin == "right") {
+            this.computedHeight = "100%";
+            this.computedWidth = this.width;
+        }
+        else if(this.origin == "top" || this.origin == "bottom") {
+            this.computedWidth = "100%";
+            this.computedHeight = this.height;
         }
     }
 }
