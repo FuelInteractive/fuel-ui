@@ -16,7 +16,8 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "./offCanvasMenu";
     </div>
 </div>
 
-<off-canvas-menu [origin]="origin" [width]="width" [height]="height" #menu>
+<off-canvas-menu [origin]="origin" [width]="width" [height]="height" 
+    (close)="onClose()" (open)="onOpen()" #menu>
     <div class="p-a-1">
         <h3>Menu</h3>
         <button class="btn btn-info off-canvas-menu-close">Close Menu</button>
@@ -70,13 +71,31 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "fuel-ui/fuel-ui"
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;off-canvas-menu origin=&quot;left&quot; width=&quot;25%&quot; #menu&gt;
+&lt;off-canvas-menu [origin]=&quot;origin&quot; [width]=&quot;width&quot; [height]=&quot;height&quot; 
+    (close)=&quot;onClose()&quot; (open)=&quot;onOpen()&quot; #menu&gt;
     &lt;div class=&quot;p-a-1&quot;&gt;
         &lt;h3&gt;Menu&lt;/h3&gt;
         &lt;button class=&quot;btn btn-info off-canvas-menu-close&quot;&gt;Close Menu&lt;/button&gt;
     &lt;/div&gt;
 &lt;/off-canvas-menu&gt;
-&lt;button class=&quot;btn btn-info&quot; (click)=&quot;menu.toggleMenu()&quot;&gt;Open Menu&lt;/button&gt;
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
+<pre>
+<code class="language-javascript" code-highlight>
+export class OffCanvasMenuExample {
+    origin = "left";  
+    width = "25%";
+    height = "25%";
+
+    onClose(){
+        console.log("Menu has been closed!");
+    }
+    onOpen(){
+        console.log("Menu has been opened!");
+    }
+}
 </code>
 </pre>
 </tab>
@@ -90,6 +109,14 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "fuel-ui/fuel-ui"
     Loading table...
 </table-sortable>
 
+<h3>Events</h3>
+<table-sortable
+    [columns]="eventsColumns"
+    [data]="events"
+    [sort]="eventsSort">
+    Loading table...
+</table-sortable>
+
 </div>`,
         directives: [CodeHighlighter, TableSortable, TAB_PROVIDERS, OFF_CANVAS_MENU_PROVIDERS]
 })
@@ -97,6 +124,13 @@ export class OffCanvasMenuDemo {
     origin = "left";  
     width = "25%";
     height = "25%";
+
+    onClose(){
+        console.log("Menu has been closed!");
+    }
+    onOpen(){
+        console.log("Menu has been opened!");
+    }
 
     attributes:any[] = [
         new Attribute('origin', '"left" | "top" | "right" "bottom"', '"left"', 'direction the menu extends from'),
@@ -106,6 +140,12 @@ export class OffCanvasMenuDemo {
     
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
+    events:Event[] = [
+        new Event('close', 'null', 'When the menu is closed'),
+        new Event('open', 'null', 'When the menu is opened')
+    ];
+    eventsColumns:TableSortableColumn[] = EventColumns;
+    eventsSort:TableSortableSorting = EventsDefaultSort;
 }
 
 export var OFFCANVASMENU_DEMO_PROVIDERS = [

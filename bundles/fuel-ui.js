@@ -3500,6 +3500,8 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
       this.origin = "left";
       this.width = "25%";
       this.height = "25%";
+      this.close = new core_2.EventEmitter();
+      this.open = new core_2.EventEmitter();
       this.computedWidth = this.width;
       this.computedHeight = this.height;
       this.isOpen = false;
@@ -3521,9 +3523,11 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
       if (this.isOpen) {
         this.overlayState = "in";
         this.openState = "open";
+        this.open.next(null);
       } else {
         this.overlayState = null;
         this.openState = null;
+        this.close.next(null);
       }
       if (this.origin == "left" || this.origin == "right") {
         this.computedHeight = "100%";
@@ -3536,6 +3540,8 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
     __decorate([core_1.Input(), __metadata('design:type', Object)], OffCanvasMenu.prototype, "origin", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Object)], OffCanvasMenu.prototype, "width", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Object)], OffCanvasMenu.prototype, "height", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_2.EventEmitter)], OffCanvasMenu.prototype, "close", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', core_2.EventEmitter)], OffCanvasMenu.prototype, "open", void 0);
     __decorate([core_1.ContentChildren(OffCanvasMenuClose), __metadata('design:type', core_1.QueryList)], OffCanvasMenu.prototype, "closeButtons", void 0);
     OffCanvasMenu = __decorate([core_1.Component({
       selector: "off-canvas-menu",

@@ -45,6 +45,11 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
     @Input()
     height = "25%";
 
+	@Output() 
+    close:EventEmitter<any> = new EventEmitter<any>();
+	@Output() 
+    open:EventEmitter<any> = new EventEmitter<any>();
+
     computedWidth = this.width;
     computedHeight = this.height;
 
@@ -78,9 +83,11 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
         if(this.isOpen) {
             this.overlayState = "in";
             this.openState = "open";
+            this.open.next(null);
         } else {
             this.overlayState = null;
             this.openState = null;
+            this.close.next(null);
         }
 
         if(this.origin == "left" || this.origin == "right") {
