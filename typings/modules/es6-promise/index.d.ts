@@ -77,10 +77,8 @@ export class Promise <R> implements Thenable <R> {
 export function polyfill (): void;
 }
 declare module 'es6-promise/dist/es6-promise' {
-import alias = require('~es6-promise/dist/es6-promise');
-export = alias;
+export * from '~es6-promise/dist/es6-promise';
 }
 declare module 'es6-promise' {
-import alias = require('~es6-promise/dist/es6-promise');
-export = alias;
+export * from '~es6-promise/dist/es6-promise';
 }
