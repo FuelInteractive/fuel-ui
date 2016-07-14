@@ -1,6 +1,6 @@
 {
   "name": "fuel-ui",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "A set of utilities and Angular2 components implementing Twitter's Bootstrap 4 components",
   "main": "fuel-ui.js",
   "typings": "fuel-ui.d.ts",
