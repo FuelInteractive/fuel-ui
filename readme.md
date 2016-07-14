@@ -86,6 +86,7 @@ Then simply add the proper script tags to your `index.html`
 - [Dropdown](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Dropdown#readme)
 - [InfiniteScroller](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/InfiniteScroller#readme)
 - [Modal](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Modal#readme)
+- [OffCanvasMenu](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/OffCanvasMenu#readme)
 - [Pagination](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Pagination#readme)
 - [Progressbar](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Progress#readme)
 - [Slider](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Slider#readme)
