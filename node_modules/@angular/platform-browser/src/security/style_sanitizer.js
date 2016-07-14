@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var core_1 = require('@angular/core');
 var dom_adapter_1 = require('../dom/dom_adapter');
@@ -68,6 +75,8 @@ function hasBalancedQuotes(value) {
  */
 function sanitizeStyle(value) {
     value = String(value).trim(); // Make sure it's actually a string.
+    if (!value)
+        return '';
     // Single url(...) values are supported, but only for URLs that sanitize cleanly. See above for
     // reasoning behind this.
     var urlMatch = URL_RE.exec(value);
@@ -75,8 +84,9 @@ function sanitizeStyle(value) {
         value.match(SAFE_STYLE_VALUE) && hasBalancedQuotes(value)) {
         return value; // Safe style values.
     }
-    if (core_1.isDevMode())
-        dom_adapter_1.getDOM().log('WARNING: sanitizing unsafe style value ' + value);
+    if (core_1.isDevMode()) {
+        dom_adapter_1.getDOM().log("WARNING: sanitizing unsafe style value " + value + " (see http://g.co/ng/security#xss).");
+    }
     return 'unsafe';
 }
 exports.sanitizeStyle = sanitizeStyle;

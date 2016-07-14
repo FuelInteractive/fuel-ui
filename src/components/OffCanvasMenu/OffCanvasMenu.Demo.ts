@@ -3,7 +3,7 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
-import {OFF_CANVAS_MENU_PROVIDERS} from "./offCanvasMenu";
+import {OFF_CANVAS_MENU_PROVIDERS} from "./OffCanvasMenu";
 
 @Component({
   template: `

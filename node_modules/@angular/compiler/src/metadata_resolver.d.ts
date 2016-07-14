@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { AnimationEntryMetadata, AnimationMetadata, AnimationStateMetadata, AnimationStyleMetadata, Provider, QueryMetadata } from '@angular/core';
 import { ReflectorReader } from '../core_private';
 import { Type } from '../src/facade/lang';
@@ -18,6 +25,8 @@ export declare class CompileMetadataResolver {
     private _anonymousTypeIndex;
     constructor(_directiveResolver: DirectiveResolver, _pipeResolver: PipeResolver, _viewResolver: ViewResolver, _config: CompilerConfig, _reflector?: ReflectorReader);
     private sanitizeTokenName(token);
+    clearCacheFor(compType: Type): void;
+    clearCache(): void;
     getAnimationEntryMetadata(entry: AnimationEntryMetadata): cpl.CompileAnimationEntryMetadata;
     getAnimationStateMetadata(value: AnimationStateMetadata): cpl.CompileAnimationStateMetadata;
     getAnimationStyleMetadata(value: AnimationStyleMetadata): cpl.CompileAnimationStyleMetadata;

@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var browser_jsonp_1 = require('./src/backends/browser_jsonp');
 var browser_xhr_1 = require('./src/backends/browser_xhr');
@@ -40,6 +47,7 @@ exports.Request = static_request_1.Request;
 var static_response_1 = require('./src/static_response');
 exports.Response = static_response_1.Response;
 var url_search_params_1 = require('./src/url_search_params');
+exports.QueryEncoder = url_search_params_1.QueryEncoder;
 exports.URLSearchParams = url_search_params_1.URLSearchParams;
 /**
  * Provides a basic set of injectables to use the {@link Http} service in any application.
@@ -183,6 +191,8 @@ exports.URLSearchParams = url_search_params_1.URLSearchParams;
  *         useValue: new CookieXSRFStrategy('MY-XSRF-COOKIE-NAME', 'X-MY-XSRF-HEADER-NAME')}])
  *   .catch(err => console.error(err));
  * ```
+ *
+ * @experimental
  */
 exports.HTTP_PROVIDERS = [
     // TODO(pascal): use factory type annotations once supported in DI
@@ -194,6 +204,9 @@ exports.HTTP_PROVIDERS = [
     xhr_backend_1.XHRBackend,
     { provide: interfaces_1.XSRFStrategy, useValue: new xhr_backend_1.CookieXSRFStrategy() },
 ];
+/**
+ * @experimental
+ */
 function httpFactory(xhrBackend, requestOptions) {
     return new http_1.Http(xhrBackend, requestOptions);
 }
@@ -310,6 +323,8 @@ exports.HTTP_BINDINGS = exports.HTTP_PROVIDERS;
  *   }
  * });
  * ```
+ *
+ * @experimental
  */
 exports.JSONP_PROVIDERS = [
     // TODO(pascal): use factory type annotations once supported in DI

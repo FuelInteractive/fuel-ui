@@ -37,6 +37,8 @@ import { RequestArgs } from './interfaces';
  *   console.log('people', res.json());
  * });
  * ```
+ *
+ * @experimental
  */
 export declare class Request {
     /**

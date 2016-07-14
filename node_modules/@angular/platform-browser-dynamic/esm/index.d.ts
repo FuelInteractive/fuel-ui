@@ -1,5 +1,11 @@
 import { ApplicationRef, ComponentRef, Type } from '@angular/core';
+/**
+ * @experimental
+ */
 export declare const BROWSER_APP_COMPILER_PROVIDERS: Array<any>;
+/**
+ * @experimental
+ */
 export declare const CACHED_TEMPLATE_PROVIDER: Array<any>;
 /**
  * Bootstrapping for Angular applications.
@@ -68,6 +74,9 @@ export declare const CACHED_TEMPLATE_PROVIDER: Array<any>;
  *   app injector to override default injection behavior.
  *
  * Returns a `Promise` of {@link ComponentRef}.
+ *
+ * @experimental This api cannot be used with the offline compiler and thus is still subject to
+ * change.
  */
 export declare function bootstrap(appComponentType: Type, customProviders?: Array<any>): Promise<ComponentRef<any>>;
 /**

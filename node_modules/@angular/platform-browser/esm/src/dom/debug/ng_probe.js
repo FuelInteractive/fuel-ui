@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { ApplicationRef, NgZone, RootRenderer, getDebugNode, isDevMode } from '@angular/core';
 import { DebugDomRootRenderer } from '../../../core_private';
 import { getDOM } from '../dom_adapter';

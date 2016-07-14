@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { FormControl, FormGroup } from '../model';
 import { AbstractFormGroupDirective } from './abstract_form_group_directive';
 import { NgControl } from './ng_control';
@@ -12,7 +19,7 @@ export interface Form {
     /**
      * Add a control to this form.
      */
-    addControl(dir: NgControl): FormControl;
+    addControl(dir: NgControl): void;
     /**
      * Remove a control from this form.
      */

@@ -1,4 +1,11 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * This indirection is needed to free up Component, etc symbols in the public API
  * to be used by the decorator versions of these annotations.
  */
@@ -17,6 +24,8 @@ import { Type } from '../src/facade/lang';
  * Interface for the {@link DirectiveMetadata} decorator function.
  *
  * See {@link DirectiveFactory}.
+ *
+ * @stable
  */
 export interface DirectiveDecorator extends TypeDecorator {
 }
@@ -24,6 +33,8 @@ export interface DirectiveDecorator extends TypeDecorator {
  * Interface for the {@link ComponentMetadata} decorator function.
  *
  * See {@link ComponentFactory}.
+ *
+ * @stable
  */
 export interface ComponentDecorator extends TypeDecorator {
     /**
@@ -45,6 +56,8 @@ export interface ComponentDecorator extends TypeDecorator {
  * Interface for the {@link ViewMetadata} decorator function.
  *
  * See {@link ViewFactory}.
+ *
+ * @experimental
  */
 export interface ViewDecorator extends TypeDecorator {
     /**
@@ -92,6 +105,8 @@ export interface ViewDecorator extends TypeDecorator {
  *   new ng.Directive({...})
  * ]
  * ```
+ *
+ * @stable
  */
 export interface DirectiveMetadataFactory {
     (obj: {
@@ -155,6 +170,8 @@ export interface DirectiveMetadataFactory {
  *   new ng.Component({...})
  * ]
  * ```
+ *
+ * @stable
  */
 export interface ComponentMetadataFactory {
     (obj: {
@@ -183,6 +200,7 @@ export interface ComponentMetadataFactory {
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
         interpolation?: [string, string];
+        precompile?: Array<Type | any[]>;
     }): ComponentDecorator;
     new (obj: {
         selector?: string;
@@ -210,6 +228,7 @@ export interface ComponentMetadataFactory {
         pipes?: Array<Type | any[]>;
         encapsulation?: ViewEncapsulation;
         interpolation?: [string, string];
+        precompile?: Array<Type | any[]>;
     }): ComponentMetadata;
 }
 /**
@@ -253,6 +272,8 @@ export interface ComponentMetadataFactory {
  *   new ng.View({...})
  * ]
  * ```
+ *
+ * @experimental You should most likely use ComponentMetadataFactory instead
  */
 export interface ViewMetadataFactory {
     (obj: {
@@ -311,6 +332,8 @@ export interface ViewMetadataFactory {
  *   [new ng.Attribute('title')]
  * ]
  * ```
+ *
+ * @stable
  */
 export interface AttributeMetadataFactory {
     (name: string): TypeDecorator;
@@ -754,7 +777,7 @@ export declare var Component: ComponentMetadataFactory;
  *   overlayManager:OverlayManager; // NOT YET IMPLEMENTED
  *
  *   constructor(overlayManager:OverlayManager) {
- *     this.overlay = overlay;
+ *     this.overlayManager = overlayManager;
  *   }
  *
  *   onMouseEnter() {

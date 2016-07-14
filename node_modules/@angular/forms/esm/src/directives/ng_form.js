@@ -1,11 +1,18 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Directive, Inject, Optional, Self, forwardRef } from '@angular/core';
 import { EventEmitter, ObservableWrapper, PromiseWrapper } from '../facade/async';
 import { ListWrapper } from '../facade/collection';
 import { isPresent } from '../facade/lang';
-import { FormControl, FormGroup } from '../model';
+import { FormGroup } from '../model';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS } from '../validators';
 import { ControlContainer } from './control_container';
-import { composeAsyncValidators, composeValidators, setUpControl, setUpFormGroup } from './shared';
+import { composeAsyncValidators, composeValidators, setUpControl, setUpFormContainer } from './shared';
 export const formDirectiveProvider = 
 /*@ts2dart_const*/ { provide: ControlContainer, useExisting: forwardRef(() => NgForm) };
 export class NgForm extends ControlContainer {
@@ -21,14 +28,12 @@ export class NgForm extends ControlContainer {
     get path() { return []; }
     get controls() { return this.form.controls; }
     addControl(dir) {
-        const ctrl = new FormControl();
         PromiseWrapper.scheduleMicrotask(() => {
             const container = this._findContainer(dir.path);
-            dir._control = container.registerControl(dir.name, ctrl);
+            dir._control = container.registerControl(dir.name, dir.control);
             setUpControl(dir.control, dir);
             dir.control.updateValueAndValidity({ emitEvent: false });
         });
-        return ctrl;
     }
     getControl(dir) { return this.form.find(dir.path); }
     removeControl(dir) {
@@ -43,7 +48,7 @@ export class NgForm extends ControlContainer {
         PromiseWrapper.scheduleMicrotask(() => {
             var container = this._findContainer(dir.path);
             var group = new FormGroup({});
-            setUpFormGroup(group, dir);
+            setUpFormContainer(group, dir);
             container.registerControl(dir.name, group);
             group.updateValueAndValidity({ emitEvent: false });
         });

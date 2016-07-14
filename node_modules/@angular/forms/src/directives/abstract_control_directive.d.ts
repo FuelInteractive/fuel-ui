@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { Observable } from '../facade/async';
 import { AbstractControl } from '../model';
 /**
  * Base class for control directives.
@@ -17,5 +25,7 @@ export declare abstract class AbstractControlDirective {
     dirty: boolean;
     touched: boolean;
     untouched: boolean;
+    statusChanges: Observable<any>;
+    valueChanges: Observable<any>;
     path: string[];
 }

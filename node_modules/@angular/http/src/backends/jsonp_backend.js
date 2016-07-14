@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -17,6 +24,8 @@ var JSONP_ERR_NO_CALLBACK = 'JSONP injected script did not invoke callback.';
 var JSONP_ERR_WRONG_METHOD = 'JSONP requests must use GET request method.';
 /**
  * Abstract base class for an in-flight JSONP request.
+ *
+ * @experimental
  */
 var JSONPConnection = (function () {
     function JSONPConnection() {
@@ -108,6 +117,8 @@ var JSONPConnection_ = (function (_super) {
 exports.JSONPConnection_ = JSONPConnection_;
 /**
  * A {@link ConnectionBackend} that uses the JSONP strategy of making requests.
+ *
+ * @experimental
  */
 var JSONPBackend = (function (_super) {
     __extends(JSONPBackend, _super);

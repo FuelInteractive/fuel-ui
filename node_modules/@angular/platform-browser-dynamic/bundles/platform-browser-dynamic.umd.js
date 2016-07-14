@@ -1,5 +1,5 @@
 /**
- * @license Angular 2.0.0-rc.3
+ * @license Angular 2.0.0-rc.4
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -16,6 +16,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     'use strict';
     var ReflectionCapabilities = _angular_core.__core_private__.ReflectionCapabilities;
     var reflector = _angular_core.__core_private__.reflector;
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var globalScope;
     if (typeof window === 'undefined') {
         if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
@@ -47,6 +54,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function isArray(obj) {
         return Array.isArray(obj);
     }
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var PromiseCompleter = (function () {
         function PromiseCompleter() {
             var _this = this;
@@ -387,6 +401,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return XHRImpl;
     }(_angular_compiler.XHR));
+    /**
+     * @experimental
+     */
     var BROWSER_APP_COMPILER_PROVIDERS = [
         _angular_compiler.COMPILER_PROVIDERS, {
             provide: _angular_compiler.CompilerConfig,
@@ -399,6 +416,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         { provide: _angular_core.PLATFORM_DIRECTIVES, useValue: _angular_common.COMMON_DIRECTIVES, multi: true },
         { provide: _angular_core.PLATFORM_PIPES, useValue: _angular_common.COMMON_PIPES, multi: true }
     ];
+    /**
+     * @experimental
+     */
     var CACHED_TEMPLATE_PROVIDER = [{ provide: _angular_compiler.XHR, useClass: CachedXHR }];
     /**
      * Bootstrapping for Angular applications.
@@ -467,6 +487,9 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   app injector to override default injection behavior.
      *
      * Returns a `Promise` of {@link ComponentRef}.
+     *
+     * @experimental This api cannot be used with the offline compiler and thus is still subject to
+     * change.
      */
     function bootstrap(appComponentType, customProviders) {
         reflector.reflectionCapabilities = new ReflectionCapabilities();

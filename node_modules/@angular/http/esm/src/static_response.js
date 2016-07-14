@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { BaseException } from '../src/facade/exceptions';
 import { Json, isString } from '../src/facade/lang';
 import { isJsObject } from './http_utils';
@@ -18,6 +25,8 @@ import { isJsObject } from './http_utils';
  * Spec](https://fetch.spec.whatwg.org/#response-class), but is considered a static value whose body
  * can be accessed many times. There are other differences in the implementation, but this is the
  * most significant.
+ *
+ * @experimental
  */
 export class Response {
     constructor(responseOptions) {

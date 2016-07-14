@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var core_1 = require('@angular/core');
 var collection_1 = require('../facade/collection');
@@ -34,6 +41,7 @@ var WebAnimationsDriver = (function () {
         var playerOptions = {
             'duration': duration,
             'delay': delay,
+            'easing': easing,
             'fill': 'both' // we use `both` because it allows for styling at 0% to work with `delay`
         };
         var player = this._triggerWebAnimation(anyElm, formattedSteps, playerOptions);

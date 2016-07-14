@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { ComponentMetadata, DirectiveMetadata, HostBindingMetadata, HostListenerMetadata, Injectable, InputMetadata, OutputMetadata, QueryMetadata, resolveForwardRef } from '@angular/core';
 import { ReflectorReader, reflector } from '../core_private';
 import { ListWrapper, StringMapWrapper } from '../src/facade/collection';
@@ -93,7 +100,8 @@ export class DirectiveResolver {
                 queries: mergedQueries,
                 changeDetection: dm.changeDetection,
                 providers: dm.providers,
-                viewProviders: dm.viewProviders
+                viewProviders: dm.viewProviders,
+                precompile: dm.precompile
             });
         }
         else {

@@ -45,6 +45,10 @@ export declare abstract class AbstractControl {
     readonly valueChanges: Observable<any>;
     readonly statusChanges: Observable<any>;
     readonly pending: boolean;
+    setAsyncValidators(newValidator: AsyncValidatorFn | AsyncValidatorFn[]): void;
+    clearAsyncValidators(): void;
+    setValidators(newValidator: ValidatorFn | ValidatorFn[]): void;
+    clearValidators(): void;
     markAsTouched(): void;
     markAsDirty({onlySelf}?: {
         onlySelf?: boolean;

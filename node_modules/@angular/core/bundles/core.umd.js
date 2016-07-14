@@ -1,5 +1,5 @@
 /**
- * @license Angular 2.0.0-rc.3
+ * @license Angular 2.0.0-rc.4
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -14,6 +14,13 @@ var __extends = (this && this.__extends) || function (d, b) {
             (factory((global.ng = global.ng || {}, global.ng.core = global.ng.core || {}), global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx));
 }(this, function (exports, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
     'use strict';
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var globalScope;
     if (typeof window === 'undefined') {
         if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
@@ -34,6 +41,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     // Need to declare a new variable for global here since TypeScript
     // exports the original value of the symbol.
     var global$1 = globalScope;
+    /**
+     * Runtime representation a type that a Component or other object is instances of.
+     *
+     * An example of a `Type` is `MyCustomComponent` class, which in JavaScript is be represented by
+     * the `MyCustomComponent` constructor function.
+     *
+     * @stable
+     */
     var Type = Function;
     function getTypeNameForDebugging(type) {
         if (type['name']) {
@@ -336,7 +351,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @stable
      */
     var InjectMetadata = (function () {
-        function InjectMetadata(token /** TODO #9100 */) {
+        function InjectMetadata(token) {
             this.token = token;
         }
         InjectMetadata.prototype.toString = function () { return "@Inject(" + stringify(this.token) + ")"; };
@@ -1034,28 +1049,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         return ViewChildMetadata;
     }(ViewQueryMetadata));
     /**
-     * Describes the current state of the change detector.
-     */
-    var ChangeDetectorState;
-    (function (ChangeDetectorState) {
-        /**
-         * `NeverChecked` means that the change detector has not been checked yet, and
-         * initialization methods should be called during detection.
-         */
-        ChangeDetectorState[ChangeDetectorState["NeverChecked"] = 0] = "NeverChecked";
-        /**
-         * `CheckedBefore` means that the change detector has successfully completed at least
-         * one detection previously.
-         */
-        ChangeDetectorState[ChangeDetectorState["CheckedBefore"] = 1] = "CheckedBefore";
-        /**
-         * `Errored` means that the change detector encountered an error checking a binding
-         * or calling a directive lifecycle method and is now in an inconsistent state. Change
-         * detectors in this state will no longer detect changes.
-         */
-        ChangeDetectorState[ChangeDetectorState["Errored"] = 2] = "Errored";
-    })(ChangeDetectorState || (ChangeDetectorState = {}));
-    /**
      * Describes within the change detector which strategy will be used the next time change
      * detection is triggered.
      * @stable
@@ -1063,42 +1056,54 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.ChangeDetectionStrategy;
     (function (ChangeDetectionStrategy) {
         /**
+         * `OnPush` means that the change detector's mode will be set to `CheckOnce` during hydration.
+         */
+        ChangeDetectionStrategy[ChangeDetectionStrategy["OnPush"] = 0] = "OnPush";
+        /**
+         * `Default` means that the change detector's mode will be set to `CheckAlways` during hydration.
+         */
+        ChangeDetectionStrategy[ChangeDetectionStrategy["Default"] = 1] = "Default";
+    })(exports.ChangeDetectionStrategy || (exports.ChangeDetectionStrategy = {}));
+    /**
+     * Describes the status of the detector.
+     */
+    var ChangeDetectorStatus;
+    (function (ChangeDetectorStatus) {
+        /**
          * `CheckedOnce` means that after calling detectChanges the mode of the change detector
          * will become `Checked`.
          */
-        ChangeDetectionStrategy[ChangeDetectionStrategy["CheckOnce"] = 0] = "CheckOnce";
+        ChangeDetectorStatus[ChangeDetectorStatus["CheckOnce"] = 0] = "CheckOnce";
         /**
          * `Checked` means that the change detector should be skipped until its mode changes to
          * `CheckOnce`.
          */
-        ChangeDetectionStrategy[ChangeDetectionStrategy["Checked"] = 1] = "Checked";
+        ChangeDetectorStatus[ChangeDetectorStatus["Checked"] = 1] = "Checked";
         /**
          * `CheckAlways` means that after calling detectChanges the mode of the change detector
          * will remain `CheckAlways`.
          */
-        ChangeDetectionStrategy[ChangeDetectionStrategy["CheckAlways"] = 2] = "CheckAlways";
+        ChangeDetectorStatus[ChangeDetectorStatus["CheckAlways"] = 2] = "CheckAlways";
         /**
          * `Detached` means that the change detector sub tree is not a part of the main tree and
          * should be skipped.
          */
-        ChangeDetectionStrategy[ChangeDetectionStrategy["Detached"] = 3] = "Detached";
+        ChangeDetectorStatus[ChangeDetectorStatus["Detached"] = 3] = "Detached";
         /**
-         * `OnPush` means that the change detector's mode will be set to `CheckOnce` during hydration.
+         * `Errored` means that the change detector encountered an error checking a binding
+         * or calling a directive lifecycle method and is now in an inconsistent state. Change
+         * detectors in this state will no longer detect changes.
          */
-        ChangeDetectionStrategy[ChangeDetectionStrategy["OnPush"] = 4] = "OnPush";
+        ChangeDetectorStatus[ChangeDetectorStatus["Errored"] = 4] = "Errored";
         /**
-         * `Default` means that the change detector's mode will be set to `CheckAlways` during hydration.
+         * `Destroyed` means that the change detector is destroyed.
          */
-        ChangeDetectionStrategy[ChangeDetectionStrategy["Default"] = 5] = "Default";
-    })(exports.ChangeDetectionStrategy || (exports.ChangeDetectionStrategy = {}));
+        ChangeDetectorStatus[ChangeDetectorStatus["Destroyed"] = 5] = "Destroyed";
+    })(ChangeDetectorStatus || (ChangeDetectorStatus = {}));
     /**
      * List of possible {@link ChangeDetectionStrategy} values.
      */
     var CHANGE_DETECTION_STRATEGY_VALUES = [
-        exports.ChangeDetectionStrategy.CheckOnce,
-        exports.ChangeDetectionStrategy.Checked,
-        exports.ChangeDetectionStrategy.CheckAlways,
-        exports.ChangeDetectionStrategy.Detached,
         exports.ChangeDetectionStrategy.OnPush,
         exports.ChangeDetectionStrategy.Default,
     ];
@@ -1696,7 +1701,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     var ComponentMetadata = (function (_super) {
         __extends(ComponentMetadata, _super);
         function ComponentMetadata(_a) {
-            var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, exportAs = _b.exportAs, moduleId = _b.moduleId, providers = _b.providers, viewProviders = _b.viewProviders, _c = _b.changeDetection, changeDetection = _c === void 0 ? exports.ChangeDetectionStrategy.Default : _c, queries = _b.queries, templateUrl = _b.templateUrl, template = _b.template, styleUrls = _b.styleUrls, styles = _b.styles, animations = _b.animations, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, interpolation = _b.interpolation;
+            var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, exportAs = _b.exportAs, moduleId = _b.moduleId, providers = _b.providers, viewProviders = _b.viewProviders, _c = _b.changeDetection, changeDetection = _c === void 0 ? exports.ChangeDetectionStrategy.Default : _c, queries = _b.queries, templateUrl = _b.templateUrl, template = _b.template, styleUrls = _b.styleUrls, styles = _b.styles, animations = _b.animations, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, interpolation = _b.interpolation, precompile = _b.precompile;
             _super.call(this, {
                 selector: selector,
                 inputs: inputs,
@@ -1720,6 +1725,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.moduleId = moduleId;
             this.animations = animations;
             this.interpolation = interpolation;
+            this.precompile = precompile;
         }
         Object.defineProperty(ComponentMetadata.prototype, "viewProviders", {
             /**
@@ -1983,6 +1989,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         return HostListenerMetadata;
     }());
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * Defines template and style encapsulation options available for Component's {@link View}.
      *
      * See {@link ViewMetadata#encapsulation}.
@@ -2041,6 +2054,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * }
      * ```
      * @ts2dart_const
+     *
+     * @experimental You should most likely be using ComponentMetadata instead.
      */
     var ViewMetadata = (function () {
         function ViewMetadata(_a) {
@@ -2057,6 +2072,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return ViewMetadata;
     }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * @stable
      */
@@ -3086,7 +3108,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   overlayManager:OverlayManager; // NOT YET IMPLEMENTED
      *
      *   constructor(overlayManager:OverlayManager) {
-     *     this.overlay = overlay;
+     *     this.overlayManager = overlayManager;
      *   }
      *
      *   onMouseEnter() {
@@ -3845,6 +3867,13 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var SkipSelf = makeParamDecorator(SkipSelfMetadata);
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * A base class for the WrappedException that can be used to identify
      * a WrappedException from ExceptionHandler without adding circular
      * dependency.
@@ -4478,9 +4507,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 res.push(keys[i]);
                 return res;
             }
-            else {
-                res.push(keys[i]);
-            }
+            res.push(keys[i]);
         }
         return res;
     }
@@ -4490,9 +4517,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             var tokenStrs = reversed.map(function (k) { return stringify(k.token); });
             return ' (' + tokenStrs.join(' -> ') + ')';
         }
-        else {
-            return '';
-        }
+        return '';
     }
     /**
      * Base class for all errors arising from misconfigured providers.
@@ -4599,7 +4624,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var InstantiationError = (function (_super) {
         __extends(InstantiationError, _super);
-        function InstantiationError(injector, originalException /** TODO #9100 */, originalStack /** TODO #9100 */, key) {
+        function InstantiationError(injector, originalException, originalStack, key) {
             _super.call(this, 'DI Exception', originalException, originalStack, null);
             this.keys = [key];
             this.injectors = [injector];
@@ -4641,7 +4666,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var InvalidProviderError = (function (_super) {
         __extends(InvalidProviderError, _super);
-        function InvalidProviderError(provider /** TODO #9100 */) {
+        function InvalidProviderError(provider) {
             _super.call(this, "Invalid provider - only instances of Provider and Type are allowed, got: " + provider);
         }
         return InvalidProviderError;
@@ -4677,10 +4702,10 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var NoAnnotationError = (function (_super) {
         __extends(NoAnnotationError, _super);
-        function NoAnnotationError(typeOrFunc /** TODO #9100 */, params) {
+        function NoAnnotationError(typeOrFunc, params) {
             _super.call(this, NoAnnotationError._genMessage(typeOrFunc, params));
         }
-        NoAnnotationError._genMessage = function (typeOrFunc /** TODO #9100 */, params) {
+        NoAnnotationError._genMessage = function (typeOrFunc, params) {
             var signature = [];
             for (var i = 0, ii = params.length; i < ii; i++) {
                 var parameter = params[i];
@@ -4714,7 +4739,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var OutOfBoundsError = (function (_super) {
         __extends(OutOfBoundsError, _super);
-        function OutOfBoundsError(index /** TODO #9100 */) {
+        function OutOfBoundsError(index) {
             _super.call(this, "Index " + index + " is out-of-bounds.");
         }
         return OutOfBoundsError;
@@ -4734,7 +4759,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var MixingMultiProvidersWithRegularProvidersError = (function (_super) {
         __extends(MixingMultiProvidersWithRegularProvidersError, _super);
-        function MixingMultiProvidersWithRegularProvidersError(provider1 /** TODO #9100 */, provider2 /** TODO #9100 */) {
+        function MixingMultiProvidersWithRegularProvidersError(provider1, provider2) {
             _super.call(this, 'Cannot mix multi providers and regular providers, got: ' + provider1.toString() + ' ' +
                 provider2.toString());
         }
@@ -5012,6 +5037,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
     }
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * Provides read-only access to reflection data about symbols. Used internally by Angular
      * to power dependency injection and compilation.
      */
@@ -5184,7 +5216,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @deprecated
      */
     var Provider = (function () {
-        function Provider(token /** TODO #9100 */, _a) {
+        function Provider(token, _a) {
             var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
             this.token = token;
             this.useClass = useClass;
@@ -5239,7 +5271,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var Binding = (function (_super) {
         __extends(Binding, _super);
-        function Binding(token /** TODO #9100 */, _a) {
+        function Binding(token, _a) {
             var toClass = _a.toClass, toValue = _a.toValue, toAlias = _a.toAlias, toFactory = _a.toFactory, deps = _a.deps, multi = _a.multi;
             _super.call(this, token, {
                 useClass: toClass,
@@ -5296,7 +5328,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * @deprecated
      */
-    function bind(token /** TODO #9100 */) {
+    function bind(token) {
         return new ProviderBuilder(token);
     }
     /**
@@ -5304,7 +5336,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @deprecated
      */
     var ProviderBuilder = (function () {
-        function ProviderBuilder(token /** TODO #9100 */) {
+        function ProviderBuilder(token) {
             this.token = token;
         }
         /**
@@ -5425,7 +5457,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * <!-- TODO: improve the docs -->
      * @deprecated
      */
-    function provide(token /** TODO #9100 */, _a) {
+    function provide(token, _a) {
         var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
         return new Provider(token, {
             useClass: useClass,
@@ -5504,7 +5536,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             resolvedDeps = _dependenciesFor(useClass);
         }
         else if (isPresent(provider.useExisting)) {
-            factoryFn = function (aliasInstance /** TODO #9100 */) { return aliasInstance; };
+            factoryFn = function (aliasInstance) { return aliasInstance; };
             resolvedDeps = [ReflectiveDependency.fromKey(ReflectiveKey.get(provider.useExisting))];
         }
         else if (isPresent(provider.useFactory)) {
@@ -5967,6 +5999,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * Notice, we don't use the `new` operator because we explicitly want to have the `Injector`
      * resolve all of the object's dependencies automatically.
+     *
+     * @stable
      */
     var ReflectiveInjector = (function () {
         function ReflectiveInjector() {
@@ -6469,12 +6503,19 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     var INJECTOR_KEY = ReflectiveKey.get(Injector);
     function _mapProviders(injector, fn) {
-        var res = [];
+        var res = new Array(injector._proto.numberOfProviders);
         for (var i = 0; i < injector._proto.numberOfProviders; ++i) {
-            res.push(fn(injector._proto.getProviderAtIndex(i)));
+            res[i] = fn(injector._proto.getProviderAtIndex(i));
         }
         return res;
     }
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * Creates a token that can be used in a DI Provider.
      *
@@ -6505,6 +6546,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         OpaqueToken.prototype.toString = function () { return "Token " + this._desc; };
         return OpaqueToken;
     }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var PromiseCompleter = (function () {
         function PromiseCompleter() {
             var _this = this;
@@ -7940,6 +7988,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         return SimpleChange;
     }());
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * @stable
      */
     var ChangeDetectorRef = (function () {
@@ -8034,11 +8089,20 @@ var __extends = (this && this.__extends) || function (d, b) {
         return RootRenderer;
     }());
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * A SecurityContext marks a location that has dangerous security implications, e.g. a DOM property
      * like `innerHTML` that could cause Cross Site Scripting (XSS) security bugs when improperly
      * handled.
      *
      * See DomSanitizationService for more details on security in Angular applications.
+     *
+     * @stable
      */
     var SecurityContext;
     (function (SecurityContext) {
@@ -8052,6 +8116,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     /**
      * SanitizationService is used by the views to sanitize potentially dangerous values. This is a
      * private API, use code should only refer to DomSanitizationService.
+     *
+     * @stable
      */
     var SanitizationService = (function () {
         function SanitizationService() {
@@ -8059,10 +8125,23 @@ var __extends = (this && this.__extends) || function (d, b) {
         return SanitizationService;
     }());
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * A wrapper around a native element inside of a View.
      *
      * An `ElementRef` is backed by a render-specific element. In the browser, this is usually a DOM
      * element.
+     *
+     * @security Permitting direct access to the DOM can make your application more vulnerable to
+     * XSS attacks. Carefully review any use of `ElementRef` in your code. For more detail, see the
+     * [Security Guide](http://g.co/ng/security).
+     *
+     * @stable
      */
     // Note: We don't expose things like `Injector`, `ViewContainer`, ... here,
     // i.e. users have to ask for what they need. With that, we can build better analysis tools
@@ -8316,6 +8395,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return ViewContainerRef_;
     }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var ViewType;
     (function (ViewType) {
         // A view that contains the host element with bound component directive.
@@ -8894,6 +8980,9 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @ts2dart_const
      */
     var EMPTY_CONTEXT = new Object();
+    /**
+     * @stable
+     */
     var ComponentFactory = (function () {
         function ComponentFactory(selector, _viewFactory, _componentType) {
             this.selector = selector;
@@ -8958,6 +9047,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     ReflectorComponentResolver.decorators = [
         { type: Injectable },
     ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * Stores error information; delivered via [NgZone.onError] stream.
      * @deprecated
@@ -9433,7 +9529,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * One important assertion this disables verifies that a change detection pass
      * does not result in additional changes to any bindings (also known as
      * unidirectional data flow).
-     * @stable
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function enableProdMode() {
         if (_runModeLocked) {
@@ -9447,6 +9544,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * This can only be read after `lockRunMode` has been called.
      *
      * By default, this is true, unless a user calls `enableProdMode`.
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function isDevMode() {
         if (!_runModeLocked) {
@@ -9458,6 +9557,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Locks the run mode of Angular. After this has been called,
      * it can't be changed any more. I.e. `isDevMode()` will always
      * return the same value.
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function lockRunMode() {
         _runModeLocked = true;
@@ -9465,7 +9566,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     /**
      * Creates a platform.
      * Platforms have to be eagerly created via this function.
-     * @experimental
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function createPlatform(injector) {
         if (_inPlatformCreate) {
@@ -9487,7 +9589,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     /**
      * Checks that there currently is a platform
      * which contains the given token as a provider.
-     * @experimental
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function assertPlatform(requiredToken) {
         var platform = getPlatform();
@@ -9501,7 +9604,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     /**
      * Dispose the existing platform.
-     * @experimental
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function disposePlatform() {
         if (isPresent(_platform) && !_platform.disposed) {
@@ -9510,7 +9614,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     /**
      * Returns the current platform.
-     * @experimental
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function getPlatform() {
         return isPresent(_platform) && !_platform.disposed ? _platform : null;
@@ -9518,7 +9623,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     /**
      * Shortcut for ApplicationRef.bootstrap.
      * Requires a platform to be created first.
-     * @experimental
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function coreBootstrap(componentFactory, injector) {
         var appRef = injector.get(ApplicationRef);
@@ -9528,7 +9634,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Resolves the componentFactory for the given component,
      * waits for asynchronous initializers and bootstraps the component.
      * Requires a platform to be created first.
-     * @experimental
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     function coreLoadAndBootstrap(componentType, injector) {
         var appRef = injector.get(ApplicationRef);
@@ -9546,7 +9653,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * A page's platform is initialized implicitly when {@link bootstrap}() is called, or
      * explicitly by calling {@link createPlatform}().
-     * @stable
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     var PlatformRef = (function () {
         function PlatformRef() {
@@ -9618,7 +9726,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * A reference to an Angular application running on a page.
      *
      * For more about Angular applications, see the documentation for {@link bootstrap}.
-     * @stable
+     *
+     * @experimental APIs related to application bootstrap are currently under review.
      */
     var ApplicationRef = (function () {
         function ApplicationRef() {
@@ -9846,6 +9955,84 @@ var __extends = (this && this.__extends) || function (d, b) {
         /* @ts2dart_Provider */ { provide: ApplicationRef, useExisting: ApplicationRef_ },
     ];
     /**
+     * Low-level service for running the angular compiler duirng runtime
+     * to create {@link ComponentFactory}s, which
+     * can later be used to create and render a Component instance.
+     * @stable
+     */
+    var Compiler = (function () {
+        function Compiler() {
+        }
+        /**
+         * Loads the template and styles of a component and returns the associated `ComponentFactory`.
+         */
+        Compiler.prototype.compileComponentAsync = function (component) {
+            throw new BaseException("Runtime compiler is not loaded. Tried to compile " + stringify(component));
+        };
+        /**
+         * Compiles the given component. All templates have to be either inline or compiled via
+         * `compileComponentAsync` before.
+         */
+        Compiler.prototype.compileComponentSync = function (component) {
+            throw new BaseException("Runtime compiler is not loaded. Tried to compile " + stringify(component));
+        };
+        /**
+         * Clears all caches
+         */
+        Compiler.prototype.clearCache = function () { };
+        /**
+         * Clears the cache for the given component.
+         */
+        Compiler.prototype.clearCacheFor = function (compType) { };
+        return Compiler;
+    }());
+    /**
+     * @stable
+     */
+    var NoComponentFactoryError = (function (_super) {
+        __extends(NoComponentFactoryError, _super);
+        function NoComponentFactoryError(component) {
+            _super.call(this, "No component factory found for " + stringify(component));
+            this.component = component;
+        }
+        return NoComponentFactoryError;
+    }(BaseException));
+    var _NullComponentFactoryResolver = (function () {
+        function _NullComponentFactoryResolver() {
+        }
+        _NullComponentFactoryResolver.prototype.resolveComponentFactory = function (component) {
+            throw new NoComponentFactoryError(component);
+        };
+        return _NullComponentFactoryResolver;
+    }());
+    /**
+     * @stable
+     */
+    var ComponentFactoryResolver = (function () {
+        function ComponentFactoryResolver() {
+        }
+        return ComponentFactoryResolver;
+    }());
+    ComponentFactoryResolver.NULL = new _NullComponentFactoryResolver();
+    var CodegenComponentFactoryResolver = (function () {
+        function CodegenComponentFactoryResolver(factories, _parent) {
+            this._parent = _parent;
+            this._factories = new Map();
+            for (var i = 0; i < factories.length; i++) {
+                var factory = factories[i];
+                this._factories.set(factory.componentType, factory);
+            }
+        }
+        CodegenComponentFactoryResolver.prototype.resolveComponentFactory = function (component) {
+            var result = this._factories.get(component);
+            if (!result) {
+                result = this._parent.resolveComponentFactory(component);
+            }
+            return result;
+        };
+        return CodegenComponentFactoryResolver;
+    }());
+    /**
      * Use ComponentResolver and ViewContainerRef directly.
      *
      * @deprecated
@@ -9931,40 +10118,48 @@ var __extends = (this && this.__extends) || function (d, b) {
             configurable: true
         });
         Object.defineProperty(QueryList.prototype, "first", {
-            get: function () { return ListWrapper.first(this._results); },
+            get: function () { return this._results[0]; },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(QueryList.prototype, "last", {
-            get: function () { return ListWrapper.last(this._results); },
+            get: function () { return this._results[this.length - 1]; },
             enumerable: true,
             configurable: true
         });
         /**
-         * returns a new array with the passed in function applied to each element.
+         * See
+         * [Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
          */
         QueryList.prototype.map = function (fn) { return this._results.map(fn); };
         /**
-         * returns a filtered array.
+         * See
+         * [Array.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
          */
-        QueryList.prototype.filter = function (fn) { return this._results.filter(fn); };
+        QueryList.prototype.filter = function (fn) {
+            return this._results.filter(fn);
+        };
         /**
-         * returns a reduced value.
+         * See
+         * [Array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
          */
         QueryList.prototype.reduce = function (fn, init) {
             return this._results.reduce(fn, init);
         };
         /**
-         * executes function for each element in a query.
+         * See
+         * [Array.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
          */
         QueryList.prototype.forEach = function (fn) { this._results.forEach(fn); };
         /**
-         * converts QueryList into an array
+         * See
+         * [Array.some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
          */
-        QueryList.prototype.toArray = function () { return ListWrapper.clone(this._results); };
-        QueryList.prototype[getSymbolIterator()] = function () {
-            return this._results[getSymbolIterator()]();
+        QueryList.prototype.some = function (fn) {
+            return this._results.some(fn);
         };
+        QueryList.prototype.toArray = function () { return this._results.slice(); };
+        QueryList.prototype[getSymbolIterator()] = function () { return this._results[getSymbolIterator()](); };
         QueryList.prototype.toString = function () { return this._results.toString(); };
         QueryList.prototype.reset = function (res) {
             this._results = ListWrapper.flatten(res);
@@ -10198,7 +10393,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             configurable: true
         });
         ViewRef_.prototype.markForCheck = function () { this._view.markPathToRootAsCheckOnce(); };
-        ViewRef_.prototype.detach = function () { this._view.cdMode = exports.ChangeDetectionStrategy.Detached; };
+        ViewRef_.prototype.detach = function () { this._view.cdMode = ChangeDetectorStatus.Detached; };
         ViewRef_.prototype.detectChanges = function () { this._view.detectChanges(false); };
         ViewRef_.prototype.checkNoChanges = function () { this._view.detectChanges(true); };
         ViewRef_.prototype.reattach = function () {
@@ -10218,7 +10413,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return EventListener;
     }());
     /**
-     * @experimental
+     * @experimental All debugging apis are currently experimental.
      */
     var DebugNode = (function () {
         function DebugNode(nativeNode, parent, _debugInfo) {
@@ -10277,7 +10472,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return DebugNode;
     }());
     /**
-     * @experimental
+     * @experimental All debugging apis are currently experimental.
      */
     var DebugElement = (function (_super) {
         __extends(DebugElement, _super);
@@ -10474,16 +10669,27 @@ var __extends = (this && this.__extends) || function (d, b) {
     /*@ts2dart_const*/ [
         APPLICATION_CORE_PROVIDERS,
         /* @ts2dart_Provider */ { provide: ComponentResolver, useClass: ReflectorComponentResolver },
+        { provide: ComponentFactoryResolver, useValue: ComponentFactoryResolver.NULL },
         APP_ID_RANDOM_PROVIDER,
         ViewUtils,
         /* @ts2dart_Provider */ { provide: IterableDiffers, useValue: defaultIterableDiffers },
         /* @ts2dart_Provider */ { provide: KeyValueDiffers, useValue: defaultKeyValueDiffers },
         /* @ts2dart_Provider */ { provide: DynamicComponentLoader, useClass: DynamicComponentLoader_ },
     ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var FILL_STYLE_FLAG = 'true'; // TODO (matsko): change to boolean
     var ANY_STATE = '*';
     var DEFAULT_STATE = '*';
     var EMPTY_STATE = 'void';
+    /**
+     * @experimental Animation support is experimental.
+     */
     var AnimationPlayer = (function () {
         function AnimationPlayer() {
         }
@@ -10595,6 +10801,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return AnimationGroupPlayer;
     }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var AnimationKeyframe = (function () {
         function AnimationKeyframe(offset, styles) {
             this.offset = offset;
@@ -10666,11 +10879,16 @@ var __extends = (this && this.__extends) || function (d, b) {
         AnimationSequencePlayer.prototype.getPosition = function () { return this._players[0].getPosition(); };
         return AnimationSequencePlayer;
     }());
+    /**
+     * @experimental Animation support is experimental.
+     */
     var AUTO_STYLE = '*';
     /**
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link trigger trigger
      * animation function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationEntryMetadata = (function () {
         function AnimationEntryMetadata(name, definitions) {
@@ -10679,6 +10897,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return AnimationEntryMetadata;
     }());
+    /**
+     * @experimental Animation support is experimental.
+     */
     var AnimationStateMetadata = (function () {
         function AnimationStateMetadata() {
         }
@@ -10688,6 +10909,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link state state animation
      * function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationStateDeclarationMetadata = (function (_super) {
         __extends(AnimationStateDeclarationMetadata, _super);
@@ -10702,6 +10925,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the
      * {@link transition transition animation function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationStateTransitionMetadata = (function (_super) {
         __extends(AnimationStateTransitionMetadata, _super);
@@ -10712,6 +10937,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return AnimationStateTransitionMetadata;
     }(AnimationStateMetadata));
+    /**
+     * @experimental Animation support is experimental.
+     */
     var AnimationMetadata = (function () {
         function AnimationMetadata() {
         }
@@ -10721,6 +10949,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link keyframes keyframes
      * animation function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationKeyframesSequenceMetadata = (function (_super) {
         __extends(AnimationKeyframesSequenceMetadata, _super);
@@ -10734,6 +10964,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link style style animation
      * function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationStyleMetadata = (function (_super) {
         __extends(AnimationStyleMetadata, _super);
@@ -10749,6 +10981,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link animate animate
      * animation function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationAnimateMetadata = (function (_super) {
         __extends(AnimationAnimateMetadata, _super);
@@ -10759,6 +10993,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return AnimationAnimateMetadata;
     }(AnimationMetadata));
+    /**
+     * @experimental Animation support is experimental.
+     */
     var AnimationWithStepsMetadata = (function (_super) {
         __extends(AnimationWithStepsMetadata, _super);
         function AnimationWithStepsMetadata() {
@@ -10775,6 +11012,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link sequence sequence
      * animation function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationSequenceMetadata = (function (_super) {
         __extends(AnimationSequenceMetadata, _super);
@@ -10793,6 +11032,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Metadata representing the entry of animations.
      * Instances of this class are provided via the animation DSL when the {@link group group animation
      * function} is called.
+     *
+     * @experimental Animation support is experimental.
      */
     var AnimationGroupMetadata = (function (_super) {
         __extends(AnimationGroupMetadata, _super);
@@ -10856,6 +11097,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function animate(timing, styles) {
         if (styles === void 0) { styles = null; }
@@ -10901,6 +11144,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function group(steps) {
         return new AnimationGroupMetadata(steps);
@@ -10941,6 +11186,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function sequence(steps) {
         return new AnimationSequenceMetadata(steps);
@@ -10989,6 +11236,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function style(tokens) {
         var input;
@@ -11063,6 +11312,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function state(stateNameExpr, styles) {
         return new AnimationStateDeclarationMetadata(stateNameExpr, styles);
@@ -11113,6 +11364,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function keyframes(steps) {
         return new AnimationKeyframesSequenceMetadata(steps);
@@ -11202,6 +11455,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function transition(stateChangeExpr, steps) {
         var animationData = isArray(steps) ? new AnimationSequenceMetadata(steps) :
@@ -11261,6 +11516,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
      *
      * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+     *
+     * @experimental Animation support is experimental.
      */
     function trigger(name, animation) {
         return new AnimationEntryMetadata(name, animation);
@@ -11352,6 +11609,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return finalStyles;
     }
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var AnimationStyles = (function () {
         function AnimationStyles(styles) {
             this.styles = styles;
@@ -11678,10 +11942,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.contentChildren = [];
             this.viewChildren = [];
             this.viewContainerElement = null;
-            // The names of the below fields must be kept in sync with codegen_name_util.ts or
-            // change detection will fail.
-            this.cdState = ChangeDetectorState.NeverChecked;
-            this.destroyed = false;
+            this.numberOfChecks = 0;
             this.activeAnimationPlayers = new ActiveAnimationPlayersMap();
             this.ref = new ViewRef_(this);
             if (type === ViewType.COMPONENT || type === ViewType.HOST) {
@@ -11691,6 +11952,11 @@ var __extends = (this && this.__extends) || function (d, b) {
                 this.renderer = declarationAppElement.parentView.renderer;
             }
         }
+        Object.defineProperty(AppView.prototype, "destroyed", {
+            get: function () { return this.cdMode === ChangeDetectorStatus.Destroyed; },
+            enumerable: true,
+            configurable: true
+        });
         AppView.prototype.cancelActiveAnimation = function (element, animationName, removeAllAnimations) {
             if (removeAllAnimations === void 0) { removeAllAnimations = false; }
             if (removeAllAnimations) {
@@ -11783,7 +12049,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._destroyRecurse();
         };
         AppView.prototype._destroyRecurse = function () {
-            if (this.destroyed) {
+            if (this.cdMode === ChangeDetectorStatus.Destroyed) {
                 return;
             }
             var children = this.contentChildren;
@@ -11795,7 +12061,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 children[i]._destroyRecurse();
             }
             this.destroyLocal();
-            this.destroyed = true;
+            this.cdMode = ChangeDetectorStatus.Destroyed;
         };
         AppView.prototype.destroyLocal = function () {
             var _this = this;
@@ -11868,16 +12134,16 @@ var __extends = (this && this.__extends) || function (d, b) {
         AppView.prototype.dirtyParentQueriesInternal = function () { };
         AppView.prototype.detectChanges = function (throwOnChange) {
             var s = _scope_check(this.clazz);
-            if (this.cdMode === exports.ChangeDetectionStrategy.Checked ||
-                this.cdState === ChangeDetectorState.Errored)
+            if (this.cdMode === ChangeDetectorStatus.Checked ||
+                this.cdMode === ChangeDetectorStatus.Errored)
                 return;
-            if (this.destroyed) {
+            if (this.cdMode === ChangeDetectorStatus.Destroyed) {
                 this.throwDestroyedError('detectChanges');
             }
             this.detectChangesInternal(throwOnChange);
-            if (this.cdMode === exports.ChangeDetectionStrategy.CheckOnce)
-                this.cdMode = exports.ChangeDetectionStrategy.Checked;
-            this.cdState = ChangeDetectorState.CheckedBefore;
+            if (this.cdMode === ChangeDetectorStatus.CheckOnce)
+                this.cdMode = ChangeDetectorStatus.Checked;
+            this.numberOfChecks++;
             wtfLeave(s);
         };
         /**
@@ -11890,7 +12156,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         AppView.prototype.detectContentChildrenChanges = function (throwOnChange) {
             for (var i = 0; i < this.contentChildren.length; ++i) {
                 var child = this.contentChildren[i];
-                if (child.cdMode === exports.ChangeDetectionStrategy.Detached)
+                if (child.cdMode === ChangeDetectorStatus.Detached)
                     continue;
                 child.detectChanges(throwOnChange);
             }
@@ -11898,7 +12164,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         AppView.prototype.detectViewChildrenChanges = function (throwOnChange) {
             for (var i = 0; i < this.viewChildren.length; ++i) {
                 var child = this.viewChildren[i];
-                if (child.cdMode === exports.ChangeDetectionStrategy.Detached)
+                if (child.cdMode === ChangeDetectorStatus.Detached)
                     continue;
                 child.detectChanges(throwOnChange);
             }
@@ -11913,12 +12179,12 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.dirtyParentQueriesInternal();
             this.viewContainerElement = null;
         };
-        AppView.prototype.markAsCheckOnce = function () { this.cdMode = exports.ChangeDetectionStrategy.CheckOnce; };
+        AppView.prototype.markAsCheckOnce = function () { this.cdMode = ChangeDetectorStatus.CheckOnce; };
         AppView.prototype.markPathToRootAsCheckOnce = function () {
             var c = this;
-            while (isPresent(c) && c.cdMode !== exports.ChangeDetectionStrategy.Detached) {
-                if (c.cdMode === exports.ChangeDetectionStrategy.Checked) {
-                    c.cdMode = exports.ChangeDetectionStrategy.CheckOnce;
+            while (isPresent(c) && c.cdMode !== ChangeDetectorStatus.Detached) {
+                if (c.cdMode === ChangeDetectorStatus.Checked) {
+                    c.cdMode = ChangeDetectorStatus.CheckOnce;
                 }
                 var parentEl = c.type === ViewType.COMPONENT ? c.declarationAppElement : c.viewContainerElement;
                 c = isPresent(parentEl) ? parentEl.parentView : null;
@@ -11992,7 +12258,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         DebugAppView.prototype._rethrowWithContext = function (e, stack) {
             if (!(e instanceof ViewWrappedException)) {
                 if (!(e instanceof ExpressionChangedAfterItHasBeenCheckedException)) {
-                    this.cdState = ChangeDetectorState.Errored;
+                    this.cdMode = ChangeDetectorStatus.Errored;
                 }
                 if (isPresent(this._currentDebugContext)) {
                     throw new ViewWrappedException(e, stack, this._currentDebugContext);
@@ -12036,18 +12302,26 @@ var __extends = (this && this.__extends) || function (d, b) {
         return lastNode;
     }
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * This is here because DART requires it. It is noop in JS.
      */
     function wtfInit() { }
     var __core_private__ = {
         isDefaultChangeDetectionStrategy: isDefaultChangeDetectionStrategy,
-        ChangeDetectorState: ChangeDetectorState,
+        ChangeDetectorStatus: ChangeDetectorStatus,
         CHANGE_DETECTION_STRATEGY_VALUES: CHANGE_DETECTION_STRATEGY_VALUES,
         constructDependencies: constructDependencies,
         LifecycleHooks: LifecycleHooks,
         LIFECYCLE_HOOKS_VALUES: LIFECYCLE_HOOKS_VALUES,
         ReflectorReader: ReflectorReader,
         ReflectorComponentResolver: ReflectorComponentResolver,
+        CodegenComponentFactoryResolver: CodegenComponentFactoryResolver,
         AppElement: AppElement,
         AppView: AppView,
         DebugAppView: DebugAppView,
@@ -12212,8 +12486,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.RenderComponentType = RenderComponentType;
     exports.Renderer = Renderer;
     exports.RootRenderer = RootRenderer;
+    exports.Compiler = Compiler;
     exports.ComponentFactory = ComponentFactory;
     exports.ComponentRef = ComponentRef;
+    exports.ComponentFactoryResolver = ComponentFactoryResolver;
+    exports.NoComponentFactoryError = NoComponentFactoryError;
     exports.ComponentResolver = ComponentResolver;
     exports.DynamicComponentLoader = DynamicComponentLoader;
     exports.ElementRef = ElementRef;

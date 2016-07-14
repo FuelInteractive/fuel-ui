@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 export const $EOF = 0;
 export const $TAB = 9;
 export const $LF = 10;
@@ -55,7 +62,17 @@ export const $NBSP = 160;
 export const $PIPE = 124;
 export const $TILDA = 126;
 export const $AT = 64;
+export const $BT = 96;
 export function isWhitespace(code) {
     return (code >= $TAB && code <= $SPACE) || (code == $NBSP);
+}
+export function isDigit(code) {
+    return $0 <= code && code <= $9;
+}
+export function isAsciiLetter(code) {
+    return code >= $a && code <= $z || code >= $A && code <= $Z;
+}
+export function isAsciiHexDigit(code) {
+    return code >= $a && code <= $f || code >= $A && code <= $F || isDigit(code);
 }
 //# sourceMappingURL=chars.js.map

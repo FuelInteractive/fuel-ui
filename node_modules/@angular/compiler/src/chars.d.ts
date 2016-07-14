@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 export declare const $EOF: number;
 export declare const $TAB: number;
 export declare const $LF: number;
@@ -55,4 +62,8 @@ export declare const $NBSP: number;
 export declare const $PIPE: number;
 export declare const $TILDA: number;
 export declare const $AT: number;
+export declare const $BT: number;
 export declare function isWhitespace(code: number): boolean;
+export declare function isDigit(code: number): boolean;
+export declare function isAsciiLetter(code: number): boolean;
+export declare function isAsciiHexDigit(code: number): boolean;

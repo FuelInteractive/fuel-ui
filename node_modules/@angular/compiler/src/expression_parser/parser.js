@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -5,6 +12,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
+var chars = require('../chars');
 var collection_1 = require('../facade/collection');
 var exceptions_1 = require('../facade/exceptions');
 var lang_1 = require('../facade/lang');
@@ -139,7 +147,7 @@ var Parser = (function () {
         for (var i = 0; i < input.length - 1; i++) {
             var char = lang_1.StringWrapper.charCodeAt(input, i);
             var nextChar = lang_1.StringWrapper.charCodeAt(input, i + 1);
-            if (char === lexer_1.$SLASH && nextChar == lexer_1.$SLASH && lang_1.isBlank(outerQuote))
+            if (char === chars.$SLASH && nextChar == chars.$SLASH && lang_1.isBlank(outerQuote))
                 return i;
             if (outerQuote === char) {
                 outerQuote = null;
@@ -254,11 +262,11 @@ var _ParseAST = (function () {
         while (this.index < this.tokens.length) {
             var expr = this.parsePipe();
             exprs.push(expr);
-            if (this.optionalCharacter(lexer_1.$SEMICOLON)) {
+            if (this.optionalCharacter(chars.$SEMICOLON)) {
                 if (!this.parseAction) {
                     this.error('Binding expression cannot contain chained expression');
                 }
-                while (this.optionalCharacter(lexer_1.$SEMICOLON)) {
+                while (this.optionalCharacter(chars.$SEMICOLON)) {
                 } // read all semicolons
             }
             else if (this.index < this.tokens.length) {
@@ -280,7 +288,7 @@ var _ParseAST = (function () {
             do {
                 var name = this.expectIdentifierOrKeyword();
                 var args = [];
-                while (this.optionalCharacter(lexer_1.$COLON)) {
+                while (this.optionalCharacter(chars.$COLON)) {
                     args.push(this.parseExpression());
                 }
                 result = new ast_1.BindingPipe(result, name, args);
@@ -294,7 +302,7 @@ var _ParseAST = (function () {
         var result = this.parseLogicalOr();
         if (this.optionalOperator('?')) {
             var yes = this.parsePipe();
-            if (!this.optionalCharacter(lexer_1.$COLON)) {
+            if (!this.optionalCharacter(chars.$COLON)) {
                 var end = this.inputIndex;
                 var expression = this.input.substring(start, end);
                 this.error("Conditional expression " + expression + " requires all 3 expressions");
@@ -414,15 +422,15 @@ var _ParseAST = (function () {
     _ParseAST.prototype.parseCallChain = function () {
         var result = this.parsePrimary();
         while (true) {
-            if (this.optionalCharacter(lexer_1.$PERIOD)) {
+            if (this.optionalCharacter(chars.$PERIOD)) {
                 result = this.parseAccessMemberOrMethodCall(result, false);
             }
             else if (this.optionalOperator('?.')) {
                 result = this.parseAccessMemberOrMethodCall(result, true);
             }
-            else if (this.optionalCharacter(lexer_1.$LBRACKET)) {
+            else if (this.optionalCharacter(chars.$LBRACKET)) {
                 var key = this.parsePipe();
-                this.expectCharacter(lexer_1.$RBRACKET);
+                this.expectCharacter(chars.$RBRACKET);
                 if (this.optionalOperator('=')) {
                     var value = this.parseConditional();
                     result = new ast_1.KeyedWrite(result, key, value);
@@ -431,9 +439,9 @@ var _ParseAST = (function () {
                     result = new ast_1.KeyedRead(result, key);
                 }
             }
-            else if (this.optionalCharacter(lexer_1.$LPAREN)) {
+            else if (this.optionalCharacter(chars.$LPAREN)) {
                 var args = this.parseCallArguments();
-                this.expectCharacter(lexer_1.$RPAREN);
+                this.expectCharacter(chars.$RPAREN);
                 result = new ast_1.FunctionCall(result, args);
             }
             else {
@@ -442,9 +450,9 @@ var _ParseAST = (function () {
         }
     };
     _ParseAST.prototype.parsePrimary = function () {
-        if (this.optionalCharacter(lexer_1.$LPAREN)) {
+        if (this.optionalCharacter(chars.$LPAREN)) {
             var result = this.parsePipe();
-            this.expectCharacter(lexer_1.$RPAREN);
+            this.expectCharacter(chars.$RPAREN);
             return result;
         }
         else if (this.next.isKeywordNull() || this.next.isKeywordUndefined()) {
@@ -459,12 +467,12 @@ var _ParseAST = (function () {
             this.advance();
             return new ast_1.LiteralPrimitive(false);
         }
-        else if (this.optionalCharacter(lexer_1.$LBRACKET)) {
-            var elements = this.parseExpressionList(lexer_1.$RBRACKET);
-            this.expectCharacter(lexer_1.$RBRACKET);
+        else if (this.optionalCharacter(chars.$LBRACKET)) {
+            var elements = this.parseExpressionList(chars.$RBRACKET);
+            this.expectCharacter(chars.$RBRACKET);
             return new ast_1.LiteralArray(elements);
         }
-        else if (this.next.isCharacter(lexer_1.$LBRACE)) {
+        else if (this.next.isCharacter(chars.$LBRACE)) {
             return this.parseLiteralMap();
         }
         else if (this.next.isIdentifier()) {
@@ -494,31 +502,31 @@ var _ParseAST = (function () {
         if (!this.next.isCharacter(terminator)) {
             do {
                 result.push(this.parsePipe());
-            } while (this.optionalCharacter(lexer_1.$COMMA));
+            } while (this.optionalCharacter(chars.$COMMA));
         }
         return result;
     };
     _ParseAST.prototype.parseLiteralMap = function () {
         var keys = [];
         var values = [];
-        this.expectCharacter(lexer_1.$LBRACE);
-        if (!this.optionalCharacter(lexer_1.$RBRACE)) {
+        this.expectCharacter(chars.$LBRACE);
+        if (!this.optionalCharacter(chars.$RBRACE)) {
             do {
                 var key = this.expectIdentifierOrKeywordOrString();
                 keys.push(key);
-                this.expectCharacter(lexer_1.$COLON);
+                this.expectCharacter(chars.$COLON);
                 values.push(this.parsePipe());
-            } while (this.optionalCharacter(lexer_1.$COMMA));
-            this.expectCharacter(lexer_1.$RBRACE);
+            } while (this.optionalCharacter(chars.$COMMA));
+            this.expectCharacter(chars.$RBRACE);
         }
         return new ast_1.LiteralMap(keys, values);
     };
     _ParseAST.prototype.parseAccessMemberOrMethodCall = function (receiver, isSafe) {
         if (isSafe === void 0) { isSafe = false; }
         var id = this.expectIdentifierOrKeyword();
-        if (this.optionalCharacter(lexer_1.$LPAREN)) {
+        if (this.optionalCharacter(chars.$LPAREN)) {
             var args = this.parseCallArguments();
-            this.expectCharacter(lexer_1.$RPAREN);
+            this.expectCharacter(chars.$RPAREN);
             return isSafe ? new ast_1.SafeMethodCall(receiver, id, args) : new ast_1.MethodCall(receiver, id, args);
         }
         else {
@@ -546,12 +554,12 @@ var _ParseAST = (function () {
         return null;
     };
     _ParseAST.prototype.parseCallArguments = function () {
-        if (this.next.isCharacter(lexer_1.$RPAREN))
+        if (this.next.isCharacter(chars.$RPAREN))
             return [];
         var positionals = [];
         do {
             positionals.push(this.parsePipe());
-        } while (this.optionalCharacter(lexer_1.$COMMA));
+        } while (this.optionalCharacter(chars.$COMMA));
         return positionals;
     };
     /**
@@ -595,7 +603,7 @@ var _ParseAST = (function () {
                     key = prefix + key[0].toUpperCase() + key.substring(1);
                 }
             }
-            this.optionalCharacter(lexer_1.$COLON);
+            this.optionalCharacter(chars.$COLON);
             var name = null;
             var expression = null;
             if (keyIsVar) {
@@ -614,8 +622,8 @@ var _ParseAST = (function () {
                 expression = new ast_1.ASTWithSource(ast, source, this.location);
             }
             bindings.push(new ast_1.TemplateBinding(key, keyIsVar, name, expression));
-            if (!this.optionalCharacter(lexer_1.$SEMICOLON)) {
-                this.optionalCharacter(lexer_1.$COMMA);
+            if (!this.optionalCharacter(chars.$SEMICOLON)) {
+                this.optionalCharacter(chars.$COMMA);
             }
         }
         return new TemplateBindingParseResult(bindings, warnings);

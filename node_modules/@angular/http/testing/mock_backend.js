@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var core_1 = require('@angular/core');
 var ReplaySubject_1 = require('rxjs/ReplaySubject');
@@ -11,7 +18,8 @@ var static_request_1 = require('../src/static_request');
  *
  * Mock Connection to represent a {@link Connection} for tests.
  *
- **/
+ * @experimental
+ */
 var MockConnection = (function () {
     function MockConnection(req) {
         this.response = take_1.take.call(new ReplaySubject_1.ReplaySubject(1), 1);

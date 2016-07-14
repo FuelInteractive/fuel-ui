@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { unimplemented } from '../facade/exceptions';
 import { isPresent } from '../facade/lang';
 /**
@@ -18,6 +25,12 @@ export class AbstractControlDirective {
     get dirty() { return isPresent(this.control) ? this.control.dirty : null; }
     get touched() { return isPresent(this.control) ? this.control.touched : null; }
     get untouched() { return isPresent(this.control) ? this.control.untouched : null; }
+    get statusChanges() {
+        return isPresent(this.control) ? this.control.statusChanges : null;
+    }
+    get valueChanges() {
+        return isPresent(this.control) ? this.control.valueChanges : null;
+    }
     get path() { return null; }
 }
 //# sourceMappingURL=abstract_control_directive.js.map

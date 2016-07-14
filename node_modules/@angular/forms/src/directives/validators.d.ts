@@ -15,6 +15,8 @@ import { AbstractControl } from '../model';
  *   }
  * }
  * ```
+ *
+ * @experimental
  */
 export interface Validator {
     validate(c: AbstractControl): {
@@ -36,11 +38,17 @@ export declare const REQUIRED_VALIDATOR: any;
  */
 export declare class RequiredValidator {
 }
+/**
+ * @experimental
+ */
 export interface ValidatorFn {
     (c: AbstractControl): {
         [key: string]: any;
     };
 }
+/**
+ * @experimental
+ */
 export interface AsyncValidatorFn {
     (c: AbstractControl): any;
 }

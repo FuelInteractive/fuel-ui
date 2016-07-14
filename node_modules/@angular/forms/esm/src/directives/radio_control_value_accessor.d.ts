@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { ElementRef, Injector, OnDestroy, OnInit, Renderer } from '@angular/core';
 import { ControlValueAccessor } from './control_value_accessor';
 import { NgControl } from './ng_control';
@@ -37,6 +44,7 @@ export declare class RadioControlValueAccessor implements ControlValueAccessor, 
     onChange: () => void;
     onTouched: () => void;
     name: string;
+    formControlName: string;
     value: any;
     constructor(_renderer: Renderer, _elementRef: ElementRef, _registry: RadioControlRegistry, _injector: Injector);
     ngOnInit(): void;
@@ -45,4 +53,6 @@ export declare class RadioControlValueAccessor implements ControlValueAccessor, 
     registerOnChange(fn: (_: any) => {}): void;
     fireUncheck(value: any): void;
     registerOnTouched(fn: () => {}): void;
+    private _checkName();
+    private _throwNameError();
 }

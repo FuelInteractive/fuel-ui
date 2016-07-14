@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
@@ -10,7 +17,8 @@ import { Request } from '../src/static_request';
  *
  * Mock Connection to represent a {@link Connection} for tests.
  *
- **/
+ * @experimental
+ */
 export class MockConnection {
     constructor(req) {
         this.response = take.call(new ReplaySubject(1), 1);

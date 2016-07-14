@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var checkbox_value_accessor_1 = require('./directives/checkbox_value_accessor');
 var default_value_accessor_1 = require('./directives/default_value_accessor');
@@ -7,6 +14,7 @@ var ng_model_1 = require('./directives/ng_model');
 var ng_model_group_1 = require('./directives/ng_model_group');
 var number_value_accessor_1 = require('./directives/number_value_accessor');
 var radio_control_value_accessor_1 = require('./directives/radio_control_value_accessor');
+var form_array_name_1 = require('./directives/reactive_directives/form_array_name');
 var form_control_directive_1 = require('./directives/reactive_directives/form_control_directive');
 var form_control_name_1 = require('./directives/reactive_directives/form_control_name');
 var form_group_directive_1 = require('./directives/reactive_directives/form_group_directive');
@@ -32,6 +40,8 @@ var number_value_accessor_2 = require('./directives/number_value_accessor');
 exports.NumberValueAccessor = number_value_accessor_2.NumberValueAccessor;
 var radio_control_value_accessor_2 = require('./directives/radio_control_value_accessor');
 exports.RadioControlValueAccessor = radio_control_value_accessor_2.RadioControlValueAccessor;
+var form_array_name_2 = require('./directives/reactive_directives/form_array_name');
+exports.FormArrayName = form_array_name_2.FormArrayName;
 var form_control_directive_2 = require('./directives/reactive_directives/form_control_directive');
 exports.FormControlDirective = form_control_directive_2.FormControlDirective;
 var form_control_name_2 = require('./directives/reactive_directives/form_control_name');
@@ -75,6 +85,11 @@ exports.FORM_DIRECTIVES = [
     radio_control_value_accessor_1.RadioControlValueAccessor, ng_control_status_1.NgControlStatus,
     validators_1.RequiredValidator, validators_1.MinLengthValidator, validators_1.MaxLengthValidator, validators_1.PatternValidator
 ];
+/**
+ * @experimental
+ */
 exports.REACTIVE_FORM_DIRECTIVES = 
-/*@ts2dart_const*/ [form_control_directive_1.FormControlDirective, form_group_directive_1.FormGroupDirective, form_control_name_1.FormControlName, form_group_name_1.FormGroupName];
+/*@ts2dart_const*/ [
+    form_control_directive_1.FormControlDirective, form_group_directive_1.FormGroupDirective, form_control_name_1.FormControlName, form_group_name_1.FormGroupName, form_array_name_1.FormArrayName
+];
 //# sourceMappingURL=directives.js.map

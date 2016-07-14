@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Injectable } from '@angular/core';
 import { isPresent, isString } from '../src/facade/lang';
 import { RequestMethod } from './enums';
@@ -27,6 +34,8 @@ import { URLSearchParams } from './url_search_params';
  * console.log('req.method:', RequestMethod[req.method]); // Post
  * console.log('options.url:', options.url); // https://google.com
  * ```
+ *
+ * @experimental
  */
 export class RequestOptions {
     constructor({ method, headers, body, url, search, withCredentials } = {}) {

@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { BaseException } from '../src/facade/exceptions';
 import { isBlank } from '../src/facade/lang';
 import { isListLikeIterable, iterateListLike, Map, MapWrapper, StringMapWrapper, ListWrapper } from '../src/facade/collection';
@@ -26,6 +33,8 @@ import { isListLikeIterable, iterateListLike, Map, MapWrapper, StringMapWrapper,
  * var thirdHeaders = new Headers(secondHeaders);
  * console.log(thirdHeaders.get('X-My-Custom-Header')); //'Angular'
  * ```
+ *
+ * @experimental
  */
 export class Headers {
     constructor(headers) {

@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -64,17 +71,23 @@ var FormGroupDirective = (function (_super) {
         shared_1.setUpControl(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
         this.directives.push(dir);
-        return ctrl;
     };
     FormGroupDirective.prototype.getControl = function (dir) { return this.form.find(dir.path); };
     FormGroupDirective.prototype.removeControl = function (dir) { collection_1.ListWrapper.remove(this.directives, dir); };
     FormGroupDirective.prototype.addFormGroup = function (dir) {
         var ctrl = this.form.find(dir.path);
-        shared_1.setUpFormGroup(ctrl, dir);
+        shared_1.setUpFormContainer(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
     };
     FormGroupDirective.prototype.removeFormGroup = function (dir) { };
     FormGroupDirective.prototype.getFormGroup = function (dir) { return this.form.find(dir.path); };
+    FormGroupDirective.prototype.addFormArray = function (dir) {
+        var ctrl = this.form.find(dir.path);
+        shared_1.setUpFormContainer(ctrl, dir);
+        ctrl.updateValueAndValidity({ emitEvent: false });
+    };
+    FormGroupDirective.prototype.removeFormArray = function (dir) { };
+    FormGroupDirective.prototype.getFormArray = function (dir) { return this.form.find(dir.path); };
     FormGroupDirective.prototype.updateModel = function (dir, value) {
         var ctrl = this.form.find(dir.path);
         ctrl.updateValue(value);

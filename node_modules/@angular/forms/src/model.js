@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -123,6 +130,14 @@ var AbstractControl = (function () {
         enumerable: true,
         configurable: true
     });
+    AbstractControl.prototype.setAsyncValidators = function (newValidator) {
+        this.asyncValidator = coerceToAsyncValidator(newValidator);
+    };
+    AbstractControl.prototype.clearAsyncValidators = function () { this.asyncValidator = null; };
+    AbstractControl.prototype.setValidators = function (newValidator) {
+        this.validator = coerceToValidator(newValidator);
+    };
+    AbstractControl.prototype.clearValidators = function () { this.validator = null; };
     AbstractControl.prototype.markAsTouched = function () { this._touched = true; };
     AbstractControl.prototype.markAsDirty = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -203,13 +218,7 @@ var AbstractControl = (function () {
         var emitEvent = (_a === void 0 ? {} : _a).emitEvent;
         emitEvent = lang_1.isPresent(emitEvent) ? emitEvent : true;
         this._errors = errors;
-        this._status = this._calculateStatus();
-        if (emitEvent) {
-            async_1.ObservableWrapper.callEmit(this._statusChanges, this._status);
-        }
-        if (lang_1.isPresent(this._parent)) {
-            this._parent._updateControlsErrors();
-        }
+        this._updateControlsErrors(emitEvent);
     };
     AbstractControl.prototype.find = function (path) { return _find(this, path); };
     AbstractControl.prototype.getError = function (errorCode, path) {
@@ -238,10 +247,13 @@ var AbstractControl = (function () {
         configurable: true
     });
     /** @internal */
-    AbstractControl.prototype._updateControlsErrors = function () {
+    AbstractControl.prototype._updateControlsErrors = function (emitEvent) {
         this._status = this._calculateStatus();
+        if (emitEvent) {
+            async_1.ObservableWrapper.callEmit(this._statusChanges, this._status);
+        }
         if (lang_1.isPresent(this._parent)) {
-            this._parent._updateControlsErrors();
+            this._parent._updateControlsErrors(emitEvent);
         }
     };
     /** @internal */

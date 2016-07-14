@@ -7,6 +7,8 @@ import { Response } from '../static_response';
 import { BrowserJsonp } from './browser_jsonp';
 /**
  * Abstract base class for an in-flight JSONP request.
+ *
+ * @experimental
  */
 export declare abstract class JSONPConnection implements Connection {
     /**
@@ -39,6 +41,8 @@ export declare class JSONPConnection_ extends JSONPConnection {
 }
 /**
  * A {@link ConnectionBackend} that uses the JSONP strategy of making requests.
+ *
+ * @experimental
  */
 export declare abstract class JSONPBackend extends ConnectionBackend {
 }

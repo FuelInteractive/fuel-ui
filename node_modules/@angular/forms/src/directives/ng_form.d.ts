@@ -77,7 +77,7 @@ export declare class NgForm extends ControlContainer implements Form {
     controls: {
         [key: string]: AbstractControl;
     };
-    addControl(dir: NgModel): FormControl;
+    addControl(dir: NgModel): void;
     getControl(dir: NgModel): FormControl;
     removeControl(dir: NgModel): void;
     addFormGroup(dir: NgModelGroup): void;

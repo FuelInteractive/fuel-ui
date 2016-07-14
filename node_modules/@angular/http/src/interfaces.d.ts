@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { ReadyState, RequestMethod, ResponseType } from './enums';
 import { Headers } from './headers';
 import { Request } from './static_request';
@@ -7,25 +14,35 @@ import { URLSearchParams } from './url_search_params';
  *
  * The primary purpose of a `ConnectionBackend` is to create new connections to fulfill a given
  * {@link Request}.
+ *
+ * @experimental
  */
 export declare abstract class ConnectionBackend {
     abstract createConnection(request: any): Connection;
 }
 /**
  * Abstract class from which real connections are derived.
+ *
+ * @experimental
  */
 export declare abstract class Connection {
     readyState: ReadyState;
     request: Request;
     response: any;
 }
-/** An XSRFStrategy configures XSRF protection (e.g. via headers) on an HTTP request. */
+/**
+ * An XSRFStrategy configures XSRF protection (e.g. via headers) on an HTTP request.
+ *
+ * @experimental
+ */
 export declare abstract class XSRFStrategy {
     abstract configureRequest(req: Request): void;
 }
 /**
  * Interface for options to construct a RequestOptions, based on
  * [RequestInit](https://fetch.spec.whatwg.org/#requestinit) from the Fetch spec.
+ *
+ * @experimental
  */
 export interface RequestOptionsArgs {
     url?: string;
@@ -44,6 +61,8 @@ export interface RequestArgs extends RequestOptionsArgs {
 /**
  * Interface for options to construct a Response, based on
  * [ResponseInit](https://fetch.spec.whatwg.org/#responseinit) from the Fetch spec.
+ *
+ * @experimental
  */
 export declare type ResponseOptionsArgs = {
     body?: string | Object | FormData;

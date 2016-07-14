@@ -23,6 +23,8 @@
  * var thirdHeaders = new Headers(secondHeaders);
  * console.log(thirdHeaders.get('X-My-Custom-Header')); //'Angular'
  * ```
+ *
+ * @experimental
  */
 export declare class Headers {
     constructor(headers?: Headers | {

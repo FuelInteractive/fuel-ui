@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Directive, Inject, Input, Optional, Output, Self, forwardRef } from '@angular/core';
 import { EventEmitter, ObservableWrapper } from '../../facade/async';
 import { ListWrapper, StringMapWrapper } from '../../facade/collection';
@@ -5,7 +12,7 @@ import { BaseException } from '../../facade/exceptions';
 import { isBlank } from '../../facade/lang';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, Validators } from '../../validators';
 import { ControlContainer } from '../control_container';
-import { composeAsyncValidators, composeValidators, setUpControl, setUpFormGroup } from '../shared';
+import { composeAsyncValidators, composeValidators, setUpControl, setUpFormContainer } from '../shared';
 export const formDirectiveProvider = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: ControlContainer,
@@ -41,17 +48,23 @@ export class FormGroupDirective extends ControlContainer {
         setUpControl(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
         this.directives.push(dir);
-        return ctrl;
     }
     getControl(dir) { return this.form.find(dir.path); }
     removeControl(dir) { ListWrapper.remove(this.directives, dir); }
     addFormGroup(dir) {
         var ctrl = this.form.find(dir.path);
-        setUpFormGroup(ctrl, dir);
+        setUpFormContainer(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
     }
     removeFormGroup(dir) { }
     getFormGroup(dir) { return this.form.find(dir.path); }
+    addFormArray(dir) {
+        var ctrl = this.form.find(dir.path);
+        setUpFormContainer(ctrl, dir);
+        ctrl.updateValueAndValidity({ emitEvent: false });
+    }
+    removeFormArray(dir) { }
+    getFormArray(dir) { return this.form.find(dir.path); }
     updateModel(dir, value) {
         var ctrl = this.form.find(dir.path);
         ctrl.updateValue(value);

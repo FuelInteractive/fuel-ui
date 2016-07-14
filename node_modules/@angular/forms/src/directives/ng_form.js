@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -49,14 +56,12 @@ var NgForm = (function (_super) {
     });
     NgForm.prototype.addControl = function (dir) {
         var _this = this;
-        var ctrl = new model_1.FormControl();
         async_1.PromiseWrapper.scheduleMicrotask(function () {
             var container = _this._findContainer(dir.path);
-            dir._control = container.registerControl(dir.name, ctrl);
+            dir._control = container.registerControl(dir.name, dir.control);
             shared_1.setUpControl(dir.control, dir);
             dir.control.updateValueAndValidity({ emitEvent: false });
         });
-        return ctrl;
     };
     NgForm.prototype.getControl = function (dir) { return this.form.find(dir.path); };
     NgForm.prototype.removeControl = function (dir) {
@@ -73,7 +78,7 @@ var NgForm = (function (_super) {
         async_1.PromiseWrapper.scheduleMicrotask(function () {
             var container = _this._findContainer(dir.path);
             var group = new model_1.FormGroup({});
-            shared_1.setUpFormGroup(group, dir);
+            shared_1.setUpFormContainer(group, dir);
             container.registerControl(dir.name, group);
             group.updateValueAndValidity({ emitEvent: false });
         });

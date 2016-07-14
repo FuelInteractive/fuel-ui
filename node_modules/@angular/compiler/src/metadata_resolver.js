@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -43,6 +50,14 @@ var CompileMetadataResolver = (function () {
             identifier = "anonymous_token_" + found + "_";
         }
         return util_1.sanitizeIdentifier(identifier);
+    };
+    CompileMetadataResolver.prototype.clearCacheFor = function (compType) {
+        this._directiveCache.delete(compType);
+        this._pipeCache.delete(compType);
+    };
+    CompileMetadataResolver.prototype.clearCache = function () {
+        this._directiveCache.clear();
+        this._pipeCache.clear();
     };
     CompileMetadataResolver.prototype.getAnimationEntryMetadata = function (entry) {
         var _this = this;
@@ -95,8 +110,8 @@ var CompileMetadataResolver = (function () {
             var changeDetectionStrategy = null;
             var viewProviders = [];
             var moduleUrl = staticTypeModuleUrl(directiveType);
+            var precompileTypes = [];
             if (dirMeta instanceof core_1.ComponentMetadata) {
-                assertions_1.assertArrayOfStrings('styles', dirMeta.styles);
                 var cmpMeta = dirMeta;
                 var viewMeta = this._viewResolver.resolve(directiveType);
                 assertions_1.assertArrayOfStrings('styles', viewMeta.styles);
@@ -104,6 +119,8 @@ var CompileMetadataResolver = (function () {
                 var animations = lang_1.isPresent(viewMeta.animations) ?
                     viewMeta.animations.map(function (e) { return _this.getAnimationEntryMetadata(e); }) :
                     null;
+                assertions_1.assertArrayOfStrings('styles', viewMeta.styles);
+                assertions_1.assertArrayOfStrings('styleUrls', viewMeta.styleUrls);
                 templateMeta = new cpl.CompileTemplateMetadata({
                     encapsulation: viewMeta.encapsulation,
                     template: viewMeta.template,
@@ -115,13 +132,17 @@ var CompileMetadataResolver = (function () {
                 });
                 changeDetectionStrategy = cmpMeta.changeDetection;
                 if (lang_1.isPresent(dirMeta.viewProviders)) {
-                    viewProviders = this.getProvidersMetadata(dirMeta.viewProviders);
+                    viewProviders = this.getProvidersMetadata(verifyNonBlankProviders(directiveType, dirMeta.viewProviders, 'viewProviders'));
                 }
                 moduleUrl = componentModuleUrl(this._reflector, directiveType, cmpMeta);
+                if (cmpMeta.precompile) {
+                    precompileTypes = flattenArray(cmpMeta.precompile)
+                        .map(function (cmp) { return _this.getTypeMetadata(cmp, staticTypeModuleUrl(cmp)); });
+                }
             }
             var providers = [];
             if (lang_1.isPresent(dirMeta.providers)) {
-                providers = this.getProvidersMetadata(dirMeta.providers);
+                providers = this.getProvidersMetadata(verifyNonBlankProviders(directiveType, dirMeta.providers, 'providers'));
             }
             var queries = [];
             var viewQueries = [];
@@ -143,7 +164,8 @@ var CompileMetadataResolver = (function () {
                 providers: providers,
                 viewProviders: viewProviders,
                 queries: queries,
-                viewQueries: viewQueries
+                viewQueries: viewQueries,
+                precompile: precompileTypes
             });
             this._directiveCache.set(directiveType, meta);
         }
@@ -417,6 +439,7 @@ function flattenPipes(view, platformPipes) {
     return pipes;
 }
 function flattenArray(tree, out) {
+    if (out === void 0) { out = []; }
     for (var i = 0; i < tree.length; i++) {
         var item = core_1.resolveForwardRef(tree[i]);
         if (lang_1.isArray(item)) {
@@ -426,6 +449,19 @@ function flattenArray(tree, out) {
             out.push(item);
         }
     }
+    return out;
+}
+function verifyNonBlankProviders(directiveType, providersTree, providersType) {
+    var flat = [];
+    var errMsg;
+    flattenArray(providersTree, flat);
+    for (var i = 0; i < flat.length; i++) {
+        if (lang_1.isBlank(flat[i])) {
+            errMsg = flat.map(function (provider) { return lang_1.isBlank(provider) ? '?' : lang_1.stringify(provider); }).join(', ');
+            throw new exceptions_1.BaseException("One or more of " + providersType + " for \"" + lang_1.stringify(directiveType) + "\" were not defined: [" + errMsg + "].");
+        }
+    }
+    return providersTree;
 }
 function isStaticType(value) {
     return lang_1.isStringMap(value) && lang_1.isPresent(value['name']) && lang_1.isPresent(value['filePath']);

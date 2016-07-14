@@ -1,5 +1,5 @@
 /**
- * @license Angular 2.0.0-rc.3
+ * @license Angular 2.0.0-rc.4
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -14,6 +14,13 @@ var __extends = (this && this.__extends) || function (d, b) {
             (factory((global.ng = global.ng || {}, global.ng.http = global.ng.http || {}), global.ng.core, global.Rx, global.ng.platformBrowser));
 }(this, function (exports, _angular_core, rxjs_Observable, _angular_platformBrowser) {
     'use strict';
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var globalScope;
     if (typeof window === 'undefined') {
         if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
@@ -205,7 +212,15 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     BrowserXhr.ctorParameters = [];
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * Supported http methods.
+     * @experimental
      */
     exports.RequestMethod;
     (function (RequestMethod) {
@@ -221,6 +236,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * All possible states in which a connection can be, based on
      * [States](http://www.w3.org/TR/XMLHttpRequest/#states) from the `XMLHttpRequest` spec, but with an
      * additional "CANCELLED" state.
+     * @experimental
      */
     exports.ReadyState;
     (function (ReadyState) {
@@ -234,6 +250,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     /**
      * Acceptable response types to be associated with a {@link Response}, based on
      * [ResponseType](https://fetch.spec.whatwg.org/#responsetype) from the Fetch spec.
+     * @experimental
      */
     exports.ResponseType;
     (function (ResponseType) {
@@ -245,6 +262,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     })(exports.ResponseType || (exports.ResponseType = {}));
     /**
      * Supported content type to be automatically associated with a {@link Request}.
+     * @experimental
      */
     var ContentType;
     (function (ContentType) {
@@ -634,6 +652,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * var thirdHeaders = new Headers(secondHeaders);
      * console.log(thirdHeaders.get('X-My-Custom-Header')); //'Angular'
      * ```
+     *
+     * @experimental
      */
     var Headers = (function () {
         function Headers(headers) {
@@ -763,6 +783,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * console.log('res.json():', res.json()); // Object {name: "Jeff"}
      * ```
+     *
+     * @experimental
      */
     var ResponseOptions = (function () {
         function ResponseOptions(_a) {
@@ -826,10 +848,19 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     BaseResponseOptions.ctorParameters = [];
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * Abstract class from which real backends are derived.
      *
      * The primary purpose of a `ConnectionBackend` is to create new connections to fulfill a given
      * {@link Request}.
+     *
+     * @experimental
      */
     var ConnectionBackend = (function () {
         function ConnectionBackend() {
@@ -838,13 +869,19 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /**
      * Abstract class from which real connections are derived.
+     *
+     * @experimental
      */
     var Connection = (function () {
         function Connection() {
         }
         return Connection;
     }());
-    /** An XSRFStrategy configures XSRF protection (e.g. via headers) on an HTTP request. */
+    /**
+     * An XSRFStrategy configures XSRF protection (e.g. via headers) on an HTTP request.
+     *
+     * @experimental
+     */
     var XSRFStrategy = (function () {
         function XSRFStrategy() {
         }
@@ -888,6 +925,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Spec](https://fetch.spec.whatwg.org/#response-class), but is considered a static value whose body
      * can be accessed many times. There are other differences in the implementation, but this is the
      * most significant.
+     *
+     * @experimental
      */
     var Response = (function () {
         function Response(responseOptions) {
@@ -937,6 +976,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     var JSONP_ERR_WRONG_METHOD = 'JSONP requests must use GET request method.';
     /**
      * Abstract base class for an in-flight JSONP request.
+     *
+     * @experimental
      */
     var JSONPConnection = (function () {
         function JSONPConnection() {
@@ -1026,6 +1067,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     }(JSONPConnection));
     /**
      * A {@link ConnectionBackend} that uses the JSONP strategy of making requests.
+     *
+     * @experimental
      */
     var JSONPBackend = (function (_super) {
         __extends(JSONPBackend, _super);
@@ -1063,6 +1106,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * This class would typically not be created or interacted with directly inside applications, though
      * the {@link MockConnection} may be interacted with in tests.
+     *
+     * @experimental
      */
     var XHRConnection = (function () {
         function XHRConnection(req, browserXHR, baseResponseOptions) {
@@ -1171,6 +1216,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Applications can configure custom cookie and header names by binding an instance of this class
      * with different `cookieName` and `headerName` values. See the main HTTP documentation for more
      * details.
+     *
+     * @experimental
      */
     var CookieXSRFStrategy = (function () {
         function CookieXSRFStrategy(_cookieName, _headerName) {
@@ -1215,7 +1262,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         if (rawParams.length > 0) {
             var params = rawParams.split('&');
             params.forEach(function (param) {
-                var split = param.split('=');
+                var split = param.split('=', 2);
                 var key = split[0];
                 var val = split[1];
                 var list = isPresent(map.get(key)) ? map.get(key) : [];
@@ -1226,17 +1273,68 @@ var __extends = (this && this.__extends) || function (d, b) {
         return map;
     }
     /**
+     * @experimental
+     **/
+    var QueryEncoder = (function () {
+        function QueryEncoder() {
+        }
+        QueryEncoder.prototype.encodeKey = function (k) { return standardEncoding(k); };
+        QueryEncoder.prototype.encodeValue = function (v) { return standardEncoding(v); };
+        return QueryEncoder;
+    }());
+    function standardEncoding(v) {
+        return encodeURIComponent(v)
+            .replace(/%40/gi, '@')
+            .replace(/%3A/gi, ':')
+            .replace(/%24/gi, '$')
+            .replace(/%2C/gi, ',')
+            .replace(/%3B/gi, ';')
+            .replace(/%2B/gi, '+')
+            .replace(/%3D/gi, ';')
+            .replace(/%3F/gi, '?')
+            .replace(/%2F/gi, '/');
+    }
+    /**
      * Map-like representation of url search parameters, based on
      * [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams) in the url living standard,
      * with several extensions for merging URLSearchParams objects:
      *   - setAll()
      *   - appendAll()
      *   - replaceAll()
+     *
+     * This class accepts an optional second parameter of ${@link QueryEncoder},
+     * which is used to serialize parameters before making a request. By default,
+     * `QueryEncoder` encodes keys and values of parameters using `encodeURIComponent`,
+     * and then un-encodes certain characters that are allowed to be part of the query
+     * according to IETF RFC 3986: https://tools.ietf.org/html/rfc3986.
+     *
+     * These are the characters that are not encoded: `! $ \' ( ) * + , ; A 9 - . _ ~ ? /`
+     *
+     * If the set of allowed query characters is not acceptable for a particular backend,
+     * `QueryEncoder` can be subclassed and provided as the 2nd argument to URLSearchParams.
+     *
+     * ```
+     * import {URLSearchParams, QueryEncoder} from '@angular/http';
+     * class MyQueryEncoder extends QueryEncoder {
+     *   encodeKey(k: string): string {
+     *     return myEncodingFunction(k);
+     *   }
+     *
+     *   encodeValue(v: string): string {
+     *     return myEncodingFunction(v);
+     *   }
+     * }
+     *
+     * let params = new URLSearchParams('', new MyQueryEncoder());
+     * ```
+     * @experimental
      */
     var URLSearchParams = (function () {
-        function URLSearchParams(rawParams) {
+        function URLSearchParams(rawParams, queryEncoder) {
             if (rawParams === void 0) { rawParams = ''; }
+            if (queryEncoder === void 0) { queryEncoder = new QueryEncoder(); }
             this.rawParams = rawParams;
+            this.queryEncoder = queryEncoder;
             this.paramsMap = paramParser(rawParams);
         }
         URLSearchParams.prototype.clone = function () {
@@ -1325,8 +1423,11 @@ var __extends = (this && this.__extends) || function (d, b) {
             });
         };
         URLSearchParams.prototype.toString = function () {
+            var _this = this;
             var paramsList = [];
-            this.paramsMap.forEach(function (values, k) { values.forEach(function (v) { return paramsList.push(k + '=' + encodeURIComponent(v)); }); });
+            this.paramsMap.forEach(function (values, k) {
+                values.forEach(function (v) { return paramsList.push(_this.queryEncoder.encodeKey(k) + '=' + _this.queryEncoder.encodeValue(v)); });
+            });
             return paramsList.join('&');
         };
         URLSearchParams.prototype.delete = function (param) { this.paramsMap.delete(param); };
@@ -1355,6 +1456,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * console.log('req.method:', RequestMethod[req.method]); // Post
      * console.log('options.url:', options.url); // https://google.com
      * ```
+     *
+     * @experimental
      */
     var RequestOptions = (function () {
         function RequestOptions(_a) {
@@ -1460,6 +1563,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   console.log('people', res.json());
      * });
      * ```
+     *
+     * @experimental
      */
     var Request = (function () {
         function Request(requestOptions) {
@@ -1679,6 +1784,14 @@ var __extends = (this && this.__extends) || function (d, b) {
          * a {@link Request} instance. If the first argument is a url, an optional {@link RequestOptions}
          * object can be provided as the 2nd argument. The options object will be merged with the values
          * of {@link BaseRequestOptions} before performing the request.
+         *
+         * @security Regular XHR is the safest alternative to JSONP for most applications, and is
+         * supported by all current browsers. Because JSONP creates a `<script>` element with
+         * contents retrieved from a remote source, attacker-controlled data introduced by an untrusted
+         * source could expose your application to XSS risks. Data exposed by JSONP may also be
+         * readable by malicious third-party websites. In addition, JSONP introduces potential risk for
+         * future security issues (e.g. content sniffing).  For more detail, see the
+         * [Security Guide](http://g.co/ng/security).
          */
         Jsonp.prototype.request = function (url, options) {
             var responseObservable;
@@ -1850,6 +1963,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *         useValue: new CookieXSRFStrategy('MY-XSRF-COOKIE-NAME', 'X-MY-XSRF-HEADER-NAME')}])
      *   .catch(err => console.error(err));
      * ```
+     *
+     * @experimental
      */
     var HTTP_PROVIDERS = [
         // TODO(pascal): use factory type annotations once supported in DI
@@ -1861,6 +1976,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         XHRBackend,
         { provide: XSRFStrategy, useValue: new CookieXSRFStrategy() },
     ];
+    /**
+     * @experimental
+     */
     function httpFactory(xhrBackend, requestOptions) {
         return new Http(xhrBackend, requestOptions);
     }
@@ -1976,6 +2094,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   }
      * });
      * ```
+     *
+     * @experimental
      */
     var JSONP_PROVIDERS = [
         // TODO(pascal): use factory type annotations once supported in DI
@@ -2018,5 +2138,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.XSRFStrategy = XSRFStrategy;
     exports.Request = Request;
     exports.Response = Response;
+    exports.QueryEncoder = QueryEncoder;
     exports.URLSearchParams = URLSearchParams;
 }));

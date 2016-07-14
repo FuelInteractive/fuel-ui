@@ -1,5 +1,5 @@
 import { AsyncValidatorFn, ValidatorFn } from './directives/validators';
-import * as modelModule from './model';
+import { FormArray, FormControl, FormGroup } from './model';
 /**
  * Creates a form object from a user-specified configuration.
  *
@@ -51,14 +51,14 @@ export declare class FormBuilder {
         [key: string]: any;
     }, extra?: {
         [key: string]: any;
-    }): modelModule.FormGroup;
+    }): FormGroup;
     /**
      * Construct a new {@link FormControl} with the given `value`,`validator`, and `asyncValidator`.
      */
-    control(value: Object, validator?: ValidatorFn | ValidatorFn[], asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]): modelModule.FormControl;
+    control(value: Object, validator?: ValidatorFn | ValidatorFn[], asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]): FormControl;
     /**
      * Construct an array of {@link FormControl}s from the given `controlsConfig` array of
      * configuration, with the given optional `validator` and `asyncValidator`.
      */
-    array(controlsConfig: any[], validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn): modelModule.FormArray;
+    array(controlsConfig: any[], validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn): FormArray;
 }

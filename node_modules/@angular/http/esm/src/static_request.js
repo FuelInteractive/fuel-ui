@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { StringWrapper, isPresent } from '../src/facade/lang';
 import { ContentType } from './enums';
 import { Headers } from './headers';
@@ -40,6 +47,8 @@ import { URLSearchParams } from './url_search_params';
  *   console.log('people', res.json());
  * });
  * ```
+ *
+ * @experimental
  */
 export class Request {
     constructor(requestOptions) {

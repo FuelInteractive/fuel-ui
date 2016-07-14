@@ -1,5 +1,5 @@
 /**
- * @license Angular 0.1.1
+ * @license Angular 0.2.0
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -54,6 +54,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
     ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var globalScope;
     if (typeof window === 'undefined') {
         if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
@@ -649,6 +656,20 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(AbstractControlDirective.prototype, "statusChanges", {
+            get: function () {
+                return isPresent(this.control) ? this.control.statusChanges : null;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AbstractControlDirective.prototype, "valueChanges", {
+            get: function () {
+                return isPresent(this.control) ? this.control.valueChanges : null;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(AbstractControlDirective.prototype, "path", {
             get: function () { return null; },
             enumerable: true,
@@ -753,6 +774,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     NgControlStatus.ctorParameters = [
         { type: NgControl, decorators: [{ type: _angular_core.Self },] },
     ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var PromiseCompleter = (function () {
         function PromiseCompleter() {
             var _this = this;
@@ -1056,6 +1084,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         }, {});
         return StringMapWrapper.isEmpty(res) ? null : res;
     }
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     function normalizeValidator(validator) {
         if (validator.validate !== undefined) {
             return function (c) { return validator.validate(c); };
@@ -1066,7 +1101,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     function normalizeAsyncValidator(validator) {
         if (validator.validate !== undefined) {
-            return function (c) { return Promise.resolve(validator.validate(c)); };
+            return function (c) { return validator.validate(c); };
         }
         else {
             return validator;
@@ -1140,6 +1175,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             });
         };
         NewRadioControlRegistry.prototype._isSameGroup = function (controlPair, accessor) {
+            if (!controlPair[0].control)
+                return false;
             return controlPair[0].control.root === accessor._control.control.root &&
                 controlPair[1].name === accessor.name;
         };
@@ -1160,6 +1197,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         RadioControlValueAccessor.prototype.ngOnInit = function () {
             this._control = this._injector.get(NgControl);
+            this._checkName();
             this._registry.add(this._control, this);
         };
         RadioControlValueAccessor.prototype.ngOnDestroy = function () { this._registry.remove(this); };
@@ -1179,6 +1217,16 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         RadioControlValueAccessor.prototype.fireUncheck = function (value) { this.writeValue(value); };
         RadioControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+        RadioControlValueAccessor.prototype._checkName = function () {
+            if (this.name && this.formControlName && this.name !== this.formControlName) {
+                this._throwNameError();
+            }
+            if (!this.name && this.formControlName)
+                this.name = this.formControlName;
+        };
+        RadioControlValueAccessor.prototype._throwNameError = function () {
+            throw new BaseException("\n      If you define both a name and a formControlName attribute on your radio button, their values\n      must match. Ex: <input type=\"radio\" formControlName=\"food\" name=\"food\">\n    ");
+        };
         return RadioControlValueAccessor;
     }());
     /** @nocollapse */
@@ -1199,6 +1247,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     RadioControlValueAccessor.propDecorators = {
         'name': [{ type: _angular_core.Input },],
+        'formControlName': [{ type: _angular_core.Input },],
         'value': [{ type: _angular_core.Input },],
     };
     var SELECT_VALUE_ACCESSOR = {
@@ -1326,6 +1375,165 @@ var __extends = (this && this.__extends) || function (d, b) {
         'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
         'value': [{ type: _angular_core.Input, args: ['value',] },],
     };
+    var SELECT_MULTIPLE_VALUE_ACCESSOR = {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: _angular_core.forwardRef(function () { return SelectMultipleControlValueAccessor; }),
+        multi: true
+    };
+    function _buildValueString$1(id, value) {
+        if (isBlank(id))
+            return "" + value;
+        if (isString(value))
+            value = "'" + value + "'";
+        if (!isPrimitive(value))
+            value = 'Object';
+        return StringWrapper.slice(id + ": " + value, 0, 50);
+    }
+    function _extractId$1(valueString) {
+        return valueString.split(':')[0];
+    }
+    var SelectMultipleControlValueAccessor = (function () {
+        function SelectMultipleControlValueAccessor() {
+            /** @internal */
+            this._optionMap = new Map();
+            /** @internal */
+            this._idCounter = 0;
+            this.onChange = function (_) { };
+            this.onTouched = function () { };
+        }
+        SelectMultipleControlValueAccessor.prototype.writeValue = function (value) {
+            var _this = this;
+            this.value = value;
+            if (value == null)
+                return;
+            var values = value;
+            // convert values to ids
+            var ids = values.map(function (v) { return _this._getOptionId(v); });
+            this._optionMap.forEach(function (opt, o) { opt._setSelected(ids.indexOf(o.toString()) > -1); });
+        };
+        SelectMultipleControlValueAccessor.prototype.registerOnChange = function (fn) {
+            var _this = this;
+            this.onChange = function (_) {
+                var selected = [];
+                if (_.hasOwnProperty('selectedOptions')) {
+                    var options = _.selectedOptions;
+                    for (var i = 0; i < options.length; i++) {
+                        var opt = options.item(i);
+                        var val = _this._getOptionValue(opt.value);
+                        selected.push(val);
+                    }
+                }
+                else {
+                    var options = _.options;
+                    for (var i = 0; i < options.length; i++) {
+                        var opt = options.item(i);
+                        if (opt.selected) {
+                            var val = _this._getOptionValue(opt.value);
+                            selected.push(val);
+                        }
+                    }
+                }
+                fn(selected);
+            };
+        };
+        SelectMultipleControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+        /** @internal */
+        SelectMultipleControlValueAccessor.prototype._registerOption = function (value) {
+            var id = (this._idCounter++).toString();
+            this._optionMap.set(id, value);
+            return id;
+        };
+        /** @internal */
+        SelectMultipleControlValueAccessor.prototype._getOptionId = function (value) {
+            for (var _i = 0, _a = MapWrapper.keys(this._optionMap); _i < _a.length; _i++) {
+                var id = _a[_i];
+                if (looseIdentical(this._optionMap.get(id)._value, value))
+                    return id;
+            }
+            return null;
+        };
+        /** @internal */
+        SelectMultipleControlValueAccessor.prototype._getOptionValue = function (valueString) {
+            var opt = this._optionMap.get(_extractId$1(valueString));
+            return isPresent(opt) ? opt._value : valueString;
+        };
+        return SelectMultipleControlValueAccessor;
+    }());
+    /** @nocollapse */
+    SelectMultipleControlValueAccessor.decorators = [
+        { type: _angular_core.Directive, args: [{
+                    selector: 'select[multiple][formControlName],select[multiple][formControl],select[multiple][ngModel]',
+                    host: { '(input)': 'onChange($event.target)', '(blur)': 'onTouched()' },
+                    providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
+                },] },
+    ];
+    /** @nocollapse */
+    SelectMultipleControlValueAccessor.ctorParameters = [];
+    var NgSelectMultipleOption = (function () {
+        function NgSelectMultipleOption(_element, _renderer, _select) {
+            this._element = _element;
+            this._renderer = _renderer;
+            this._select = _select;
+            if (isPresent(this._select)) {
+                this.id = this._select._registerOption(this);
+            }
+        }
+        Object.defineProperty(NgSelectMultipleOption.prototype, "ngValue", {
+            set: function (value) {
+                if (this._select == null)
+                    return;
+                this._value = value;
+                this._setElementValue(_buildValueString$1(this.id, value));
+                this._select.writeValue(this._select.value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(NgSelectMultipleOption.prototype, "value", {
+            set: function (value) {
+                if (isPresent(this._select)) {
+                    this._value = value;
+                    this._setElementValue(_buildValueString$1(this.id, value));
+                    this._select.writeValue(this._select.value);
+                }
+                else {
+                    this._setElementValue(value);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /** @internal */
+        NgSelectMultipleOption.prototype._setElementValue = function (value) {
+            this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
+        };
+        /** @internal */
+        NgSelectMultipleOption.prototype._setSelected = function (selected) {
+            this._renderer.setElementProperty(this._element.nativeElement, 'selected', selected);
+        };
+        NgSelectMultipleOption.prototype.ngOnDestroy = function () {
+            if (isPresent(this._select)) {
+                this._select._optionMap.delete(this.id);
+                this._select.writeValue(this._select.value);
+            }
+        };
+        return NgSelectMultipleOption;
+    }());
+    /** @nocollapse */
+    NgSelectMultipleOption.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: 'option' },] },
+    ];
+    /** @nocollapse */
+    NgSelectMultipleOption.ctorParameters = [
+        { type: _angular_core.ElementRef, },
+        { type: _angular_core.Renderer, },
+        { type: SelectMultipleControlValueAccessor, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Host },] },
+    ];
+    /** @nocollapse */
+    NgSelectMultipleOption.propDecorators = {
+        'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
+        'value': [{ type: _angular_core.Input, args: ['value',] },],
+    };
     function controlPath(name, parent) {
         var p = ListWrapper.clone(parent.path);
         p.push(name);
@@ -1350,7 +1558,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         // touched
         dir.valueAccessor.registerOnTouched(function () { return control.markAsTouched(); });
     }
-    function setUpFormGroup(control, dir) {
+    function setUpFormContainer(control, dir) {
         if (isBlank(control))
             _throwError(dir, 'Cannot find control');
         control.validator = Validators.compose([control.validator, dir.validator]);
@@ -1388,6 +1596,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             else if (hasConstructor(v, CheckboxControlValueAccessor) || hasConstructor(v, NumberValueAccessor) ||
                 hasConstructor(v, SelectControlValueAccessor) ||
+                hasConstructor(v, SelectMultipleControlValueAccessor) ||
                 hasConstructor(v, RadioControlValueAccessor)) {
                 if (isPresent(builtinAccessor))
                     _throwError(dir, 'More than one built-in value accessor matches');
@@ -1519,6 +1728,14 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        AbstractControl.prototype.setAsyncValidators = function (newValidator) {
+            this.asyncValidator = coerceToAsyncValidator(newValidator);
+        };
+        AbstractControl.prototype.clearAsyncValidators = function () { this.asyncValidator = null; };
+        AbstractControl.prototype.setValidators = function (newValidator) {
+            this.validator = coerceToValidator(newValidator);
+        };
+        AbstractControl.prototype.clearValidators = function () { this.validator = null; };
         AbstractControl.prototype.markAsTouched = function () { this._touched = true; };
         AbstractControl.prototype.markAsDirty = function (_a) {
             var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -1599,13 +1816,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             var emitEvent = (_a === void 0 ? {} : _a).emitEvent;
             emitEvent = isPresent(emitEvent) ? emitEvent : true;
             this._errors = errors;
-            this._status = this._calculateStatus();
-            if (emitEvent) {
-                ObservableWrapper.callEmit(this._statusChanges, this._status);
-            }
-            if (isPresent(this._parent)) {
-                this._parent._updateControlsErrors();
-            }
+            this._updateControlsErrors(emitEvent);
         };
         AbstractControl.prototype.find = function (path) { return _find(this, path); };
         AbstractControl.prototype.getError = function (errorCode, path) {
@@ -1634,10 +1845,13 @@ var __extends = (this && this.__extends) || function (d, b) {
             configurable: true
         });
         /** @internal */
-        AbstractControl.prototype._updateControlsErrors = function () {
+        AbstractControl.prototype._updateControlsErrors = function (emitEvent) {
             this._status = this._calculateStatus();
+            if (emitEvent) {
+                ObservableWrapper.callEmit(this._statusChanges, this._status);
+            }
             if (isPresent(this._parent)) {
-                this._parent._updateControlsErrors();
+                this._parent._updateControlsErrors(emitEvent);
             }
         };
         /** @internal */
@@ -1988,14 +2202,12 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         NgForm.prototype.addControl = function (dir) {
             var _this = this;
-            var ctrl = new FormControl();
             PromiseWrapper.scheduleMicrotask(function () {
                 var container = _this._findContainer(dir.path);
-                dir._control = container.registerControl(dir.name, ctrl);
+                dir._control = container.registerControl(dir.name, dir.control);
                 setUpControl(dir.control, dir);
                 dir.control.updateValueAndValidity({ emitEvent: false });
             });
-            return ctrl;
         };
         NgForm.prototype.getControl = function (dir) { return this.form.find(dir.path); };
         NgForm.prototype.removeControl = function (dir) {
@@ -2012,7 +2224,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             PromiseWrapper.scheduleMicrotask(function () {
                 var container = _this._findContainer(dir.path);
                 var group = new FormGroup({});
-                setUpFormGroup(group, dir);
+                setUpFormContainer(group, dir);
                 container.registerControl(dir.name, group);
                 group.updateValueAndValidity({ emitEvent: false });
             });
@@ -2076,18 +2288,18 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._validators = _validators;
             this._asyncValidators = _asyncValidators;
             /** @internal */
-            this._added = false;
+            this._control = new FormControl();
+            /** @internal */
+            this._registered = false;
             this.update = new EventEmitter();
             this.valueAccessor = selectValueAccessor(this, valueAccessors);
-            if (!this._parent)
-                this._control = new FormControl();
         }
         NgModel.prototype.ngOnChanges = function (changes) {
             this._checkName();
-            if (!this._added)
-                this._addControl();
+            if (!this._registered)
+                this._setUpControl();
             if (isPropertyUpdated(changes, this.viewModel)) {
-                this._control.updateValue(this.model);
+                this._updateValue(this.model);
                 this.viewModel = this.model;
             }
         };
@@ -2125,22 +2337,28 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.viewModel = newValue;
             ObservableWrapper.callEmit(this.update, newValue);
         };
-        NgModel.prototype._addControl = function () {
-            this._control = this.formDirective ? this.formDirective.addControl(this) :
-                this._addStandaloneControl();
-            this._added = true;
+        NgModel.prototype._setUpControl = function () {
+            this._isStandalone() ? this._setUpStandalone() :
+                this.formDirective.addControl(this);
+            this._registered = true;
         };
-        NgModel.prototype._addStandaloneControl = function () {
+        NgModel.prototype._isStandalone = function () {
+            return !this._parent || (this.options && this.options.standalone);
+        };
+        NgModel.prototype._setUpStandalone = function () {
             setUpControl(this._control, this);
             this._control.updateValueAndValidity({ emitEvent: false });
-            return this._control;
         };
         NgModel.prototype._checkName = function () {
             if (this.options && this.options.name)
                 this.name = this.options.name;
-            if (this._parent && !this.name) {
-                throw new BaseException("Name attribute must be set if ngModel is used within a form.\n                      Example: <input [(ngModel)]=\"person.firstName\" name=\"first\">");
+            if (!this._isStandalone() && !this.name) {
+                throw new BaseException("If ngModel is used within a form tag, either the name attribute must be set\n                      or the form control must be defined as 'standalone' in ngModelOptions.\n\n                      Example 1: <input [(ngModel)]=\"person.firstName\" name=\"first\">\n                      Example 2: <input [(ngModel)]=\"person.firstName\" [ngModelOptions]=\"{standalone: true}\">\n                   ");
             }
+        };
+        NgModel.prototype._updateValue = function (value) {
+            var _this = this;
+            PromiseWrapper.scheduleMicrotask(function () { _this.control.updateValue(value); });
         };
         return NgModel;
     }(NgControl));
@@ -2240,6 +2458,62 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     NgModelGroup.propDecorators = {
         'name': [{ type: _angular_core.Input, args: ['ngModelGroup',] },],
+    };
+    var formArrayNameProvider =
+    /*@ts2dart_const*/ /* @ts2dart_Provider */ {
+        provide: ControlContainer,
+        useExisting: _angular_core.forwardRef(function () { return FormArrayName; })
+    };
+    var FormArrayName = (function (_super) {
+        __extends(FormArrayName, _super);
+        function FormArrayName(parent, validators, asyncValidators) {
+            _super.call(this);
+            this._parent = parent;
+            this._validators = validators;
+            this._asyncValidators = asyncValidators;
+        }
+        FormArrayName.prototype.ngOnInit = function () { this.formDirective.addFormArray(this); };
+        FormArrayName.prototype.ngOnDestroy = function () { this.formDirective.removeFormArray(this); };
+        Object.defineProperty(FormArrayName.prototype, "control", {
+            get: function () { return this.formDirective.getFormArray(this); },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormArrayName.prototype, "formDirective", {
+            get: function () { return this._parent.formDirective; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormArrayName.prototype, "path", {
+            get: function () { return controlPath(this.name, this._parent); },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormArrayName.prototype, "validator", {
+            get: function () { return composeValidators(this._validators); },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormArrayName.prototype, "asyncValidator", {
+            get: function () { return composeAsyncValidators(this._asyncValidators); },
+            enumerable: true,
+            configurable: true
+        });
+        return FormArrayName;
+    }(ControlContainer));
+    /** @nocollapse */
+    FormArrayName.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[formArrayName]', providers: [formArrayNameProvider] },] },
+    ];
+    /** @nocollapse */
+    FormArrayName.ctorParameters = [
+        { type: ControlContainer, decorators: [{ type: _angular_core.Host }, { type: _angular_core.SkipSelf },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    ];
+    /** @nocollapse */
+    FormArrayName.propDecorators = {
+        'name': [{ type: _angular_core.Input, args: ['formArrayName',] },],
     };
     var formControlBinding$1 =
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -2441,17 +2715,23 @@ var __extends = (this && this.__extends) || function (d, b) {
             setUpControl(ctrl, dir);
             ctrl.updateValueAndValidity({ emitEvent: false });
             this.directives.push(dir);
-            return ctrl;
         };
         FormGroupDirective.prototype.getControl = function (dir) { return this.form.find(dir.path); };
         FormGroupDirective.prototype.removeControl = function (dir) { ListWrapper.remove(this.directives, dir); };
         FormGroupDirective.prototype.addFormGroup = function (dir) {
             var ctrl = this.form.find(dir.path);
-            setUpFormGroup(ctrl, dir);
+            setUpFormContainer(ctrl, dir);
             ctrl.updateValueAndValidity({ emitEvent: false });
         };
         FormGroupDirective.prototype.removeFormGroup = function (dir) { };
         FormGroupDirective.prototype.getFormGroup = function (dir) { return this.form.find(dir.path); };
+        FormGroupDirective.prototype.addFormArray = function (dir) {
+            var ctrl = this.form.find(dir.path);
+            setUpFormContainer(ctrl, dir);
+            ctrl.updateValueAndValidity({ emitEvent: false });
+        };
+        FormGroupDirective.prototype.removeFormArray = function (dir) { };
+        FormGroupDirective.prototype.getFormArray = function (dir) { return this.form.find(dir.path); };
         FormGroupDirective.prototype.updateModel = function (dir, value) {
             var ctrl = this.form.find(dir.path);
             ctrl.updateValue(value);
@@ -2523,165 +2803,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     FormGroupName.propDecorators = {
         'name': [{ type: _angular_core.Input, args: ['formGroupName',] },],
-    };
-    var SELECT_MULTIPLE_VALUE_ACCESSOR = {
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: _angular_core.forwardRef(function () { return SelectMultipleControlValueAccessor; }),
-        multi: true
-    };
-    function _buildValueString$1(id, value) {
-        if (isBlank(id))
-            return "" + value;
-        if (isString(value))
-            value = "'" + value + "'";
-        if (!isPrimitive(value))
-            value = 'Object';
-        return StringWrapper.slice(id + ": " + value, 0, 50);
-    }
-    function _extractId$1(valueString) {
-        return valueString.split(':')[0];
-    }
-    var SelectMultipleControlValueAccessor = (function () {
-        function SelectMultipleControlValueAccessor() {
-            /** @internal */
-            this._optionMap = new Map();
-            /** @internal */
-            this._idCounter = 0;
-            this.onChange = function (_) { };
-            this.onTouched = function () { };
-        }
-        SelectMultipleControlValueAccessor.prototype.writeValue = function (value) {
-            var _this = this;
-            this.value = value;
-            if (value == null)
-                return;
-            var values = value;
-            // convert values to ids
-            var ids = values.map(function (v) { return _this._getOptionId(v); });
-            this._optionMap.forEach(function (opt, o) { opt._setSelected(ids.indexOf(o.toString()) > -1); });
-        };
-        SelectMultipleControlValueAccessor.prototype.registerOnChange = function (fn) {
-            var _this = this;
-            this.onChange = function (_) {
-                var selected = [];
-                if (_.hasOwnProperty('selectedOptions')) {
-                    var options = _.selectedOptions;
-                    for (var i = 0; i < options.length; i++) {
-                        var opt = options.item(i);
-                        var val = _this._getOptionValue(opt.value);
-                        selected.push(val);
-                    }
-                }
-                else {
-                    var options = _.options;
-                    for (var i = 0; i < options.length; i++) {
-                        var opt = options.item(i);
-                        if (opt.selected) {
-                            var val = _this._getOptionValue(opt.value);
-                            selected.push(val);
-                        }
-                    }
-                }
-                fn(selected);
-            };
-        };
-        SelectMultipleControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
-        /** @internal */
-        SelectMultipleControlValueAccessor.prototype._registerOption = function (value) {
-            var id = (this._idCounter++).toString();
-            this._optionMap.set(id, value);
-            return id;
-        };
-        /** @internal */
-        SelectMultipleControlValueAccessor.prototype._getOptionId = function (value) {
-            for (var _i = 0, _a = MapWrapper.keys(this._optionMap); _i < _a.length; _i++) {
-                var id = _a[_i];
-                if (looseIdentical(this._optionMap.get(id)._value, value))
-                    return id;
-            }
-            return null;
-        };
-        /** @internal */
-        SelectMultipleControlValueAccessor.prototype._getOptionValue = function (valueString) {
-            var opt = this._optionMap.get(_extractId$1(valueString));
-            return isPresent(opt) ? opt._value : valueString;
-        };
-        return SelectMultipleControlValueAccessor;
-    }());
-    /** @nocollapse */
-    SelectMultipleControlValueAccessor.decorators = [
-        { type: _angular_core.Directive, args: [{
-                    selector: 'select[multiple][formControlName],select[multiple][formControl],select[multiple][ngModel]',
-                    host: { '(input)': 'onChange($event.target)', '(blur)': 'onTouched()' },
-                    providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
-                },] },
-    ];
-    /** @nocollapse */
-    SelectMultipleControlValueAccessor.ctorParameters = [];
-    var NgSelectMultipleOption = (function () {
-        function NgSelectMultipleOption(_element, _renderer, _select) {
-            this._element = _element;
-            this._renderer = _renderer;
-            this._select = _select;
-            if (isPresent(this._select)) {
-                this.id = this._select._registerOption(this);
-            }
-        }
-        Object.defineProperty(NgSelectMultipleOption.prototype, "ngValue", {
-            set: function (value) {
-                if (this._select == null)
-                    return;
-                this._value = value;
-                this._setElementValue(_buildValueString$1(this.id, value));
-                this._select.writeValue(this._select.value);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgSelectMultipleOption.prototype, "value", {
-            set: function (value) {
-                if (isPresent(this._select)) {
-                    this._value = value;
-                    this._setElementValue(_buildValueString$1(this.id, value));
-                    this._select.writeValue(this._select.value);
-                }
-                else {
-                    this._setElementValue(value);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /** @internal */
-        NgSelectMultipleOption.prototype._setElementValue = function (value) {
-            this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
-        };
-        /** @internal */
-        NgSelectMultipleOption.prototype._setSelected = function (selected) {
-            this._renderer.setElementProperty(this._element.nativeElement, 'selected', selected);
-        };
-        NgSelectMultipleOption.prototype.ngOnDestroy = function () {
-            if (isPresent(this._select)) {
-                this._select._optionMap.delete(this.id);
-                this._select.writeValue(this._select.value);
-            }
-        };
-        return NgSelectMultipleOption;
-    }());
-    /** @nocollapse */
-    NgSelectMultipleOption.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: 'option' },] },
-    ];
-    /** @nocollapse */
-    NgSelectMultipleOption.ctorParameters = [
-        { type: _angular_core.ElementRef, },
-        { type: _angular_core.Renderer, },
-        { type: SelectMultipleControlValueAccessor, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Host },] },
-    ];
-    /** @nocollapse */
-    NgSelectMultipleOption.propDecorators = {
-        'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
-        'value': [{ type: _angular_core.Input, args: ['value',] },],
     };
     var REQUIRED = Validators.required;
     var REQUIRED_VALIDATOR = {
@@ -2808,8 +2929,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         RadioControlValueAccessor, NgControlStatus,
         RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValidator
     ];
+    /**
+     * @experimental
+     */
     var REACTIVE_FORM_DIRECTIVES =
-    /*@ts2dart_const*/ [FormControlDirective, FormGroupDirective, FormControlName, FormGroupName];
+    /*@ts2dart_const*/ [
+        FormControlDirective, FormGroupDirective, FormControlName, FormGroupName, FormArrayName
+    ];
     var NewFormBuilder = (function () {
         function NewFormBuilder() {
         }
@@ -2857,8 +2983,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         /** @internal */
         NewFormBuilder.prototype._createControl = function (controlConfig) {
-            if (controlConfig instanceof FormControl ||
-                controlConfig instanceof FormGroup ||
+            if (controlConfig instanceof FormControl || controlConfig instanceof FormGroup ||
                 controlConfig instanceof FormArray) {
                 return controlConfig;
             }
@@ -2878,7 +3003,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     NewFormBuilder.decorators = [
         { type: _angular_core.Injectable },
     ];
-    /*
+    /**
      * Shorthand set of providers used for building Angular forms.
      *
      * ### Example
@@ -2902,6 +3027,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return flattenedDirectives;
     }
+    /**
+     * @experimental
+     */
     function disableDeprecatedForms() {
         return [{
                 provide: _angular_compiler.CompilerConfig,
@@ -2913,6 +3041,9 @@ var __extends = (this && this.__extends) || function (d, b) {
                 deps: [_angular_core.PLATFORM_DIRECTIVES, _angular_core.PLATFORM_PIPES]
             }];
     }
+    /**
+     * @experimental
+     */
     function provideForms() {
         return [
             { provide: _angular_core.PLATFORM_DIRECTIVES, useValue: NEW_FORM_DIRECTIVES, multi: true }, FORM_PROVIDERS
@@ -2930,6 +3061,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.NgForm = NgForm;
     exports.NgModel = NgModel;
     exports.NgModelGroup = NgModelGroup;
+    exports.FormArrayName = FormArrayName;
     exports.FormControlDirective = FormControlDirective;
     exports.FormControlName = FormControlName;
     exports.FormGroupDirective = FormGroupDirective;

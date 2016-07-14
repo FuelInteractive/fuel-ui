@@ -25,6 +25,8 @@ import { ResponseOptionsArgs } from './interfaces';
  *
  * console.log('res.json():', res.json()); // Object {name: "Jeff"}
  * ```
+ *
+ * @experimental
  */
 export declare class ResponseOptions {
     /**
@@ -112,6 +114,8 @@ export declare class ResponseOptions {
  * console.log('res.headers.get("framework"):', res.headers.get('framework')); // angular
  * console.log('res.text():', res.text()); // Angular;
  * ```
+ *
+ * @experimental
  */
 export declare class BaseResponseOptions extends ResponseOptions {
     constructor();

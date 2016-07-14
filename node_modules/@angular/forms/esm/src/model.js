@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { composeAsyncValidators, composeValidators } from './directives/shared';
 import { EventEmitter, ObservableWrapper } from './facade/async';
 import { ListWrapper, StringMapWrapper } from './facade/collection';
@@ -72,6 +79,14 @@ export class AbstractControl {
     get valueChanges() { return this._valueChanges; }
     get statusChanges() { return this._statusChanges; }
     get pending() { return this._status == PENDING; }
+    setAsyncValidators(newValidator) {
+        this.asyncValidator = coerceToAsyncValidator(newValidator);
+    }
+    clearAsyncValidators() { this.asyncValidator = null; }
+    setValidators(newValidator) {
+        this.validator = coerceToValidator(newValidator);
+    }
+    clearValidators() { this.validator = null; }
     markAsTouched() { this._touched = true; }
     markAsDirty({ onlySelf } = {}) {
         onlySelf = normalizeBool(onlySelf);
@@ -147,13 +162,7 @@ export class AbstractControl {
     setErrors(errors, { emitEvent } = {}) {
         emitEvent = isPresent(emitEvent) ? emitEvent : true;
         this._errors = errors;
-        this._status = this._calculateStatus();
-        if (emitEvent) {
-            ObservableWrapper.callEmit(this._statusChanges, this._status);
-        }
-        if (isPresent(this._parent)) {
-            this._parent._updateControlsErrors();
-        }
+        this._updateControlsErrors(emitEvent);
     }
     find(path) { return _find(this, path); }
     getError(errorCode, path = null) {
@@ -176,10 +185,13 @@ export class AbstractControl {
         return x;
     }
     /** @internal */
-    _updateControlsErrors() {
+    _updateControlsErrors(emitEvent) {
         this._status = this._calculateStatus();
+        if (emitEvent) {
+            ObservableWrapper.callEmit(this._statusChanges, this._status);
+        }
         if (isPresent(this._parent)) {
-            this._parent._updateControlsErrors();
+            this._parent._updateControlsErrors(emitEvent);
         }
     }
     /** @internal */

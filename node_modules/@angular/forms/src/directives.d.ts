@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Type } from '@angular/core';
 export { CheckboxControlValueAccessor } from './directives/checkbox_value_accessor';
 export { ControlValueAccessor } from './directives/control_value_accessor';
@@ -9,6 +16,7 @@ export { NgModel } from './directives/ng_model';
 export { NgModelGroup } from './directives/ng_model_group';
 export { NumberValueAccessor } from './directives/number_value_accessor';
 export { RadioControlValueAccessor } from './directives/radio_control_value_accessor';
+export { FormArrayName } from './directives/reactive_directives/form_array_name';
 export { FormControlDirective } from './directives/reactive_directives/form_control_directive';
 export { FormControlName } from './directives/reactive_directives/form_control_name';
 export { FormGroupDirective } from './directives/reactive_directives/form_group_directive';
@@ -34,4 +42,7 @@ export { MaxLengthValidator, MinLengthValidator, PatternValidator, RequiredValid
  * @experimental
  */
 export declare const FORM_DIRECTIVES: Type[];
+/**
+ * @experimental
+ */
 export declare const REACTIVE_FORM_DIRECTIVES: Type[];

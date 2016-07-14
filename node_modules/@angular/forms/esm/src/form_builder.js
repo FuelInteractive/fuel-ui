@@ -1,7 +1,14 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Injectable } from '@angular/core';
 import { StringMapWrapper } from './facade/collection';
 import { isArray, isPresent } from './facade/lang';
-import * as modelModule from './model';
+import { FormArray, FormControl, FormGroup } from './model';
 export class FormBuilder {
     /**
      * Construct a new {@link FormGroup} with the given map of configuration.
@@ -14,13 +21,13 @@ export class FormBuilder {
         var optionals = (isPresent(extra) ? StringMapWrapper.get(extra, 'optionals') : null);
         var validator = isPresent(extra) ? StringMapWrapper.get(extra, 'validator') : null;
         var asyncValidator = isPresent(extra) ? StringMapWrapper.get(extra, 'asyncValidator') : null;
-        return new modelModule.FormGroup(controls, optionals, validator, asyncValidator);
+        return new FormGroup(controls, optionals, validator, asyncValidator);
     }
     /**
      * Construct a new {@link FormControl} with the given `value`,`validator`, and `asyncValidator`.
      */
     control(value, validator = null, asyncValidator = null) {
-        return new modelModule.FormControl(value, validator, asyncValidator);
+        return new FormControl(value, validator, asyncValidator);
     }
     /**
      * Construct an array of {@link FormControl}s from the given `controlsConfig` array of
@@ -28,7 +35,7 @@ export class FormBuilder {
      */
     array(controlsConfig, validator = null, asyncValidator = null) {
         var controls = controlsConfig.map(c => this._createControl(c));
-        return new modelModule.FormArray(controls, validator, asyncValidator);
+        return new FormArray(controls, validator, asyncValidator);
     }
     /** @internal */
     _reduceControls(controlsConfig) {
@@ -40,9 +47,8 @@ export class FormBuilder {
     }
     /** @internal */
     _createControl(controlConfig) {
-        if (controlConfig instanceof modelModule.FormControl ||
-            controlConfig instanceof modelModule.FormGroup ||
-            controlConfig instanceof modelModule.FormArray) {
+        if (controlConfig instanceof FormControl || controlConfig instanceof FormGroup ||
+            controlConfig instanceof FormArray) {
             return controlConfig;
         }
         else if (isArray(controlConfig)) {

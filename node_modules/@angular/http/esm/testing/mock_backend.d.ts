@@ -7,7 +7,8 @@ import { Response } from '../src/static_response';
  *
  * Mock Connection to represent a {@link Connection} for tests.
  *
- **/
+ * @experimental
+ */
 export declare class MockConnection implements Connection {
     /**
      * Describes the state of the connection, based on `XMLHttpRequest.readyState`, but with
@@ -95,7 +96,9 @@ export declare class MockConnection implements Connection {
  * ```
  *
  * This method only exists in the mock implementation, not in real Backends.
- **/
+ *
+ * @experimental
+ */
 export declare class MockBackend implements ConnectionBackend {
     /**
      * {@link EventEmitter}

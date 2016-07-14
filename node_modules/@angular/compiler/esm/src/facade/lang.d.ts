@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 export interface BrowserNodeGlobal {
     Object: typeof Object;
     Array: typeof Array;
@@ -23,20 +30,22 @@ export declare function scheduleMicroTask(fn: Function): void;
 export declare const IS_DART: boolean;
 declare var _global: BrowserNodeGlobal;
 export { _global as global };
-export declare var Type: FunctionConstructor;
 /**
  * Runtime representation a type that a Component or other object is instances of.
  *
  * An example of a `Type` is `MyCustomComponent` class, which in JavaScript is be represented by
  * the `MyCustomComponent` constructor function.
+ *
+ * @stable
  */
+export declare var Type: FunctionConstructor;
 export interface Type extends Function {
 }
 /**
  * Runtime representation of a type that is constructable (non-abstract).
  */
-export interface ConcreteType extends Type {
-    new (...args: any[]): any;
+export interface ConcreteType<T> extends Type {
+    new (...args: any[]): T;
 }
 export declare function getTypeNameForDebugging(type: Type): string;
 export declare var Math: any;
@@ -48,7 +57,7 @@ export declare function isNumber(obj: any): boolean;
 export declare function isString(obj: any): obj is String;
 export declare function isFunction(obj: any): boolean;
 export declare function isType(obj: any): boolean;
-export declare function isStringMap(obj: any): boolean;
+export declare function isStringMap(obj: any): obj is Object;
 export declare function isStrictStringMap(obj: any): boolean;
 export declare function isPromise(obj: any): boolean;
 export declare function isArray(obj: any): boolean;

@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { StringWrapper, isBlank, isPresent } from '../facade/lang';
 import { HtmlCommentAst, HtmlElementAst, HtmlTextAst, htmlVisitAll } from '../html_ast';
 import { ParseError } from '../parse_util';

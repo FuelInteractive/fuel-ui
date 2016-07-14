@@ -1,5 +1,5 @@
 /**
- * @license Angular 2.0.0-rc.3
+ * @license Angular 2.0.0-rc.4
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -14,6 +14,13 @@ var __extends = (this && this.__extends) || function (d, b) {
             (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx));
 }(this, function (exports, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
     'use strict';
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var globalScope;
     if (typeof window === 'undefined') {
         if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
@@ -318,6 +325,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function hasConstructor(value, type) {
         return value.constructor === type;
     }
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var PromiseCompleter = (function () {
         function PromiseCompleter() {
             var _this = this;
@@ -938,6 +952,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     AsyncPipe.ctorParameters = [
         { type: _angular_core.ChangeDetectorRef, },
     ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var NumberFormatStyle;
     (function (NumberFormatStyle) {
         NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
@@ -1165,19 +1186,45 @@ var __extends = (this && this.__extends) || function (d, b) {
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
     ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @experimental
+     */
+    var NgLocalization = (function () {
+        function NgLocalization() {
+        }
+        return NgLocalization;
+    }());
+    /**
+     * Returns the plural category for a given value.
+     * - "=value" when the case exists,
+     * - the plural category otherwise
+     *
+     * @internal
+     */
+    function getPluralCategory(value, cases, ngLocalization) {
+        var nbCase = "=" + value;
+        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
+    }
     var _INTERPOLATION_REGEXP = /#/g;
     var I18nPluralPipe = (function () {
-        function I18nPluralPipe() {
+        function I18nPluralPipe(_localization) {
+            this._localization = _localization;
         }
         I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-            var key;
-            var valueStr;
+            if (isBlank(value))
+                return '';
             if (!isStringMap(pluralMap)) {
                 throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
             }
-            key = value === 0 || value === 1 ? "=" + value : 'other';
-            valueStr = isPresent(value) ? value.toString() : '';
-            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, valueStr);
+            var key = getPluralCategory(value, Object.getOwnPropertyNames(pluralMap), this._localization);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
         };
         return I18nPluralPipe;
     }());
@@ -1185,14 +1232,20 @@ var __extends = (this && this.__extends) || function (d, b) {
     I18nPluralPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
     ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = [
+        { type: NgLocalization, },
+    ];
     var I18nSelectPipe = (function () {
         function I18nSelectPipe() {
         }
         I18nSelectPipe.prototype.transform = function (value, mapping) {
+            if (isBlank(value))
+                return '';
             if (!isStringMap(mapping)) {
                 throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
             }
-            return StringMapWrapper.contains(mapping, value) ? mapping[value] : mapping['other'];
+            return mapping.hasOwnProperty(value) ? mapping[value] : '';
         };
         return I18nSelectPipe;
     }());
@@ -1707,6 +1760,8 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.TemplateRef, },
     ];
     var _CASE_DEFAULT = new Object();
+    // TODO: remove when fully deprecated
+    var _warned = false;
     var SwitchView = (function () {
         function SwitchView(_viewContainerRef, _templateRef) {
             this._viewContainerRef = _viewContainerRef;
@@ -1825,8 +1880,8 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         Object.defineProperty(NgSwitchCase.prototype, "ngSwitchWhen", {
             set: function (value) {
-                if (!this._warned) {
-                    this._warned = true;
+                if (!_warned) {
+                    _warned = true;
                     console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
                 }
                 this._switch._onCaseValueChanged(this._value, value, this._view);
@@ -1863,15 +1918,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.TemplateRef, },
         { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
     ];
-    var _CATEGORY_DEFAULT = 'other';
-    /**
-     * @experimental
-     */
-    var NgLocalization = (function () {
-        function NgLocalization() {
-        }
-        return NgLocalization;
-    }());
     var NgPluralCase = (function () {
         function NgPluralCase(value, template, viewContainer) {
             this.value = value;
@@ -1892,7 +1938,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     var NgPlural = (function () {
         function NgPlural(_localization) {
             this._localization = _localization;
-            this._caseViews = new Map$1();
+            this._caseViews = {};
             this.cases = null;
         }
         Object.defineProperty(NgPlural.prototype, "ngPlural", {
@@ -1906,17 +1952,15 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgPlural.prototype.ngAfterContentInit = function () {
             var _this = this;
             this.cases.forEach(function (pluralCase) {
-                _this._caseViews.set(_this._formatValue(pluralCase), pluralCase._view);
+                _this._caseViews[pluralCase.value] = pluralCase._view;
             });
             this._updateView();
         };
         /** @internal */
         NgPlural.prototype._updateView = function () {
             this._clearViews();
-            var view = this._caseViews.get(this._switchValue);
-            if (!isPresent(view))
-                view = this._getCategoryView(this._switchValue);
-            this._activateView(view);
+            var key = getPluralCategory(this._switchValue, Object.getOwnPropertyNames(this._caseViews), this._localization);
+            this._activateView(this._caseViews[key]);
         };
         /** @internal */
         NgPlural.prototype._clearViews = function () {
@@ -1930,20 +1974,6 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._activeView = view;
             this._activeView.create();
         };
-        /** @internal */
-        NgPlural.prototype._getCategoryView = function (value) {
-            var category = this._localization.getPluralCategory(value);
-            var categoryView = this._caseViews.get(category);
-            return isPresent(categoryView) ? categoryView : this._caseViews.get(_CATEGORY_DEFAULT);
-        };
-        /** @internal */
-        NgPlural.prototype._isValueView = function (pluralCase) { return pluralCase.value[0] === '='; };
-        /** @internal */
-        NgPlural.prototype._formatValue = function (pluralCase) {
-            return this._isValueView(pluralCase) ? this._stripValue(pluralCase.value) : pluralCase.value;
-        };
-        /** @internal */
-        NgPlural.prototype._stripValue = function (value) { return NumberWrapper.parseInt(value.substring(1), 10); };
         return NgPlural;
     }());
     /** @nocollapse */
@@ -2854,8 +2884,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         /** @internal */
         FormBuilder.prototype._createControl = function (controlConfig) {
-            if (controlConfig instanceof Control ||
-                controlConfig instanceof ControlGroup ||
+            if (controlConfig instanceof Control || controlConfig instanceof ControlGroup ||
                 controlConfig instanceof ControlArray) {
                 return controlConfig;
             }
@@ -3107,6 +3136,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return ControlContainer;
     }(AbstractControlDirective));
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     function normalizeValidator(validator) {
         if (validator.validate !== undefined) {
             return function (c) { return validator.validate(c); };
@@ -3117,7 +3153,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     function normalizeAsyncValidator(validator) {
         if (validator.validate !== undefined) {
-            return function (c) { return Promise.resolve(validator.validate(c)); };
+            return function (c) { return validator.validate(c); };
         }
         else {
             return validator;
@@ -3286,6 +3322,165 @@ var __extends = (this && this.__extends) || function (d, b) {
         'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
         'value': [{ type: _angular_core.Input, args: ['value',] },],
     };
+    var SELECT_MULTIPLE_VALUE_ACCESSOR = {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: _angular_core.forwardRef(function () { return SelectMultipleControlValueAccessor; }),
+        multi: true
+    };
+    function _buildValueString$1(id, value) {
+        if (isBlank(id))
+            return "" + value;
+        if (isString(value))
+            value = "'" + value + "'";
+        if (!isPrimitive(value))
+            value = 'Object';
+        return StringWrapper.slice(id + ": " + value, 0, 50);
+    }
+    function _extractId$1(valueString) {
+        return valueString.split(':')[0];
+    }
+    var SelectMultipleControlValueAccessor = (function () {
+        function SelectMultipleControlValueAccessor() {
+            /** @internal */
+            this._optionMap = new Map();
+            /** @internal */
+            this._idCounter = 0;
+            this.onChange = function (_) { };
+            this.onTouched = function () { };
+        }
+        SelectMultipleControlValueAccessor.prototype.writeValue = function (value) {
+            var _this = this;
+            this.value = value;
+            if (value == null)
+                return;
+            var values = value;
+            // convert values to ids
+            var ids = values.map(function (v) { return _this._getOptionId(v); });
+            this._optionMap.forEach(function (opt, o) { opt._setSelected(ids.indexOf(o.toString()) > -1); });
+        };
+        SelectMultipleControlValueAccessor.prototype.registerOnChange = function (fn) {
+            var _this = this;
+            this.onChange = function (_) {
+                var selected = [];
+                if (_.hasOwnProperty('selectedOptions')) {
+                    var options = _.selectedOptions;
+                    for (var i = 0; i < options.length; i++) {
+                        var opt = options.item(i);
+                        var val = _this._getOptionValue(opt.value);
+                        selected.push(val);
+                    }
+                }
+                else {
+                    var options = _.options;
+                    for (var i = 0; i < options.length; i++) {
+                        var opt = options.item(i);
+                        if (opt.selected) {
+                            var val = _this._getOptionValue(opt.value);
+                            selected.push(val);
+                        }
+                    }
+                }
+                fn(selected);
+            };
+        };
+        SelectMultipleControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+        /** @internal */
+        SelectMultipleControlValueAccessor.prototype._registerOption = function (value) {
+            var id = (this._idCounter++).toString();
+            this._optionMap.set(id, value);
+            return id;
+        };
+        /** @internal */
+        SelectMultipleControlValueAccessor.prototype._getOptionId = function (value) {
+            for (var _i = 0, _a = MapWrapper.keys(this._optionMap); _i < _a.length; _i++) {
+                var id = _a[_i];
+                if (looseIdentical(this._optionMap.get(id)._value, value))
+                    return id;
+            }
+            return null;
+        };
+        /** @internal */
+        SelectMultipleControlValueAccessor.prototype._getOptionValue = function (valueString) {
+            var opt = this._optionMap.get(_extractId$1(valueString));
+            return isPresent(opt) ? opt._value : valueString;
+        };
+        return SelectMultipleControlValueAccessor;
+    }());
+    /** @nocollapse */
+    SelectMultipleControlValueAccessor.decorators = [
+        { type: _angular_core.Directive, args: [{
+                    selector: 'select[multiple][ngControl],select[multiple][ngFormControl],select[multiple][ngModel]',
+                    host: { '(input)': 'onChange($event.target)', '(blur)': 'onTouched()' },
+                    providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
+                },] },
+    ];
+    /** @nocollapse */
+    SelectMultipleControlValueAccessor.ctorParameters = [];
+    var NgSelectMultipleOption = (function () {
+        function NgSelectMultipleOption(_element, _renderer, _select) {
+            this._element = _element;
+            this._renderer = _renderer;
+            this._select = _select;
+            if (isPresent(this._select)) {
+                this.id = this._select._registerOption(this);
+            }
+        }
+        Object.defineProperty(NgSelectMultipleOption.prototype, "ngValue", {
+            set: function (value) {
+                if (this._select == null)
+                    return;
+                this._value = value;
+                this._setElementValue(_buildValueString$1(this.id, value));
+                this._select.writeValue(this._select.value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(NgSelectMultipleOption.prototype, "value", {
+            set: function (value) {
+                if (isPresent(this._select)) {
+                    this._value = value;
+                    this._setElementValue(_buildValueString$1(this.id, value));
+                    this._select.writeValue(this._select.value);
+                }
+                else {
+                    this._setElementValue(value);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /** @internal */
+        NgSelectMultipleOption.prototype._setElementValue = function (value) {
+            this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
+        };
+        /** @internal */
+        NgSelectMultipleOption.prototype._setSelected = function (selected) {
+            this._renderer.setElementProperty(this._element.nativeElement, 'selected', selected);
+        };
+        NgSelectMultipleOption.prototype.ngOnDestroy = function () {
+            if (isPresent(this._select)) {
+                this._select._optionMap.delete(this.id);
+                this._select.writeValue(this._select.value);
+            }
+        };
+        return NgSelectMultipleOption;
+    }());
+    /** @nocollapse */
+    NgSelectMultipleOption.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: 'option' },] },
+    ];
+    /** @nocollapse */
+    NgSelectMultipleOption.ctorParameters = [
+        { type: _angular_core.ElementRef, },
+        { type: _angular_core.Renderer, },
+        { type: SelectMultipleControlValueAccessor, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Host },] },
+    ];
+    /** @nocollapse */
+    NgSelectMultipleOption.propDecorators = {
+        'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
+        'value': [{ type: _angular_core.Input, args: ['value',] },],
+    };
     function controlPath(name, parent) {
         var p = ListWrapper.clone(parent.path);
         p.push(name);
@@ -3348,6 +3543,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             else if (hasConstructor(v, CheckboxControlValueAccessor) || hasConstructor(v, NumberValueAccessor) ||
                 hasConstructor(v, SelectControlValueAccessor) ||
+                hasConstructor(v, SelectMultipleControlValueAccessor) ||
                 hasConstructor(v, RadioControlValueAccessor)) {
                 if (isPresent(builtinAccessor))
                     _throwError(dir, 'More than one built-in value accessor matches');
@@ -3957,165 +4153,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
     ];
-    var SELECT_MULTIPLE_VALUE_ACCESSOR = {
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: _angular_core.forwardRef(function () { return SelectMultipleControlValueAccessor; }),
-        multi: true
-    };
-    function _buildValueString$1(id, value) {
-        if (isBlank(id))
-            return "" + value;
-        if (isString(value))
-            value = "'" + value + "'";
-        if (!isPrimitive(value))
-            value = 'Object';
-        return StringWrapper.slice(id + ": " + value, 0, 50);
-    }
-    function _extractId$1(valueString) {
-        return valueString.split(':')[0];
-    }
-    var SelectMultipleControlValueAccessor = (function () {
-        function SelectMultipleControlValueAccessor() {
-            /** @internal */
-            this._optionMap = new Map();
-            /** @internal */
-            this._idCounter = 0;
-            this.onChange = function (_) { };
-            this.onTouched = function () { };
-        }
-        SelectMultipleControlValueAccessor.prototype.writeValue = function (value) {
-            var _this = this;
-            this.value = value;
-            if (value == null)
-                return;
-            var values = value;
-            // convert values to ids
-            var ids = values.map(function (v) { return _this._getOptionId(v); });
-            this._optionMap.forEach(function (opt, o) { opt._setSelected(ids.indexOf(o.toString()) > -1); });
-        };
-        SelectMultipleControlValueAccessor.prototype.registerOnChange = function (fn) {
-            var _this = this;
-            this.onChange = function (_) {
-                var selected = [];
-                if (_.hasOwnProperty('selectedOptions')) {
-                    var options = _.selectedOptions;
-                    for (var i = 0; i < options.length; i++) {
-                        var opt = options.item(i);
-                        var val = _this._getOptionValue(opt.value);
-                        selected.push(val);
-                    }
-                }
-                else {
-                    var options = _.options;
-                    for (var i = 0; i < options.length; i++) {
-                        var opt = options.item(i);
-                        if (opt.selected) {
-                            var val = _this._getOptionValue(opt.value);
-                            selected.push(val);
-                        }
-                    }
-                }
-                fn(selected);
-            };
-        };
-        SelectMultipleControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
-        /** @internal */
-        SelectMultipleControlValueAccessor.prototype._registerOption = function (value) {
-            var id = (this._idCounter++).toString();
-            this._optionMap.set(id, value);
-            return id;
-        };
-        /** @internal */
-        SelectMultipleControlValueAccessor.prototype._getOptionId = function (value) {
-            for (var _i = 0, _a = MapWrapper.keys(this._optionMap); _i < _a.length; _i++) {
-                var id = _a[_i];
-                if (looseIdentical(this._optionMap.get(id)._value, value))
-                    return id;
-            }
-            return null;
-        };
-        /** @internal */
-        SelectMultipleControlValueAccessor.prototype._getOptionValue = function (valueString) {
-            var opt = this._optionMap.get(_extractId$1(valueString));
-            return isPresent(opt) ? opt._value : valueString;
-        };
-        return SelectMultipleControlValueAccessor;
-    }());
-    /** @nocollapse */
-    SelectMultipleControlValueAccessor.decorators = [
-        { type: _angular_core.Directive, args: [{
-                    selector: 'select[multiple][ngControl],select[multiple][ngFormControl],select[multiple][ngModel]',
-                    host: { '(input)': 'onChange($event.target)', '(blur)': 'onTouched()' },
-                    providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
-                },] },
-    ];
-    /** @nocollapse */
-    SelectMultipleControlValueAccessor.ctorParameters = [];
-    var NgSelectMultipleOption = (function () {
-        function NgSelectMultipleOption(_element, _renderer, _select) {
-            this._element = _element;
-            this._renderer = _renderer;
-            this._select = _select;
-            if (isPresent(this._select)) {
-                this.id = this._select._registerOption(this);
-            }
-        }
-        Object.defineProperty(NgSelectMultipleOption.prototype, "ngValue", {
-            set: function (value) {
-                if (this._select == null)
-                    return;
-                this._value = value;
-                this._setElementValue(_buildValueString$1(this.id, value));
-                this._select.writeValue(this._select.value);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgSelectMultipleOption.prototype, "value", {
-            set: function (value) {
-                if (isPresent(this._select)) {
-                    this._value = value;
-                    this._setElementValue(_buildValueString$1(this.id, value));
-                    this._select.writeValue(this._select.value);
-                }
-                else {
-                    this._setElementValue(value);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /** @internal */
-        NgSelectMultipleOption.prototype._setElementValue = function (value) {
-            this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
-        };
-        /** @internal */
-        NgSelectMultipleOption.prototype._setSelected = function (selected) {
-            this._renderer.setElementProperty(this._element.nativeElement, 'selected', selected);
-        };
-        NgSelectMultipleOption.prototype.ngOnDestroy = function () {
-            if (isPresent(this._select)) {
-                this._select._optionMap.delete(this.id);
-                this._select.writeValue(this._select.value);
-            }
-        };
-        return NgSelectMultipleOption;
-    }());
-    /** @nocollapse */
-    NgSelectMultipleOption.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: 'option' },] },
-    ];
-    /** @nocollapse */
-    NgSelectMultipleOption.ctorParameters = [
-        { type: _angular_core.ElementRef, },
-        { type: _angular_core.Renderer, },
-        { type: SelectMultipleControlValueAccessor, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Host },] },
-    ];
-    /** @nocollapse */
-    NgSelectMultipleOption.propDecorators = {
-        'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
-        'value': [{ type: _angular_core.Input, args: ['value',] },],
-    };
     var REQUIRED = Validators.required;
     var REQUIRED_VALIDATOR = {
         provide: NG_VALIDATORS,
@@ -4314,6 +4351,13 @@ var __extends = (this && this.__extends) || function (d, b) {
      */
     var COMMON_DIRECTIVES = [CORE_DIRECTIVES, FORM_DIRECTIVES];
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * This class should not be used directly by an application developer. Instead, use
      * {@link Location}.
      *
@@ -4422,13 +4466,18 @@ var __extends = (this && this.__extends) || function (d, b) {
             var browserBaseHref = this._platformStrategy.getBaseHref();
             this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
             this._platformStrategy.onPopState(function (ev) {
-                ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(), 'pop': true, 'type': ev.type });
+                ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(true), 'pop': true, 'type': ev.type });
             });
         }
         /**
          * Returns the normalized URL path.
          */
-        Location.prototype.path = function () { return this.normalize(this._platformStrategy.path()); };
+        // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+        // removed.
+        Location.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            return this.normalize(this._platformStrategy.path(includeHash));
+        };
         /**
          * Normalizes the given path and compares to the current normalized path.
          */
@@ -4567,7 +4616,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._platformLocation.onHashChange(fn);
         };
         HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-        HashLocationStrategy.prototype.path = function () {
+        HashLocationStrategy.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
             // the hash value is always prefixed with a `#`
             // and if it is empty then it will stay empty
             var path = this._platformLocation.hash;
@@ -4630,9 +4680,12 @@ var __extends = (this && this.__extends) || function (d, b) {
         PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
             return Location.joinWithSlash(this._baseHref, internal);
         };
-        PathLocationStrategy.prototype.path = function () {
-            return this._platformLocation.pathname +
+        PathLocationStrategy.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            var pathname = this._platformLocation.pathname +
                 Location.normalizeQueryParams(this._platformLocation.search);
+            var hash = this._platformLocation.hash;
+            return hash && includeHash ? "" + pathname + hash : pathname;
         };
         PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
             var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
@@ -4655,6 +4708,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
     ];
+    exports.NgLocalization = NgLocalization;
     exports.AsyncPipe = AsyncPipe;
     exports.COMMON_PIPES = COMMON_PIPES;
     exports.DatePipe = DatePipe;
@@ -4672,7 +4726,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.NgClass = NgClass;
     exports.NgFor = NgFor;
     exports.NgIf = NgIf;
-    exports.NgLocalization = NgLocalization;
     exports.NgPlural = NgPlural;
     exports.NgPluralCase = NgPluralCase;
     exports.NgStyle = NgStyle;

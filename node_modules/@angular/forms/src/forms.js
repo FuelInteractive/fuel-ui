@@ -1,4 +1,15 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+/**
  * @module
  * @description
  * This module is used for handling user input, by defining and building a {@link FormGroup} that
@@ -11,10 +22,6 @@
  * Forms providers are not included in default providers; you must import these providers
  * explicitly.
  */
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 var directives_1 = require('./directives');
 exports.FORM_DIRECTIVES = directives_1.FORM_DIRECTIVES;
 exports.REACTIVE_FORM_DIRECTIVES = directives_1.REACTIVE_FORM_DIRECTIVES;
@@ -38,6 +45,8 @@ var ng_model_1 = require('./directives/ng_model');
 exports.NgModel = ng_model_1.NgModel;
 var ng_model_group_1 = require('./directives/ng_model_group');
 exports.NgModelGroup = ng_model_group_1.NgModelGroup;
+var form_array_name_1 = require('./directives/reactive_directives/form_array_name');
+exports.FormArrayName = form_array_name_1.FormArrayName;
 var form_control_directive_1 = require('./directives/reactive_directives/form_control_directive');
 exports.FormControlDirective = form_control_directive_1.FormControlDirective;
 var form_control_name_1 = require('./directives/reactive_directives/form_control_name');

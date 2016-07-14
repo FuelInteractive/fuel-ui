@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var lang_1 = require('../src/facade/lang');
 var enums_1 = require('./enums');
@@ -41,6 +48,8 @@ var url_search_params_1 = require('./url_search_params');
  *   console.log('people', res.json());
  * });
  * ```
+ *
+ * @experimental
  */
 var Request = (function () {
     function Request(requestOptions) {

@@ -1,4 +1,11 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @module
  * @description
  * This module is used for handling user input, by defining and building a {@link FormGroup} that
@@ -23,12 +30,13 @@ export { NgControlStatus } from './directives/ng_control_status';
 export { NgForm } from './directives/ng_form';
 export { NgModel } from './directives/ng_model';
 export { NgModelGroup } from './directives/ng_model_group';
+export { FormArrayName } from './directives/reactive_directives/form_array_name';
 export { FormControlDirective } from './directives/reactive_directives/form_control_directive';
 export { FormControlName } from './directives/reactive_directives/form_control_name';
 export { FormGroupDirective } from './directives/reactive_directives/form_group_directive';
 export { FormGroupName } from './directives/reactive_directives/form_group_name';
 export { NgSelectOption, SelectControlValueAccessor } from './directives/select_control_value_accessor';
-export { MaxLengthValidator, MinLengthValidator, PatternValidator, RequiredValidator, Validator } from './directives/validators';
+export { AsyncValidatorFn, MaxLengthValidator, MinLengthValidator, PatternValidator, RequiredValidator, Validator, ValidatorFn } from './directives/validators';
 export { FormBuilder } from './form_builder';
 export { AbstractControl, FormArray, FormControl, FormGroup } from './model';
 export { NG_ASYNC_VALIDATORS, NG_VALIDATORS, Validators } from './validators';

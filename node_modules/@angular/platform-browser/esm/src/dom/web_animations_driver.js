@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { AUTO_STYLE, BaseException } from '@angular/core';
 import { StringMapWrapper } from '../facade/collection';
 import { StringWrapper, isNumber, isPresent } from '../facade/lang';
@@ -31,6 +38,7 @@ export class WebAnimationsDriver {
         var playerOptions = {
             'duration': duration,
             'delay': delay,
+            'easing': easing,
             'fill': 'both' // we use `both` because it allows for styling at 0% to work with `delay`
         };
         var player = this._triggerWebAnimation(anyElm, formattedSteps, playerOptions);

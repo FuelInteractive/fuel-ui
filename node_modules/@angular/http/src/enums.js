@@ -1,6 +1,14 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 /**
  * Supported http methods.
+ * @experimental
  */
 (function (RequestMethod) {
     RequestMethod[RequestMethod["Get"] = 0] = "Get";
@@ -16,6 +24,7 @@ var RequestMethod = exports.RequestMethod;
  * All possible states in which a connection can be, based on
  * [States](http://www.w3.org/TR/XMLHttpRequest/#states) from the `XMLHttpRequest` spec, but with an
  * additional "CANCELLED" state.
+ * @experimental
  */
 (function (ReadyState) {
     ReadyState[ReadyState["Unsent"] = 0] = "Unsent";
@@ -29,6 +38,7 @@ var ReadyState = exports.ReadyState;
 /**
  * Acceptable response types to be associated with a {@link Response}, based on
  * [ResponseType](https://fetch.spec.whatwg.org/#responsetype) from the Fetch spec.
+ * @experimental
  */
 (function (ResponseType) {
     ResponseType[ResponseType["Basic"] = 0] = "Basic";
@@ -40,6 +50,7 @@ var ReadyState = exports.ReadyState;
 var ResponseType = exports.ResponseType;
 /**
  * Supported content type to be automatically associated with a {@link Request}.
+ * @experimental
  */
 (function (ContentType) {
     ContentType[ContentType["NONE"] = 0] = "NONE";

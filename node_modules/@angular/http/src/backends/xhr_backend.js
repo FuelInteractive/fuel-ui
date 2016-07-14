@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 "use strict";
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
@@ -18,6 +25,8 @@ var XSSI_PREFIX = /^\)\]\}',?\n/;
  *
  * This class would typically not be created or interacted with directly inside applications, though
  * the {@link MockConnection} may be interacted with in tests.
+ *
+ * @experimental
  */
 var XHRConnection = (function () {
     function XHRConnection(req, browserXHR, baseResponseOptions) {
@@ -127,6 +136,8 @@ exports.XHRConnection = XHRConnection;
  * Applications can configure custom cookie and header names by binding an instance of this class
  * with different `cookieName` and `headerName` values. See the main HTTP documentation for more
  * details.
+ *
+ * @experimental
  */
 var CookieXSRFStrategy = (function () {
     function CookieXSRFStrategy(_cookieName, _headerName) {
