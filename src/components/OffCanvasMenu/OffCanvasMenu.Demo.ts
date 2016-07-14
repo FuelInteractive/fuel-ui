@@ -20,7 +20,8 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "./offCanvasMenu";
     (close)="onClose()" (open)="onOpen()" #menu>
     <div class="p-a-1">
         <h3>Menu</h3>
-        <button class="btn btn-info off-canvas-menu-close">Close Menu</button>
+        <button class="btn btn-info off-canvas-menu-close">Close Menu with Class</button>
+        <button class="btn btn-primary" offCanvasMenuClose>Close Menu with Directive</button>
     </div>
 </off-canvas-menu>
 
@@ -75,7 +76,8 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "fuel-ui/fuel-ui"
     (close)=&quot;onClose()&quot; (open)=&quot;onOpen()&quot; #menu&gt;
     &lt;div class=&quot;p-a-1&quot;&gt;
         &lt;h3&gt;Menu&lt;/h3&gt;
-        &lt;button class=&quot;btn btn-info off-canvas-menu-close&quot;&gt;Close Menu&lt;/button&gt;
+        &lt;button class=&quot;btn btn-info off-canvas-menu-close&quot;&gt;Close Menu with Class&lt;/button&gt;
+        &lt;button class=&quot;btn btn-primary&quot; offCanvasMenuClose&gt;Close Menu with Directive&lt;/button&gt;
     &lt;/div&gt;
 &lt;/off-canvas-menu&gt;
 </code>
