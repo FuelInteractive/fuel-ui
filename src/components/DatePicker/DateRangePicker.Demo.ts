@@ -20,7 +20,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 <section class="row">
     <div class="col-md-4">
-        <form class="form-inline">
+        <div class="form-inline">
             <date-range-picker
                 minDate="11/1/2015"
                 maxDate="11/12/2016" 
@@ -40,7 +40,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
                     </div>
                 </div>
             </date-range-picker>
-        </form>
+        </div>
     </div>
     <div class="col-md-6">
         value.start: {{dateRangePickerValue.start}} <br/>
