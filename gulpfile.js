@@ -107,9 +107,9 @@ gulp.task('bundleScripts', ['scripts'], function() {
             module: 'cjs'
         },
         map: {
-            typescript: path.resolve('node_modules/typescript/lib/typescript.js'),
-            '@angular': path.resolve('node_modules/@angular'),
-            rxjs: path.resolve('node_modules/rxjs')
+            typescript: 'fuel-ui/node_modules/typescript/lib/typescript.js',
+            '@angular': 'fuel-ui/node_modules/@angular',
+            rxjs: 'fuel-ui/node_modules/rxjs'
         },
         paths: {
             '*': '*.js'

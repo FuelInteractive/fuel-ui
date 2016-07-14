@@ -143,8 +143,8 @@ export class ModalDemo {
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
     events:Event[] = [
-        new Event('close', 'null', 'When the model is closed'),
-        new Event('open', 'null', 'When the model is opened')
+        new Event('close', 'null', 'When the modal is closed'),
+        new Event('open', 'null', 'When the modal is opened')
     ];
     eventsColumns:TableSortableColumn[] = EventColumns;
     eventsSort:TableSortableSorting = EventsDefaultSort;
