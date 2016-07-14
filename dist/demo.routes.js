@@ -14,6 +14,7 @@ var routes = [
     { path: 'component/dropdown', component: fuel_ui_demo_1.DropdownDemo },
     { path: 'component/infinitescroller', component: fuel_ui_demo_1.InfiniteScrollerDemo },
     { path: 'component/modal', component: fuel_ui_demo_1.ModalDemo },
+    { path: 'component/offCanvasMenu', component: fuel_ui_demo_1.OffCanvasMenuDemo },
     { path: 'component/pagination', component: fuel_ui_demo_1.PaginationDemo },
     { path: 'component/progress', component: fuel_ui_demo_1.ProgressDemo },
     { path: 'component/slider', component: fuel_ui_demo_1.SliderDemo },

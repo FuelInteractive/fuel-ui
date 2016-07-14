@@ -10,6 +10,7 @@ var DateRangePicker_Demo_1 = require("./DatePicker/DateRangePicker.Demo");
 var Dropdown_Demo_1 = require("./Dropdown/Dropdown.Demo");
 var InfiniteScroller_Demo_1 = require("./InfiniteScroller/InfiniteScroller.Demo");
 var Modal_Demo_1 = require("./Modal/Modal.Demo");
+var OffCanvasMenu_Demo_1 = require("./OffCanvasMenu/OffCanvasMenu.Demo");
 var Pagination_Demo_1 = require("./Pagination/Pagination.Demo");
 var Progress_Demo_1 = require("./Progress/Progress.Demo");
 var TableSortable_Demo_1 = require("./TableSortable/TableSortable.Demo");
@@ -27,6 +28,7 @@ exports.FUELUI_DEMO_COMPONENT_PROVIDERS = [
     Dropdown_Demo_1.DROPDOWN_DEMO_PROVIDERS,
     InfiniteScroller_Demo_1.INFINITESCROLLER_DEMO_PROVIDERS,
     Modal_Demo_1.MODAL_DEMO_PROVIDERS,
+    OffCanvasMenu_Demo_1.OFFCANVASMENU_DEMO_PROVIDERS,
     Pagination_Demo_1.PAGINATION_DEMO_PROVIDERS,
     Progress_Demo_1.PROGRESS_DEMO_PROVIDERS,
     TableSortable_Demo_1.TABLESORTABLE_DEMO_PROVIDERS,
@@ -44,6 +46,7 @@ __export(require("./DatePicker/DateRangePicker.Demo"));
 __export(require("./Dropdown/Dropdown.Demo"));
 __export(require("./InfiniteScroller/InfiniteScroller.Demo"));
 __export(require("./Modal/Modal.Demo"));
+__export(require("./OffCanvasMenu/OffCanvasMenu.Demo"));
 __export(require("./Pagination/Pagination.Demo"));
 __export(require("./Progress/Progress.Demo"));
 __export(require("./TableSortable/TableSortable.Demo"));

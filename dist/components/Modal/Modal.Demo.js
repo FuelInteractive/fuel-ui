@@ -27,8 +27,8 @@ var ModalDemo = (function () {
         this.attributesColumns = demoUtilities_1.AttributeColumns;
         this.attributesSort = demoUtilities_1.AttributesDefaultSort;
         this.events = [
-            new demoUtilities_1.Event('close', 'null', 'When the model is closed'),
-            new demoUtilities_1.Event('open', 'null', 'When the model is opened')
+            new demoUtilities_1.Event('close', 'null', 'When the modal is closed'),
+            new demoUtilities_1.Event('open', 'null', 'When the modal is opened')
         ];
         this.eventsColumns = demoUtilities_1.EventColumns;
         this.eventsSort = demoUtilities_1.EventsDefaultSort;
