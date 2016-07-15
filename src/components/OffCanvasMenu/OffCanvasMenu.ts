@@ -12,7 +12,7 @@ export class OffCanvasMenuClose {
     close = new EventEmitter();
 
     @HostListener("click", ["$event"])
-    onClick(e): void {
+    onClick(e: any): void {
         this.close.next(null);
     }
 }
