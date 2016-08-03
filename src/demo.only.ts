@@ -47,7 +47,7 @@ export class DemoHome {
                
 <pre>
 <code class="language-bash" code-highlight>
-npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
+npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.3 --save
 </code>
 </pre>
 
@@ -80,7 +80,7 @@ npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
 <code class="language-bash" code-highlight>
 ng new example-project
 cd example-project
-npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
+npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.3 --save
 </code>
 </pre>
 

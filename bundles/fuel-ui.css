@@ -1186,9 +1186,9 @@
     content: "\f0dd";
     color: #767676; }
 
-.fuel-ui-tag-label {
+.fuel-ui-tag {
   margin: 0 .25em; }
-  .fuel-ui-tag-label.disabled {
+  .fuel-ui-tag.disabled {
     cursor: not-allowed;
     background: #818a91;
     color: darkgray; }

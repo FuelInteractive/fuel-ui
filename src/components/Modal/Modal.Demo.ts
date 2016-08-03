@@ -19,7 +19,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <div class="form-group row">
     <label for="size" class="col-md-1 form-control-label">Size</label>
     <div class="col-md-2">
-        <select name="size" [(ngModel)]="size" class="c-select">
+        <select name="size" [(ngModel)]="size" class="custom-select">
             <option value="">Default</option>
             <option value="sm">Small</option>
             <option value="lg">Large</option>

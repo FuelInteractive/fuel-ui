@@ -29,7 +29,7 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "./OffCanvasMenu";
     <div class="row">
         <label for="origin" class="col-md-1 form-control-label">Origin</label>
         <div class="col-md-2">
-            <select name="origin" [(ngModel)]="origin" class="c-select">
+            <select name="origin" [(ngModel)]="origin" class="custom-select">
                 <option>left</option>
                 <option>right</option>
                 <option>top</option>

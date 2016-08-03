@@ -22,7 +22,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
         <div class="form-group row">
             <label for="tempTag.color" class="col-sm-2 col-md-1 form-control-label">Color</label>
             <div class="col-sm-2">
-                <select class="c-select" [(ngModel)]="tempTag.color" name="tempTag.color">
+                <select class="custom-select" [(ngModel)]="tempTag.color" name="tempTag.color">
                     <option [selected]="tempTag.color == 'danger'" value="danger">Danger</option>
                     <option [selected]="tempTag.color == 'default'" value="default">Default</option>
                     <option [selected]="tempTag.color == 'info'" value="info">Info</option>

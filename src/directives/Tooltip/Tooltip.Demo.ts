@@ -39,7 +39,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
         <div class="form-group row">
             <label for="position" class="col-sm-2 col-md-1 form-control-label">Position</label>
             <div class="col-sm-2">
-                <select [(ngModel)]="position" class="c-select" name="position">
+                <select [(ngModel)]="position" class="custom-select" name="position">
                     <option value="bottom-right">bottom-right</option>
                     <option value="bottom">bottom</option>
                     <option value="bottom-left">bottom-left</option>
@@ -54,7 +54,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
         <div class="form-group row">
             <label for="color" class="col-sm-2 col-md-1 form-control-label">Color</label>
             <div class="col-sm-2">
-                <select [(ngModel)]="color" class="c-select" name="color">
+                <select [(ngModel)]="color" class="custom-select" name="color">
                     <option value="none">none</option>
                     <option value="error">error</option>
                     <option value="warning">warning</option>
@@ -66,7 +66,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
         <div class="form-group row">
             <label for="size" class="col-sm-2 col-md-1 form-control-label">Size</label>
             <div class="col-sm-2">
-                <select [(ngModel)]="size" class="c-select" name="size">
+                <select [(ngModel)]="size" class="custom-select" name="size">
                     <option value="auto">auto</option>
                     <option value="small">small</option>
                     <option value="medium">medium</option>
