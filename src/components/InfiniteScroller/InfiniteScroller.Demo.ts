@@ -39,7 +39,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {INFINITE_SCROLLER_PROVIDERS} from 'fuel-ui/fuel-ui';
+{{'import {INFINITE_SCROLLER_PROVIDERS} from "fuel-ui/fuel-ui"'}};
 </code>
 </pre>
 
@@ -51,7 +51,8 @@ import {INFINITE_SCROLLER_PROVIDERS} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;infinite-scroller 
+{{'
+<infinite-scroller 
     (next)=&quot;infinteScrollNext()&quot; 
     (prev)=&quot;infiniteScrollPrev()&quot; 
     height=&quot;300px&quot;
@@ -65,12 +66,14 @@ import {INFINITE_SCROLLER_PROVIDERS} from 'fuel-ui/fuel-ui';
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/infinite-scroller&gt;
+'}}
 </code>
 </pre>
 </tab>
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
+{{'
 export class InfiniteScrollerDemo {
     infiniteScrollItems: string[] = [];
     infiniteScrollMin: number = 0;
@@ -102,6 +105,7 @@ export class InfiniteScrollerDemo {
         this.infiniteScrollItems.push(newItem);
     }
 }
+'}}
 </code>
 </pre>
 </tab>

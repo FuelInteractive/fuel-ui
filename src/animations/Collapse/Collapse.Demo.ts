@@ -6,6 +6,14 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
+  styles: [`
+    #collapse-demo-box {
+            border: 1px solid black; 
+            padding: 0 25px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+  `],
   template: `
 <div class="row">
     <div class="col-md-12">
@@ -18,12 +26,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 <button class="btn btn-primary" (click)="collapsed = !collapsed">Toggle Collapse</button>
 <style>
-    #collapse-demo-box {
-        border: 1px solid black; 
-        padding: 0 25px;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
+    
 </style>
 <div id="collapse-demo-box" @collapse="collapsed ? 'true' : 'false'"> 
     <h2>All of your content</h2>
@@ -39,11 +42,11 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Collapse} from 'fuel-ui/fuel-ui';
+import {{'{'}}Collapse{{'}'}} from 'fuel-ui/fuel-ui';
 
-@Component({
+@Component({{'{'}}
     animations: [Collapse(300)]
-})
+{{'}'}})
 </code>
 </pre>
 
@@ -70,9 +73,9 @@ import {Collapse} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class CollapseExample { 
+export class CollapseExample {{'{'}}
     collapsed: boolean = false;
-}
+{{'}'}}
 </code>
 </pre>
 </tab>

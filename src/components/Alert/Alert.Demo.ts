@@ -30,7 +30,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Alert} from 'fuel-ui/fuel-ui';
+import {{'{'}}Alert{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -51,9 +51,9 @@ import {Alert} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class AlertExample {
+export class AlertExample {{'{'}}
     showAlert: boolean = false;
-}
+{{'}'}}
 </code>
 </pre>
 </tab>

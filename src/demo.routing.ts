@@ -1,10 +1,10 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import {DemoHome, InstallationComponent} from './demo.only';
 import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, OffCanvasMenuDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
     TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo, TextExpanderDemo} from './fuel-ui-demo';
 
-const routes: RouterConfig = [
+const routes: Routes = [
     { path: '', component: DemoHome },
     { path: 'installation', component: InstallationComponent},
     { path: 'animation/collapse', component: CollapseDemo },
@@ -34,6 +34,8 @@ const routes: RouterConfig = [
     { path: 'pipe/range', component: RangeDemo}
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
+export const appRoutingProviders: any[] = [
+  
 ];
+
+export const routing = RouterModule.forRoot(routes);

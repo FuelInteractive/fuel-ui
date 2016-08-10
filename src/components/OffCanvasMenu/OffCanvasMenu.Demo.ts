@@ -60,7 +60,7 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "./OffCanvasMenu";
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {OFF_CANVAS_MENU_PROVIDERS} from "fuel-ui/fuel-ui"
+import {{'{'}}OFF_CANVAS_MENU_PROVIDERS{{'}'}} from "fuel-ui/fuel-ui"
 </code>
 </pre>
 
@@ -86,18 +86,18 @@ import {OFF_CANVAS_MENU_PROVIDERS} from "fuel-ui/fuel-ui"
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class OffCanvasMenuExample {
+export class OffCanvasMenuExample {{'{'}}
     origin = "left";  
     width = "25%";
     height = "25%";
 
-    onClose(){
+    onClose(){{'{'}}
         console.log("Menu has been closed!");
-    }
-    onOpen(){
+    {{'}'}}
+    onOpen(){{'{'}}
         console.log("Menu has been opened!");
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>

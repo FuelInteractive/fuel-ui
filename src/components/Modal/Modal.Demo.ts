@@ -52,7 +52,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Modal} from 'fuel-ui/fuel-ui';
+import {{'{'}}Modal{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -91,14 +91,14 @@ import {Modal} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class ModalExample {
-    onClose(){
+export class ModalExample {{'{'}}
+    onClose(){{'{'}}
         console.log("Modal has been closed!");
-    }
-    onOpen(){
+    {{'}'}}
+    onOpen(){{'{'}}
         console.log("Modal has been opened!");
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>

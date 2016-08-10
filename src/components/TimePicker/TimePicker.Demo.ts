@@ -62,7 +62,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {TimePicker} from 'fuel-ui/fuel-ui';
+import {{'{'}}TimePicker{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -92,7 +92,7 @@ import {TimePicker} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class TimePickerExample {
+export class TimePickerExample {{'{'}}
     date: Date = new Date();
     minDate: Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0);
     maxDate: Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 23, 59, 59);
@@ -103,7 +103,7 @@ export class TimePickerExample {
     showSeconds: boolean = true;
     showSpinners: boolean = true;
     showMeridian: boolean = true;
-}
+{{'}'}}
 </code>
 </pre>
 </tab>

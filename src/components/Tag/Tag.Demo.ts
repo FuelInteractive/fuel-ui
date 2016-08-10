@@ -86,7 +86,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {TAG_PROVIDERS} from 'fuel-ui/fuel-ui';
+import {{'{'}}TAG_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -114,20 +114,20 @@ import {TAG_PROVIDERS} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class TagExample {
+export class TagExample {{'{'}}
     tags:any[] = [
-        {title: 'Default'},
-        {title: 'Primary', color: 'primary', pill: true, removable: true, value: 'Some great value'},
-        {title: 'Info', color: 'info', pill: true, removable: true, value: false},
-        {title: 'Success', color: 'success', pill: true, removable: true, value: 1234567890},
-        {title: 'Danger', color: 'danger', pill: false, removable: true, value: {some: 'great', value: true}},
-        {title: 'Warning', color: 'warning', pill: false, removable: true, value: true}
+        {{'{'}}title: 'Default'{{'}'}},
+        {{'{'}}title: 'Primary', color: 'primary', pill: true, removable: true, value: 'Some great value'{{'}'}},
+        {{'{'}}title: 'Info', color: 'info', pill: true, removable: true, value: false{{'}'}},
+        {{'{'}}title: 'Success', color: 'success', pill: true, removable: true, value: 1234567890{{'}'}},
+        {{'{'}}title: 'Danger', color: 'danger', pill: false, removable: true, value: {{'{'}}some: 'great', value: true{{'}'}}{{'}'}},
+        {{'{'}}title: 'Warning', color: 'warning', pill: false, removable: true, value: true{{'}'}}
     ];
     
-    removeLog(tag: Tag):void {
+    removeLog(tag: Tag):void {{'{'}}
         console.log('Removed:', tag.title, '-', tag.value);
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>

@@ -54,7 +54,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {DateRange, DATE_PICKER_PROVIDERS} from 'fuel-ui/fuel-ui';
+import {{'{'}}DateRange, DATE_PICKER_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -93,22 +93,22 @@ import {DateRange, DATE_PICKER_PROVIDERS} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class DateRangePickerExample { 
+export class DateRangePickerExample {{'{'}}
     dateRangePickerValue: DateRange;
     
-    datePickerValueChange(eventValue: any){
+    datePickerValueChange(eventValue: any){{'{'}}
         this.dateRangePickerValue = eventValue;
-    }
+    {{'}'}}
     
-    dateFilter(d: Date): boolean {
+    dateFilter(d: Date): boolean {{'{'}}
         
         //every Tuesday
         if([2].indexOf(d.getDay()) > -1)
             return false;
         
         return true;
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>

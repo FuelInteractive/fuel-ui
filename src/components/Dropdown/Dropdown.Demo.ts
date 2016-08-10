@@ -26,7 +26,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Dropdown} from 'fuel-ui/fuel-ui';
+import {{'{'}}Dropdown{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 

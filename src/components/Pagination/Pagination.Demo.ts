@@ -74,7 +74,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Pagination} from 'fuel-ui/fuel-ui';
+import {{'{'}}Pagination{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -101,13 +101,13 @@ import {Pagination} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class PaginationExample {
+export class PaginationExample {{'{'}}
     currentPage: number = 1;
     
-    pageChange(page: number): void {
+    pageChange(page: number): void {{'{'}}
         console.log('New Page: ' + page);
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>

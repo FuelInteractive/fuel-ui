@@ -38,7 +38,7 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {CAROUSEL_PROVIDERS} from 'fuel-ui/fuel-ui';
+import {{'{'}}CAROUSEL_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 

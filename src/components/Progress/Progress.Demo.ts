@@ -40,7 +40,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
     class=&quot;progress progress-striped progress-animated&quot;
     [value]=&quot;progress&quot; 
     max=&quot;100&quot;&gt;
-        {<pre>{</pre>progress}}%
+        {{'{'}}<pre>{{'{'}}</pre>progress{{'}'}}{{'}'}}%
 &lt;/progress&gt;
 </code>
 </pre>

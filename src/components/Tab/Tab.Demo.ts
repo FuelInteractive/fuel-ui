@@ -55,7 +55,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
+import {{'{'}}TAB_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -76,7 +76,7 @@ import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
         (deselect)=&quot;deselectLog($event)&quot;
         (select)=&quot;selectLog($event)&quot;
         (remove)=&quot;removeLog($event)&quot;&gt;
-    {<pre>{</pre>theTab?.content}}
+    {{'{'}}<pre>{{'}'}}</pre>theTab?.content{{'}'}}{{'}'}}
     &lt;/tab&gt;
 &lt;/tabset&gt;
 
@@ -90,26 +90,26 @@ import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class TabExample {
+export class TabExample {{'{'}}
     tabs:any[] = [
-        {heading: 'Title 1', content: 'Content 1', active: true},
-        {heading: 'Title 2', content: 'Content 2'},
-        {heading: 'Title 3', content: 'Content 3'},
-        {heading: 'Title 4', content: 'Content 4', removable: true}
+        {{'{'}}heading: 'Title 1', content: 'Content 1', active: true{{'}'}},
+        {{'{'}}heading: 'Title 2', content: 'Content 2'{{'}'}},
+        {{'{'}}heading: 'Title 3', content: 'Content 3'{{'}'}},
+        {{'{'}}heading: 'Title 4', content: 'Content 4', removable: true{{'}'}}
     ];
     
-    deselectLog(tab: Tab):void {
+    deselectLog(tab: Tab):void {{'{'}}
         console.log('Deselected:', tab.heading);
-    }
+    {{'}'}}
     
-    selectLog(tab: Tab):void {
+    selectLog(tab: Tab):void {{'{'}}
         console.log('Selected:', tab.heading);
-    }
+    {{'}'}}
     
-    removeLog(tab: Tab):void {
+    removeLog(tab: Tab):void {{'{'}}
         console.log('Removed:', tab.heading);
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>

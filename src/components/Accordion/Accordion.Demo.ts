@@ -124,7 +124,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {ACCORDION_PROVIDERS} from 'fuel-ui/fuel-ui';
+import {{'{'}}ACCORDION_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -146,7 +146,7 @@ import {ACCORDION_PROVIDERS} from 'fuel-ui/fuel-ui';
         &lt;accordion-heading&gt;
             &lt;a (click)=&quot;$event.preventDefault&quot; class=&quot;fuel-ui-clickable&quot;&gt;Markup Here!&lt;/a&gt;
             &lt;i class=&quot;pull-right fa&quot;
-                [ngClass]=&quot;{'fa-chevron-down': item?.open, 'fa-chevron-right': !item || !item.open}&quot;&gt;&lt;/i&gt;
+                [ngClass]=&quot;{{'{'}}'fa-chevron-down': item?.open, 'fa-chevron-right': !item || !item.open{{'}'}}&quot;&gt;&lt;/i&gt;
         &lt;/accordion-heading&gt;
         What amazing content!
     &lt;/accordion-item&gt;
@@ -162,7 +162,7 @@ import {ACCORDION_PROVIDERS} from 'fuel-ui/fuel-ui';
                     [(open)]=&quot;firstOpen&quot;
                     [disabled]=&quot;firstDisabled&quot;&gt;
         &lt;div accordion-heading class=&quot;fuel-ui-accordion-heading fuel-ui-clickable&quot; 
-                    [ngClass]=&quot;{'text-muted': firstDisabled}&quot;&gt;
+                    [ngClass]=&quot;{{'{'}}'text-muted': firstDisabled{{'}'}}&quot;&gt;
             Static Header 1
         &lt;/div&gt;
         &lt;div class=&quot;fuel-ui-accordion-body&quot;&gt;
@@ -173,7 +173,7 @@ import {ACCORDION_PROVIDERS} from 'fuel-ui/fuel-ui';
         &lt;div accordion-heading class=&quot;fuel-ui-accordion-heading fuel-ui-clickable&quot;&gt;
             &lt;a (click)=&quot;$event.preventDefault&quot;&gt;Markup Here!&lt;/a&gt;
             &lt;i class=&quot;pull-right fa&quot;
-                [ngClass]=&quot;{'fa-chevron-down': itemStyled?.open, 'fa-chevron-right': !itemStyled || !itemStyled.open}&quot;&gt;&lt;/i&gt;
+                [ngClass]=&quot;{{'{'}}'fa-chevron-down': itemStyled?.open, 'fa-chevron-right': !itemStyled || !itemStyled.open{{'}'}}&quot;&gt;&lt;/i&gt;
         &lt;/div&gt;
         &lt;div class=&quot;fuel-ui-accordion-body&quot;&gt;
             What amazing content!
@@ -191,12 +191,12 @@ import {ACCORDION_PROVIDERS} from 'fuel-ui/fuel-ui';
  * Feel free to use this as base for your own styles!
  */
 
-.fuel-ui-accordion {
+.fuel-ui-accordion {{'{'}}
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     
-    .fuel-ui-accordion-heading {
+    .fuel-ui-accordion-heading {{'{'}}
         background-color: #f5f5f5;
         border-bottom: 1px solid #ddd;
         border-top-left-radius: 3px;
@@ -204,28 +204,28 @@ import {ACCORDION_PROVIDERS} from 'fuel-ui/fuel-ui';
         color: #333;
         padding: 10px 15px;
         
-        &.text-muted {
+        &.text-muted {{'{'}}
             color: #818a91 !important;
-        }
-    }
+        {{'}'}}
+    {{'}'}}
     
-    .fuel-ui-accordion-body {
+    .fuel-ui-accordion-body {{'{'}}
         padding: 15px;
-    }
-}
+    {{'}'}}
+{{'}'}}
 </code>
 </pre>
 </tab>
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class AccordionExample {
+export class AccordionExample {{'{'}}
     oneAtATime:boolean = true;
     duration:number = 250;
     firstOpen:boolean = true;
     firstDisabled:boolean = false;
     lastOpen:boolean = false;
-}
+{{'{'}}
 </code>
 </pre>
 </tab>

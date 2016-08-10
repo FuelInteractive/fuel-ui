@@ -83,7 +83,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {TextExpander} from 'fuel-ui/fuel-ui';
+import {{'{'}}TextExpander{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 
@@ -110,7 +110,7 @@ import {TextExpander} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class TextExpanderExample {
+export class TextExpanderExample {{'{'}}
     expanded: boolean = false;
     ellipsis: boolean = true;
     text: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed " + 
@@ -119,7 +119,7 @@ export class TextExpanderExample {
     words: number = 0;
     expandText: string = "Show more";
     shrinkText: string = "Show less";
-}
+{{'}'}}
 </code>
 </pre>
 </tab>

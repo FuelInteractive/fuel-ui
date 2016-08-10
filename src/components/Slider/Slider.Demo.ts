@@ -77,7 +77,7 @@ import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {Slider} from 'fuel-ui/fuel-ui';
+import {{'{'}}Slider{{'}'}} from 'fuel-ui/fuel-ui';
 </code>
 </pre>
 <h3>Getting Started</h3>
@@ -115,12 +115,12 @@ import {Slider} from 'fuel-ui/fuel-ui';
 <tab heading="TypeScript">
 <pre>
 <code class="language-javascript" code-highlight>
-export class SliderExample{
+export class SliderExample{{'{'}}
     sliderValue: number = 20;
     secondSliderValue: number = 80;
     minValue: number = 0;
     maxValue: number = 100;
-}
+{{'}'}}
 </code>
 </pre>
 </tab>
