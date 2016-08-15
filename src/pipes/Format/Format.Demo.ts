@@ -21,7 +21,7 @@ export class DataType{
 }
 
 @Component({
-  templateUrl: "pipes/Format/Format.Demo.html",
+  templateUrl: "pipes/Format/Format.demo.html",
     directives: [CORE_DIRECTIVES, CodeHighlighter, TableSortable, TAB_PROVIDERS],
     pipes: [FORMAT_PROVIDERS]
 })

@@ -1,13 +1,9 @@
 import {Component} from '@angular/core';
-import {Animation} from './Animation';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "directives/Animation/Animation.Demo.html",
-        directives: [Animation, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+  templateUrl: "directives/Animation/Animation.demo.html"
 })
 export class AnimationDemo {
     codeExample1 = `&lt;div class=&quot;some-animation-class&quot;
@@ -65,7 +61,3 @@ export class AnimationDemo {
     eventsColumns:TableSortableColumn[] = EventColumns;
     eventsSort:TableSortableSorting = EventsDefaultSort;
 }
-
-export var ANIMATION_DEMO_PROVIDERS = [
-    AnimationDemo
-];

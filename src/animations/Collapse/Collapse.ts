@@ -24,6 +24,3 @@ export function Collapse(duration: number = 300) {
         ])
 }
 
-export var COLLAPSE_PROVIDERS = [
-    Collapse
-];

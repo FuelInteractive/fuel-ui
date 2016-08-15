@@ -5,7 +5,7 @@ import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter'
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "pipes/MapToIterable/MapToIterable.Demo.html",
+  templateUrl: "pipes/MapToIterable/MapToIterable.demo.html",
     directives: [CORE_DIRECTIVES, CodeHighlighter, TAB_PROVIDERS],
     pipes: [MAPTOITERABLE_PROVIDERS]
 })

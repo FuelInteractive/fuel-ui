@@ -1,12 +1,25 @@
-import {Animation} from './Animation/Animation';
-import {TOOLTIP_PROVIDERS, Tooltip} from "./Tooltip/Tooltip";
-import {CodeHighlighter} from "./CodeHighlighter/CodeHighlighter";
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
 
-export var FUELUI_DIRECTIVE_PROVIDERS = [
-    TOOLTIP_PROVIDERS,
-    Animation,
-    CodeHighlighter
+import {FuiAnimationModule} from './animation/animation';
+import {FuiTooltipModule} from "./tooltip/tooltip";
+import {FuiCodeHighlighterModule} from "./codeHighlighter/codeHighlighter";
+
+export * from './animation/animation';
+export * from "./tooltip/tooltip";
+export * from "./codeHighlighter/codeHighlighter";
+
+const directiveModules = [
+    FuiAnimationModule,
+    FuiTooltipModule,
+    FuiCodeHighlighterModule
 ];
-export * from './Animation/Animation';
-export * from "./Tooltip/Tooltip";
-export * from "./CodeHighlighter/CodeHighlighter";
+
+@NgModule({
+    imports: [
+        CommonModule,
+        ...directiveModules
+    ],
+    exports: directiveModules
+})
+export class FuiDirectivesModule { }

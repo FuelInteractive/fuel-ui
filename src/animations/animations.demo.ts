@@ -1,8 +1,5 @@
 import {NgModule} from "@angular/core";
-
-import {Collapse} from "./collapse/collapse";
-
-export * from "./collapse/collapse";
+import {CollapseDemo} from "./Collapse/Collapse.Demo";
 
 const animationModules = [
 
@@ -10,11 +7,13 @@ const animationModules = [
 
 const animationExports = [
     ...animationModules,
-    Collapse
+    CollapseDemo
 ];
 
 @NgModule({
     imports: animationModules,
     exports: animationExports
 })
-export class FuiAnimationsModule { }
+export class FuiAnimationsDemoModule { }
+
+export * from "./Collapse/Collapse.Demo";

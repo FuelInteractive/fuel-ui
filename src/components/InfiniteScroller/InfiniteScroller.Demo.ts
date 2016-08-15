@@ -1,14 +1,9 @@
 import {Component} from '@angular/core';
-import {COMMON_DIRECTIVES} from '@angular/common';
-import {INFINITE_SCROLLER_PROVIDERS} from './InfiniteScroller';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "components/InfiniteScroller/InfiniteScroller.Demo.html",
-        directives: [INFINITE_SCROLLER_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS, COMMON_DIRECTIVES]
+  templateUrl: "components/InfiniteScroller/InfiniteScroller.demo.html"
 })
 export class InfiniteScrollerDemo {
     infiniteScrollItems: string[] = [];
@@ -102,7 +97,3 @@ export class InfiniteScrollerDemo {
     eventsColumns:TableSortableColumn[] = EventColumns;
     eventsSort:TableSortableSorting = EventsDefaultSort;
 }
-
-export var INFINITESCROLLER_DEMO_PROVIDERS = [
-    InfiniteScrollerDemo
-];

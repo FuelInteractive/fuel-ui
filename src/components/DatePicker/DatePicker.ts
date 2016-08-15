@@ -1,17 +1,15 @@
 import {Component, OnInit, OnChanges, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
 import {Input, Output, EventEmitter, ElementRef, ViewChild, ContentChildren, ContentChild, QueryList} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
-import {DatePickerCalendar} from "./DatePickerCalendar";
-import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
-import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
-import {MobileDetection} from "../../utilities/DetectionUtils";
-import {DateRange, DateUtils} from "../../utilities/utilities";
+import {CommonModule} from '@angular/common';
+import {DatePickerCalendar} from "./datePickerCalendar";
+import {DatePickerField, DatePickerFieldStyler} from "./datePickerField";
+import {FuiInfiniteScrollerModule, InfiniteScroller} from "../infiniteScroller/infiniteScroller";
+import {DateRange, DateUtils, MobileDetection} from "../../utilities/utilities";
 
 @Component({
     selector: "date-picker",
     styleUrls: ["components/DatePicker/DatePicker.css"],
     templateUrl: "components/DatePicker/DatePicker.html",
-    directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePicker implements OnInit, AfterContentInit {
@@ -251,4 +249,3 @@ export class DatePicker implements OnInit, AfterContentInit {
         this.changeDetector.markForCheck();
     }
 }
-

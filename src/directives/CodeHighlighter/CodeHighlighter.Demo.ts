@@ -3,7 +3,7 @@ import {CodeHighlighter} from './CodeHighlighter';
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "directives/CodeHighlighter/CodeHighlighter.Demo.html",
+  templateUrl: "directives/CodeHighlighter/CodeHighlighter.demo.html",
         directives: [CodeHighlighter, TAB_PROVIDERS]
 })
 export class CodeHighlighterDemo {

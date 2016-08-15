@@ -7,7 +7,7 @@ import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../co
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/Tag/Tag.Demo.html",
+  templateUrl: "components/Tag/Tag.demo.html",
         directives: [CORE_DIRECTIVES, TAG_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
 })
 export class TagDemo {

@@ -1,5 +1,5 @@
-import {Directive, ElementRef, AfterViewInit} from '@angular/core';
-import {StringHelper} from '../../utilities/StringUtils';
+import {NgModule, Directive, ElementRef, AfterViewInit} from '@angular/core';
+import {StringHelper} from '../../utilities/utilities';
 
 declare var Prism: any;
 
@@ -16,3 +16,8 @@ export class CodeHighlighter implements AfterViewInit{
         }
     }
 }
+
+@NgModule({
+    exports: [CodeHighlighter]
+})
+export class FuiCodeHighlighterModule { }

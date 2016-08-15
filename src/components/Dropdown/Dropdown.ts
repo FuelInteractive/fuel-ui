@@ -1,9 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+import {NgModule, Component, Input} from '@angular/core';
 
 @Component({
     selector: "dropdown",
-    templateUrl: 'components/Dropdown/Dropdown.html'
+    templateUrl: 'components/dropdown/dropdown.html'
 })
 
 export class Dropdown {
@@ -18,3 +17,11 @@ export class Dropdown {
 export var DROPDOWN_COMPONENT_PROVIDERS = [
     Dropdown
 ];
+
+@NgModule({
+    imports: [],
+    exports: [
+        Dropdown
+    ]
+})
+export class FuiDropdownModule { }

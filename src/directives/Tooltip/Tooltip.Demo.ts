@@ -1,13 +1,9 @@
 import {Component} from '@angular/core';
-import {TOOLTIP_PROVIDERS} from './Tooltip';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "directives/Tooltip/Tooltip.Demo.html",
-        directives: [TOOLTIP_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+  templateUrl: "directives/Tooltip/Tooltip.demo.html"
 })
 export class TooltipDemo {
     codeExample1 = `&lt;a href=&quot;#&quot; tooltip=&quot;Tooltip text goes here.&quot; 
@@ -41,7 +37,3 @@ export class TooltipDemo {
     rounded: boolean = false;
     always: boolean = false;
 }
-
-export var TOOLTIP_DEMO_PROVIDERS = [
-    TooltipDemo
-];

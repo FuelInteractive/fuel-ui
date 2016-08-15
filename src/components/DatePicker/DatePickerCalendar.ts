@@ -5,8 +5,7 @@ import {DateUtils} from "../../utilities/utilities";
 
 @Component({
     selector: "date-picker-calendar",
-    templateUrl: "components/DatePicker/DatePickerCalendar.html",
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+    templateUrl: "components/DatePicker/DatePickerCalendar.html"
 })
 export class DatePickerCalendar implements OnInit {
     weeks: string[][];

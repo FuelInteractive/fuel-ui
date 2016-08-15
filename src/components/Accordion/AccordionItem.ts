@@ -49,8 +49,3 @@ export class AccordionItem implements OnInit, OnDestroy {
         }
     }
 }
-
-export var ACCORDION_PROVIDERS = [
-    Accordion,
-    AccordionItem
-];

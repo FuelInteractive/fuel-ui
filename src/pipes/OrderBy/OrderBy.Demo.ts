@@ -21,7 +21,7 @@ export class PersonInfo {
 }
 
 @Component({
-  template: "pipes/OrderBy/OrderBy.Demo.html",
+  template: "pipes/OrderBy/OrderBy.demo.html",
         directives: [CORE_DIRECTIVES, CodeHighlighter, TAB_PROVIDERS],
         pipes: [ORDERBY_PROVIDERS]
 })

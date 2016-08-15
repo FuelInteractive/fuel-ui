@@ -7,7 +7,7 @@ import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, Att
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "components/Tab/Tab.Demo.html",
+  templateUrl: "components/Tab/Tab.demo.html",
         directives: [CORE_DIRECTIVES, TAB_PROVIDERS, CodeHighlighter, TableSortable]
 })
 export class TabDemo {

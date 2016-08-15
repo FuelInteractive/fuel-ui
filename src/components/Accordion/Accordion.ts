@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {AccordionItem} from './AccordionItem';
+import {Component, Input, NgModule} from '@angular/core';
+import {AccordionItem} from './accordionItem';
 import {Collapse} from '../../animations/Collapse/Collapse';
 
 @Component({
@@ -35,3 +35,12 @@ export class Accordion {
         }
     }
 }
+
+@NgModule({
+    imports: [],
+    exports: [
+        Accordion,
+        AccordionItem
+    ]
+})
+export class FuiAccordionModule { }

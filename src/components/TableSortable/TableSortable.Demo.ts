@@ -5,7 +5,7 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "components/TableSortable/TableSortable.Demo.html",
+  templateUrl: "components/TableSortable/TableSortable.demo.html",
         directives: [TABLESORTABLE_PROVIDERS, CodeHighlighter, TAB_PROVIDERS]
 })
 export class TableSortableDemo {

@@ -7,7 +7,7 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "pipes/Range/Range.Demo.html",
+  templateUrl: "pipes/Range/Range.demo.html",
     directives: [CORE_DIRECTIVES, CodeHighlighter, TableSortable, TAB_PROVIDERS],
     pipes: [RANGE_PROVIDERS]
 })

@@ -1,5 +1,5 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnInit, OnChanges} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+import {NgModule, Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnInit, OnChanges} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 @Directive({
     selector: '[tooltip]',
@@ -111,6 +111,8 @@ export class Tooltip implements OnInit, OnChanges{
     }
 }
 
-export var TOOLTIP_PROVIDERS = [
-    Tooltip
-];
+@NgModule({
+    imports: [CommonModule],
+    exports: [Tooltip]
+})
+export class FuiTooltipModule { }
