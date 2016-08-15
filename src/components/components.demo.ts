@@ -1,3 +1,9 @@
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {FuiComponentsModule} from "./components";
+import {FuiDirectivesModule} from "../directives/directives";
+import {FuiPipesModule} from "../pipes/pipes";
+
 import {AccordionDemo} from "./Accordion/Accordion.Demo";
 import {AlertDemo} from "./Alert/Alert.Demo";
 import {CarouselDemo} from "./Carousel/Carousel.Demo";
@@ -16,8 +22,6 @@ import {TagDemo} from "./Tag/Tag.Demo";
 import {TimePickerDemo} from "./TimePicker/TimePicker.Demo";
 import {TextExpanderDemo} from "./TextExpander/TextExpander.Demo";
 
-
-
 export * from "./Accordion/Accordion.Demo";
 export * from "./Alert/Alert.Demo";
 export * from "./Carousel/Carousel.Demo";
@@ -35,3 +39,34 @@ export * from "./Tab/Tab.Demo";
 export * from "./Tag/Tag.Demo";
 export * from "./TimePicker/TimePicker.Demo";
 export * from "./TextExpander/TextExpander.Demo";
+
+const demoDirectives = [
+    AccordionDemo,
+    AlertDemo,
+    CarouselDemo,
+    DatePickerDemo,
+    DateRangePickerDemo,
+    DropdownDemo,
+    InfiniteScrollerDemo,
+    ModalDemo,
+    OffCanvasMenuDemo,
+    PaginationDemo,
+    ProgressDemo,
+    TableSortableDemo,
+    SliderDemo,
+    TabDemo,
+    TimePickerDemo,
+    TextExpanderDemo
+]
+
+@NgModule({
+    imports: [
+        CommonModule, 
+        FuiComponentsModule, 
+        FuiDirectivesModule, 
+        FuiPipesModule
+    ],
+    declarations: demoDirectives,
+    exports: demoDirectives
+})
+export class FuiComponentsDemoModule { }

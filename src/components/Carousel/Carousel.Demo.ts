@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({

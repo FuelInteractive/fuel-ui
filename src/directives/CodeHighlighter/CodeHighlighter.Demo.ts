@@ -1,15 +1,8 @@
 import {Component} from '@angular/core';
 import {CodeHighlighter} from './CodeHighlighter';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "directives/CodeHighlighter/CodeHighlighter.demo.html",
-        directives: [CodeHighlighter, TAB_PROVIDERS]
+  templateUrl: "directives/CodeHighlighter/CodeHighlighter.demo.html"
 })
 export class CodeHighlighterDemo {
-    
 }
-
-export var CODEHIGHLIGHTER_DEMO_PROVIDERS = [
-    CodeHighlighterDemo
-];

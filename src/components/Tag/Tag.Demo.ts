@@ -1,14 +1,10 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {TAG_PROVIDERS, Tag} from './Tag';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Tag} from './Tag';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/Tag/Tag.demo.html",
-        directives: [CORE_DIRECTIVES, TAG_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+  templateUrl: "components/Tag/Tag.demo.html"
 })
 export class TagDemo {
     codeExample1 = `&lt;tagset&gt;

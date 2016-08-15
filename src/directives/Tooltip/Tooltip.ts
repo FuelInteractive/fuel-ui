@@ -113,6 +113,7 @@ export class Tooltip implements OnInit, OnChanges{
 
 @NgModule({
     imports: [CommonModule],
+    declarations: [Tooltip],
     exports: [Tooltip]
 })
 export class FuiTooltipModule { }

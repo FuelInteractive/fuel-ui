@@ -96,6 +96,7 @@ export class Animation implements OnInit, OnChanges {
 }
 
 @NgModule({
+	declarations: [Animation],
 	exports: [Animation]
 })
 export class FuiAnimationModule { }

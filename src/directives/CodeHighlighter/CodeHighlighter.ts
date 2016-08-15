@@ -18,6 +18,7 @@ export class CodeHighlighter implements AfterViewInit{
 }
 
 @NgModule({
+    declarations: [CodeHighlighter],
     exports: [CodeHighlighter]
 })
 export class FuiCodeHighlighterModule { }

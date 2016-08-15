@@ -1,10 +1,7 @@
 import {Component} from '@angular/core';
-import {FORM_DIRECTIVES} from '@angular/common';
 import {DateRange} from '../../utilities/utilities';
-import {CodeHighlighter} from '../../directives/codeHighlighter/codeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/tab/tab';
 
 @Component({
   templateUrl: "components/datePicker/dateRangePicker.demo.html"
@@ -43,7 +40,3 @@ export class DateRangePickerDemo {
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
-
-export var DATERANGEPICKER_DEMO_PROVIDERS = [
-    DateRangePickerDemo
-];

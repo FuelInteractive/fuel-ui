@@ -1,5 +1,5 @@
 import {NgModule, Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
-import {CommonModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
 import {TagSet} from './TagSet';
 
 @Directive({

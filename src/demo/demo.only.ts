@@ -1,6 +1,4 @@
 import {Component} from "@angular/core";
-import {CodeHighlighter} from "./directives/CodeHighlighter/CodeHighlighter";
-import {ACCORDION_PROVIDERS} from './components/Accordion/AccordionItem';
 
 @Component({
     template: `
@@ -121,8 +119,7 @@ ng build
 </pre>
         </div>
     </div>
-</accordion>`,
-directives: [CodeHighlighter, ACCORDION_PROVIDERS]
+</accordion>`
 })
 export class InstallationComponent {
     
