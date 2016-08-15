@@ -1,14 +1,10 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {TAB_PROVIDERS, Tab} from './Tab';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "components/Tab/Tab.demo.html",
-        directives: [CORE_DIRECTIVES, TAB_PROVIDERS, CodeHighlighter, TableSortable]
+  templateUrl: "components/tab/tab.demo.html"
 })
 export class TabDemo {
     codeExample1 = `&lt;tabset&gt;
@@ -100,7 +96,3 @@ export class TabDemo {
     tabEventsColumns:TableSortableColumn[] = EventColumns;
     tabEventsSort:TableSortableSorting = EventsDefaultSort;
 }
-
-export var TAB_DEMO_PROVIDERS = [
-    TabDemo
-];

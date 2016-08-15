@@ -1,47 +1,25 @@
-import {ACCORDION_PROVIDERS, AccordionItem} from "./Accordion/AccordionItem";
-import {Accordion} from "./Accordion/Accordion";
-import {ALERT_PROVIDERS, Alert} from "./Alert/Alert";
-import {CAROUSEL_PROVIDERS, Carousel, CarouselItem} from "./Carousel/Carousel";
-import {DATE_PICKER_PROVIDERS, DatePickerCalendar, DatePicker, DateRangePicker, StartDateField, EndDateField, DatePickerField, DatePickerFieldStyler} from "./DatePicker/DatePickerProviders";
-import {MODAL_PROVIDERS, Modal} from "./Modal/Modal";
-import {PAGINATION_PROVIDERS, Pagination} from "./Pagination/Pagination";
-import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller, ScrollItem} from "./InfiniteScroller/InfiniteScroller";
-import {DROPDOWN_COMPONENT_PROVIDERS, Dropdown} from "./Dropdown/Dropdown";
-import {TAB_PROVIDERS, Tab} from "./Tab/Tab";
-import {TabSet} from "./Tab/TabSet";
-import {TAG_PROVIDERS, Tag} from "./Tag/Tag";
-import {TagSet} from "./Tag/TagSet";
-import {TABLESORTABLE_PROVIDERS, TableSortable} from "./TableSortable/TableSortable";
-import {TableSortableColumn} from "./TableSortable/TableSortableColumn";
-import {TableSortableSorting} from "./TableSortable/TableSortableSorting";
-import {SLIDER_COMPONENT_PROVIDERS, Slider} from "./Slider/Slider";
-import {TIMEPICKER_PROVIDERS, TimePicker} from "./TimePicker/TimePicker";
-import {TEXTEXPANDER_PROVIDERS, TextExpander} from "./TextExpander/TextExpander";
-import {OFF_CANVAS_MENU_PROVIDERS, OffCanvasMenu, OffCanvasMenuClose} from "./OffCanvasMenu/OffCanvasMenu";
+import {NgModule} from "@angular/core";
 
-export var FUELUI_COMPONENT_PROVIDERS = [
-	ACCORDION_PROVIDERS,
-	ALERT_PROVIDERS,
-	CAROUSEL_PROVIDERS,
-	DATE_PICKER_PROVIDERS,
-	MODAL_PROVIDERS,
-	PAGINATION_PROVIDERS,
-	INFINITE_SCROLLER_PROVIDERS,
-    DROPDOWN_COMPONENT_PROVIDERS,
-    TABLESORTABLE_PROVIDERS,
-    SLIDER_COMPONENT_PROVIDERS,
-	TAB_PROVIDERS,
-	TAG_PROVIDERS,
-	TEXTEXPANDER_PROVIDERS,
-	TIMEPICKER_PROVIDERS, 
-	OFF_CANVAS_MENU_PROVIDERS
-];
+import {FuiAccordionModule} from "./accordion/accordion";
+import {FuiAlertModule} from "./alert/alert";
+import {FuiCarouselModule} from "./carousel/carousel";
+import {FuiDatePickerModule} from "./datePicker/datePicker.module";
+import {FuiModalModule} from "./modal/modal";
+import {FuiPaginationModule} from "./pagination/pagination";
+import {FuiInfiniteScrollerModule} from "./infiniteScroller/infiniteScroller";
+import {FuiDropdownModule} from "./dropdown/dropdown";
+import {FuiTabModule} from "./tab/tab";
+import {FuiTagModule} from "./tag/tag";
+import {FuiTableSortableModule} from "./tableSortable/tableSortable";
+import {FuiSliderModule} from "./slider/slider";
+import {FuiTimePickerModule} from "./timePicker/timePicker";
+import {FuiTextExpanderModule} from "./textExpander/textExpander";
+import {FuiOffCanvasMenuModule} from "./offCanvasMenu/offCanvasMenu";
 
 export * from "./Accordion/Accordion";
 export * from "./Accordion/AccordionItem";
 export * from "./Alert/Alert";
 export * from "./Carousel/Carousel";
-export * from "./DatePicker/DatePickerProviders";
 export * from "./Modal/Modal";
 export * from "./Pagination/Pagination";
 export * from "./InfiniteScroller/InfiniteScroller";
@@ -57,3 +35,29 @@ export * from "./Slider/Slider";
 export * from "./TimePicker/TimePicker";
 export * from "./TextExpander/TextExpander";
 export * from "./OffCanvasMenu/OffCanvasMenu";
+
+const componentModules = [
+	FuiOffCanvasMenuModule,
+	FuiAlertModule,
+	FuiCarouselModule,
+	FuiDatePickerModule,
+	FuiModalModule,
+	FuiPaginationModule,
+	FuiInfiniteScrollerModule,
+    FuiDropdownModule,
+    FuiTabModule,
+    FuiTagModule,
+	FuiTableSortableModule,
+	FuiSliderModule,
+	FuiTimePickerModule,
+	FuiTextExpanderModule, 
+	FuiOffCanvasMenuModule
+];
+
+@NgModule({
+	imports: [
+		...componentModules
+	],
+	exports: componentModules
+})
+export class FuiComponentsModule { }

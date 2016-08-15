@@ -1,12 +1,9 @@
 import {Component} from '@angular/core';
-import {TABLESORTABLE_PROVIDERS, TableSortableColumn, TableSortableSorting} from './TableSortable';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
+import {TableSortableColumn, TableSortableSorting} from './tableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "components/TableSortable/TableSortable.demo.html",
-        directives: [TABLESORTABLE_PROVIDERS, CodeHighlighter, TAB_PROVIDERS]
+  templateUrl: "components/tableSortable/tableSortable.demo.html"
 })
 export class TableSortableDemo {
     codeExample1 = `&lt;table-sortable
@@ -98,7 +95,3 @@ export class TableSortableDemo {
   attributesColumns:TableSortableColumn[] = AttributeColumns;
   attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
-
-export var TABLESORTABLE_DEMO_PROVIDERS = [
-    TableSortableDemo
-];

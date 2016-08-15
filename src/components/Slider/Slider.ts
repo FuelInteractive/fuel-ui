@@ -1,11 +1,11 @@
-import {Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, OnChanges} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+import {NgModule, Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, OnChanges} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import "./NoUiSlider";
 import {noUiSlider} from "nouislider";
 
 @Component({
     selector: "slider",
-    templateUrl: 'components/Slider/Slider.html'
+    templateUrl: 'components/slider/slider.html'
 })
 
 export class Slider implements AfterViewInit, OnChanges {
@@ -118,6 +118,9 @@ export class Slider implements AfterViewInit, OnChanges {
     }
 }
 
-export var SLIDER_COMPONENT_PROVIDERS = [
-    Slider
-];
+@NgModule({
+    imports: [CommonModule],
+    declarations: [Slider],
+    exports: [Slider]
+})
+export class FuiSliderModule { }

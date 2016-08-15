@@ -1,8 +1,8 @@
-import {Component, Directive, Input, Output, QueryList, ContentChildren} from "@angular/core";
+import {NgModule, Component, Directive, Input, Output, QueryList, ContentChildren} from "@angular/core";
 import {HostListener, EventEmitter} from "@angular/core";
 import {OnInit, OnDestroy, AfterContentInit} from "@angular/core";
 import {trigger, state, style, transition, animate, keyframes} from '@angular/core';
-import {CORE_DIRECTIVES} from "@angular/common";
+import {CommonModule} from "@angular/common";
 
 @Directive({
     selector: "[offCanvasMenuClose], .off-canvas-menu-close"
@@ -21,7 +21,7 @@ export class OffCanvasMenuClose {
     selector: "off-canvas-menu",
     templateUrl: "components/OffCanvasMenu/OffCanvasMenu.html",
     styleUrls: ["components/OffCanvasMenu/OffCanvasMenu.css"],
-    directives: [CORE_DIRECTIVES, OffCanvasMenuClose],
+    directives: [OffCanvasMenuClose],
     animations: [
         trigger("open", [
             state("open", style({transform: "translate(0,0)"})),
@@ -101,7 +101,15 @@ export class OffCanvasMenu implements OnInit, OnDestroy, AfterContentInit {
     }
 }
 
-export let OFF_CANVAS_MENU_PROVIDERS = [
+const offCanvasMenuDirectives = [
     OffCanvasMenu,
     OffCanvasMenuClose
 ]
+
+@NgModule({
+    imports: [CommonModule],
+    declarations: offCanvasMenuDirectives,
+    exports: offCanvasMenuDirectives
+})
+export class FuiOffCanvasMenuModule { }
+

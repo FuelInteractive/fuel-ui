@@ -1,5 +1,6 @@
-import {Directive, OnDestroy, Input, Output, HostBinding, EventEmitter} from '@angular/core';
-import {TabSet} from './TabSet';
+import {NgModule, Directive, OnDestroy, Input, Output, HostBinding, EventEmitter} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {TabSet} from "./TabSet";
 
 @Directive({
     selector: 'tab, [tab]'
@@ -66,7 +67,14 @@ export class Tab implements OnDestroy {
     }
 }
 
-export var TAB_PROVIDERS = [
+const tabComponents = [
     Tab,
     TabSet
 ];
+
+@NgModule({
+    imports: [CommonModule],
+    declarations: tabComponents,
+    exports: tabComponents
+})
+export class FuiTabModule { }
