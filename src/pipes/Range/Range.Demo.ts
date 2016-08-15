@@ -1,15 +1,9 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {RANGE_PROVIDERS} from './Range';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 @Component({
-  templateUrl: "pipes/Range/Range.demo.html",
-    directives: [CORE_DIRECTIVES, CodeHighlighter, TableSortable, TAB_PROVIDERS],
-    pipes: [RANGE_PROVIDERS]
+  templateUrl: "pipes/range/range.demo.html"
 })
 export class RangeDemo {
     numbers:number[] = [];
@@ -25,7 +19,3 @@ export class RangeDemo {
     parametersColumns:TableSortableColumn[] = AttributeColumns;
     parametersSort:TableSortableSorting = AttributesDefaultSort;
 }
-
-export var RANGE_DEMO_PROVIDERS = [
-    RangeDemo
-];

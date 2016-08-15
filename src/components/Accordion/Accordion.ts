@@ -36,11 +36,14 @@ export class Accordion {
     }
 }
 
+const accordionComponents = [
+    Accordion,
+    AccordionItem
+]
+
 @NgModule({
     imports: [],
-    exports: [
-        Accordion,
-        AccordionItem
-    ]
+    declarations: accordionComponents,
+    exports: accordionComponents
 })
 export class FuiAccordionModule { }

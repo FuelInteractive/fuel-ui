@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
-import {ALERT_PROVIDERS} from './alert';
 import {CodeHighlighter} from '../../directives/codeHighlighter/codeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 import {TAB_PROVIDERS} from '../../components/tab/tab';
 
 @Component({
-  templateUrl: "components/alert/alert.demo.html",
-        directives: [ALERT_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+  templateUrl: "components/alert/alert.demo.html"
 })
 export class AlertDemo {
     showAlert: boolean = false;

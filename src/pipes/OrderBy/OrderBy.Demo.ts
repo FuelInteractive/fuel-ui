@@ -1,8 +1,4 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {ORDERBY_PROVIDERS} from './OrderBy';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 export class Person {
     public firstName: string;
@@ -21,9 +17,7 @@ export class PersonInfo {
 }
 
 @Component({
-  template: "pipes/OrderBy/OrderBy.demo.html",
-        directives: [CORE_DIRECTIVES, CodeHighlighter, TAB_PROVIDERS],
-        pipes: [ORDERBY_PROVIDERS]
+  template: "pipes/orderBy/orderBy.demo.html"
 })
 export class OrderByDemo {
     typescriptCodeExample = `export class Person {
@@ -125,7 +119,3 @@ export class OrderByExample {
     	this.newPerson = new Person('', '', 18);
 	}
 }
-
-export var ORDERBY_DEMO_PROVIDERS = [
-    OrderByDemo
-];

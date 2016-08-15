@@ -1,10 +1,6 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {FORMAT_PROVIDERS} from './Format';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
 
 export class DataType{
     public Type: string;
@@ -21,9 +17,7 @@ export class DataType{
 }
 
 @Component({
-  templateUrl: "pipes/Format/Format.demo.html",
-    directives: [CORE_DIRECTIVES, CodeHighlighter, TableSortable, TAB_PROVIDERS],
-    pipes: [FORMAT_PROVIDERS]
+  templateUrl: "pipes/format/format.demo.html"
 })
 export class FormatDemo {
     htmlCodeExample = `&lt;span&gt;{{someVar | format : "number : 1.0-2"}}&lt;/span&gt;
@@ -55,7 +49,3 @@ export class FormatDemo {
     ];
     dataTypesSort:TableSortableSorting = new TableSortableSorting('Type', false);
 }
-
-export var FORMAT_DEMO_PROVIDERS = [
-    FormatDemo
-];

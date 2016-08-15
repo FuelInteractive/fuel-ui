@@ -215,11 +215,14 @@ export class InfiniteScroller
     }
 }
 
+const infiniteScrollerDirectives = [
+    InfiniteScroller,
+    ScrollItem
+]
+
 @NgModule({
     imports: [],
-    exports: [
-        InfiniteScroller,
-        ScrollItem
-    ]
+    declarations: infiniteScrollerDirectives,
+    exports: infiniteScrollerDirectives
 })
 export class FuiInfiniteScrollerModule { }

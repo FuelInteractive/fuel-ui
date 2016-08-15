@@ -14,14 +14,9 @@ export class Dropdown {
     }
 }
 
-export var DROPDOWN_COMPONENT_PROVIDERS = [
-    Dropdown
-];
-
 @NgModule({
     imports: [],
-    exports: [
-        Dropdown
-    ]
+    declarations: [Dropdown],
+    exports: [Dropdown]
 })
 export class FuiDropdownModule { }

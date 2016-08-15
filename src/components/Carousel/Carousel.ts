@@ -315,13 +315,11 @@ export class Carousel
     }*/
 }
 
+const carouselDirectives = [Carousel,CarouselItem];
+
 @NgModule({
-    imports: [
-        CommonModule
-    ],
-    exports: [
-        Carousel,
-        CarouselItem
-    ]
+    imports: [CommonModule],
+    declarations: carouselDirectives,
+    exports: carouselDirectives
 })
 export class FuiCarouselModule { }

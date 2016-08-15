@@ -4,17 +4,20 @@ import {Collapse} from "./collapse/collapse";
 
 export * from "./collapse/collapse";
 
-const animationModules = [
+const animationComponents = [
 
 ];
 
-const animationExports = [
-    ...animationModules,
+const animationProviders = [
     Collapse
 ];
 
 @NgModule({
-    imports: animationModules,
-    exports: animationExports
+    imports: [],
+    declarations: [],
+    providers: animationProviders,
+    exports: [
+        ...animationProviders
+    ]
 })
 export class FuiAnimationsModule { }

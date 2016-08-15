@@ -11,7 +11,7 @@ export * from "./animation/animation.demo";
 export * from "./tooltip/tooltip.demo";
 export * from "./codeHighlighter/codeHighlighter.demo";
 
-const directivesDemoProviders = [
+const directivesDemoDirectives = [
     AnimationDemo,
     TooltipDemo,
     CodeHighlighterDemo
@@ -22,6 +22,7 @@ const directivesDemoProviders = [
         CommonModule,
         FuiDirectivesModule
     ],
-    exports: directivesDemoProviders
+    declarations: directivesDemoDirectives,
+    exports: directivesDemoDirectives
 })
 export class FuiDirectivesDemoModule { }

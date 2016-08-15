@@ -1,6 +1,7 @@
-import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {Animation} from "../../directives/animation/animation";
+import {NgModule, Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {FuiAnimationModule} from "../../directives/animation/animation";
+
 
 @Component({
 	selector: 'modal',
@@ -71,6 +72,9 @@ export class Modal {
 	}
 }
 
-export var MODAL_PROVIDERS = [
-	Modal
-];
+@NgModule({
+	imports: [CommonModule, FuiAnimationModule],
+	declarations: [Modal],
+	exports: [Modal]
+})
+export class FuiModalModule { }

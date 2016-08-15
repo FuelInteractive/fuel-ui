@@ -1,14 +1,12 @@
 import {Component} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {TAB_PROVIDERS} from '../../components/tab/tab';
-import {ACCORDION_PROVIDERS} from '../../components/accordion/accordionItem';
 import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
 import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/accordion/accordian.demo.html",
-        directives: [CORE_DIRECTIVES, ACCORDION_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
+  templateUrl: "components/accordion/accordian.demo.html"
 })
 export class AccordionDemo {
     

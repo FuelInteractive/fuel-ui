@@ -12,7 +12,3 @@ export class DropdownDemo {
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
-
-export var DROPDOWN_DEMO_PROVIDERS = [
-    DropdownDemo
-];

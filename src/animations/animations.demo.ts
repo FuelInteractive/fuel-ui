@@ -1,18 +1,19 @@
 import {NgModule} from "@angular/core";
 import {CollapseDemo} from "./Collapse/Collapse.Demo";
+import {FuiAnimationsModule} from "./animations";
 
-const animationModules = [
-
-];
-
-const animationExports = [
-    ...animationModules,
+const animationsDemoComponents = [
     CollapseDemo
-];
+]
 
 @NgModule({
-    imports: animationModules,
-    exports: animationExports
+    imports: [FuiAnimationsModule],
+    declarations: [
+        ...animationsDemoComponents
+    ],
+    exports: [
+        ...animationsDemoComponents
+    ]
 })
 export class FuiAnimationsDemoModule { }
 

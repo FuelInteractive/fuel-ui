@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import {NgModule, Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'mapToIterable'
@@ -15,6 +15,8 @@ export class MapToIterablePipe implements PipeTransform  {
   }
 }
 
-export var MAPTOITERABLE_PROVIDERS = [
-    MapToIterablePipe
-];
+@NgModule({
+    declarations: [MapToIterablePipe],
+    exports: [MapToIterablePipe]
+})
+export class FuiMapToIterablePipeModule { }

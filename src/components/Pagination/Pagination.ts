@@ -1,6 +1,6 @@
-import {Component, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from '@angular/core';
-import {CORE_DIRECTIVES, SlicePipe} from '@angular/common';
-import {RangePipe} from '../../pipes/Range/Range';
+import {NgModule, Component, ElementRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy} from '@angular/core';
+import {CommonModule, SlicePipe} from '@angular/common';
+import {FuiRangePipeModule} from "../../pipes/range/range";
 
 @Component({
     selector: 'pagination',
@@ -9,9 +9,7 @@ import {RangePipe} from '../../pipes/Range/Range';
         "totalPages: total-pages",
         "pagesAtOnce: pages-at-once"
     ],
-    templateUrl: 'components/Pagination/Pagination.html',
-    directives: [CORE_DIRECTIVES],
-    pipes: [SlicePipe, RangePipe]
+    templateUrl: 'components/pagination/pagination.html'
 })
 export class Pagination implements OnChanges {
     @Input() currentPage: number = 1;
@@ -58,6 +56,9 @@ export class Pagination implements OnChanges {
     }
 }
 
-export var PAGINATION_PROVIDERS = [
-    Pagination
-];
+@NgModule({
+    imports: [CommonModule, FuiRangePipeModule],
+    declarations: [Pagination],
+    exports: [Pagination]
+})
+export class FuiPaginationModule { }

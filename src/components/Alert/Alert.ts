@@ -45,8 +45,7 @@ export class Alert extends OnChanges {
 
 @NgModule({
     imports: [CommonModule],
-    exports: [
-        Alert
-    ]
+    declarations: [Alert],
+    exports: [Alert]
 })
 export class FuiAlertModule { }
