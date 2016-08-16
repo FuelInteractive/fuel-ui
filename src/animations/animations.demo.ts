@@ -1,13 +1,15 @@
 import {NgModule} from "@angular/core";
 import {CollapseDemo} from "./Collapse/Collapse.Demo";
-import {FuiAnimationsModule} from "./animations";
+import {FuelUiModule} from "../fuel-ui";
 
 const animationsDemoComponents = [
     CollapseDemo
 ]
 
 @NgModule({
-    imports: [FuiAnimationsModule],
+    imports: [
+        FuelUiModule
+    ],
     declarations: [
         ...animationsDemoComponents
     ],

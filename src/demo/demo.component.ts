@@ -5,7 +5,7 @@ import {provideForms, disableDeprecatedForms} from '@angular/forms';
 
 @Component({
 	selector: "fuel-ui",
-    template: "demo/demo.component.html",
+    templateUrl: "demo/demo.component.html",
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {

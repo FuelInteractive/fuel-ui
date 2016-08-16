@@ -68,6 +68,149 @@ System.registerDynamic("fuel-ui/dist/animations/animations", ["@angular/core", "
   return module.exports;
 });
 
+System.registerDynamic("fuel-ui/dist/components/accordion/accordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this || self,
+      GLOBAL = global;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
+  var AccordionItem = (function() {
+    function AccordionItem() {
+      this.disabled = false;
+      this.openChange = new core_1.EventEmitter();
+    }
+    AccordionItem.prototype.ngOnInit = function() {};
+    AccordionItem.prototype.toggleOpen = function(event) {
+      event.preventDefault();
+      if (!this.disabled) {
+        this.open = !this.open;
+        this.openChange.next(this.open);
+      }
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], AccordionItem.prototype, "heading", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "disabled", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", void 0);
+    AccordionItem = __decorate([core_1.Component({
+      selector: 'accordion-item, [accordion-item]',
+      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" \n              [ngClass]=\"{'text-muted': disabled}\">\n              {{heading}}\n          </span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [@collapse]=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+      animations: [Collapse_1.Collapse(350)]
+    }), __metadata('design:paramtypes', [])], AccordionItem);
+    return AccordionItem;
+  }());
+  exports.AccordionItem = AccordionItem;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/accordion/accordion", ["@angular/core", "@angular/common", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this || self,
+      GLOBAL = global;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var accordionItem_1 = $__require('./accordionItem');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
+  var Accordion = (function() {
+    function Accordion() {
+      this.closeOthers = true;
+      this.duration = 250;
+      this.itemEvents = [];
+    }
+    Accordion.prototype.ngAfterContentInit = function() {
+      var _this = this;
+      this.items.changes.subscribe(function(i) {
+        return _this.registerItems();
+      });
+      this.registerItems();
+    };
+    Accordion.prototype.registerItems = function() {
+      var _this = this;
+      for (var _i = 0,
+          _a = this.itemEvents; _i < _a.length; _i++) {
+        var event_1 = _a[_i];
+        event_1.unsubscribe();
+      }
+      var _loop_1 = function(item) {
+        item.openChange.subscribe(function() {
+          _this.closeOtherItems(item);
+        });
+      };
+      for (var _b = 0,
+          _c = this.items.toArray(); _b < _c.length; _b++) {
+        var item = _c[_b];
+        _loop_1(item);
+      }
+    };
+    Accordion.prototype.closeOtherItems = function(openItem) {
+      if (!this.closeOthers)
+        return;
+      this.items.forEach(function(item) {
+        if (item !== openItem) {
+          item.open = false;
+        }
+      });
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Accordion.prototype, "closeOthers", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
+    __decorate([core_1.ContentChildren(accordionItem_1.AccordionItem), __metadata('design:type', core_1.QueryList)], Accordion.prototype, "items", void 0);
+    Accordion = __decorate([core_1.Component({
+      selector: 'accordion',
+      template: "<ng-content></ng-content>",
+      animations: [Collapse_1.Collapse(350)]
+    }), __metadata('design:paramtypes', [])], Accordion);
+    return Accordion;
+  }());
+  exports.Accordion = Accordion;
+  var accordionComponents = [Accordion, accordionItem_1.AccordionItem];
+  var FuiAccordionModule = (function() {
+    function FuiAccordionModule() {}
+    FuiAccordionModule = __decorate([core_1.NgModule({
+      imports: [common_1.CommonModule],
+      declarations: accordionComponents,
+      exports: accordionComponents
+    }), __metadata('design:paramtypes', [])], FuiAccordionModule);
+    return FuiAccordionModule;
+  }());
+  exports.FuiAccordionModule = FuiAccordionModule;
+  return module.exports;
+});
+
 System.registerDynamic("fuel-ui/dist/components/alert/alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -231,7 +374,7 @@ System.registerDynamic("fuel-ui/dist/components/carousel/carousel", ["@angular/c
     CarouselItem = __decorate([core_1.Component({
       selector: ".carousel-item",
       changeDetection: core_3.ChangeDetectionStrategy.OnPush,
-      template: "\n        <div @slide=\"state\" class=\"item-content\">\n            <ng-content></ng-content>\n        </div>\n    ",
+      template: "\n        <div [@slide]=\"state\" class=\"item-content\">\n            <ng-content></ng-content>\n        </div>\n    ",
       animations: [core_4.trigger("slide", [core_4.state("right", core_4.style({transform: "translate(100%,0)"})), core_4.state("in, void", core_4.style({transform: "translate(0,0)"})), core_4.state("left", core_4.style({transform: "translate(-100%, 0)"})), core_4.transition("right <=> in", [core_4.animate("300ms ease")]), core_4.transition("left <=> in", [core_4.animate("300ms ease")])])]
     }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], CarouselItem);
     return CarouselItem;
@@ -4612,7 +4755,7 @@ System.registerDynamic("fuel-ui/dist/components/offCanvasMenu/offCanvasMenu", ["
     __decorate([core_1.ContentChildren(OffCanvasMenuClose), __metadata('design:type', core_1.QueryList)], OffCanvasMenu.prototype, "closeButtons", void 0);
     OffCanvasMenu = __decorate([core_1.Component({
       selector: "off-canvas-menu",
-      template: "\n      <div *ngIf=\"isOpen\" @fade=\"overlayState\" class=\"off-canvas-menu-overlay\" \n          (click)=\"toggleMenu()\"></div>\n\n      <div *ngIf=\"isOpen\" @open=\"openState\" class=\"off-canvas-menu\"\n          [class.off-canvas-menu-left]=\"origin.toLowerCase() == 'left'\"\n          [class.off-canvas-menu-right]=\"origin.toLowerCase() == 'right'\"\n          [class.off-canvas-menu-top]=\"origin.toLowerCase() == 'top'\"\n          [class.off-canvas-menu-bottom]=\"origin.toLowerCase() == 'bottom'\"\n          [style.width]=\"computedWidth\"\n          [style.height]=\"computedHeight\">\n          <ng-content></ng-content>    \n      </div>\n    ",
+      template: "\n      <div *ngIf=\"isOpen\" [@fade]=\"overlayState\" class=\"off-canvas-menu-overlay\" \n          (click)=\"toggleMenu()\"></div>\n\n      <div *ngIf=\"isOpen\" [@open]=\"openState\" class=\"off-canvas-menu\"\n          [class.off-canvas-menu-left]=\"origin.toLowerCase() == 'left'\"\n          [class.off-canvas-menu-right]=\"origin.toLowerCase() == 'right'\"\n          [class.off-canvas-menu-top]=\"origin.toLowerCase() == 'top'\"\n          [class.off-canvas-menu-bottom]=\"origin.toLowerCase() == 'bottom'\"\n          [style.width]=\"computedWidth\"\n          [style.height]=\"computedHeight\">\n          <ng-content></ng-content>    \n      </div>\n    ",
       styles: ["\n      .off-canvas-menu-overlay {\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 900;\n        background-color: #55595c;\n        opacity: 0; }\n\n      .off-canvas-menu {\n        display: block;\n        position: fixed;\n        z-index: 1000;\n        background-color: #fff; }\n        .off-canvas-menu.off-canvas-menu-left {\n          top: 0;\n          left: 0;\n          bottom: 0;\n          transform: translate(-100%, 0);\n          width: 75%; }\n        .off-canvas-menu.off-canvas-menu-right {\n          top: 0;\n          right: 0;\n          bottom: 0;\n          transform: translate(100%, 0);\n          width: 75%; }\n        .off-canvas-menu.off-canvas-menu-top {\n          top: 0;\n          left: 0;\n          right: 0;\n          transform: translate(0, -100%);\n          height: 75%; }\n        .off-canvas-menu.off-canvas-menu-bottom {\n          left: 0;\n          right: 0;\n          bottom: 0;\n          transform: translate(0, 100%);\n          height: 75%; }\n    "],
       directives: [OffCanvasMenuClose],
       animations: [core_3.trigger("open", [core_3.state("open", core_3.style({transform: "translate(0,0)"})), core_3.transition("void => open", [core_3.animate("200ms ease")]), core_3.transition("open => void", [core_3.animate("200ms ease")])]), core_3.trigger("fade", [core_3.state("in", core_3.style({opacity: ".75"})), core_3.transition("void => in", [core_3.animate("200ms ease")]), core_3.transition("in => void", [core_3.animate("200ms ease")])])]
@@ -4634,7 +4777,59 @@ System.registerDynamic("fuel-ui/dist/components/offCanvasMenu/offCanvasMenu", ["
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/accordionItem", ["@angular/core", "@angular/common", "../../animations/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/accordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this || self,
+      GLOBAL = global;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('@angular/core');
+  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
+  var AccordionItem = (function() {
+    function AccordionItem() {
+      this.disabled = false;
+      this.openChange = new core_1.EventEmitter();
+    }
+    AccordionItem.prototype.ngOnInit = function() {};
+    AccordionItem.prototype.toggleOpen = function(event) {
+      event.preventDefault();
+      if (!this.disabled) {
+        this.open = !this.open;
+        this.openChange.next(this.open);
+      }
+    };
+    __decorate([core_1.Input(), __metadata('design:type', String)], AccordionItem.prototype, "heading", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "disabled", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", void 0);
+    AccordionItem = __decorate([core_1.Component({
+      selector: 'accordion-item, [accordion-item]',
+      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" \n              [ngClass]=\"{'text-muted': disabled}\">\n              {{heading}}\n          </span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [@collapse]=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+      animations: [Collapse_1.Collapse(350)]
+    }), __metadata('design:paramtypes', [])], AccordionItem);
+    return AccordionItem;
+  }());
+  exports.AccordionItem = AccordionItem;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core", "@angular/common", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4658,54 +4853,70 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/accordionItem", ["@ang
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var accordionItem_1 = $__require('./accordionItem');
   var Collapse_1 = $__require('../../animations/Collapse/Collapse');
-  var Accordion_1 = $__require('./Accordion');
-  var AccordionItem = (function() {
-    function AccordionItem(accordion) {
-      this.disabled = false;
-      this._open = false;
-      this.openChange = new core_1.EventEmitter();
-      this.accordion = accordion;
+  var Accordion = (function() {
+    function Accordion() {
+      this.closeOthers = true;
+      this.duration = 250;
+      this.itemEvents = [];
     }
-    Object.defineProperty(AccordionItem.prototype, "open", {
-      get: function() {
-        return this._open;
-      },
-      set: function(value) {
-        this._open = value;
-        if (value) {
-          this.accordion.closeOtherItems(this);
-        }
-      },
-      enumerable: true,
-      configurable: true
-    });
-    AccordionItem.prototype.ngOnInit = function() {
-      this.accordion.addItem(this);
+    Accordion.prototype.ngAfterContentInit = function() {
+      var _this = this;
+      this.items.changes.subscribe(function(i) {
+        return _this.registerItems();
+      });
+      this.registerItems();
     };
-    AccordionItem.prototype.ngOnDestroy = function() {
-      this.accordion.removeItem(this);
-    };
-    AccordionItem.prototype.toggleOpen = function(event) {
-      event.preventDefault();
-      if (!this.disabled) {
-        this.open = !this.open;
-        this.openChange.next(this.open);
+    Accordion.prototype.registerItems = function() {
+      var _this = this;
+      for (var _i = 0,
+          _a = this.itemEvents; _i < _a.length; _i++) {
+        var event_1 = _a[_i];
+        event_1.unsubscribe();
+      }
+      var _loop_1 = function(item) {
+        item.openChange.subscribe(function() {
+          _this.closeOtherItems(item);
+        });
+      };
+      for (var _b = 0,
+          _c = this.items.toArray(); _b < _c.length; _b++) {
+        var item = _c[_b];
+        _loop_1(item);
       }
     };
-    __decorate([core_1.Input(), __metadata('design:type', String)], AccordionItem.prototype, "heading", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "disabled", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", null);
-    __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
-    AccordionItem = __decorate([core_1.Component({
-      selector: 'accordion-item, [accordion-item]',
-      directives: [common_1.NgClass],
-      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" @collapse=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+    Accordion.prototype.closeOtherItems = function(openItem) {
+      if (!this.closeOthers)
+        return;
+      this.items.forEach(function(item) {
+        if (item !== openItem) {
+          item.open = false;
+        }
+      });
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Accordion.prototype, "closeOthers", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
+    __decorate([core_1.ContentChildren(accordionItem_1.AccordionItem), __metadata('design:type', core_1.QueryList)], Accordion.prototype, "items", void 0);
+    Accordion = __decorate([core_1.Component({
+      selector: 'accordion',
+      template: "<ng-content></ng-content>",
       animations: [Collapse_1.Collapse(350)]
-    }), __metadata('design:paramtypes', [Accordion_1.Accordion])], AccordionItem);
-    return AccordionItem;
+    }), __metadata('design:paramtypes', [])], Accordion);
+    return Accordion;
   }());
-  exports.AccordionItem = AccordionItem;
+  exports.Accordion = Accordion;
+  var accordionComponents = [Accordion, accordionItem_1.AccordionItem];
+  var FuiAccordionModule = (function() {
+    function FuiAccordionModule() {}
+    FuiAccordionModule = __decorate([core_1.NgModule({
+      imports: [common_1.CommonModule],
+      declarations: accordionComponents,
+      exports: accordionComponents
+    }), __metadata('design:paramtypes', [])], FuiAccordionModule);
+    return FuiAccordionModule;
+  }());
+  exports.FuiAccordionModule = FuiAccordionModule;
   return module.exports;
 });
 
@@ -4734,7 +4945,7 @@ System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4757,109 +4968,13 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
-  var accordionItem_1 = $__require('./accordionItem');
   var Collapse_1 = $__require('../../animations/Collapse/Collapse');
-  var Accordion = (function() {
-    function Accordion() {
-      this.closeOthers = true;
-      this.duration = 250;
-      this.items = [];
-    }
-    Accordion.prototype.closeOtherItems = function(openItem) {
-      if (!this.closeOthers)
-        return;
-      this.items.forEach(function(item) {
-        if (item !== openItem) {
-          item.open = false;
-          item.openChange.next(item.open);
-        }
-      });
-    };
-    Accordion.prototype.addItem = function(item) {
-      this.items.push(item);
-    };
-    Accordion.prototype.removeItem = function(item) {
-      var index = this.items.indexOf(item);
-      if (index !== -1) {
-        this.items.splice(index, 1);
-      }
-    };
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], Accordion.prototype, "closeOthers", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Number)], Accordion.prototype, "duration", void 0);
-    Accordion = __decorate([core_1.Component({
-      selector: 'accordion',
-      template: "<ng-content></ng-content>",
-      animations: [Collapse_1.Collapse(350)]
-    }), __metadata('design:paramtypes', [])], Accordion);
-    return Accordion;
-  }());
-  exports.Accordion = Accordion;
-  var accordionComponents = [Accordion, accordionItem_1.AccordionItem];
-  var FuiAccordionModule = (function() {
-    function FuiAccordionModule() {}
-    FuiAccordionModule = __decorate([core_1.NgModule({
-      imports: [],
-      declarations: accordionComponents,
-      exports: accordionComponents
-    }), __metadata('design:paramtypes', [])], FuiAccordionModule);
-    return FuiAccordionModule;
-  }());
-  exports.FuiAccordionModule = FuiAccordionModule;
-  return module.exports;
-});
-
-System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "@angular/common", "../../animations/Collapse/Collapse", "./Accordion"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this || self,
-      GLOBAL = global;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('@angular/core');
-  var common_1 = $__require('@angular/common');
-  var Collapse_1 = $__require('../../animations/Collapse/Collapse');
-  var Accordion_1 = $__require('./Accordion');
   var AccordionItem = (function() {
-    function AccordionItem(accordion) {
+    function AccordionItem() {
       this.disabled = false;
-      this._open = false;
       this.openChange = new core_1.EventEmitter();
-      this.accordion = accordion;
     }
-    Object.defineProperty(AccordionItem.prototype, "open", {
-      get: function() {
-        return this._open;
-      },
-      set: function(value) {
-        this._open = value;
-        if (value) {
-          this.accordion.closeOtherItems(this);
-        }
-      },
-      enumerable: true,
-      configurable: true
-    });
-    AccordionItem.prototype.ngOnInit = function() {
-      this.accordion.addItem(this);
-    };
-    AccordionItem.prototype.ngOnDestroy = function() {
-      this.accordion.removeItem(this);
-    };
+    AccordionItem.prototype.ngOnInit = function() {};
     AccordionItem.prototype.toggleOpen = function(event) {
       event.preventDefault();
       if (!this.disabled) {
@@ -4869,14 +4984,13 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@ang
     };
     __decorate([core_1.Input(), __metadata('design:type', String)], AccordionItem.prototype, "heading", void 0);
     __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "disabled", void 0);
-    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", null);
     __decorate([core_1.Output(), __metadata('design:type', Object)], AccordionItem.prototype, "openChange", void 0);
+    __decorate([core_1.Input(), __metadata('design:type', Boolean)], AccordionItem.prototype, "open", void 0);
     AccordionItem = __decorate([core_1.Component({
       selector: 'accordion-item, [accordion-item]',
-      directives: [common_1.NgClass],
-      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" @collapse=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
+      template: "\n      <div (click)=\"toggleOpen($event)\">\n          <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" \n              [ngClass]=\"{'text-muted': disabled}\">\n              {{heading}}\n          </span>\n          <ng-content select=\"accordion-heading\"></ng-content>\n          <ng-content select=\"[accordion-heading]\"></ng-content>\n      </div>\n      <div class=\"fuel-ui-collapse\" [@collapse]=\"!open ? 'true' : 'false'\">\n          <ng-content></ng-content>\n      </div>\n    ",
       animations: [Collapse_1.Collapse(350)]
-    }), __metadata('design:paramtypes', [Accordion_1.Accordion])], AccordionItem);
+    }), __metadata('design:paramtypes', [])], AccordionItem);
     return AccordionItem;
   }());
   exports.AccordionItem = AccordionItem;
@@ -5046,7 +5160,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
     CarouselItem = __decorate([core_1.Component({
       selector: ".carousel-item",
       changeDetection: core_3.ChangeDetectionStrategy.OnPush,
-      template: "\n        <div @slide=\"state\" class=\"item-content\">\n            <ng-content></ng-content>\n        </div>\n    ",
+      template: "\n        <div [@slide]=\"state\" class=\"item-content\">\n            <ng-content></ng-content>\n        </div>\n    ",
       animations: [core_4.trigger("slide", [core_4.state("right", core_4.style({transform: "translate(100%,0)"})), core_4.state("in, void", core_4.style({transform: "translate(0,0)"})), core_4.state("left", core_4.style({transform: "translate(-100%, 0)"})), core_4.transition("right <=> in", [core_4.animate("300ms ease")]), core_4.transition("left <=> in", [core_4.animate("300ms ease")])])]
     }), __metadata('design:paramtypes', [core_3.ChangeDetectorRef, core_2.ElementRef])], CarouselItem);
     return CarouselItem;
@@ -8646,7 +8760,7 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
     __decorate([core_1.ContentChildren(OffCanvasMenuClose), __metadata('design:type', core_1.QueryList)], OffCanvasMenu.prototype, "closeButtons", void 0);
     OffCanvasMenu = __decorate([core_1.Component({
       selector: "off-canvas-menu",
-      template: "\n      <div *ngIf=\"isOpen\" @fade=\"overlayState\" class=\"off-canvas-menu-overlay\" \n          (click)=\"toggleMenu()\"></div>\n\n      <div *ngIf=\"isOpen\" @open=\"openState\" class=\"off-canvas-menu\"\n          [class.off-canvas-menu-left]=\"origin.toLowerCase() == 'left'\"\n          [class.off-canvas-menu-right]=\"origin.toLowerCase() == 'right'\"\n          [class.off-canvas-menu-top]=\"origin.toLowerCase() == 'top'\"\n          [class.off-canvas-menu-bottom]=\"origin.toLowerCase() == 'bottom'\"\n          [style.width]=\"computedWidth\"\n          [style.height]=\"computedHeight\">\n          <ng-content></ng-content>    \n      </div>\n    ",
+      template: "\n      <div *ngIf=\"isOpen\" [@fade]=\"overlayState\" class=\"off-canvas-menu-overlay\" \n          (click)=\"toggleMenu()\"></div>\n\n      <div *ngIf=\"isOpen\" [@open]=\"openState\" class=\"off-canvas-menu\"\n          [class.off-canvas-menu-left]=\"origin.toLowerCase() == 'left'\"\n          [class.off-canvas-menu-right]=\"origin.toLowerCase() == 'right'\"\n          [class.off-canvas-menu-top]=\"origin.toLowerCase() == 'top'\"\n          [class.off-canvas-menu-bottom]=\"origin.toLowerCase() == 'bottom'\"\n          [style.width]=\"computedWidth\"\n          [style.height]=\"computedHeight\">\n          <ng-content></ng-content>    \n      </div>\n    ",
       styles: ["\n      .off-canvas-menu-overlay {\n        display: block;\n        position: fixed;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        z-index: 900;\n        background-color: #55595c;\n        opacity: 0; }\n\n      .off-canvas-menu {\n        display: block;\n        position: fixed;\n        z-index: 1000;\n        background-color: #fff; }\n        .off-canvas-menu.off-canvas-menu-left {\n          top: 0;\n          left: 0;\n          bottom: 0;\n          transform: translate(-100%, 0);\n          width: 75%; }\n        .off-canvas-menu.off-canvas-menu-right {\n          top: 0;\n          right: 0;\n          bottom: 0;\n          transform: translate(100%, 0);\n          width: 75%; }\n        .off-canvas-menu.off-canvas-menu-top {\n          top: 0;\n          left: 0;\n          right: 0;\n          transform: translate(0, -100%);\n          height: 75%; }\n        .off-canvas-menu.off-canvas-menu-bottom {\n          left: 0;\n          right: 0;\n          bottom: 0;\n          transform: translate(0, 100%);\n          height: 75%; }\n    "],
       directives: [OffCanvasMenuClose],
       animations: [core_3.trigger("open", [core_3.state("open", core_3.style({transform: "translate(0,0)"})), core_3.transition("void => open", [core_3.animate("200ms ease")]), core_3.transition("open => void", [core_3.animate("200ms ease")])]), core_3.trigger("fade", [core_3.state("in", core_3.style({opacity: ".75"})), core_3.transition("void => in", [core_3.animate("200ms ease")]), core_3.transition("in => void", [core_3.animate("200ms ease")])])]
@@ -8668,7 +8782,7 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "./alert/alert", "./carousel/carousel", "./datePicker/datePicker.module", "./modal/modal", "./pagination/pagination", "./infiniteScroller/infiniteScroller", "./dropdown/dropdown", "./tab/tab", "./tag/tag", "./tableSortable/tableSortable", "./slider/slider", "./timePicker/timePicker", "./textExpander/textExpander", "./offCanvasMenu/offCanvasMenu", "./Accordion/Accordion", "./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tab/TabSet", "./TableSortable/TableSortable", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/Tag", "./Tag/TagSet", "./Slider/Slider", "./TimePicker/TimePicker", "./TextExpander/TextExpander", "./OffCanvasMenu/OffCanvasMenu"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "./accordion/accordion", "./alert/alert", "./carousel/carousel", "./datePicker/datePicker.module", "./modal/modal", "./pagination/pagination", "./infiniteScroller/infiniteScroller", "./dropdown/dropdown", "./tab/tab", "./tag/tag", "./tableSortable/tableSortable", "./slider/slider", "./timePicker/timePicker", "./textExpander/textExpander", "./offCanvasMenu/offCanvasMenu", "./Accordion/Accordion", "./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tab/TabSet", "./TableSortable/TableSortable", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/Tag", "./Tag/TagSet", "./Slider/Slider", "./TimePicker/TimePicker", "./TextExpander/TextExpander", "./OffCanvasMenu/OffCanvasMenu"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8696,6 +8810,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "
         exports[p] = m[p];
   }
   var core_1 = $__require('@angular/core');
+  var accordion_1 = $__require('./accordion/accordion');
   var alert_1 = $__require('./alert/alert');
   var carousel_1 = $__require('./carousel/carousel');
   var datePicker_module_1 = $__require('./datePicker/datePicker.module');
@@ -8717,6 +8832,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "
   __export($__require('./Modal/Modal'));
   __export($__require('./Pagination/Pagination'));
   __export($__require('./InfiniteScroller/InfiniteScroller'));
+  __export($__require('./datePicker/datePicker.module'));
   __export($__require('./Dropdown/Dropdown'));
   __export($__require('./Tab/Tab'));
   __export($__require('./Tab/TabSet'));
@@ -8729,7 +8845,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "
   __export($__require('./TimePicker/TimePicker'));
   __export($__require('./TextExpander/TextExpander'));
   __export($__require('./OffCanvasMenu/OffCanvasMenu'));
-  var componentModules = [offCanvasMenu_1.FuiOffCanvasMenuModule, alert_1.FuiAlertModule, carousel_1.FuiCarouselModule, datePicker_module_1.FuiDatePickerModule, modal_1.FuiModalModule, pagination_1.FuiPaginationModule, infiniteScroller_1.FuiInfiniteScrollerModule, dropdown_1.FuiDropdownModule, tab_1.FuiTabModule, tag_1.FuiTagModule, tableSortable_1.FuiTableSortableModule, slider_1.FuiSliderModule, timePicker_1.FuiTimePickerModule, textExpander_1.FuiTextExpanderModule, offCanvasMenu_1.FuiOffCanvasMenuModule];
+  var componentModules = [accordion_1.FuiAccordionModule, alert_1.FuiAlertModule, carousel_1.FuiCarouselModule, datePicker_module_1.FuiDatePickerModule, dropdown_1.FuiDropdownModule, infiniteScroller_1.FuiInfiniteScrollerModule, modal_1.FuiModalModule, offCanvasMenu_1.FuiOffCanvasMenuModule, pagination_1.FuiPaginationModule, tab_1.FuiTabModule, tag_1.FuiTagModule, tableSortable_1.FuiTableSortableModule, slider_1.FuiSliderModule, timePicker_1.FuiTimePickerModule, textExpander_1.FuiTextExpanderModule];
   var FuiComponentsModule = (function() {
     function FuiComponentsModule() {}
     FuiComponentsModule = __decorate([core_1.NgModule({
@@ -9676,7 +9792,7 @@ System.registerDynamic("fuel-ui/dist/utilities/utilities", ["./DateRange", "./Da
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/common", "./animations/animations", "./components/components", "./directives/directives", "./pipes/pipes", "./utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/common", "@angular/forms", "./animations/animations", "./components/components", "./directives/directives", "./pipes/pipes", "./utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9705,6 +9821,7 @@ System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/commo
   }
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var forms_1 = $__require('@angular/forms');
   var animations_1 = $__require('./animations/animations');
   var components_1 = $__require('./components/components');
   var directives_1 = $__require('./directives/directives');
@@ -9714,12 +9831,14 @@ System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/commo
   __export($__require('./directives/directives'));
   __export($__require('./pipes/pipes'));
   __export($__require('./utilities/utilities'));
+  var fuiDirectives = [];
   var fuiModules = [animations_1.FuiAnimationsModule, components_1.FuiComponentsModule, directives_1.FuiDirectivesModule, pipes_1.FuiPipesModule];
   var FuelUiModule = (function() {
     function FuelUiModule() {}
     FuelUiModule = __decorate([core_1.NgModule({
-      imports: [common_1.CommonModule].concat(fuiModules),
-      exports: fuiModules
+      imports: [common_1.CommonModule, forms_1.FormsModule].concat(fuiModules),
+      declarations: fuiDirectives,
+      exports: fuiDirectives.concat(fuiModules)
     }), __metadata('design:paramtypes', [])], FuelUiModule);
     return FuelUiModule;
   }());

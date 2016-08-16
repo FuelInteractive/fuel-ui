@@ -10,7 +10,7 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/co
     selector: ".carousel-item",
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <div @slide="state" class="item-content">
+        <div [@slide]="state" class="item-content">
             <ng-content></ng-content>
         </div>
     `,

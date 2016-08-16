@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
-import {DemoHome, InstallationComponent} from './demo.only';
 import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, OffCanvasMenuDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo, TextExpanderDemo} from './demo';
+    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo, TextExpanderDemo, DemoHome, InstallationComponent} 
+    from './demo';
 
 const routes: Routes = [
     { path: '', component: DemoHome },
@@ -38,4 +38,4 @@ export const appRoutingProviders: any[] = [
   
 ];
 
-export const routing = RouterModule.forRoot(routes);
+export const routing = RouterModule.forRoot(routes, { useHash: true });

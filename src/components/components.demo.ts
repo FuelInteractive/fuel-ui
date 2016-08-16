@@ -1,8 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {FuiComponentsModule} from "./components";
-import {FuiDirectivesModule} from "../directives/directives";
-import {FuiPipesModule} from "../pipes/pipes";
+import {FormsModule} from "@angular/forms";
+import {FuelUiModule} from "../fuel-ui";
 
 import {AccordionDemo} from "./Accordion/Accordion.Demo";
 import {AlertDemo} from "./Alert/Alert.Demo";
@@ -62,10 +61,9 @@ const demoDirectives = [
 
 @NgModule({
     imports: [
-        CommonModule, 
-        FuiComponentsModule, 
-        FuiDirectivesModule, 
-        FuiPipesModule
+        CommonModule,
+        FormsModule,
+        FuelUiModule
     ],
     declarations: demoDirectives,
     exports: demoDirectives

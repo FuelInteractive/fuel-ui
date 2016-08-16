@@ -10,7 +10,7 @@ import {FuiInfiniteScrollerModule} from "./infiniteScroller/infiniteScroller";
 import {FuiDropdownModule} from "./dropdown/dropdown";
 import {FuiTabModule} from "./tab/tab";
 import {FuiTagModule} from "./tag/tag";
-import {FuiTableSortableModule} from "./tableSortable/tableSortable";
+import {FuiTableSortableModule, TableSortable} from "./tableSortable/tableSortable";
 import {FuiSliderModule} from "./slider/slider";
 import {FuiTimePickerModule} from "./timePicker/timePicker";
 import {FuiTextExpanderModule} from "./textExpander/textExpander";
@@ -23,6 +23,7 @@ export * from "./Carousel/Carousel";
 export * from "./Modal/Modal";
 export * from "./Pagination/Pagination";
 export * from "./InfiniteScroller/InfiniteScroller";
+export * from "./datePicker/datePicker.module";
 export * from "./Dropdown/Dropdown";
 export * from "./Tab/Tab";
 export * from "./Tab/TabSet";
@@ -37,21 +38,21 @@ export * from "./TextExpander/TextExpander";
 export * from "./OffCanvasMenu/OffCanvasMenu";
 
 const componentModules = [
-	FuiOffCanvasMenuModule,
+	FuiAccordionModule,
 	FuiAlertModule,
 	FuiCarouselModule,
 	FuiDatePickerModule,
-	FuiModalModule,
-	FuiPaginationModule,
+	FuiDropdownModule,
 	FuiInfiniteScrollerModule,
-    FuiDropdownModule,
+	FuiModalModule,
+	FuiOffCanvasMenuModule,
+	FuiPaginationModule,
     FuiTabModule,
     FuiTagModule,
 	FuiTableSortableModule,
 	FuiSliderModule,
 	FuiTimePickerModule,
 	FuiTextExpanderModule, 
-	FuiOffCanvasMenuModule
 ];
 
 @NgModule({

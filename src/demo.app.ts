@@ -8,19 +8,45 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {routing} from "./demo/demo.routing";
 
 import {FuelUiModule} from "./fuel-ui";
-import {FuiDemoModule} from "./demo/demo";
-import {DemoComponent} from "./demo/demo.component";
+import {
+    DemoComponent,
+    DemoHome,
+    InstallationComponent,
+    FuiAnimationsDemoModule, 
+    FuiComponentsDemoModule, 
+    FuiDirectivesDemoModule,
+    FuiPipesDemoModule
+} from "./demo/demo";
 
+const demoModules = [
+    FuiAnimationsDemoModule,
+    FuiComponentsDemoModule,
+    FuiDirectivesDemoModule,
+    FuiPipesDemoModule
+];
+
+const demoComponents = [
+    DemoHome,
+    InstallationComponent,
+    DemoComponent
+];
 
 
 @NgModule({
-    declarations: [DemoComponent],
+    declarations: [
+        ...demoComponents
+    ],
     imports: [
         BrowserModule,
         FormsModule,
         routing,
         FuelUiModule,
-        FuiDemoModule
+        ...demoModules
+    ],
+    exports: [
+        FuelUiModule,
+        ...demoComponents,
+        DemoComponent
     ],
     bootstrap: [DemoComponent]
 }) 

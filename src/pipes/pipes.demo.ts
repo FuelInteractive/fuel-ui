@@ -1,5 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {FuelUiModule} from "../fuel-ui";
 
 import {FormatDemo} from "./format/format.demo";
 import {MapToIterableDemo} from "./mapToIterable/mapToIterable.demo";
@@ -19,6 +21,7 @@ const demoDirectives = [
 ]
 
 @NgModule({
+    imports: [CommonModule,FormsModule,FuelUiModule],
     declarations: demoDirectives,
     exports: demoDirectives
 })

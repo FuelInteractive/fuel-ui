@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-
-import {FuiDirectivesModule} from "./directives";
+import {FormsModule} from "@angular/forms";
+import {FuelUiModule} from "../fuel-ui";
 
 import {AnimationDemo} from "./animation/animation.demo";
 import {TooltipDemo} from "./tooltip/tooltip.demo";
@@ -20,7 +20,8 @@ const directivesDemoDirectives = [
 @NgModule({
     imports: [
         CommonModule,
-        FuiDirectivesModule
+        FormsModule,
+        FuelUiModule
     ],
     declarations: directivesDemoDirectives,
     exports: directivesDemoDirectives
