@@ -1,4 +1,5 @@
 import {NgModule, Component, Input} from '@angular/core';
+import {CommonModule} from "@angular/common";
 
 @Component({
     selector: "dropdown",
@@ -15,7 +16,7 @@ export class Dropdown {
 }
 
 @NgModule({
-    imports: [],
+    imports: [CommonModule],
     declarations: [Dropdown],
     exports: [Dropdown]
 })

@@ -55,6 +55,7 @@ const demoDirectives = [
     TableSortableDemo,
     SliderDemo,
     TabDemo,
+    TagDemo,
     TimePickerDemo,
     TextExpanderDemo
 ]

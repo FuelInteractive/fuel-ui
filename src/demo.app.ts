@@ -1,5 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
@@ -16,8 +17,10 @@ import {DemoComponent} from "./demo/demo.component";
     declarations: [DemoComponent],
     imports: [
         BrowserModule,
+        FormsModule,
         routing,
-        FuelUiModule
+        FuelUiModule,
+        FuiDemoModule
     ],
     bootstrap: [DemoComponent]
 }) 

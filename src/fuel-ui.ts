@@ -1,6 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
+import {FuiAnimationsModule} from "./animations/animations";
 import {FuiComponentsModule} from "./components/components";
 import {FuiDirectivesModule} from "./directives/directives";
 import {FuiPipesModule} from "./pipes/pipes";
@@ -12,6 +13,7 @@ export * from "./pipes/pipes";
 export * from './utilities/utilities';
  
 const fuiModules = [
+    FuiAnimationsModule,
     FuiComponentsModule,
     FuiDirectivesModule,
     FuiPipesModule

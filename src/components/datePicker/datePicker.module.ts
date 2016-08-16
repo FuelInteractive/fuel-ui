@@ -1,5 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 import {FuiInfiniteScrollerModule} from "../infiniteScroller/infiniteScroller";
 
 export {DatePickerCalendar}  from "./datePickerCalendar";
@@ -23,7 +24,7 @@ const datePickerDirectives = [
 ]
 
 @NgModule({
-    imports: [CommonModule, FuiInfiniteScrollerModule],
+    imports: [CommonModule, FormsModule, FuiInfiniteScrollerModule],
     declarations: datePickerDirectives,
     exports: datePickerDirectives
 })

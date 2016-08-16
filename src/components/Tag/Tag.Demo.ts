@@ -100,7 +100,3 @@ export class TagDemo {
     tagEventsColumns:TableSortableColumn[] = EventColumns;
     tagEventsSort:TableSortableSorting = EventsDefaultSort;
 }
-
-export var TAG_DEMO_PROVIDERS = [
-    TagDemo
-];

@@ -1,3 +1,73 @@
+System.registerDynamic("fuel-ui/dist/animations/collapse/collapse", ["@angular/core"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this || self,
+      GLOBAL = global;
+  var core_1 = $__require('@angular/core');
+  function Collapse(duration) {
+    if (duration === void 0) {
+      duration = 300;
+    }
+    return core_1.trigger('collapse', [core_1.state('collapsed, true, void', core_1.style({
+      height: '0',
+      opacity: '0',
+      overflow: 'hidden'
+    })), core_1.state('expanded, false', core_1.style({
+      height: '*',
+      opacity: '1',
+      overflow: 'hidden'
+    })), core_1.transition('true => false, collapsed => expanded', [core_1.animate(duration + 'ms ease', core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})]))]), core_1.transition('false => true, expanded => collapsed', [core_1.animate(duration + 'ms ease', core_1.style({height: '0'}))])]);
+  }
+  exports.Collapse = Collapse;
+  return module.exports;
+});
+
+System.registerDynamic("fuel-ui/dist/animations/animations", ["@angular/core", "./collapse/collapse"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this || self,
+      GLOBAL = global;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  function __export(m) {
+    for (var p in m)
+      if (!exports.hasOwnProperty(p))
+        exports[p] = m[p];
+  }
+  var core_1 = $__require('@angular/core');
+  __export($__require('./collapse/collapse'));
+  var animationComponents = [];
+  var animationProviders = [];
+  var FuiAnimationsModule = (function() {
+    function FuiAnimationsModule() {}
+    FuiAnimationsModule = __decorate([core_1.NgModule({
+      imports: [],
+      declarations: [],
+      providers: animationProviders,
+      exports: animationProviders.slice()
+    }), __metadata('design:paramtypes', [])], FuiAnimationsModule);
+    return FuiAnimationsModule;
+  }());
+  exports.FuiAnimationsModule = FuiAnimationsModule;
+  return module.exports;
+});
+
 System.registerDynamic("fuel-ui/dist/components/alert/alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -1071,7 +1141,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/dateRangePicker", ["@
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker.module", ["@angular/core", "@angular/common", "../infiniteScroller/infiniteScroller", "./datePickerCalendar", "./datePicker", "./datePickerField", "./dateRangePicker"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker.module", ["@angular/core", "@angular/common", "@angular/forms", "../infiniteScroller/infiniteScroller", "./datePickerCalendar", "./datePicker", "./datePickerField", "./dateRangePicker"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1095,6 +1165,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker.module", [
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var forms_1 = $__require('@angular/forms');
   var infiniteScroller_1 = $__require('../infiniteScroller/infiniteScroller');
   var datePickerCalendar_1 = $__require('./datePickerCalendar');
   exports.DatePickerCalendar = datePickerCalendar_1.DatePickerCalendar;
@@ -1115,7 +1186,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker.module", [
   var FuiDatePickerModule = (function() {
     function FuiDatePickerModule() {}
     FuiDatePickerModule = __decorate([core_1.NgModule({
-      imports: [common_1.CommonModule, infiniteScroller_1.FuiInfiniteScrollerModule],
+      imports: [common_1.CommonModule, forms_1.FormsModule, infiniteScroller_1.FuiInfiniteScrollerModule],
       declarations: datePickerDirectives,
       exports: datePickerDirectives
     }), __metadata('design:paramtypes', [])], FuiDatePickerModule);
@@ -1495,7 +1566,7 @@ System.registerDynamic("fuel-ui/dist/components/infiniteScroller/infiniteScrolle
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/dropdown/dropdown", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/dropdown/dropdown", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1518,6 +1589,7 @@ System.registerDynamic("fuel-ui/dist/components/dropdown/dropdown", ["@angular/c
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Dropdown = (function() {
     function Dropdown() {
       this.dropdownOpen = false;
@@ -1536,7 +1608,7 @@ System.registerDynamic("fuel-ui/dist/components/dropdown/dropdown", ["@angular/c
   var FuiDropdownModule = (function() {
     function FuiDropdownModule() {}
     FuiDropdownModule = __decorate([core_1.NgModule({
-      imports: [],
+      imports: [common_1.CommonModule],
       declarations: [Dropdown],
       exports: [Dropdown]
     }), __metadata('design:paramtypes', [])], FuiDropdownModule);
@@ -1977,7 +2049,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["@angular/core", "@angular/common", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["@angular/core", "@angular/common", "@angular/forms", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2001,6 +2073,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var forms_1 = $__require('@angular/forms');
   var orderBy_1 = $__require('../../pipes/orderBy/orderBy');
   var format_1 = $__require('../../pipes/format/format');
   var tableSortableSorting_1 = $__require('./tableSortableSorting');
@@ -2036,7 +2109,6 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["
     return TableSortable;
   }());
   exports.TableSortable = TableSortable;
-  exports.TABLESORTABLE_PROVIDERS = [TableSortable];
   var TableSortableColumn_1 = $__require('./TableSortableColumn');
   exports.TableSortableColumn = TableSortableColumn_1.TableSortableColumn;
   var TableSortableSorting_1 = $__require('./TableSortableSorting');
@@ -2044,7 +2116,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["
   var FuiTableSortableModule = (function() {
     function FuiTableSortableModule() {}
     FuiTableSortableModule = __decorate([core_1.NgModule({
-      imports: [common_1.CommonModule, format_1.FuiFormatPipeModule, orderBy_1.FuiOrderByPipeModule],
+      imports: [common_1.CommonModule, forms_1.FormsModule, format_1.FuiFormatPipeModule, orderBy_1.FuiOrderByPipeModule],
       declarations: [TableSortable],
       exports: [TableSortable]
     }), __metadata('design:paramtypes', [])], FuiTableSortableModule);
@@ -4117,7 +4189,7 @@ System.registerDynamic("fuel-ui/dist/components/slider/slider", ["@angular/core"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/timePicker/timePicker", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/timePicker/timePicker", ["@angular/core", "@angular/common", "@angular/forms"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4140,6 +4212,8 @@ System.registerDynamic("fuel-ui/dist/components/timePicker/timePicker", ["@angul
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var forms_1 = $__require('@angular/forms');
   var TimePicker = (function() {
     function TimePicker() {
       this.hourStep = 1;
@@ -4345,6 +4419,7 @@ System.registerDynamic("fuel-ui/dist/components/timePicker/timePicker", ["@angul
   var FuiTimePickerModule = (function() {
     function FuiTimePickerModule() {}
     FuiTimePickerModule = __decorate([core_1.NgModule({
+      imports: [common_1.CommonModule, forms_1.FormsModule],
       declarations: [TimePicker],
       exports: [TimePicker]
     }), __metadata('design:paramtypes', [])], FuiTimePickerModule);
@@ -5525,7 +5600,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5548,6 +5623,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/c
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
   var Dropdown = (function() {
     function Dropdown() {
       this.dropdownOpen = false;
@@ -5566,7 +5642,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/c
   var FuiDropdownModule = (function() {
     function FuiDropdownModule() {}
     FuiDropdownModule = __decorate([core_1.NgModule({
-      imports: [],
+      imports: [common_1.CommonModule],
       declarations: [Dropdown],
       exports: [Dropdown]
     }), __metadata('design:paramtypes', [])], FuiDropdownModule);
@@ -5808,7 +5884,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/tableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "@angular/forms", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5832,6 +5908,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
   };
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var forms_1 = $__require('@angular/forms');
   var orderBy_1 = $__require('../../pipes/orderBy/orderBy');
   var format_1 = $__require('../../pipes/format/format');
   var tableSortableSorting_1 = $__require('./tableSortableSorting');
@@ -5867,7 +5944,6 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
     return TableSortable;
   }());
   exports.TableSortable = TableSortable;
-  exports.TABLESORTABLE_PROVIDERS = [TableSortable];
   var TableSortableColumn_1 = $__require('./TableSortableColumn');
   exports.TableSortableColumn = TableSortableColumn_1.TableSortableColumn;
   var TableSortableSorting_1 = $__require('./TableSortableSorting');
@@ -5875,7 +5951,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
   var FuiTableSortableModule = (function() {
     function FuiTableSortableModule() {}
     FuiTableSortableModule = __decorate([core_1.NgModule({
-      imports: [common_1.CommonModule, format_1.FuiFormatPipeModule, orderBy_1.FuiOrderByPipeModule],
+      imports: [common_1.CommonModule, forms_1.FormsModule, format_1.FuiFormatPipeModule, orderBy_1.FuiOrderByPipeModule],
       declarations: [TableSortable],
       exports: [TableSortable]
     }), __metadata('design:paramtypes', [])], FuiTableSortableModule);
@@ -8147,7 +8223,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["@angular/core"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angular/core", "@angular/common", "@angular/forms"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8170,6 +8246,8 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angul
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('@angular/core');
+  var common_1 = $__require('@angular/common');
+  var forms_1 = $__require('@angular/forms');
   var TimePicker = (function() {
     function TimePicker() {
       this.hourStep = 1;
@@ -8375,6 +8453,7 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angul
   var FuiTimePickerModule = (function() {
     function FuiTimePickerModule() {}
     FuiTimePickerModule = __decorate([core_1.NgModule({
+      imports: [common_1.CommonModule, forms_1.FormsModule],
       declarations: [TimePicker],
       exports: [TimePicker]
     }), __metadata('design:paramtypes', [])], FuiTimePickerModule);
@@ -9379,77 +9458,6 @@ System.registerDynamic("fuel-ui/dist/pipes/pipes", ["@angular/core", "./format/f
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/animations/collapse/collapse", ["@angular/core"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this || self,
-      GLOBAL = global;
-  var core_1 = $__require('@angular/core');
-  function Collapse(duration) {
-    if (duration === void 0) {
-      duration = 300;
-    }
-    return core_1.trigger('collapse', [core_1.state('collapsed, true, void', core_1.style({
-      height: '0',
-      opacity: '0',
-      overflow: 'hidden'
-    })), core_1.state('expanded, false', core_1.style({
-      height: '*',
-      opacity: '1',
-      overflow: 'hidden'
-    })), core_1.transition('true => false, collapsed => expanded', [core_1.animate(duration + 'ms ease', core_1.keyframes([core_1.style({opacity: '1'}), core_1.style({height: '*'})]))]), core_1.transition('false => true, expanded => collapsed', [core_1.animate(duration + 'ms ease', core_1.style({height: '0'}))])]);
-  }
-  exports.Collapse = Collapse;
-  return module.exports;
-});
-
-System.registerDynamic("fuel-ui/dist/animations/animations", ["@angular/core", "./collapse/collapse"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this || self,
-      GLOBAL = global;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  function __export(m) {
-    for (var p in m)
-      if (!exports.hasOwnProperty(p))
-        exports[p] = m[p];
-  }
-  var core_1 = $__require('@angular/core');
-  var collapse_1 = $__require('./collapse/collapse');
-  __export($__require('./collapse/collapse'));
-  var animationComponents = [];
-  var animationProviders = [collapse_1.Collapse];
-  var FuiAnimationsModule = (function() {
-    function FuiAnimationsModule() {}
-    FuiAnimationsModule = __decorate([core_1.NgModule({
-      imports: [],
-      declarations: [],
-      providers: animationProviders,
-      exports: animationProviders.slice()
-    }), __metadata('design:paramtypes', [])], FuiAnimationsModule);
-    return FuiAnimationsModule;
-  }());
-  exports.FuiAnimationsModule = FuiAnimationsModule;
-  return module.exports;
-});
-
 System.registerDynamic("fuel-ui/dist/utilities/DateRange", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -9668,7 +9676,7 @@ System.registerDynamic("fuel-ui/dist/utilities/utilities", ["./DateRange", "./Da
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/common", "./components/components", "./directives/directives", "./pipes/pipes", "./animations/animations", "./utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/common", "./animations/animations", "./components/components", "./directives/directives", "./pipes/pipes", "./utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9697,6 +9705,7 @@ System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/commo
   }
   var core_1 = $__require('@angular/core');
   var common_1 = $__require('@angular/common');
+  var animations_1 = $__require('./animations/animations');
   var components_1 = $__require('./components/components');
   var directives_1 = $__require('./directives/directives');
   var pipes_1 = $__require('./pipes/pipes');
@@ -9705,7 +9714,7 @@ System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/commo
   __export($__require('./directives/directives'));
   __export($__require('./pipes/pipes'));
   __export($__require('./utilities/utilities'));
-  var fuiModules = [components_1.FuiComponentsModule, directives_1.FuiDirectivesModule, pipes_1.FuiPipesModule];
+  var fuiModules = [animations_1.FuiAnimationsModule, components_1.FuiComponentsModule, directives_1.FuiDirectivesModule, pipes_1.FuiPipesModule];
   var FuelUiModule = (function() {
     function FuelUiModule() {}
     FuelUiModule = __decorate([core_1.NgModule({

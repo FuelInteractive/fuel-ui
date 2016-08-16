@@ -9,7 +9,7 @@ const animationComponents = [
 ];
 
 const animationProviders = [
-    Collapse
+    //Collapse
 ];
 
 @NgModule({

@@ -1,7 +1,8 @@
-import {NgModule, Component, ChangeDetectionStrategy, Input} from '@angular/core'
-import {CommonModule, JsonPipe} from '@angular/common'
-import {FuiOrderByPipeModule} from "../../pipes/orderBy/orderBy"
-import {FuiFormatPipeModule} from "../../pipes/format/format"
+import {NgModule, Component, ChangeDetectionStrategy, Input} from "@angular/core"
+import {CommonModule, JsonPipe} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {FuiOrderByPipeModule} from "../../pipes/orderBy/orderBy";
+import {FuiFormatPipeModule} from "../../pipes/format/format";
 import {TableSortableColumn} from "./tableSortableColumn";
 import {TableSortableSorting} from "./tableSortableSorting";
 
@@ -41,14 +42,11 @@ export class TableSortable {
   }
 }
 
-export var TABLESORTABLE_PROVIDERS = [
-    TableSortable
-];
 export {TableSortableColumn} from "./TableSortableColumn";
 export {TableSortableSorting} from "./TableSortableSorting";
 
 @NgModule({
-    imports: [CommonModule, FuiFormatPipeModule, FuiOrderByPipeModule],
+    imports: [CommonModule, FormsModule, FuiFormatPipeModule, FuiOrderByPipeModule],
     declarations: [TableSortable],
     exports: [TableSortable]
 })

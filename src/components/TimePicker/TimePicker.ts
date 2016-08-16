@@ -1,4 +1,6 @@
 import {NgModule, Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: "timepicker",
@@ -217,6 +219,7 @@ export let TIMEPICKER_PROVIDERS = [
 ];
 
 @NgModule({
+    imports: [CommonModule, FormsModule],
     declarations: [TimePicker],
     exports: [TimePicker]
 })
