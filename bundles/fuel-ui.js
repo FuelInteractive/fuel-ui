@@ -1,4 +1,4 @@
-System.registerDynamic("fuel-ui/dist/animations/collapse/collapse", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/animations/collapse/collapse", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -23,7 +23,7 @@ System.registerDynamic("fuel-ui/dist/animations/collapse/collapse", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/animations/animations", ["@angular/core", "./collapse/collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/animations/animations", ["@angular/core", "./collapse/collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -68,7 +68,7 @@ System.registerDynamic("fuel-ui/dist/animations/animations", ["@angular/core", "
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/accordion/accordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/accordion/accordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -120,7 +120,7 @@ System.registerDynamic("fuel-ui/dist/components/accordion/accordionItem", ["@ang
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/accordion/accordion", ["@angular/core", "@angular/common", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/accordion/accordion", ["@angular/core", "@angular/common", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -211,7 +211,7 @@ System.registerDynamic("fuel-ui/dist/components/accordion/accordion", ["@angular
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/alert/alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/alert/alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -305,7 +305,7 @@ System.registerDynamic("fuel-ui/dist/components/alert/alert", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/carousel/carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/carousel/carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -558,7 +558,7 @@ System.registerDynamic("fuel-ui/dist/components/carousel/carousel", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/datePicker/datePickerCalendar", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/datePicker/datePickerCalendar", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -672,7 +672,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/datePickerCalendar", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker", ["@angular/core", "./datePickerField", "../infiniteScroller/infiniteScroller", "../../utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/datePicker/datePicker", ["@angular/core", "./datePickerField", "../infiniteScroller/infiniteScroller", "../../utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -919,7 +919,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker", ["@angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/datePicker/datePickerField", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/datePicker/datePickerField", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1035,7 +1035,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/datePickerField", ["@
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/datePicker/dateRangePicker", ["@angular/core", "../../utilities/utilities", "./datePicker", "./datePickerField", "../infiniteScroller/infiniteScroller"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/datePicker/dateRangePicker", ["@angular/core", "../../utilities/utilities", "./datePicker", "./datePickerField", "../infiniteScroller/infiniteScroller"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1284,7 +1284,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/dateRangePicker", ["@
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker.module", ["@angular/core", "@angular/common", "@angular/forms", "../infiniteScroller/infiniteScroller", "./datePickerCalendar", "./datePicker", "./datePickerField", "./dateRangePicker"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/datePicker/datePicker.module", ["@angular/core", "@angular/common", "@angular/forms", "../infiniteScroller/infiniteScroller", "./datePickerCalendar", "./datePicker", "./datePickerField", "./dateRangePicker"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1339,7 +1339,7 @@ System.registerDynamic("fuel-ui/dist/components/datePicker/datePicker.module", [
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/modal/modal", ["@angular/core", "@angular/common", "../../directives/animation/animation"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/modal/modal", ["@angular/core", "@angular/common", "../../directives/animation/animation"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1438,7 +1438,7 @@ System.registerDynamic("fuel-ui/dist/components/modal/modal", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/pagination/pagination", ["@angular/core", "@angular/common", "../../pipes/range/range"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/pagination/pagination", ["@angular/core", "@angular/common", "../../pipes/range/range"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1523,7 +1523,7 @@ System.registerDynamic("fuel-ui/dist/components/pagination/pagination", ["@angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/infiniteScroller/infiniteScroller", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/infiniteScroller/infiniteScroller", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1709,7 +1709,7 @@ System.registerDynamic("fuel-ui/dist/components/infiniteScroller/infiniteScrolle
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/dropdown/dropdown", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/dropdown/dropdown", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1761,7 +1761,7 @@ System.registerDynamic("fuel-ui/dist/components/dropdown/dropdown", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tab/TabSet", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tab/TabSet", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1880,7 +1880,7 @@ System.registerDynamic("fuel-ui/dist/components/tab/TabSet", ["@angular/core"], 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tab/tab", ["@angular/core", "@angular/common", "./TabSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tab/tab", ["@angular/core", "@angular/common", "./TabSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1976,7 +1976,7 @@ System.registerDynamic("fuel-ui/dist/components/tab/tab", ["@angular/core", "@an
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2030,7 +2030,7 @@ System.registerDynamic("fuel-ui/dist/components/tag/TagSet", ["@angular/core", "
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tag/tag", ["@angular/core", "@angular/common", "./TagSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tag/tag", ["@angular/core", "@angular/common", "./TagSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2138,7 +2138,7 @@ System.registerDynamic("fuel-ui/dist/components/tag/tag", ["@angular/core", "@an
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortableSorting", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tableSortable/tableSortableSorting", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2155,7 +2155,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tableSortable/TableSortableColumn", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tableSortable/TableSortableColumn", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2175,7 +2175,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/TableSortableColum
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tableSortable/TableSortableSorting", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tableSortable/TableSortableSorting", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2192,7 +2192,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["@angular/core", "@angular/common", "@angular/forms", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/tableSortable/tableSortable", ["@angular/core", "@angular/common", "@angular/forms", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -2269,7 +2269,7 @@ System.registerDynamic("fuel-ui/dist/components/tableSortable/tableSortable", ["
   return module.exports;
 });
 
-System.registerDynamic('fuel-ui/dist/components/slider/NoUiSlider', [], false, function ($__require, $__exports, $__module) {
+System.registerDynamic('fuel-ui/lib/components/slider/NoUiSlider', [], false, function ($__require, $__exports, $__module) {
 	var _retrieveGlobal = System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
 
 	(function ($__global) {
@@ -4180,7 +4180,7 @@ System.registerDynamic('fuel-ui/dist/components/slider/NoUiSlider', [], false, f
 
 	return _retrieveGlobal();
 });
-System.registerDynamic("fuel-ui/dist/components/slider/slider", ["@angular/core", "@angular/common", "./NoUiSlider"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/slider/slider", ["@angular/core", "@angular/common", "./NoUiSlider"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4332,7 +4332,7 @@ System.registerDynamic("fuel-ui/dist/components/slider/slider", ["@angular/core"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/timePicker/timePicker", ["@angular/core", "@angular/common", "@angular/forms"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/timePicker/timePicker", ["@angular/core", "@angular/common", "@angular/forms"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4572,7 +4572,7 @@ System.registerDynamic("fuel-ui/dist/components/timePicker/timePicker", ["@angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/textExpander/textExpander", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/textExpander/textExpander", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4666,7 +4666,7 @@ System.registerDynamic("fuel-ui/dist/components/textExpander/textExpander", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/offCanvasMenu/offCanvasMenu", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/offCanvasMenu/offCanvasMenu", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4777,7 +4777,7 @@ System.registerDynamic("fuel-ui/dist/components/offCanvasMenu/offCanvasMenu", ["
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/accordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Accordion/accordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4829,7 +4829,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/accordionItem", ["@ang
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular/core", "@angular/common", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Accordion/Accordion", ["@angular/core", "@angular/common", "./accordionItem", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4920,7 +4920,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/Accordion", ["@angular
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/animations/Collapse/Collapse", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4945,7 +4945,7 @@ System.registerDynamic("fuel-ui/dist/animations/Collapse/Collapse", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Accordion/AccordionItem", ["@angular/core", "../../animations/Collapse/Collapse"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -4997,7 +4997,7 @@ System.registerDynamic("fuel-ui/dist/components/Accordion/AccordionItem", ["@ang
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Alert/Alert", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5091,7 +5091,7 @@ System.registerDynamic("fuel-ui/dist/components/Alert/Alert", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Carousel/Carousel", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5344,7 +5344,7 @@ System.registerDynamic("fuel-ui/dist/components/Carousel/Carousel", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", "@angular/common", "../../directives/animation/animation"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Modal/Modal", ["@angular/core", "@angular/common", "../../directives/animation/animation"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5443,7 +5443,7 @@ System.registerDynamic("fuel-ui/dist/components/Modal/Modal", ["@angular/core", 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["@angular/core", "@angular/common", "../../pipes/range/range"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Pagination/Pagination", ["@angular/core", "@angular/common", "../../pipes/range/range"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5528,7 +5528,7 @@ System.registerDynamic("fuel-ui/dist/components/Pagination/Pagination", ["@angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScroller", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/InfiniteScroller/InfiniteScroller", ["@angular/core", "../../utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5714,7 +5714,7 @@ System.registerDynamic("fuel-ui/dist/components/InfiniteScroller/InfiniteScrolle
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Dropdown/Dropdown", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5766,7 +5766,7 @@ System.registerDynamic("fuel-ui/dist/components/Dropdown/Dropdown", ["@angular/c
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["@angular/core", "@angular/common", "./TabSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Tab/Tab", ["@angular/core", "@angular/common", "./TabSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5862,7 +5862,7 @@ System.registerDynamic("fuel-ui/dist/components/Tab/Tab", ["@angular/core", "@an
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Tab/TabSet", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5981,7 +5981,7 @@ System.registerDynamic("fuel-ui/dist/components/Tab/TabSet", ["@angular/core"], 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/tableSortableSorting", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/TableSortable/tableSortableSorting", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -5998,7 +5998,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/tableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "@angular/forms", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/TableSortable/TableSortable", ["@angular/core", "@angular/common", "@angular/forms", "../../pipes/orderBy/orderBy", "../../pipes/format/format", "./tableSortableSorting", "./TableSortableColumn", "./TableSortableSorting"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -6075,7 +6075,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortable", ["
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableColumn", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/TableSortable/TableSortableColumn", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -6095,7 +6095,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableColum
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorting", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/TableSortable/TableSortableSorting", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -6112,7 +6112,7 @@ System.registerDynamic("fuel-ui/dist/components/TableSortable/TableSortableSorti
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["@angular/core", "@angular/common", "./TagSet"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Tag/Tag", ["@angular/core", "@angular/common", "./TagSet"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -6220,7 +6220,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/Tag", ["@angular/core", "@an
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Tag/TagSet", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -6274,7 +6274,7 @@ System.registerDynamic("fuel-ui/dist/components/Tag/TagSet", ["@angular/core", "
   return module.exports;
 });
 
-System.registerDynamic('fuel-ui/dist/components/Slider/NoUiSlider', [], false, function ($__require, $__exports, $__module) {
+System.registerDynamic('fuel-ui/lib/components/Slider/NoUiSlider', [], false, function ($__require, $__exports, $__module) {
 	var _retrieveGlobal = System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
 
 	(function ($__global) {
@@ -8185,7 +8185,7 @@ System.registerDynamic('fuel-ui/dist/components/Slider/NoUiSlider', [], false, f
 
 	return _retrieveGlobal();
 });
-System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["@angular/core", "@angular/common", "./NoUiSlider"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/Slider/Slider", ["@angular/core", "@angular/common", "./NoUiSlider"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8337,7 +8337,7 @@ System.registerDynamic("fuel-ui/dist/components/Slider/Slider", ["@angular/core"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angular/core", "@angular/common", "@angular/forms"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/TimePicker/TimePicker", ["@angular/core", "@angular/common", "@angular/forms"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8577,7 +8577,7 @@ System.registerDynamic("fuel-ui/dist/components/TimePicker/TimePicker", ["@angul
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/TextExpander/TextExpander", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/TextExpander/TextExpander", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8671,7 +8671,7 @@ System.registerDynamic("fuel-ui/dist/components/TextExpander/TextExpander", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/OffCanvasMenu/OffCanvasMenu", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8782,7 +8782,7 @@ System.registerDynamic("fuel-ui/dist/components/OffCanvasMenu/OffCanvasMenu", ["
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "./accordion/accordion", "./alert/alert", "./carousel/carousel", "./datePicker/datePicker.module", "./modal/modal", "./pagination/pagination", "./infiniteScroller/infiniteScroller", "./dropdown/dropdown", "./tab/tab", "./tag/tag", "./tableSortable/tableSortable", "./slider/slider", "./timePicker/timePicker", "./textExpander/textExpander", "./offCanvasMenu/offCanvasMenu", "./Accordion/Accordion", "./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tab/TabSet", "./TableSortable/TableSortable", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/Tag", "./Tag/TagSet", "./Slider/Slider", "./TimePicker/TimePicker", "./TextExpander/TextExpander", "./OffCanvasMenu/OffCanvasMenu"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/components", ["@angular/core", "./accordion/accordion", "./alert/alert", "./carousel/carousel", "./datePicker/datePicker.module", "./modal/modal", "./pagination/pagination", "./infiniteScroller/infiniteScroller", "./dropdown/dropdown", "./tab/tab", "./tag/tag", "./tableSortable/tableSortable", "./slider/slider", "./timePicker/timePicker", "./textExpander/textExpander", "./offCanvasMenu/offCanvasMenu", "./Accordion/Accordion", "./Accordion/AccordionItem", "./Alert/Alert", "./Carousel/Carousel", "./Modal/Modal", "./Pagination/Pagination", "./InfiniteScroller/InfiniteScroller", "./Dropdown/Dropdown", "./Tab/Tab", "./Tab/TabSet", "./TableSortable/TableSortable", "./TableSortable/TableSortableColumn", "./TableSortable/TableSortableSorting", "./Tag/Tag", "./Tag/TagSet", "./Slider/Slider", "./TimePicker/TimePicker", "./TextExpander/TextExpander", "./OffCanvasMenu/OffCanvasMenu"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8858,7 +8858,7 @@ System.registerDynamic("fuel-ui/dist/components/components", ["@angular/core", "
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/animation/animation", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/directives/animation/animation", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -8985,7 +8985,7 @@ System.registerDynamic("fuel-ui/dist/directives/animation/animation", ["@angular
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/tooltip/tooltip", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/directives/tooltip/tooltip", ["@angular/core", "@angular/common"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9111,7 +9111,7 @@ System.registerDynamic("fuel-ui/dist/directives/tooltip/tooltip", ["@angular/cor
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/codeHighlighter/codeHighlighter", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/directives/codeHighlighter/codeHighlighter", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9159,7 +9159,7 @@ System.registerDynamic("fuel-ui/dist/directives/codeHighlighter/codeHighlighter"
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/directives/directives", ["@angular/core", "@angular/common", "./animation/animation", "./tooltip/tooltip", "./codeHighlighter/codeHighlighter"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/directives/directives", ["@angular/core", "@angular/common", "./animation/animation", "./tooltip/tooltip", "./codeHighlighter/codeHighlighter"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9207,7 +9207,7 @@ System.registerDynamic("fuel-ui/dist/directives/directives", ["@angular/core", "
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/format/format", ["@angular/core", "@angular/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/pipes/format/format", ["@angular/core", "@angular/common", "../../utilities/StringUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9290,7 +9290,7 @@ System.registerDynamic("fuel-ui/dist/pipes/format/format", ["@angular/core", "@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/mapToIterable/mapToIterable", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/pipes/mapToIterable/mapToIterable", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9346,7 +9346,7 @@ System.registerDynamic("fuel-ui/dist/pipes/mapToIterable/mapToIterable", ["@angu
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/orderBy/orderBy", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/pipes/orderBy/orderBy", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9466,7 +9466,7 @@ System.registerDynamic("fuel-ui/dist/pipes/orderBy/orderBy", ["@angular/core"], 
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/range/range", ["@angular/core"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/pipes/range/range", ["@angular/core"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9525,7 +9525,7 @@ System.registerDynamic("fuel-ui/dist/pipes/range/range", ["@angular/core"], true
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/pipes/pipes", ["@angular/core", "./format/format", "./mapToIterable/mapToIterable", "./orderBy/orderBy", "./range/range"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/pipes/pipes", ["@angular/core", "./format/format", "./mapToIterable/mapToIterable", "./orderBy/orderBy", "./range/range"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9574,7 +9574,7 @@ System.registerDynamic("fuel-ui/dist/pipes/pipes", ["@angular/core", "./format/f
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/DateRange", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/DateRange", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9626,7 +9626,7 @@ System.registerDynamic("fuel-ui/dist/utilities/DateRange", [], true, function($_
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/DateUtils", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/DateUtils", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9648,7 +9648,7 @@ System.registerDynamic("fuel-ui/dist/utilities/DateUtils", [], true, function($_
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/DetectionUtils", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/DetectionUtils", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9680,7 +9680,7 @@ System.registerDynamic("fuel-ui/dist/utilities/DetectionUtils", [], true, functi
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/AnimationUtils", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/AnimationUtils", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9699,7 +9699,7 @@ System.registerDynamic("fuel-ui/dist/utilities/AnimationUtils", [], true, functi
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/ElementUtils", ["./AnimationUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/ElementUtils", ["./AnimationUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9746,7 +9746,7 @@ System.registerDynamic("fuel-ui/dist/utilities/ElementUtils", ["./AnimationUtils
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/StringUtils", [], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/StringUtils", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9773,7 +9773,7 @@ System.registerDynamic("fuel-ui/dist/utilities/StringUtils", [], true, function(
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/utilities/utilities", ["./DateRange", "./DateUtils", "./DetectionUtils", "./ElementUtils", "./StringUtils"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/utilities/utilities", ["./DateRange", "./DateUtils", "./DetectionUtils", "./ElementUtils", "./StringUtils"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -9792,7 +9792,7 @@ System.registerDynamic("fuel-ui/dist/utilities/utilities", ["./DateRange", "./Da
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/dist/fuel-ui", ["@angular/core", "@angular/common", "@angular/forms", "./animations/animations", "./components/components", "./directives/directives", "./pipes/pipes", "./utilities/utilities"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/fuel-ui", ["@angular/core", "@angular/common", "@angular/forms", "./animations/animations", "./components/components", "./directives/directives", "./pipes/pipes", "./utilities/utilities"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,

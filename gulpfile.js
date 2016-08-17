@@ -23,7 +23,7 @@ var path = require('path');
 
 var paths = {
     source: 'src',
-    dest: 'dist',
+    dest: 'lib',
     bundle: 'bundles'
 };
 
@@ -63,7 +63,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     
     var sourceFiles = [
         paths.source + '/**/*.ts',
-        '!./dist/**/*.*',
+        '!./'+paths.dest+'/**/*.*',
         './typings/index.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
@@ -75,7 +75,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject));
         
-    //copy NoUiSlider to dist for demo
+    //copy NoUiSlider to lib for demo
     var noUiSlider = gulp
         .src('./src/**/NoUiSlider.js')
         .pipe(rename({dirname: 'components/Slider'}))
@@ -122,10 +122,10 @@ gulp.task('bundleScripts', ['scripts'], function() {
 
     builder.config(config);
 
-    return builder.bundle(name+'/dist/'+name, paths.bundle+'/fuel-ui.js')
+    return builder.bundle(name+'/'+paths.dest+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('Build complete.');
-            return builder.bundle(name+'/dist/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
+            return builder.bundle(name+'/'+paths.dest+'/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
                 .then(function() {
                     console.log('Minified build complete.');
                 })
