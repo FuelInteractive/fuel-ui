@@ -1,8 +1,8 @@
-import {Directive, Component, ViewEncapsulation, Renderer} from "@angular/core";
+import {NgModule, Directive, Component, ViewEncapsulation, Renderer} from "@angular/core";
 import {QueryList, ContentChildren, ElementRef} from "@angular/core";
 import {AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked, OnDestroy} from "@angular/core";
 import {Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef} from "@angular/core";
-import {CORE_DIRECTIVES} from "@angular/common";
+import {CommonModule} from "@angular/common";
 //import {HammerGesturesPluginCommon} from "@angular//platform-browser/src/dom/events/hammer_common";
 import {trigger, state, style, transition, animate, keyframes} from '@angular/core';
 
@@ -10,7 +10,7 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/co
     selector: ".carousel-item",
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <div @slide="state" class="item-content">
+        <div [@slide]="state" class="item-content">
             <ng-content></ng-content>
         </div>
     `,
@@ -77,7 +77,7 @@ export class CarouselItem {
 @Component({
     selector: "carousel",
     templateUrl: "components/Carousel/Carousel.html",
-    directives: [CORE_DIRECTIVES, CarouselItem],
+    directives: [CarouselItem],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Carousel
@@ -315,6 +315,11 @@ export class Carousel
     }*/
 }
 
-export var CAROUSEL_PROVIDERS = [
-    Carousel, CarouselItem
-];
+const carouselDirectives = [Carousel,CarouselItem];
+
+@NgModule({
+    imports: [CommonModule],
+    declarations: carouselDirectives,
+    exports: carouselDirectives
+})
+export class FuiCarouselModule { }

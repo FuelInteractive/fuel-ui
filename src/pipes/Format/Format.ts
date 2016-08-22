@@ -1,5 +1,5 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {DatePipe, DecimalPipe} from '@angular/common';
+import {NgModule, Pipe, PipeTransform} from '@angular/core';
+import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
 import {StringHelper} from '../../utilities/StringUtils';
 
 @Pipe({
@@ -54,6 +54,9 @@ export class FormatPipe implements PipeTransform  {
   }
 }
 
-export var FORMAT_PROVIDERS = [
-    FormatPipe
-];
+@NgModule({
+    imports: [CommonModule],
+    declarations: [FormatPipe],
+    exports: [FormatPipe]
+})
+export class FuiFormatPipeModule { }

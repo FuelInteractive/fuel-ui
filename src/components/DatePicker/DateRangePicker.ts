@@ -3,12 +3,11 @@ import {AfterContentInit, AfterContentChecked, OnInit} from "@angular/core";
 import {EventEmitter, ElementRef, ViewChild, ContentChildren ,ContentChild,QueryList} from '@angular/core';
 import {Input, Output, HostListener, HostBinding} from "@angular/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
-import {DateRange, DateUtils} from "../../utilities/utilities";
-import {MobileDetection} from "../../utilities/DetectionUtils";
-import {DatePicker} from "./DatePicker";
-import {DatePickerCalendar} from "./DatePickerCalendar";
-import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
-import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
+import {DateRange, DateUtils, MobileDetection} from "../../utilities/utilities";
+import {DatePicker} from "./datePicker";
+import {DatePickerCalendar} from "./datePickerCalendar";
+import {DatePickerField, DatePickerFieldStyler} from "./datePickerField";
+import {InfiniteScroller} from "../infiniteScroller/infiniteScroller";
 
 @Directive({
     selector: "[startDateField], .start-date-field",
@@ -31,7 +30,6 @@ export class EndDateField extends DatePickerField {
 @Component({
     selector: "date-range-picker",
     templateUrl: 'components/DatePicker/DateRangePicker.html',
-    directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateRangePicker extends DatePicker implements AfterContentInit {    

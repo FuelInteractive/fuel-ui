@@ -122,10 +122,10 @@ gulp.task('bundleScripts', ['scripts'], function() {
 
     builder.config(config);
 
-    return builder.bundle(name+'/'+name, paths.bundle+'/fuel-ui.js')
+    return builder.bundle(name+'/dist/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('Build complete.');
-            return builder.bundle(name+'/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
+            return builder.bundle(name+'/dist/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
                 .then(function() {
                     console.log('Minified build complete.');
                 })

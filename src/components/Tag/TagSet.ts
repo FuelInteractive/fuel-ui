@@ -5,7 +5,7 @@ import {Tag} from './Tag';
 @Component({
     selector: 'tagset',
     directives: [NgClass],
-    templateUrl: 'components/Tag/TagSet.html'
+    templateUrl: 'components/tag/tagSet.html'
 })
 export class TagSet implements OnDestroy {
 

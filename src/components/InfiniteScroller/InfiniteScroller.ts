@@ -1,18 +1,19 @@
 import { 
-	Directive,
-	Component,
-	ElementRef, 
-	Input, 
-	Output, 
-	EventEmitter,
-	ContentChildren,
-	ViewChildren,
-	QueryList,
-	AfterContentInit,
+    NgModule,
+    Directive,
+    Component,
+    ElementRef, 
+    Input, 
+    Output, 
+    EventEmitter,
+    ContentChildren,
+    ViewChildren,
+    QueryList,
+    AfterContentInit,
     AfterViewInit
  } from '@angular/core';
  
- import { ElementUtils } from "../../utilities/ElementUtils";
+ import { ElementUtils } from "../../utilities/utilities";
 
 @Directive({
     selector: "[scroll-item],.scroll-item"
@@ -34,8 +35,8 @@ export class ScrollItem implements AfterViewInit {
 }
 
 @Component({
-	selector: "infinite-scroller",
-	template: `
+    selector: "infinite-scroller",
+    template: `
         <div class="scroll-outer" [class.hide-scrollbar]="hideScrollbar">
             <div class="scroll-container"
                 (scroll)="doscroll($event)"
@@ -43,40 +44,39 @@ export class ScrollItem implements AfterViewInit {
                 <ng-content></ng-content>
             </div>
         </div>
-	`,
-	styles: [`
-		.scroll-container {
-			overflow-y: scroll;
-			overflow-x: hidden;
+    `,
+    styles: [`
+        .scroll-container {
+            overflow-y: scroll;
+            overflow-x: hidden;
             max-height: 100%;
-		}
+        }
 
         .scroll-outer.hide-scrollbar .scroll-container {
             margin-right: -16px;
         }
 
-		.scroll-content {
-			overflow: auto;
-		}
-	`],
-	directives: []
+        .scroll-content {
+            overflow: auto;
+        }
+    `]
 })
 export class InfiniteScroller 
     implements AfterContentInit, AfterViewInit 
 {        
-	@Input()
-	distance: number = 100;
-	@Input()
-	height: string = 'auto';
-	@Input()
-	hideScrollbar: boolean = false;
-	
-	@Output()
-	next: EventEmitter<any> = new EventEmitter();
-	
-	@Output()
-	prev: EventEmitter<any> = new EventEmitter();
-	
+    @Input()
+    distance: number = 100;
+    @Input()
+    height: string = 'auto';
+    @Input()
+    hideScrollbar: boolean = false;
+    
+    @Output()
+    next: EventEmitter<any> = new EventEmitter();
+    
+    @Output()
+    prev: EventEmitter<any> = new EventEmitter();
+    
     @Output()
     topIndexChange: EventEmitter<any> = new EventEmitter();
     topIndex: number = 0;
@@ -85,33 +85,33 @@ export class InfiniteScroller
     bottomIndexChange: EventEmitter<any> = new EventEmitter();
     bottomIndex: number = 0;
     
-	lastScroll: number = 0;
-	
+    lastScroll: number = 0;
+    
     @ContentChildren(ScrollItem) 
     itemQuery: QueryList<ScrollItem>;
     firstItem: ScrollItem;
-	container: HTMLElement
-	scrollTarget: HTMLElement;
+    container: HTMLElement
+    scrollTarget: HTMLElement;
     
     //test
     
-	constructor(element: ElementRef) {
-		this.container = element.nativeElement;
-	}
-	
-	ngAfterContentInit(): void {
+    constructor(element: ElementRef) {
+        this.container = element.nativeElement;
+    }
+    
+    ngAfterContentInit(): void {
         this.firstItem = this.itemQuery.first;
         this.itemQuery.changes.subscribe(() => {
             this.handleItemChanges();
         });
-	}
+    }
     
     ngAfterViewInit(): void {
         this.container = <HTMLElement>this.container.querySelector(".scroll-container");        
         this.container.scrollTop += 1;
     }
     
-	handleItemChanges() {
+    handleItemChanges() {
         if(this.firstItem == null)
             this.firstItem = this.itemQuery.first;
             
@@ -156,31 +156,31 @@ export class InfiniteScroller
             
         return false;
     }
-	
-	doscroll(event: Event) {		
-		var target = <Element>(typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
-		var targetRect = target.getBoundingClientRect();
-		var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
-		
-		var scrollDown = target.scrollTop > this.lastScroll;
-		var saveLastScroll = this.lastScroll;
-		this.lastScroll = target.scrollTop;
-		
-		if(scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance*2) {
-			this.next.emit(null);
-			if(target.scrollHeight - target.scrollTop === target.clientHeight) {
-				target.scrollTop -= 10;
-			}
-		} 
-		else if(!scrollDown && target.scrollTop <= this.distance*2) {
-			this.prev.emit(null);
-		}
-		
+    
+    doscroll(event: Event) {		
+        var target = <Element>(typeof event.srcElement === 'undefined' ? event.target : event.srcElement);
+        var targetRect = target.getBoundingClientRect();
+        var bottomPosition = target.scrollHeight - (target.scrollTop + targetRect.height);
+        
+        var scrollDown = target.scrollTop > this.lastScroll;
+        var saveLastScroll = this.lastScroll;
+        this.lastScroll = target.scrollTop;
+        
+        if(scrollDown && target.scrollHeight - (target.scrollTop + targetRect.height) <= this.distance*2) {
+            this.next.emit(null);
+            if(target.scrollHeight - target.scrollTop === target.clientHeight) {
+                target.scrollTop -= 10;
+            }
+        } 
+        else if(!scrollDown && target.scrollTop <= this.distance*2) {
+            this.prev.emit(null);
+        }
+        
         this.getVisableIndicies();
         
         if(target.scrollTop < 1)
             target.scrollTop = 1;
-	}
+    }
     
     scrollTo(position: number, animate = true): void {
         if(animate)
@@ -215,6 +215,14 @@ export class InfiniteScroller
     }
 }
 
-export var INFINITE_SCROLLER_PROVIDERS = [
-    InfiniteScroller, ScrollItem
+const infiniteScrollerDirectives = [
+    InfiniteScroller,
+    ScrollItem
 ]
+
+@NgModule({
+    imports: [],
+    declarations: infiniteScrollerDirectives,
+    exports: infiniteScrollerDirectives
+})
+export class FuiInfiniteScrollerModule { }

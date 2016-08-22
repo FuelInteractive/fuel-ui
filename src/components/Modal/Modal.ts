@@ -1,14 +1,14 @@
-import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {Animation} from "../../directives/Animation/Animation";
+import {NgModule, Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {FuiAnimationModule} from "../../directives/animation/animation";
+
 
 @Component({
 	selector: 'modal',
 	host:{
 		'(click)': 'clickElement($event)'
 	},
-	templateUrl: 'components/Modal/Modal.html',
-	directives: [CORE_DIRECTIVES, Animation]
+	templateUrl: 'components/Modal/Modal.html'
 })
 export class Modal {
 	private _el:HTMLElement;
@@ -72,6 +72,9 @@ export class Modal {
 	}
 }
 
-export var MODAL_PROVIDERS = [
-	Modal
-];
+@NgModule({
+	imports: [CommonModule, FuiAnimationModule],
+	declarations: [Modal],
+	exports: [Modal]
+})
+export class FuiModalModule { }

@@ -1,15 +1,24 @@
-import {FORMAT_PROVIDERS, FormatPipe} from "./Format/Format";
-import {MAPTOITERABLE_PROVIDERS, MapToIterablePipe} from "./MapToIterable/MapToIterable";
-import {ORDERBY_PROVIDERS, OrderByPipe} from "./OrderBy/OrderBy";
-import {RANGE_PROVIDERS, RangePipe} from "./Range/Range";
+import {NgModule} from "@angular/core";
 
-export var FUELUI_PIPE_PROVIDERS = [
-    FORMAT_PROVIDERS,
-    MAPTOITERABLE_PROVIDERS,
-    ORDERBY_PROVIDERS,
-    RANGE_PROVIDERS
-];
-export * from "./Format/Format";
-export * from "./MapToIterable/MapToIterable";
-export * from "./OrderBy/OrderBy";
-export * from "./Range/Range";
+import {FuiFormatPipeModule} from "./format/format";
+import {FuiMapToIterablePipeModule} from "./mapToIterable/mapToIterable";
+import {FuiOrderByPipeModule} from "./orderBy/orderBy";
+import {FuiRangePipeModule} from "./range/range";
+
+export * from "./format/format";
+export * from "./mapToIterable/mapToIterable";
+export * from "./orderBy/orderBy";
+export * from "./range/range";
+
+const pipeModules = [
+    FuiFormatPipeModule, 
+    FuiMapToIterablePipeModule,
+    FuiOrderByPipeModule,
+    FuiRangePipeModule
+]
+
+@NgModule({
+    imports: pipeModules,
+    exports: pipeModules
+})
+export class FuiPipesModule { }

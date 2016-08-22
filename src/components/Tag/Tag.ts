@@ -1,4 +1,5 @@
-import {Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import {NgModule, Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
 import {TagSet} from './TagSet';
 
 @Directive({
@@ -61,7 +62,14 @@ export class Tag implements OnInit, OnDestroy {
     }
 }
 
-export var TAG_PROVIDERS = [
+const tagDirectives = [
     Tag,
     TagSet
 ];
+
+@NgModule({
+    imports: [CommonModule],
+    declarations: tagDirectives,
+    exports: tagDirectives
+})
+export class FuiTagModule { }

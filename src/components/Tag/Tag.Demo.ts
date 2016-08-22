@@ -1,104 +1,13 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {TAG_PROVIDERS, Tag} from './Tag';
-import {TAB_PROVIDERS} from '../../components/Tab/Tab';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {Tag} from './Tag';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  template: `
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-block">
-            <h2 class="card-title">Tags</h2>
-            <p class="card-text">TagSet is a custom component to display a list of Tags</p>
-        </div>
-    </div>
-</div>
-
-<section class="row m-a">
-    <form>
-        <div class="form-group row">
-            <label for="tempTag.color" class="col-sm-2 col-md-1 form-control-label">Color</label>
-            <div class="col-sm-2">
-                <select class="custom-select" [(ngModel)]="tempTag.color" name="tempTag.color">
-                    <option [selected]="tempTag.color == 'danger'" value="danger">Danger</option>
-                    <option [selected]="tempTag.color == 'default'" value="default">Default</option>
-                    <option [selected]="tempTag.color == 'info'" value="info">Info</option>
-                    <option [selected]="tempTag.color == 'primary'" value="primary">Primary</option>
-                    <option [selected]="tempTag.color == 'success'" value="success">Success</option>
-                    <option [selected]="tempTag.color == 'warning'" value="warning">Warning</option>
-                </select>
-            </div>
-            <label for="tempTag.pill" class="form-control-label">
-                <input #pillcb type="checkbox" (change)="tempTag.pill = pillcb.checked" [checked]="tempTag.pill" /> Pill
-            </label>
-            <label for="tempTag.removable" class="form-control-label">
-                <input #removablecb type="checkbox" (change)="tempTag.removable = removablecb.checked" [checked]="tempTag.removable" /> Removable
-            </label>
-            <label for="tempTag.disabled" class="form-control-label">
-                <input #disabledcb type="checkbox" (change)="tempTag.disabled = disabledcb.checked" [checked]="tempTag.disabled" /> Disabled
-            </label>
-        </div>
-        <div class="form-group row">
-            <label for="tempTag.title" class="col-sm-2 col-md-1 form-control-label">Title</label>
-            <div class="col-sm-2">
-                <input class="form-control" [(ngModel)]="tempTag.title" type="text" name="tempTag.title">
-            </div>
-            <label for="tempTag.value" class="col-sm-2 col-md-1 form-control-label">Value</label>
-            <div class="col-sm-4">
-                <input class="form-control" [(ngModel)]="tempTag.value" type="text" name="tempTag.value" ngControl="value">
-                <div [hidden]="!valueError" class="alert alert-danger">
-                    Value is already used for another tag
-                </div>
-            </div>
-        <button type="submit" class="btn btn-primary" (click)="addTag()">Add tag</button>
-        </div>
-    </form>
-    <p>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tags.length <= 1" (click)="tags[1].disabled = !tags[1].disabled">Enable/Disable second tag</button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tags.length == 0" (click)="clearTags()">Clear tags</button>
-    </p>
-    <div (click)="$event.preventDefault()">
-        <h3>
-            <tagset>
-                <tag *ngFor="let theTag of tags"
-                    [color]="theTag.color"
-                    [pill]="theTag.pill"
-                    [disabled]="theTag.disabled"
-                    [removable]="theTag.removable"
-                    [title]="theTag.title"
-                    [value]="theTag.value"
-                    (remove)="removeLog($event)">
-                </tag>
-            </tagset>
-        </h3>
-        
-        <h4>Tags</h4>
-        <div *ngFor="let theTag of tags">
-            {{theTag | json}}
-        </div>
-    </div>
-</section>
-
-<div class="source">
-<h3>Import</h3>
-<pre>
-<code class="language-javascript" code-highlight>
-import {TAG_PROVIDERS} from 'fuel-ui/fuel-ui';
-</code>
-</pre>
-
-<h3>Getting Started</h3>
-<p>TagSet is a custom element to show an interactive tag interface. Used in conjuction with the custom Tag element. Tags can be displayed in a number ways</p>
-
-<h3>Usage</h3>
-<tabset>
-<tab heading="HTML">
-<pre>
-<code class="language-markup" code-highlight>
-&lt;tagset&gt;
+  templateUrl: "components/Tag/Tag.demo.html"
+})
+export class TagDemo {
+    codeExample1 = `&lt;tagset&gt;
     &lt;tag *ngFor=&quot;#theTag of tags&quot;
         [color]=&quot;theTag.color&quot;
         [pill]=&quot;theTag.pill&quot;
@@ -107,14 +16,9 @@ import {TAG_PROVIDERS} from 'fuel-ui/fuel-ui';
         [value]=&quot;theTag.value&quot;
         (remove)=&quot;removeLog($event)&quot;&gt;
     &lt;/tag&gt;
-&lt;/tagset&gt;
-</code>
-</pre>
-</tab>
-<tab heading="TypeScript">
-<pre>
-<code class="language-javascript" code-highlight>
-export class TagExample {
+&lt;/tagset&gt;`;
+
+    codeExample2 = `export class TagExample {
     tags:any[] = [
         {title: 'Default'},
         {title: 'Primary', color: 'primary', pill: true, removable: true, value: 'Some great value'},
@@ -127,32 +31,8 @@ export class TagExample {
     removeLog(tag: Tag):void {
         console.log('Removed:', tag.title, '-', tag.value);
     }
-}
-</code>
-</pre>
-</tab>
-</tabset>
+}`;
 
-<h3>Tag Attributes</h3>
-<table-sortable
-    [columns]="tagAttributesColumns"
-    [data]="tagAttributes"
-    [sort]="tagAttributesSort">
-    Loading table...
-</table-sortable>
-
-<h3>Tag Events</h3>
-<table-sortable
-    [columns]="tagEventsColumns"
-    [data]="tagEvents"
-    [sort]="tagEventsSort">
-    Loading table...
-</table-sortable>
-
-</div>`,
-        directives: [CORE_DIRECTIVES, TAG_PROVIDERS, CodeHighlighter, TableSortable, TAB_PROVIDERS]
-})
-export class TagDemo {
     valueError: boolean = false;
     tempTag:any = {
         title: 'Example Title', 
@@ -220,7 +100,3 @@ export class TagDemo {
     tagEventsColumns:TableSortableColumn[] = EventColumns;
     tagEventsSort:TableSortableSorting = EventsDefaultSort;
 }
-
-export var TAG_DEMO_PROVIDERS = [
-    TagDemo
-];

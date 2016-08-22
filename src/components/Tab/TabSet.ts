@@ -1,11 +1,10 @@
 import {Component, OnInit, OnDestroy, Input, Output} from '@angular/core';
-import {NgClass} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Tab} from './Tab';
 
 @Component({
     selector: 'tabset',
-    directives: [NgClass],
-    templateUrl: 'components/Tab/TabSet.html'
+    templateUrl: 'components/tab/tabSet.html'
 })
 export class TabSet implements OnInit, OnDestroy {
 

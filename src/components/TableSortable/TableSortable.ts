@@ -1,15 +1,15 @@
-import {Component, ChangeDetectionStrategy, Input} from '@angular/core'
-import {CORE_DIRECTIVES, JsonPipe} from '@angular/common'
-import {OrderByPipe} from "../../pipes/OrderBy/OrderBy"
-import {FormatPipe} from "../../pipes/Format/Format"
-import {TableSortableColumn} from "./TableSortableColumn";
-import {TableSortableSorting} from "./TableSortableSorting";
+import {NgModule, Component, ChangeDetectionStrategy, Input} from "@angular/core"
+import {CommonModule, JsonPipe} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {FuiOrderByPipeModule} from "../../pipes/orderBy/orderBy";
+import {FuiFormatPipeModule} from "../../pipes/format/format";
+import {TableSortableColumn} from "./tableSortableColumn";
+import {TableSortableSorting} from "./tableSortableSorting";
 
 @Component({
   selector: 'table-sortable',
-  templateUrl: 'components/TableSortable/TableSortable.html',
-  directives: [CORE_DIRECTIVES],
-  pipes: [OrderByPipe, JsonPipe, FormatPipe]
+  templateUrl: 'components/tableSortable/tableSortable.html',
+  pipes: [JsonPipe]
 })
 export class TableSortable {
   
@@ -42,8 +42,12 @@ export class TableSortable {
   }
 }
 
-export var TABLESORTABLE_PROVIDERS = [
-    TableSortable
-];
 export {TableSortableColumn} from "./TableSortableColumn";
 export {TableSortableSorting} from "./TableSortableSorting";
+
+@NgModule({
+    imports: [CommonModule, FormsModule, FuiFormatPipeModule, FuiOrderByPipeModule],
+    declarations: [TableSortable],
+    exports: [TableSortable]
+})
+export class FuiTableSortableModule { }

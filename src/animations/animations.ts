@@ -1,6 +1,23 @@
-import {Collapse} from "./Collapse/Collapse";
+import {NgModule} from "@angular/core";
 
-export var FUELUI_ANIMATION_PROVIDERS = [
-    Collapse()
+import {Collapse} from "./collapse/collapse";
+
+export * from "./collapse/collapse";
+
+const animationComponents = [
+
 ];
-export * from "./Collapse/Collapse";
+
+const animationProviders = [
+    //Collapse
+];
+
+@NgModule({
+    imports: [],
+    declarations: [],
+    providers: animationProviders,
+    exports: [
+        ...animationProviders
+    ]
+})
+export class FuiAnimationsModule { }
