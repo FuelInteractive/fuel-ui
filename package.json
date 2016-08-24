@@ -3,6 +3,7 @@
   "version": "0.4.1-0",
   "description": "A set of utilities and Angular2 components implementing Twitter's Bootstrap 4 components",
   "main": "lib/fuel-ui.js",
+  "jsnext:main": "esm/fuel-ui.js",
   "typings": "lib/fuel-ui.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

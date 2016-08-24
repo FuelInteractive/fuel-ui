@@ -175,6 +175,7 @@ _UpgradeReport_Files/
 **/wwwroot/lib/
 dist/
 lib/
+esm/
 .idea/
 .vscode/
 
