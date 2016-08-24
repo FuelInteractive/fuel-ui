@@ -16,7 +16,7 @@
 [Dd]ebugDLL/
 x64/
 x86/
-src/
+./src/
 build/
 bld/
 [Bb]in/
