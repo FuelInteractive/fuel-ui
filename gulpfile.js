@@ -101,7 +101,7 @@ gulp.task('es6', ['views', 'sass', 'cleanEs6'], function () {
     var tsProject = typescript.createProject('tsconfig.es6.json');
     
     var sourceFiles = [
-        paths.source + '/fuel-ui.ts'
+        paths.source + '/**/*.ts'
     ];
 
     var tsResult = gulp
