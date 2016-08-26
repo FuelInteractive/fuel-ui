@@ -958,7 +958,7 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DatePickerField", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/lib/components/DatePicker/dateRangePicker", ["@angular/core", "../../utilities/utilities", "./DatePicker", "./DatePickerField", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@angular/core", "../../utilities/utilities", "./DatePicker", "./DatePickerField", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1207,7 +1207,7 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/dateRangePicker", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/lib/components/DatePicker/DatePicker.Module", ["@angular/core", "@angular/common", "@angular/forms", "../InfiniteScroller/InfiniteScroller", "./DatePickerCalendar", "./DatePicker", "./DatePickerField", "./dateRangePicker"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/DatePicker/DatePicker.Module", ["@angular/core", "@angular/common", "@angular/forms", "../InfiniteScroller/InfiniteScroller", "./DatePickerCalendar", "./DatePicker", "./DatePickerField", "./DateRangePicker"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -1240,21 +1240,21 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DatePicker.Module", ["
   var DatePickerField_1 = $__require('./DatePickerField');
   exports.DatePickerField = DatePickerField_1.DatePickerField;
   exports.DatePickerFieldStyler = DatePickerField_1.DatePickerFieldStyler;
-  var dateRangePicker_1 = $__require('./dateRangePicker');
-  exports.DateRangePicker = dateRangePicker_1.DateRangePicker;
-  exports.StartDateField = dateRangePicker_1.StartDateField;
-  exports.EndDateField = dateRangePicker_1.EndDateField;
+  var DateRangePicker_1 = $__require('./DateRangePicker');
+  exports.DateRangePicker = DateRangePicker_1.DateRangePicker;
+  exports.StartDateField = DateRangePicker_1.StartDateField;
+  exports.EndDateField = DateRangePicker_1.EndDateField;
   var DatePickerCalendar_2 = $__require('./DatePickerCalendar');
   var DatePicker_2 = $__require('./DatePicker');
   var DatePickerField_2 = $__require('./DatePickerField');
-  var dateRangePicker_2 = $__require('./dateRangePicker');
-  var DatePickerDirectives = [DatePicker_2.DatePicker, DatePickerCalendar_2.DatePickerCalendar, DatePickerField_2.DatePickerField, DatePickerField_2.DatePickerFieldStyler, dateRangePicker_2.DateRangePicker, dateRangePicker_2.StartDateField, dateRangePicker_2.EndDateField];
+  var DateRangePicker_2 = $__require('./DateRangePicker');
+  var datePickerDirectives = [DatePicker_2.DatePicker, DatePickerCalendar_2.DatePickerCalendar, DatePickerField_2.DatePickerField, DatePickerField_2.DatePickerFieldStyler, DateRangePicker_2.DateRangePicker, DateRangePicker_2.StartDateField, DateRangePicker_2.EndDateField];
   var FuiDatePickerModule = (function() {
     function FuiDatePickerModule() {}
     FuiDatePickerModule = __decorate([core_1.NgModule({
       imports: [common_1.CommonModule, forms_1.FormsModule, InfiniteScroller_1.FuiInfiniteScrollerModule],
-      declarations: DatePickerDirectives,
-      exports: DatePickerDirectives
+      declarations: datePickerDirectives,
+      exports: datePickerDirectives
     }), __metadata('design:paramtypes', [])], FuiDatePickerModule);
     return FuiDatePickerModule;
   }());
