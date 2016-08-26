@@ -6,6 +6,8 @@ import {CommonModule} from "@angular/common";
 //import {HammerGesturesPluginCommon} from "@angular//platform-browser/src/dom/events/hammer_common";
 import {trigger, state, style, transition, animate, keyframes} from '@angular/core';
 
+declare var Hammer: any;
+
 @Component({
     selector: ".carousel-item",
     changeDetection: ChangeDetectionStrategy.OnPush,

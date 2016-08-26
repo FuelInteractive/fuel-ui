@@ -16,6 +16,7 @@
 [Dd]ebugDLL/
 x64/
 x86/
+./src/
 build/
 bld/
 [Bb]in/
@@ -174,8 +175,6 @@ _UpgradeReport_Files/
 .settings/
 **/wwwroot/lib/
 dist/
-lib/
-esm/
 .idea/
 .vscode/
 

@@ -23,8 +23,9 @@ var path = require('path');
 
 var paths = {
     source: 'src',
-    dest: 'dist',
-    bundle: 'bundles'
+    dest: 'lib',
+    bundle: 'bundles',
+    esm: 'esm'
 };
 
 var inlineTemplateConfig = {
@@ -56,14 +57,19 @@ gulp.task('cleanScripts', function () {
 			.pipe(vinylPaths(del));
 });
 
-gulp.task('clean', ['cleanSass','cleanViews', 'cleanScripts']);
+gulp.task("cleanEs6", function() {
+    return gulp.src(paths.dest + '/**/*.{js,map,d.ts}', { read: false })
+			.pipe(vinylPaths(del));
+});
+
+gulp.task('clean', ['cleanSass','cleanViews', 'cleanScripts', 'cleanEs6']);
 
 gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
     var tsProject = typescript.createProject('tsconfig.json');
     
     var sourceFiles = [
         paths.source + '/**/*.ts',
-        '!./dist/**/*.*',
+        '!./'+paths.dest+'/**/*.*',
         './typings/index.d.ts',
         '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
         '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
@@ -75,7 +81,7 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject));
         
-    //copy NoUiSlider to dist for demo
+    //copy NoUiSlider to lib for demo
     var noUiSlider = gulp
         .src('./src/**/NoUiSlider.js')
         .pipe(rename({dirname: 'components/Slider'}))
@@ -88,6 +94,34 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
                 .pipe(gulp.dest(paths.dest)),
             tsResult.dts
                 .pipe(gulp.dest(paths.dest))
+        ]);
+});
+
+gulp.task('es6', ['views', 'sass', 'cleanEs6'], function () {
+    var tsProject = typescript.createProject('tsconfig.es6.json');
+    
+    var sourceFiles = [
+        paths.source + '/**/*.ts'
+    ];
+
+    var tsResult = gulp
+        .src(sourceFiles)
+        .pipe(inlineNg2Template(inlineTemplateConfig))
+        .pipe(typescript(tsProject));
+        
+    //copy NoUiSlider to lib for demo
+    var noUiSlider = gulp
+        .src('./src/**/NoUiSlider.js')
+        .pipe(rename({dirname: 'components/Slider'}))
+        .pipe(gulp.dest(paths.esm));
+
+    return merge(
+        [
+            tsResult.js
+                .pipe(sourcemaps.write('.'))
+                .pipe(gulp.dest(paths.esm)),
+            tsResult.dts
+                .pipe(gulp.dest(paths.esm))
         ]);
 });
 
@@ -122,10 +156,10 @@ gulp.task('bundleScripts', ['scripts'], function() {
 
     builder.config(config);
 
-    return builder.bundle(name+'/dist/'+name, paths.bundle+'/fuel-ui.js')
+    return builder.bundle(name+'/'+paths.dest+'/'+name, paths.bundle+'/fuel-ui.js')
         .then(function() {
             console.log('Build complete.');
-            return builder.bundle(name+'/dist/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
+            return builder.bundle(name+'/'+paths.dest+'/'+name, paths.bundle+'/fuel-ui.min.js', {minify: true, mangle: false})
                 .then(function() {
                     console.log('Minified build complete.');
                 })
@@ -188,7 +222,7 @@ gulp.task('watch', function () {
     gulp.watch(paths.source+'/**/*.*', ['scripts']);
 });
 
-gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'bundle']);
+gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'es6', 'bundle']);
 
 gulp.task('default', function(){
 	runSequence(

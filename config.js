@@ -27,7 +27,7 @@ System.config({
 		"rxjs": {
 			defaultExtension: 'js'
 		},
-		'dist': {
+		'lib': {
 			defaultExtension: 'js'
 		},
 	},

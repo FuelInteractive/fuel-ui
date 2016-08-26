@@ -1,3 +1,4 @@
+import {ModuleWithProviders} from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
 import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
     InfiniteScrollerDemo, ModalDemo, OffCanvasMenuDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
@@ -38,4 +39,4 @@ export const appRoutingProviders: any[] = [
   
 ];
 
-export const routing = RouterModule.forRoot(routes, { useHash: true });
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });
