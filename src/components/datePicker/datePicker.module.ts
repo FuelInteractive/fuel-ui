@@ -6,12 +6,12 @@ import {FuiInfiniteScrollerModule} from "../InfiniteScroller/InfiniteScroller";
 export {DatePickerCalendar}  from "./DatePickerCalendar";
 export {DatePicker} from "./DatePicker";
 export {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
-export {DateRangePicker, StartDateField, EndDateField} from "./dateRangePicker";
+export {DateRangePicker, StartDateField, EndDateField} from "./DateRangePicker";
 
 import {DatePickerCalendar}  from "./DatePickerCalendar";
 import {DatePicker} from "./DatePicker";
 import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
-import {DateRangePicker, StartDateField, EndDateField} from "./dateRangePicker";
+import {DateRangePicker, StartDateField, EndDateField} from "./DateRangePicker";
 
 const DatePickerDirectives = [
     DatePicker,
