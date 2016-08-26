@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/dropdown/dropdown.demo.html"
+  templateUrl: "components/Dropdown/Dropdown.Demo.html"
 })
 export class DropdownDemo {
     attributes:any[] = [

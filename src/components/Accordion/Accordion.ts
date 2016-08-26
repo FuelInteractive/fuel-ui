@@ -1,6 +1,6 @@
 import {Component, Input, NgModule, ContentChildren, QueryList, AfterContentInit, EventEmitter} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {AccordionItem} from './accordionItem';
+import {AccordionItem} from './AccordionItem';
 import {Collapse} from '../../animations/Collapse/Collapse';
 
 @Component({

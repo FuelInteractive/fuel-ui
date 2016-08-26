@@ -1,6 +1,6 @@
 import {NgModule, Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {FuiAnimationModule} from "../../directives/animation/animation";
+import {FuiAnimationModule} from "../../directives/Animation/Animation";
 
 
 @Component({

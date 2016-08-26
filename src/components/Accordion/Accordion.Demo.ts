@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/accordion/accordion.demo.html"
+  templateUrl: "components/Accordion/Accordion.Demo.html"
 })
 export class AccordionDemo {
     

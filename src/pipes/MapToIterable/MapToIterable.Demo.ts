@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  templateUrl: "pipes/mapToIterable/mapToIterable.demo.html"
+  templateUrl: "pipes/MapToIterable/MapToIterable.Demo.html"
 })
 export class MapToIterableDemo {
     htmlCodeExample = `&lt;ul *ngFor=&quot;#object of data&quot;&gt;

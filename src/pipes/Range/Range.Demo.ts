@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "pipes/range/range.demo.html"
+  templateUrl: "pipes/Range/Range.Demo.html"
 })
 export class RangeDemo {
     numbers:number[] = [];

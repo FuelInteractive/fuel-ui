@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {DateRange} from '../../utilities/utilities';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/datePicker/dateRangePicker.demo.html"
+  templateUrl: "components/DatePicker/DatePicker.Demo.html"
 })
 export class DateRangePickerDemo { 
     dateRangePickerValue: DateRange = new DateRange(new Date(), new Date());

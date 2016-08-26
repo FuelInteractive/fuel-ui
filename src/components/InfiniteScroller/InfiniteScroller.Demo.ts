@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/InfiniteScroller/InfiniteScroller.demo.html"
+  templateUrl: "components/InfiniteScroller/InfiniteScroller.Demo.html"
 })
 export class InfiniteScrollerDemo {
     infiniteScrollItems: string[] = [];

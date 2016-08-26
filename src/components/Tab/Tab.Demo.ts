@@ -1,11 +1,11 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
-import {Tab} from "./tab";
+import {Tab} from "./Tab";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "components/tab/tab.demo.html"
+  templateUrl: "components/Tab/Tab.Demo.html"
 })
 export class TabDemo {
     codeExample1 = `&lt;tabset&gt;

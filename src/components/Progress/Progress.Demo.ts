@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/progress/progress.demo.html"
+  templateUrl: "components/Progress/Progress.Demo.html"
 })
 export class ProgressDemo {
     progress: number = 25;

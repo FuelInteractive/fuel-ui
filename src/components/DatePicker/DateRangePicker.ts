@@ -4,10 +4,10 @@ import {EventEmitter, ElementRef, ViewChild, ContentChildren ,ContentChild,Query
 import {Input, Output, HostListener, HostBinding} from "@angular/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {DateRange, DateUtils, MobileDetection} from "../../utilities/utilities";
-import {DatePicker} from "./datePicker";
-import {DatePickerCalendar} from "./datePickerCalendar";
-import {DatePickerField, DatePickerFieldStyler} from "./datePickerField";
-import {InfiniteScroller} from "../infiniteScroller/infiniteScroller";
+import {DatePicker} from "./DatePicker";
+import {DatePickerCalendar} from "./DatePickerCalendar";
+import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
+import {InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 
 @Directive({
     selector: "[startDateField], .start-date-field",

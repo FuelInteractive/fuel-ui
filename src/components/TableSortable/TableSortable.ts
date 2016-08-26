@@ -1,14 +1,14 @@
 import {NgModule, Component, ChangeDetectionStrategy, Input} from "@angular/core"
 import {CommonModule, JsonPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {FuiOrderByPipeModule} from "../../pipes/orderBy/orderBy";
-import {FuiFormatPipeModule} from "../../pipes/format/format";
-import {TableSortableColumn} from "./tableSortableColumn";
-import {TableSortableSorting} from "./tableSortableSorting";
+import {FuiOrderByPipeModule} from "../../pipes/OrderBy/OrderBy";
+import {FuiFormatPipeModule} from "../../pipes/Format/Format";
+import {TableSortableColumn} from "./TableSortableColumn";
+import {TableSortableSorting} from "./TableSortableSorting";
 
 @Component({
   selector: 'table-sortable',
-  templateUrl: 'components/tableSortable/tableSortable.html',
+  templateUrl: 'components/TableSortable/TableSortable.html',
   pipes: [JsonPipe]
 })
 export class TableSortable {

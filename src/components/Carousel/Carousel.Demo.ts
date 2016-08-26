@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/carousel/carousel.demo.html"
+  templateUrl: "components/Carousel/Carousel.Demo.html"
 })
 export class CarouselDemo {
     carouselImages: string[] = [

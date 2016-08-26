@@ -1,9 +1,9 @@
 import {Component, OnInit, OnChanges, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
 import {Input, Output, EventEmitter, ElementRef, ViewChild, ContentChildren, ContentChild, QueryList} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DatePickerCalendar} from "./datePickerCalendar";
-import {DatePickerField, DatePickerFieldStyler} from "./datePickerField";
-import {FuiInfiniteScrollerModule, InfiniteScroller} from "../infiniteScroller/infiniteScroller";
+import {DatePickerCalendar} from "./DatePickerCalendar";
+import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
+import {FuiInfiniteScrollerModule, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 import {DateRange, DateUtils, MobileDetection} from "../../utilities/utilities";
 
 @Component({

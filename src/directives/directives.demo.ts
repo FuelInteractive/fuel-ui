@@ -3,13 +3,13 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {FuelUiModule} from "../fuel-ui";
 
-import {AnimationDemo} from "./animation/animation.demo";
-import {TooltipDemo} from "./tooltip/tooltip.demo";
-import {CodeHighlighterDemo} from "./codeHighlighter/codeHighlighter.demo";
+import {AnimationDemo} from "./Animation/Animation.Demo";
+import {TooltipDemo} from "./Tooltip/Tooltip.Demo";
+import {CodeHighlighterDemo} from "./CodeHighlighter/CodeHighlighter.Demo";
 
-export * from "./animation/animation.demo";
-export * from "./tooltip/tooltip.demo";
-export * from "./codeHighlighter/codeHighlighter.demo";
+export * from "./Animation/Animation.Demo";
+export * from "./Tooltip/Tooltip.Demo";
+export * from "./CodeHighlighter/CodeHighlighter.Demo";
 
 const directivesDemoDirectives = [
     AnimationDemo,

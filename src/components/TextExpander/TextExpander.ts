@@ -3,7 +3,7 @@ import {CommonModule, SlicePipe} from '@angular/common';
 
 @Component({
     selector: 'text-expander',
-    templateUrl: 'components/textExpander/textExpander.html',
+    templateUrl: 'components/TextExpander/TextExpander.html',
     pipes: [SlicePipe]
 })
 export class TextExpander {

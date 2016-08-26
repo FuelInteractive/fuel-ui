@@ -1,19 +1,19 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {FuiInfiniteScrollerModule} from "../infiniteScroller/infiniteScroller";
+import {FuiInfiniteScrollerModule} from "../InfiniteScroller/InfiniteScroller";
 
-export {DatePickerCalendar}  from "./datePickerCalendar";
-export {DatePicker} from "./datePicker";
-export {DatePickerField, DatePickerFieldStyler} from "./datePickerField";
+export {DatePickerCalendar}  from "./DatePickerCalendar";
+export {DatePicker} from "./DatePicker";
+export {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
 export {DateRangePicker, StartDateField, EndDateField} from "./dateRangePicker";
 
-import {DatePickerCalendar}  from "./datePickerCalendar";
-import {DatePicker} from "./datePicker";
-import {DatePickerField, DatePickerFieldStyler} from "./datePickerField";
+import {DatePickerCalendar}  from "./DatePickerCalendar";
+import {DatePicker} from "./DatePicker";
+import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
 import {DateRangePicker, StartDateField, EndDateField} from "./dateRangePicker";
 
-const datePickerDirectives = [
+const DatePickerDirectives = [
     DatePicker,
     DatePickerCalendar,
     DatePickerField,
@@ -25,7 +25,7 @@ const datePickerDirectives = [
 
 @NgModule({
     imports: [CommonModule, FormsModule, FuiInfiniteScrollerModule],
-    declarations: datePickerDirectives,
-    exports: datePickerDirectives
+    declarations: DatePickerDirectives,
+    exports: DatePickerDirectives
 })
 export class FuiDatePickerModule { }

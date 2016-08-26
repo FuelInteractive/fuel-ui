@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 
 @Component({
     selector: "dropdown",
-    templateUrl: 'components/dropdown/dropdown.html'
+    templateUrl: 'components/Dropdown/Dropdown.html'
 })
 
 export class Dropdown {

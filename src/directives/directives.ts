@@ -1,13 +1,13 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
-import {FuiAnimationModule} from './animation/animation';
-import {FuiTooltipModule} from "./tooltip/tooltip";
-import {FuiCodeHighlighterModule} from "./codeHighlighter/codeHighlighter";
+import {FuiAnimationModule} from './Animation/Animation';
+import {FuiTooltipModule} from "./Tooltip/Tooltip";
+import {FuiCodeHighlighterModule} from "./CodeHighlighter/CodeHighlighter";
 
-export * from './animation/animation';
-export * from "./tooltip/tooltip";
-export * from "./codeHighlighter/codeHighlighter";
+export * from './Animation/Animation';
+export * from "./Tooltip/Tooltip";
+export * from "./CodeHighlighter/CodeHighlighter";
 
 const directiveModules = [
     FuiAnimationModule,
