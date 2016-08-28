@@ -1,5 +1,5 @@
 import {Component, trigger, state, style, transition, animate, group, keyframes} from '@angular/core';
-import {Collapse} from './collapse';
+import {Collapse} from './Collapse';
 import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
@@ -12,7 +12,7 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
             overflow: hidden;
         }
   `],
-  templateUrl: "animations/Collapse/Collapse.demo.html",
+  templateUrl: "animations/Collapse/Collapse.Demo.html",
     animations: [
         Collapse(300)
     ]

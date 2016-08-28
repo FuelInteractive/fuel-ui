@@ -17,7 +17,7 @@ export class DataType{
 }
 
 @Component({
-  templateUrl: "pipes/format/format.demo.html"
+  templateUrl: "pipes/Format/Format.Demo.html"
 })
 export class FormatDemo {
     htmlCodeExample = `&lt;span&gt;{{someVar | format : "number : 1.0-2"}}&lt;/span&gt;

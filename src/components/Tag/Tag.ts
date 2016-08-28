@@ -56,8 +56,8 @@ export class Tag implements OnInit, OnDestroy {
     private setClassMap():void {
         this.classMap = {
             'disabled': this.disabled,
-            'label-pill': this.pill,
-            ['label-' + ((this.color && this.color.toLowerCase()) || 'default')]: true
+            'tag-pill': this.pill,
+            ['tag-' + ((this.color && this.color.toLowerCase()) || 'default')]: true
         };
     }
 }

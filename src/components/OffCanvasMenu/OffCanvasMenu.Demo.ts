@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/offCanvasMenu/offCanvasMenu.demo.html"
+  templateUrl: "components/OffCanvasMenu/OffCanvasMenu.Demo.html"
 })
 export class OffCanvasMenuDemo {
     origin = "left";  

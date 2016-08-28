@@ -4,7 +4,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/Tag/Tag.demo.html"
+  templateUrl: "components/Tag/Tag.Demo.html"
 })
 export class TagDemo {
     codeExample1 = `&lt;tagset&gt;

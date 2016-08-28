@@ -1,14 +1,14 @@
 import {NgModule} from "@angular/core";
 
-import {FuiFormatPipeModule} from "./format/format";
-import {FuiMapToIterablePipeModule} from "./mapToIterable/mapToIterable";
-import {FuiOrderByPipeModule} from "./orderBy/orderBy";
-import {FuiRangePipeModule} from "./range/range";
+import {FuiFormatPipeModule} from "./Format/Format";
+import {FuiMapToIterablePipeModule} from "./MapToIterable/MapToIterable";
+import {FuiOrderByPipeModule} from "./OrderBy/OrderBy";
+import {FuiRangePipeModule} from "./Range/Range";
 
-export * from "./format/format";
-export * from "./mapToIterable/mapToIterable";
-export * from "./orderBy/orderBy";
-export * from "./range/range";
+export * from "./Format/Format";
+export * from "./MapToIterable/MapToIterable";
+export * from "./OrderBy/OrderBy";
+export * from "./Range/Range";
 
 const pipeModules = [
     FuiFormatPipeModule, 

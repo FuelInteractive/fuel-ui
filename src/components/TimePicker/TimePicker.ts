@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: "timepicker",
-    templateUrl: 'components/timePicker/timePicker.html'
+    templateUrl: 'components/TimePicker/TimePicker.html'
 })
 export class TimePicker implements OnInit, OnChanges {
     @Input() hourStep: number = 1;

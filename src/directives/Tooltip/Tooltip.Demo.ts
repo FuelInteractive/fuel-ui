@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "directives/Tooltip/Tooltip.demo.html"
+  templateUrl: "directives/Tooltip/Tooltip.Demo.html"
 })
 export class TooltipDemo {
     codeExample1 = `&lt;a href=&quot;#&quot; tooltip=&quot;Tooltip text goes here.&quot; 

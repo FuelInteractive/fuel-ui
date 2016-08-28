@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-    templateUrl: "components/slider/slider.demo.html"
+    templateUrl: "components/Slider/Slider.Demo.html"
 })
 export class SliderDemo{
     singleSliderValue: number = 40;

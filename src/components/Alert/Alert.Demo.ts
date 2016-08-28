@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/alert/alert.demo.html"
+  templateUrl: "components/Alert/Alert.Demo.html"
 })
 export class AlertDemo {
     showAlert: boolean = false;

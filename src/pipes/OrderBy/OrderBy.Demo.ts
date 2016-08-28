@@ -17,7 +17,7 @@ export class PersonInfo {
 }
 
 @Component({
-  templateUrl: "pipes/orderBy/orderBy.demo.html"
+  templateUrl: "pipes/OrderBy/OrderBy.Demo.html"
 })
 export class OrderByDemo {
     typescriptCodeExample = `export class Person {

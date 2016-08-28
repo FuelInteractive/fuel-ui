@@ -1,8 +1,8 @@
 import {NgModule} from "@angular/core";
 
-import {Collapse} from "./collapse/collapse";
+import {Collapse} from "./Collapse/Collapse";
 
-export * from "./collapse/collapse";
+export * from "./Collapse/Collapse";
 
 const animationComponents = [
 

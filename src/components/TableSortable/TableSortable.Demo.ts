@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from './tableSortable';
+import {TableSortableColumn, TableSortableSorting} from './TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/tableSortable/tableSortable.demo.html"
+  templateUrl: "components/TableSortable/TableSortable.Demo.html"
 })
 export class TableSortableDemo {
     codeExample1 = `&lt;table-sortable

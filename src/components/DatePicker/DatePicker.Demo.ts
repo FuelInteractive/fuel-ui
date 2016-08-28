@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/datePicker/datePicker.demo.html"
+  templateUrl: "components/DatePicker/DatePicker.Demo.html"
 })
 export class DatePickerDemo { 
     datePickerValue = new Date(2016,7,6);

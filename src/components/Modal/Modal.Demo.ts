@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/modal/modal.demo.html"
+  templateUrl: "components/Modal/Modal.Demo.html"
 })
 export class ModalDemo {
     closeText: string = "Cancel";

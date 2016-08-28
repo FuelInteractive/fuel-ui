@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  template: "components/textExpander/textExpander.demo.html"
+  templateUrl: "components/TextExpander/TextExpander.Demo.html"
 })
 export class TextExpanderDemo {
     expanded: boolean = false;

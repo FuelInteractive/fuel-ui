@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {TableSortableColumn, TableSortableSorting} from '../../components/tableSortable/tableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/timePicker/timePicker.demo.html"
+  templateUrl: "components/TimePicker/TimePicker.Demo.html"
 })
 export class TimePickerDemo {
     date: Date = new Date();

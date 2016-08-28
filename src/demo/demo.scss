@@ -252,6 +252,15 @@ body {
 	background: blue;
 }
 
+/*Override Bootstrap 4 Styles for PrismJs*/
+.token.tag {
+    display: inline;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+    white-space: pre;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 1024px){
     #wrapper {

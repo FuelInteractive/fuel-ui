@@ -3,7 +3,7 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/pagination/pagination.demo.html"
+  templateUrl: "components/Pagination/Pagination.Demo.html"
 })
 export class PaginationDemo {
     totalPages: number = 10;
