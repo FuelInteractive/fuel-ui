@@ -4,14 +4,14 @@ import {TableSortableColumn, TableSortableSorting} from '../../components/TableS
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 
 @Component({
-  templateUrl: "components/DatePicker/DatePicker.Demo.html"
+  templateUrl: "components/DatePicker/DateRangePicker.Demo.html"
 })
 export class DateRangePickerDemo { 
-    dateRangePickerValue: DateRange = new DateRange(new Date(), new Date());
-    /*arrivalDate = new Date(2016,7,6);
-    departureDate = new Date(2016,7,10);*/
-    arrivalDate = "8/6/2016";
-    departureDate = "8/10/2016";
+    arrivalDate = new Date(2017,7,6);
+    departureDate = new Date(2017,7,10);
+    dateRangePickerValue: DateRange = new DateRange(this.arrivalDate, this.departureDate);
+    //arrivalDate = "8/6/2016";
+    //departureDate = "8/10/2016";
     
     datePickerValueChange(event: any){
         this.dateRangePickerValue = event;

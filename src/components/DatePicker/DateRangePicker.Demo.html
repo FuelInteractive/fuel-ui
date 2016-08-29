@@ -11,21 +11,21 @@
     <div class="col-md-4">
         <div class="form-inline">
             <date-range-picker
-                minDate="11/1/2015"
-                maxDate="11/12/2016" 
+                minDate="11/1/2016"
+                maxDate="11/12/2017" 
                 [dateFilter]="dateFilter"
                 (valueChange)="datePickerValueChange($event)">
                 <div class="form-group">
                     <label for="arrival">Arrival Date</label>
                     <div class="date-picker-input-group">
-                        <input name="arrival" [(ngModel)]="arrivalDate" startDateField class="form-control" placeholder="Arrival" />
+                        <input name="arrival" [(date)]="arrivalDate" startDateField class="form-control" placeholder="Arrival" />
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="departure">Departure Date</label>
                     <div class="date-picker-input-group">
-                        <input name="departure" [(ngModel)]="departureDate" endDateField class="form-control" placeholder="Departure" />
+                        <input name="departure" [(date)]="departureDate" endDateField class="form-control" placeholder="Departure" />
                     </div>
                 </div>
             </date-range-picker>
