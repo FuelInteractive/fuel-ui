@@ -29,6 +29,7 @@ export class EndDateField extends DatePickerField {
 
 @Component({
     selector: "date-range-picker",
+    styleUrls: ["components/DatePicker/DatePicker.css"],
     templateUrl: 'components/DatePicker/DateRangePicker.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
