@@ -1,0 +1,60 @@
+<div class="date-picker-overlay" aria-hidden="true"
+    *ngIf="calendarDisplayed" 
+    (click)="hideCalendar()">
+</div>
+
+<div class="date-picker-content">
+    <ng-content></ng-content>
+
+    <div class="date-picker-component" *ngIf="calendarDisplayed"
+        [style.left]="calendarX"
+        [style.top]="calendarY">
+        <div class="container p-a-0">
+            <header>
+                <button type="button" class="btn btn-secondary pull-left"
+                    (click)="scrollPrevMonth()" [class.button-disable]="disablePrev()">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+                <div class="date-range pull-left input-group">
+                    <input type="text" class="form-control text-xs-center" 
+                        id="startDate" [(ngModel)]="inputDate" readonly />
+                </div>
+                <button type="button" class="btn btn-secondary pull-right"
+                    (click)="scrollNextMonth()" [class.button-disable]="disableNext()">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+                <table class="table m-b-0 days-of-week">
+                    <tbody>
+                    <tr>
+                        <th>S</th>
+                        <th>M</th>
+                        <th>T</th>
+                        <th>W</th>
+                        <th>T</th>
+                        <th>F</th>
+                        <th>S</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </header>
+            <div class="calendar-container m-a-0">
+                <infinite-scroller
+                    (next)="addNextMonth()"
+                    (prev)="addPrevMonth()"
+                    distance="100"
+                    [height]="calendarHeight"
+                    [hideScrollbar]="true">
+                    <date-picker-calendar scroll-item
+                        *ngFor="let month of calendarMonths; let i=index" 
+                        [id]="i"
+                        [minDate]="minDate" [maxDate]="maxDate"
+                        [dateFilter]="dateFilter"
+                        [currentMonth]="month" 
+                        [(selectedDate)]="selectedDate">
+                        {{i}}
+                    </date-picker-calendar>
+                </infinite-scroller>
+            </div>
+        </div>
+    </div>
+</div>

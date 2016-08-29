@@ -1,0 +1,22 @@
+<div class="fuel-ui-datepicker-calendar text-center py">
+	<table class="table m-a-0">	
+		<tbody>
+            <tr *ngIf="showMonth">
+                <td colspan="7">
+                    <strong>{{currentMonth | date:'MMMM yyyy'}}</strong>
+                </td>
+            </tr> 
+			<tr *ngFor="let week of weeks">
+				<td *ngFor="let day of week"
+					[class.selectable]="checkSelectable(day)" 
+					[class.disabled]="!checkSelectable(day)"
+					[class.selected]="checkSelectedDate(day)" 
+                    [class.startDate]="checkStartDate(day)"
+                    [class.endDate]="checkEndDate(day)"
+					(click)="selectDate(day)">
+					<span class="calendar-date">{{day}}</span>
+				</td> 
+			</tr>
+		</tbody>
+	</table>
+</div>

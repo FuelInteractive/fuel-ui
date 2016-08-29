@@ -1,0 +1,105 @@
+.date-picker-overlay {
+  background-color: transparent;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 900; }
+  @media (max-width: 480px), screen and (max-device-width: 480px) {
+    .date-picker-overlay {
+      background-color: #55595c;
+      opacity: .75; } }
+
+.date-picker-content {
+  position: relative;
+  top: 0;
+  left: 0; }
+
+.fuel-ui-datepicker-input-group input:read-only, .fuel-ui-datepicker-input-group .form-control[readonly] {
+  background-color: #fff !important; }
+
+.fuel-ui-datepicker-input-group .input-group-addon {
+  background-color: #fff !important; }
+
+.date-picker-component {
+  border: 1px solid #eceeef;
+  z-index: 1000;
+  background-color: #fff;
+  font-size: .75rem;
+  position: absolute;
+  width: 350px;
+  height: auto;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: 0.3rem;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  transition: all 0.1s ease; }
+  @media (max-width: 480px), screen and (max-device-width: 480px) {
+    .date-picker-component {
+      width: 90%;
+      height: 90%;
+      position: fixed;
+      top: 5%;
+      left: 5%; } }
+  .date-picker-component .input-group {
+    z-index: 110; }
+  .date-picker-component .container {
+    height: 100%; }
+    @media (max-width: 480px), screen and (max-device-width: 480px) {
+      .date-picker-component .container .calendar-container {
+        height: 91%; } }
+    .date-picker-component .container header {
+      position: relative;
+      top: 0;
+      left: 0;
+      vertical-align: middle;
+      background-color: #fff; }
+      .date-picker-component .container header .days-of-week {
+        background-color: #0275d8;
+        color: #fff; }
+      .date-picker-component .container header table {
+        border-top: none !important; }
+        .date-picker-component .container header table th, .date-picker-component .container header table td {
+          text-align: center; }
+      .date-picker-component .container header button {
+        border: none;
+        border-radius: 0;
+        color: #0275d8;
+        background-color: #fff;
+        width: 15%; }
+        .date-picker-component .container header button:active {
+          background-color: #eceeef; }
+        .date-picker-component .container header button.button-disable {
+          color: #eceeef;
+          cursor: default; }
+      .date-picker-component .container header .date-range {
+        width: 70%; }
+        .date-picker-component .container header .date-range span {
+          background-color: #eceeef;
+          border-left: none;
+          border-right: none; }
+      .date-picker-component .container header .input-group-addon {
+        border: none;
+        background-color: #fff !important; }
+      .date-picker-component .container header input {
+        border: none;
+        display: inline-block;
+        margin: 1px auto 0 auto;
+        cursor: pointer;
+        background-color: #fff !important; }
+      .date-picker-component .container header input:read-only, .date-picker-component .container header .form-control[readonly] {
+        background-color: #fff !important; }
+      .date-picker-component .container header input.target {
+        color: #0275d8; }
+        .date-picker-component .container header input.target::-webkit-input-placeholder {
+          color: #0275d8; }
+        .date-picker-component .container header input.target::-moz-placeholder {
+          color: #0275d8; }
+        .date-picker-component .container header input.target:-moz-placeholder {
+          color: #0275d8; }
+        .date-picker-component .container header input.target:-ms-input-placeholder {
+          color: #0275d8; }

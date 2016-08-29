@@ -1,0 +1,20 @@
+@import "../../styles/bourbon";
+@import "../../styles/variables";
+
+.carousel {
+    background-color: $gray-light;
+}
+
+.carousel-item {
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: block !important;
+    overflow: hidden;
+    
+    .item-content img {
+        width: 100%;
+        pointer-events: none;
+    }
+}

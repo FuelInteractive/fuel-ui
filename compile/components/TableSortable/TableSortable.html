@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-striped fuel-ui-table-sortable">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns" [class]="selectedClass(column)" (click)="changeSorting(column)">
+          {{column.display}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let object of data | orderBy : convertSorting()">
+        <td *ngFor="let column of columns" [innerHtml]="object[column.variable] | format : column.filter"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

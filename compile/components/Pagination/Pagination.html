@@ -1,0 +1,38 @@
+<nav class="fuel-ui-pagination">
+    <ul class="pagination">
+        <li *ngIf="showEnds" class="page-item" [class.disabled]="currentPage == 1">
+            <a class="page-link" [attr.disabled]="currentPage == 1" (click)="setPage(1)" aria-label="First">
+                <span aria-hidden="true">First</span>
+                <span class="sr-only">First</span>
+            </a>
+        </li>
+        <li *ngIf="showSteps" class="page-item" [class.disabled]="currentPage == 1">
+            <a class="page-link" [attr.disabled]="currentPage == 1" (click)="setPage(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&#171;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <li *ngFor="let page of pagesBlank | range : 1 : totalPages | slice: startingIndex : endingIndex" class="page-item" [class.active]="currentPage == page">
+            <a class="page-link" (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li *ngIf="showSteps" class="page-item" [class.disabled]="currentPage == totalPages">
+            <a class="page-link" [attr.disabled]="currentPage == totalPages" (click)="setPage(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&#187;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+        <li *ngIf="showEnds" class="page-item" [class.disabled]="currentPage == totalPages">
+            <a class="page-link" [attr.disabled]="currentPage == totalPages" (click)="setPage(totalPages)" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+                <span class="sr-only">Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<div class="input-group col-md-3" *ngIf="showSelect">
+    <span class="input-group-addon">Jump to:</span>
+    <select class="custom-select" (change)="setPage($event.target.value)">
+        <option *ngFor="let page of pagesBlank | range : 1 : totalPages" [value]="page" [selected]="page == currentPage">{{page}}</option>
+    </select>
+</div>

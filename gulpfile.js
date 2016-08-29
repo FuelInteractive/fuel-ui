@@ -10,6 +10,7 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var sassGlob = require('gulp-sass-glob');
 var inlineNg2Template = require('gulp-inline-ng2-template');
+var htmlMinifier = require('html-minifier');
 var merge = require('merge2');
 var webserver = require('gulp-webserver');
 var Builder = require('systemjs-builder');
@@ -25,15 +26,34 @@ var paths = {
     source: 'src',
     dest: 'lib',
     bundle: 'bundles',
-    esm: 'esm'
+    esm: 'esm',
+    work: 'compile'
 };
+
+
+function minifyTemplate(path, ext, file, cb) {
+  try {
+    var minifiedFile = htmlMinifier.minify(file, {
+      collapseWhitespace: true,
+      caseSensitive: true,
+      removeComments: true,
+      removeRedundantAttributes: true
+    });
+    cb(null, minifiedFile);
+  }
+  catch (err) {
+    cb(err);
+  }
+}
 
 var inlineTemplateConfig = {
     base: paths.dest,
     html: true,
     css: true,
     target: 'es5',
-    indent: 2
+    indent: 2,
+    useRelativePaths: true,
+    templateProcessor: minifyTemplate
 }
 
 
@@ -62,17 +82,48 @@ gulp.task("cleanEs6", function() {
 			.pipe(vinylPaths(del));
 });
 
+gulp.task("cleanPrep", function() {
+    return merge([
+        gulp.src(paths.work + '/**/*.*', { read: false })
+			.pipe(vinylPaths(del))
+    ]);
+})
+
+gulp.task("prep", ["cleanPrep"], function() {
+    return merge([
+        gulp.src([paths.source + '/**/*.*', '!'+paths.source + '/**/*.css'])
+            .pipe(gulp.dest(paths.work))
+    ]);
+})
+
 gulp.task('clean', ['cleanSass','cleanViews', 'cleanScripts', 'cleanEs6']);
 
-gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
+gulp.task('views', ['cleanViews'], function () {
+    return gulp.src(paths.source + '/**/*.html')
+        .pipe(gulp.dest(paths.dest));
+});
+
+gulp.task('sass', ['cleanSass', 'prep'], function () {
+    return gulp.src(paths.work + '/**/*.{scss,sass}')
+        //.pipe(sourcemaps.init())
+        .pipe(sassGlob())
+        .pipe(sass({
+            errLogToConsole: true
+        }).on('error', sass.logError))
+        //.pipe(sourcemaps.write())
+        .pipe(gulp.dest(paths.work))
+        .pipe(gulp.dest(paths.dest));
+
+});
+
+gulp.task('scripts', ['cleanScripts', 'views', 'sass', 'prep'], function () {
     var tsProject = typescript.createProject('tsconfig.json');
     
     var sourceFiles = [
-        paths.source + '/**/*.ts',
-        '!./'+paths.dest+'/**/*.*',
+        paths.work + '/**/*.ts',
         './typings/index.d.ts',
-        '!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
-        '!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
+        //'!./node_modules/angular2/typings/es6-collections/es6-collections.d.ts',
+        //'!./node_modules/angular2/typings/es6-promise/es6-promise.d.ts'
     ];
 
     var tsResult = gulp
@@ -97,11 +148,11 @@ gulp.task('scripts', ['cleanScripts', 'views', 'sass'], function () {
         ]);
 });
 
-gulp.task('es6', ['views', 'sass', 'cleanEs6'], function () {
+gulp.task('es6', ['views', 'sass', 'cleanEs6', 'scripts', 'prep'], function () {
     var tsProject = typescript.createProject('tsconfig.es6.json');
     
     var sourceFiles = [
-        paths.source + '/**/*.ts'
+        paths.work + '/**/*.ts'
     ];
 
     var tsResult = gulp
@@ -178,23 +229,6 @@ gulp.task('bundleSass', ['sass'], function(){
         .pipe(minCss())
         .pipe(rename({ extname: '.min.css' }))
         .pipe(gulp.dest(paths.bundle));
-})
-
-gulp.task('views', ['cleanViews'], function () {
-    return gulp.src(paths.source + '/**/*.html')
-        .pipe(gulp.dest(paths.dest));
-});
-
-gulp.task('sass', ['cleanSass'], function () {
-    return gulp.src(paths.source + '/**/*.{scss,sass}')
-        //.pipe(sourcemaps.init())
-        .pipe(sassGlob())
-        .pipe(sass({
-            errLogToConsole: true
-        }).on('error', sass.logError))
-        //.pipe(sourcemaps.write())
-        .pipe(gulp.dest(paths.dest));
-
 });
 
 gulp.task('serve', function(){
@@ -222,7 +256,14 @@ gulp.task('watch', function () {
     gulp.watch(paths.source+'/**/*.*', ['scripts']);
 });
 
-gulp.task('build', ['cleanSass', 'cleanScripts', 'cleanViews', 'sass', 'views', 'scripts', 'es6', 'bundle']);
+gulp.task('postBuild', ['sass', 'scripts', 'es6'] , function() {
+    //return merge([
+    //    gulp.src(paths.source + '/**/*.css', { read: false })
+    //        .pipe(vinylPaths(del))
+    //]);
+});
+
+gulp.task('build', ['prep', 'sass', 'views', 'scripts', 'es6', 'bundle', 'postBuild']);
 
 gulp.task('default', function(){
 	runSequence(

@@ -6,9 +6,7 @@
         "noImplicitAny": false,
         "sourceMap": false,
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-        "rootDir": "./src",
-		"outDir": "dist"
+		"emitDecoratorMetadata": true
     },
     "filesGlob": [
         "./**/*.ts",

@@ -1,0 +1,26 @@
+<div class="carousel slide" >
+  <!--(swiperight)="prev()" (swipeleft)="next()"-->
+  <!--(pan)="pan($event)" (panleft)="panleft($event)" (panright)="panright($event)"
+  (panend)="panend($event)"-->
+  <ol class="carousel-indicators">
+    <!--<li *ngFor="let image of images"
+      (click)="switchTo(image)" [class.active]="image.isActive && !image.checkIfAnimating()">
+      </li> -->
+      <li *ngFor="let item of items"
+        [class.active]="item.isActive"
+        (click)="navigateTo(item)">
+      </li>
+  </ol>
+  <div class="carousel-inner" role="listbox"
+    [style.height.px]="innerHeight">
+      <ng-content select="carousel-item,.carousel-item"></ng-content>
+  </div>
+  <a class="left carousel-control" role="button" (click)="prev()">
+    <span class="icon-prev" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" role="button" (click)="next()">
+    <span class="icon-next" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

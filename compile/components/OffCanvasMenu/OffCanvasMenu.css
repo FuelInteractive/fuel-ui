@@ -1,0 +1,40 @@
+.off-canvas-menu-overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 900;
+  background-color: #55595c;
+  opacity: 0; }
+
+.off-canvas-menu {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  background-color: #fff; }
+  .off-canvas-menu.off-canvas-menu-left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translate(-100%, 0);
+    width: 75%; }
+  .off-canvas-menu.off-canvas-menu-right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate(100%, 0);
+    width: 75%; }
+  .off-canvas-menu.off-canvas-menu-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translate(0, -100%);
+    height: 75%; }
+  .off-canvas-menu.off-canvas-menu-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate(0, 100%);
+    height: 75%; }

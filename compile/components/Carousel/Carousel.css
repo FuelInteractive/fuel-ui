@@ -1,0 +1,13 @@
+.carousel {
+  background-color: #818a91; }
+
+.carousel-item {
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: block !important;
+  overflow: hidden; }
+  .carousel-item .item-content img {
+    width: 100%;
+    pointer-events: none; }

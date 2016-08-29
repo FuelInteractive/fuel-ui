@@ -1,0 +1,9 @@
+@import "../../styles/bourbon";
+
+$duration: 1s;
+
+.fuel-ui-modal-fade-in{
+  @include animation-name(fadeInDown);
+  @include animation-duration($duration);
+  @include animation-timing-function(ease);
+}

@@ -1,0 +1,12 @@
+<div *ngIf="isOpen" [@fade]="overlayState" class="off-canvas-menu-overlay" 
+    (click)="toggleMenu()"></div>
+
+<div *ngIf="isOpen" [@open]="openState" class="off-canvas-menu"
+    [class.off-canvas-menu-left]="origin.toLowerCase() == 'left'"
+    [class.off-canvas-menu-right]="origin.toLowerCase() == 'right'"
+    [class.off-canvas-menu-top]="origin.toLowerCase() == 'top'"
+    [class.off-canvas-menu-bottom]="origin.toLowerCase() == 'bottom'"
+    [style.width]="computedWidth"
+    [style.height]="computedHeight">
+    <ng-content></ng-content>    
+</div>

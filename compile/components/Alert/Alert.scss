@@ -1,0 +1,15 @@
+@import "../../styles/bourbon";
+
+$duration: 1s;
+
+.fuel-ui-alert-fade-in {
+  @include animation-name(fadeIn);
+  @include animation-duration($duration);
+  @include animation-timing-function(ease);
+}
+
+.fuel-ui-alert-fade-out {
+  @include animation-name(fadeOut);
+  @include animation-duration($duration);
+  @include animation-timing-function(ease);
+}

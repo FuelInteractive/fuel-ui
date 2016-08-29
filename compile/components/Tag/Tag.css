@@ -1,0 +1,10 @@
+.fuel-ui-tag {
+  margin: 0 .25em; }
+  .fuel-ui-tag.disabled {
+    cursor: not-allowed;
+    background: #818a91;
+    color: darkgray; }
+  .fuel-ui-tag .fuel-ui-clickable {
+    cursor: pointer; }
+    .fuel-ui-tag .fuel-ui-clickable.disabled {
+      cursor: not-allowed; }

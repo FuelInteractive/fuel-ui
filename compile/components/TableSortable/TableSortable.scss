@@ -1,0 +1,26 @@
+.fuel-ui-table-sortable > thead > tr > th:not(.fuel-ui-not-sortable) {
+    cursor: pointer;
+    position: relative;
+    background-image: none;
+    white-space: nowrap;
+    
+    &:after, .sort-desc:after, .sort-asc:after{
+        font-family: FontAwesome;
+        padding-left: 5px;
+    }
+    
+    &:after{
+        content: "\f0dc";
+        color: #ddd;
+    }
+    
+    &.sort-asc:after{
+        content: "\f0de";
+        color: #767676;
+    }
+    
+    &.sort-desc:after{
+        content: "\f0dd";
+        color: #767676;       
+    }
+}

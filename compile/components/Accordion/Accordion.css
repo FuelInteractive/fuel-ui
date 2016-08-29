@@ -1,0 +1,19 @@
+.fuel-ui-accordion {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px; }
+  .fuel-ui-accordion .fuel-ui-clickable {
+    cursor: pointer; }
+    .fuel-ui-accordion .fuel-ui-clickable.disabled {
+      cursor: not-allowed; }
+  .fuel-ui-accordion .fuel-ui-accordion-heading {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #333;
+    padding: 10px 15px; }
+    .fuel-ui-accordion .fuel-ui-accordion-heading.text-muted {
+      color: #818a91 !important; }
+  .fuel-ui-accordion .fuel-ui-accordion-body {
+    padding: 15px; }

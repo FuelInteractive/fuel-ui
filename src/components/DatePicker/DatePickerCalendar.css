@@ -1,0 +1,58 @@
+.fuel-ui-datepicker-calendar .table {
+  font-size: .75rem;
+  border: none;
+  border-top: 1px solid #eceeef;
+  background-color: #fff;
+  border-collapse: collapse; }
+  .fuel-ui-datepicker-calendar .table .calendar-date {
+    z-index: 200;
+    background-color: transparent; }
+  .fuel-ui-datepicker-calendar .table tr {
+    border: none; }
+  .fuel-ui-datepicker-calendar .table th, .fuel-ui-datepicker-calendar .table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: .75rem;
+    padding: .1rem;
+    height: 1.75rem;
+    border: none;
+    position: relative; }
+    @media (max-width: 480px), screen and (max-device-width: 480px) {
+      .fuel-ui-datepicker-calendar .table th, .fuel-ui-datepicker-calendar .table td {
+        padding: .5rem;
+        font-size: 1rem; } }
+  .fuel-ui-datepicker-calendar .table td.selectable {
+    cursor: pointer !important; }
+    .fuel-ui-datepicker-calendar .table td.selectable:hover {
+      background-color: #0275d8;
+      color: #fff; }
+  .fuel-ui-datepicker-calendar .table td.selected {
+    background-color: #99c4e9;
+    color: #fff; }
+  .fuel-ui-datepicker-calendar .table td.disabled {
+    color: #c9c9c9; }
+  .fuel-ui-datepicker-calendar .table td.startDate, .fuel-ui-datepicker-calendar .table td.endDate {
+    background-color: #0275d8;
+    color: #fff; }
+  .fuel-ui-datepicker-calendar .table td.startDate:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    right: 0;
+    background-color: transparent;
+    border-left: 1em solid transparent;
+    border-top: 1.1em solid #99c4e9;
+    border-bottom: 1.1em solid #99c4e9; }
+  .fuel-ui-datepicker-calendar .table td.endDate:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    left: 0;
+    background-color: transparent;
+    border-right: 1em solid transparent;
+    border-top: 1.1em solid #99c4e9;
+    border-bottom: 1.1em solid #99c4e9; }

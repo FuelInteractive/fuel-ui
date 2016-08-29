@@ -1,0 +1,9 @@
+.fuel-ui-pagination {
+    a{
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}

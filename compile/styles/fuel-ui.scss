@@ -1,0 +1,11 @@
+@import "framework";
+@import "../components/**/*";
+@import "../directives/**/*";
+
+.fuel-ui-clickable {
+    cursor: pointer;
+    
+    &.disabled {
+        cursor: not-allowed;
+    }
+}

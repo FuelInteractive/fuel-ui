@@ -1,0 +1,147 @@
+@import "../../styles/variables";
+@import "../../styles/bourbon";
+@import "../../styles/media_queries";
+
+.date-picker-overlay {
+    background-color: rgba(0,0,0,0);
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 900;
+    
+    @include mobile-only {
+        background-color: $gray;
+        opacity: .75;
+    }
+}
+
+.date-picker-content {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.fuel-ui-datepicker-input-group {
+    input:read-only, .form-control[readonly] {
+        background-color: $input-bg !important;
+    } 
+
+    .input-group-addon {
+        background-color: $input-bg !important;
+    }
+}
+
+.date-picker-component {
+    border: 1px solid $table-border-color;
+    z-index: 1000;
+    background-color: $body-bg;
+    font-size: .75rem;
+    position: absolute;
+    width: 350px;
+    height: auto;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    @if $enable-rounded {
+        border-radius: $border-radius-lg;
+    }
+    
+    @include transition(all .1s ease);
+    
+    @include mobile-only {
+        width: 90%;
+        height: 90%;
+        position: fixed;
+        top: 5%;
+        left: 5%;
+    }
+
+    .input-group {
+        z-index: 110;
+    }
+
+    .container {
+        height: 100%;
+
+        .calendar-container {    
+            @include mobile-only {
+                height: 91%;
+            }
+        }
+
+        header {
+            position: relative;
+            top: 0;
+            left: 0;
+            vertical-align: middle;
+            background-color: $input-bg;
+            
+            .days-of-week {
+                background-color: $brand-primary;
+                color: $btn-primary-color;
+            }
+            
+            table{
+                border-top: none !important;
+                
+                th, td {
+                    text-align: center;
+                }
+            }
+            
+            button {
+                border: none;
+                border-radius: 0;
+                color: $brand-primary; 
+                background-color: $input-bg;
+                width: 15%;
+                
+                &:active {
+                    background-color: $input-bg-disabled;
+                }
+                
+                &.button-disable {
+                    color: $input-bg-disabled;
+                    cursor: default;
+                }
+            }
+            
+            .date-range {
+                width: 70%;
+                
+                span {
+                    background-color: $gray-lighter;
+                    border-left: none;
+                    border-right: none;
+                }
+            }
+            
+            .input-group-addon {
+                border: none;
+                background-color: $input-bg !important;
+            }
+            
+            input {
+                border: none;
+                display: inline-block;
+                margin: 1px auto 0 auto;
+                cursor: pointer;
+                background-color: $input-bg !important;
+            }
+            
+            input:read-only, .form-control[readonly] {
+                background-color: $body-bg !important;
+            }
+            
+            input.target {
+                color: $brand-primary;
+                @include placeholder {
+                    color: $brand-primary;
+                }
+            }
+        }
+    }
+}

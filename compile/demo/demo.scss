@@ -1,0 +1,310 @@
+@import "../styles/variables";
+@import "../styles/media_queries";
+@import "../styles/bourbon";
+@import "../styles/animation";
+
+$primary-branding: #E24932;
+
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+}
+
+.card-title {
+    color: $primary-branding;
+}
+
+.btn-fuel {
+    color: #fff;
+    background-color: $primary-branding;
+    border-color: $primary-branding;
+    
+    &:hover{
+        color: #fff;
+        background-color: #D33E28; 
+    }
+}
+
+#wrapper {
+    padding-left: 0;
+    max-width: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    
+    .fuel-ui-toggle {
+        position: fixed;
+        left: 0;
+        top: 10px;
+        padding: 10px;
+        z-index: 111;
+        background: $primary-branding;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        
+        &:hover {
+            width: 125px;
+            text-align: right;
+            @include animation(slideInRightLess .25s ease);
+            
+            ::before {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+                content: 'Open Menu ';
+                font-weight: bold;
+            }
+            i::after {
+                content: '\f054';
+            }
+        }
+    }
+
+    #sidebar-wrapper {
+        z-index: 111;
+        position: fixed;
+        overflow-y: hidden;
+        width: 100%;
+        height: 60px;
+        background: $primary-branding;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        
+        .sidebar-nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            
+            li{
+                text-indent: 20px;
+                line-height: 40px;    
+                
+                a{
+                    display: block;
+                    text-decoration: none;
+                    color: #fff;
+                    font-size: 16px;
+                    
+                    &:hover{
+                        background: rgba(150, 22, 2, 0.2);   
+                    }
+                }    
+            }
+            
+            .sidebar-brand {
+                height: 60px;
+                line-height: 60px;
+                color: #fff;
+                text-indent: 10px;
+                
+                a {
+                    display: inline;
+                    
+                    img {
+                        margin-bottom: 7px;
+                    }
+                    
+                    span {
+                        position: relative;
+                        font-size: 22px;
+                    }
+                    
+                    &:hover {
+                        background: none;
+                    }
+                }
+                    
+                i {
+                    line-height: 60px;
+                    font-size: 18px;
+                    margin-right: 20px;
+                    display: inline;
+                }
+            }
+            
+            .sidebar-title {
+                color: #eee;
+                font-weight: bold;
+                text-indent: 0;
+                margin: 0 10px;
+                border-bottom: 1px solid #bbb;
+                font-size: 18px;
+                    
+                &:hover{
+                    color: #fff;   
+                }
+                
+                i {
+                    line-height: 40px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    
+    &.toggled {
+        
+        #sidebar-wrapper {
+            overflow-y: auto;
+            height: 100%;
+            background-color: rgba(226,73,50, .95);
+            
+            .sidebar-nav .sidebar-brand i:before{
+                content: '\f00d';
+            }
+        }
+        
+        #page-content-wrapper {
+            width: 100%;
+        }
+    }
+
+    #page-content-wrapper {
+        width: 100%;
+        position: absolute;
+        padding: 15px;
+        margin-top: 60px;
+    
+        .source {
+            margin-top: 35px;
+            
+            h3 {
+                margin-top: 25px;
+            }
+        }
+    }
+
+}
+/* Animations */
+
+.customFadeIn{
+  cursor: pointer;
+  opacity: 1 !important;
+  @include fadeIn(
+    $count: $countDefault,
+    $duration: .5s,
+    $delay: $delayDefault,
+    $function: $functionDefault,
+    $fill: $fillDefault,
+    $visibility: $visibilityDefault
+  )
+}
+
+@include keyframes(slideInLeft) {
+	0% {
+  		@include transform(translateX(100%));
+  	}
+	100% {
+  		@include transform(translateX(0));
+  	}
+}
+
+@include keyframes(slideInRightLess) {
+	0% {
+  		@include transform(translateX(-75%));
+  	}
+	100% {
+  		@include transform(translateX(0));
+  	}
+}
+
+@include keyframes(slideInRight) {
+	0% {
+  		@include transform(translateX(-100%));
+  	}
+	100% {
+  		@include transform(translateX(0));
+  	}
+}
+
+@include keyframes(slideOutLeft) {
+	0% {
+  		@include transform(translateX(0));
+  	}
+	100% {
+  		@include transform(translateX(-100%));
+  	}
+}
+
+@include keyframes(slideOutRight) {
+	0% {
+  		@include transform(translateX(0));
+  	}
+	100% {
+  		@include transform(translateX(100%));
+  	}
+}
+
+.test-animation-a {
+	@include animation(slideInLeft 1s ease);
+}
+
+.test-animation-b {
+	@include animation(slideOutRight 1s ease);
+}
+
+.test-box {
+	width: 50px;
+	height: 50px;
+	background: blue;
+}
+
+/*Override Bootstrap 4 Styles for PrismJs*/
+.token.tag {
+    display: inline;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+    white-space: pre;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 1024px){
+    #wrapper {
+        padding-left: 275px;
+        
+        &.toggled {
+            padding-left: 0;
+            
+            #sidebar-wrapper {
+                width: 0;
+                
+                .sidebar-nav {
+                    width: 275px;
+                    overflow: hidden;
+                    
+                    .sidebar-brand i:before{
+                        content: '\f0c9';
+                    }
+                }
+            }
+            
+            #page-content-wrapper {
+                position: relative;
+                margin-right: 0;
+            }
+        }
+
+        #sidebar-wrapper {
+            width: 275px;
+            left: 275px;
+            height: 100%;
+            margin-left: -275px;
+            overflow-y: auto;
+            
+            .sidebar-nav .sidebar-brand i:hover,
+            .sidebar-nav .sidebar-brand a:hover {
+                color: #bbb;
+            }
+        }
+
+        #page-content-wrapper {
+            padding: 20px;
+            position: relative;
+            margin-top: 0;
+        }
+    }
+}

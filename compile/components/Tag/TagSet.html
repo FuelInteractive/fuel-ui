@@ -1,0 +1,6 @@
+<span *ngFor="let tag of tags" class="fuel-ui-tag tag" [ngClass]="tag.classMap">
+    <span [innerHtml]="tag.title"></span>
+    <span class="fuel-ui-clickable" [class.disabled]="tag.disabled" *ngIf="tag.removable" (click)="$event.preventDefault(); removeTag(tag);">
+        <i class="fa fa-remove"></i>
+    </span>
+</span>

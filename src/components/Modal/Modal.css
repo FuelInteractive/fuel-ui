@@ -1,0 +1,10 @@
+.fuel-ui-modal-fade-in {
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease; }
