@@ -967,12 +967,21 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DatePickerField", ["@a
   return module.exports;
 });
 
-System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@angular/core", "../../utilities/utilities", "./DatePickerField", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
+System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@angular/core", "../../utilities/utilities", "./DatePicker", "./DatePickerField", "../InfiniteScroller/InfiniteScroller"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this || self,
       GLOBAL = global;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -993,12 +1002,14 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
   var core_2 = $__require('@angular/core');
   var core_3 = $__require('@angular/core');
   var utilities_1 = $__require('../../utilities/utilities');
+  var DatePicker_1 = $__require('./DatePicker');
   var DatePickerField_1 = $__require('./DatePickerField');
   var InfiniteScroller_1 = $__require('../InfiniteScroller/InfiniteScroller');
-  var StartDateField = (function() {
+  var StartDateField = (function(_super) {
+    __extends(StartDateField, _super);
     function StartDateField(element) {
+      _super.call(this);
       this.element = element;
-      this._date = new Date();
       this._value = "";
       this.valueChange = new core_2.EventEmitter();
       this.ngModelChange = new core_2.EventEmitter();
@@ -1066,12 +1077,13 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
     __decorate([core_3.HostListener("click", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [MouseEvent]), __metadata('design:returntype', void 0)], StartDateField.prototype, "selected", null);
     StartDateField = __decorate([core_1.Directive({selector: "[startDateField],.start-date-field"}), __metadata('design:paramtypes', [core_2.ElementRef])], StartDateField);
     return StartDateField;
-  }());
+  }(DatePickerField_1.DatePickerField));
   exports.StartDateField = StartDateField;
-  var EndDateField = (function() {
+  var EndDateField = (function(_super) {
+    __extends(EndDateField, _super);
     function EndDateField(element) {
+      _super.call(this);
       this.element = element;
-      this._date = new Date();
       this._value = "";
       this.valueChange = new core_2.EventEmitter();
       this.ngModelChange = new core_2.EventEmitter();
@@ -1139,26 +1151,17 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
     __decorate([core_3.HostListener("click", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [MouseEvent]), __metadata('design:returntype', void 0)], EndDateField.prototype, "selected", null);
     EndDateField = __decorate([core_1.Directive({selector: "[endDateField],.end-date-field"}), __metadata('design:paramtypes', [core_2.ElementRef])], EndDateField);
     return EndDateField;
-  }());
+  }(DatePickerField_1.DatePickerField));
   exports.EndDateField = EndDateField;
-  var DateRangePicker = (function() {
+  var DateRangePicker = (function(_super) {
+    __extends(DateRangePicker, _super);
     function DateRangePicker(changeDetector, renderer) {
-      this._minDate = new Date(1900, 0, 1);
-      this._maxDate = new Date(2200, 0, 1);
-      this._dateTarget = false;
-      this.calendarDisplayed = false;
-      this.calendarX = "5%";
-      this.calendarY = "5%";
-      this.calendarHeight = utilities_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
-      this.calendarMonths = [];
-      this._preGenMonths = 2;
-      this.initialScroll = true;
+      _super.call(this, changeDetector, renderer);
       this.valueChange = new core_2.EventEmitter();
+      this._dateTarget = false;
+      this.calendarHeight = utilities_1.MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
       this.startDateChange = new core_2.EventEmitter();
       this.endDateChange = new core_2.EventEmitter();
-      this.changeDetector = changeDetector;
-      this.renderer = renderer;
-      this.generateMonths();
     }
     Object.defineProperty(DateRangePicker.prototype, "value", {
       set: function(value) {
@@ -1237,29 +1240,6 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(DateRangePicker.prototype, "canPrevMonth", {
-      get: function() {
-        var currentDate = this.calendarMonths[0];
-        var prevDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
-        var compareDate = new Date(this._minDate.getFullYear(), this._minDate.getMonth());
-        return prevDate >= compareDate;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(DateRangePicker.prototype, "canNextMonth", {
-      get: function() {
-        var currentDate = this.calendarMonths[this.calendarMonths.length - 1];
-        var nextDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
-        var compareDate = new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
-        return nextDate <= compareDate;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    DateRangePicker.prototype.ngOnInit = function() {
-      this.scrollerReset();
-    };
     DateRangePicker.prototype.ngAfterContentInit = function() {
       var _this = this;
       if (typeof this.startDateField === "undefined")
@@ -1294,64 +1274,6 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
         });
       });
       this.generateMonths();
-    };
-    DateRangePicker.prototype.generateMonths = function() {
-      var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-      this.calendarMonths = [new Date(currentDate.getFullYear(), currentDate.getMonth() - 1), new Date(currentDate.getFullYear(), currentDate.getMonth())];
-      for (var i = 0; i < this._preGenMonths; i++) {
-        var earliestDate = this.calendarMonths[0];
-        var latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-        if (this.canPrevMonth)
-          this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-        if (this.canNextMonth)
-          this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-      }
-    };
-    DateRangePicker.prototype.scrollerReset = function() {
-      var _this = this;
-      setTimeout(function() {
-        var currentDate = _this.selectedDate != null ? _this.selectedDate : new Date();
-        if (_this.calendarScroller == null)
-          return;
-        var scrollToMonth = _this.calendarMonths.findIndex(function(m) {
-          return m.getFullYear() == currentDate.getFullYear() && m.getMonth() == currentDate.getMonth();
-        });
-        if (_this.initialScroll) {
-          _this.initialScroll = false;
-          _this.calendarScroller.container.scrollTop = _this.calendarScroller.itemQuery.toArray()[scrollToMonth].element.offsetTop - 20;
-        }
-        _this.calendarScroller.scrollToIndex(scrollToMonth);
-      }, 1);
-    };
-    DateRangePicker.prototype.toggleCalendar = function(event) {
-      if (!this.calendarDisplayed)
-        this.showCalendar(event);
-      else
-        this.hideCalendar();
-    };
-    DateRangePicker.prototype.showCalendar = function(event) {
-      if (event != null && !utilities_1.MobileDetection.isAny()) {
-        var clickedTarget = event.target ? event.target.parentElement : event.srcElement.parentElement;
-        if (clickedTarget.classList.contains("input-group-addon"))
-          clickedTarget = clickedTarget.parentElement;
-        this.calendarX = clickedTarget.offsetLeft + "px";
-        if (screen.height - clickedTarget.getBoundingClientRect().bottom <= 500) {
-          this.calendarY = (clickedTarget.offsetTop - 300) + "px";
-        } else {
-          this.calendarY = clickedTarget.offsetTop + "px";
-        }
-      } else if (utilities_1.MobileDetection.isAny()) {
-        this.calendarX = "5%";
-        this.calendarY = "5%";
-      }
-      this.scrollerReset();
-      this.changeDetector.markForCheck();
-      this.calendarDisplayed = true;
-    };
-    DateRangePicker.prototype.hideCalendar = function() {
-      this.calendarDisplayed = false;
-      this.initialScroll = true;
-      this.changeDetector.markForCheck();
     };
     DateRangePicker.prototype.selectDate = function(value, target) {
       this._selectedDate = value;
@@ -1398,42 +1320,6 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
     DateRangePicker.prototype.checkEndDateTarget = function() {
       return this._dateTarget;
     };
-    DateRangePicker.prototype.disablePrev = function() {
-      return this.calendarScroller ? this.calendarScroller.isTop() : false;
-    };
-    DateRangePicker.prototype.disableNext = function() {
-      return this.calendarScroller ? this.calendarScroller.isBottom() : false;
-    };
-    DateRangePicker.prototype.scrollPrevMonth = function() {
-      var _this = this;
-      if (this.calendarScroller.topIndex == 0)
-        this.addPrevMonth();
-      setTimeout(function() {
-        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex - 1);
-      }, 10);
-    };
-    DateRangePicker.prototype.scrollNextMonth = function() {
-      var _this = this;
-      setTimeout(function() {
-        _this.calendarScroller.scrollToIndex(_this.calendarScroller.topIndex + 1);
-      }, 10);
-    };
-    DateRangePicker.prototype.addNextMonth = function() {
-      if (!this.canNextMonth)
-        return;
-      var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
-      var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
-      this.calendarMonths.push(nextMonth);
-      this.changeDetector.markForCheck();
-    };
-    DateRangePicker.prototype.addPrevMonth = function() {
-      if (!this.canPrevMonth)
-        return;
-      var firstMonth = this.calendarMonths[0];
-      var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
-      this.calendarMonths.unshift(prevMonth);
-      this.changeDetector.markForCheck();
-    };
     __decorate([core_3.Output(), __metadata('design:type', Object)], DateRangePicker.prototype, "valueChange", void 0);
     __decorate([core_3.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "value", null);
     __decorate([core_3.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], DateRangePicker.prototype, "minDate", null);
@@ -1453,7 +1339,7 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
       changeDetection: core_1.ChangeDetectionStrategy.OnPush
     }), __metadata('design:paramtypes', [core_1.ChangeDetectorRef, core_1.Renderer])], DateRangePicker);
     return DateRangePicker;
-  }());
+  }(DatePicker_1.DatePicker));
   exports.DateRangePicker = DateRangePicker;
   return module.exports;
 });

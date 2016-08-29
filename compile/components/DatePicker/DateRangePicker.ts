@@ -12,9 +12,7 @@ import {InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 @Directive({
     selector: "[startDateField],.start-date-field",
 })
-export class StartDateField {
-    protected _date = new Date();
-
+export class StartDateField extends DatePickerField {
      @HostBinding("value")
     _value = "";
     
@@ -72,16 +70,14 @@ export class StartDateField {
     }
 
     constructor(public element: ElementRef) {
-        
+        super();
     }
 }
 
 @Directive({
     selector: "[endDateField],.end-date-field",
 })
-export class EndDateField {
-    protected _date = new Date();
-
+export class EndDateField extends DatePickerField {
      @HostBinding("value")
     _value = "";
     
@@ -138,7 +134,8 @@ export class EndDateField {
         this.select.next(event);
     }
 
-    constructor(public element: ElementRef) {        
+    constructor(public element: ElementRef) {
+        super();
     }
 }
 
@@ -148,28 +145,8 @@ export class EndDateField {
     templateUrl: 'DateRangePicker.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DateRangePicker implements AfterContentInit {
-    _minDate: Date = new Date(1900, 0, 1);
-    _maxDate: Date = new Date(2200, 0, 1);
-    _startDate: Date;
-    _endDate: Date;
-    _selectedDate: Date;
-    _dateTarget: boolean = false;
-    calendarDisplayed: boolean = false;
-    calendarX: string = "5%";
-    calendarY: string = "5%";
-    calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
-
-    calendarMonths: Date[] = [];
-
-    _preGenMonths = 2;
-
-    changeDetector: ChangeDetectorRef;
-    renderer: Renderer;
-
-    initialScroll = true;
-
-    @Output() valueChange = new EventEmitter<any>();
+export class DateRangePicker extends DatePicker implements AfterContentInit {    
+    @Output() valueChange = new EventEmitter();
     @Input()
     set value(value: any) {
         this._selectedDate = this.handleRangeInput(value).start;
@@ -198,7 +175,10 @@ export class DateRangePicker implements AfterContentInit {
     endDateField: EndDateField;
     
     @ContentChildren(DatePickerFieldStyler)
-    dateFieldIcons: QueryList<DatePickerFieldStyler>;    
+    dateFieldIcons: QueryList<DatePickerFieldStyler>;
+
+    private _dateTarget: boolean = false;
+    calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
 
     get selectedDate(): Date { return this._selectedDate };
     set selectedDate(value: Date) {
@@ -212,6 +192,9 @@ export class DateRangePicker implements AfterContentInit {
     get inputEndDate(): string {
         return this.endDateField != null ? this.endDateField.value : "";
     }
+
+    private _startDate: Date;
+    private _endDate: Date;
 
     @Output() startDateChange = new EventEmitter();
     @Input()
@@ -231,34 +214,8 @@ export class DateRangePicker implements AfterContentInit {
     }
     get endDate(): any { return this._endDate; }
 
-    get canPrevMonth(): boolean {
-        var currentDate = this.calendarMonths[0];
-        var prevDate =
-            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
-        var compareDate =
-            new Date(this._minDate.getFullYear(), this._minDate.getMonth());
-        return prevDate >= compareDate;
-    }
-
-    get canNextMonth(): boolean {
-        var currentDate = this.calendarMonths[this.calendarMonths.length - 1];
-        var nextDate =
-            new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
-        var compareDate =
-            new Date(this._maxDate.getFullYear(), this._maxDate.getMonth());
-
-        return nextDate <= compareDate;
-    }
-
     constructor(changeDetector: ChangeDetectorRef, renderer: Renderer) {
-        this.changeDetector = changeDetector;
-        this.renderer = renderer;
-
-        this.generateMonths();
-    }
-
-    ngOnInit(): void {
-        this.scrollerReset();
+        super(changeDetector, renderer);
     }
 
     ngAfterContentInit(): void {
@@ -324,80 +281,6 @@ export class DateRangePicker implements AfterContentInit {
         this.generateMonths();
     }
 
-    generateMonths(): void {
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-        this.calendarMonths = [
-            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
-            new Date(currentDate.getFullYear(), currentDate.getMonth())
-        ]
-
-        for (let i = 0; i < this._preGenMonths; i++) {
-            let earliestDate = this.calendarMonths[0];
-            let latestDate = this.calendarMonths[this.calendarMonths.length - 1];
-            if (this.canPrevMonth)
-                this.calendarMonths.unshift(new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 1));
-            if (this.canNextMonth)
-                this.calendarMonths.push(new Date(latestDate.getFullYear(), latestDate.getMonth() + 1));
-        }
-    }
-
-    scrollerReset(): void {
-        setTimeout(() => {
-            var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
-            if (this.calendarScroller == null)
-                return;
-
-            let scrollToMonth = this.calendarMonths.findIndex((m: Date) => {
-                return m.getFullYear() == currentDate.getFullYear()
-                    && m.getMonth() == currentDate.getMonth()
-            });
-
-            if(this.initialScroll) {
-                this.initialScroll = false;
-                this.calendarScroller.container.scrollTop =
-                    this.calendarScroller.itemQuery.toArray()[scrollToMonth]
-                        .element.offsetTop - 20;
-            }
-
-            this.calendarScroller.scrollToIndex(scrollToMonth);
-        }, 1);
-    }
-
-    toggleCalendar(event: Event): void {
-        if (!this.calendarDisplayed)
-            this.showCalendar(event);
-        else
-            this.hideCalendar();
-    }
-
-    showCalendar(event: Event): void {
-        if (event != null && !MobileDetection.isAny()) {
-            var clickedTarget = event.target ? (<HTMLElement>event.target).parentElement : event.srcElement.parentElement;
-            if (clickedTarget.classList.contains("input-group-addon"))
-                clickedTarget = clickedTarget.parentElement;
-            this.calendarX = clickedTarget.offsetLeft + "px";
-            if (screen.height - clickedTarget.getBoundingClientRect().bottom <= 500) {
-                this.calendarY = (clickedTarget.offsetTop - 300) + "px";
-            } else {
-                this.calendarY = clickedTarget.offsetTop + "px";
-            }
-        } else if (MobileDetection.isAny()) {
-            this.calendarX = "5%";
-            this.calendarY = "5%";
-        }
-
-        this.scrollerReset();
-
-        this.changeDetector.markForCheck();
-        this.calendarDisplayed = true;
-    }
-
-    hideCalendar(): void {
-        this.calendarDisplayed = false;
-        this.initialScroll = true;
-        this.changeDetector.markForCheck();
-    }
-
     selectDate(value: Date, target?: boolean): void {
         this._selectedDate = value;
 
@@ -455,48 +338,5 @@ export class DateRangePicker implements AfterContentInit {
 
     checkEndDateTarget(): boolean {
         return this._dateTarget;
-    }
-
-    disablePrev(): boolean {
-        return this.calendarScroller ? this.calendarScroller.isTop() : false;
-    }
-
-    disableNext(): boolean {
-        return this.calendarScroller ? this.calendarScroller.isBottom() : false;
-    }
-
-    scrollPrevMonth(): void {
-        if (this.calendarScroller.topIndex == 0)
-            this.addPrevMonth();
-
-        setTimeout(() => {
-            this.calendarScroller.scrollToIndex(this.calendarScroller.topIndex - 1);
-        }, 10);
-    }
-
-    scrollNextMonth(): void {
-        setTimeout(() => {
-            this.calendarScroller.scrollToIndex(this.calendarScroller.topIndex + 1);
-        }, 10);
-    }
-
-    addNextMonth(): void {
-        if (!this.canNextMonth)
-            return;
-
-        var lastMonth = this.calendarMonths[this.calendarMonths.length - 1];
-        var nextMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1);
-        this.calendarMonths.push(nextMonth);
-        this.changeDetector.markForCheck();
-    }
-
-    addPrevMonth(): void {
-        if (!this.canPrevMonth)
-            return;
-
-        var firstMonth = this.calendarMonths[0];
-        var prevMonth = new Date(firstMonth.getFullYear(), firstMonth.getMonth() - 1);
-        this.calendarMonths.unshift(prevMonth);
-        this.changeDetector.markForCheck();
     }
 }
