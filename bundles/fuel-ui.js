@@ -946,7 +946,7 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DatePickerField", ["@a
     __decorate([core_1.HostListener("focus", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [Event]), __metadata('design:returntype', void 0)], DatePickerField.prototype, "focused", null);
     __decorate([core_1.Output(), __metadata('design:type', Object)], DatePickerField.prototype, "select", void 0);
     __decorate([core_1.HostListener("click", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [MouseEvent]), __metadata('design:returntype', void 0)], DatePickerField.prototype, "selected", null);
-    DatePickerField = __decorate([core_1.Directive({selector: "[dateField], .date-field"}), __metadata('design:paramtypes', [])], DatePickerField);
+    DatePickerField = __decorate([core_1.Directive({selector: "[dateField],.date-field"}), __metadata('design:paramtypes', [])], DatePickerField);
     return DatePickerField;
   }());
   exports.DatePickerField = DatePickerField;
@@ -1010,8 +1010,72 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
     function StartDateField(element) {
       _super.call(this);
       this.element = element;
+      this._value = "";
+      this.valueChange = new core_2.EventEmitter();
+      this.ngModelChange = new core_2.EventEmitter();
+      this.dateChange = new core_2.EventEmitter();
+      this.select = new core_2.EventEmitter();
     }
-    StartDateField = __decorate([core_1.Directive({selector: "[startDateField], .start-date-field"}), __metadata('design:paramtypes', [core_2.ElementRef])], StartDateField);
+    Object.defineProperty(StartDateField.prototype, "value", {
+      get: function() {
+        return this._value;
+      },
+      set: function(value) {
+        if (value == this._value)
+          return;
+        this._value = value;
+        this._date = utilities_1.DateUtils.handleDateInput(value);
+        this.valueChange.next(value);
+        this.ngModelChange.next(value);
+        this.dateChange.next(this._date);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(StartDateField.prototype, "ngModel", {
+      set: function(value) {
+        this.value = value;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(StartDateField.prototype, "date", {
+      get: function() {
+        return this._date;
+      },
+      set: function(date) {
+        if (date.getTime() == this._date.getTime())
+          return;
+        this._date = date;
+        this._value = date.toLocaleDateString();
+        this.dateChange.next(date);
+        this.ngModelChange.next(this._value);
+        this.valueChange.next(this._value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    StartDateField.prototype.inputChange = function(value) {
+      this.value = value;
+    };
+    StartDateField.prototype.focused = function(event) {
+      this.select.next(event);
+    };
+    StartDateField.prototype.selected = function(event) {
+      this.select.next(event);
+    };
+    __decorate([core_3.HostBinding("value"), __metadata('design:type', Object)], StartDateField.prototype, "_value", void 0);
+    __decorate([core_3.Input(), __metadata('design:type', String), __metadata('design:paramtypes', [String])], StartDateField.prototype, "value", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], StartDateField.prototype, "valueChange", void 0);
+    __decorate([core_3.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], StartDateField.prototype, "ngModel", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], StartDateField.prototype, "ngModelChange", void 0);
+    __decorate([core_3.Input(), __metadata('design:type', Date), __metadata('design:paramtypes', [Date])], StartDateField.prototype, "date", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], StartDateField.prototype, "dateChange", void 0);
+    __decorate([core_3.HostListener("input", ["$event.target.value"]), __metadata('design:type', Function), __metadata('design:paramtypes', [Object]), __metadata('design:returntype', void 0)], StartDateField.prototype, "inputChange", null);
+    __decorate([core_3.HostListener("focus", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [Event]), __metadata('design:returntype', void 0)], StartDateField.prototype, "focused", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], StartDateField.prototype, "select", void 0);
+    __decorate([core_3.HostListener("click", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [MouseEvent]), __metadata('design:returntype', void 0)], StartDateField.prototype, "selected", null);
+    StartDateField = __decorate([core_1.Directive({selector: "[startDateField],.start-date-field"}), __metadata('design:paramtypes', [core_2.ElementRef])], StartDateField);
     return StartDateField;
   }(DatePickerField_1.DatePickerField));
   exports.StartDateField = StartDateField;
@@ -1020,8 +1084,72 @@ System.registerDynamic("fuel-ui/lib/components/DatePicker/DateRangePicker", ["@a
     function EndDateField(element) {
       _super.call(this);
       this.element = element;
+      this._value = "";
+      this.valueChange = new core_2.EventEmitter();
+      this.ngModelChange = new core_2.EventEmitter();
+      this.dateChange = new core_2.EventEmitter();
+      this.select = new core_2.EventEmitter();
     }
-    EndDateField = __decorate([core_1.Directive({selector: "[endDateField], .start-date-field"}), __metadata('design:paramtypes', [core_2.ElementRef])], EndDateField);
+    Object.defineProperty(EndDateField.prototype, "value", {
+      get: function() {
+        return this._value;
+      },
+      set: function(value) {
+        if (value == this._value)
+          return;
+        this._value = value;
+        this._date = utilities_1.DateUtils.handleDateInput(value);
+        this.valueChange.next(value);
+        this.ngModelChange.next(value);
+        this.dateChange.next(this._date);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(EndDateField.prototype, "ngModel", {
+      set: function(value) {
+        this.value = value;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(EndDateField.prototype, "date", {
+      get: function() {
+        return this._date;
+      },
+      set: function(date) {
+        if (date.getTime() == this._date.getTime())
+          return;
+        this._date = date;
+        this._value = date.toLocaleDateString();
+        this.dateChange.next(date);
+        this.ngModelChange.next(this._value);
+        this.valueChange.next(this._value);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    EndDateField.prototype.inputChange = function(value) {
+      this.value = value;
+    };
+    EndDateField.prototype.focused = function(event) {
+      this.select.next(event);
+    };
+    EndDateField.prototype.selected = function(event) {
+      this.select.next(event);
+    };
+    __decorate([core_3.HostBinding("value"), __metadata('design:type', Object)], EndDateField.prototype, "_value", void 0);
+    __decorate([core_3.Input(), __metadata('design:type', String), __metadata('design:paramtypes', [String])], EndDateField.prototype, "value", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], EndDateField.prototype, "valueChange", void 0);
+    __decorate([core_3.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], EndDateField.prototype, "ngModel", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], EndDateField.prototype, "ngModelChange", void 0);
+    __decorate([core_3.Input(), __metadata('design:type', Date), __metadata('design:paramtypes', [Date])], EndDateField.prototype, "date", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], EndDateField.prototype, "dateChange", void 0);
+    __decorate([core_3.HostListener("input", ["$event.target.value"]), __metadata('design:type', Function), __metadata('design:paramtypes', [Object]), __metadata('design:returntype', void 0)], EndDateField.prototype, "inputChange", null);
+    __decorate([core_3.HostListener("focus", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [Event]), __metadata('design:returntype', void 0)], EndDateField.prototype, "focused", null);
+    __decorate([core_3.Output(), __metadata('design:type', Object)], EndDateField.prototype, "select", void 0);
+    __decorate([core_3.HostListener("click", ["$event"]), __metadata('design:type', Function), __metadata('design:paramtypes', [MouseEvent]), __metadata('design:returntype', void 0)], EndDateField.prototype, "selected", null);
+    EndDateField = __decorate([core_1.Directive({selector: "[endDateField],.end-date-field"}), __metadata('design:paramtypes', [core_2.ElementRef])], EndDateField);
     return EndDateField;
   }(DatePickerField_1.DatePickerField));
   exports.EndDateField = EndDateField;

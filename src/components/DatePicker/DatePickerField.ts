@@ -2,10 +2,10 @@ import {Component, Directive, Input, Output, HostBinding, HostListener, OnInit, 
 import {DateUtils} from "../../utilities/utilities";
 
 @Directive({
-    selector: "[dateField], .date-field"
+    selector: "[dateField],.date-field"
 })
 export class DatePickerField implements OnInit {
-    private _date = new Date();
+    protected _date = new Date();
     
     @HostBinding("value")
     _value = "";
