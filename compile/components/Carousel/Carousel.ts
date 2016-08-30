@@ -16,8 +16,6 @@ declare var Hammer: any;
             <ng-content></ng-content>
         </div>
     `,
-    styleUrls: ["Carousel.css"],
-    encapsulation: ViewEncapsulation.None,
     animations: [
         trigger("slide", [
             state("right", style({
