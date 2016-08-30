@@ -37,13 +37,14 @@ export * from "./TimePicker/TimePicker";
 export * from "./TextExpander/TextExpander";
 export * from "./OffCanvasMenu/OffCanvasMenu";
 
+// note bug in RC5 bundling requires modules/components be included in order of dependence
 const componentModules = [
 	FuiAccordionModule,
 	FuiAlertModule,
 	FuiCarouselModule,
+	FuiInfiniteScrollerModule,
 	FuiDatePickerModule,
 	FuiDropdownModule,
-	FuiInfiniteScrollerModule,
 	FuiModalModule,
 	FuiOffCanvasMenuModule,
 	FuiPaginationModule,
