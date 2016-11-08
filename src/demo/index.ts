@@ -9,6 +9,10 @@ import {FuiComponentsDemoModule} from "../components/components.demo";
 import {FuiDirectivesDemoModule} from "../directives/directives.demo";
 import {FuiPipesDemoModule} from "../pipes/pipes.demo";
 
+import {DemoComponent} from "./demo.component";
+import {HomeComponent} from "./home.component";
+import {InstallationComponent} from "./installation.component";
+
 @NgModule({
     imports: [
         CommonModule,
@@ -21,6 +25,11 @@ import {FuiPipesDemoModule} from "../pipes/pipes.demo";
         FuiDirectivesDemoModule,
         FuiPipesDemoModule
     ],
-    bootstrap: []
+    declarations: [
+        InstallationComponent,
+        HomeComponent,
+        DemoComponent
+    ],
+    bootstrap: [DemoComponent]
 })
 export class FuelUiDemoModule { }
