@@ -1,5 +1,5 @@
 @import "../../styles/variables";
-@import "../../styles/bourbon";
+@import "../../../styles/bourbon";
 @import "../../styles/media_queries";
 
 .fuel-ui-datepicker-calendar {
@@ -38,9 +38,11 @@
             &.selectable {
                 cursor: pointer !important;
                 
-                &:hover {
-                    background-color: $brand-primary;
-                    color: $body-bg;
+                @include tablet-landscape-and-up {
+                    &:hover {
+                        background-color: $brand-primary;
+                        color: $body-bg;
+                    }
                 }
             }
             
@@ -51,6 +53,10 @@
             
             &.disabled {
                 color: desaturate(lighten($btn-link-disabled-color, 25%), 25%);
+            }
+
+            &.today {
+                color: lighten(complement($brand-primary), 25%) !important;
             }
             
             &.startDate, &.endDate {

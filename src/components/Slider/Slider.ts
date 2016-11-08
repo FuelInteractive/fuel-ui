@@ -1,11 +1,12 @@
-import {Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, OnChanges} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import "./NoUiSlider";
-import {noUiSlider} from "nouislider";
+import {NgModule, Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, OnChanges, ViewEncapsulation} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import * as noUiSlider from "nouislider";
 
 @Component({
     selector: "slider",
-    templateUrl: 'components/Slider/Slider.html'
+    templateUrl: 'slider.html',
+    styleUrls: ["../../../../node_modules/nouislider/distribute/nouislider.min.css"],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class Slider implements AfterViewInit, OnChanges {
@@ -25,13 +26,14 @@ export class Slider implements AfterViewInit, OnChanges {
     @Input() value: number = 0;
     @Input() secondValue: number = null;
     @Input() debounceTime: number = 150;
+    @Input() handleHeight: string = "";
     @Output() valueChange = new EventEmitter<any>();
     @Output() secondValueChange = new EventEmitter<any>();
     private _sliderElement: any;
     private _slider: any;
     
     timeout: any = null;
-    
+
     constructor(private _element: ElementRef) {}
     
     update(val: any[]): any{
@@ -45,17 +47,30 @@ export class Slider implements AfterViewInit, OnChanges {
     
     ngAfterViewInit(){
         this._sliderElement = this._element.nativeElement.children[0];
-        
+
         if(this.orientation == 'vertical')
             this._sliderElement.style.height = this.height.length > 0 
                 ? this.height
                 : "200px";
             
-        if(this.orientation == 'horizontal')
+        if(this.orientation == 'horizontal'){
             this._sliderElement.style.width = this.width.length > 0 
                 ? this.width
                 : null; //full width
-        
+
+            if(this.height.length > 0)
+                this._sliderElement.style.height = this.height;
+        }
+
+        setTimeout(() => {
+            if(this.handleHeight.length > 0){
+                var handles = this._sliderElement.childNodes[0].getElementsByClassName("noUi-handle");
+                for(var i=0; i<handles.length; i++){
+                    handles[i].style.height = this.handleHeight;
+                }
+            }
+        }, 500);
+
         this._slider = noUiSlider.create(this._sliderElement, {
             start: this.secondValue != null ? [this.value, this.secondValue] : this.value, // Handle start position
             step: parseInt(this.step.toString()), // Slider increment
@@ -82,7 +97,7 @@ export class Slider implements AfterViewInit, OnChanges {
                 }
             }
         });
-        
+       
         if(!(<HTMLInputElement>this._element.nativeElement).disabled){
             var noUI:HTMLCollection = this._element.nativeElement.getElementsByClassName('noUi-connect');
             
@@ -118,6 +133,9 @@ export class Slider implements AfterViewInit, OnChanges {
     }
 }
 
-export var SLIDER_COMPONENT_PROVIDERS = [
-    Slider
-];
+@NgModule({
+    imports: [CommonModule],
+    declarations: [Slider],
+    exports: [Slider]
+})
+export class FuiSliderModule { }

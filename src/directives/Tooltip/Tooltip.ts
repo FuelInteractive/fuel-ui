@@ -1,16 +1,8 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnInit, OnChanges} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+import {NgModule, Directive, ElementRef, Input, Output, EventEmitter, ViewContainerRef, OnInit, OnChanges} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 @Directive({
     selector: '[tooltip]',
-    properties: [
-        'text: tooltip',
-        'position: position',
-        'color: color',
-        'size: size',
-        'rounded: rounded',
-        'always: always'
-    ],
     host: {
         '(mouseover)': 'show()',
         '(mouseout)': 'hide()',
@@ -19,11 +11,17 @@ import {CORE_DIRECTIVES} from '@angular/common';
     }
 })
 export class Tooltip implements OnInit, OnChanges{
+    @Input()
     text:string = '';
+    @Input()
     position:string = 'top';
+    @Input()
     color:string = 'none';
+    @Input()
     size:string = 'auto';
+    @Input()
     rounded:boolean = false;
+    @Input()
     always:boolean = false; 
     private _el:HTMLElement;
 
@@ -38,7 +36,7 @@ export class Tooltip implements OnInit, OnChanges{
         }
     }
     
-    ngOnChanges() {
+    ngOnChanges(changes: any) {
         for (var i = 0; i < this._el.classList.length; i++) {
             var currentClass = this._el.classList[i];
             if(currentClass.startsWith("hint--"))
@@ -111,6 +109,9 @@ export class Tooltip implements OnInit, OnChanges{
     }
 }
 
-export var TOOLTIP_PROVIDERS = [
-    Tooltip
-];
+@NgModule({
+    imports: [CommonModule],
+    declarations: [Tooltip],
+    exports: [Tooltip]
+})
+export class FuiTooltipModule { }

@@ -1,5 +1,5 @@
 @import "../../styles/variables";
-@import "../../styles/bourbon";
+@import "../../../styles/bourbon";
 @import "../../styles/media_queries";
 
 .date-picker-overlay {
@@ -25,7 +25,7 @@
 }
 
 .fuel-ui-datepicker-input-group {
-    input:read-only, .form-control[readonly] {
+    :disabled.form-control, read-only.form-control, .form-control[readonly] {
         background-color: $input-bg !important;
     } 
 
@@ -66,7 +66,10 @@
     .container {
         height: 100%;
 
-        .calendar-container {    
+        .calendar-container {
+            @include desktop-and-up {
+                margin-right: -16px !important;
+            }
             @include mobile-only {
                 height: 91%;
             }
@@ -134,13 +137,21 @@
             
             input:read-only, .form-control[readonly] {
                 background-color: $body-bg !important;
+                cursor: pointer !important;
             }
-            
+
             input.target {
                 color: $brand-primary;
                 @include placeholder {
                     color: $brand-primary;
                 }
+            }
+
+            .close {
+                padding-top: 2px; 
+                padding-bottom: 5px; 
+                background:none; opacity:5; 
+                text-align:right;
             }
         }
     }

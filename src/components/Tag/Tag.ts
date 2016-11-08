@@ -1,4 +1,5 @@
-import {Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import {NgModule, Directive, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
 import {TagSet} from './TagSet';
 
 @Directive({
@@ -35,7 +36,7 @@ export class Tag implements OnInit, OnDestroy {
 
     @Output() public remove:EventEmitter<Tag> = new EventEmitter<Tag>(false);
 
-    private classMap:any = {};
+    public classMap:any = {};
     public tagset:TagSet;
 
     public constructor(tagset:TagSet) {
@@ -55,13 +56,20 @@ export class Tag implements OnInit, OnDestroy {
     private setClassMap():void {
         this.classMap = {
             'disabled': this.disabled,
-            'label-pill': this.pill,
-            ['label-' + ((this.color && this.color.toLowerCase()) || 'default')]: true
+            'tag-pill': this.pill,
+            ['tag-' + ((this.color && this.color.toLowerCase()) || 'default')]: true
         };
     }
 }
 
-export var TAG_PROVIDERS = [
+export const tagDirectives = [
     Tag,
     TagSet
 ];
+
+@NgModule({
+    imports: [CommonModule],
+    declarations: tagDirectives,
+    exports: tagDirectives
+})
+export class FuiTagModule { }

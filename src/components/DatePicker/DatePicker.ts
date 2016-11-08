@@ -1,17 +1,17 @@
-import {Component, OnInit, OnChanges, AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit, OnChanges, AfterContentInit, 
+    ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
 import {Input, Output, EventEmitter, ElementRef, ViewChild, ContentChildren, ContentChild, QueryList} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
-import {INFINITE_SCROLLER_PROVIDERS, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
-import {MobileDetection} from "../../utilities/DetectionUtils";
-import {DateRange, DateUtils} from "../../utilities/utilities";
+import {FuiInfiniteScrollerModule, InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
+import {DateRange, DateUtils, MobileDetection} from "../../utilities";
 
 @Component({
     selector: "date-picker",
-    styleUrls: ["components/DatePicker/DatePicker.css"],
-    templateUrl: "components/DatePicker/DatePicker.html",
-    directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
+    styleUrls: ["DatePicker.css"],
+    templateUrl: "DatePicker.html",
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePicker implements OnInit, AfterContentInit {
@@ -30,7 +30,8 @@ export class DatePicker implements OnInit, AfterContentInit {
     }
     get maxDate(): Date | string { return this._maxDate; }
 
-    @Input() dateFilter: (d: Date) => boolean;
+    @Input() dateFilter: (d: Date, field: "start" | "end") => boolean;
+    public calendarDateFilter = (d: Date) => this.dateFilter(d, "start");
 
     @Output() valueChange = new EventEmitter();
     @Input()
@@ -64,7 +65,7 @@ export class DatePicker implements OnInit, AfterContentInit {
     calendarDisplayed: boolean = false;
     calendarX: string = "5%";
     calendarY: string = "5%";
-    calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
+    calendarHeight: string = window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
 
     calendarMonths: Date[] = [];
 
@@ -116,10 +117,13 @@ export class DatePicker implements OnInit, AfterContentInit {
     }
 
     generateMonths(): void {
-        var currentDate = this.selectedDate != null ? this.selectedDate : new Date();
+        var currentDate = DateUtils.isValidDate(this.selectedDate) ? this.selectedDate : new Date();
+
+        var monthOffset = this._minDate.getMonth() >= currentDate.getMonth() ? 1 : 0;
+
         this.calendarMonths = [
-            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
-            new Date(currentDate.getFullYear(), currentDate.getMonth())
+            new Date(currentDate.getFullYear(), currentDate.getMonth() + monthOffset - 1),
+            new Date(currentDate.getFullYear(), currentDate.getMonth() + monthOffset)
         ]
 
         for (let i = 0; i < this._preGenMonths; i++) {
@@ -251,4 +255,3 @@ export class DatePicker implements OnInit, AfterContentInit {
         this.changeDetector.markForCheck();
     }
 }
-

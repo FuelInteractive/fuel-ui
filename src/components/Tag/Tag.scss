@@ -1,9 +1,17 @@
-.fuel-ui-tag-label {
+.fuel-ui-tag {
     margin: 0 .25em;
     
     &.disabled {
         cursor: not-allowed;
         background: #818a91;
         color: darkgray;
+    }
+
+    .fuel-ui-clickable {
+        cursor: pointer;
+        
+        &.disabled {
+            cursor: not-allowed;
+        }
     }
 }

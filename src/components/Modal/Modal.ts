@@ -1,14 +1,16 @@
-import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {Animation} from "../../directives/Animation/Animation";
+import {NgModule, ViewEncapsulation, Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {FuiAnimationModule} from "../../directives/Animation/Animation";
+
 
 @Component({
 	selector: 'modal',
 	host:{
 		'(click)': 'clickElement($event)'
 	},
-	templateUrl: 'components/Modal/Modal.html',
-	directives: [CORE_DIRECTIVES, Animation]
+	templateUrl: 'Modal.html',
+	styleUrls: ['Modal.css'],
+	encapsulation: ViewEncapsulation.None
 })
 export class Modal {
 	private _el:HTMLElement;
@@ -42,7 +44,7 @@ export class Modal {
 		return false;
     }
 
-	showModal(isDisplayed: boolean): boolean {
+	showModal(isDisplayed: boolean = false): boolean {
 		var body = document.body;
 
 		if(isDisplayed === undefined){
@@ -72,6 +74,9 @@ export class Modal {
 	}
 }
 
-export var MODAL_PROVIDERS = [
-	Modal
-];
+@NgModule({
+	imports: [CommonModule, FuiAnimationModule],
+	declarations: [Modal],
+	exports: [Modal]
+})
+export class FuiModalModule { }

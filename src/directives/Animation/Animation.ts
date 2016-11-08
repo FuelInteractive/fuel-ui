@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges} from '@angular/core';
+import {NgModule, Directive, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges} from '@angular/core';
 
 @Directive({
     selector: '[animation]',
@@ -30,7 +30,7 @@ export class Animation implements OnInit, OnChanges {
 		this.element = element.nativeElement;
     }
 	
-	ngOnChanges(): void {
+	ngOnChanges(changes: any): void {
 		this.setup();
 	}
 	
@@ -94,3 +94,9 @@ export class Animation implements OnInit, OnChanges {
 		this.onAnimationEnd.next(null);
     }
 }
+
+@NgModule({
+	declarations: [Animation],
+	exports: [Animation]
+})
+export class FuiAnimationModule { }

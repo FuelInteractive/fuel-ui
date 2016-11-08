@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy, Input, Output} from '@angular/core';
-import {NgClass} from '@angular/common';
+import {Component, ViewEncapsulation, OnInit, OnDestroy, Input, Output} from '@angular/core';
 import {Tag} from './Tag';
 
 @Component({
     selector: 'tagset',
-    directives: [NgClass],
-    templateUrl: 'components/Tag/TagSet.html'
+    templateUrl: 'TagSet.html',
+    styleUrls: ['Tag.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TagSet implements OnDestroy {
 

@@ -1,12 +1,12 @@
-import {Component} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
 import {Input, Output, EventEmitter, OnInit} from "@angular/core";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
-import {DateUtils} from "../../utilities/utilities";
+import {DateUtils} from "../../utilities";
 
 @Component({
     selector: "date-picker-calendar",
-    templateUrl: "components/DatePicker/DatePickerCalendar.html",
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+    templateUrl: "DatePickerCalendar.html",
+    styleUrls: ["DatePickerCalendar.css"],
+    encapsulation: ViewEncapsulation.None
 })
 export class DatePickerCalendar implements OnInit {
     weeks: string[][];
@@ -24,7 +24,11 @@ export class DatePickerCalendar implements OnInit {
 
     @Input() showMonth: boolean = true;
 
+    today: Date;
+
     constructor() {
+        this.today = new Date();
+        this.today.setHours(0, 0, 0);
     }
 
     ngOnInit(): void {
@@ -57,6 +61,12 @@ export class DatePickerCalendar implements OnInit {
         return this.selectedDate.getFullYear() == this.currentMonth.getFullYear()
             && this.selectedDate.getMonth() == this.currentMonth.getMonth()
             && this.selectedDate.getDate().toString() == date;
+    }
+
+    checkToday(date: string): boolean {
+        return this.today.getFullYear() == this.currentMonth.getFullYear()
+            && this.today.getMonth() == this.currentMonth.getMonth()
+            && this.today.getDate() == parseInt(date);
     }
 
     checkStartDate(date: string): boolean {
@@ -93,6 +103,7 @@ export class DatePickerCalendar implements OnInit {
 
         var dateNumber = parseInt(date);
         this.selectedDate = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), dateNumber);
+
         this.selectedDateChange.next(this.selectedDate);
     }
 

@@ -1,5 +1,4 @@
 export class MobileDetection {
-	
 	static isAndroid(): boolean {
         return navigator.userAgent.match(/Android/i) != null;
     }

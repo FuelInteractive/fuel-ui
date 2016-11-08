@@ -42,13 +42,12 @@
                     (next)="addNextMonth()"
                     (prev)="addPrevMonth()"
                     distance="100"
-                    [height]="calendarHeight"
-                    [hideScrollbar]="true">
+                    [height]="calendarHeight">
                     <date-picker-calendar scroll-item
                         *ngFor="let month of calendarMonths; let i=index" 
                         [id]="i"
                         [minDate]="minDate" [maxDate]="maxDate"
-                        [dateFilter]="dateFilter"
+                        [dateFilter]="calendarDateFilter"
                         [currentMonth]="month" 
                         [(selectedDate)]="selectedDate">
                         {{i}}

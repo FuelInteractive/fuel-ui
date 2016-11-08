@@ -1,11 +1,9 @@
-import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import {CORE_DIRECTIVES, SlicePipe} from '@angular/common';
+import {NgModule, Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule, SlicePipe} from '@angular/common';
 
 @Component({
     selector: 'text-expander',
-    templateUrl: 'components/TextExpander/TextExpander.html',
-    directives: [CORE_DIRECTIVES],
-    pipes: [SlicePipe]
+    templateUrl: 'TextExpander.html'
 })
 export class TextExpander {
     @Input() expanded: boolean = false;
@@ -66,6 +64,9 @@ export class TextExpander {
     }
 }
 
-export var TEXTEXPANDER_PROVIDERS = [
-    TextExpander
-];
+@NgModule({
+    imports: [CommonModule],
+    declarations: [TextExpander],
+    exports: [TextExpander]
+})
+export class FuiTextExpanderModule { }

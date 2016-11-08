@@ -1,8 +1,11 @@
-import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
+import {NgModule, Component, ViewEncapsulation, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: "timepicker",
-    templateUrl: 'components/TimePicker/TimePicker.html'
+    templateUrl: 'TimePicker.html',
+    styleUrls: ["TimePicker.css"]
 })
 export class TimePicker implements OnInit, OnChanges {
     @Input() hourStep: number = 1;
@@ -215,3 +218,10 @@ export class TimePicker implements OnInit, OnChanges {
 export let TIMEPICKER_PROVIDERS = [
     TimePicker
 ];
+
+@NgModule({
+    imports: [CommonModule, FormsModule],
+    declarations: [TimePicker],
+    exports: [TimePicker]
+})
+export class FuiTimePickerModule { }

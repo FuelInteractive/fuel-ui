@@ -10,6 +10,18 @@
         [style.left]="calendarX" [style.top]="calendarY">
         <div class="container p-a-0">
             <header>
+                <table class="table m-b-0">
+                    <tbody>
+                        <tr>
+                            <td colspan="7">
+                                <button aria-label="Close" class="close" type="button" (click)="hideCalendar()">
+                                    <span aria-hidden="true" class="fa fa-times-circle"></span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 <button type="button" class="btn btn-secondary pull-left"
                     (click)="scrollPrevMonth()" [class.button-disable]="disablePrev()">
                     <i class="fa fa-chevron-left"></i>
@@ -50,13 +62,12 @@
                     (next)="addNextMonth()"
                     (prev)="addPrevMonth()"
                     distance="100"
-                    height="{{calendarHeight}}"
-                    hideScrollbar="true">
+                    height="{{calendarHeight}}">
                     <date-picker-calendar scroll-item
                         *ngFor="let month of calendarMonths; let i=index" 
                         [id]="i"
                         [minDate]="minDate" [maxDate]="maxDate"
-                        [dateFilter]="dateFilter"
+                        [dateFilter]="calendarDateFilter"
                         [currentMonth]="month" 
                         [(selectedDate)]="selectedDate"
                         [(startDate)]="startDate"

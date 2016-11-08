@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-block">
+            <h2 class="card-title">Infinite Scroller</h2>
+            <p class="card-text">Infinite Scroller is a custom component to infinitely scroll</p>
+        </div>
+    </div>
+</div>
+
+<section class="row m-a">
+    <div class="col-md-6" style="border: 1px solid #333; background-color: #EEE">
+        <infinite-scroller 
+            (next)="infinteScrollNext()" 
+            (prev)="infiniteScrollPrev()" 
+            height="300px"
+            distance="120"
+            hideScrollbar="true">
+            <div *ngFor="let item of infiniteScrollItems" 
+                class="card p-a scroll-item" style="background-color: #FFF">
+                <div class="card-block">
+                    <h4 class="card-title">Some Item</h4>
+                    <p class="card-text">{{item}}</p>
+                </div>
+            </div>
+        </infinite-scroller>
+    </div>
+</section>
+
+<div class="source">
+<h3>Import</h3>
+<pre>
+<code class="language-javascript" code-highlight>
+{{'import {INFINITE_SCROLLER_PROVIDERS} from "fuel-ui/fuel-ui"'}};
+</code>
+</pre>
+
+<h3>Getting Started</h3>
+<p>The Infinite Scroller component allows for asynchronous ability to show items as a user scrolls. Use the <code>next</code> and <code>prev</code> events to know when to start adding items to show or removing items for performance reasons.</p>
+
+<h3>Usage</h3>
+<tabset>
+<tab heading="HTML">
+<pre>
+<code class="language-markup" code-highlight [innerHTML]="markupExample">
+</code>
+</pre>
+</tab>
+<tab heading="TypeScript">
+<pre>
+<code class="language-javascript" code-highlight [innerHTML]="codeExample">
+</code>
+</pre>
+</tab>
+</tabset>
+
+<h3>Attributes</h3>
+<table-sortable
+    [columns]="attributesColumns"
+    [data]="attributes"
+    [sort]="attributesSort">
+    Loading table...
+</table-sortable>
+
+<h3>Events</h3>
+<table-sortable
+    [columns]="eventsColumns"
+    [data]="events"
+    [sort]="eventsSort">
+    Loading table...
+</table-sortable>
+
+</div>

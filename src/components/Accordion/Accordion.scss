@@ -3,6 +3,14 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     
+    .fuel-ui-clickable {
+        cursor: pointer;
+        
+        &.disabled {
+            cursor: not-allowed;
+        }
+    }
+
     .fuel-ui-accordion-heading {
         background-color: #f5f5f5;
         border-bottom: 1px solid #ddd;

@@ -1,6 +1,6 @@
-import {trigger, state, style, transition, animate, keyframes} from '@angular/core';
+import {trigger, state, style, transition, animate, keyframes, AnimationEntryMetadata} from '@angular/core';
 
-export function Collapse(duration: number = 300) {
+export function Collapse(duration: number = 250): AnimationEntryMetadata {
     return trigger('collapse', [
             state('collapsed, true, void', style({
                 height: '0',
@@ -24,6 +24,3 @@ export function Collapse(duration: number = 300) {
         ])
 }
 
-export var COLLAPSE_PROVIDERS = [
-    Collapse
-];

@@ -1,11 +1,12 @@
-import {Component, Directive, Input, Output, HostBinding, HostListener, OnInit, EventEmitter} from "@angular/core";
-import {DateUtils} from "../../utilities/utilities";
+import {Component, Directive, Input, Output, HostBinding, HostListener, 
+    OnInit, AfterViewInit, EventEmitter, ElementRef, Renderer} from "@angular/core";
+import {DateUtils} from "../../utilities";
 
 @Directive({
-    selector: "[dateField], .date-field"
+    selector: "[dateField],.date-field"
 })
 export class DatePickerField implements OnInit {
-    private _date = new Date();
+    protected _date = new Date();
     
     @HostBinding("value")
     _value = "";
@@ -53,7 +54,7 @@ export class DatePickerField implements OnInit {
     }
     
     @HostListener("focus", ["$event"])
-    focused(event: Event): void {
+    focused(event: MouseEvent): void {
         this.select.next(event);
     }
     
@@ -63,6 +64,9 @@ export class DatePickerField implements OnInit {
         this.select.next(event);
     }
     
+    @HostBinding("attr.readonly")
+    readonly = true;
+
     ngOnInit(): void {
         this.date = DateUtils.handleDateInput(this.value);
     }
@@ -81,6 +85,22 @@ export class DatePickerField implements OnInit {
 export class DatePickerFieldStyler {
     selectEvent = new EventEmitter<Event>();
     
+    element: HTMLElement; 
+
+    constructor(ref: ElementRef) {
+        this.element = ref.nativeElement;
+    }
+
+    isStartDate(): boolean {
+        var startDateField = this.element.querySelector("input[startDateField]");
+        return typeof startDateField !== "undefined" && startDateField !== null;
+    }
+
+    isEndDate(): boolean {
+        var endDateField = this.element.querySelector("input[endDateField]");
+        return typeof endDateField !== "undefined" && endDateField !== null;
+    }
+
     select(event: Event): void {
         this.selectEvent.next(event);
     }

@@ -1,10 +1,11 @@
-import {Component, ElementRef, Input, Output, EventEmitter, OnChanges} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
+import {NgModule, ViewEncapsulation, Component, ElementRef, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'alert',
-    templateUrl: 'components/Alert/Alert.html',
-    directives: [CORE_DIRECTIVES]
+    templateUrl: 'Alert.html',
+    styleUrls: ['Alert.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class Alert extends OnChanges {
     @Input() displayed: boolean = false;
@@ -44,6 +45,9 @@ export class Alert extends OnChanges {
     }
 }
 
-export var ALERT_PROVIDERS = [
-    Alert
-];
+@NgModule({
+    imports: [CommonModule],
+    declarations: [Alert],
+    exports: [Alert]
+})
+export class FuiAlertModule { }

@@ -1,73 +1,14 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {TAB_PROVIDERS, Tab} from './Tab';
-import {CodeHighlighter} from '../../directives/CodeHighlighter/CodeHighlighter';
-import {TableSortable, TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
+import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Event, EventColumns, EventsDefaultSort, Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
+import {Tab} from "./Tab";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-block">
-            <h2 class="card-title">Tabs</h2>
-            <p class="card-text">TabSet is a custom component to display a tabbed interface</p>
-        </div>
-    </div>
-</div>
-
-<section class="row m-a">
-    <div (click)="$event.preventDefault()">
-    <p>Select a tab by setting active binding to true:</p>
-    <p>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tabs[1].active" (click)="setActiveTab(1)">Select 2nd tab</button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="tabs[2].active" (click)="setActiveTab(2)">Select 3rd tab</button>
-    </p>
-    <p>
-        <button type="button" class="btn btn-primary btn-sm" (click)="tabs[2].disabled = ! tabs[2].disabled">Enable/Disable 3rd tab</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="addTab()">Add a removable tab</button>
-    </p>
-    <hr />
-    <tabset>
-        <tab *ngFor="let theTab of tabs"
-            [heading]="theTab.heading"
-            [(active)]="theTab.active"
-            [disabled]="theTab.disabled"
-            [removable]="theTab.removable"
-            (deselect)="deselectLog($event)"
-            (select)="selectLog($event)"
-            (remove)="removeLog($event)">
-        {{theTab?.content}}
-        </tab>
-    </tabset>
-    
-    <hr />
-
-    <tabset [vertical]="true" type="pills">
-        <tab heading="Vertical 1">Vertical content 1</tab>
-        <tab heading="Vertical 2">Vertical content 2</tab>
-    </tabset>
-    </div>
-</section>
-
-<div class="source">
-<h3>Import</h3>
-<pre>
-<code class="language-javascript" code-highlight>
-import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
-</code>
-</pre>
-
-<h3>Getting Started</h3>
-<p>TabSet is a custom element to show an interactive tabbed interface. Used in conjuction with the custom Tab element, TabSet can be displayed in a number of ways</p>
-
-<h3>Usage</h3>
-<tabset>
-<tab heading="HTML">
-<pre>
-<code class="language-markup" code-highlight>
-&lt;tabset&gt;
+  templateUrl: "Tab.Demo.html"
+})
+export class TabDemo {
+    codeExample1 = `&lt;tabset&gt;
     &lt;tab *ngFor=&quot;#theTab of tabs&quot;
         [heading]=&quot;theTab.heading&quot;
         [(active)]=&quot;theTab.active&quot;
@@ -76,21 +17,16 @@ import {TAB_PROVIDERS} from 'fuel-ui/fuel-ui';
         (deselect)=&quot;deselectLog($event)&quot;
         (select)=&quot;selectLog($event)&quot;
         (remove)=&quot;removeLog($event)&quot;&gt;
-    {<pre>{</pre>theTab?.content}}
+    {{theTab?.content}}
     &lt;/tab&gt;
 &lt;/tabset&gt;
 
 &lt;tabset [vertical]=&quot;true&quot; type=&quot;pills&quot;&gt;
     &lt;tab heading=&quot;Vertical 1&quot;&gt;Vertical content 1&lt;/tab&gt;
     &lt;tab heading=&quot;Vertical 2&quot;&gt;Vertical content 2&lt;/tab&gt;
-&lt;/tabset&gt;
-</code>
-</pre>
-</tab>
-<tab heading="TypeScript">
-<pre>
-<code class="language-javascript" code-highlight>
-export class TabExample {
+&lt;/tabset&gt;`
+
+    codeExample2 = `export class TabExample {
     tabs:any[] = [
         {heading: 'Title 1', content: 'Content 1', active: true},
         {heading: 'Title 2', content: 'Content 2'},
@@ -109,40 +45,8 @@ export class TabExample {
     removeLog(tab: Tab):void {
         console.log('Removed:', tab.heading);
     }
-}
-</code>
-</pre>
-</tab>
-</tabset>
+}`;
 
-<h3>TabSet Attributes</h3>
-<table-sortable
-    [columns]="tabSetAttributesColumns"
-    [data]="tabSetAttributes"
-    [sort]="tabSetAttributesSort">
-    Loading table...
-</table-sortable>
-
-<h3>Tab Attributes</h3>
-<table-sortable
-    [columns]="tabAttributesColumns"
-    [data]="tabAttributes"
-    [sort]="tabAttributesSort">
-    Loading table...
-</table-sortable>
-
-<h3>Tab Events</h3>
-<table-sortable
-    [columns]="tabEventsColumns"
-    [data]="tabEvents"
-    [sort]="tabEventsSort">
-    Loading table...
-</table-sortable>
-
-</div>`,
-        directives: [CORE_DIRECTIVES, TAB_PROVIDERS, CodeHighlighter, TableSortable]
-})
-export class TabDemo {
     tabs:any[] = [
         {heading: 'Title 1', content: 'Content 1', active: true},
         {heading: 'Title 2', content: 'Content 2'},
@@ -193,7 +97,3 @@ export class TabDemo {
     tabEventsColumns:TableSortableColumn[] = EventColumns;
     tabEventsSort:TableSortableSorting = EventsDefaultSort;
 }
-
-export var TAB_DEMO_PROVIDERS = [
-    TabDemo
-];

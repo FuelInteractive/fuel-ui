@@ -2,13 +2,11 @@
     {{text | slice : 0 : (expanded ? text.length : amountOfCharacters())}}
     <span *ngIf="!expanded && text.length > amountOfCharacters()">
         <span *ngIf="ellipsis">&hellip;</span>
-        <a href="javascript:void(8);" (click)="toggleExpand()">
-            {{expandText}}
+        <a [innerHtml]="expandText" href="javascript:void(8);" (click)="toggleExpand()">
         </a>
     </span>
     <span *ngIf="expanded && text.length > amountOfCharacters()">
-        <a href="javascript:void(8);" (click)="toggleExpand()">
-            {{shrinkText}}
+        <a [innerHtml]="shrinkText" href="javascript:void(8);" (click)="toggleExpand()">
         </a>
     </span>
 </span>

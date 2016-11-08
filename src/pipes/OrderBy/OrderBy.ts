@@ -5,7 +5,7 @@
  *		Multidimensional Array Sort on multiple columns: *ngFor="let todo of todoService.todos | orderBy : ['status', '-title']"
  */
 
-import {Pipe, PipeTransform} from '@angular/core';
+import {NgModule, Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({name: 'orderBy', pure: false})
 export class OrderByPipe implements PipeTransform {
@@ -16,6 +16,15 @@ export class OrderByPipe implements PipeTransform {
 
         if(a === null || typeof a === 'undefined') a = 0;
         if(b === null || typeof b === 'undefined') b = 0;
+
+        if(a instanceof Date && b instanceof Date) {
+            a = a.getTime();
+            b = b.getTime();
+        }
+        else if(typeof a === 'boolean' && typeof b === 'boolean') {
+            a = !a ? 0 : 1;
+            b = !b ? 0 : 1;
+        }
 
 		if((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))){
 			//Isn't a number so lowercase the string to properly compare
@@ -113,6 +122,8 @@ export class OrderByPipe implements PipeTransform {
     }
 }
 
-export let ORDERBY_PROVIDERS = [
-    OrderByPipe
-];
+@NgModule({
+    declarations: [OrderByPipe],
+    exports: [OrderByPipe]
+})
+export class FuiOrderByPipeModule { }

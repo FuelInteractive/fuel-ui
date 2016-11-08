@@ -1,28 +1,157 @@
-import {Component, Directive, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
+import {Component, Directive, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, Renderer} from '@angular/core';
 import {AfterContentInit, AfterContentChecked, OnInit} from "@angular/core";
 import {EventEmitter, ElementRef, ViewChild, ContentChildren ,ContentChild,QueryList} from '@angular/core';
 import {Input, Output, HostListener, HostBinding} from "@angular/core";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
-import {DateRange, DateUtils} from "../../utilities/utilities";
-import {MobileDetection} from "../../utilities/DetectionUtils";
+import {DateRange, DateUtils, MobileDetection} from "../../utilities";
 import {DatePicker} from "./DatePicker";
 import {DatePickerCalendar} from "./DatePickerCalendar";
 import {DatePickerField, DatePickerFieldStyler} from "./DatePickerField";
-import {InfiniteScroller, INFINITE_SCROLLER_PROVIDERS} from "../InfiniteScroller/InfiniteScroller";
+import {InfiniteScroller} from "../InfiniteScroller/InfiniteScroller";
 
 @Directive({
-    selector: "[startDateField], .start-date-field",
+    selector: "[startDateField],.start-date-field",
 })
 export class StartDateField extends DatePickerField {
+     @HostBinding("value")
+    _value = "";
+
+    @HostBinding("attr.readonly")
+    readonly = true;
+    
+    @Input()
+    set value(value: string) {
+        if(value == this._value)
+            return;
+        
+        this._value = value;
+
+        if((<any>value) instanceof Date) {
+            this._date = <any>value;
+        } else {
+            this._date = DateUtils.handleDateInput(value);
+        }
+
+        this.valueChange.next(value);
+        this.ngModelChange.next(value);
+        
+        this.dateChange.next(this._date);
+    }
+    get value(): string {return this._value;}
+    
+    @Output() valueChange = new EventEmitter<string>();
+    
+    @Input()
+    set ngModel(value: any) {
+        this.value = value;
+    }
+    
+    @Output()
+    ngModelChange = new EventEmitter<any>();
+    
+    @Input()
+    set date(date: Date) {
+        if(!DateUtils.isValidDate(date))
+            return;
+
+        if(date.getTime() == this._date.getTime())
+            return;
+            
+        this._date = date;
+        this._value = date.toLocaleDateString();
+        this.dateChange.next(date);
+        this.ngModelChange.next(this._value);
+        this.valueChange.next(this._value);
+    }
+    get date(): Date {return this._date;}
+    @Output() dateChange = new EventEmitter<Date>();
+    
+    @HostListener("input", ["$event.target.value"])
+    inputChange(value: any): void {
+        this.value = value;
+    }
+    
+    @HostListener("focus", ["$event"])
+    focused(event: MouseEvent): void {
+        this.select.next(event);
+    }
+    
+    @Output() select = new EventEmitter<MouseEvent>();
+    @HostListener("click", ["$event"])
+    selected(event: MouseEvent): void {
+        this.select.next(event);
+    }
+
     constructor(public element: ElementRef) {
         super();
     }
 }
 
 @Directive({
-    selector: "[endDateField], .start-date-field",
+    selector: "[endDateField],.end-date-field",
 })
 export class EndDateField extends DatePickerField {
+     @HostBinding("value")
+    _value = "";
+
+    @HostBinding("attr.readonly")
+    readonly = true;
+    
+    @Input()
+    set value(value: string) {
+        if(value == this._value)
+            return;
+        
+        this._value = value;
+        this._date = DateUtils.handleDateInput(value);
+        this.valueChange.next(value);
+        this.ngModelChange.next(value);
+        this.dateChange.next(this._date);
+    }
+    get value(): string {return this._value;}
+    
+    @Output() valueChange = new EventEmitter<string>();
+    
+    @Input()
+    set ngModel(value: any) {
+        this.value = value;
+    }
+    
+    @Output()
+    ngModelChange = new EventEmitter<any>();
+    
+    @Input()
+    set date(date: Date) {
+        if(!DateUtils.isValidDate(date))
+            return;
+
+        if(date.getTime() == this._date.getTime())
+            return;
+            
+        this._date = date;
+        this._value = date.toLocaleDateString();
+        this.dateChange.next(date);
+        this.ngModelChange.next(this._value);
+        this.valueChange.next(this._value);
+    }
+    get date(): Date {return this._date;}
+    @Output() dateChange = new EventEmitter<Date>();
+    
+    @HostListener("input", ["$event.target.value"])
+    inputChange(value: any): void {
+        this.value = value;
+    }
+    
+    @HostListener("focus", ["$event"])
+    focused(event: MouseEvent): void {
+        this.select.next(event);
+    }
+    
+    @Output() select = new EventEmitter<MouseEvent>();
+    @HostListener("click", ["$event"])
+    selected(event: MouseEvent): void {
+        this.select.next(event);
+    }
+
     constructor(public element: ElementRef) {
         super();
     }
@@ -30,8 +159,9 @@ export class EndDateField extends DatePickerField {
 
 @Component({
     selector: "date-range-picker",
-    templateUrl: 'components/DatePicker/DateRangePicker.html',
-    directives: [DatePickerCalendar, INFINITE_SCROLLER_PROVIDERS, CORE_DIRECTIVES, FORM_DIRECTIVES],
+    styleUrls: ["DatePicker.css"],
+    templateUrl: 'DateRangePicker.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateRangePicker extends DatePicker implements AfterContentInit {    
@@ -53,21 +183,22 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     }
     get maxDate(): Date | string { return this._maxDate; }
 
-    @Input() dateFilter: (d: Date) => boolean;
+    @Input() dateFilter: (d: Date, field: "start" | "end") => boolean;
+    public calendarDateFilter = (d: Date) => true;
 
     @ViewChild(InfiniteScroller)
     calendarScroller: InfiniteScroller;
     
-    @ContentChild(StartDateField)
+    @ContentChild(StartDateField, <any>{descendants: true})
     startDateField: StartDateField;
-    @ContentChild(EndDateField)
+    @ContentChild(EndDateField, <any>{descendants: true})
     endDateField: EndDateField;
     
     @ContentChildren(DatePickerFieldStyler)
     dateFieldIcons: QueryList<DatePickerFieldStyler>;
 
     private _dateTarget: boolean = false;
-    calendarHeight: string = MobileDetection.isAny() || window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
+    calendarHeight: string = window.innerWidth <= 480 || window.outerWidth <= 480 ? "auto" : "300px";
 
     get selectedDate(): Date { return this._selectedDate };
     set selectedDate(value: Date) {
@@ -88,6 +219,9 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Output() startDateChange = new EventEmitter();
     @Input()
     set startDate(value: any) {
+        if(!DateUtils.isValidDate(value))
+            return;
+
         this._startDate = DateUtils.handleDateInput(value);
         if(this.startDateField != null)
             this.startDateField.value = this._startDate.toLocaleDateString();
@@ -97,6 +231,9 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     @Output() endDateChange = new EventEmitter();
     @Input()
     set endDate(value: any) {
+        if(!DateUtils.isValidDate(value))
+            return;
+
         this._endDate = DateUtils.handleDateInput(value);
         if(this.endDateField != null)
             this.endDateField.value = this._endDate.toLocaleDateString();
@@ -118,7 +255,9 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
                 this.selectDate(startDateValue, false);
         else {
             this.selectDate(this._startDate, false);
-            this.startDateField._value = this._startDate.toLocaleDateString();
+
+            if(DateUtils.isValidDate(this._startDate))
+                this.startDateField._value = this._startDate.toLocaleDateString();
         }
         
         this.startDateField.select
@@ -144,7 +283,9 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
             this.selectDate(endDateValue, true); 
         else {
             this.selectDate(this._endDate, true);
-            this.endDateField._value = this._endDate.toLocaleDateString();
+
+            if(DateUtils.isValidDate(this._endDate))
+                this.endDateField._value = this._endDate.toLocaleDateString();
         }
             
         
@@ -160,10 +301,14 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
                 if(this.endDate !== date)
                     this.endDate = date;
             });*/
-            
+        
         this.dateFieldIcons.map((i: DatePickerFieldStyler) => {
             i.selectEvent.subscribe((event: Event) => {
                 this.showCalendar(event);
+                if(i.isStartDate())
+                    this.focusStartDate();
+                else if(i.isEndDate && this.inputEndDate.length > 0)
+                    this.focusEndDate();
             });
         });
         
@@ -199,6 +344,8 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
             this.valueChange.next(new DateRange(startDate, endDate));
         }
+
+        this.calendarDateFilter = (d: Date) => this.dateFilter(d, !this._dateTarget ? "start" : "end");
         this.changeDetector.markForCheck();
     }
 
@@ -215,10 +362,14 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
     focusStartDate(): void {
         this._dateTarget = false;
+        this.calendarDateFilter = (d: Date) => this.dateFilter(d, "start");
+        //this.changeDetector.markForCheck();
     }
 
     focusEndDate(): void {
         this._dateTarget = true;
+        this.calendarDateFilter = (d: Date) => this.dateFilter(d, "end");
+        //this.changeDetector.markForCheck();
     }
 
     checkStartDateTarget(): boolean {
