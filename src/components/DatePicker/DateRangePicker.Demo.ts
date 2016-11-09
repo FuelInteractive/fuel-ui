@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DateRange} from '../../utilities/utilities';
+import {DateRange} from '../../utilities';
 import {TableSortableColumn, TableSortableSorting} from '../../components/TableSortable/TableSortable';
 import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilities/demoUtilities';
 

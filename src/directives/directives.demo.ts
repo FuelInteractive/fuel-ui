@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {FuelUiModule} from "../fuel-ui";
+import {FuelUiModule} from "../index";
 
 import {AnimationDemo} from "./Animation/Animation.Demo";
 import {TooltipDemo} from "./Tooltip/Tooltip.Demo";

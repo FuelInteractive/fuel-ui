@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {FuelUiModule} from "../fuel-ui";
+import {FuelUiModule} from "../index";
 
 import {FormatDemo} from "./Format/Format.Demo";
 import {MapToIterableDemo} from "./MapToIterable/MapToIterable.Demo";

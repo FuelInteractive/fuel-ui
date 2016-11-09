@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {FuelUiModule} from "../fuel-ui";
+import {FuelUiModule} from "../index";
 
 import {AccordionDemo} from "./Accordion/Accordion.Demo";
 import {AlertDemo} from "./Alert/Alert.Demo";

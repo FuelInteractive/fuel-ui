@@ -54,7 +54,7 @@ module.exports = function (options) {
       './src/polyfills.browser.ts',
       isProd ? './src/vendor.aot.ts' : './src/vendor.browser.ts',
       'font-awesome-sass!./src/font-awesome-sass.config.js',
-      isProd ? './src/guestdesk.prod.ts' : './src/guestdesk.dev.ts'
+      './src/demo/index.ts'
     ],
 
     /*
@@ -189,10 +189,10 @@ module.exports = function (options) {
       *
       * See: https://www.npmjs.com/package/copy-webpack-plugin
       */
-      new CopyWebpackPlugin([{
+      /*new CopyWebpackPlugin([{
         from: 'src/assets',
         to: 'assets'
-      }]),
+      }]),*/
 
       /*
       * Plugin: HtmlWebpackPlugin

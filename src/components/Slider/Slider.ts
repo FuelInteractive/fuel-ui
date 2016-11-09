@@ -5,7 +5,7 @@ import * as noUiSlider from "nouislider";
 @Component({
     selector: "slider",
     templateUrl: 'slider.html',
-    styleUrls: ["../../../../node_modules/nouislider/distribute/nouislider.min.css"],
+    styleUrls: ["../../../node_modules/nouislider/distribute/nouislider.min.css"],
     encapsulation: ViewEncapsulation.None
 })
 
