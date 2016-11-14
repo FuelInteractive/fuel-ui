@@ -13,6 +13,8 @@ import {DemoComponent} from "./demo.component";
 import {HomeComponent} from "./home.component";
 import {InstallationComponent} from "./installation.component";
 
+console.log("module accessed");
+
 @NgModule({
     imports: [
         CommonModule,
@@ -32,4 +34,8 @@ import {InstallationComponent} from "./installation.component";
     ],
     bootstrap: [DemoComponent]
 })
-export class FuelUiDemoModule { }
+export class FuelUiDemoModule { 
+    constructor() {
+        console.log("demo module loaded");
+    }
+}

@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 @Component({
-    templateUrl: "installation.component" 
+    templateUrl: "installation.component.html" 
 })
 export class InstallationComponent {
     

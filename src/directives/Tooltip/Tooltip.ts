@@ -2,7 +2,7 @@ import {NgModule, Directive, ElementRef, Input, Output, EventEmitter, ViewContai
 import {CommonModule} from '@angular/common';
 
 @Directive({
-    selector: '[tooltip]',
+    selector: 'tooltip,[tooltip]',
     host: {
         '(mouseover)': 'show()',
         '(mouseout)': 'hide()',

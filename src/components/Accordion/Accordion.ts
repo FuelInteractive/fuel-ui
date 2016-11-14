@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation, Input, NgModule, ContentChildren, QueryList, AfterContentInit, EventEmitter} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {AccordionItem} from './AccordionItem';
+import {AccordionItem} from "./AccordionItem";
+import {AccordionHeading} from "./AccordionHeading";
 
 @Component({
     selector: 'accordion',
@@ -46,7 +47,8 @@ export class Accordion implements AfterContentInit {
 
 export const accordionDirectives = [
     Accordion,
-    AccordionItem
+    AccordionItem,
+    AccordionHeading
 ]
 
 @NgModule({

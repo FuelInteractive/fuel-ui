@@ -54,7 +54,7 @@ module.exports = function (options) {
       './src/polyfills.browser.ts',
       isProd ? './src/vendor.aot.ts' : './src/vendor.browser.ts',
       'font-awesome-sass!./src/font-awesome-sass.config.js',
-      './src/demo/index.ts'
+      './src/main.browser.ts'
     ],
 
     /*

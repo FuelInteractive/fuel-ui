@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noEmitHelpers": true,
+    "pretty": false,
+    "sourceMap": true,
+    "lib": ["es5", "dom"],
+    "noEmit": true,
+    "strictNullChecks": false,
+    "skipDefaultLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/compiled",
+    "src/**/*.e2e.ts",
+    "src/**/*.spec.ts",
+    "src/server.ts",
+    "src/main.browser.aot.ts",
+    "src/fuel-ui/**/*demo*/"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useWebpackText": true,
+    "forkChecker": true,
+    "useCache": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": { "rewriteTsconfig": false },
+  "angularCompilerOptions": {
+   "genDir": "src/compiled",
+   "skipMetadataEmit" : true
+ }
+}
