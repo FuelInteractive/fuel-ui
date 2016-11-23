@@ -4,14 +4,25 @@ import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {FuelUiModule} from "../index";
+import {demoRouting} from "./demo.routing";
+
 import {FuiAnimationsDemoModule} from "../animations/animations.demo";
 import {FuiComponentsDemoModule} from "../components/components.demo";
 import {FuiDirectivesDemoModule} from "../directives/directives.demo";
 import {FuiPipesDemoModule} from "../pipes/pipes.demo";
 
+
 import {DemoComponent} from "./demo.component";
 import {HomeComponent} from "./home.component";
 import {InstallationComponent} from "./installation.component";
+
+export * from "../animations/animations.demo";
+export * from "../components/components.demo";
+export * from "../directives/directives.demo";
+export * from "../pipes/pipes.demo";
+export * from "./demo.component";
+export * from "./home.component";
+export * from "./installation.component";
 
 console.log("module accessed");
 
@@ -20,7 +31,7 @@ console.log("module accessed");
         CommonModule,
         BrowserModule,
         FormsModule, ReactiveFormsModule,
-        RouterModule,
+        demoRouting,
         FuelUiModule,
         FuiAnimationsDemoModule,
         FuiComponentsDemoModule,

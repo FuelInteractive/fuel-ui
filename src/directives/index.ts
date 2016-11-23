@@ -9,7 +9,7 @@ export * from './Animation/Animation';
 export * from "./Tooltip/Tooltip";
 export * from "./CodeHighlighter/CodeHighlighter";
 
-const directiveModules = [
+export const directiveModules = [
     FuiAnimationModule,
     FuiTooltipModule,
     FuiCodeHighlighterModule

@@ -11,7 +11,7 @@ export * from "./Animation/Animation.Demo";
 export * from "./Tooltip/Tooltip.Demo";
 export * from "./CodeHighlighter/CodeHighlighter.Demo";
 
-const directivesDemoDirectives = [
+export const directivesDemoDirectives = [
     AnimationDemo,
     TooltipDemo,
     CodeHighlighterDemo

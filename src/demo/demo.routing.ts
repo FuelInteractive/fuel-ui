@@ -1,11 +1,17 @@
 import { RouterModule, Routes } from '@angular/router';
-import {DemoHome, InstallationComponent} from './demo.only';
-import {AccordionDemo, AlertDemo, CarouselDemo, CollapseDemo, DatePickerDemo, DateRangePickerDemo, DropdownDemo, 
-    InfiniteScrollerDemo, ModalDemo, OffCanvasMenuDemo, PaginationDemo, ProgressDemo, TableSortableDemo, AnimationDemo, CodeHighlighterDemo,
-    TooltipDemo, FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo, SliderDemo, TabDemo, TagDemo, TimePickerDemo, TextExpanderDemo} from './fuel-ui-demo';
+import {HomeComponent} from "./home.component";
+import {InstallationComponent} from "./installation.component";
+
+import {CollapseDemo} from "../animations/animations.demo";
+import {AccordionDemo, AlertDemo, CarouselDemo, DatePickerDemo, DateRangePickerDemo,
+    DropdownDemo, InfiniteScrollerDemo, ModalDemo, OffCanvasMenuDemo, PaginationDemo,
+    ProgressDemo, SliderDemo, TabDemo, TableSortableDemo, TagDemo, 
+    TextExpanderDemo, TimePickerDemo} from "../components/components.demo";
+import {CodeHighlighterDemo, TooltipDemo} from "../directives/directives.demo";
+import {FormatDemo, MapToIterableDemo, OrderByDemo, RangeDemo} from "../pipes/pipes.demo";
 
 const routes: Routes = [
-    { path: '', component: DemoHome },
+    { path: '', component: HomeComponent },
     { path: 'installation', component: InstallationComponent},
     { path: 'animation/collapse', component: CollapseDemo },
     { path: 'component/accordion', component: AccordionDemo },
@@ -25,7 +31,6 @@ const routes: Routes = [
     { path: 'component/tag', component: TagDemo },
     { path: 'component/textexpander', component: TextExpanderDemo },
     { path: 'component/timepicker', component: TimePickerDemo },
-    { path: 'directive/animation', component: AnimationDemo },
     { path: 'directive/codehighlighter', component: CodeHighlighterDemo },
     { path: 'directive/tooltip', component: TooltipDemo },
     { path: 'pipe/format', component: FormatDemo },

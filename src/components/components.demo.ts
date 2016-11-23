@@ -39,7 +39,7 @@ export * from "./Tag/Tag.Demo";
 export * from "./TimePicker/TimePicker.Demo";
 export * from "./TextExpander/TextExpander.Demo";
 
-const demoDirectives = [
+export const demoDirectives = [
     AccordionDemo,
     AlertDemo,
     CarouselDemo,
