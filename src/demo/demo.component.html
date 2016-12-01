@@ -6,7 +6,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a [routerLink]="['']">
-                    <img src="https://pbs.twimg.com/profile_images/572406600309018624/r2ma7PE3.png" height="40"/> 
+                    <img src="https://pbs.twimg.com/profile_images/572406600309018624/r2ma7PE3.png" height="40"/>
                     <span>Fuel-UI</span>
                 </a>
                 <i class="fa fa-bars fuel-ui-clickable pull-right" (click)="$event.preventDefault(); toggled = !toggled"></i>
@@ -19,7 +19,7 @@
                         <i class="pull-right fa"
                             [ngClass]="{'fa-minus': animationNav?.open, 'fa-plus': !animationNav || !animationNav.open}"></i>
                     </li>
-                    
+
                     <li><a [routerLink]="['animation/collapse']">Collapse</a></li>
                 </accordion-item>
                 <accordion-item #componentNav [open]="false">
@@ -28,7 +28,7 @@
                         <i class="pull-right fa"
                             [ngClass]="{'fa-minus': componentNav?.open, 'fa-plus': !componentNav || !componentNav.open}"></i>
                     </li>
-                    
+
                     <li><a [routerLink]="['component/accordion']">Accordion</a></li>
                     <li><a [routerLink]="['component/alert']">Alert</a></li>
                     <li><a [routerLink]="['component/carousel']">Carousel</a></li>
@@ -53,8 +53,7 @@
                         <i class="pull-right fa"
                             [ngClass]="{'fa-minus': directiveNav?.open, 'fa-plus': !directiveNav || !directiveNav.open}"></i>
                     </li>
-                    
-                    <li><a [routerLink]="['directive/animation']">Animation</a></li>
+
                     <li><a [routerLink]="['directive/codehighlighter']">Code Highlighter</a></li>
                     <li><a [routerLink]="['directive/tooltip']">Tooltip</a></li>
                 </accordion-item>
@@ -64,7 +63,7 @@
                         <i class="pull-right fa"
                             [ngClass]="{'fa-minus': pipeNav?.open, 'fa-plus': !pipeNav || !pipeNav.open}"></i>
                     </li>
-                    
+
                     <li><a [routerLink]="['pipe/format']">Format</a></li>
                     <li><a [routerLink]="['pipe/maptoiterable']">MapToIterable</a></li>
                     <li><a [routerLink]="['pipe/orderby']">OrderBy</a></li>
