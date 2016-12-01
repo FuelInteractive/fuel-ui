@@ -10,22 +10,22 @@
 <section class="row m-a">
     <div class="row">
         <div class="col-md-3">
-            <a href="javascript:;" tooltip="Tooltip text goes here." 
+            <a href="javascript:;" tooltip text="Tooltip text goes here."
                 [position]="position" [color]="color" [size]="size"
                 [rounded]="rounded" [always]="always">
                 Some text here.
             </a>
         </div>
         <div class="col-md-4 form-group">
-            <div tooltip="You have entered: tooltipText!" 
+            <div tooltip text="You have entered: {{tooltipText}}!"
                         [position]="position" [color]="color" [size]="size"
                         [rounded]="rounded" [always]="always">
-                <input [(ngModel)]="tooltipText" name="tooltipText" type="text" class="form-control" placeholder="Tooltip text" /> 
+                <input [(ngModel)]="tooltipText" name="tooltipText" type="text" class="form-control" placeholder="Tooltip text" />
             </div>
             <small class="text-muted">Enter text above, then hover the input.</small>
         </div>
     </div><br/>
-    
+
     <form>
         <div class="form-group row">
             <label for="position" class="col-sm-2 col-md-1 form-control-label">Position</label>
@@ -50,7 +50,7 @@
                     <option value="error">error</option>
                     <option value="warning">warning</option>
                     <option value="info">info</option>
-                    <option value="success">success</option>      
+                    <option value="success">success</option>
                 </select>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     <option value="auto">auto</option>
                     <option value="small">small</option>
                     <option value="medium">medium</option>
-                    <option value="large">large</option>    
+                    <option value="large">large</option>
                 </select>
             </div>
         </div>
