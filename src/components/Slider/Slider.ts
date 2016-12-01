@@ -4,8 +4,8 @@ import * as noUiSlider from "nouislider";
 
 @Component({
     selector: "slider",
-    templateUrl: 'slider.html',
-    styleUrls: ["../../../node_modules/nouislider/distribute/nouislider.min.css"],
+    templateUrl: 'Slider.html',
+    styleUrls: ["Slider.css"],
     encapsulation: ViewEncapsulation.None
 })
 
@@ -31,30 +31,30 @@ export class Slider implements AfterViewInit, OnChanges {
     @Output() secondValueChange = new EventEmitter<any>();
     private _sliderElement: any;
     private _slider: any;
-    
+
     timeout: any = null;
 
     constructor(private _element: ElementRef) {}
-    
+
     update(val: any[]): any{
         this.value = parseInt(val[0]);
         this.secondValue = val.length > 1 ? parseInt(val[1]) : null;
         this.valueChange.next(this.value);
         this.secondValueChange.next(this.secondValue);
-        
+
         this.timeout = null;
     };
-    
+
     ngAfterViewInit(){
         this._sliderElement = this._element.nativeElement.children[0];
 
         if(this.orientation == 'vertical')
-            this._sliderElement.style.height = this.height.length > 0 
+            this._sliderElement.style.height = this.height.length > 0
                 ? this.height
                 : "200px";
-            
+
         if(this.orientation == 'horizontal'){
-            this._sliderElement.style.width = this.width.length > 0 
+            this._sliderElement.style.width = this.width.length > 0
                 ? this.width
                 : null; //full width
 
@@ -97,37 +97,37 @@ export class Slider implements AfterViewInit, OnChanges {
                 }
             }
         });
-       
+
         if(!(<HTMLInputElement>this._element.nativeElement).disabled){
             var noUI:HTMLCollection = this._element.nativeElement.getElementsByClassName('noUi-connect');
-            
+
             //convert HTMLCollection to array to loop
             [].slice.call(noUI).forEach((el:HTMLElement) => {
                 el.style.background = this.background;
             });
         }
-        
+
         this._sliderElement.noUiSlider.on('slide', (val: number[]) => {
             if(this.timeout)
                 clearTimeout(this.timeout);
-                
+
             this.timeout = setTimeout(() => {
                 this.update(val);
             }, this.debounceTime);
         });
-        
+
         this._sliderElement.noUiSlider.on('end', (val: number[]) => {
             if(this.timeout)
                 clearTimeout(this.timeout);
-                
+
             this.update(val);
         });
     }
-    
+
     ngOnChanges(changes:any):void{
         if(this._sliderElement && typeof changes.value !== 'undefined')
             this._sliderElement.noUiSlider.set([changes.value.currentValue, this.secondValue]);
-            
+
         if(this._sliderElement && typeof changes.secondValue !== 'undefined')
             this._sliderElement.noUiSlider.set([this.value, changes.secondValue.currentValue]);
     }
