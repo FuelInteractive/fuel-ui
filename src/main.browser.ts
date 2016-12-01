@@ -3,7 +3,6 @@
  */
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { decorateModuleRef } from './environment';
-import { bootloader } from '@angularclass/hmr';
 /*
  * App Module
  * our top level module that holds all of our components
@@ -20,6 +19,8 @@ export function main(): Promise<any> {
     .catch(err => console.error(err));
 }
 
-// needed for hmr
-// in prod this is replace for document ready
-bootloader(main);
+export function bootstrapDomReady() {
+  document.addEventListener('DOMContentLoaded', main);
+}
+
+bootstrapDomReady();

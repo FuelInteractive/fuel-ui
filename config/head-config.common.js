@@ -35,7 +35,10 @@ module.exports = {
     { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/icon/favicon-16x16.png' },
 
     /** <link> tags for a Web App Manifest **/
-    { rel: 'manifest', href: '/assets/manifest.json' }
+    { rel: 'manifest', href: '/assets/manifest.json' },
+
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-coy.css' },
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.1/hint.min.css' },
   ],
   meta: [
     { name: 'msapplication-TileColor', content: '#00bcd4' },
