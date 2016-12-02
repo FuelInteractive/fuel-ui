@@ -64,7 +64,7 @@
                 </tag>
             </tagset>
         </h3>
-        
+
         <h4>Tags</h4>
         <div *ngFor="let theTag of tags">
             {{theTag | json}}
@@ -76,7 +76,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-{{'import {TAG_PROVIDERS} from "fuel-ui/fuel-ui"'}}
+import {{'{'}}FuiTagModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}Tag, TagSet{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 

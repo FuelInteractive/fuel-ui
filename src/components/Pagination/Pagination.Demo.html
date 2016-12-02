@@ -31,19 +31,19 @@
             <div class="row">
                 <div class="checkbox col-md-3">
                     <label for="showSteps" class="form-control-label">
-                        <input [(ngModel)]="showSteps" name="showSteps" type="checkbox" /> 
+                        <input [(ngModel)]="showSteps" name="showSteps" type="checkbox" />
                         Show Next/Previous
                     </label>
                 </div>
                 <div class="checkbox col-md-3">
                     <label for="showEnds" class="form-control-label">
-                        <input [(ngModel)]="showEnds" name="showEnds" type="checkbox" /> 
+                        <input [(ngModel)]="showEnds" name="showEnds" type="checkbox" />
                         Show First/Last
                     </label>
                 </div>
                 <div class="checkbox col-md-3">
                     <label for="showSelect" class="form-control-label">
-                        <input [(ngModel)]="showSelect" name="showSelect" type="checkbox" /> 
+                        <input [(ngModel)]="showSelect" name="showSelect" type="checkbox" />
                         Show Jump To
                     </label>
                 </div>
@@ -65,7 +65,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}Pagination{{'}'}} from 'fuel-ui/fuel-ui';
+import {{'{'}}FuiPaginationModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}Pagination{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
@@ -94,7 +95,7 @@ import {{'{'}}Pagination{{'}'}} from 'fuel-ui/fuel-ui';
 <code class="language-javascript" code-highlight>
 export class PaginationExample {{'{'}}
     currentPage: number = 1;
-    
+
     pageChange(page: number): void {{'{'}}
         console.log('New Page: ' + page);
     {{'}'}}

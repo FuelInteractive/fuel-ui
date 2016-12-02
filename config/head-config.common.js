@@ -37,8 +37,8 @@ module.exports = {
     /** <link> tags for a Web App Manifest **/
     { rel: 'manifest', href: '/assets/manifest.json' },
 
-    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-coy.css' },
-    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.1/hint.min.css' },
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-coy.css' }, //for code-highlighter
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.1/hint.min.css' }, //for tooltip
   ],
   meta: [
     { name: 'msapplication-TileColor', content: '#00bcd4' },

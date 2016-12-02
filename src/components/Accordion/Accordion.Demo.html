@@ -20,7 +20,7 @@
                     (click)="addAccordionItem()">Add Accordion Item
             </button>
         </p>
-        
+
         <div class="row">
             <label for="duration" class="col-sm-2 form-control-label">Animation Duration</label>
             <div class="col-sm-2">
@@ -28,12 +28,12 @@
             </div>
             <div class="checkbox col-md-3">
                 <label for="oneAtATime" class="form-control-label">
-                    <input [(ngModel)]="oneAtATime" name="oneAtATime" type="checkbox" /> 
+                    <input [(ngModel)]="oneAtATime" name="oneAtATime" type="checkbox" />
                     Open only one at a time
                 </label>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-6">
                 <h3>Without Styles</h3>
@@ -67,7 +67,7 @@
                     <div accordion-item class="fuel-ui-accordion"
                                     [(open)]="firstOpen"
                                     [disabled]="firstDisabled">
-                        <div accordion-heading class="fuel-ui-accordion-heading fuel-ui-clickable" 
+                        <div accordion-heading class="fuel-ui-accordion-heading fuel-ui-clickable"
                                     [ngClass]="{'text-muted': firstDisabled}">
                             Static Header 1
                         </div>
@@ -114,7 +114,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}ACCORDION_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
+import {{'{'}}FuiAccordionModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}Accordion, AccordionHeading{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
@@ -151,7 +152,7 @@ import {{'{'}}ACCORDION_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
     &lt;div accordion-item class=&quot;fuel-ui-accordion&quot;
                     [(open)]=&quot;firstOpen&quot;
                     [disabled]=&quot;firstDisabled&quot;&gt;
-        &lt;div accordion-heading class=&quot;fuel-ui-accordion-heading fuel-ui-clickable&quot; 
+        &lt;div accordion-heading class=&quot;fuel-ui-accordion-heading fuel-ui-clickable&quot;
                     [ngClass]=&quot;{{'{'}}'text-muted': firstDisabled{{'}'}}&quot;&gt;
             Static Header 1
         &lt;/div&gt;
@@ -176,7 +177,7 @@ import {{'{'}}ACCORDION_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 <tab heading="Sass">
 <pre>
 <code class="language-css" code-highlight>
-/* 
+/*
  * This is added in Fuel-UI's CSS bundle already!
  * Feel free to use this as base for your own styles!
  */
@@ -185,7 +186,7 @@ import {{'{'}}ACCORDION_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    
+
     .fuel-ui-accordion-heading {{'{'}}
         background-color: #f5f5f5;
         border-bottom: 1px solid #ddd;
@@ -193,12 +194,12 @@ import {{'{'}}ACCORDION_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
         border-top-right-radius: 3px;
         color: #333;
         padding: 10px 15px;
-        
+
         &.text-muted {{'{'}}
             color: #818a91 !important;
         {{'}'}}
     {{'}'}}
-    
+
     .fuel-ui-accordion-body {{'{'}}
         padding: 15px;
     {{'}'}}

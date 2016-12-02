@@ -9,13 +9,13 @@
 
 <section class="row m-a">
     <div class="col-md-6" style="border: 1px solid #333; background-color: #EEE">
-        <infinite-scroller 
-            (next)="infinteScrollNext()" 
-            (prev)="infiniteScrollPrev()" 
+        <infinite-scroller
+            (next)="infinteScrollNext()"
+            (prev)="infiniteScrollPrev()"
             height="300px"
             distance="120"
             hideScrollbar="true">
-            <div *ngFor="let item of infiniteScrollItems" 
+            <div *ngFor="let item of infiniteScrollItems"
                 class="card p-a scroll-item" style="background-color: #FFF">
                 <div class="card-block">
                     <h4 class="card-title">Some Item</h4>
@@ -30,7 +30,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-{{'import {INFINITE_SCROLLER_PROVIDERS} from "fuel-ui/fuel-ui"'}};
+import {{'{'}}FuiInfiniteScrollerModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}InfiniteScroller, ScrollItem{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 

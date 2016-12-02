@@ -9,9 +9,9 @@
 
 <button class="btn btn-primary" (click)="collapsed = !collapsed">Toggle Collapse</button>
 <style>
-    
+
 </style>
-<div id="collapse-demo-box" [@collapse]="collapsed ? 'true' : 'false'"> 
+<div id="collapse-demo-box" [@collapse]="collapsed ? 'true' : 'false'">
     <h2>All of your content</h2>
     <ul>
         <li>That you wish</li>
@@ -25,7 +25,7 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}Collapse{{'}'}} from 'fuel-ui/fuel-ui';
+import {{'{'}}Collapse{{'}'}} from 'fuel-ui';
 
 @Component({{'{'}}
     animations: [Collapse(300)]
@@ -34,7 +34,7 @@ import {{'{'}}Collapse{{'}'}} from 'fuel-ui/fuel-ui';
 </pre>
 
 <h3>Getting Started</h3>
-<p>Collapse allows you to toggle content on the page with a nice sliding animation. Import the Collapse function from 'fuel-ui/fuel-ui', and add the function to your animations array of any component. You can optionally add a duration number as a parameter.</p>
+<p>Collapse allows you to toggle content on the page with a nice sliding animation. Import the Collapse function from 'fuel-ui', and add the function to your animations array of any component. You can optionally add a duration number as a parameter.</p>
 
 <h3>Usage</h3>
 <tabset>

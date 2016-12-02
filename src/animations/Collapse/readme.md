@@ -3,7 +3,7 @@
 
 ### Collapse Import
 ```javascript
-import {Collapse} from 'fuel-ui/fuel-ui';
+import {Collapse} from 'fuel-ui';
 
 @Component({
     animations: [Collapse(300)]

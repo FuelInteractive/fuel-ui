@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="checkbox col-md-3">
                     <label for="expanded" class="form-control-label">
-                        <input [(ngModel)]="expanded" type="checkbox" name="expanded" /> 
+                        <input [(ngModel)]="expanded" type="checkbox" name="expanded" />
                         Expanded
                     </label>
                 </div>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="checkbox col-md-3">
                     <label for="ellipsis" class="form-control-label">
-                        <input [(ngModel)]="ellipsis" type="checkbox" name="ellipsis" /> 
+                        <input [(ngModel)]="ellipsis" type="checkbox" name="ellipsis" />
                         Ellipsis
                     </label>
                 </div>
@@ -74,7 +74,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}TextExpander{{'}'}} from 'fuel-ui/fuel-ui';
+import {{'{'}}FuiTextExpanderModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}TextExpander{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
@@ -104,7 +105,7 @@ import {{'{'}}TextExpander{{'}'}} from 'fuel-ui/fuel-ui';
 export class TextExpanderExample {{'{'}}
     expanded: boolean = false;
     ellipsis: boolean = true;
-    text: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed " + 
+    text: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed " +
                     "massa sed odio gravida iaculis. Sed elementum dapibus neque, sit.";
     characters: number = 50;
     words: number = 0;

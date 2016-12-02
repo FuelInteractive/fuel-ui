@@ -28,31 +28,32 @@
         <button type="button" class="btn btn-primary btn-sm" (click)="showSpinners = !showSpinners">Spinners: {{showSpinners ? 'On' : 'Off'}}</button>
     </p>
     <p>
-        <button type="button" class="btn btn-primary btn-sm" (click)="setDate()">Set time to 14:00:00</button>        
+        <button type="button" class="btn btn-primary btn-sm" (click)="setDate()">Set time to 14:00:00</button>
     </p>
-    
-    <timepicker 
-        [(value)]="date" 
-        [min]="minDate" 
-        [max]="maxDate" 
+
+    <timepicker
+        [(value)]="date"
+        [min]="minDate"
+        [max]="maxDate"
         [hourStep]="hourStep"
-        [minuteStep]="minuteStep" 
-        [disabled]="disabled" 
-        [readonlyInput]="readonly" 
-        [showSeconds]="showSeconds" 
-        [showSpinners]="showSpinners" 
+        [minuteStep]="minuteStep"
+        [disabled]="disabled"
+        [readonlyInput]="readonly"
+        [showSeconds]="showSeconds"
+        [showSpinners]="showSpinners"
         [showMeridian]="showMeridian">
     </timepicker>
 
     {{date | date : 'h:mm:ss'}}
-    
+
 </section>
 
 <div class="source">
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}TimePicker{{'}'}} from 'fuel-ui/fuel-ui';
+import {{'{'}}FuiTimePickerModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}TimePicker{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
@@ -64,16 +65,16 @@ import {{'{'}}TimePicker{{'}'}} from 'fuel-ui/fuel-ui';
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;timepicker 
-    [(value)]=&quot;date&quot; 
-    [min]=&quot;minDate&quot; 
-    [max]=&quot;maxDate&quot; 
+&lt;timepicker
+    [(value)]=&quot;date&quot;
+    [min]=&quot;minDate&quot;
+    [max]=&quot;maxDate&quot;
     [hourStep]=&quot;hourStep&quot;
-    [minuteStep]=&quot;minuteStep&quot; 
-    [disabled]=&quot;disabled&quot; 
-    [readonlyInput]=&quot;readonly&quot; 
-    [showSeconds]=&quot;showSeconds&quot; 
-    [showSpinners]=&quot;showSpinners&quot; 
+    [minuteStep]=&quot;minuteStep&quot;
+    [disabled]=&quot;disabled&quot;
+    [readonlyInput]=&quot;readonly&quot;
+    [showSeconds]=&quot;showSeconds&quot;
+    [showSpinners]=&quot;showSpinners&quot;
     [showMeridian]=&quot;showMeridian&quot;&gt;
 &lt;/timepicker&gt;
 </code>

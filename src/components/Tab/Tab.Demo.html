@@ -31,7 +31,7 @@
         {{theTab?.content}}
         </tab>
     </tabset>
-    
+
     <hr />
 
     <tabset [vertical]="true" type="pills">
@@ -45,7 +45,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-{{'import {TAB_PROVIDERS} from "fuel-ui/fuel-ui"'}}
+import {{'{'}}FuiTabModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}Tab, TabSet{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 

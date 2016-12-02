@@ -135,14 +135,15 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-{{'import {OrderByPipe} from "fuel-ui/fuel-ui"'}}
+import {{'{'}}FuiOrderByPipeModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}OrderByPipe{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
 <h3>Getting Started</h3>
-<p>OrderBy is pipe that allows for sorting ascending or descending on any array types across multiple columns. 
-Simply pass an array of strings with the name of the key within the object. 
-Put a '-' in front of the name if you wish to sort descending on it. 
+<p>OrderBy is pipe that allows for sorting ascending or descending on any array types across multiple columns.
+Simply pass an array of strings with the name of the key within the object.
+Put a '-' in front of the name if you wish to sort descending on it.
 OrderBy pipe also allows for data to be pushed dynamically and sorted.</p>
 
 <h3>Usage</h3>

@@ -12,7 +12,7 @@
         <div class="form-inline">
             <date-range-picker
                 minDate="11/1/2014"
-                maxDate="11/12/2017" 
+                maxDate="11/12/2017"
                 [dateFilter]="dateFilter"
                 (valueChange)="datePickerValueChange($event)">
                 <div class="form-group">
@@ -21,7 +21,7 @@
                         <input name="arrival" [(date)]="arrivalDate" startDateField class="form-control" placeholder="Arrival" />
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="departure">Departure Date</label>
                     <div class="date-picker-input-group">
@@ -43,7 +43,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}DateRange, DATE_PICKER_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
+import {{'{'}}FuiDatePickerModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}DateRange, DateRangePicker, DatePickerField, StartDateField, EndDateField, DatePickerCalendar, DatePickerFieldStyler{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
@@ -58,7 +59,7 @@ import {{'{'}}DateRange, DATE_PICKER_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 &lt;form class=&quot;form-inline&quot;&gt;
     &lt;date-range-picker
         minDate=&quot;11/1/2015&quot;
-        maxDate=&quot;11/12/2016&quot; 
+        maxDate=&quot;11/12/2016&quot;
         [dateFilter]=&quot;dateFilter&quot;
         (valueChange)=&quot;datePickerValueChange($event)&quot;&gt;
         &lt;div class=&quot;form-group&quot;&gt;
@@ -67,7 +68,7 @@ import {{'{'}}DateRange, DATE_PICKER_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
                 &lt;input name=&quot;arrival&quot; startDateField class=&quot;form-control&quot; value=&quot;5/5/2016&quot; placeholder=&quot;Arrival&quot; /&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-        
+
         &lt;div class=&quot;form-group&quot;&gt;
             &lt;label for=&quot;departure&quot;&gt;Departure Date&lt;/label&gt;
             &lt;div class=&quot;date-picker-input-group&quot;&gt;
@@ -84,17 +85,17 @@ import {{'{'}}DateRange, DATE_PICKER_PROVIDERS{{'}'}} from 'fuel-ui/fuel-ui';
 <code class="language-javascript" code-highlight>
 export class DateRangePickerExample {{'{'}}
     dateRangePickerValue: DateRange;
-    
+
     datePickerValueChange(eventValue: any){{'{'}}
         this.dateRangePickerValue = eventValue;
     {{'}'}}
-    
+
     dateFilter(d: Date): boolean {{'{'}}
-        
+
         //every Tuesday
         if([2].indexOf(d.getDay()) > -1)
             return false;
-        
+
         return true;
     {{'}'}}
 {{'}'}}

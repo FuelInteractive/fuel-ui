@@ -4,7 +4,7 @@
             <h2 class="card-title">Installation</h2>
             <p class="card-text">
                 Fork our Quickstart! <a href="https://github.com/coryshaw1/ng2-play/" target="_blank">https://github.com/coryshaw1/ng2-play/</a><br/>
-                Fork our angular-cli Quickstart! <a href="https://github.com/FuelInteractive/fuel-ui-cli-quickstart/" target="_blank">https://github.com/FuelInteractive/fuel-ui-cli-quickstart/</a>
+                <!--Fork our angular-cli Quickstart! <a href="https://github.com/FuelInteractive/fuel-ui-cli-quickstart/" target="_blank">https://github.com/FuelInteractive/fuel-ui-cli-quickstart/</a>-->
             </p>
         </div>
     </div>
@@ -19,29 +19,48 @@
         </div>
         <div class="fuel-ui-accordion-body">
             <p>If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:</p>
-               
+
 <pre>
 <code class="language-bash" code-highlight>
-npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
+npm install fuel-ui --save
 </code>
 </pre>
 
-            <p>Then simply add the proper script tags to your <code>index.html</code></p>
-                        
+            <p>Then simply add the proper module(s) to your base component</p>
+
 <pre>
-<code class="language-markup" code-highlight>
-&lt;head&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/font-awesome/css/font-awesome.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.min.css&quot; /&gt;
-&lt;/head&gt;
+<code class="language-javascript" code-highlight>
+import {{'{'}} FuelUiModule {{'}'}} from 'fuel-ui';
 
-...
-
-&lt;!-- All your SystemJS, Angular2, Rx, etc. scripts first! --&gt;
-&lt;script src=&quot;node_modules/fuel-ui/bundles/fuel-ui.min.js&quot;&gt;&lt;/script&gt;
+@NgModule({{'{'}}
+  bootstrap: [ YourBaseComponent ],
+  declarations: [ YourBaseComponent, ... ],
+  imports: [ FuelUiModule, ... ],
+  providers: [ ... ]
+{{'}'}})
 </code>
 </pre>
+            <p><code>FuelUiModule</code> will add access to every Fuel-UI module to your project. If you wish to minimize the amount of imports, you can also mix and match the following modules:</p>
+
+<pre>
+<code class="language-javascript" code-highlight>
+import {{'{'}}
+  FuiAnimationsModule,  //All animations
+  FuiComponentsModule,  //All components
+  FuiDirectivesModule,  //All directives
+  FuiPipesModule //All pipes
+{{'}'}} from 'fuel-ui';
+
+@NgModule({{'{'}}
+  bootstrap: [ YourBaseComponent ],
+  declarations: [ YourBaseComponent, ... ],
+  imports: [ FuiAnimationsModule, FuiComponentsModule, FuiDirectivesModule, FuiPipesModule, ... ],
+  providers: [ ... ]
+{{'}'}})
+</code>
+</pre>
+
+          <p>To make your imports even more modular, every demo page will have the Fuel-UI component/directive/etc's module. This way you'll be able to import even less. <code>FuiDatePickerModule</code> for example.</p>
         </div>
     </div>
     <div accordion-item class="fuel-ui-accordion" #manuallyCli>
@@ -51,11 +70,13 @@ npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
                 [ngClass]="{'fa-chevron-down': manuallyCli?.open, 'fa-chevron-right': !manuallyCli || !manuallyCli.open}"></i>
         </div>
         <div class="fuel-ui-accordion-body">
+          Work in progress...
+<!--
 <pre>
 <code class="language-bash" code-highlight>
 ng new example-project
 cd example-project
-npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.2 --save
+npm install fuel-ui font-awesome bootstrap@4.0.0-alpha.5 --save
 </code>
 </pre>
 
@@ -78,22 +99,21 @@ ng build
 </code>
 </pre>
 
-            <p>Then simply add the proper script tags to your <code>index.html</code></p>
+            <p>Then simply add the proper module(s) to your base component</p>
 
 <pre>
-<code class="language-markup" code-highlight>
-&lt;head&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;vendor/font-awesome/css/font-awesome.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;vendor/bootstrap/dist/css/bootstrap.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;vendor/fuel-ui/bundles/fuel-ui.min.css&quot; /&gt;
-&lt;/head&gt;
+<code class="language-javascript" code-highlight>
+import {{'{'}} FuelUiModule {{'}'}} from 'fuel-ui';
 
-...
-
-&lt;!-- All your SystemJS, Angular2, Rx, etc. scripts first! --&gt;
-&lt;script src=&quot;vendor/fuel-ui/bundles/fuel-ui.min.js&quot;&gt;&lt;/script&gt;
+@NgModule({{'{'}}
+  bootstrap: [ YourBaseComponent ],
+  declarations: [ YourBaseComponent, ... ],
+  imports: [ FuelUiModule, ... ],
+  providers: [ ... ]
+{{'}'}})
 </code>
 </pre>
+-->
         </div>
     </div>
 </accordion>

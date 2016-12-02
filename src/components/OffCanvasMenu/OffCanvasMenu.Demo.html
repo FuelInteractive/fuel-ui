@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<off-canvas-menu [origin]="origin" [width]="width" [height]="height" 
+<off-canvas-menu [origin]="origin" [width]="width" [height]="height"
     (close)="onClose()" (open)="onOpen()" #menu>
     <div class="p-a-1">
         <h3>Menu</h3>
@@ -51,7 +51,8 @@
 <h3>Import</h3>
 <pre>
 <code class="language-javascript" code-highlight>
-import {{'{'}}OFF_CANVAS_MENU_PROVIDERS{{'}'}} from "fuel-ui/fuel-ui"
+import {{'{'}}FuiOffCanvasMenuModule{{'}'}} from 'fuel-ui'; //module
+import {{'{'}}OffCanvasMenu, OffCanvasMenuClose{{'}'}} from 'fuel-ui'; //class
 </code>
 </pre>
 
@@ -63,7 +64,7 @@ import {{'{'}}OFF_CANVAS_MENU_PROVIDERS{{'}'}} from "fuel-ui/fuel-ui"
 <tab heading="HTML">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;off-canvas-menu [origin]=&quot;origin&quot; [width]=&quot;width&quot; [height]=&quot;height&quot; 
+&lt;off-canvas-menu [origin]=&quot;origin&quot; [width]=&quot;width&quot; [height]=&quot;height&quot;
     (close)=&quot;onClose()&quot; (open)=&quot;onOpen()&quot; #menu&gt;
     &lt;div class=&quot;p-a-1&quot;&gt;
         &lt;h3&gt;Menu&lt;/h3&gt;
@@ -78,7 +79,7 @@ import {{'{'}}OFF_CANVAS_MENU_PROVIDERS{{'}'}} from "fuel-ui/fuel-ui"
 <pre>
 <code class="language-javascript" code-highlight>
 export class OffCanvasMenuExample {{'{'}}
-    origin = "left";  
+    origin = "left";
     width = "25%";
     height = "25%";
 
