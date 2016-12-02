@@ -24,8 +24,6 @@ export * from "./demo.component";
 export * from "./home.component";
 export * from "./installation.component";
 
-console.log("module accessed");
-
 @NgModule({
     imports: [
         CommonModule,
@@ -45,8 +43,6 @@ console.log("module accessed");
     ],
     bootstrap: [DemoComponent]
 })
-export class FuelUiDemoModule { 
-    constructor() {
-        console.log("demo module loaded");
-    }
+export class FuelUiDemoModule {
+
 }
