@@ -21,7 +21,11 @@ const demoDirectives = [
 ]
 
 @NgModule({
-    imports: [CommonModule,FormsModule,FuelUiModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        FuelUiModule
+    ],
     declarations: demoDirectives,
     exports: demoDirectives
 })

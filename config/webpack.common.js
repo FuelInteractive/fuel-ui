@@ -21,7 +21,7 @@ const autoprefixer = require('autoprefixer');
  * Webpack Constants
  */
 const METADATA = {
-  title: 'Guestdesk',
+  title: 'Fuel-UI',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -54,7 +54,7 @@ module.exports = function (options) {
       './src/polyfills.browser.ts',
       isProd ? './src/vendor.aot.ts' : './src/vendor.browser.ts',
       'font-awesome-sass!./src/font-awesome-sass.config.js',
-      './src/main.browser.ts'
+      isProd ? './src/main.aot.ts' : './src/main.browser.ts'
     ],
 
     /*
@@ -146,13 +146,13 @@ module.exports = function (options) {
           loader: 'file'
         },
         { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] },
-        { 
-          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-          loader: "url-loader?limit=10000&mimetype=application/font-woff" 
+        {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: "url-loader?limit=10000&mimetype=application/font-woff"
         },
-        { 
-          test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-          loader: "file-loader" 
+        {
+          test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: "file-loader"
         }
       ]
 
@@ -282,7 +282,7 @@ module.exports = function (options) {
             ],
             customAttrAssign: [/\)?\]?=/]
           },
-          
+
         }
       }),
     ],

@@ -41,39 +41,7 @@ import {FuiTimePickerModule} from "./TimePicker/TimePicker";
 import {FuiTextExpanderModule} from "./TextExpander/TextExpander";
 import {FuiOffCanvasMenuModule} from "./OffCanvasMenu/OffCanvasMenu";
 
-/*import {Alert} from "./Alert/Alert"
-import {accordionDirectives} from "./Accordion/Accordion";
-import {carouselDirectives} from "./Carousel/Carousel";
-import {datePickerDirectives}  from "./DatePicker/DatePicker.Module";
-import {Dropdown} from "./Dropdown/Dropdown";
-import {infiniteScrollerDirectives} from "./InfiniteScroller/InfiniteScroller";
-import {Modal} from "./Modal/Modal";
-import {offCanvasMenuDirectives} from "./OffCanvasMenu/OffCanvasMenu";
-import {Pagination} from "./Pagination/Pagination";
-import {Slider} from "./Slider/Slider";
-import {tabDirectives} from "./Tab/Tab";
-import {TableSortable} from "./TableSortable/TableSortable";
-import {tagDirectives} from "./Tag/Tag";
-import {TextExpander} from "./TextExpander/TextExpander";
-import {TimePicker} from "./TimePicker/TimePicker";*/
-
-const declarations = [
-    /*...accordionDirectives,
-    Alert,
-    ...carouselDirectives,
-    ...datePickerDirectives,
-    Dropdown,
-    ...infiniteScrollerDirectives,
-    Modal,
-    ...offCanvasMenuDirectives,
-    Pagination,
-    Slider,
-    ...tabDirectives,
-    TableSortable,
-    ...tagDirectives,
-    TimePicker,
-    TextExpander*/
-];
+const declarations = [];
 
 const componentModules = [
     FuiAccordionModule,
@@ -90,7 +58,7 @@ const componentModules = [
     FuiTableSortableModule,
     FuiSliderModule,
     FuiTimePickerModule,
-    FuiTextExpanderModule, 
+    FuiTextExpanderModule,
 ];
 
 @NgModule({
