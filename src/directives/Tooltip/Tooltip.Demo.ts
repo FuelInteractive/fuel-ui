@@ -34,6 +34,7 @@ export class TooltipDemo {
     position: string = "top";
     color: string = "none";
     size: string = "auto";
+    tooltipText: string = "";
     rounded: boolean = false;
     always: boolean = false;
 }

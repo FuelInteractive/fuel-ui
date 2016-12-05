@@ -6,24 +6,24 @@ import {StringHelper} from '../../utilities/StringUtils';
   name: 'format'
 })
 export class FormatPipe implements PipeTransform  {
-  
+
   datePipe: DatePipe = new DatePipe("en-US");
   decimalPipe: DecimalPipe = new DecimalPipe("en-US");
-  
+
   constructor(){}
-  
-  transform(input:string, args:any): any {
+
+  transform(input:any, args:any): any {
     var format = '';
     var parsedFloat = 0;
     var pipeArgs = args.split(':');
     for(var i = 0; i < pipeArgs.length; i++){
       pipeArgs[i] = pipeArgs[i].trim(' ');
     }
-    
+
     //Escape all html if not explicitly set
     if(pipeArgs[0].toLowerCase() !== 'html')
         input = StringHelper.escapeHtml(input);
-    
+
     switch(pipeArgs[0].toLowerCase()) {
       case 'text':
         return input;

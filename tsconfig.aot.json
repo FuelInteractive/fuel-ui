@@ -8,7 +8,7 @@
     "noEmitHelpers": true,
     "pretty": false,
     "sourceMap": true,
-    "lib": ["es5", "dom"],
+    "lib": ["es5", "dom", "es2015"],
     "noEmit": true,
     "strictNullChecks": false,
     "skipDefaultLibCheck": true,
@@ -22,8 +22,7 @@
     "src/compiled",
     "src/**/*.e2e.ts",
     "src/**/*.spec.ts",
-    "src/main.browser.aot.ts",
-    "src/fuel-ui/**/*demo*/"
+    "src/main.aot.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,
