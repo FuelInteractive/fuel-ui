@@ -9,7 +9,7 @@
     "sourceMap": true,
     "noEmitHelpers": true,
     "strictNullChecks": false,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "outDir": "./dist",
     "rootDir": "./src",
     "paths": {
@@ -40,9 +40,6 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "atom": { "rewriteTsconfig": false },
-  "files": [
-    "src/index.ts"
-  ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,
     "genDir": "./dist/waste"
