@@ -7,9 +7,9 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 })
 export class CarouselDemo {
     carouselImages: string[] = [
-        "https://placeimg.com/640/300/any",
-        "https://placeimg.com/640/300/any",
-        "https://placeimg.com/640/300/any"
+        "assets/images/beach.png",
+        "assets/images/river.jpg",
+        "assets/images/windmill.jpg"
     ];
 
     attributes:any[] = [
