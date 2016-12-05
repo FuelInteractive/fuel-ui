@@ -8,21 +8,21 @@
 </div>
 
 <div class="row">
-    <carousel interval="10000" class="col-md-6">
-        <div *ngFor="let image of carouselImages" class="carousel-item">
-            <img src="{{image}}" />
+    <carousel height="300" interval="10000" class="col-md-6">
+        <div *ngFor="let image of carouselImages" class="carousel-item"
+            [image]="image">
         </div>
     </carousel>
 
-    <carousel interval="10000" class="col-md-6">
-        <div *ngFor="let image of carouselImages" class="carousel-item">
-            <img src="{{image}}" />
-            <div class="carousel-caption">
-                <h3>Some Title</h3>
-                <p>Path: {{image}}</p>
-            </div>
-        </div>
-    </carousel>
+  <carousel height="300" interval="10000" class="col-md-6">
+      <div *ngFor="let image of carouselImages" class="carousel-item"
+          [image]="image">
+          <div class="carousel-caption">
+              <h3>Some Title</h3>
+              <p>Path: {{image}}</p>
+          </div>
+      </div>
+  </carousel>
 </div>
 
 <div class="source">
@@ -43,15 +43,9 @@ import {{'{'}}Carousel, CarouselItem{{'}'}} from 'fuel-ui'; //class
 <tab heading="Images Only">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;carousel&gt;
-    &lt;div class="carousel-item"&gt;
-        &lt;img src=&quot;image1.jpg&quot; class=&quot;carousel-item&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class="carousel-item"&gt;
-        &lt;img src=&quot;image2.jpg&quot; class=&quot;carousel-item&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class="carousel-item"&gt;
-        &lt;img src=&quot;image3.jpg&quot; class=&quot;carousel-item&quot; /&gt;
+&lt;carousel interval=&quot;10000&quot; class=&quot;col-md-6&quot;&gt;
+    &lt;div *ngFor=&quot;let image of carouselImages&quot; class=&quot;carousel-item&quot;
+        [image]=&quot;image&quot;&gt;
     &lt;/div&gt;
 &lt;/carousel&gt;
 </code>
@@ -60,22 +54,15 @@ import {{'{'}}Carousel, CarouselItem{{'}'}} from 'fuel-ui'; //class
 <tab heading="Images With Captions">
 <pre>
 <code class="language-markup" code-highlight>
-&lt;carousel&gt;
-    &lt;div class=&quot;carousel-item&quot;&gt;
-        &lt;img src=&quot;image1.jpg&quot; /&gt;
-        &lt;div class=&quot;carousel-caption&quot;&gt;
-            &lt;h3&gt;Some Title 1&lt;/h3&gt;
-            &lt;p&gt;Some caption 1&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;carousel-item&quot;&gt;
-        &lt;img src=&quot;image2.jpg&quot; /&gt;
-        &lt;div class=&quot;carousel-caption&quot;&gt;
-            &lt;h3&gt;Some Title 2&lt;/h3&gt;
-            &lt;p&gt;Some caption 2&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/carousel&gt;
+&lt;carousel interval=&quot;10000&quot; class=&quot;col-md-6&quot;&gt;
+      &lt;div *ngFor=&quot;let image of carouselImages&quot; class=&quot;carousel-item&quot;
+          [image]=&quot;image&quot;&gt;
+          &lt;div class=&quot;carousel-caption&quot;&gt;
+              &lt;h3&gt;Some Title&lt;/h3&gt;
+              &lt;p&gt;Path: {{'{'}}{{'{'}}image{{'}'}}{{'}'}}&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+  &lt;/carousel&gt;
 </code>
 </pre>
 </tab>

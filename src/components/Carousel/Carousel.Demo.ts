@@ -7,15 +7,16 @@ import {Attribute, AttributeColumns, AttributesDefaultSort} from '../../utilitie
 })
 export class CarouselDemo {
     carouselImages: string[] = [
-        "images/carouselImages/beach.png",
-        "images/carouselImages/river.jpg",
-        "images/carouselImages/windmill.jpg"
+        "https://placeimg.com/640/300/any",
+        "https://placeimg.com/640/300/any",
+        "https://placeimg.com/640/300/any"
     ];
-    
+
     attributes:any[] = [
-        new Attribute('interval', 'number', '0', 'Time in ms before auto-advancing slide. If set to 0 slides will not auto-advance')
+        new Attribute('interval', 'number', '300', 'Time in ms before auto-advancing slide. If set to 0 slides will not auto-advance'),
+        new Attribute('height', 'number', '0', 'Height of carousel in pixels')
     ];
-    
+
     attributesColumns:TableSortableColumn[] = AttributeColumns;
     attributesSort:TableSortableSorting = AttributesDefaultSort;
 }
