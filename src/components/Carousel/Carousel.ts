@@ -17,13 +17,13 @@ declare var Hammer: any;
     template: `
         <div *ngIf="supportedTransform" [@slide]="state" class="item-content"
             [style.background-image]="backgroundImage | safeStyle">
-            <ng-content></ng-content>
+            <ng-content select=".carousel-caption"></ng-content>
         </div>
         <div *ngIf="!supportedTransform" class="item-content"
             [style.z-index]="zIndex"
             [style.display]="isActive ? 'block' : 'none'"
             [style.background-image]="backgroundImage | safeStyle">
-            <ng-content></ng-content>
+            <ng-content select=".carousel-caption"></ng-content>
         </div>
     `,
     animations: [
@@ -83,7 +83,7 @@ export class CarouselItem implements AfterViewInit {
             let delayTime = 10;
             if(this.id != 0)
                 delayTime = 500 + (Math.random() * 2000);
-            
+
             setTimeout(() => {
                 this.delay = false;
                 this.change.markForCheck();
@@ -105,13 +105,13 @@ export class CarouselItem implements AfterViewInit {
         this._state = val;
         setTimeout(() => {
             this.change.markForCheck();
-        }, 1); 
+        }, 1);
     }
 
     get isActive(): boolean { return this.state == "inright" || this.state == "inleft"; }
-    
+
     element: HTMLElement;
-    
+
     constructor(
         public change: ChangeDetectorRef,
         private _sanitizer: DomSanitizer,
@@ -136,7 +136,7 @@ export class CarouselItem implements AfterViewInit {
             this.imageWidth = image.width;
             image = undefined;
         }
-        
+
         return {height: this.imageHeight, width: this.imageWidth};
     }
 }
@@ -164,7 +164,7 @@ export class Carousel
             this._activeIndex = -1;
             return;
         }
-        
+
         this._activeIndex = val;
         for (let i in this.items) {
             let itemIndex = parseInt(i);
@@ -198,7 +198,7 @@ export class Carousel
     _intervalRef: any = null;
 
     @Input()
-    height: number = 0;
+    height: number = 300;
     innerHeight: number = 0;
 
     @Input()
@@ -303,10 +303,10 @@ export class Carousel
                 .getBoundingClientRect().width / dimensions.width;
             var newHeight = dimensions.height * widthModifier;
             this.innerHeight = newHeight;
-        
+
             if (this.innerHeight < 1)
                 this.innerHeight = 250;
-            
+
             this._change.markForCheck();
         }, 1);
     }
