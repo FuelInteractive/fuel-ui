@@ -28,6 +28,7 @@
         bottom: 0;
         transform: translate(-100%,0);
         width: 75%;
+        overflow-y: auto;
     }
 
     &.off-canvas-menu-right {
@@ -36,6 +37,7 @@
         bottom: 0;
         transform: translate(100%,0);
         width: 75%;
+        overflow-y: auto;
     }
 
     &.off-canvas-menu-top {
