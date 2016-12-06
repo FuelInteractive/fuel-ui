@@ -1,5 +1,5 @@
 import {NgModule, ModuleWithProviders, NgModuleFactoryLoader} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {CommonModule, LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
@@ -41,7 +41,8 @@ export * from "./installation.component";
         HomeComponent,
         DemoComponent
     ],
-    bootstrap: [DemoComponent]
+    bootstrap: [DemoComponent],
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
 })
 export class FuelUiDemoModule {
 
