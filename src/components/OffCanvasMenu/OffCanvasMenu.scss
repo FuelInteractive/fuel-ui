@@ -19,6 +19,7 @@
     display: block;
     position: fixed;
     z-index: 1000;
+    padding: 1rem;
     background-color: $body-bg;
 
     &.off-canvas-menu-left {
