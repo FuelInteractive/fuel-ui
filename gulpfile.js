@@ -2,6 +2,12 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 
+var paths = {
+    source: 'src',
+    dest: 'dist',
+    bundle: 'bundles'
+};
+
 function webpackCallBack(taskName, gulpDone) {
   return function(err, stats) {
     if (err) throw new gutil.PluginError(taskName, err);
@@ -30,7 +36,7 @@ gulp.task('umd', function(cb) {
   webpack(
       {
         entry: './dist/index.js',
-        output: {filename: 'dist/bundles/fuel-ui.js', library: 'ngb', libraryTarget: 'umd'},
+        output: {filename: paths.bundle + '/fuel-ui.umd.js', library: 'ngb', libraryTarget: 'umd'},
         devtool: 'source-map',
         externals: [
           {
@@ -42,4 +48,9 @@ gulp.task('umd', function(cb) {
         ]
       },
       webpackCallBack('webpack', cb));
+});
+
+gulp.task('css', function() {
+  gulp.src(paths.source + '/styles/fuel-ui.css')
+    .pipe(gulp.dest(paths.bundle))
 });

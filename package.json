@@ -1,6 +1,6 @@
 {
   "name": "fuel-ui",
-  "version": "0.5.0-beta5",
+  "version": "0.5.0-beta6",
   "description": "A set of utilities and Angular2 components implementing Twitter's Bootstrap 4 components",
   "keywords": [
     "angular",
@@ -26,7 +26,9 @@
     "webpack-dev-server": "webpack-dev-server",
     "webdriver-manager": "webdriver-manager",
     "protractor": "protractor",
-    "clean": "npm cache clean && npm run rimraf -- doc coverage dist",
+    "clean": "npm run rimraf -- doc coverage bundles \"src/compiled\" dist",
+    "clean:cache": "npm cache clean",
+    "clean:bundles": "npm run rimraf -- bundles",
     "clean:compile": "npm run rimraf -- \"src/compiled\" ",
     "clean:dist": "npm run rimraf -- dist",
     "preclean:install": "npm run clean",
@@ -38,7 +40,7 @@
     "watch:test": "npm run test -- --auto-watch --no-single-run",
     "watch:prod": "npm run build:prod -- --watch",
     "compile": "npm run ngc",
-    "compile:jit": "npm run sass && npm run clean:compile && npm run ngc:jit && npm run compile:system",
+    "compile:jit": "npm run sass && npm run clean:compile && npm run ngc:jit",
     "compile:aot": "npm run sass && npm run clean:compile && npm run ngc:aot",
     "compile:system": "gulp umd",
     "build": "npm run build:dev",
@@ -67,7 +69,7 @@
     "preversion": "npm test",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "prepublish": "npm run clean:dist && npm run build:dev && npm run compile:jit && npm run compile:system"
+    "prepublish": "npm run clean && npm run sass && gulp css && npm run build:dev && npm run compile:jit && npm run compile:system"
   },
   "dependencies": {
     "@angular/common": "2.2.4",

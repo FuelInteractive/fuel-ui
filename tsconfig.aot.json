@@ -12,6 +12,9 @@
     "noEmit": true,
     "strictNullChecks": false,
     "skipDefaultLibCheck": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "typeRoots": [
       "node_modules/@types"
     ]
