@@ -28,7 +28,7 @@
 <div class="form-group row">
     <label for="stepNumber" class="col-sm-2 form-control-label">Step Number</label>
     <div class="col-sm-2">
-        <input name="stepNumber" [(ngModel)]="stepNumber" type="number" min="1" class="form-control">
+        <input name="stepNumber" [(ngModel)]="stepNumber" type="number" class="form-control">
     </div>
 </div>
 
@@ -42,7 +42,7 @@ import {{'{'}}RangePipe{{'}'}} from 'fuel-ui'; //class
 </pre>
 
 <h3>Getting Started</h3>
-<p>Range is a pipe that simply takes in 3 arguments, a <code>start</code> number, <code>end</code> number, and <code>step</code> number.</p>
+<p>Range is a pipe that simply takes in 3 arguments, a <code>start</code> number, <code>end</code> number, and <code>step</code> number. There is also support for counting down from the <code>max</code> to the <code>min</code> when the <code>step</code> is <i>negative</i>. Perfect for date selects!</p>
 
 <h3>Usage</h3>
 <tabset>

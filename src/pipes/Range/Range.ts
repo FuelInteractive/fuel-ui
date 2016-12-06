@@ -14,6 +14,9 @@ export class RangePipe implements PipeTransform {
 
         let newValue: any[] = [];
 
+        if(step == 0)
+            step = max + 1; //only show the starting value
+
         for (let i = step > 0 ? min : max;
             step > 0 ? i <= max : i >= min;
             i += step) {
