@@ -1,6 +1,7 @@
 @import "../styles/variables";
 @import "../styles/media_queries";
 @import "../styles/bourbon";
+@import "../styles/fuel-ui.scss";
 
 $primary-branding: #E24932;
 
@@ -16,10 +17,10 @@ body {
     color: #fff;
     background-color: $primary-branding;
     border-color: $primary-branding;
-    
+
     &:hover{
         color: #fff;
-        background-color: #D33E28; 
+        background-color: #D33E28;
     }
 }
 
@@ -30,7 +31,7 @@ body {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    
+
     .fuel-ui-toggle {
         position: fixed;
         left: 0;
@@ -40,12 +41,12 @@ body {
         background: $primary-branding;
         color: #fff;
         border-radius: 0 5px 5px 0;
-        
+
         &:hover {
             width: 125px;
             text-align: right;
             @include animation(slideInRightLess .25s ease);
-            
+
             ::before {
                 font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
                 content: 'Open Menu ';
@@ -68,7 +69,7 @@ body {
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
-        
+
         .sidebar-nav {
             position: absolute;
             top: 0;
@@ -76,46 +77,46 @@ body {
             margin: 0;
             padding: 0;
             list-style: none;
-            
+
             li{
                 text-indent: 20px;
-                line-height: 40px;    
-                
+                line-height: 40px;
+
                 a{
                     display: block;
                     text-decoration: none;
                     color: #fff;
                     font-size: 16px;
-                    
+
                     &:hover{
-                        background: rgba(150, 22, 2, 0.2);   
+                        background: rgba(150, 22, 2, 0.2);
                     }
-                }    
+                }
             }
-            
+
             .sidebar-brand {
                 height: 60px;
                 line-height: 60px;
                 color: #fff;
                 text-indent: 10px;
-                
+
                 a {
                     display: inline;
-                    
+
                     img {
                         margin-bottom: 7px;
                     }
-                    
+
                     span {
                         position: relative;
                         font-size: 22px;
                     }
-                    
+
                     &:hover {
                         background: none;
                     }
                 }
-                    
+
                 i {
                     line-height: 60px;
                     font-size: 18px;
@@ -123,7 +124,7 @@ body {
                     display: inline;
                 }
             }
-            
+
             .sidebar-title {
                 color: #eee;
                 font-weight: bold;
@@ -131,11 +132,11 @@ body {
                 margin: 0 10px;
                 border-bottom: 1px solid #bbb;
                 font-size: 18px;
-                    
+
                 &:hover{
-                    color: #fff;   
+                    color: #fff;
                 }
-                
+
                 i {
                     line-height: 40px;
                     margin-right: 10px;
@@ -143,19 +144,19 @@ body {
             }
         }
     }
-    
+
     &.toggled {
-        
+
         #sidebar-wrapper {
             overflow-y: auto;
             height: 100%;
             background-color: rgba(226,73,50, .95);
-            
+
             .sidebar-nav .sidebar-brand i:before{
                 content: '\f00d';
             }
         }
-        
+
         #page-content-wrapper {
             width: 100%;
         }
@@ -166,10 +167,10 @@ body {
         position: absolute;
         padding: 15px;
         margin-top: 60px;
-    
+
         .source {
             margin-top: 35px;
-            
+
             h3 {
                 margin-top: 25px;
             }
@@ -182,23 +183,23 @@ body {
 @media screen and (min-width: 1024px){
     #wrapper {
         padding-left: 275px;
-        
+
         &.toggled {
             padding-left: 0;
-            
+
             #sidebar-wrapper {
                 width: 0;
-                
+
                 .sidebar-nav {
                     width: 275px;
                     overflow: hidden;
-                    
+
                     .sidebar-brand i:before{
                         content: '\f0c9';
                     }
                 }
             }
-            
+
             #page-content-wrapper {
                 position: relative;
                 margin-right: 0;
@@ -211,7 +212,7 @@ body {
             height: 100%;
             margin-left: -275px;
             overflow-y: auto;
-            
+
             .sidebar-nav .sidebar-brand i:hover,
             .sidebar-nav .sidebar-brand a:hover {
                 color: #bbb;
