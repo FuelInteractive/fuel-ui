@@ -3,28 +3,38 @@
         <div class="card card-block">
             <h2 class="card-title">Installation</h2>
             <p class="card-text">
-                Fork our Quickstart! <a href="https://github.com/coryshaw1/ng2-play/" target="_blank">https://github.com/coryshaw1/ng2-play/</a><br/>
-                <!--Fork our angular-cli Quickstart! <a href="https://github.com/FuelInteractive/fuel-ui-cli-quickstart/" target="_blank">https://github.com/FuelInteractive/fuel-ui-cli-quickstart/</a>-->
+                Fork our Webpack Quickstart! <a href="https://github.com/coryshaw1/ng2-play/" target="_blank">https://github.com/coryshaw1/ng2-play/</a><br/>
+                Fork our angular-cli Quickstart! <a href="https://github.com/FuelInteractive/fuel-ui-cli-quickstart/" target="_blank">https://github.com/FuelInteractive/fuel-ui-cli-quickstart/</a>
             </p>
         </div>
     </div>
 </div>
 
 <accordion>
-    <div accordion-item class="fuel-ui-accordion" #manually [open]="true">
+    <div accordion-item class="fuel-ui-accordion" #webpack [open]="true">
         <div accordion-heading class="fuel-ui-accordion-heading fuel-ui-clickable">
-            Manually
+            Webpack
             <i class="pull-right fa"
-                [ngClass]="{'fa-chevron-down': manually?.open, 'fa-chevron-right': !manually || !manually.open}"></i>
+                [ngClass]="{'fa-chevron-down': webpack?.open, 'fa-chevron-right': !webpack || !webpack.open}"></i>
         </div>
         <div class="fuel-ui-accordion-body">
-            <p>If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:</p>
+            <p>If you would like to add Fuel-UI to your Angular2 Webpack project through npm manually, do the following:</p>
 
 <pre>
 <code class="language-bash" code-highlight>
 npm install fuel-ui --save
 </code>
 </pre>
+
+            <p>You then need to make sure you add references to the following:</p>
+
+            <ul>
+              <li><a target="_blank" href="http://v4-alpha.getbootstrap.com/">Bootstrap 4</a></li>
+              <li><a target="_blank" href="http://fontawesome.io/">Font Awesome</a></li>
+              <li><a target="_blank" href="https://github.com/FuelInteractive/fuel-ui/">Fuel-UI CSS Bundle</a> (for Tooltips and CodeHighlighter, will be in `node_modules/fuel-ui/bundles/fuel-ui.css`)</li>
+            </ul>
+
+            <p>There are different ways of doing adding these. In our <a target="_blank" href="https://github.com/FuelInteractive/fuel-ui/">Github project</a>, we use Webpack loaders to achieve this where we can (see <a target="_blank" href="https://github.com/shakacode/bootstrap-loader">bootstrap-loader</a> and <a target="_blank" href="https://github.com/gowravshekar/font-awesome-webpack">font-awesome-webpack</a>). You may also just simply add the vendor CSS files to the head. <i>You do not need the javascript for these</i></p>
 
             <p>Then simply add the proper module(s) to your base component</p>
 
@@ -63,15 +73,14 @@ import {{'{'}}
           <p>To make your imports even more modular, every demo page will have the Fuel-UI component/directive/etc's module. This way you'll be able to import even less. <code>FuiDatePickerModule</code> for example.</p>
         </div>
     </div>
-    <div accordion-item class="fuel-ui-accordion" #manuallyCli>
+    <div accordion-item class="fuel-ui-accordion" #cli>
         <div accordion-heading class="fuel-ui-accordion-heading fuel-ui-clickable">
-            Manually with <a href="https://github.com/angular/angular-cli">angular-cli</a>
+            <a href="https://github.com/angular/angular-cli">angular-cli</a>
             <i class="pull-right fa"
-                [ngClass]="{'fa-chevron-down': manuallyCli?.open, 'fa-chevron-right': !manuallyCli || !manuallyCli.open}"></i>
+                [ngClass]="{'fa-chevron-down': cli?.open, 'fa-chevron-right': !cli || !cli.open}"></i>
         </div>
         <div class="fuel-ui-accordion-body">
-          Work in progress...
-<!--
+
 <pre>
 <code class="language-bash" code-highlight>
 ng new example-project
@@ -80,18 +89,25 @@ npm install fuel-ui font-awesome bootstrap@4.0.0-alpha.5 --save
 </code>
 </pre>
 
-            <p>Go to your <code>angular-cli-build.js</code> file, and add the following to your <code>vendorNpmFiles</code> array:</p>
+            <p>Go to your <code>angular-cli.json</code> file, and add the following to your <code>styles</code> array:</p>
 
 <pre>
 <code class="language-markup" code-highlight>
-'bootstrap/**/bootstrap.min.css',
-'font-awesome/**/font-awesome.min.css',
-'font-awesome/fonts/*',
-'fuel-ui/bundles/*'
+"../node_modules/bootstrap/dist/css/bootstrap.min.css",
+"../node_modules/font-awesome/css/font-awesome.min.css",
+"../node_modules/fuel-ui/bundles/fuel-ui.css"
 </code>
 </pre>
 
-            <p>Now build the project to copy over the necessary files to your vendor directory</p>
+            <p>Next, still within your <code>angular-cli.json</code> file, add the following to your <code>addons</code> array:</p>
+
+<pre>
+<code class="language-markup" code-highlight>
+"../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+</code>
+</pre>
+
+            <p>Now build the project to copy over the necessary files</p>
 
 <pre>
 <code class="language-markup" code-highlight>
@@ -113,7 +129,6 @@ import {{'{'}} FuelUiModule {{'}'}} from 'fuel-ui';
 {{'}'}})
 </code>
 </pre>
--->
         </div>
     </div>
 </accordion>

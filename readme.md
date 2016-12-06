@@ -6,13 +6,16 @@ See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo 
 
 ##Dependencies
 - Node
+- Gulp
 
 ##Build
 Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at [http://localhost:8001](http://localhost:8001)
 
 ```
 npm install
-npm start server
+npm run sass
+npm run build
+npm run server
 ```
 
 ##Installation
@@ -40,21 +43,31 @@ import { FuelUiModule } from 'fuel-ui';
 })
 ```
 
+You then need to make sure you add references to the following:
+ * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
+ * [Font Awesome](http://fontawesome.io/)
+ * [Fuel-UI CSS Bundle](https://github.com/FuelInteractive/fuel-ui/) (for Tooltips and CodeHighlighter, will be in `node_modules/fuel-ui/bundles/fuel-ui.css`)
+ 
+There are different ways of doing adding these. In our [Github project](https://github.com/FuelInteractive/fuel-ui/), we use Webpack loaders to achieve this where we can (see [bootstrap-loader](https://github.com/shakacode/bootstrap-loader) and [font-awesome-webpack](https://github.com/gowravshekar/font-awesome-webpack)). You may also just simply add the vendor CSS files to the head. *You do not need the javascript for these*
+
 ###Manually with [angular-cli](https://github.com/angular/angular-cli)
 
 ```
 ng new example-project
 cd example-project
-npm install fuel-ui --save
+npm install fuel-ui font-awesome bootstrap@^4.0.0-alpha.5 --save
 ```
-Go to your `angular-cli-build.js` file, and add the following to your `vendorNpmFiles` array: 
+Go to your `angular-cli.json` file, and add the following to your `styles` array:
 ```js
-'bootstrap/**/bootstrap.min.css',
-'font-awesome/**/font-awesome.min.css',
-'font-awesome/fonts/*',
-'fuel-ui/bundles/*'
+"../node_modules/bootstrap/dist/css/bootstrap.min.css",
+"../node_modules/font-awesome/css/font-awesome.min.css",
+"../node_modules/fuel-ui/bundles/fuel-ui.css"
 ```
-Now build the project to copy over the necessary files to your vendor directory
+Next, still within your `angular-cli.json` file, add the following to your `addons` array:
+```js
+"../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+```
+Now build the project to copy over the necessary files
 ```
 ng build
 ```
@@ -69,6 +82,14 @@ import { FuelUiModule } from 'fuel-ui';
   providers: [ ... ]
 })
 ```
+
+You then need to make sure you add references to the following:
+ * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
+ * [Font Awesome](http://fontawesome.io/)
+ * [hint.css](https://github.com/chinchang/hint.css/) (for Tooltips)
+ * [PrismJs theme](https://github.com/PrismJS/prism) (for CodeHighlighter)
+ 
+There are different ways of doing adding these. In our [Github project](https://github.com/FuelInteractive/fuel-ui/), we use Webpack loaders to achieve this where we can (see [bootstrap-loader](https://github.com/shakacode/bootstrap-loader) and [font-awesome-webpack](https://github.com/gowravshekar/font-awesome-webpack)). You may also just simply add the vendor CSS files to the head. *You do not need the javascript for these*
 
 ##Animations
 - [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/animations/Collapse#readme)
