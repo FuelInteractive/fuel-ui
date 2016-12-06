@@ -83,14 +83,6 @@ import { FuelUiModule } from 'fuel-ui';
 })
 ```
 
-You then need to make sure you add references to the following:
- * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
- * [Font Awesome](http://fontawesome.io/)
- * [hint.css](https://github.com/chinchang/hint.css/) (for Tooltips)
- * [PrismJs theme](https://github.com/PrismJS/prism) (for CodeHighlighter)
- 
-There are different ways of doing adding these. In our [Github project](https://github.com/FuelInteractive/fuel-ui/), we use Webpack loaders to achieve this where we can (see [bootstrap-loader](https://github.com/shakacode/bootstrap-loader) and [font-awesome-webpack](https://github.com/gowravshekar/font-awesome-webpack)). You may also just simply add the vendor CSS files to the head. *You do not need the javascript for these*
-
 ##Animations
 - [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/animations/Collapse#readme)
 
