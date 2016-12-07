@@ -9,7 +9,7 @@ See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo 
 - Gulp
 
 ##Build
-Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at [http://localhost:8001](http://localhost:8001)
+Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at [http://localhost:3000](http://localhost:3000)
 
 ```
 npm install
@@ -23,7 +23,7 @@ npm run server
 ####Fork our Quickstart! [https://github.com/coryshaw1/ng2-play/](https://github.com/coryshaw1/ng2-play/)
 ####Fork our angular-cli Quickstart! [https://github.com/FuelInteractive/fuel-ui-cli-quickstart/](https://github.com/FuelInteractive/fuel-ui-cli-quickstart/)
 
-###Manually
+###Manually with Webpack
 
 If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:
 
@@ -70,6 +70,37 @@ Next, still within your `angular-cli.json` file, add the following to your `addo
 Now build the project to copy over the necessary files
 ```
 ng build
+```
+Then simply add the proper module(s) to your base component
+```js
+import { FuelUiModule } from 'fuel-ui';
+
+@NgModule({
+  bootstrap: [ YourBaseComponent ],
+  declarations: [ YourBaseComponent, ... ],
+  imports: [ FuelUiModule, ... ],
+  providers: [ ... ]
+})
+```
+
+###Manually with SystemJs
+
+```
+npm install fuel-ui --save
+```
+Go to your SystemJs config file, and add the following to your map array:
+```
+"moment": "node_modules/moment/moment.js",
+"fuel-ui": "node_modules/fuel-ui/bundles/fuel-ui.umd.js",
+```
+Then the proper link tags to your `index.html`'s `<head>`
+
+```html
+<head>
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/fuel-ui/bundles/fuel-ui.css" />
+</head>
 ```
 Then simply add the proper module(s) to your base component
 ```js

@@ -131,4 +131,55 @@ import {{'{'}} FuelUiModule {{'}'}} from 'fuel-ui';
 </pre>
         </div>
     </div>
+    <div accordion-item class="fuel-ui-accordion" #systemJs>
+        <div accordion-heading class="fuel-ui-accordion-heading fuel-ui-clickable">
+            SystemJs
+            <i class="pull-right fa"
+                [ngClass]="{'fa-chevron-down': systemJs?.open, 'fa-chevron-right': !systemJs || !systemJs.open}"></i>
+        </div>
+        <div class="fuel-ui-accordion-body">
+
+<pre>
+<code class="language-bash" code-highlight>
+npm install fuel-ui --save
+</code>
+</pre>
+
+            <p>Go to your SystemJs config file, and add the following to your <code>map</code> array:</p>
+
+<pre>
+<code class="language-markup" code-highlight>
+"moment": "node_modules/moment/moment.js",
+"fuel-ui": "node_modules/fuel-ui/bundles/fuel-ui.umd.js",
+</code>
+</pre>
+
+            <p>Then the proper link tags to your <code>index.html</code>'s <code>&lt;head&gt;</code></p>
+                        
+<pre>
+<code class="language-markup" code-highlight>
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/font-awesome/css/font-awesome.min.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/fuel-ui/bundles/fuel-ui.css&quot; /&gt;
+&lt;/head&gt;
+</code>
+</pre>
+
+            <p>Then simply add the proper module(s) to your base component</p>
+
+<pre>
+<code class="language-javascript" code-highlight>
+import {{'{'}} FuelUiModule {{'}'}} from 'fuel-ui';
+
+@NgModule({{'{'}}
+  bootstrap: [ YourBaseComponent ],
+  declarations: [ YourBaseComponent, ... ],
+  imports: [ FuelUiModule, ... ],
+  providers: [ ... ]
+{{'}'}})
+</code>
+</pre>
+        </div>
+    </div>
 </accordion>
