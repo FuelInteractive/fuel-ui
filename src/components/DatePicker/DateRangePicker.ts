@@ -345,7 +345,9 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
             this.valueChange.next(new DateRange(startDate, endDate));
         }
 
-        this.calendarDateFilter = (d: Date) => this.dateFilter(d, !this._dateTarget ? "start" : "end");
+        this.calendarDateFilter = (d: Date) => this.dateFilter 
+            ? this.dateFilter(d, !this._dateTarget ? "start" : "end")
+            : true;
         this.changeDetector.markForCheck();
     }
 
@@ -362,13 +364,13 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
     focusStartDate(): void {
         this._dateTarget = false;
-        this.calendarDateFilter = (d: Date) => this.dateFilter(d, "start");
+        this.calendarDateFilter = (d: Date) => this.dateFilter ? this.dateFilter(d, "start") : true;
         //this.changeDetector.markForCheck();
     }
 
     focusEndDate(): void {
         this._dateTarget = true;
-        this.calendarDateFilter = (d: Date) => this.dateFilter(d, "end");
+        this.calendarDateFilter = (d: Date) => this.dateFilter ? this.dateFilter(d, "end") : true;
         //this.changeDetector.markForCheck();
     }
 
