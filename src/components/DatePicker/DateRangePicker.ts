@@ -183,7 +183,7 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
     }
     get maxDate(): Date | string { return this._maxDate; }
 
-    @Input() dateFilter: (d: Date, field: "start" | "end") => boolean;
+    @Input() dateFilter: (d: Date, field: "start" | "end") => boolean = () => true;
     public calendarDateFilter = (d: Date) => true;
 
     @ViewChild(InfiniteScroller)
@@ -364,13 +364,13 @@ export class DateRangePicker extends DatePicker implements AfterContentInit {
 
     focusStartDate(): void {
         this._dateTarget = false;
-        this.calendarDateFilter = (d: Date) => this.dateFilter ? this.dateFilter(d, "start") : true;
+        this.calendarDateFilter = (d: Date) => this.dateFilter(d, "start");
         //this.changeDetector.markForCheck();
     }
 
     focusEndDate(): void {
         this._dateTarget = true;
-        this.calendarDateFilter = (d: Date) => this.dateFilter ? this.dateFilter(d, "end") : true;
+        this.calendarDateFilter = (d: Date) => this.dateFilter(d, "end");
         //this.changeDetector.markForCheck();
     }
 

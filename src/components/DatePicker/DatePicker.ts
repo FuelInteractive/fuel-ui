@@ -30,8 +30,8 @@ export class DatePicker implements OnInit, AfterContentInit {
     }
     get maxDate(): Date | string { return this._maxDate; }
 
-    @Input() dateFilter: (d: Date, field: "start" | "end") => boolean;
-    public calendarDateFilter = (d: Date) => this.dateFilter ? this.dateFilter(d, "start") : true;
+    @Input() dateFilter: (d: Date, field: "start" | "end") => boolean = () => true;
+    public calendarDateFilter = (d: Date) => this.dateFilter(d, "start");
 
     @Output() valueChange = new EventEmitter();
     @Input()
