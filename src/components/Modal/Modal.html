@@ -1,7 +1,7 @@
 <div class="modal" [ngClass]="{'fuel-ui-modal-fade-in': displayed}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" [style.display]="displayed ? 'block' : 'none'">
     <div class="modal-dialog" role="document" [ngClass]="{'modal-lg': size == 'large' || size == 'lg', 'modal-sm': size == 'small' || size == 'sm'}">
         <div class="modal-content" *ngIf="displayed">
-            <div class="modal-header">
+            <div class="modal-header" *ngIf="modalTitle || closeButton">
                 <button *ngIf="closeButton" type="button" class="close" aria-label="Close" (click)="closeModal()">
                     <span class="fa fa-times-circle" aria-hidden="true"></span>
                     <span class="sr-only">Close</span>
