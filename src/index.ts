@@ -1,6 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import {FuiAnimationsModule} from "./animations";
 import {FuiComponentsModule} from "./components";
@@ -12,9 +13,9 @@ export * from "./components";
 export * from "./directives";
 export * from "./pipes";
 export * from './utilities';
- 
+
 const fuiDirectives = [
-    
+
 ];
 
 const fuiModules = [
@@ -28,6 +29,7 @@ const fuiModules = [
     imports: [
         CommonModule,
         FormsModule,
+        BrowserAnimationsModule,
         ...fuiModules
     ],
     declarations: fuiDirectives,

@@ -7,16 +7,14 @@ import {CommonModule} from '@angular/common';
     styleUrls: ['Alert.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class Alert extends OnChanges {
+export class Alert implements OnChanges {
     @Input() displayed: boolean = false;
     @Input() closeButton: boolean = true;
     @Input() type: string = 'success';
     @Input() closeDelay: number = 0;
     @Output() displayedChange = new EventEmitter<any>();
 
-    constructor(private _el:ElementRef){
-        super();
-    }
+    constructor(private _el:ElementRef){}
 
     ngOnChanges(event: any): void {
         if(this.displayed && this._el.nativeElement.querySelector('.alert')){

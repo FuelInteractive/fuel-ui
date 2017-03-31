@@ -20,7 +20,6 @@
     ],
     "types": [
       "hammerjs",
-      "jasmine",
       "node",
       "protractor",
       "selenium-webdriver",

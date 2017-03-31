@@ -11,7 +11,6 @@ const helpers = require('./helpers');
 // problem with copy-webpack-plugin
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
@@ -104,6 +103,7 @@ module.exports = function (options) {
     * See: http://webpack.github.io/docs/configuration.html#module
     */
     module: {
+      exprContextCritical: false,
       /*
       * An array of automatically applied loaders.
       *
@@ -186,14 +186,6 @@ module.exports = function (options) {
     * See: http://webpack.github.io/docs/configuration.html#plugins
     */
     plugins: [
-
-      /*
-      * Plugin: ForkCheckerPlugin
-      * Description: Do type checking in a separate process, so webpack don't need to wait.
-      *
-      * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
-      */
-      new ForkCheckerPlugin(),
 
       /* Plugin: ContentReplacementPlugin
       *  Description: fix systemjs resolver warning message from update to 2.0.0
