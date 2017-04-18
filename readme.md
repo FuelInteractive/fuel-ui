@@ -1,14 +1,14 @@
-#Fuel-UI [![npm version](https://badge.fury.io/js/fuel-ui.svg)](https://badge.fury.io/js/fuel-ui) [![npm downloads](https://img.shields.io/npm/dm/fuel-ui.svg)](https://npmjs.org/fuel-ui) [![Dependency Status](https://david-dm.org/fuelinteractive/fuel-ui.svg)](https://david-dm.org/fuelinteractive/fuel-ui) [![devDependency Status](https://david-dm.org/fuelinteractive/fuel-ui/dev-status.svg)](https://david-dm.org/fuelinteractive/fuel-ui#info=devDependencies)
+# Fuel-UI [![npm version](https://badge.fury.io/js/fuel-ui.svg)](https://badge.fury.io/js/fuel-ui) [![npm downloads](https://img.shields.io/npm/dm/fuel-ui.svg)](https://npmjs.org/fuel-ui) [![Dependency Status](https://david-dm.org/fuelinteractive/fuel-ui.svg)](https://david-dm.org/fuelinteractive/fuel-ui) [![devDependency Status](https://david-dm.org/fuelinteractive/fuel-ui/dev-status.svg)](https://david-dm.org/fuelinteractive/fuel-ui#info=devDependencies)
 
 A set of UI components for use with Angular 2 and Bootstrap 4.
 
 See [Fuel-UI](http://fuelinteractive.github.io/fuel-ui/) homepage for live demo and documentation.
 
-##Dependencies
+## Dependencies
 - Node
 - Gulp
 
-##Build
+## Build
 Execute the following commands to run the demo in your local environment. A browser window pops up with the demo running at [http://localhost:8001](http://localhost:8001)
 
 ```
@@ -16,12 +16,12 @@ npm install
 gulp
 ```
 
-##Installation
+## Installation
 
-####Fork our Quickstart! [https://github.com/coryshaw1/ng2-play/](https://github.com/coryshaw1/ng2-play/)
-####Fork our angular-cli Quickstart! [https://github.com/FuelInteractive/fuel-ui-cli-quickstart/](https://github.com/FuelInteractive/fuel-ui-cli-quickstart/)
+#### Fork our Quickstart! [https://github.com/coryshaw1/ng2-play/](https://github.com/coryshaw1/ng2-play/)
+#### Fork our angular-cli Quickstart! [https://github.com/FuelInteractive/fuel-ui-cli-quickstart/](https://github.com/FuelInteractive/fuel-ui-cli-quickstart/)
 
-###Manually
+### Manually
 
 If you would like to add Fuel-UI to your Angular2 project through npm manually, do the following:
 
@@ -43,7 +43,7 @@ Then simply add the proper script tags to your `index.html`
 <script src="node_modules/fuel-ui/bundles/fuel-ui.min.js"></script>
 ```
 
-###Manually with [angular-cli](https://github.com/angular/angular-cli)
+### Manually with [angular-cli](https://github.com/angular/angular-cli)
 
 ```
 ng new example-project
@@ -75,10 +75,10 @@ Then simply add the proper script tags to your `index.html`
 <script src="vendor/fuel-ui/bundles/fuel-ui.min.js"></script>
 ```
 
-##Animations
+## Animations
 - [Collapse](https://github.com/FuelInteractive/fuel-ui/tree/master/src/animations/Collapse#readme)
 
-##Components
+## Components
 - [Accordion](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Accordion#readme)
 - [Alert](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/Alert#readme)
 - Carousel (documentation in progress)
@@ -96,12 +96,12 @@ Then simply add the proper script tags to your `index.html`
 - [TextExpander](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TextExpander#readme)
 - [TimePicker](https://github.com/FuelInteractive/fuel-ui/tree/master/src/components/TimePicker#readme)
 
-##Directives
+## Directives
 - [Animation (helper)](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Animation#readme)
 - [CodeHighlighter](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/CodeHighlighter#readme)
 - [Tooltip](https://github.com/FuelInteractive/fuel-ui/tree/master/src/directives/Tooltip#readme)
 
-##Pipes
+## Pipes
 - [Format](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/Format#readme)
 - [MapToIterable](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/MapToIterable#readme)
 - [OrderBy](https://github.com/FuelInteractive/fuel-ui/tree/master/src/pipes/OrderBy#readme)
