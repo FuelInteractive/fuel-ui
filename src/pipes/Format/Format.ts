@@ -1,5 +1,5 @@
 import {NgModule, Pipe, PipeTransform} from '@angular/core';
-import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
+import {CommonModule, DatePipe, DecimalPipe,CurrencyPipe} from '@angular/common';
 import {StringHelper} from '../../utilities/StringUtils';
 
 @Pipe({
@@ -9,6 +9,7 @@ export class FormatPipe implements PipeTransform  {
 
   datePipe: DatePipe = new DatePipe("en-US");
   decimalPipe: DecimalPipe = new DecimalPipe("en-US");
+  currencyPipe: CurrencyPipe = new CurrencyPipe("en-US");
 
   constructor(){}
 
@@ -27,6 +28,11 @@ export class FormatPipe implements PipeTransform  {
     switch(pipeArgs[0].toLowerCase()) {
       case 'text':
         return input;
+      case 'currency':
+        parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
+        format = pipeArgs.length > 1 ? pipeArgs[1] : "USD";
+        let symbolDisplay = pipeArgs.length > 2 ? pipeArgs[2].toLowerCase() == "true" : true;
+        return this.currencyPipe.transform(parsedFloat, format, symbolDisplay);
       case 'decimal':
       case 'number':
         parsedFloat = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;

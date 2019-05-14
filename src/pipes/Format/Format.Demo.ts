@@ -7,7 +7,7 @@ export class DataType{
     public Parameters: string;
     public Input: string;
     public Output: string;
-    
+
     constructor(Type: string, Parameters: string, Input: string, Output: string) {
         this.Type = Type;
         this.Parameters = Parameters;
@@ -25,14 +25,15 @@ export class FormatDemo {
 
     someNumberVar: string = '435.23528';
     someTimestamp: number = 1442187616000;
-    
+
     parameters:Attribute[] = [
         new Attribute('Name', 'string', 'text', 'The type of data you want the input to be output as'),
     ];
     parametersColumns:TableSortableColumn[] = AttributeColumns;
     parametersSort:TableSortableSorting = AttributesDefaultSort;
-    
+
     dataTypes:DataType[] = [
+        new DataType('currency', "true - currency type : symbol displayed?", '"123.456"', '$123.46'),
         new DataType('date', "true - format of date - default: 'MMM d, y h:mm:ss a'", '"1442187616000"', 'Sep 13, 2015, 7:40:16 PM'),
         new DataType('datetime', "true - format of date - default: 'MMM d, y h:mm:ss a'", '"1442187616000"', 'Sep 13, 2015, 7:40:16 PM'),
         new DataType('decimal', "true - number formatting - default: '1.0-0'", '"1442187616000"', '1442187616000'),
@@ -43,8 +44,8 @@ export class FormatDemo {
     ];
     dataTypesColumns:TableSortableColumn[] = [
         new TableSortableColumn('Type', 'Type', 'string'),
-        new TableSortableColumn('Parameters?', 'Parameters', 'html'), 
-        new TableSortableColumn('Input', 'Input', 'html'), 
+        new TableSortableColumn('Parameters?', 'Parameters', 'html'),
+        new TableSortableColumn('Input', 'Input', 'html'),
         new TableSortableColumn('Output', 'Output', 'html'),
     ];
     dataTypesSort:TableSortableSorting = new TableSortableSorting('Type', false);
